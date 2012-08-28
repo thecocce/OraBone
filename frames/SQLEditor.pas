@@ -675,7 +675,7 @@ begin
     WantTabs := True;
     Options := [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo,
       eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces,
-      eoTrimTrailingSpaces, eoScrollPastEol];
+      eoTrimTrailingSpaces, eoScrollPastEol, eoSpecialLineDefaultFg];
     OnChange := SynEditChange;
     OnReplaceText := SynEditorReplaceText;
     OnSpecialLineColors := SynEditSpecialLineColors;
@@ -747,17 +747,18 @@ procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Intege
 var
   LStyles: TCustomStyleServices;
 begin
-  if not TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
-  begin
-    Special := True;
-    LStyles := StyleServices;
-    if LStyles.Enabled then
+  if not TBCSynEdit(Sender).SelAvail then
+    if TBCSynEdit(Sender).CaretY = Line then
     begin
-      BG := LStyles.GetSystemColor(clHighlight);
-      FG := LStyles.GetSystemColor(clHighlightText); //LStyles.GetStyleFontColor(sfMenuItemTextSelected); //LStyles.GetSystemColor(clHighlightText);
+      Special := True;
+      LStyles := StyleServices;
+      if LStyles.Enabled then
+      begin
+        BG := LStyles.GetSystemColor(clHighlight);
+        FG := LStyles.GetSystemColor(clHighlightText); //LStyles.GetStyleFontColor(sfMenuItemTextSelected); //LStyles.GetSystemColor(clHighlightText);
+      end;
     end;
-  end;
-  if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
+ { if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
   begin
     Special := True;
     LStyles := StyleServices;
@@ -766,7 +767,7 @@ begin
       BG := LStyles.GetStyleColor(scEdit);
       FG := LStyles.GetStyleFontColor(sfEditBoxTextNormal); //LStyles.GetStyleFontColor(sfMenuItemTextSelected); //LStyles.GetSystemColor(clHighlightText);
     end;
-  end;
+  end; }
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
