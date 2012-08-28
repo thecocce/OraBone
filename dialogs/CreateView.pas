@@ -1,0 +1,205 @@
+unit CreateView;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.Mask, BCDBEdit,
+  DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList,
+  SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
+  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, DBGridEhGrouping, GridsEh, DBGridEh,
+  BCDBGrid;
+
+type
+  TCreateViewDialog = class(TCreateObjectBaseDialog)
+    ViewNameLabel: TLabel;
+    ViewNameEdit: TBCEdit;
+    CommnetLabel: TLabel;
+    CommentEdit: TBCEdit;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsQuery: TOraQuery;
+    ColumnsTabSheet: TTabSheet;
+    ColumnCommentsTabSheet: TTabSheet;
+    SelectStatementTabSheet: TTabSheet;
+    ColumnsPanel: TPanel;
+    ColumnButtonPanel: TPanel;
+    UpBitBtn: TJvBitBtn;
+    DownBitBtn: TJvBitBtn;
+    InsertBitBtn: TJvBitBtn;
+    DeleteBitBtn: TJvBitBtn;
+    ColumnCommentsPanel: TPanel;
+    SQLPanel: TPanel;
+    SQLSynEdit: TSynEdit;
+    MoveUpAction: TAction;
+    MoveDownAction: TAction;
+    AddColumnAction: TAction;
+    DeleteColumnAction: TAction;
+    ColumnCommentsDBGrid: TBCDBGrid;
+    ColumnsDBGrid: TBCDBGrid;
+    procedure FormDestroy(Sender: TObject);
+    procedure Formshow(Sender: TObject);
+    procedure AddColumnActionExecute(Sender: TObject);
+    procedure MoveDownActionExecute(Sender: TObject);
+    procedure MoveUpActionExecute(Sender: TObject);
+    procedure DeleteColumnActionExecute(Sender: TObject);
+    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
+      var Background: TColor; State: TGridDrawState);
+  private
+    { Private declarations }
+  protected
+    procedure CreateSQL; override;
+    function CheckFields: Boolean; override;
+    procedure Initialize; override;
+  public
+    { Public declarations }
+  end;
+
+function CreateViewDialog: TCreateViewDialog;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  Common, Lib, Vcl.Themes, Winapi.UxTheme;
+
+var
+  FCreateViewDialog: TCreateViewDialog;
+
+function CreateViewDialog: TCreateViewDialog;
+begin
+  if FCreateViewDialog = nil then
+    Application.CreateForm(TCreateViewDialog, FCreateViewDialog);
+  Result := FCreateViewDialog;
+end;
+
+procedure TCreateViewDialog.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FCreateViewDialog := nil;
+end;
+
+procedure TCreateViewDialog.Formshow(Sender: TObject);
+begin
+  inherited;
+  ViewNameEdit.SetFocus;
+end;
+
+procedure TCreateViewDialog.AddColumnActionExecute(Sender: TObject);
+begin
+  inherited;
+  ColumnsQuery.Append;
+end;
+
+procedure TCreateViewDialog.DeleteColumnActionExecute(Sender: TObject);
+begin
+  inherited;
+  ColumnsQuery.Delete;
+end;
+
+procedure TCreateViewDialog.MoveDownActionExecute(Sender: TObject);
+begin
+  inherited;
+  Lib.MoveGridRowDown(ColumnsQuery);
+end;
+
+procedure TCreateViewDialog.MoveUpActionExecute(Sender: TObject);
+begin
+  inherited;
+  Lib.MoveGridRowUp(ColumnsQuery);
+end;
+
+function TCreateViewDialog.CheckFields: Boolean;
+begin
+  Result := False;
+  if Trim(ViewNameEdit.Text) = '' then
+  begin
+    Common.ShowErrorMessage('Set table name.');
+    ViewNameEdit.SetFocus;
+    Exit;
+  end;
+  if ColumnsQuery.RecordCount = 0 then
+  begin
+    Common.ShowErrorMessage('Set columns.');
+    Exit;
+  end;
+  Result := True;
+end;
+
+procedure TCreateViewDialog.ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh;
+  AFont: TFont; var Background: TColor; State: TGridDrawState);
+var
+  LStyles: TCustomStyleServices;
+begin
+  LStyles := StyleServices;
+
+  if Column.FieldName = 'COLUMN_NAME' then
+  begin
+    if UseThemes then
+      Background := LStyles.GetSystemColor(clBtnFace)
+    else
+      Background := clBtnFace;
+  end;
+end;
+
+procedure TCreateViewDialog.Initialize;
+begin
+  inherited;
+  with ColumnsQuery do
+  begin
+    Session := FOraSession;
+    Close;
+    Open;
+  end;
+end;
+
+procedure TCreateViewDialog.CreateSQL;
+var
+  i: Integer;
+  Columns: string;
+  ColumnComments: WideString;
+begin
+  SourceSynEdit.Lines.Clear;
+  SourceSynEdit.Lines.BeginUpdate;
+  i := 1;
+  Columns := '(';
+  with ColumnsQuery do
+  begin
+    First;
+    while not Eof do
+    begin
+      Columns := Columns + FieldByName('COLUMN_NAME').AsString;
+      if not FieldByName('COLUMN_COMMENT').IsNull then
+        ColumnComments := ColumnComments + Format('COMMENT ON COLUMN %s.%s.%s IS %s;', [FSchemaParam,
+          ViewNameEdit.Text, Trim(FieldByName('COLUMN_NAME').AsWideString), QuotedStr(FieldByName('COLUMN_COMMENT').AsWideString)]) + CHR_ENTER;
+      Next;
+      if not Eof then
+        Columns := Columns + ', ';
+      if i mod 5 = 0 then
+      begin
+        i := 1;
+        Columns := Columns + CHR_ENTER + ' ';
+      end;
+      Inc(i);
+    end;
+    First;
+  end;
+  Columns := Columns + ') AS';
+  SourceSynEdit.Lines.Clear;
+  SourceSynEdit.Lines.BeginUpdate;
+  SourceSynEdit.Lines.Text := Format('CREATE OR REPLACE VIEW %s.%s', [FSchemaParam, ViewNameEdit.Text]) + CHR_ENTER +
+    Columns + CHR_ENTER + SQLSynEdit.Text + ';' + CHR_ENTER;
+  Application.ProcessMessages;
+  { comments }
+  if (CommentEdit.Text <> '') or (ColumnComments <> '') then
+    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER;
+  if CommentEdit.Text <> '' then
+    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('COMMENT ON VIEW %s.%s IS %s;', [
+      FSchemaParam, ViewNameEdit.Text, QuotedStr(CommentEdit.Text)]) + CHR_ENTER;
+  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ColumnComments + CHR_ENTER;
+  Application.ProcessMessages;
+  SourceSynEdit.Lines.Text := Trim(SourceSynEdit.Lines.Text);
+  SourceSynEdit.Lines.EndUpdate;
+end;
+
+end.
