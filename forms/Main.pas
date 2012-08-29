@@ -134,6 +134,18 @@ type
     StyleTurquoiseGrayAction: TAction;
     StyleWindowsAction: TAction;
     TNSNamesEditorAction: TAction;
+    DatabaseCreateConstraintAction: TAction;
+    DatabaseCreateDBLinkAction: TAction;
+    DatabaseCreateFunctionAction: TAction;
+    DatabaseCreateIndexAction: TAction;
+    DatabaseCreatePackageAction: TAction;
+    DatabaseCreateProcedureAction: TAction;
+    DatabaseCreateSequenceAction: TAction;
+    DatabaseCreateSynonymAction: TAction;
+    DatabaseCreateTableAction: TAction;
+    DatabaseCreateTriggerAction: TAction;
+    DatabaseCreateUserAction: TAction;
+    DatabaseCreateViewAction: TAction;
     procedure FileExitActionExecute(Sender: TObject);
     procedure DatabaseNewConnectionMenuActionExecute(Sender: TObject);
     procedure DatabaseEndConnectionMenuActionExecute(Sender: TObject);
@@ -235,6 +247,18 @@ type
     procedure StyleTurquoiseGrayActionExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure TNSNamesEditorActionExecute(Sender: TObject);
+    procedure DatabaseCreateConstraintActionExecute(Sender: TObject);
+    procedure DatabaseCreateDBLinkActionExecute(Sender: TObject);
+    procedure DatabaseCreateFunctionActionExecute(Sender: TObject);
+    procedure DatabaseCreateIndexActionExecute(Sender: TObject);
+    procedure DatabaseCreatePackageActionExecute(Sender: TObject);
+    procedure DatabaseCreateProcedureActionExecute(Sender: TObject);
+    procedure DatabaseCreateSequenceActionExecute(Sender: TObject);
+    procedure DatabaseCreateSynonymActionExecute(Sender: TObject);
+    procedure DatabaseCreateTableActionExecute(Sender: TObject);
+    procedure DatabaseCreateTriggerActionExecute(Sender: TObject);
+    procedure DatabaseCreateUserActionExecute(Sender: TObject);
+    procedure DatabaseCreateViewActionExecute(Sender: TObject);
   private
     { Private declarations }
     FOnProgress: Boolean;
@@ -795,6 +819,19 @@ begin
     DatabaseCloseAllOtherTabsAction.Enabled := DatabaseCloseTabAction.Enabled;
 
     DatabaseImportTableDataAction.Enabled := DatabaseEndConnectionMenuAction.Enabled;
+
+    DatabaseCreateConstraintAction.Enabled := Assigned(SchemaBrowserFrame);
+    DatabaseCreateDBLinkAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateFunctionAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateIndexAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreatePackageAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateProcedureAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateSequenceAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateSynonymAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateTableAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateTriggerAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateUserAction.Enabled := DatabaseCreateConstraintAction.Enabled;
+    DatabaseCreateViewAction.Enabled := DatabaseCreateConstraintAction.Enabled;
     { View }
     ViewToolbarAction.Checked := ActionToolBar.Visible;
 
@@ -1735,6 +1772,149 @@ begin
       SQLEditorFrame.InTransaction := False;
       SQLEditorFrame.Session.Commit;
     end;
+end;
+
+procedure TMainForm.DatabaseCreateConstraintActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateConstraintAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateDBLinkActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateDBLinkAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateFunctionActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateFunctionAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateIndexActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateIndexAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreatePackageActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreatePackageAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateProcedureActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateProcedureAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateSequenceActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateSequenceAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateSynonymActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateSynonymAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateTableActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateTableAction.Execute;
+  end;
+end;
+procedure TMainForm.DatabaseCreateTriggerActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateTriggerAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateUserActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateUserAction.Execute;
+  end;
+end;
+
+procedure TMainForm.DatabaseCreateViewActionExecute(Sender: TObject);
+var
+  SchemaBrowserFrame: TSchemaBrowserFrame;
+begin
+  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+  begin
+    SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+    if Assigned(SchemaBrowserFrame) then
+      SchemaBrowserFrame.CreateViewAction.Execute;
+  end;
 end;
 
 procedure TMainForm.LoadSQLIntoEditor(Schema: string; SQLText: WideString);
