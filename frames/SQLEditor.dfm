@@ -339,13 +339,11 @@ object SQLEditorFrame: TSQLEditorFrame
     UseDockManager = False
     Padding.Top = 2
     TabOrder = 1
-    ExplicitWidth = 988
-    ExplicitHeight = 185
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 988
-      Height = 183
+      Width = 451
+      Height = 32
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -373,8 +371,6 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 2
     Visible = False
-    ExplicitTop = 232
-    ExplicitWidth = 988
   end
   object ToolbarPanel: TPanel
     Left = 0
@@ -388,7 +384,6 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentDoubleBuffered = False
     PopupMenu = ToolbarPopupMenu
     TabOrder = 3
-    ExplicitWidth = 988
     object ExecuteToolbarPanel: TPanel
       Left = 0
       Top = 0
@@ -1474,7 +1469,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 18
     Top = 162
     Bitmap = {
-      494C010106003800C80310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800CC0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1750,7 +1745,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800880310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A0038008C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
