@@ -755,7 +755,7 @@ begin
       if LStyles.Enabled then
       begin
         BG := GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
-        FG := LStyles.GetSystemColor(TBCSynEdit(Sender).Font.Color); //LStyles.GetSystemColor(clHighlightText);
+        FG := LStyles.GetSystemColor(clHighlightText);
       end;
     end;
  { if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
