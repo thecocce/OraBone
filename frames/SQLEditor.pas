@@ -434,7 +434,7 @@ uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks,
   Preferences, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
   Compare, Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
-  AnsiStrings, ShellAPI, WideStrings, Common;
+  AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil;
 
 const
   //SAVED_IMAGEINDEX = 0;
@@ -754,8 +754,8 @@ begin
       LStyles := StyleServices;
       if LStyles.Enabled then
       begin
-        BG := LStyles.GetSystemColor(clHighlight);
-        FG := LStyles.GetSystemColor(clHighlightText); //LStyles.GetStyleFontColor(sfMenuItemTextSelected); //LStyles.GetSystemColor(clHighlightText);
+        BG := GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
+        FG := LStyles.GetSystemColor(TBCSynEdit(Sender).Font.Color); //LStyles.GetSystemColor(clHighlightText);
       end;
     end;
  { if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
