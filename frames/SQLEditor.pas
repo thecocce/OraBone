@@ -746,6 +746,7 @@ procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Intege
   var Special: Boolean; var FG, BG: TColor);
 var
   LStyles: TCustomStyleServices;
+  //HighlightColor: TColor;
 begin
   if not TBCSynEdit(Sender).SelAvail then
     if TBCSynEdit(Sender).CaretY = Line then
@@ -754,7 +755,12 @@ begin
       LStyles := StyleServices;
       if LStyles.Enabled then
       begin
-        BG := GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
+       // if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecFillColor, LColor) or (LColor = clNone) then
+       //   LColor := GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight)));
+       // HighlightColor := LStyles.GetSystemColor(clHighlight);
+       // HighlightColor := LightenColor(HighlightColor, TBCSynEdit(Sender).Color, False);
+
+        BG := LightenColor(TBCSynEdit(Sender).Color);  //HighlightColor; //LStyles.GetSystemColor(clHighlight); // GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
         FG := LStyles.GetSystemColor(clHighlightText);
       end;
     end;

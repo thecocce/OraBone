@@ -12,7 +12,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = ColumnsTabSheet
+    ActivePage = DataTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -253,8 +253,8 @@ object ViewBrowserFrame: TViewBrowserFrame
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           IndicatorOptions = [gioShowRowselCheckboxesEh]
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
           ParentCtl3D = False
           EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
           TabOrder = 0
@@ -883,7 +883,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114000002E40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114000002E80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
