@@ -718,6 +718,7 @@ begin
     SynEdit.Lines.LoadFromFile(FileName);
   Application.ProcessMessages;
   SynEdit.Visible := True;
+  SynEdit.SetFocus;
 
   Result := SynEdit;
 end;
@@ -761,7 +762,7 @@ begin
        // HighlightColor := LightenColor(HighlightColor, TBCSynEdit(Sender).Color, False);
 
         BG := LightenColor(TBCSynEdit(Sender).Color);  //HighlightColor; //LStyles.GetSystemColor(clHighlight); // GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
-        FG := LStyles.GetSystemColor(clHighlightText);
+        //FG := LStyles.GetSystemColor(clHighlightText);
       end;
     end;
  { if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
