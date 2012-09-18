@@ -718,7 +718,11 @@ begin
     SynEdit.Lines.LoadFromFile(FileName);
   Application.ProcessMessages;
   SynEdit.Visible := True;
-  SynEdit.SetFocus;
+  try
+    SynEdit.SetFocus;
+  except
+    { not possible if tab is not selected }
+  end;
 
   Result := SynEdit;
 end;

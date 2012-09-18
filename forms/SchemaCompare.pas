@@ -337,7 +337,7 @@ begin
       else
       begin
         NodeData := Schema1VirtualDrawTree.GetNodeData(Node);
-        NodeData.ObjectName := Format('%s [%d}', [NodeData.ObjectName, Node.ChildCount]);
+        NodeData.ObjectName := Format('%s [%d]', [NodeData.ObjectName, Node.ChildCount]);
       end;
       Node := Node.NextSibling;
     end;

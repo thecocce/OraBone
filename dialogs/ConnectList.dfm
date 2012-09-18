@@ -23,16 +23,16 @@ object ConnectListDialog: TConnectListDialog
     Height = 28
     Align = alTop
     BevelOuter = bvNone
+    Padding.Top = 8
+    Padding.Bottom = 6
     TabOrder = 0
-    DesignSize = (
-      428
-      28)
     object Label1: TLabel
-      Left = 285
-      Top = 9
-      Width = 26
-      Height = 13
-      Anchors = [akTop, akRight]
+      Left = 286
+      Top = 8
+      Width = 33
+      Height = 14
+      Align = alRight
+      AutoSize = False
       Caption = 'Mode'
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
@@ -42,28 +42,32 @@ object ConnectListDialog: TConnectListDialog
       Font.Style = []
       ParentColor = False
       ParentFont = False
+      ExplicitLeft = 288
+      ExplicitHeight = 12
     end
     object ClientModeRadioButton: TRadioButton
-      Left = 317
-      Top = 7
+      Left = 319
+      Top = 8
       Width = 54
-      Height = 17
-      Anchors = [akTop, akRight]
+      Height = 14
+      Align = alRight
       Caption = ' Client'
       Checked = True
       TabOrder = 0
       TabStop = True
       OnClick = ModeClickActionExecute
+      ExplicitLeft = 321
     end
     object DirectModeRadioButton: TRadioButton
-      Left = 372
-      Top = 7
-      Width = 53
-      Height = 17
-      Anchors = [akTop, akRight]
+      Left = 373
+      Top = 8
+      Width = 55
+      Height = 14
+      Align = alRight
       Caption = ' Direct'
       TabOrder = 1
       OnClick = ModeClickActionExecute
+      ExplicitLeft = 375
     end
     object ActionToolBar1: TActionToolBar
       Left = 3
@@ -265,7 +269,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000800B00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000800B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000035A0500035A0500035A
