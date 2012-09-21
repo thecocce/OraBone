@@ -87,6 +87,7 @@ begin
   if FConnectDirectDialog = nil then
     Application.CreateForm(TConnectDirectDialog, FConnectDirectDialog);
   Result := FConnectDirectDialog;
+  Common.SetStyledFormSize(Result, 321, 236);
 end;
 {
 procedure TOraSessionEditorForm.DivConnStr(Server : string; var Service, Port, Host: string);

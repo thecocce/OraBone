@@ -53,6 +53,7 @@ begin
   if FCreateDBLinkDialog = nil then
     Application.CreateForm(TCreateDBLinkDialog, FCreateDBLinkDialog);
   Result := FCreateDBLinkDialog;
+  Common.SetStyledFormSize(Result, 321, 248);
 end;
 
 procedure TCreateDBLinkDialog.FormDestroy(Sender: TObject);

@@ -97,9 +97,6 @@ object DropUserDialog: TDropUserDialog
       ModalResult = 2
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 138
-      ExplicitTop = 18
-      ExplicitHeight = 23
     end
     object OKButton: TButton
       Left = 66
@@ -117,9 +114,6 @@ object DropUserDialog: TDropUserDialog
       ModalResult = 1
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 64
-      ExplicitTop = 18
-      ExplicitHeight = 23
     end
     object Separator1Panel: TPanel
       Left = 134

@@ -51,6 +51,7 @@ begin
   if FParametersDialog = nil then
     Application.CreateForm(TParametersDialog, FParametersDialog);
   Result := FParametersDialog;
+  Common.SetStyledFormSize(Result, 338, 320);
 end;
 
 procedure TParametersDialog.FormCreate(Sender: TObject);

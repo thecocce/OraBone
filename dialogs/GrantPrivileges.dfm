@@ -151,6 +151,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           TabOrder = 3
           EditColor = clInfoBk
           DeniedKeyStrokes = False
+          DropDownFixedWidth = 0
         end
         object RoleComboBox: TBCComboBox
           Left = 66
@@ -162,6 +163,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           TabOrder = 4
           EditColor = clInfoBk
           DeniedKeyStrokes = False
+          DropDownFixedWidth = 0
         end
       end
       object GrantOptionCheckBox: TCheckBox
@@ -189,9 +191,11 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           ExplicitHeight = 209
         end
       end
-      inherited SourceToolBar: TBCToolBar
-        Width = 318
-        ExplicitWidth = 318
+      inherited TopPanel: TPanel
+        inherited SourceToolBar: TBCToolBar
+          Width = 318
+          ExplicitWidth = 318
+        end
       end
     end
   end
@@ -209,7 +213,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

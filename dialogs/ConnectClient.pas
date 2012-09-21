@@ -77,6 +77,7 @@ begin
   if FConnectClientDialog = nil then
     Application.CreateForm(TConnectClientDialog, FConnectClientDialog);
   Result := FConnectClientDialog;
+  Common.SetStyledFormSize(Result, 321, 181);
 end;
 
 procedure TConnectClientDialog.FillDatabaseCombo;

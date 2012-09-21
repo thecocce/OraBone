@@ -76,6 +76,7 @@ begin
   if FImportTableDataDialog = nil then
     Application.CreateForm(TImportTableDataDialog, FImportTableDataDialog);
   Result := FImportTableDataDialog;
+  Common.SetStyledFormSize(Result, 339, 347);
 end;
 
 procedure TImportTableDataDialog.FormDestroy(Sender: TObject);

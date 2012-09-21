@@ -61,15 +61,7 @@ begin
   if FCustomizeObjectBrowserDialog = nil then
     Application.CreateForm(TCustomizeObjectBrowserDialog, FCustomizeObjectBrowserDialog);
   Result := FCustomizeObjectBrowserDialog;
-
-  Result.Width := 240;
-  Result.Height := 370;
-  if Assigned(TStyleManager.ActiveStyle) then
-    if TStyleManager.ActiveStyle.Name <> 'Windows' then
-    begin
-      Result.Height := Result.Height + 6;
-      Result.Width := Result.Width + 6;
-    end;
+  Common.SetStyledFormSize(Result, 240, 370);
 end;
 
 procedure TCustomizeObjectBrowserDialog.FormDestroy(Sender: TObject);

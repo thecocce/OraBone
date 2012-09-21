@@ -94,6 +94,7 @@ begin
   if FSchemaCompareForm = nil then
     Application.CreateForm(TSchemaCompareForm, FSchemaCompareForm);
   Result := FSchemaCompareForm;
+  Common.SetStyledFormSize(Result, 638, 554);
 end;
 
 procedure TSchemaCompareForm.FormClose(Sender: TObject; var Action: TCloseAction);

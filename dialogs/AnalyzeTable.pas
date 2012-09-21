@@ -32,6 +32,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  Common;
+
 const
   CAPTION_TEXT = 'Analyze Table: %s';
 
@@ -43,6 +46,7 @@ begin
   if FAnalyzeTableDialog = nil then
     Application.CreateForm(TAnalyzeTableDialog, FAnalyzeTableDialog);
   Result := FAnalyzeTableDialog;
+  Common.SetStyledFormSize(Result, 301, 146);
 end;
 
 procedure TAnalyzeTableDialog.FormDestroy(Sender: TObject);

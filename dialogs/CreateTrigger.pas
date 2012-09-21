@@ -62,6 +62,7 @@ begin
   if FCreateTriggerDialog = nil then
     Application.CreateForm(TCreateTriggerDialog, FCreateTriggerDialog);
   Result := FCreateTriggerDialog;
+  Common.SetStyledFormSize(Result, 363, 330);
 end;
 
 procedure TCreateTriggerDialog.FormDestroy(Sender: TObject);

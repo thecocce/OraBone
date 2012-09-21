@@ -90,6 +90,7 @@ begin
   if FDataSortDialog = nil then
     Application.CreateForm(TDataSortDialog, FDataSortDialog);
   Result := FDataSortDialog;
+  Common.SetStyledFormSize(Result, 570, 417);
 end;
 
 procedure TDataSortDialog.SetFields;

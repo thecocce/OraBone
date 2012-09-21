@@ -365,6 +365,10 @@ inherited CreateViewDialog: TCreateViewDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -427,6 +431,10 @@ inherited CreateViewDialog: TCreateViewDialog
     object SelectStatementTabSheet: TTabSheet [2]
       Caption = 'Select Statement'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SQLPanel: TPanel
         Left = 0
         Top = 0
@@ -482,9 +490,11 @@ inherited CreateViewDialog: TCreateViewDialog
           ExplicitHeight = 279
         end
       end
-      inherited SourceToolBar: TBCToolBar
-        Width = 431
-        ExplicitWidth = 431
+      inherited TopPanel: TPanel
+        inherited SourceToolBar: TBCToolBar
+          Width = 431
+          ExplicitWidth = 431
+        end
       end
     end
   end
@@ -551,7 +561,7 @@ inherited CreateViewDialog: TCreateViewDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

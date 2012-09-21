@@ -54,6 +54,7 @@ begin
   if FCreateSynonymDialog = nil then
     Application.CreateForm(TCreateSynonymDialog, FCreateSynonymDialog);
   Result := FCreateSynonymDialog;
+  Common.SetStyledFormSize(Result, 331, 247);
 end;
 
 procedure TCreateSynonymDialog.FormDestroy(Sender: TObject);

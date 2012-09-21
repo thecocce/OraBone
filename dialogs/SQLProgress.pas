@@ -38,6 +38,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+  Common;
+
 var
   FSQLProgressDialog: TSQLProgressDialog;
 
@@ -46,6 +49,7 @@ begin
   if FSQLProgressDialog = nil then
     Application.CreateForm(TSQLProgressDialog, FSQLProgressDialog);
   Result := FSQLProgressDialog;
+  Common.SetStyledFormSize(Result, 304, 114);
 end;
 
 procedure TSQLProgressDialog.CancelActionExecute(Sender: TObject);

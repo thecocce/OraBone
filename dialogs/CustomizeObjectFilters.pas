@@ -72,6 +72,7 @@ begin
   if FCustomizeObjectFiltersDialog = nil then
     Application.CreateForm(TCustomizeObjectFiltersDialog, FCustomizeObjectFiltersDialog);
   Result := FCustomizeObjectFiltersDialog;
+  Common.SetStyledFormSize(Result, 354, 421);
 end;
 
 procedure TCustomizeObjectFiltersDialog.DeselectAllActionExecute(Sender: TObject);

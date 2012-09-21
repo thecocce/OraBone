@@ -66,6 +66,7 @@ begin
   if FCreateFunctionDialog = nil then
     Application.CreateForm(TCreateFunctionDialog, FCreateFunctionDialog);
   Result := FCreateFunctionDialog;
+  Common.SetStyledFormSize(Result, 364, 390);
 end;
 
 procedure TCreateFunctionDialog.FormDestroy(Sender: TObject);

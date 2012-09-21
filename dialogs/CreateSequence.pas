@@ -54,6 +54,7 @@ begin
   if FCreateSequenceDialog = nil then
     Application.CreateForm(TCreateSequenceDialog, FCreateSequenceDialog);
   Result := FCreateSequenceDialog;
+  Common.SetStyledFormSize(Result, 371, 295);
 end;
 
 procedure TCreateSequenceDialog.FormDestroy(Sender: TObject);

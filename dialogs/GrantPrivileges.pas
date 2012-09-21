@@ -58,6 +58,7 @@ begin
   if FGrantPrivilegesDialog = nil then
     Application.CreateForm(TGrantPrivilegesDialog, FGrantPrivilegesDialog);
   Result := FGrantPrivilegesDialog;
+  Common.SetStyledFormSize(Result, 339, 354);
 end;
 
 procedure TGrantPrivilegesDialog.FormDestroy(Sender: TObject);

@@ -110,10 +110,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       inherited SourcePanel: TPanel
         Width = 726
         Height = 260
@@ -126,9 +122,11 @@ inherited CreatePackageDialog: TCreatePackageDialog
           ExplicitHeight = 259
         end
       end
-      inherited SourceToolBar: TBCToolBar
-        Width = 726
-        ExplicitWidth = 726
+      inherited TopPanel: TPanel
+        inherited SourceToolBar: TBCToolBar
+          Width = 726
+          ExplicitWidth = 726
+        end
       end
     end
   end
@@ -162,7 +160,7 @@ inherited CreatePackageDialog: TCreatePackageDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00EC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00F00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

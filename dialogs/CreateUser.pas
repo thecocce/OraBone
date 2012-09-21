@@ -51,6 +51,7 @@ begin
   if FCreateUserDialog = nil then
     Application.CreateForm(TCreateUserDialog, FCreateUserDialog);
   Result := FCreateUserDialog;
+  Common.SetStyledFormSize(Result, 411, 430);
 end;
 
 procedure TCreateUserDialog.FormDestroy(Sender: TObject);

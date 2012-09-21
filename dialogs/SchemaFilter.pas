@@ -54,6 +54,7 @@ begin
   if FSchemaFilterDialog = nil then
     Application.CreateForm(TSchemaFilterDialog, FSchemaFilterDialog);
   Result := FSchemaFilterDialog;
+  Common.SetStyledFormSize(Result, 354, 421);
 end;
 
 procedure TSchemaFilterDialog.DeselectAllActionExecute(Sender: TObject);

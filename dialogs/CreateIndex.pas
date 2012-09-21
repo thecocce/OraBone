@@ -61,6 +61,7 @@ begin
   if FCreateIndexDialog = nil then
     Application.CreateForm(TCreateIndexDialog, FCreateIndexDialog);
   Result := FCreateIndexDialog;
+  Common.SetStyledFormSize(Result, 312, 448);
 end;
 
 procedure TCreateIndexDialog.FormDestroy(Sender: TObject);

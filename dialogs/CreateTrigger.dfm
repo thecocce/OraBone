@@ -169,6 +169,10 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     object v: TTabSheet [1]
       Caption = 'When Clsuse'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object WhenClausePanel: TPanel
         Left = 0
         Top = 0
@@ -210,6 +214,10 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     object BodyTabSheet: TTabSheet [2]
       Caption = 'Body'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object BodyPanel: TPanel
         Left = 0
         Top = 0
@@ -265,9 +273,11 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           ExplicitHeight = 149
         end
       end
-      inherited SourceToolBar: TBCToolBar
-        Width = 342
-        ExplicitWidth = 342
+      inherited TopPanel: TPanel
+        inherited SourceToolBar: TBCToolBar
+          Width = 342
+          ExplicitWidth = 342
+        end
       end
     end
   end
@@ -316,7 +326,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00FC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

@@ -38,8 +38,6 @@ object StringDataDialog: TStringDataDialog
       Default = True
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 388
-      ExplicitTop = 16
     end
     object CancelButton: TButton
       Left = 471
@@ -50,8 +48,6 @@ object StringDataDialog: TStringDataDialog
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 469
-      ExplicitTop = 16
     end
     object Separator1Panel: TPanel
       Left = 465
@@ -61,7 +57,6 @@ object StringDataDialog: TStringDataDialog
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 261
     end
   end
   object Panel2: TPanel
@@ -75,10 +70,6 @@ object StringDataDialog: TStringDataDialog
     Padding.Top = 6
     Padding.Right = 6
     TabOrder = 1
-    ExplicitLeft = 94
-    ExplicitTop = 88
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object StringDataEdit: TSynEdit
       Left = 6
       Top = 6
@@ -103,10 +94,6 @@ object StringDataDialog: TStringDataDialog
       Gutter.Gradient = True
       Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
-      ExplicitLeft = 4
-      ExplicitTop = 4
-      ExplicitWidth = 544
-      ExplicitHeight = 177
     end
   end
 end

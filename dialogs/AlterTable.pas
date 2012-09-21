@@ -85,6 +85,7 @@ begin
   if FAlterTableDialog = nil then
     Application.CreateForm(TAlterTableDialog, FAlterTableDialog);
   Result := FAlterTableDialog;
+  Common.SetStyledFormSize(Result, 745, 481);
 end;
 
 procedure TAlterTableDialog.AddColumnActionExecute(Sender: TObject);

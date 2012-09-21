@@ -40,8 +40,6 @@ object ParametersDialog: TParametersDialog
       Default = True
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 168
-      ExplicitTop = 16
     end
     object CancelButton: TButton
       Left = 251
@@ -52,8 +50,6 @@ object ParametersDialog: TParametersDialog
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 249
-      ExplicitTop = 16
     end
     object Separator1Panel: TPanel
       Left = 245
@@ -63,7 +59,6 @@ object ParametersDialog: TParametersDialog
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 246
     end
   end
   object Panel2: TPanel
@@ -78,10 +73,6 @@ object ParametersDialog: TParametersDialog
     Padding.Top = 6
     Padding.Right = 6
     TabOrder = 1
-    ExplicitLeft = 92
-    ExplicitTop = 108
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object ValueListEditor: TValueListEditor
       Left = 6
       Top = 6
@@ -95,10 +86,6 @@ object ParametersDialog: TParametersDialog
         'Parameter'
         'Value')
       OnKeyUp = ValueListEditorKeyUp
-      ExplicitLeft = 8
-      ExplicitTop = 8
-      ExplicitWidth = 304
-      ExplicitHeight = 243
       ColWidths = (
         150
         164)

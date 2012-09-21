@@ -71,6 +71,7 @@ begin
   if FCreateViewDialog = nil then
     Application.CreateForm(TCreateViewDialog, FCreateViewDialog);
   Result := FCreateViewDialog;
+  Common.SetStyledFormSize(Result, 452, 460);
 end;
 
 procedure TCreateViewDialog.FormDestroy(Sender: TObject);

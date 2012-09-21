@@ -394,6 +394,10 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     object BodyTabSheet: TTabSheet [1]
       Caption = 'Body'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object BodyPanel: TPanel
         Left = 0
         Top = 0
@@ -449,9 +453,11 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
           ExplicitHeight = 233
         end
       end
-      inherited SourceToolBar: TBCToolBar
-        Width = 343
-        ExplicitWidth = 343
+      inherited TopPanel: TPanel
+        inherited SourceToolBar: TBCToolBar
+          Width = 343
+          ExplicitWidth = 343
+        end
       end
     end
   end
@@ -503,7 +509,7 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

@@ -92,6 +92,7 @@ begin
   if FExportTableDataDialog = nil then
     Application.CreateForm(TExportTableDataDialog, FExportTableDataDialog);
   Result := FExportTableDataDialog;
+  Common.SetStyledFormSize(Result, 339, 402);
 end;
 
 procedure TExportTableDataDialog.FormDestroy(Sender: TObject);

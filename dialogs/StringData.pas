@@ -31,7 +31,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, StyleHooks;
+  Common, Vcl.Themes, StyleHooks;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';
@@ -44,6 +44,7 @@ begin
   if FStringDataDialog = nil then
     Application.CreateForm(TStringDataDialog, FStringDataDialog);
   Result := FStringDataDialog;
+  Common.SetStyledFormSize(Result, 568, 264);
 end;
 
 procedure TStringDataDialog.FormDestroy(Sender: TObject);

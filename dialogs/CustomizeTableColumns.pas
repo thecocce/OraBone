@@ -66,15 +66,7 @@ begin
   if FCustomizeTableColumnsrDialog = nil then
     Application.CreateForm(TCustomizeTableColumnsDialog, FCustomizeTableColumnsrDialog);
   Result := FCustomizeTableColumnsrDialog;
-
-  Result.Width := 265;
-  Result.Height := 371;
-  if Assigned(TStyleManager.ActiveStyle) then
-    if TStyleManager.ActiveStyle.Name <> 'Windows' then
-    begin
-      Result.Height := Result.Height + 6;
-      Result.Width := Result.Width + 6;
-    end;
+  Common.SetStyledFormSize(Result, 265, 371);
 end;
 
 procedure TCustomizeTableColumnsDialog.FormDestroy(Sender: TObject);

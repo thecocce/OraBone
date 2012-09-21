@@ -74,6 +74,7 @@ begin
   if FCreateTableDialog = nil then
     Application.CreateForm(TCreateTableDialog, FCreateTableDialog);
   Result := FCreateTableDialog;
+  Common.SetStyledFormSize(Result, 694, 505);
 end;
 
 procedure TCreateTableDialog.AddColumnActionExecute(Sender: TObject);

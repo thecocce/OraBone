@@ -103,15 +103,7 @@ begin
   if FDataFilterDialog = nil then
     Application.CreateForm(TDataFilterDialog, FDataFilterDialog);
   Result := FDataFilterDialog;
-
-  Result.Width := 710;
-  Result.Height := 433;
-  if Assigned(TStyleManager.ActiveStyle) then
-    if TStyleManager.ActiveStyle.Name <> 'Windows' then
-    begin
-      Result.Height := Result.Height + 8;
-      Result.Width := Result.Width + 6;
-    end;
+  Common.SetStyledFormSize(Result, 710, 433);
 end;
 
 procedure TDataFilterDialog.SetFields;

@@ -35,9 +35,6 @@ object ImportTableDataDialog: TImportTableDataDialog
       Align = alClient
       Caption = ' Options '
       TabOrder = 0
-      ExplicitLeft = 8
-      ExplicitWidth = 317
-      ExplicitHeight = 157
       object SchemaLabel: TLabel
         Left = 12
         Top = 74
@@ -199,7 +196,6 @@ object ImportTableDataDialog: TImportTableDataDialog
     Padding.Right = 6
     Padding.Bottom = 6
     TabOrder = 1
-    ExplicitTop = 280
     object ImportButton: TButton
       Left = 171
       Top = 6
@@ -209,8 +205,6 @@ object ImportTableDataDialog: TImportTableDataDialog
       Align = alRight
       Default = True
       TabOrder = 0
-      ExplicitLeft = 169
-      ExplicitTop = 16
     end
     object CancelButton: TButton
       Left = 252
@@ -221,8 +215,6 @@ object ImportTableDataDialog: TImportTableDataDialog
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 250
-      ExplicitTop = 16
     end
     object Separator1Panel: TPanel
       Left = 246
@@ -253,10 +245,6 @@ object ImportTableDataDialog: TImportTableDataDialog
       Align = alClient
       Caption = ' Output '
       TabOrder = 0
-      ExplicitLeft = 8
-      ExplicitTop = 4
-      ExplicitWidth = 317
-      ExplicitHeight = 111
       object FileRadioButton: TRadioButton
         Left = 16
         Top = 20

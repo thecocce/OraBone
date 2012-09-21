@@ -52,7 +52,7 @@ implementation
 {$R *.dfm}
 
 uses
-  StyleHooks;
+  Common, StyleHooks;
 
 var
   FProgressDialog: TProgressDialog;
@@ -63,6 +63,7 @@ begin
     //Application.CreateForm(TProgressDialog, FProgressDialog);
     FProgressDialog := TProgressDialog.Create(AOwner);
   Result := FProgressDialog;
+  Common.SetStyledFormSize(Result, 370, 140);
 end;
 
 procedure TProgressDialog.CancelActionExecute(Sender: TObject);

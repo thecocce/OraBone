@@ -81,6 +81,7 @@ begin
   if FCreateConstraintDialog = nil then
     Application.CreateForm(TCreateConstraintDialog, FCreateConstraintDialog);
   Result := FCreateConstraintDialog;
+  Common.SetStyledFormSize(Result, 384, 448);
 end;
 
 procedure TCreateConstraintDialog.FormDestroy(Sender: TObject);

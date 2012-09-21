@@ -50,6 +50,7 @@ begin
   if FQueryProgressDialog = nil then
     Application.CreateForm(TQueryProgressDialog, FQueryProgressDialog);
   Result := FQueryProgressDialog;
+  Common.SetStyledFormSize(Result, 304, 114);
 end;
 
 procedure TQueryProgressDialog.CancelActionExecute(Sender: TObject);

@@ -68,15 +68,7 @@ begin
   if FCustomizePageControlDialog = nil then
     Application.CreateForm(TCustomizePageControlDialog, FCustomizePageControlDialog);
   Result := FCustomizePageControlDialog;
-
-  Result.Width := 256;
-  Result.Height := 351;
-  if Assigned(TStyleManager.ActiveStyle) then
-    if TStyleManager.ActiveStyle.Name <> 'Windows' then
-    begin
-      Result.Height := Result.Height + 6;
-      Result.Width := Result.Width + 6;
-    end;
+  Common.SetStyledFormSize(Result, 256, 351);
 end;
 
 procedure TCustomizePageControlDialog.FormDestroy(Sender: TObject);

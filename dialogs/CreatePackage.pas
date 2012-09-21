@@ -46,6 +46,7 @@ begin
   if FCreatePackageDialog = nil then
     Application.CreateForm(TCreatePackageDialog, FCreatePackageDialog);
   Result := FCreatePackageDialog;
+  Common.SetStyledFormSize(Result, 747, 415);
 end;
 
 

@@ -70,6 +70,7 @@ begin
   if FObjectSearhForm = nil then
     Application.CreateForm(TObjectSearhForm, FObjectSearhForm);
   Result := FObjectSearhForm;
+  Common.SetStyledFormSize(Result, 627, 472);
 end;
 
 procedure TObjectSearhForm.FormClose(Sender: TObject; var Action: TCloseAction);

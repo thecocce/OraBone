@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Math;
+  Common, Math;
 
 const
   CAPTION_TEXT = 'Drop table %s, are you sure?';
@@ -50,6 +50,7 @@ begin
   if FDropTableDialog = nil then
     Application.CreateForm(TDropTableDialog, FDropTableDialog);
   Result := FDropTableDialog;
+  Common.SetStyledFormSize(Result, 220, 141);
 end;
 
 procedure TDropTableDialog.FormDestroy(Sender: TObject);
