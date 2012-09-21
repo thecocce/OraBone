@@ -38,6 +38,7 @@ type
     procedure OutputCloseAllOtherPagesActionExecute(Sender: TObject);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     FTabsheetDblClick: TNotifyEvent;
@@ -90,7 +91,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Preferences, Lib, Vcl.Themes, StyleHooks;
+  Main, Common, Preferences, Lib, Vcl.Themes, StyleHooks, ClipBrd;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -592,6 +593,8 @@ begin
     Align := alClient;
     Items.Clear;
     Items.Text := Text;
+    MultiSelect := True;
+    OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
@@ -684,6 +687,19 @@ begin
             Result := TSynEdit(Panel.Components[0]);
       end;
     end;
+end;
+
+procedure TOutputFrame.ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  i: Integer;
+begin
+  if (ssCtrl in Shift) and (Key = 67) then
+  begin
+    Clipboard.AsText := '';
+    for i := 0 to TListBox(Sender).Count - 1 do
+      if TListBox(Sender).Selected[i] then
+        Clipboard.AsText := Clipboard.AsText + TListBox(Sender).Items.Strings[i] + CHR_ENTER;
+  end;
 end;
 
 procedure TOutputFrame.AddDBMSOutput(TabCaption: string; Text: string);
@@ -815,6 +831,8 @@ begin
     Align := alClient;
     Items.Clear;
     Items.Text := Text;
+    MultiSelect := True;
+    OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
