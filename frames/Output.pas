@@ -594,6 +594,7 @@ begin
     Items.Text := Text;
   end;
   TabSheet.TabVisible := True;
+  UpdatePopupMenu;
 end;
 
 function TOutputFrame.GetListBox(TabCaption: string): TListBox;

@@ -1,18 +1,20 @@
 object FuncProcBrowserFrame: TFuncProcBrowserFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 642
+  Height = 450
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object FuncProcPageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 451
-    Height = 304
-    ActivePage = SourceTabSheet
+    Width = 642
+    Height = 450
+    ActivePage = SynonymsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -21,24 +23,30 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     OnChange = FuncProcPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ExplicitWidth = 451
+    ExplicitHeight = 304
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object SourcePanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 634
+        Height = 400
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 443
+        ExplicitHeight = 254
         object SourceSynEdit: TSynEdit
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 632
+          Height = 399
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -60,16 +68,20 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          ExplicitWidth = 441
+          ExplicitHeight = 253
         end
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 400
+        Width = 634
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 254
+        ExplicitWidth = 443
         object Bevel2: TBevel
           AlignWithMargins = True
           Left = 75
@@ -127,25 +139,25 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 634
+        Height = 400
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 443
+        ExplicitHeight = 254
         object GrantsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 632
+          Height = 399
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -177,12 +189,14 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object GrantsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 400
+        Width = 634
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 254
+        ExplicitWidth = 443
         object Bevel1: TBevel
           AlignWithMargins = True
           Left = 52
@@ -235,21 +249,25 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 634
+        Height = 400
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 443
+        ExplicitHeight = 254
         object SynonymsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 632
+          Height = 399
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -281,12 +299,14 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object SynonymsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 400
+        Width = 634
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 254
+        ExplicitWidth = 443
         object Bevel3: TBevel
           AlignWithMargins = True
           Left = 52
@@ -340,25 +360,25 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 634
+        Height = 400
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 443
+        ExplicitHeight = 254
         object DependenciesDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 632
+          Height = 399
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -389,12 +409,14 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object DependenciesButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 400
+        Width = 634
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 254
+        ExplicitWidth = 443
         object DependenciesToolBar: TBCToolBar
           Left = 0
           Top = 0
@@ -417,7 +439,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Left = 78
     Top = 166
     Bitmap = {
-      494C010109000E000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

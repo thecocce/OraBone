@@ -149,6 +149,7 @@ end;
 procedure TFuncProcBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
+  SynonymsQuery.Refresh;
 end;
 
 procedure TFuncProcBrowserFrame.CustomizeActionExecute(Sender: TObject);
