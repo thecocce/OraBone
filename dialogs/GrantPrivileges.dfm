@@ -146,7 +146,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 22
           Width = 225
           Height = 21
-          ItemHeight = 13
           ReadOnly = False
           TabOrder = 3
           EditColor = clInfoBk
@@ -158,7 +157,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 45
           Width = 225
           Height = 21
-          ItemHeight = 13
           ReadOnly = False
           TabOrder = 4
           EditColor = clInfoBk
@@ -213,7 +211,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00FC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

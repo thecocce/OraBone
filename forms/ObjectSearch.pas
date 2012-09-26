@@ -162,9 +162,9 @@ begin
     Unprepare;
     SQL.Clear;
     if CaseSensitiveCheckBox.Checked then
-      SQL.Add(DM.ObjectTreeStringHolder.StringsByName['SearchCaseSensitiveSQL'].Text)
+      SQL.Add(DM.StringHolder.StringsByName['SearchCaseSensitiveSQL'].Text)
     else
-      SQL.Add(DM.ObjectTreeStringHolder.StringsByName['SearchNotCaseSensitiveSQL'].Text);
+      SQL.Add(DM.StringHolder.StringsByName['SearchNotCaseSensitiveSQL'].Text);
     ParamByName('SEARCHSTRING').AsString := SearchForEdit.Text;
     Prepare;
     Open;
@@ -176,9 +176,9 @@ begin
     Unprepare;
     SQL.Clear;
     if CaseSensitiveCheckBox.Checked then
-      SQL.Add(DM.ObjectTreeStringHolder.StringsByName['SearchColumnsCaseSensitiveSQL'].Text)
+      SQL.Add(DM.StringHolder.StringsByName['SearchColumnsCaseSensitiveSQL'].Text)
     else
-      SQL.Add(DM.ObjectTreeStringHolder.StringsByName['SearchColumnsNotCaseSensitiveSQL'].Text);
+      SQL.Add(DM.StringHolder.StringsByName['SearchColumnsNotCaseSensitiveSQL'].Text);
     ParamByName('SEARCHSTRING').AsString := SearchForEdit.Text;
     Prepare;
     Open;

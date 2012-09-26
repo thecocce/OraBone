@@ -1,8 +1,8 @@
 object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 744
+  Height = 458
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
@@ -10,9 +10,9 @@ object TableBrowserFrame: TTableBrowserFrame
   object TablePageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 451
-    Height = 304
-    ActivePage = DataTabSheet
+    Width = 744
+    Height = 458
+    ActivePage = SourceTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -26,8 +26,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -36,8 +36,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 252
+          Width = 734
+          Height = 406
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -70,8 +70,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -136,8 +136,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object SourcePanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -146,8 +146,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object SourceSynEdit: TSynEdit
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -173,12 +173,13 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 410
         object Bevel4: TBevel
           AlignWithMargins = True
           Left = 75
@@ -203,7 +204,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 123
+          ExplicitLeft = 142
           ExplicitTop = 4
         end
         object SourceToolBar: TBCToolBar
@@ -231,103 +232,35 @@ object TableBrowserFrame: TTableBrowserFrame
             Action = SaveToFileAction
           end
         end
-        object CreateTableCheckBox: TCheckBox
-          Left = 118
-          Top = 0
-          Width = 84
-          Height = 22
-          Align = alLeft
-          Caption = 'Create Table'
-          Checked = True
-          State = cbChecked
-          TabOrder = 1
-          OnClick = SetSourceClickActionExecute
-        end
-        object IndexesCheckBox: TCheckBox
-          Left = 275
-          Top = 0
-          Width = 64
-          Height = 22
-          Align = alLeft
-          Caption = 'Indexes'
-          Checked = True
-          State = cbChecked
-          TabOrder = 2
-          OnClick = SetSourceClickActionExecute
-        end
-        object ConstraintsCheckBox: TCheckBox
-          Left = 339
-          Top = 0
-          Width = 80
-          Height = 22
-          Align = alLeft
-          Caption = 'Constraints'
-          Checked = True
-          State = cbChecked
-          TabOrder = 3
-          OnClick = SetSourceClickActionExecute
-        end
-        object TriggersCheckBox: TCheckBox
-          Left = 419
-          Top = 0
-          Width = 64
-          Height = 22
-          Align = alLeft
-          Caption = 'Triggers'
-          Checked = True
-          State = cbChecked
-          TabOrder = 4
-          OnClick = SetSourceClickActionExecute
-        end
-        object CommentsCheckBox: TCheckBox
-          Left = 202
-          Top = 0
-          Width = 73
-          Height = 22
-          Align = alLeft
-          Caption = 'Comments'
-          Checked = True
-          State = cbChecked
-          TabOrder = 5
-          OnClick = SetSourceClickActionExecute
-        end
-        object SynonymsCheckBox: TCheckBox
-          Left = 483
-          Top = 0
-          Width = 74
-          Height = 22
-          Align = alLeft
-          Caption = 'Synonyms'
-          Checked = True
-          State = cbChecked
-          TabOrder = 6
-          OnClick = SetSourceClickActionExecute
-        end
-        object GrantsCheckBox: TCheckBox
-          Left = 557
-          Top = 0
-          Width = 64
-          Height = 22
-          Align = alLeft
-          Caption = 'Grants'
-          Checked = True
-          State = cbChecked
-          TabOrder = 7
-          OnClick = SetSourceClickActionExecute
-        end
         object BCToolBar2: TBCToolBar
-          Left = 82
+          Left = 118
           Top = 0
           Width = 23
           Height = 22
           Align = alLeft
           Caption = 'SourceToolBar'
           Images = ImageList
-          TabOrder = 8
+          TabOrder = 1
+          ExplicitLeft = 82
           object ToolButton3: TToolButton
             Left = 0
             Top = 0
             Action = RefreshAction
+          end
+        end
+        object BCToolBar10: TBCToolBar
+          Left = 82
+          Top = 0
+          Width = 23
+          Height = 22
+          Align = alLeft
+          Caption = 'BCToolBar10'
+          Images = ImageList
+          TabOrder = 2
+          object ToolButton28: TToolButton
+            Left = 0
+            Top = 0
+            Action = SourceOptionsAction
           end
         end
       end
@@ -338,8 +271,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object DataPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -348,8 +281,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object DataDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -381,8 +314,6 @@ object TableBrowserFrame: TTableBrowserFrame
           TitleFont.Style = []
           OnDblClick = DataDBGridDblClick
           OnDrawDataCell = DataDBGridDrawDataCell
-          OnGetCellParams = DataDBGridGetCellParams
-          OnKeyDown = DataDBGridKeyDown
           OnMouseDown = DataDBGridMouseDown
           OnTitleClick = DataDBGridTitleClick
           object RowDetailData: TRowDetailPanelControlEh
@@ -391,8 +322,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object DataButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -449,7 +380,7 @@ object TableBrowserFrame: TTableBrowserFrame
           end
         end
         object DataDBNavigator: TDBNavigator
-          Left = 275
+          Left = 568
           Top = 0
           Width = 168
           Height = 22
@@ -502,8 +433,8 @@ object TableBrowserFrame: TTableBrowserFrame
       ImageIndex = 2
       object ConstraintSplitter: TSplitter
         Left = 0
-        Top = 83
-        Width = 443
+        Top = 237
+        Width = 736
         Height = 2
         Cursor = crVSplit
         Align = alBottom
@@ -513,8 +444,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object ConstraintsClientPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 83
+        Width = 736
+        Height = 237
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -522,8 +453,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object ConstraintsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 59
+          Width = 734
+          Height = 213
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -554,8 +485,8 @@ object TableBrowserFrame: TTableBrowserFrame
         end
         object ConstraintButtonPanel: TPanel
           Left = 0
-          Top = 59
-          Width = 441
+          Top = 213
+          Width = 734
           Height = 24
           Align = alBottom
           BevelOuter = bvNone
@@ -647,8 +578,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ConstraintBottomPanel: TPanel
         Left = 0
-        Top = 85
-        Width = 443
+        Top = 239
+        Width = 736
         Height = 191
         Align = alBottom
         BevelOuter = bvNone
@@ -658,7 +589,7 @@ object TableBrowserFrame: TTableBrowserFrame
         object ConstraintColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
+          Width = 734
           Height = 190
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
@@ -695,7 +626,7 @@ object TableBrowserFrame: TTableBrowserFrame
       object TriggersSplitter: TSplitter
         Left = 0
         Top = 165
-        Width = 443
+        Width = 736
         Height = 2
         Cursor = crVSplit
         Align = alTop
@@ -704,7 +635,7 @@ object TableBrowserFrame: TTableBrowserFrame
       object TriggersTopPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
+        Width = 736
         Height = 165
         Align = alTop
         BevelOuter = bvNone
@@ -713,7 +644,7 @@ object TableBrowserFrame: TTableBrowserFrame
         object TriggersDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
+          Width = 734
           Height = 141
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
@@ -746,7 +677,7 @@ object TableBrowserFrame: TTableBrowserFrame
         object TriggersButtonPanel: TPanel
           Left = 0
           Top = 141
-          Width = 441
+          Width = 734
           Height = 24
           Align = alBottom
           BevelOuter = bvNone
@@ -839,8 +770,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object TriggersBottomPanel: TPanel
         Left = 0
         Top = 167
-        Width = 443
-        Height = 109
+        Width = 736
+        Height = 263
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -849,8 +780,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object TriggerSynEdit: TSynEdit
           Left = 0
           Top = 0
-          Width = 441
-          Height = 108
+          Width = 734
+          Height = 262
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -881,8 +812,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object IndexesPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -891,8 +822,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object IndexesDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -924,8 +855,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object IndexesButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -986,8 +917,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -996,8 +927,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object GrantsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1029,8 +960,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object GrantsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1091,8 +1022,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1101,8 +1032,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object SynonymsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1134,8 +1065,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object SynonymsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1196,8 +1127,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object ReferencedByPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1206,8 +1137,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object ReferencedByDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1238,8 +1169,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ReferencedByButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1267,8 +1198,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object ReferencesPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1277,8 +1208,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object ReferencesDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1309,8 +1240,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ReferencesButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1338,8 +1269,8 @@ object TableBrowserFrame: TTableBrowserFrame
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 736
+        Height = 408
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1348,8 +1279,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object DependenciesDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 734
+          Height = 407
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1380,8 +1311,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object DependenciesButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 408
+        Width = 736
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1405,7 +1336,6 @@ object TableBrowserFrame: TTableBrowserFrame
     end
   end
   object ColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   s.column_id "ID", RPAD (s.column_name, 30) "Column Name' +
@@ -1590,7 +1520,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 22
     Top = 36
     Bitmap = {
-      494C01011D000004300410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D000004380410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000008E5D
       59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
@@ -2873,9 +2803,14 @@ object TableBrowserFrame: TTableBrowserFrame
       ImageIndex = 28
       OnExecute = ExportTableDataActionExecute
     end
+    object SourceOptionsAction: TAction
+      Caption = 'SourceOptionsAction'
+      Hint = 'Source options'
+      ImageIndex = 8
+      OnExecute = SourceOptionsActionExecute
+    end
   end
   object ConstraintsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT constraint_name "Constraint Name",'
       
@@ -2913,7 +2848,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 112
   end
   object TriggersQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   trigger_name "Trigger Name", trigger_type "Type", trigg' +
@@ -2953,7 +2887,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 238
   end
   object GrantsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   grantee "Granted To", privilege "Privilege", grantable ' +
@@ -2986,7 +2919,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 118
   end
   object IndexesQuery: TOraQuery
-    DataTypeMap = <>
     FetchAll = True
     ReadOnly = True
     AutoCommit = False
@@ -3002,7 +2934,6 @@ object TableBrowserFrame: TTableBrowserFrame
   end
   object ReferencesQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT LPAD('#39' '#39', 30) "Ref. Table", LPAD('#39' '#39', 300) "Ref. Columns"' +
@@ -3031,7 +2962,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 92
   end
   object DependenciesQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   d.name "Name", d.type "Type", INITCAP(o.status) "Status' +
@@ -3059,7 +2989,6 @@ object TableBrowserFrame: TTableBrowserFrame
   end
   object ReferencedByQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT LPAD('#39' '#39', 30) "Table", LPAD('#39' '#39', 300) "Columns", LPAD('#39' '#39 +
@@ -3088,7 +3017,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 220
   end
   object SynonymsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT owner "Synonym Owner", synonym_name "Synonym Name", table' +
@@ -3144,7 +3072,6 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 306
   end
   object SourceQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT comments'
       '  FROM all_tab_comments'
@@ -3261,7 +3188,6 @@ object TableBrowserFrame: TTableBrowserFrame
     end
   end
   object ConstraintColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT a.position "Position",'
       '       a.table_name || '#39'.'#39' || a.column_name "Constraint Column",'

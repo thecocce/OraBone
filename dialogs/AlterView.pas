@@ -242,7 +242,7 @@ begin
   { columns }
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ViewColumnsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ViewColumnsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_VIEW_NAME').AsWideString := FObjectName;
@@ -269,7 +269,7 @@ begin
   { select statements }
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ViewTextSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ViewTextSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_VIEW_NAME').AsWideString := FObjectName;

@@ -31,6 +31,10 @@ inherited AlterViewDialog: TAlterViewDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -605,7 +609,7 @@ inherited AlterViewDialog: TAlterViewDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00240210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
@@ -746,7 +750,6 @@ inherited AlterViewDialog: TAlterViewDialog
   end
   object ColumnsQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT 0 column_id,'
       '       LPAD('#39' '#39', 30) column_name,'
@@ -764,7 +767,6 @@ inherited AlterViewDialog: TAlterViewDialog
   end
   object OriginalColumnsQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT 0 column_id,'
       '       LPAD('#39' '#39', 30) column_name,'

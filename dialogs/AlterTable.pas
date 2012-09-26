@@ -293,7 +293,7 @@ begin
   end;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := ColumnsQuery.Session;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ColumnsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ColumnsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_OWNER').AsWideString := FSchemaParam;
@@ -399,7 +399,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := ColumnsQuery.Session;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -428,7 +428,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := ColumnsQuery.Session;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectTriggersSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectTriggersSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -498,7 +498,7 @@ var
   begin
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintColumnsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintColumnsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -534,7 +534,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -576,7 +576,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectTriggersSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectTriggersSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -608,7 +608,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectGrantsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectGrantsSQL'].Text);
     with OraQuery do
     try
       //ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -652,7 +652,7 @@ var
     { get constraint object type and name }
       OraQuery := TOraQuery.Create(nil);
       OraQuery.Session := FOraSession;
-      OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ConstraintTypeForRenamingSQL'].Text);
+      OraQuery.SQL.Add(DM.StringHolder.StringsByName['ConstraintTypeForRenamingSQL'].Text);
       with OraQuery do
       try
         ParamByName('CONSTRAINT_NAME').AsWideString := String(OldName);
@@ -663,13 +663,13 @@ var
         Close;
         Free;
       end;
-      Result := Format(DM.ObjectTreeStringHolder.StringsByName['RenameConstraintSQL'].Text, [ObjectType, ObjectName, OldName, NewName])
+      Result := Format(DM.StringHolder.StringsByName['RenameConstraintSQL'].Text, [ObjectType, ObjectName, OldName, NewName])
     end;
   begin
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -705,7 +705,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectTriggersSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectTriggersSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -720,7 +720,7 @@ var
         if Length(NewName) > 26 then
           NewName := Copy(NewName, 1, 26);
         NewName := NewName + '_OLD';
-        Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['RenameTriggerSQL'].Text, [OldName, NewName]);
+        Result := Result + Format(DM.StringHolder.StringsByName['RenameTriggerSQL'].Text, [OldName, NewName]);
         Next;
       end;
       if Result <> '' then
@@ -797,7 +797,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;
@@ -851,7 +851,7 @@ var
     Screen.Cursor := crSQLWait;
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := FOraSession;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OWNER').AsString := FSchemaParam;

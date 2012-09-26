@@ -242,7 +242,7 @@ begin
   with OraQuery do
   begin
     Session := FOraSession;
-    SQL.Add(Format(DM.ObjectTreeStringHolder.StringsByName['DateFromDualSQL'].Text, [DateFormat]));
+    SQL.Add(Format(DM.StringHolder.StringsByName['DateFromDualSQL'].Text, [DateFormat]));
     Open;
     Result := FieldByName('TEXT').AsString;
     Close;

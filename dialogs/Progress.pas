@@ -63,7 +63,6 @@ begin
     //Application.CreateForm(TProgressDialog, FProgressDialog);
     FProgressDialog := TProgressDialog.Create(AOwner);
   Result := FProgressDialog;
-  Common.SetStyledFormSize(Result, 370, 140);
 end;
 
 procedure TProgressDialog.CancelActionExecute(Sender: TObject);
@@ -98,6 +97,7 @@ begin
     Height := 140 //116
   else
     Height := 99; //75;
+  Common.SetStyledFormSize(Self, 370, Height);
   ProgressBar.Marquee := Marquee;
   Visible := True;
 end;

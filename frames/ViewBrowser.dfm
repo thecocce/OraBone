@@ -12,7 +12,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = DataTabSheet
+    ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -344,6 +344,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object TriggersTabSheet: TTabSheet
       Caption = 'Triggers'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object TriggersSplitter: TSplitter
         Left = 0
         Top = 165
@@ -529,6 +533,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -634,6 +642,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -739,6 +751,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -808,7 +824,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     end
   end
   object ColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT   s.column_id "ID", s.column_name "Column Name",'
       '         RPAD (   s.data_type'
@@ -883,7 +898,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114000002E80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114000002EC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1813,7 +1828,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     end
   end
   object TriggersQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   trigger_name "Trigger Name", trigger_type "Type", INITC' +
@@ -1852,7 +1866,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 236
   end
   object GrantsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   grantee "Granted To", privilege "Privilege", grantable ' +
@@ -1884,7 +1897,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 100
   end
   object DependenciesQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT DISTINCT d.name "Name", d.type "Type", INITCAP(o.status) ' +
@@ -1915,7 +1927,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 364
   end
   object SynonymsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT owner "Synonym Owner", synonym_name "Synonym Name", table' +
@@ -1946,7 +1957,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 348
   end
   object SourceQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT text, '#39#39' type'
       '  FROM all_views'

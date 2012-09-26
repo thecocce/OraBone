@@ -185,13 +185,12 @@ object ObjectSearhForm: TObjectSearhForm
         item
           Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
           Position = 1
-          Width = 294
+          Width = 298
           WideText = 'Search Result'
         end>
     end
   end
   object ObjectSearchQuery: TOraQuery
-    DataTypeMap = <>
     FetchAll = True
     AfterOpen = ObjectSearchQueryAfterOpen
     Left = 180
@@ -210,7 +209,7 @@ object ObjectSearhForm: TObjectSearhForm
     Left = 60
     Top = 284
     Bitmap = {
-      494C01011800E000600210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011800E000680210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1142,7 +1141,6 @@ object ObjectSearhForm: TObjectSearhForm
       000000000000}
   end
   object ColumnsQuery: TOraQuery
-    DataTypeMap = <>
     FetchRows = 500
     AfterOpen = ObjectSearchQueryAfterOpen
     Left = 178

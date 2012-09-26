@@ -113,7 +113,7 @@ object ObjectTreeFrame: TObjectTreeFrame
     Left = 60
     Top = 284
     Bitmap = {
-      494C01015200E000040310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015200E0000C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005001000001002000000000000050
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2893,14 +2893,12 @@ object ObjectTreeFrame: TObjectTreeFrame
       000000000000}
   end
   object ObjectsQuery: TOraQuery
-    DataTypeMap = <>
     FetchAll = True
     NonBlocking = True
     Left = 184
     Top = 228
   end
   object InvalidObjectsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   object_type || '#39' '#39' || owner || '#39'.'#39' || object_name NAME,' +
@@ -2920,7 +2918,6 @@ object ObjectTreeFrame: TObjectTreeFrame
       end>
   end
   object RecycleBinQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   original_name NAME, '#39'RECYCLE BIN'#39' TYPE, '#39'ENABLED'#39' statu' +
@@ -2945,7 +2942,6 @@ object ObjectTreeFrame: TObjectTreeFrame
     Top = 160
   end
   object SchemasQuery: TOraQuery
-    DataTypeMap = <>
     FetchAll = True
     NonBlocking = True
     Left = 48
@@ -2963,7 +2959,6 @@ object ObjectTreeFrame: TObjectTreeFrame
     end
   end
   object UsersQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT   username name, '#39'USER'#39' type, account_status status'
       '    FROM dba_users    '

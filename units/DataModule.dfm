@@ -2,7 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   Height = 150
   Width = 215
-  object ObjectTreeStringHolder: TJvMultiStringHolder
+  object StringHolder: TJvMultiStringHolder
     MultipleStrings = <
       item
         Name = 'ObjectsSQL'
@@ -31,6 +31,29 @@ object DM: TDM
             '        AND table_name NOT IN (SELECT mview_name FROM all_mviews' +
             ' WHERE owner = :P_SCHEMA)'
           '          %s')
+      end
+      item
+        Name = 'TableParametersSQL'
+        Strings.Strings = (
+          
+            'SELECT tablespace_name, NVL(pct_used, 0) pct_used, pct_free, ini' +
+            '_trans, max_trans, initial_extent,'
+          '       next_extent,'
+          
+            '       min_extents, max_extents, NVL(pct_increase, 0) pct_increa' +
+            'se, buffer_pool,'
+          '       DECODE(logging, '#39'YES'#39', '#39'LOGGING'#39', '#39'NOLOGGING'#39') logging,'
+          
+            '       DECODE(compression, '#39'ENABLED'#39', '#39'COMPRESS'#39', '#39'NOCOMPRESS'#39') ' +
+            'compression,'
+          '       DECODE(cache, '#39'Y'#39', '#39'CACHE'#39', '#39'NOCACHE'#39') cache,'
+          '       DECODE(degree, 1, '#39'NOPARALLEL'#39', '#39'PARALLEL'#39') parallel,'
+          
+            '       DECODE(monitoring, '#39'YES'#39', '#39'MONITORING'#39', '#39'NOMONITORING'#39') m' +
+            'onitoring'
+          '  FROM all_tables'
+          ' WHERE owner = :P_OWNER'
+          '   AND table_name = :P_TABLE_NAME')
       end
       item
         Name = 'ViewsSQL'

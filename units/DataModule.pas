@@ -7,7 +7,7 @@ uses
 
 type
   TDM = class(TDataModule)
-    ObjectTreeStringHolder: TJvMultiStringHolder;
+    StringHolder: TJvMultiStringHolder;
   private
     { Private declarations }
   public

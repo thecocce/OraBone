@@ -333,7 +333,7 @@ begin
   with SchemasQuery do
   begin
     SQL.Clear;
-    SQL.Add(Format(DM.ObjectTreeStringHolder.StringsByName['SchemasSQL'].Text, [SchemaFilters, FilterLength]));
+    SQL.Add(Format(DM.StringHolder.StringsByName['SchemasSQL'].Text, [SchemaFilters, FilterLength]));
     Open;
     while SchemasQuery.Executing do
       Application.ProcessMessages;
@@ -562,7 +562,7 @@ begin
     with OraQuerySpec do
     try
       { Open queries }
-      SQL.Text := DM.ObjectTreeStringHolder.StringsByName['PackageSpecificationSQL'].Text;
+      SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text;
       ParamByName('P_OBJECT_NAME').AsWideString := string(ParentData.NodeText); // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;
@@ -578,7 +578,7 @@ begin
 
       if not PackageSpec then
       begin
-        SQL.Text := DM.ObjectTreeStringHolder.StringsByName['PackageBodyLineSQL'].Text;
+        SQL.Text := DM.StringHolder.StringsByName['PackageBodyLineSQL'].Text;
         ParamByName('P_OBJECT_NAME').AsWideString := FObjectName;
         ParamByName('P_OWNER').AsWideString := FSchemaParam;
         ParamByName('P_LINE').AsInteger := 1;
@@ -896,72 +896,72 @@ begin
   begin
     if FTreeObjects.Strings[i] = TEXT_TABLES + TEXT_IS_TRUE then
     begin
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['TablesSQL'].Text, [FFilterObjects[0]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['TablesSQL'].Text, [FFilterObjects[0]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_VIEWS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['ViewsSQL'].Text, [FFilterObjects[1]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['ViewsSQL'].Text, [FFilterObjects[1]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_FUNCTIONS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['FunctionsSQL'].Text, [FFilterObjects[2]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['FunctionsSQL'].Text, [FFilterObjects[2]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_PROCEDURES + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['ProceduresSQL'].Text, [FFilterObjects[3]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['ProceduresSQL'].Text, [FFilterObjects[3]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_PACKAGES + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['PackagesSQL'].Text, [FFilterObjects[4]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['PackagesSQL'].Text, [FFilterObjects[4]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_TRIGGERS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['TriggersSQL'].Text, [FFilterObjects[5]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['TriggersSQL'].Text, [FFilterObjects[5]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_CONSTRAINTS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['ConstraintsSQL'].Text, [FFilterObjects[6]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['ConstraintsSQL'].Text, [FFilterObjects[6]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_INDEXES + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['IndexesSQL'].Text, [FFilterObjects[7]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['IndexesSQL'].Text, [FFilterObjects[7]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_SEQUENCES + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['SequencesSQL'].Text, [FFilterObjects[8]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['SequencesSQL'].Text, [FFilterObjects[8]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_SYNONYMS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['SynonymsSQL'].Text, [FFilterObjects[9]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['SynonymsSQL'].Text, [FFilterObjects[9]]);
     end;
     if FTreeObjects.Strings[i] = TEXT_DBLINKS + TEXT_IS_TRUE then
     begin
       if Result <> '' then
         Result := Result + ' UNION ALL ';
-      Result := Result + Format(DM.ObjectTreeStringHolder.StringsByName['DBLinksSQL'].Text, [FFilterObjects[10]]);
+      Result := Result + Format(DM.StringHolder.StringsByName['DBLinksSQL'].Text, [FFilterObjects[10]]);
     end;
   end;
 
   if Result <> '' then
-    Result := Format(DM.ObjectTreeStringHolder.StringsByName['ObjectsSQL'].Text, [Result]);
+    Result := Format(DM.StringHolder.StringsByName['ObjectsSQL'].Text, [Result]);
 end;
 
 procedure TObjectTreeFrame.AddObjects;
@@ -1058,7 +1058,7 @@ begin
   with UsersQuery do
   try
     SQL.Clear;
-    SQL.Text := Format(DM.ObjectTreeStringHolder.StringsByName['UsersSQL'].Text, [FFilterObjects[11]]);
+    SQL.Text := Format(DM.StringHolder.StringsByName['UsersSQL'].Text, [FFilterObjects[11]]);
     //ParamByName('P_SCHEMA').AsWideString := FSchemaParam;
     Prepare;
     Open;
@@ -1609,7 +1609,7 @@ begin
     with TOraQuery.Create(nil) do
     try
       Session := FOraSession;
-      SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ConstraintTypeAndNameSQL'].Text);
+      SQL.Add(DM.StringHolder.StringsByName['ConstraintTypeAndNameSQL'].Text);
       ParamByName('CONSTRAINT_NAME').AsWideString := String(OldName);
       Open;
       ObjectType := FieldByName('TYPE').AsWideString;
@@ -1719,8 +1719,8 @@ begin
 end;
 
 initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TVirtualTreeStyleHook);
+  TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TScrollingStyleHook);
+  //TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TVirtualTreeStyleHook);
 
 end.
 

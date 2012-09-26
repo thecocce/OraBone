@@ -88,7 +88,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Object owner'
-        ItemHeight = 13
         ReadOnly = False
         TabOrder = 3
         EditColor = clInfoBk
@@ -101,7 +100,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Object name'
-        ItemHeight = 13
         ReadOnly = False
         TabOrder = 4
         EditColor = clInfoBk
@@ -114,7 +112,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Database link'
-        ItemHeight = 13
         ReadOnly = False
         TabOrder = 5
         EditColor = clInfoBk
@@ -157,7 +154,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

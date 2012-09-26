@@ -136,7 +136,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['AllTablesOfSchemaSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['AllTablesOfSchemaSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_SCHEMA').AsWideString := FSchemaParam;
@@ -177,7 +177,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['TableColumnsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['TableColumnsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_TABLE_NAME').AsWideString := TableNameComboBox.Text;

@@ -137,96 +137,96 @@ function TSchemaCompareForm.GetCompareSQL: string;
 begin
   Result := '';
   if TablesCheckBox.Checked then
-    Result := DM.ObjectTreeStringHolder.StringsByName['SchemaCompareTablesSQL'].Text;
+    Result := DM.StringHolder.StringsByName['SchemaCompareTablesSQL'].Text;
 
   if ViewsCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareViewsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareViewsSQL'].Text;
   end;
   
   if FunctionsCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareFunctionsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareFunctionsSQL'].Text;
   end;
   
   if ProceduresCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareProceduresSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareProceduresSQL'].Text;
   end;
   
   if PackagesCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';  
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaComparePackagesSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaComparePackagesSQL'].Text;
   end;
   
   if TriggersCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';  
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareTriggersSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareTriggersSQL'].Text;
   end;
   if ConstraintsCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareConstraintsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareConstraintsSQL'].Text;
   end;
   
   if IndexesCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';  
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareIndexesSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareIndexesSQL'].Text;
   end;
   
   if SequencesCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';  
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareSequencesSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareSequencesSQL'].Text;
   end;
 
   if SynonymsCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareSynonymsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareSynonymsSQL'].Text;
   end;
 
   if DBLinksCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareDBLinksSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareDBLinksSQL'].Text;
   end;
   
   if TableCommentsCheckBox.Checked then
   begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareTableCommentsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareTableCommentsSQL'].Text;
   end;
   
   if ColumnNamesCheckBox.Checked then
   begin  
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareColumnNamesSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareColumnNamesSQL'].Text;
   end;
   
   if ColumnCommentsCheckBox.Checked then
   begin  
     if Result <> '' then
       Result := Result + ' UNION ALL ';
-    Result := Result + DM.ObjectTreeStringHolder.StringsByName['SchemaCompareColumnCommentsSQL'].Text;
+    Result := Result + DM.StringHolder.StringsByName['SchemaCompareColumnCommentsSQL'].Text;
   end;
   
   if Result <> '' then

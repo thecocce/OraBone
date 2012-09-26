@@ -1398,7 +1398,7 @@ begin
   begin
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := ObjectTreeFrame.Session;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ConstraintTableNameSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['ConstraintTableNameSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OBJECT_NAME').AsWideString := ObjectTreeFrame.ObjectName;
@@ -1418,7 +1418,7 @@ begin
   begin
     OraQuery := TOraQuery.Create(nil);
     OraQuery.Session := ObjectTreeFrame.Session;
-    OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['SynonymOwnerSQL'].Text);
+    OraQuery.SQL.Add(DM.StringHolder.StringsByName['SynonymOwnerSQL'].Text);
     with OraQuery do
     try
       ParamByName('P_OBJECT_NAME').AsWideString := ObjectTreeFrame.ObjectName;

@@ -100,7 +100,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['AllUsersSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['AllUsersSQL'].Text);
   with OraQuery do
   try
     Prepare;
@@ -123,7 +123,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['DistinctGrantedRolesSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['DistinctGrantedRolesSQL'].Text);
   with OraQuery do
   try
     Prepare;

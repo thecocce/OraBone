@@ -93,7 +93,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectNamesSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectNamesSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_SCHEMA').AsWideString := FSchemaParam;
@@ -117,7 +117,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['DBLinksOfSchemaSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['DBLinksOfSchemaSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_SCHEMA').AsWideString := FSchemaParam;
@@ -141,7 +141,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := FOraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['AllUsersSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['AllUsersSQL'].Text);
   with OraQuery do
   try
     Prepare;

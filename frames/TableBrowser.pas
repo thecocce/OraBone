@@ -9,7 +9,7 @@ uses
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
   Vcl.StdCtrls, JvMenus, BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.StdStyleActnCtrls, BCImageList, BCToolBar, BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh,
-  Data.DB;
+  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -122,13 +122,6 @@ type
     SourceButtonPanel: TPanel;
     SourceToolBar: TBCToolBar;
     SQLEditorToolButton: TToolButton;
-    CreateTableCheckBox: TCheckBox;
-    IndexesCheckBox: TCheckBox;
-    ConstraintsCheckBox: TCheckBox;
-    TriggersCheckBox: TCheckBox;
-    CommentsCheckBox: TCheckBox;
-    SynonymsCheckBox: TCheckBox;
-    GrantsCheckBox: TCheckBox;
     SetSourceClickAction: TAction;
     OpenDialog: TOpenDialog;
     SaveDialog: TSaveDialog;
@@ -230,6 +223,9 @@ type
     Bevel12: TBevel;
     BCToolBar9: TBCToolBar;
     ToolButton27: TToolButton;
+    BCToolBar10: TBCToolBar;
+    ToolButton28: TToolButton;
+    SourceOptionsAction: TAction;
     procedure TablePageControlChange(Sender: TObject);
     procedure FilterActionExecute(Sender: TObject);
     procedure TriggersQueryAfterScroll(DataSet: TDataSet);
@@ -283,21 +279,18 @@ type
     procedure ExportTableDataActionExecute(Sender: TObject);
     procedure DataQueryQueryAfterFetch(DataSet: TCustomDADataSet);
     procedure DataQueryQueryBeforeFetch(DataSet: TCustomDADataSet; var Cancel: Boolean);
-    procedure DataDBGridCustomDrawHeader(Sender: TObject; Index: Integer; HeaderRect: TRect);
     procedure DataDBGridDblClick(Sender: TObject);
     procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField;
       State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
-    procedure DataDBGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DataDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
     procedure ConstraintsDBGridSelectionChanged(Sender: TObject);
     procedure TriggersDBGridSelectionChanged(Sender: TObject);
     procedure IndexesDBGridSelectionChanged(Sender: TObject);
     procedure GrantsDBGridSelectionChanged(Sender: TObject);
     procedure SynonymsDBGridSelectionChanged(Sender: TObject);
     procedure DataDBGridTitleClick(Column: TColumnEh);
+    procedure SourceOptionsActionExecute(Sender: TObject);
   private
     { Private declarations }
     FSession: TOraSession;
@@ -320,8 +313,6 @@ type
     function GetQueryOpened: Boolean;
     procedure SetColumnWidths(OraQuery: TOraQuery);
     procedure SetSource;
-    procedure ReadIniFile;
-    procedure WriteIniFile;
     procedure SetConstraintActions;
     procedure SetTriggerActions;
     procedure SetGrantActions;
@@ -334,7 +325,6 @@ type
     { Public declarations }
     constructor Create(AOwner: TComponent; ParentPanel: TPanel;
       OraSession: TOraSession; SchemaParam: string); reintroduce; overload;
-    destructor Destroy; override;
     procedure OpenQuery(Query: TOraQuery = nil; RefreshQuery: Boolean = False);
     property ObjectName: string write FObjectName;
     property HighlighterTableNames: TStrings write SetHighlighterTableNames;
@@ -352,8 +342,9 @@ type
 implementation
 
 uses
-  DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, BigINI, Blob,
-  CustomizeTableColumns, Preferences, Lib, NxColumns, NxSharedCommon, StyleHooks;
+  DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
+  CustomizeTableColumns, Preferences, Lib, NxColumns, NxSharedCommon, StyleHooks,
+  TableSourceOptions, DataModule;
 
 const
   { ColumnsQuery columns }
@@ -406,8 +397,6 @@ begin
   Parent := ParentPanel;
   SetSession(OraSession);
   FSchemaParam := SchemaParam;
-
-  ReadIniFile;
 end;
 
 procedure TTableBrowserFrame.CreateConstraintActionExecute(Sender: TObject);
@@ -428,72 +417,6 @@ end;
 procedure TTableBrowserFrame.CreateTriggerActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateTriggerForObjectAction');
-end;
-
-destructor TTableBrowserFrame.Destroy;
-begin
-  WriteIniFile;
-  Inherited;
-end;
-
-procedure TTableBrowserFrame.ReadIniFile;
-var
-  s: string;
-begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    s := ReadString('TableSource', 'Options', 'YYYYYYY');
-    CreateTableCheckBox.Checked := s[1] = 'Y';
-    CommentsCheckBox.Checked := s[2] = 'Y';
-    IndexesCheckBox.Checked := s[3] = 'Y';
-    ConstraintsCheckBox.Checked := s[4] = 'Y';
-    TriggersCheckBox.Checked := s[5] = 'Y';
-    SynonymsCheckBox.Checked := s[6] = 'Y';
-    GrantsCheckBox.Checked := s[7] = 'Y';
-  finally
-    Free;
-  end;
-end;
-
-procedure TTableBrowserFrame.WriteIniFile;
-var
-  s: string;
-begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    s := 'YYYYYYY';
-    if CreateTableCheckBox.Checked then
-      s[1] := 'Y'
-    else
-      s[1] := 'N';
-    if CommentsCheckBox.Checked then
-      s[2] := 'Y'
-    else
-      s[2] := 'N';
-    if IndexesCheckBox.Checked then
-      s[3] := 'Y'
-    else
-      s[3] := 'N';
-    if ConstraintsCheckBox.Checked then
-      s[4] := 'Y'
-    else
-      s[4] := 'N';
-    if TriggersCheckBox.Checked then
-      s[5] := 'Y'
-    else
-      s[5] := 'N';
-    if SynonymsCheckBox.Checked then
-      s[6] := 'Y'
-    else
-      s[6] := 'N';
-    if GrantsCheckBox.Checked then
-      s[7] := 'Y'
-    else
-      s[7] := 'N';
-    WriteString('TableSource', 'Options', s);
-  finally
-    Free;
-  end;
 end;
 
 function TTableBrowserFrame.GetQueryOpened: Boolean;
@@ -566,6 +489,12 @@ begin
   end;
 end;
 
+procedure TTableBrowserFrame.SourceOptionsActionExecute(Sender: TObject);
+begin
+  if TableSourceOptionsDialog.Open then
+    RefreshAction.Execute;
+end;
+
 procedure TTableBrowserFrame.SourceQueryAfterOpen(DataSet: TDataSet);
 begin
   SetSource;
@@ -582,7 +511,7 @@ begin
   SourceSynEdit.Lines.Clear;
   SourceSynEdit.Lines.BeginUpdate;
   { create table }
-  if CreateTableCheckBox.Checked then
+  if TableSourceOptionsDialog.CreateTable then
   begin
     OpenQuery(ColumnsQuery, True);
     with ColumnsQuery do
@@ -624,13 +553,58 @@ begin
         if not Eof then
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ',' + CHR_ENTER;
       end;
-      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + ');';
+      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + ')';
+
+      if TableSourceOptionsDialog.Storage or TableSourceOptionsDialog.Parameters then
+      begin
+        OraQuery := TOraQuery.Create(Self);
+        with OraQuery do
+        begin
+          Session := FSession;
+          SQL.Add(DM.StringHolder.StringsByName['TableParametersSQL'].Text);
+          try
+            ParamByName('P_TABLE_NAME').AsWideString := FObjectName;
+            ParamByName('P_OWNER').AsWideString := FSchemaParam;
+            Open;
+            { storage }
+            if TableSourceOptionsDialog.Storage then
+            begin
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + Format('TABLESPACE    %s', [FieldByName('TABLESPACE_NAME').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('PCTUSED       %s', [FieldByName('PCT_USED').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('PCTFREE       %s', [FieldByName('PCT_FREE').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('INITRANS      %s', [FieldByName('INI_TRANS').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('MAXTRANS      %s', [FieldByName('MAX_TRANS').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'STORAGE (' + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  INITIAL     %s', [FieldByName('INITIAL_EXTENT').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  NEXT        %s', [FieldByName('NEXT_EXTENT').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MINEXTENTS  %s', [FieldByName('MIN_EXTENTS').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MAXEXTENTS  %s', [FieldByName('MAX_EXTENTS').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  PCTINCREASE %s', [FieldByName('PCT_INCREASE').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  BUFFER_POOL %s', [FieldByName('BUFFER_POOL').AsString]) + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ')';
+            end;
+            { parameters }
+            if TableSourceOptionsDialog.Parameters then
+            begin
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + FieldByName('LOGGING').AsString + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName('COMPRESSION').AsString + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName('CACHE').AsString + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName('PARALLEL').AsString + CHR_ENTER;
+              SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName('MONITORING').AsString;
+            end;
+          finally
+            Close;
+            Free;
+          end;
+        end;
+      end;
+      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ';';
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + CHR_ENTER;
     end;
     Application.ProcessMessages;
   end;
   { comments }
-  if CommentsCheckBox.Checked then
+  if TableSourceOptionsDialog.Comments then
   begin
     with SourceQuery do
     begin
@@ -643,7 +617,7 @@ begin
     Application.ProcessMessages;
   end;
   { indexes }
-  if IndexesCheckBox.Checked then
+  if TableSourceOptionsDialog.Indexes then
   begin
     s := SQLStringHolder.StringsByName['IndexesDescendSQL'].Text;
     { test if Oracle supports descend field }
@@ -689,7 +663,7 @@ begin
     Application.ProcessMessages;
   end;
   { constraints }
-  if ConstraintsCheckBox.Checked then
+  if TableSourceOptionsDialog.Constraints then
   begin
     OpenQuery(ConstraintsQuery, True);
     with ConstraintsQuery do
@@ -742,7 +716,7 @@ begin
     Application.ProcessMessages;
   end;
   { triggers }
-  if TriggersCheckBox.Checked then
+  if TableSourceOptionsDialog.Triggers then
   begin
     OraQuery := TOraQuery.Create(Self);
     with OraQuery do
@@ -757,7 +731,7 @@ begin
       while not Eof do
       begin
         SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'CREATE OR REPLACE TRIGGER ' + FieldByName('DESCRIPTION').AsWideString +
-          FieldByName('TRIGGER_BODY').AsWideString + CHR_ENTER + '/' + CHR_ENTER;
+          FieldByName('TRIGGER_BODY').AsWideString + CHR_ENTER + '/' + CHR_ENTER + 'SHOW ERRORS;' + CHR_ENTER;
         Next;
       end;
     finally
@@ -767,7 +741,7 @@ begin
     Application.ProcessMessages;
   end;
   { synonyms }
-  if SynonymsCheckBox.Checked then
+  if TableSourceOptionsDialog.Synonyms then
   begin
     OpenQuery(SynonymsQuery, True);
     with SynonymsQuery do
@@ -788,7 +762,7 @@ begin
     Application.ProcessMessages;
   end;
   { grants }
-  if GrantsCheckBox.Checked then
+  if TableSourceOptionsDialog.Grants then
   begin
     OpenQuery(GrantsQuery, True);
     with GrantsQuery do
@@ -1357,29 +1331,6 @@ begin
   end;
 end;
 
-procedure TTableBrowserFrame.DataDBGridCustomDrawHeader(Sender: TObject; Index: Integer;
-  HeaderRect: TRect);
-begin
-(*  DataDBGrid.Canvas.Brush.Color := clBtnFace;
-  DataDBGrid.Canvas.FillRect(HeaderRect);
-  DataDBGrid.Canvas.Brush.Style := bsClear;
-
-  if UseThemes then
-  begin
-    {header := Rect;
-    header.Right := header.Right + 1;
-    header.Bottom := header.Bottom + 2; }
-
-    StyleServices.DrawElement(DataDBGrid.Canvas.Handle, StyleServices.GetElementDetails(thHeaderItemNormal), HeaderRect);
-  end;
-
-  DrawText(DataDBGrid.Canvas.Handle,
-    DataDBGrid.Columns.Item[Index].Field.Text,
-    Length(DataDBGrid.Columns.Item[Index].Field.Text),
-    HeaderRect,
-    DT_SINGLELINE or DT_VCENTER or DT_CENTER);   *)
-end;
-
 procedure TTableBrowserFrame.DataDBGridDblClick(Sender: TObject);
 var
   Rslt: Integer;
@@ -1431,42 +1382,12 @@ begin
   GridDrawStringDataCell(Sender, Rect, Field);
 end;
 
-procedure TTableBrowserFrame.DataDBGridGetCellParams(Sender: TObject; Column: TColumnEh;
-  AFont: TFont; var Background: TColor; State: TGridDrawState);
-{var
-  LStyles: TCustomStyleServices;
-  LColor: TColor; }
-begin
- { LStyles := StyleServices;
-
-  if gdSelected in State then
-  begin
-    if not LStyles.GetElementColor(LStyles.GetElementDetails(tlListItemSelected), ecTextColor, LColor) or (LColor = clNone) then
-      LColor := LStyles.GetSystemColor(clWindowText);
-    Background := LColor;
-  end;  }
-end;
-
-procedure TTableBrowserFrame.DataDBGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-{  if (ssShift in Shift) or (ssCtrl in Shift) then
-  begin
-    DataDBGrid.Options := DataDBGrid.Options + [dgRowSelect];
-  end; }
-end;
-
 procedure TTableBrowserFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   { this fixes the bug when popup is popped from grid - it won't get the focus }
   if Button = mbRight then
     DataPopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
-
- { if (Button = mbLeft) and not ((ssShift in Shift) or (ssCtrl in Shift)) then
-  begin
-    DataDBGrid.Options := DataDBGrid.Options - [dgRowSelect];
-    DataDBGrid.Options := DataDBGrid.Options + [dgEditing];
-  end; }
 end;
 
 procedure TTableBrowserFrame.DataDBGridTitleClick(Column: TColumnEh);
@@ -1573,18 +1494,8 @@ begin
 end;
 
 procedure TTableBrowserFrame.DropSynonymActionExecute(Sender: TObject);
-//var
-//  SynonymAvailability: string;
 begin
   Lib.DropSelectedSynonyms(FSession, SynonymsDBGrid);
-{  if Common.AskYesOrNo(Format('Drop synonym %s, are you sure?', [SynonymsQuery.FieldByName(SYNONYM_NAME).AsString])) then
-  begin
-    SynonymAvailability := '';
-    if SynonymsQuery.FieldByName(SYNONYM_OWNER).AsString = 'PUBLIC' then
-      SynonymAvailability := 'PUBLIC ';
-    SynonymsQuery.Session.ExecSQL(Format('DROP %sSYNONYM %s', [SynonymAvailability, SynonymsQuery.FieldByName(SYNONYM_NAME).AsString]), []);
-    SynonymsQuery.Refresh;
-  end;   }
 end;
 
 procedure TTableBrowserFrame.DropTriggerActionExecute(Sender: TObject);

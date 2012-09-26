@@ -321,7 +321,7 @@ begin
   Screen.Cursor := crSQLWait;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := Session;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['HighlighterObjectsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['HighlighterObjectsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_OWNER').AsWideString := SchemaParam;
@@ -547,7 +547,7 @@ begin
   Screen.Cursor := crSQLWait;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := OraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['AllConstrainsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['AllConstrainsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_OWNER').AsWideString := SchemaParam;
@@ -573,7 +573,7 @@ begin
   Screen.Cursor := crSQLWait;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := OraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectConstraintsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectConstraintsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_OWNER').AsString := SchemaParam;
@@ -746,7 +746,7 @@ begin
   Screen.Cursor := crSQLWait;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := OraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['AllTriggersSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['AllTriggersSQL'].Text);
 
   with OraQuery do
   try
@@ -773,7 +773,7 @@ begin
   Screen.Cursor := crSQLWait;
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := OraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['ObjectTriggersSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['ObjectTriggersSQL'].Text);
 
   with OraQuery do
   try
@@ -1038,7 +1038,7 @@ var
 begin
   OraQuery := TOraQuery.Create(nil);
   OraQuery.Session := OraSession;
-  OraQuery.SQL.Add(DM.ObjectTreeStringHolder.StringsByName['TableOrViewCommentsSQL'].Text);
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['TableOrViewCommentsSQL'].Text);
   with OraQuery do
   try
     ParamByName('P_OWNER').AsWideString := SchemaParam;

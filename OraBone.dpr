@@ -83,7 +83,8 @@ uses
   DownloadURL in '..\..\Common\dialogs\DownloadURL.pas' {DownloadURLDialog},
   Compare in '..\..\Common\frames\Compare.pas' {CompareFrame: TFrame},
   TNSNamesEditor in 'forms\TNSNamesEditor.pas' {TNSNamesEditorForm},
-  BigIni in '..\..\Common\units\BigIni.pas';
+  BigIni in '..\..\Common\units\BigIni.pas',
+  TableSourceOptions in 'dialogs\TableSourceOptions.pas' {TableSourceOptionsDialog};
 
 {$R *.res}
 
