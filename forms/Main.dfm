@@ -72,7 +72,7 @@ object MainForm: TMainForm
       Left = 2
       Top = 2
       Width = 915
-      Height = 54
+      Height = 26
       ActionManager = ActionManager
       Color = clMenuBar
       ColorMap.DisabledFontColor = 7171437
@@ -86,7 +86,6 @@ object MainForm: TMainForm
       Font.Style = []
       ParentFont = False
       Spacing = 0
-      ExplicitHeight = 26
     end
   end
   object MainPanel: TPanel
@@ -1517,7 +1516,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C010158005802DC0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010158005802E00410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

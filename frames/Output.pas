@@ -242,7 +242,7 @@ begin
   for i := 0 to TabSheet.ComponentCount - 1 do
     if TabSheet.Components[i].Tag = 76 then
     begin
-      TLabel(TabSheet.Components[i]).Caption := 'Execution time: ' + Time;
+      TLabel(TabSheet.Components[i]).Caption := 'Time elapsed: ' + Time;
       Break;
     end
 end;

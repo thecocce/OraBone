@@ -21,7 +21,7 @@ type
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
-    FStartTime: TTime;
+    FStartTime: TDateTime;
     FOraSQL: TOraSQL;
     FOnProgress: Boolean;
     procedure SetExecutionTimeText(Value: string);
@@ -29,7 +29,7 @@ type
   public
     { Public declarations }
     property ExecutionTimeText: string write SetExecutionTimeText;
-    function Open(OraSQL: TOraSQL; StartTime: TTime): Boolean;
+    function Open(OraSQL: TOraSQL; StartTime: TDateTime): Boolean;
   end;
 
 function SQLProgressDialog: TSQLProgressDialog;
@@ -62,7 +62,7 @@ end;
 procedure TSQLProgressDialog.WMAfterShow(var Msg: TMessage);
 var
   Success, UserCancel: Boolean;
-  Secs, Min: Integer;
+//  Secs, Min: Integer;
 begin
   Success := False;
   UserCancel := False;
@@ -71,7 +71,7 @@ begin
   begin
     while FOraSQL.Executing do
     begin
-      Min := StrToInt(FormatDateTime('n', Now - FStartTime));
+      {Min := StrToInt(FormatDateTime('n', Now - FStartTime));
       Secs := Min * 60 + StrToInt(FormatDateTime('s', Now - FStartTime));
       if Secs < 1 then
         ExecutionTimeText := FormatDateTime('"Execution time:" s.zzz "s."', Now - FStartTime)
@@ -79,7 +79,8 @@ begin
       if Secs < 60 then
         ExecutionTimeText := FormatDateTime('"Execution time:" s "s."', Now - FStartTime)
       else
-        ExecutionTimeText := FormatDateTime('"Execution time:" n "min" s "s."', Now - FStartTime);
+        ExecutionTimeText := FormatDateTime('"Execution time:" n "min" s "s."', Now - FStartTime);}
+      ExecutionTimeText := Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - FStartTime)]);
       if not FOnProgress then
       begin
         UserCancel := True;
@@ -112,7 +113,7 @@ begin
   PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
 end;
 
-function TSQLProgressDialog.Open(OraSQL: TOraSQL; StartTime: TTime): Boolean;
+function TSQLProgressDialog.Open(OraSQL: TOraSQL; StartTime: TDateTime): Boolean;
 var
   Rslt: Integer;
 begin

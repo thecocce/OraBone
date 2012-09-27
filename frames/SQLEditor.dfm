@@ -1131,7 +1131,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Caption = '-'
     end
     object ToggleBookmarkMenuItem: TMenuItem
-      Action = MainForm.SearchToggleBookmarkAction
     end
     object ToggleBookmarksMenuItem: TMenuItem
       Caption = 'Toggle Boo&kmarks'
@@ -1318,7 +1317,6 @@ object SQLEditorFrame: TSQLEditorFrame
     end
   end
   object ColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   LOWER(s.column_name) column_name, LOWER(s.column_name) ' +
@@ -1442,12 +1440,10 @@ object SQLEditorFrame: TSQLEditorFrame
     Top = 174
   end
   object ScriptQuery: TOraQuery
-    DataTypeMap = <>
     Left = 166
     Top = 172
   end
   object ErrorsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT line, position, text '
       '    FROM user_errors '
@@ -1469,7 +1465,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 18
     Top = 162
     Bitmap = {
-      494C010106003800CC0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800E80310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1745,7 +1741,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A0038008C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800A80310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

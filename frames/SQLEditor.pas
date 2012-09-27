@@ -66,7 +66,7 @@ type
     FOraQuery: TOraQuery;
     FPlanQuery: TOraQuery;
     FOraSQL: TOraSQL;
-    FStartTime: TTime;
+    FStartTime: TDateTime;
     FObjectCompletionProposal: TSynCompletionProposal;
     FObjectFieldCompletionProposal: TSynCompletionProposal;
     FInThread: Boolean;
@@ -78,7 +78,7 @@ type
     property InThread: Boolean read FInThread write FInThread;
     property DocumentName: string read FDocumentName write FDocumentName;
     property FileDateTime: TDateTime read FFileDateTime write FFileDateTime;
-    property StartTime: TTime read FStartTime write FStartTime;
+    property StartTime: TDateTime read FStartTime write FStartTime;
     property QueryOpened: Boolean read GetQueryOpened;
     property ObjectCompletionProposal: TSynCompletionProposal read FObjectCompletionProposal write FObjectCompletionProposal;
   end;
@@ -721,7 +721,7 @@ begin
   try
     SynEdit.SetFocus;
   except
-    { not possible if tab is not selected }
+    { not possible if tab is not visible }
   end;
 
   Result := SynEdit;
@@ -2283,7 +2283,7 @@ begin
     OraScript.Session := FSession;
     ScriptQuery.Session := FSession;
     OraScript.AfterExecute := OraScriptAfterExecuteEvent;
-
+    SynEdit.StartTime := Now;
     if DBMSOutputToolButton.Down then
       EnableDBMSOutput;
     { parameters }
@@ -2652,7 +2652,7 @@ begin
   if QuerySuccess then
   begin
     T2 := Now;
-    FOutputFrame.AddGrid('Data: ' + GetActivePageCaption, SynEdit.FOraQuery, FormatDateTime('s.zzz "s"', T2 - T1));
+    FOutputFrame.AddGrid('Data: ' + GetActivePageCaption, SynEdit.FOraQuery, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', T2 - T1));
     WriteHistory(SynEdit.FOraQuery.Session, SynEdit.Text);
   end
   else
@@ -2778,17 +2778,26 @@ end;
 
 procedure TSQLEditorFrame.OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
 var
-  i:integer;
+  i: Integer;
   StringList: TStringList;
-//  T2: TTime;
   s: string;
   SynEdit: TBCSynEdit;
+//  T2: TTime;
+//  Min, Secs: Integer;
 begin
   SynEdit := ActiveSynEdit;
 
   StringList := TStringList.Create;
   StringList.Clear;
   try
+   { s := Format('Execution started %s', [System.SysUtils.FormatDateTime('dd.mm.yyyy hh:mm:ss', SynEdit.StartTime)]);
+    StringList.Add(s);
+    j := Length(s);
+    s := '';
+    for i := 0 to j - 1 do
+      s := s + '_';
+    StringList.Add(s);  }
+
     for i := 0 to OraScript.Params.Count-1 do
       StringList.Add(OraScript.Params[i].Name + ' = ' +
        OraScript.Params[i].AsWideString);
@@ -2797,8 +2806,19 @@ begin
       s := IntToStr(OraScript.DataSet.RowsProcessed) + ' row(s) processed.'
     else
       s := 'Success.';
+    //StringList.Add(s);
 
-    StringList.Add(Trim(s));
+   { T2 := Now;
+    Min := StrToInt(FormatDateTime('n', T2 - SynEdit.StartTime));
+    Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - SynEdit.StartTime));
+
+    if Secs < 60 then
+      s := s + System.SysUtils.FormatDateTime('s.zzz "s"', T2 - SynEdit.StartTime) + '.'
+    else
+      s := s + System.SysUtils.FormatDateTime('n "min" s.zzz "s"', T2 - SynEdit.StartTime) + '.';}
+
+    StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
+
     FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
   finally
     WriteHistory(OraScript.Session, SynEdit.Text);
@@ -2811,15 +2831,23 @@ var
   i:integer;
   SynEdit: TBCSynEdit;
   StringList: TStringList;
-  T2: TTime;
+//  T2: TTime;
   s: string;
-  Min, Secs: Integer;
+  //Min, Secs: Integer;
 begin
   SynEdit := ActiveSynEdit;
   if Result then
   begin
     StringList := TStringList.Create;
     try
+      {s := Format('Execution started %s', [System.SysUtils.FormatDateTime('dd.mm.yyyy hh:mm:ss', SynEdit.StartTime)]);
+      StringList.Add(s);
+      j := Length(s);
+      s := '';
+      for i := 0 to j - 1 do
+        s := s + '_';
+      StringList.Add(s); }
+
       for i := 0 to SynEdit.FOraSQL.Params.Count-1 do
         StringList.Add(SynEdit.FOraSQL.Params[i].Name + ' = ' +
          SynEdit.FOraSQL.Params[i].AsWideString);
@@ -2827,14 +2855,22 @@ begin
       if SynEdit.FOraSQL.RowsProcessed <> 0 then
         s := IntToStr(SynEdit.FOraSQL.RowsProcessed) + ' row(s) processed in '
       else
-        s := 'Execution time: ';
-      T2 := Now;
+        s := 'Success.';
+      {T2 := Now;
       Min := StrToInt(FormatDateTime('n', T2 - SynEdit.StartTime));
       Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - SynEdit.StartTime));
+      StringList.Add('Success.');
+
+      'Elapsed time: 00:00:03.6'
+
       if Secs < 60 then
-        StringList.Add('Success. ' + s + FormatDateTime('s.zzz "s"', T2 - SynEdit.StartTime) + '.')
+        s := s + System.SysUtils.FormatDateTime('s.zzz "s"', T2 - SynEdit.StartTime) + '.'
       else
-        StringList.Add('Success. ' + s + FormatDateTime('n "min" s.zzz "s"', T2 - SynEdit.StartTime) + '.');
+        s := s + System.SysUtils.FormatDateTime('n "min" s.zzz "s"', T2 - SynEdit.StartTime) + '.';
+                          }
+      //StringList.Add(s);
+      StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
+
       FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
     finally
       WriteHistory(SynEdit.FOraSQL.Session, SynEdit.Text);

@@ -591,7 +591,7 @@ var
         Next;
       end;
       if Result <> '' then
-        Result := Result + CHR_ENTER + '/' + CHR_ENTER
+        Result := Result + CHR_ENTER + '/' + CHR_ENTER + 'SHOW ERRORS;' + CHR_ENTER;
     finally
       Close;
       UnPrepare;

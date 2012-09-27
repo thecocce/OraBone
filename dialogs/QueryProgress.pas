@@ -21,7 +21,7 @@ type
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
-    FStartTime: TTime;
+    FStartTime: TDateTime;
     FOraQuery: TOraQuery;
     FOnProgress: Boolean;
     procedure SetExecutionTimeText(Value: string);
@@ -30,7 +30,7 @@ type
     { Public declarations }
     property ExecutionTimeText: string write SetExecutionTimeText;
     property OnProgress: Boolean read FOnProgress;
-    function Open(OraQuery: TOraQuery; StartTime: TTime): Boolean;
+    function Open(OraQuery: TOraQuery; StartTime: TDateTime): Boolean;
   end;
 
 function QueryProgressDialog: TQueryProgressDialog;
@@ -63,7 +63,7 @@ end;
 procedure TQueryProgressDialog.WMAfterShow(var Msg: TMessage);
 var
   Success, UserCancel: Boolean;
-  Secs, Min: Integer;
+  //Secs, Min: Integer;
 begin
   Success := False;
   UserCancel := False;
@@ -72,7 +72,7 @@ begin
   begin
     while FOraQuery.Executing do
     begin
-      Min := StrToInt(FormatDateTime('n', Now - FStartTime));
+      {Min := StrToInt(FormatDateTime('n', Now - FStartTime));
       Secs := Min * 60 + StrToInt(FormatDateTime('s', Now - FStartTime));
       if Secs < 1 then
         ExecutionTimeText := FormatDateTime('"Execution time:" s.zzz "s."', Now - FStartTime)
@@ -80,7 +80,8 @@ begin
       if Secs < 60 then
         ExecutionTimeText := FormatDateTime('"Execution time:" s "s."', Now - FStartTime)
       else
-        ExecutionTimeText := FormatDateTime('"Execution time:" n "min" s "s."', Now - FStartTime);
+        ExecutionTimeText := FormatDateTime('"Execution time:" n "min" s "s."', Now - FStartTime);  }
+      ExecutionTimeText := Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - FStartTime)]);
 
       if not OnProgress then
       begin
@@ -114,7 +115,7 @@ begin
   PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
 end;
 
-function TQueryProgressDialog.Open(OraQuery: TOraQuery; StartTime: TTime): Boolean;
+function TQueryProgressDialog.Open(OraQuery: TOraQuery; StartTime: TDateTime): Boolean;
 var
   Rslt: Integer;
 begin

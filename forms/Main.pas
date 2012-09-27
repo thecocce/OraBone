@@ -1487,71 +1487,69 @@ var
 begin
   with TBigIniFile.Create(Common.GetINIFilename) do
   try
-    WriteString('OraBone', 'Version', AboutDialog.Version);
-    { Preferences }
-    WriteString('Preferences', 'FontName', OptionsContainer.FontName);
-    WriteString('Preferences', 'FontSize', IntToStr(OptionsContainer.FontSize));
-    WriteString('Preferences', 'RightEdge', IntToStr(OptionsContainer.RightEdge));
-    WriteString('Preferences', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
-    WriteString('Preferences', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
-    WriteBool('Preferences', 'GutterVisible', OptionsContainer.GutterVisible);
-    WriteBool('Preferences', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
-    WriteBool('Preferences', 'MultiLine', OptionsContainer.MultiLine);
-    WriteString('Preferences', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
-    WriteString('Preferences', 'DateFormat', OptionsContainer.DateFormat);
-    WriteString('Preferences', 'TimeFormat', OptionsContainer.TimeFormat);
-    WriteString('Preferences', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
-    WriteString('Preferences', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
-    WriteBool('Preferences', 'ShowToolBar', ActionToolBar.Visible);
-    if Assigned(TStyleManager.ActiveStyle) then
-      WriteString('Preferences', 'StyleName', TStyleManager.ActiveStyle.Name);
+    try
+      WriteString('OraBone', 'Version', AboutDialog.Version);
+      { Preferences }
+      WriteString('Preferences', 'FontName', OptionsContainer.FontName);
+      WriteString('Preferences', 'FontSize', IntToStr(OptionsContainer.FontSize));
+      WriteString('Preferences', 'RightEdge', IntToStr(OptionsContainer.RightEdge));
+      WriteString('Preferences', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
+      WriteString('Preferences', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
+      WriteBool('Preferences', 'GutterVisible', OptionsContainer.GutterVisible);
+      WriteBool('Preferences', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
+      WriteBool('Preferences', 'MultiLine', OptionsContainer.MultiLine);
+      WriteString('Preferences', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
+      WriteString('Preferences', 'DateFormat', OptionsContainer.DateFormat);
+      WriteString('Preferences', 'TimeFormat', OptionsContainer.TimeFormat);
+      WriteString('Preferences', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
+      WriteString('Preferences', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
+      WriteBool('Preferences', 'ShowToolBar', ActionToolBar.Visible);
+      if Assigned(TStyleManager.ActiveStyle) then
+        WriteString('Preferences', 'StyleName', TStyleManager.ActiveStyle.Name);
 
-    if Windowstate = wsNormal then
-    begin
-      { Position }
-      WriteInteger('Position', 'Left', Left);
-      WriteInteger('Position', 'Top', Top);
-      { Size }
-      WriteInteger('Size', 'Width', Width);
-      WriteInteger('Size', 'Height', Height);
-    end;
-    { Open connections }
-    EraseSection('OpenConnections');
-    for i := 0 to PageControl.PageCount - 1 do
-    begin
-      if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+      if Windowstate = wsNormal then
       begin
-        SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
-        if Assigned(SchemaBrowserFrame) then
-          WriteString('OpenConnections', IntToStr(i), Common.EncryptString(SchemaBrowserFrame.ObjectTreeFrame.GetConnectString + '||' + SchemaBrowserFrame.ObjectTreeFrame.SchemaParam));
+        { Position }
+        WriteInteger('Position', 'Left', Left);
+        WriteInteger('Position', 'Top', Top);
+        { Size }
+        WriteInteger('Size', 'Width', Width);
+        WriteInteger('Size', 'Height', Height);
       end;
+      { Open connections }
+      EraseSection('OpenConnections');
+      for i := 0 to PageControl.PageCount - 1 do
+      begin
+        if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+        begin
+          SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
+          if Assigned(SchemaBrowserFrame) then
+            WriteString('OpenConnections', IntToStr(i), Common.EncryptString(SchemaBrowserFrame.ObjectTreeFrame.GetConnectString + '||' + SchemaBrowserFrame.ObjectTreeFrame.SchemaParam));
+        end;
+      end;
+      { Parameters }
+      EraseSection('SQLParameters');
+      for i := 1 to ParametersDialog.ValuesList.RowCount - 1 do
+        if ParametersDialog.ValuesList.Keys[i] <> '' then
+          WriteString('SQLParameters', ParametersDialog.ValuesList.Keys[i],
+            ParametersDialog.ValuesList.Values[ParametersDialog.ValuesList.Keys[i]]);
+      { Filters }
+      EraseSection('SQLFilters');
+      for i := 1 to DataFilterDialog.ValuesList.RowCount - 1 do
+        if DataFilterDialog.ValuesList.Keys[i] <> '' then
+          WriteString('SQLFilters', DataFilterDialog.ValuesList.Keys[i],
+            DataFilterDialog.ValuesList.Values[DataFilterDialog.ValuesList.Keys[i]]);
+      { Sorts }
+      EraseSection('SQLSorts');
+      for i := 1 to DataSortDialog.ValuesList.RowCount - 1 do
+        if DataSortDialog.ValuesList.Keys[i] <> '' then
+          WriteString('SQLSorts', DataSortDialog.ValuesList.Keys[i],
+            DataSortDialog.ValuesList.Values[DataSortDialog.ValuesList.Keys[i]]);
+    except
+      { silent }
     end;
-    { Parameters }
-    EraseSection('SQLParameters');
-    for i := 1 to ParametersDialog.ValuesList.RowCount - 1 do
-      if ParametersDialog.ValuesList.Keys[i] <> '' then
-        //WriteString('SQLParameters', Common.EncryptString(ParametersDialog.ValuesList.Keys[i]),
-        //  Common.EncryptString(ParametersDialog.ValuesList.Values[ParametersDialog.ValuesList.Keys[i]]));
-        WriteString('SQLParameters', ParametersDialog.ValuesList.Keys[i],
-          ParametersDialog.ValuesList.Values[ParametersDialog.ValuesList.Keys[i]]);
-    { Filters }
-    EraseSection('SQLFilters');
-    for i := 1 to DataFilterDialog.ValuesList.RowCount - 1 do
-      if DataFilterDialog.ValuesList.Keys[i] <> '' then
-        //WriteString('SQLFilters', Common.EncryptString(DataFilterDialog.ValuesList.Keys[i]),
-        //  Common.EncryptString(DataFilterDialog.ValuesList.Values[DataFilterDialog.ValuesList.Keys[i]]));
-        WriteString('SQLFilters', DataFilterDialog.ValuesList.Keys[i],
-          DataFilterDialog.ValuesList.Values[DataFilterDialog.ValuesList.Keys[i]]);
-    { Sorts }
-    EraseSection('SQLSorts');
-    for i := 1 to DataSortDialog.ValuesList.RowCount - 1 do
-      if DataSortDialog.ValuesList.Keys[i] <> '' then
-        //WriteString('SQLSorts', Common.EncryptString(DataSortDialog.ValuesList.Keys[i]),
-        //  Common.EncryptString(DataSortDialog.ValuesList.Values[DataSortDialog.ValuesList.Keys[i]]));
-        WriteString('SQLSorts', DataSortDialog.ValuesList.Keys[i],
-          DataSortDialog.ValuesList.Values[DataSortDialog.ValuesList.Keys[i]]);
   finally
-    Free;
+    Free
   end;
 end;
 
@@ -2043,10 +2041,9 @@ begin
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;
     Result.SchemaParam := SchemaBrowserFrame.ObjectTreeFrame.SchemaParam;
     Result.UpdateGuttersAndControls(PageControl.DoubleBuffered);
-
+    PageControl.ActivePage := TabSheet;
     if AddNewDocument then
       Result.New;
-    PageControl.ActivePage := TabSheet;
   end;
 end;
 
@@ -2062,33 +2059,37 @@ var
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
   Result := mrNo;
-  if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-    if not Confirm or Common.AskYesOrNo(Format('End connection %s, are you sure?', [PageControl.ActivePage.Caption])) then
-    begin
-      Result := mrYes;
-      s := PageControl.ActivePage.Caption;
-      SchemaBrowserFrame := GetActiveSchemaBrowser;
-      if Assigned(SchemaBrowserFrame) then
+  try
+    if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+      if not Confirm or Common.AskYesOrNo(Format('End connection %s, are you sure?', [PageControl.ActivePage.Caption])) then
       begin
-        if SchemaBrowserFrame.ObjectTreeFrame.Session.InTransaction then
+        Result := mrYes;
+        s := PageControl.ActivePage.Caption;
+        SchemaBrowserFrame := GetActiveSchemaBrowser;
+        if Assigned(SchemaBrowserFrame) then
         begin
-          if Lib.AskCommit(s) then
-            SchemaBrowserFrame.ObjectTreeFrame.Session.Commit
-          else
-            SchemaBrowserFrame.ObjectTreeFrame.Session.Rollback
-        end;
-        SchemaBrowserFrame.ObjectTreeFrame.Disconnect;
-        PageControl.ActivePage.Destroy;
-        { destroy editor }
-        i := 0;
-        while i < PageControl.PageCount do
-        begin
-          if PageControl.Pages[i].Caption = s then
-            PageControl.Pages[i].Destroy;
-          Inc(i);
+          if SchemaBrowserFrame.ObjectTreeFrame.Session.InTransaction then
+          begin
+            if Lib.AskCommit(s) then
+              SchemaBrowserFrame.ObjectTreeFrame.Session.Commit
+            else
+              SchemaBrowserFrame.ObjectTreeFrame.Session.Rollback
+          end;
+          SchemaBrowserFrame.ObjectTreeFrame.Disconnect;
+          PageControl.ActivePage.Destroy;
+          { destroy editor }
+          i := 0;
+          while i < PageControl.PageCount do
+          begin
+            if PageControl.Pages[i].Caption = s then
+              PageControl.Pages[i].Destroy;
+            Inc(i);
+          end;
         end;
       end;
-    end;
+  except
+
+  end;
   PageControl.Repaint;
 end;
 

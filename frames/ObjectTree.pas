@@ -1719,8 +1719,7 @@ begin
 end;
 
 initialization
-  TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TScrollingStyleHook);
-  //TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TVirtualTreeStyleHook);
+  TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TVirtualTreeStyleHook);
 
 end.
 
