@@ -2274,15 +2274,16 @@ begin
   else
     s := Trim(SynEdit.Text);
 
-  s := Trim(UpperCase(RemoveParenthesisFromBegin(RemoveComments(s))));
-  CreateStatement := Pos(WideString('CREATE'), s) = 1;
+  //s := Trim(RemoveParenthesisFromBegin(RemoveComments(s)));
+  CreateStatement := Pos(ShortString('CREATE'), UpperCase(Trim(RemoveParenthesisFromBegin(RemoveComments(s))))) = 1;
 
-  OraScript.SQL.Text := SynEdit.Text;
-  ScriptQuery.SQL.Text := SynEdit.Text;
+  OraScript.SQL.Text := s;
+  ScriptQuery.SQL.Text := s;
   try
     OraScript.Session := FSession;
     ScriptQuery.Session := FSession;
     OraScript.AfterExecute := OraScriptAfterExecuteEvent;
+    FOutputFrame.ClearStrings('Output: ' + GetActivePageCaption);
     SynEdit.StartTime := Now;
     if DBMSOutputToolButton.Down then
       EnableDBMSOutput;

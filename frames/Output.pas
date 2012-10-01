@@ -64,6 +64,7 @@ type
    // procedure AddTreeView(TabCaption: string);
     procedure AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
     procedure AddPlan(TabCaption: string; OraQuery: TOraQuery);
+    procedure ClearStrings(TabCaption: string);
     procedure AddStrings(TabCaption: string; Text: string);
     procedure AddErrors(TabCaption: string; Text: string);
     procedure AddDBMSOutput(TabCaption: string; Text: string);
@@ -549,6 +550,17 @@ begin
   end;
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
+end;
+
+procedure TOutputFrame.ClearStrings(TabCaption: string);
+var
+  ListBox: TListBox;
+begin
+  if TabFound(TabCaption) then
+  begin
+    ListBox := GetListBox(TabCaption);
+    ListBox.Items.Clear;
+  end;
 end;
 
 procedure TOutputFrame.AddStrings(TabCaption: string; Text: string);
