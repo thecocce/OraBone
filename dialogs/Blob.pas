@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Dlg;
 
 type
-  TBlobDialog = class(TForm)
+  TBlobDialog = class(TDialog)
     TopPanel: TPanel;
     DataSizeLabel: TLabel;
     BottomPanel: TPanel;
@@ -42,7 +42,7 @@ begin
   if FBlobDialog = nil then
     Application.CreateForm(TBlobDialog, FBlobDialog);
   Result := FBlobDialog;
-  Common.SetStyledFormSize(Result, 336, 91);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TBlobDialog.FormDestroy(Sender: TObject);

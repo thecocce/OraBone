@@ -6,10 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.ImgList, ComCtrls, JvExComCtrls, JvComCtrls, BCPageControl, Vcl.StdCtrls, Vcl.Buttons,
   JvExButtons, JvBitBtn, Vcl.ExtCtrls, ToolWin, JvExStdCtrls, JvCombobox, BCComboBox, VirtualTrees, DB,
-  MemDS, DBAccess, Ora, JvStatusBar, JvProgressBar;
+  MemDS, DBAccess, Ora, JvStatusBar, JvProgressBar, Dlg;
 
 type
-  TSchemaCompareForm = class(TForm)
+  TSchemaCompareForm = class(TDialog)
     PageControl: TBCPageControl;
     Schema1TabSheet: TTabSheet;
     Schema2TabSheet: TTabSheet;
@@ -94,7 +94,7 @@ begin
   if FSchemaCompareForm = nil then
     Application.CreateForm(TSchemaCompareForm, FSchemaCompareForm);
   Result := FSchemaCompareForm;
-  Common.SetStyledFormSize(Result, 638, 554);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TSchemaCompareForm.FormClose(Sender: TObject; var Action: TCloseAction);

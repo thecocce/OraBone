@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
 
 type
-  TAnalyzeTableDialog = class(TForm)
+  TAnalyzeTableDialog = class(TDialog)
     TopPanel: TPanel;
     GroupBox1: TGroupBox;
     ComputeStatisticsRadioButton: TRadioButton;
@@ -46,7 +46,7 @@ begin
   if FAnalyzeTableDialog = nil then
     Application.CreateForm(TAnalyzeTableDialog, FAnalyzeTableDialog);
   Result := FAnalyzeTableDialog;
-  Common.SetStyledFormSize(Result, 301, 146);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TAnalyzeTableDialog.FormDestroy(Sender: TObject);

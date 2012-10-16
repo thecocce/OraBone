@@ -4,13 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, Dlg;
 
 const
   WM_AFTER_SHOW = WM_USER + 302; // custom message
 
 type
-  TSQLProgressDialog = class(TForm)
+  TSQLProgressDialog = class(TDialog)
     ActionList: TActionList;
     CancelAction: TAction;
     ExecutionTimeLabel: TLabel;
@@ -49,7 +49,7 @@ begin
   if FSQLProgressDialog = nil then
     Application.CreateForm(TSQLProgressDialog, FSQLProgressDialog);
   Result := FSQLProgressDialog;
-  Common.SetStyledFormSize(Result, 304, 114);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TSQLProgressDialog.CancelActionExecute(Sender: TObject);

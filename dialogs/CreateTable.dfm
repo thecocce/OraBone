@@ -32,6 +32,10 @@ inherited CreateTableDialog: TCreateTableDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -606,7 +610,7 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
@@ -752,7 +756,6 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   object ColumnsQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT LPAD('#39' '#39', 30) column_name, LPAD('#39' '#39', 106) data_type, 0 co' +

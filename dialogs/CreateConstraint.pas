@@ -8,7 +8,7 @@ uses
   Vcl.Grids, JvExGrids, JvStringGrid, BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
   BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCPageControl, Ora, BCToolBar;
+  BCPageControl, Ora, BCToolBar, Dlg;
 
 type
   TCreateConstraintDialog = class(TCreateObjectBaseDialog)
@@ -81,7 +81,7 @@ begin
   if FCreateConstraintDialog = nil then
     Application.CreateForm(TCreateConstraintDialog, FCreateConstraintDialog);
   Result := FCreateConstraintDialog;
-  Common.SetStyledFormSize(Result, 384, 448);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateConstraintDialog.FormDestroy(Sender: TObject);

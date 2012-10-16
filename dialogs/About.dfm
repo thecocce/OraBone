@@ -35,12 +35,6 @@ object AboutDialog: TAboutDialog
     Width = 115
     Height = 13
     Caption = 'Copyright '#169' 2010-2012'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
   end
   object TopPanel: TPanel
     Left = -10

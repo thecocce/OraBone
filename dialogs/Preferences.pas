@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls,
-  CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter,
+  CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter, Dlg,
   SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCPageControl,
   System.SysUtils, Vcl.ImgList, SynHighlighterWeb, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvxSlider,
   ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCEdit, JvExStdCtrls, JvEdit, JvCombobox,
@@ -13,7 +13,7 @@ uses
 type
   TOptionsContainer = class;
 
-  TPreferencesDialog = class(TForm)
+  TPreferencesDialog = class(TDialog)
     FontDialog: TFontDialog;
     ActionList: TActionList;
     SelectFontAction: TAction;
@@ -212,8 +212,7 @@ begin
   if FPreferencesDialog = nil then
     Application.CreateForm(TPreferencesDialog, FPreferencesDialog);
   Result := FPreferencesDialog;
-  Common.SetStyledFormSize(Result, 476, 386);
-
+  Common.SetStyledFormSize(Result);
   if Assigned(TStyleManager.ActiveStyle) then
     Result.PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
 end;

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, MemDS, DBAccess, Ora, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.DBCtrls,
-  BCDBComboBox, Vcl.Mask, BCDBEdit, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
+  BCDBComboBox, Vcl.Mask, BCDBEdit, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, Dlg,
   BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls,
   ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar,
   DBGridEhGrouping, GridsEh, DBGridEh, BCDBGrid, Data.DB;
@@ -66,7 +66,7 @@ begin
   if FCreateFunctionDialog = nil then
     Application.CreateForm(TCreateFunctionDialog, FCreateFunctionDialog);
   Result := FCreateFunctionDialog;
-  Common.SetStyledFormSize(Result, 364, 390);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateFunctionDialog.FormDestroy(Sender: TObject);

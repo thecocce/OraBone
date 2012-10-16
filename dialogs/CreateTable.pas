@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, DB, MemDS, DBAccess, Ora, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.StdCtrls,
-  Vcl.DBCtrls, BCDBComboBox, Vcl.Mask, BCDBEdit, JvExStdCtrls, JvEdit, BCEdit,
+  Vcl.DBCtrls, BCDBComboBox, Vcl.Mask, BCDBEdit, JvExStdCtrls, JvEdit, BCEdit, Dlg,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
   JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, DBGridEhGrouping, GridsEh,
   DBGridEh, BCDBGrid;
@@ -74,7 +74,7 @@ begin
   if FCreateTableDialog = nil then
     Application.CreateForm(TCreateTableDialog, FCreateTableDialog);
   Result := FCreateTableDialog;
-  Common.SetStyledFormSize(Result, 694, 505);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateTableDialog.AddColumnActionExecute(Sender: TObject);

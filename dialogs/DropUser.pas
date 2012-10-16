@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
 
 type
-  TDropUserDialog = class(TForm)
+  TDropUserDialog = class(TDialog)
     TopPanel: TPanel;
     MessageLabel: TLabel;
     InfoImage: TImage;
@@ -47,7 +47,7 @@ begin
   if FDropUserDialog = nil then
     Application.CreateForm(TDropUserDialog, FDropUserDialog);
   Result := FDropUserDialog;
-  Common.SetStyledFormSize(Result, 220, 141);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TDropUserDialog.FormDestroy(Sender: TObject);

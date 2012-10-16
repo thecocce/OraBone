@@ -32,6 +32,10 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -504,7 +508,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Hint = 'Return type'
     Anchors = [akLeft, akTop, akRight]
     DropDownCount = 17
-    ItemHeight = 13
     ReadOnly = False
     TabOrder = 4
     OnChange = PageControlChange
@@ -554,7 +557,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
@@ -700,7 +703,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   end
   object ColumnsQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT LPAD('#39' '#39', 30) column_name, LPAD('#39' '#39', 6) inout, LPAD('#39' '#39', ' +

@@ -84,7 +84,8 @@ uses
   Compare in '..\..\Common\frames\Compare.pas' {CompareFrame: TFrame},
   TNSNamesEditor in 'forms\TNSNamesEditor.pas' {TNSNamesEditorForm},
   BigIni in '..\..\Common\units\BigIni.pas',
-  TableSourceOptions in 'dialogs\TableSourceOptions.pas' {TableSourceOptionsDialog};
+  TableSourceOptions in 'dialogs\TableSourceOptions.pas' {TableSourceOptionsDialog},
+  Dlg in '..\..\Common\dialogs\Dlg.pas' {Dialog};
 
 {$R *.res}
 

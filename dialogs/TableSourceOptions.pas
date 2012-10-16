@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Dlg;
 
 type
-  TTableSourceOptionsDialog = class(TForm)
+  TTableSourceOptionsDialog = class(TDialog)
     Panel1: TPanel;
     OKButton: TButton;
     CancelButton: TButton;
@@ -71,7 +71,7 @@ begin
     Application.CreateForm(TTableSourceOptionsDialog, FTableSourceOptionsDialog);
   Result := FTableSourceOptionsDialog;
   FTableSourceOptionsDialog.ReadIniFile;
-  Common.SetStyledFormSize(Result, 220, 197);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TTableSourceOptionsDialog.FormDestroy(Sender: TObject);

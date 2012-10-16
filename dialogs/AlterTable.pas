@@ -8,7 +8,7 @@ uses
   Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, BCDBComboBox, Vcl.Mask, BCDBEdit,
   JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCPageControl, Vcl.Menus,
-  BCToolBar, DBGridEhGrouping, GridsEh, BCDBGrid, DBGridEh, Data.DB, MemDS, DBAccess;
+  BCToolBar, DBGridEhGrouping, GridsEh, BCDBGrid, DBGridEh, Data.DB, MemDS, DBAccess, Dlg;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)
@@ -85,7 +85,7 @@ begin
   if FAlterTableDialog = nil then
     Application.CreateForm(TAlterTableDialog, FAlterTableDialog);
   Result := FAlterTableDialog;
-  Common.SetStyledFormSize(Result, 745, 481);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterTableDialog.AddColumnActionExecute(Sender: TObject);

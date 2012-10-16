@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter,
+  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter, Dlg,
   SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCEdit, JvEdit, Vcl.ExtCtrls;
 
 type
-  TDataFilterDialog = class(TForm)
+  TDataFilterDialog = class(TDialog)
     ActionList: TActionList;
     ColumnClickAction: TAction;
     SynSQLSyn: TSynSQLSyn;
@@ -103,7 +103,7 @@ begin
   if FDataFilterDialog = nil then
     Application.CreateForm(TDataFilterDialog, FDataFilterDialog);
   Result := FDataFilterDialog;
-  Common.SetStyledFormSize(Result, 710, 433);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TDataFilterDialog.SetFields;

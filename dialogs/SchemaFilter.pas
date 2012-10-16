@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, CheckLst, DB, MemDS, DBAccess, Ora, ActnList, JvStringHolder, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, CheckLst, DB, MemDS, DBAccess, Ora, ActnList, JvStringHolder, Vcl.ExtCtrls, Dlg;
 
 type
-  TSchemaFilterDialog = class(TForm)
+  TSchemaFilterDialog = class(TDialog)
     SchemasQuery: TOraQuery;
     ActionList: TActionList;
     DeselectAllAction: TAction;
@@ -54,7 +54,7 @@ begin
   if FSchemaFilterDialog = nil then
     Application.CreateForm(TSchemaFilterDialog, FSchemaFilterDialog);
   Result := FSchemaFilterDialog;
-  Common.SetStyledFormSize(Result, 354, 421);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TSchemaFilterDialog.DeselectAllActionExecute(Sender: TObject);

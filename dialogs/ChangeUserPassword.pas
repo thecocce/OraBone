@@ -4,10 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ExtCtrls,
+  Dlg;
 
 type
-  TChangeUserPasswordDialog = class(TForm)
+  TChangeUserPasswordDialog = class(TDialog)
     TopPanel: TPanel;
     PasswordLabel: TLabel;
     PasswordEdit: TBCEdit;
@@ -45,7 +46,7 @@ begin
   if FChangeUserPasswordDialog = nil then
     Application.CreateForm(TChangeUserPasswordDialog, FChangeUserPasswordDialog);
   Result := FChangeUserPasswordDialog;
-  Common.SetStyledFormSize(Result, 294, 103);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TChangeUserPasswordDialog.FormDestroy(Sender: TObject);

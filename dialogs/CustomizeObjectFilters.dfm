@@ -86,7 +86,6 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
       Width = 263
       Height = 21
       Align = alRight
-      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       OnChange = NameComboBoxChange
@@ -213,7 +212,6 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
     Top = 104
   end
   object ObjectsQuery: TOraQuery
-    DataTypeMap = <>
     Left = 120
     Top = 152
   end

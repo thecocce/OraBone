@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Dialogs, Winapi.Messages, Vcl.ActnList, OdacVcl,
-  Ora, OraError, JvExStdCtrls, JvCombobox, BCEdit, JvEdit, BCComboBox;
+  Ora, OraError, JvExStdCtrls, JvCombobox, BCEdit, JvEdit, BCComboBox, Dlg;
 
 type
-  TConnectClientDialog = class(TForm)
+  TConnectClientDialog = class(TDialog)
     ActionList: TActionList;
     ConnectAction: TAction;
     Panel1: TPanel;
@@ -77,7 +77,7 @@ begin
   if FConnectClientDialog = nil then
     Application.CreateForm(TConnectClientDialog, FConnectClientDialog);
   Result := FConnectClientDialog;
-  Common.SetStyledFormSize(Result, 321, 181);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TConnectClientDialog.FillDatabaseCombo;

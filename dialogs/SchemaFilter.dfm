@@ -107,7 +107,6 @@ object SchemaFilterDialog: TSchemaFilterDialog
     end
   end
   object SchemasQuery: TOraQuery
-    DataTypeMap = <>
     Left = 120
     Top = 152
   end

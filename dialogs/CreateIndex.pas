@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Grids, JvExGrids, JvStringGrid,
   BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit, BCEdit, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar;
+  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, Dlg;
 
 type
   TCreateIndexDialog = class(TCreateObjectBaseDialog)
@@ -61,7 +61,7 @@ begin
   if FCreateIndexDialog = nil then
     Application.CreateForm(TCreateIndexDialog, FCreateIndexDialog);
   Result := FCreateIndexDialog;
-  Common.SetStyledFormSize(Result, 312, 448);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateIndexDialog.FormDestroy(Sender: TObject);

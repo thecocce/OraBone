@@ -5,11 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCPageControl,
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls,
-  JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess, SynEdit, BCEdit,
+  JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess, SynEdit, BCEdit, Dlg,
   JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, BCDBGrid, Vcl.Buttons;
 
 type
-  TExportTableDataDialog = class(TForm)
+  TExportTableDataDialog = class(TDialog)
     ActionList: TActionList;
     ExportAction: TAction;
     SelectFileButtonAction: TAction;
@@ -92,7 +92,7 @@ begin
   if FExportTableDataDialog = nil then
     Application.CreateForm(TExportTableDataDialog, FExportTableDataDialog);
   Result := FExportTableDataDialog;
-  Common.SetStyledFormSize(Result, 339, 402);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TExportTableDataDialog.FormDestroy(Sender: TObject);

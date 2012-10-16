@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCPageControl,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls,
+  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, Dlg,
   JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, BCComboBox, Vcl.ExtCtrls;
 
 type
-  TCustomizePageControlDialog = class(TForm)
+  TCustomizePageControlDialog = class(TDialog)
     ActionList: TActionList;
     MoveUpAction: TAction;
     MoveDownAction: TAction;
@@ -68,7 +68,7 @@ begin
   if FCustomizePageControlDialog = nil then
     Application.CreateForm(TCustomizePageControlDialog, FCustomizePageControlDialog);
   Result := FCustomizePageControlDialog;
-  Common.SetStyledFormSize(Result, 256, 351);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizePageControlDialog.FormDestroy(Sender: TObject);

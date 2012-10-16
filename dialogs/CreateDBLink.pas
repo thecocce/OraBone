@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
   BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCPageControl, Ora, BCToolBar;
+  BCPageControl, Ora, BCToolBar, Dlg;
 
 type
   TCreateDBLinkDialog = class(TCreateObjectBaseDialog)
@@ -53,7 +53,7 @@ begin
   if FCreateDBLinkDialog = nil then
     Application.CreateForm(TCreateDBLinkDialog, FCreateDBLinkDialog);
   Result := FCreateDBLinkDialog;
-  Common.SetStyledFormSize(Result, 321, 248);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateDBLinkDialog.FormDestroy(Sender: TObject);

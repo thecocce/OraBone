@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
 
 type
-  TDropTableDialog = class(TForm)
+  TDropTableDialog = class(TDialog)
     TopPanel: TPanel;
     MessageLabel: TLabel;
     CascadeConstraintsCheckBox: TCheckBox;
@@ -50,7 +50,7 @@ begin
   if FDropTableDialog = nil then
     Application.CreateForm(TDropTableDialog, FDropTableDialog);
   Result := FDropTableDialog;
-  Common.SetStyledFormSize(Result, 220, 141);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TDropTableDialog.FormDestroy(Sender: TObject);

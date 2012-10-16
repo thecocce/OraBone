@@ -8,7 +8,7 @@ uses
   SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar,
   SynEdit, JvComCtrls, BCPageControl, JvEdit, BCEdit, DBAccess, Ora, MemDS, Vcl.Buttons,
   JvExButtons, JvBitBtn, BCDBEdit, BCToolBar, DBGridEhGrouping, GridsEh, DBGridEh, BCDBGrid,
-  JvExStdCtrls, Vcl.ExtCtrls, Data.DB;
+  JvExStdCtrls, Vcl.ExtCtrls, Data.DB, Dlg;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)
@@ -81,7 +81,7 @@ begin
   if FAlterViewDialog = nil then
     Application.CreateForm(TAlterViewDialog, FAlterViewDialog);
   Result := FAlterViewDialog;
-  Common.SetStyledFormSize(Result, 459, 460);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterViewDialog.FormDestroy(Sender: TObject);

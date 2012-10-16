@@ -5,10 +5,10 @@ interface
 uses
   System.SysUtils, Winapi.Windows, Winapi.Messages, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, Dlg;
 
 type
-  TAboutDialog = class(TForm)
+  TAboutDialog = class(TDialog)
     OKButton: TButton;
     Kayttajanimi2Label: TLabel;
     LinkRow1Label: TLinkLabel;
@@ -51,7 +51,7 @@ begin
   if FAboutDialog = nil then
     Application.CreateForm(TAboutDialog, FAboutDialog);
   Result := FAboutDialog;
-  Common.SetStyledFormSize(Result, 387, 288);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TAboutDialog.Open;

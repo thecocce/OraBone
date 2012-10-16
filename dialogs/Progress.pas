@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList,
+  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList, Dlg,
   //Vcl.Styles,
   Vcl.Themes{, Winapi.CommCtrl};
 
@@ -21,7 +21,7 @@ type
     destructor Destroy; override;
   end; }
 
-  TProgressDialog = class(TForm)
+  TProgressDialog = class(TDialog)
     ProgressPanel: TPanel;
     CancelButton: TButton;
     ActionList: TActionList;
@@ -94,10 +94,11 @@ begin
   InformationText := '';
   CancelButton.Visible := ShowCancel;
   if ShowCancel then
-    Height := 140 //116
+    Height := 140
   else
-    Height := 99; //75;
-  Common.SetStyledFormSize(Self, 370, Height);
+    Height := 99;
+  OrigHeight := Height;
+  Common.SetStyledFormSize(Self);
   ProgressBar.Marquee := Marquee;
   Visible := True;
 end;

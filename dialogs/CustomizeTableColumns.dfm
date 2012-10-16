@@ -247,7 +247,6 @@ object CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog
     end
   end
   object ColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT   column_name'
       '    FROM all_tab_columns '

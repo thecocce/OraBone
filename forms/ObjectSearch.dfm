@@ -165,7 +165,7 @@ object ObjectSearhForm: TObjectSearhForm
       Indent = 16
       ParentCtl3D = False
       TabOrder = 0
-      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes]
+      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
       TreeOptions.PaintOptions = [toHideFocusRect, toShowBackground, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection]
       TreeOptions.SelectionOptions = [toFullRowSelect]
@@ -209,7 +209,7 @@ object ObjectSearhForm: TObjectSearhForm
     Left = 60
     Top = 284
     Bitmap = {
-      494C01011800E000680210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011800E0006C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

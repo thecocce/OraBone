@@ -120,7 +120,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         Width = 120
         Height = 21
         Hint = 'Delimiter.'
-        ItemHeight = 13
         ReadOnly = False
         TabOrder = 3
         Text = 'Semicolon'

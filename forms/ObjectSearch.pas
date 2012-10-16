@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCEdit,
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCEdit, Dlg,
   ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, JvExComCtrls, JvHeaderControl;
 
 type
-  TObjectSearhForm = class(TForm)
+  TObjectSearhForm = class(TDialog)
     ButtonPanel: TPanel;
     SearchForLabel: TLabel;
     SearchForEdit: TBCEdit;
@@ -70,7 +70,7 @@ begin
   if FObjectSearhForm = nil then
     Application.CreateForm(TObjectSearhForm, FObjectSearhForm);
   Result := FObjectSearhForm;
-  Common.SetStyledFormSize(Result, 627, 472);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TObjectSearhForm.FormClose(Sender: TObject; var Action: TCloseAction);

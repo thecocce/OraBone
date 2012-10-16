@@ -4,13 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, Dlg;
 
 const
   WM_AFTER_SHOW = WM_USER + 301; // custom message
 
 type
-  TQueryProgressDialog = class(TForm)
+  TQueryProgressDialog = class(TDialog)
     ActionList: TActionList;
     CancelAction: TAction;
     ExecutionTimeLabel: TLabel;
@@ -50,7 +50,7 @@ begin
   if FQueryProgressDialog = nil then
     Application.CreateForm(TQueryProgressDialog, FQueryProgressDialog);
   Result := FQueryProgressDialog;
-  Common.SetStyledFormSize(Result, 304, 114);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TQueryProgressDialog.CancelActionExecute(Sender: TObject);

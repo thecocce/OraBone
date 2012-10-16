@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, CheckLst, ActnList, DB, MemDS, DBAccess, Ora, JvStringHolder, JvExStdCtrls,
-  JvCombobox, BCComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls;
+  JvCombobox, BCComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls, Dlg;
 
 type
-  TCustomizeObjectFiltersDialog = class(TForm)
+  TCustomizeObjectFiltersDialog = class(TDialog)
     SQLStringHolder: TJvMultiStringHolder;
     ObjectsQuery: TOraQuery;
     ActionList: TActionList;
@@ -72,7 +72,7 @@ begin
   if FCustomizeObjectFiltersDialog = nil then
     Application.CreateForm(TCustomizeObjectFiltersDialog, FCustomizeObjectFiltersDialog);
   Result := FCustomizeObjectFiltersDialog;
-  Common.SetStyledFormSize(Result, 354, 421);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectFiltersDialog.DeselectAllActionExecute(Sender: TObject);

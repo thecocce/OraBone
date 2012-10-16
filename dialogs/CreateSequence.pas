@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter,
   SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls,
-  JvComCtrls, BCPageControl, BCToolBar;
+  JvComCtrls, BCPageControl, BCToolBar, Dlg;
 
 type
   TCreateSequenceDialog = class(TCreateObjectBaseDialog)
@@ -54,7 +54,7 @@ begin
   if FCreateSequenceDialog = nil then
     Application.CreateForm(TCreateSequenceDialog, FCreateSequenceDialog);
   Result := FCreateSequenceDialog;
-  Common.SetStyledFormSize(Result, 371, 295);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateSequenceDialog.FormDestroy(Sender: TObject);

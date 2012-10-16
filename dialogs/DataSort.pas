@@ -7,10 +7,10 @@ uses
   Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter,
   SynHighlighterSQL, ValEdit, JvStringHolder, Menus, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
   PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCEdit, JvEdit, BCImageList, BCToolBar,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Dlg;
 
 type
-  TDataSortDialog = class(TForm)
+  TDataSortDialog = class(TDialog)
     ActionList: TActionList;
     ColumnClickAction: TAction;
     SynSQLSyn: TSynSQLSyn;
@@ -90,7 +90,7 @@ begin
   if FDataSortDialog = nil then
     Application.CreateForm(TDataSortDialog, FDataSortDialog);
   Result := FDataSortDialog;
-  Common.SetStyledFormSize(Result, 570, 417);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TDataSortDialog.SetFields;

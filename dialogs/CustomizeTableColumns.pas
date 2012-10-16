@@ -6,10 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls,
   JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, DB, MemDS,
-  DBAccess, Ora, Vcl.ExtCtrls;
+  DBAccess, Ora, Vcl.ExtCtrls, Dlg;
 
 type
-  TCustomizeTableColumnsDialog = class(TForm)
+  TCustomizeTableColumnsDialog = class(TDialog)
     ActionList: TActionList;
     MoveUpAction: TAction;
     MoveDownAction: TAction;
@@ -66,7 +66,7 @@ begin
   if FCustomizeTableColumnsrDialog = nil then
     Application.CreateForm(TCustomizeTableColumnsDialog, FCustomizeTableColumnsrDialog);
   Result := FCustomizeTableColumnsrDialog;
-  Common.SetStyledFormSize(Result, 265, 371);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeTableColumnsDialog.FormDestroy(Sender: TObject);

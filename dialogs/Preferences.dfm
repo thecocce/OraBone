@@ -412,6 +412,7 @@ object PreferencesDialog: TPreferencesDialog
             Top = 20
             Width = 62
             Height = 21
+            ItemHeight = 13
             ReadOnly = False
             TabOrder = 0
             Text = 'Bottom'
@@ -427,6 +428,7 @@ object PreferencesDialog: TPreferencesDialog
             Top = 20
             Width = 64
             Height = 21
+            ItemHeight = 13
             ReadOnly = False
             TabOrder = 1
             Text = 'Bottom'

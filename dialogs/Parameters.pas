@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvListBox, SynEdit, Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvListBox, SynEdit, Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls, Dlg;
 
 type
   TValueListEditor = class(ValEdit.TValueListEditor)
@@ -12,7 +12,7 @@ type
     property InplaceEditor; // change this property to public
   end;
 
-  TParametersDialog = class(TForm)
+  TParametersDialog = class(TDialog)
     Panel1: TPanel;
     OKButton: TButton;
     CancelButton: TButton;
@@ -51,7 +51,7 @@ begin
   if FParametersDialog = nil then
     Application.CreateForm(TParametersDialog, FParametersDialog);
   Result := FParametersDialog;
-  Common.SetStyledFormSize(Result, 338, 320);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TParametersDialog.FormCreate(Sender: TObject);

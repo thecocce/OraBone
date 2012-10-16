@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, Dlg;
 
 type
-  TStringDataDialog = class(TForm)
+  TStringDataDialog = class(TDialog)
     Panel1: TPanel;
     OKButton: TButton;
     CancelButton: TButton;
@@ -44,7 +44,7 @@ begin
   if FStringDataDialog = nil then
     Application.CreateForm(TStringDataDialog, FStringDataDialog);
   Result := FStringDataDialog;
-  Common.SetStyledFormSize(Result, 568, 264);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TStringDataDialog.FormDestroy(Sender: TObject);

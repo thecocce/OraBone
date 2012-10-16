@@ -2038,18 +2038,21 @@ begin
     EditRect.TopLeft := ClientToScreen(EditRect.TopLeft);
     EditRect.BottomRight := ClientToScreen(EditRect.BottomRight);
 
-    ConfirmReplaceDialog.PrepareShow(EditRect, APos.X, APos.Y,
-      APos.Y + SynEdit.LineHeight, ASearch);
-
-    case ConfirmReplaceDialog.ShowModal of
-      mrYes:
-        Action := raReplace;
-      mrYesToAll:
-        Action := raReplaceAll;
-      mrNo:
-        Action := raSkip;
-    else
-      Action := raCancel;
+    ConfirmReplaceDialog.PrepareShow(EditRect, APos.X, APos.Y, APos.Y + SynEdit.LineHeight,
+      ASearch);
+    try
+      case ConfirmReplaceDialog.ShowModal of
+        mrYes:
+          Action := raReplace;
+        mrYesToAll:
+          Action := raReplaceAll;
+        mrNo:
+          Action := raSkip;
+      else
+        Action := raCancel;
+      end;
+    finally
+      ConfirmReplaceDialog.Release;
     end;
   end;
 end;

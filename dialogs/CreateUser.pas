@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCStringGrid, Vcl.StdCtrls, JvExStdCtrls,
   JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
   JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, DB, MemDS, DBAccess, Ora,
-  BCToolBar;
+  BCToolBar, Dlg;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)
@@ -51,7 +51,7 @@ begin
   if FCreateUserDialog = nil then
     Application.CreateForm(TCreateUserDialog, FCreateUserDialog);
   Result := FCreateUserDialog;
-  Common.SetStyledFormSize(Result, 411, 430);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateUserDialog.FormDestroy(Sender: TObject);

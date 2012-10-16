@@ -47,7 +47,6 @@ object CustomizePageControlDialog: TCustomizePageControlDialog
       Width = 160
       Height = 21
       Align = alRight
-      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       EditColor = clInfoBk

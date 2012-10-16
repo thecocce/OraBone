@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora, BCEdit, JvExStdCtrls, JvEdit,
-  JvCombobox, BCComboBox, BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls;
+  JvCombobox, BCComboBox, BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, Dlg;
 
 type
-  TImportTableDataDialog = class(TForm)
+  TImportTableDataDialog = class(TDialog)
     ActionList: TActionList;
     ImportAction: TAction;
     OpenDialog: TOpenDialog;
@@ -76,7 +76,7 @@ begin
   if FImportTableDataDialog = nil then
     Application.CreateForm(TImportTableDataDialog, FImportTableDataDialog);
   Result := FImportTableDataDialog;
-  Common.SetStyledFormSize(Result, 339, 347);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TImportTableDataDialog.FormDestroy(Sender: TObject);

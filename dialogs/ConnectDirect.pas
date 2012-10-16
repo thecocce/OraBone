@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Dialogs, Winapi.Messages, Vcl.ActnList, OdacVcl,
-  Ora, OraError, JvExStdCtrls, JvCombobox, JvEdit, BCEdit;
+  Ora, OraError, JvExStdCtrls, JvCombobox, JvEdit, BCEdit, Dlg;
 
 type
-  TConnectDirectDialog = class(TForm)
+  TConnectDirectDialog = class(TDialog)
     ActionList: TActionList;
     ConnectAction: TAction;
     Panel1: TPanel;
@@ -87,7 +87,7 @@ begin
   if FConnectDirectDialog = nil then
     Application.CreateForm(TConnectDirectDialog, FConnectDirectDialog);
   Result := FConnectDirectDialog;
-  Common.SetStyledFormSize(Result, 321, 236);
+  Common.SetStyledFormSize(Result);
 end;
 {
 procedure TOraSessionEditorForm.DivConnStr(Server : string; var Service, Port, Host: string);

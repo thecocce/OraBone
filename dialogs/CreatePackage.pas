@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, Vcl.StdCtrls,
   ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl,
-  JvExStdCtrls, JvEdit, BCEdit, BCToolBar;
+  JvExStdCtrls, JvEdit, BCEdit, BCToolBar, Dlg;
 
 type
   TCreatePackageDialog = class(TCreateObjectBaseDialog)
@@ -46,7 +46,7 @@ begin
   if FCreatePackageDialog = nil then
     Application.CreateForm(TCreatePackageDialog, FCreatePackageDialog);
   Result := FCreatePackageDialog;
-  Common.SetStyledFormSize(Result, 747, 415);
+  Common.SetStyledFormSize(TDialog(Result));
 end;
 
 

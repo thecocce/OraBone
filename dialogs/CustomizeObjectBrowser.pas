@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls,
+  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, Dlg,
   JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, Vcl.ExtCtrls;
 
 type
-  TCustomizeObjectBrowserDialog = class(TForm)
+  TCustomizeObjectBrowserDialog = class(TDialog)
     ActionList: TActionList;
     MoveUpAction: TAction;
     MoveDownAction: TAction;
@@ -61,7 +61,7 @@ begin
   if FCustomizeObjectBrowserDialog = nil then
     Application.CreateForm(TCustomizeObjectBrowserDialog, FCustomizeObjectBrowserDialog);
   Result := FCustomizeObjectBrowserDialog;
-  Common.SetStyledFormSize(Result, 240, 370);
+  Common.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectBrowserDialog.FormDestroy(Sender: TObject);
