@@ -24,6 +24,10 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 63
@@ -208,7 +212,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000E00C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E00C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
@@ -525,7 +529,6 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     end
   end
   object SourceQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   trigger_name "Trigger Name", trigger_type "Type", trigg' +

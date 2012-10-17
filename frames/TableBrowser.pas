@@ -1162,7 +1162,7 @@ end;
 
 procedure TTableBrowserFrame.RevokePrivilegesActionExecute(Sender: TObject);
 begin
-  Lib.RevokeSelectedGrants(FSession, FObjectName, GrantsDBGrid);
+  Lib.RevokeSelectedGrants(FSession, FSchemaParam, FObjectName, GrantsDBGrid);
 {  if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [GrantsQuery.FieldByName(PRIVILEGE).AsString])) then
   begin
     GrantsQuery.Session.ExecSQL(Format('REVOKE %s ON %s FROM %s', [GrantsQuery.FieldByName(PRIVILEGE).AsString,
@@ -1455,7 +1455,7 @@ end;
 
 procedure TTableBrowserFrame.DropConstraintActionExecute(Sender: TObject);
 begin
-  Lib.DropSelectedConstraints(FSession, FObjectName, ConstraintsDBGrid);
+  Lib.DropSelectedConstraints(FSession, FSchemaParam, FObjectName, ConstraintsDBGrid);
 end;
 
 procedure TTableBrowserFrame.DropDownFilterMenuClick(Sender: TObject);
@@ -1500,7 +1500,7 @@ end;
 
 procedure TTableBrowserFrame.DropTriggerActionExecute(Sender: TObject);
 begin
-  Lib.DropSelectedTriggers(FSession, TriggersDBGrid);
+  Lib.DropSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid);
 end;
 
 procedure TTableBrowserFrame.DuplicateRowActionExecute(Sender: TObject);
@@ -1535,12 +1535,12 @@ end;
 
 procedure TTableBrowserFrame.EnableConstraintActionExecute(Sender: TObject);
 begin
-  AlterSelectedConstraints(FSession, FObjectName, ConstraintsDBGrid, True);
+  AlterSelectedConstraints(FSession, FSchemaParam, FObjectName, ConstraintsDBGrid, True);
 end;
 
 procedure TTableBrowserFrame.EnableTriggerActionExecute(Sender: TObject);
 begin
-  AlterSelectedTriggers(FSession, TriggersDBGrid, True);
+  AlterSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid, True);
 end;
 
 procedure TTableBrowserFrame.ExportTableDataActionExecute(Sender: TObject);
@@ -1550,12 +1550,12 @@ end;
 
 procedure TTableBrowserFrame.DisableConstraintActionExecute(Sender: TObject);
 begin
-  AlterSelectedConstraints(FSession, FObjectName, ConstraintsDBGrid, False);
+  AlterSelectedConstraints(FSession, FSchemaParam, FObjectName, ConstraintsDBGrid, False);
 end;
 
 procedure TTableBrowserFrame.DisableTriggerActionExecute(Sender: TObject);
 begin
-  AlterSelectedTriggers(FSession, TriggersDBGrid, False);
+  AlterSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid, False);
 end;
 
 procedure TTableBrowserFrame.IndexesDBGridSelectionChanged(Sender: TObject);

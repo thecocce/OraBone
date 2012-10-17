@@ -1,19 +1,17 @@
 object FuncProcBrowserFrame: TFuncProcBrowserFrame
   Left = 0
   Top = 0
-  Width = 642
-  Height = 450
+  Width = 451
+  Height = 304
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object FuncProcPageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 642
-    Height = 450
+    Width = 451
+    Height = 304
     ActivePage = SynonymsTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -23,13 +21,11 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     OnChange = FuncProcPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
-    ExplicitWidth = 451
-    ExplicitHeight = 304
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
-      ExplicitWidth = 443
-      ExplicitHeight = 276
+      ExplicitLeft = 0
+      ExplicitTop = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -139,8 +135,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitWidth = 443
-      ExplicitHeight = 276
+      ExplicitLeft = 0
+      ExplicitTop = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -249,8 +245,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
-      ExplicitWidth = 443
-      ExplicitHeight = 276
+      ExplicitLeft = 0
+      ExplicitTop = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -360,8 +356,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitWidth = 443
-      ExplicitHeight = 276
+      ExplicitLeft = 0
+      ExplicitTop = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -439,7 +435,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Left = 78
     Top = 166
     Bitmap = {
-      494C010109000E00100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00140110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -908,7 +904,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Top = 236
   end
   object GrantsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   grantee "Granted To", privilege "Privilege", grantable ' +
@@ -940,7 +935,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Top = 100
   end
   object DependenciesQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   d.name "Name", d.type "Type", INITCAP(o.status) "Status' +
@@ -967,7 +961,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end>
   end
   object SynonymsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT owner "Synonym Owner", synonym_name "Synonym Name", table' +
@@ -998,7 +991,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Top = 348
   end
   object SourceQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT type, text'
       '  FROM all_source'

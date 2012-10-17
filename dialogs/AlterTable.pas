@@ -408,7 +408,7 @@ var
       Open;
       while not Eof do
       begin
-        Result := Result + GetAlterConstraintSQL(FSchemaParam + '.' + TableNameEdit.Text, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint) + ';' + CHR_ENTER;
+        Result := Result + GetAlterConstraintSQL(FSchemaParam, TableNameEdit.Text, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint) + ';' + CHR_ENTER;
         Next;
       end;
       if Result <> '' then
@@ -437,7 +437,7 @@ var
       Open;
       while not Eof do
       begin
-        Result := Result + GetAlterTriggerSQL(FieldByName('TRIGGER_NAME').AsString, EnableTrigger) + ';' + CHR_ENTER;
+        Result := Result + GetAlterTriggerSQL(FSchemaParam, FieldByName('TRIGGER_NAME').AsString, EnableTrigger) + ';' + CHR_ENTER;
         Next;
       end;
       if Result <> '' then

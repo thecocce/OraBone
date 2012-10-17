@@ -371,7 +371,7 @@ end;
 
 procedure TSequenceBrowserFrame.RevokePrivilegesActionExecute(Sender: TObject);
 begin
-  Lib.RevokeSelectedGrants(FSession, FObjectName, GrantsDBGrid);
+  Lib.RevokeSelectedGrants(FSession, FSchemaParam, FObjectName, GrantsDBGrid);
   {if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [GrantsQuery.FieldByName(PRIVILEGE).AsString])) then
   begin
     GrantsQuery.Session.ExecSQL(Format('REVOKE %s ON %s FROM %s', [GrantsQuery.FieldByName(PRIVILEGE).AsString,

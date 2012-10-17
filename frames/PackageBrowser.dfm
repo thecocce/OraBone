@@ -24,6 +24,10 @@ object PackageBrowserFrame: TPackageBrowserFrame
     object SpecificationTabSheet: TTabSheet
       Caption = 'Specification'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SpecPanel: TPanel
         Left = 0
         Top = 0
@@ -345,6 +349,10 @@ object PackageBrowserFrame: TPackageBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -527,7 +535,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00040110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -996,7 +1004,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Top = 236
   end
   object GrantsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   grantee "Granted To", privilege "Privilege", grantable ' +
@@ -1028,7 +1035,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Top = 100
   end
   object DependenciesQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   d.name "Name", d.type "Type", INITCAP(o.status) "Status' +
@@ -1056,7 +1062,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
       end>
   end
   object SynonymsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT owner "Synonym Owner", synonym_name "Synonym Name", table' +
@@ -1087,7 +1092,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Top = 348
   end
   object SpecQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT type, text'
       '  FROM all_source'
@@ -1141,7 +1145,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Top = 292
   end
   object BodyQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT type, text'
       '  FROM all_source'

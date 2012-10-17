@@ -259,6 +259,8 @@ type
     SpeedButton3: TSpeedButton;
     SearchForEdit: TBCEdit;
     ToggleBookmarkMenuItem: TMenuItem;
+    ImageList25: TBCImageList;
+    ImageList50: TBCImageList;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -569,19 +571,38 @@ begin
     PageControl.Images.Handle := SysImageList;
     PageControl.Images.BkColor := ClNone;
     PageControl.Images.ShareImages := True;
-    //FSystemImageList.Handle := SysImageList;
-    //FSystemImageList.ShareImages := True;
   end;
 
   { compare and new image index }
   Icon := TIcon.Create;
   try
-    Icon.Height := 16;
-    Icon.Width := 16;
-    ImageList.GetIcon(0, Icon);
-    FCompareImageIndex := PageControl.Images.AddIcon(Icon);
-    ImageList.GetIcon(1, Icon);
-    FNewImageIndex := PageControl.Images.AddIcon(Icon);
+    { windows font size causing problems here!
+      Icon size will be smaller than PageControl.Images size }
+    try
+      { smaller }
+      ImageList.GetIcon(0, Icon);
+      FCompareImageIndex := PageControl.Images.AddIcon(Icon);
+      ImageList.GetIcon(1, Icon);
+      FNewImageIndex := PageControl.Images.AddIcon(Icon);
+    except
+      try
+        { medium }
+        ImageList25.GetIcon(0, Icon);
+        FCompareImageIndex := PageControl.Images.AddIcon(Icon);
+        ImageList25.GetIcon(1, Icon);
+        FNewImageIndex := PageControl.Images.AddIcon(Icon);
+      except
+        try
+          { larger }
+          ImageList50.GetIcon(0, Icon);
+          FCompareImageIndex := PageControl.Images.AddIcon(Icon);
+          ImageList50.GetIcon(1, Icon);
+          FNewImageIndex := PageControl.Images.AddIcon(Icon);
+        except
+
+        end;
+      end;
+    end;
   finally
     Icon.Free;
   end;

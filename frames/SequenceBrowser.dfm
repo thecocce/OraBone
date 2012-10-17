@@ -24,6 +24,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SequencePanel: TPanel
         Left = 0
         Top = 0
@@ -309,6 +313,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -490,7 +498,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00040110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -957,7 +965,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Top = 236
   end
   object GrantsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   grantee "Granted To", privilege "Privilege", grantable ' +
@@ -989,7 +996,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Top = 100
   end
   object DependenciesQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT   d.name "Name", d.type "Type", INITCAP(o.status) "Status' +
@@ -1016,7 +1022,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
       end>
   end
   object SynonymsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       
         'SELECT owner "Synonym Owner", synonym_name "Synonym Name", table' +
@@ -1047,7 +1052,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Top = 348
   end
   object SequenceQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT last_number "Last Number", '
       '       min_value "Min Value", '

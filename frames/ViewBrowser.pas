@@ -405,7 +405,7 @@ end;
 
 procedure TViewBrowserFrame.RevokePrivilegesActionExecute(Sender: TObject);
 begin
-  Lib.RevokeSelectedGrants(FSession, FObjectName, GrantsDBGrid);
+  Lib.RevokeSelectedGrants(FSession, FSchemaParam, FObjectName, GrantsDBGrid);
 
   {if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [GrantsQuery.FieldByName(PRIVILEGE).AsString])) then
   begin
@@ -638,12 +638,12 @@ end;
 
 procedure TViewBrowserFrame.DropTriggerActionExecute(Sender: TObject);
 begin
-  Lib.DropSelectedTriggers(FSession, TriggersDBGrid);
+  Lib.DropSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid);
 end;
 
 procedure TViewBrowserFrame.EnableTriggerActionExecute(Sender: TObject);
 begin
-  AlterSelectedTriggers(FSession, TriggersDBGrid, True);
+  AlterSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid, True);
   //AlterTrigger(FSession, TriggersQuery.FieldByName(TRIGGER_NAME).AsString, True);
   //TriggersQuery.Refresh;
 end;
@@ -866,7 +866,7 @@ end;
 
 procedure TViewBrowserFrame.DisableTriggerActionExecute(Sender: TObject);
 begin
-  AlterSelectedTriggers(FSession, TriggersDBGrid, False);
+  AlterSelectedTriggers(FSession, FSchemaParam, TriggersDBGrid, False);
   //AlterTrigger(FSession, TriggersQuery.FieldByName(TRIGGER_NAME).AsString, False);
   //TriggersQuery.Refresh;
 end;

@@ -136,14 +136,14 @@ end;
 
 procedure TConstraintBrowserFrame.DisableConstraintActionExecute(Sender: TObject);
 begin
-  AlterConstraint(FOraSession, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
+  AlterConstraint(FOraSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
     ConstraintsQuery.FieldByName(CONSTRAINT_NAME).AsString, False);
   ConstraintsQuery.Refresh;
 end;
 
 procedure TConstraintBrowserFrame.EnableConstraintActionExecute(Sender: TObject);
 begin
-  AlterConstraint(FOraSession, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
+  AlterConstraint(FOraSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
     ConstraintsQuery.FieldByName(CONSTRAINT_NAME).AsString, True);
   ConstraintsQuery.Refresh;
 end;

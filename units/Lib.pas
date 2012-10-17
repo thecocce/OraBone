@@ -78,20 +78,20 @@ procedure GridDrawStringDataCell(Sender: TObject; const Rect: TRect; Field: TFie
 function FormatServer(Server: string): string;
 function FormatSchema(Schema: string): string;
 function StrContains(Str1, Str2: string): Boolean;
-function GetAlterConstraintSQL(TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
-procedure AlterConstraint(OraSession: TOraSession; TableName: string; ConstraintName: string; EnableConstraint: Boolean);
-procedure AlterSelectedConstraints(OraSession: TOraSession; TableName: string; Grid: TBCDBGrid; EnableConstraint: Boolean);
-procedure DropConstraint(OraSession: TOraSession; TableName: string; ConstraintName: string);
-procedure DropSelectedConstraints(OraSession: TOraSession; TableName: string; Grid: TBCDBGrid);
+function GetAlterConstraintSQL(SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
+procedure AlterConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean);
+procedure AlterSelectedConstraints(OraSession: TOraSession; SchemaParam: string; TableName: string; Grid: TBCDBGrid; EnableConstraint: Boolean);
+procedure DropConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string);
+procedure DropSelectedConstraints(OraSession: TOraSession; SchemaParam: string; TableName: string; Grid: TBCDBGrid);
 procedure AlterAllConstraints(OraSession: TOraSession; SchemaParam: string; EnableConstraint: Boolean);
 procedure AlterObjectConstraints(OraSession: TOraSession; SchemaParam: string; ObjectName: string; EnableConstraint: Boolean);
-function GetAlterTriggerSQL(TriggerName: string; EnableTrigger: Boolean): string;
-procedure AlterTrigger(OraSession: TOraSession; TriggerName: string; EnableTrigger: Boolean);
-procedure AlterSelectedTriggers(OraSession: TOraSession; Grid: TBCDBGrid; EnableTrigger: Boolean);
-procedure DropTrigger(OraSession: TOraSession; TriggerName: string);
-procedure DropSelectedTriggers(OraSession: TOraSession; Grid: TBCDBGrid);
-procedure RevokeGrant(OraSession: TOraSession; Privilege: string; ObjectName: string; Grantee: string);
-procedure RevokeSelectedGrants(OraSession: TOraSession; ObjectName: string; Grid: TBCDBGrid);
+function GetAlterTriggerSQL(SchemaParam: string; TriggerName: string; EnableTrigger: Boolean): string;
+procedure AlterTrigger(OraSession: TOraSession; SchemaParam: string; TriggerName: string; EnableTrigger: Boolean);
+procedure AlterSelectedTriggers(OraSession: TOraSession; SchemaParam: string; Grid: TBCDBGrid; EnableTrigger: Boolean);
+procedure DropTrigger(OraSession: TOraSession; SchemaParam: string; TriggerName: string);
+procedure DropSelectedTriggers(OraSession: TOraSession; SchemaParam: string; Grid: TBCDBGrid);
+procedure RevokeGrant(OraSession: TOraSession; Privilege: string; SchemaParam: string; ObjectName: string; Grantee: string);
+procedure RevokeSelectedGrants(OraSession: TOraSession; SchemaParam: string; ObjectName: string; Grid: TBCDBGrid);
 procedure DropSynonym(OraSession: TOraSession; SynonymOwner: string; SynonymName: string);
 procedure DropSelectedSynonyms(OraSession: TOraSession; Grid: TBCDBGrid);
 procedure AlterAllTriggers(OraSession: TOraSession; SchemaParam: string; EnableConstraint: Boolean);
@@ -460,7 +460,7 @@ begin
   Result := False;
 end;
 
-function GetAlterConstraintSQL(TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
+function GetAlterConstraintSQL(SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
 var
   Action, Cascade: string;
 begin
@@ -472,20 +472,20 @@ begin
     Action := 'DISABLE';
     Cascade := 'CASCADE';
   end;
-  Result := Trim(Format('ALTER TABLE %s %s CONSTRAINT %s %s', [TableName, Action, ConstraintName, Cascade]));
+  Result := Trim(Format('ALTER TABLE %s.%s %s CONSTRAINT %s %s', [SchemaParam, TableName, Action, ConstraintName, Cascade]));
 end;
 
-procedure AlterConstraint(OraSession: TOraSession; TableName: string; ConstraintName: string; EnableConstraint: Boolean);
+procedure AlterConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean);
 begin
   try
-    OraSession.ExecSQL(GetAlterConstraintSQL(TableName, ConstraintName, EnableConstraint), []);
+    OraSession.ExecSQL(GetAlterConstraintSQL(SchemaParam, TableName, ConstraintName, EnableConstraint), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);
   end;
 end;
 
-procedure AlterSelectedConstraints(OraSession: TOraSession; TableName: string; Grid: TBCDBGrid; EnableConstraint: Boolean);
+procedure AlterSelectedConstraints(OraSession: TOraSession; SchemaParam: string; TableName: string; Grid: TBCDBGrid; EnableConstraint: Boolean);
 var
   i: Integer;
 begin
@@ -497,7 +497,7 @@ begin
        for i := 0 to SelectedRows.Count - 1 do
        begin
          Datasource.DataSet.GotoBookmark(Pointer(SelectedRows[i]));
-         AlterConstraint(OraSession, TableName, Datasource.DataSet.FieldByName(CONSTRAINT_NAME).AsString, EnableConstraint);
+         AlterConstraint(OraSession, SchemaParam, TableName, Datasource.DataSet.FieldByName(CONSTRAINT_NAME).AsString, EnableConstraint);
        end;
      finally
        DataSource.DataSet.EnableControls();
@@ -506,18 +506,18 @@ begin
   end;
 end;
 
-procedure DropConstraint(OraSession: TOraSession; TableName: string; ConstraintName: string);
+procedure DropConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string);
 begin
   try
     if Common.AskYesOrNo(Format('Drop constraint %s, are you sure?', [ConstraintName])) then
-      OraSession.ExecSQL(Format('ALTER TABLE %s DROP CONSTRAINT %s', [TableName, ConstraintName]), []);
+      OraSession.ExecSQL(Format('ALTER TABLE %s.%s DROP CONSTRAINT %s', [SchemaParam, TableName, ConstraintName]), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);
   end;
 end;
 
-procedure DropSelectedConstraints(OraSession: TOraSession; TableName: string; Grid: TBCDBGrid);
+procedure DropSelectedConstraints(OraSession: TOraSession; SchemaParam: string; TableName: string; Grid: TBCDBGrid);
 var
   i: Integer;
 begin
@@ -529,7 +529,7 @@ begin
        for i := 0 to SelectedRows.Count - 1 do
        begin
          Datasource.DataSet.GotoBookmark(Pointer(SelectedRows[i]));
-         DropConstraint(OraSession, TableName, Datasource.DataSet.FieldByName(CONSTRAINT_NAME).AsString);
+         DropConstraint(OraSession, SchemaParam, TableName, Datasource.DataSet.FieldByName(CONSTRAINT_NAME).AsString);
        end;
      finally
        DataSource.DataSet.EnableControls();
@@ -555,7 +555,7 @@ begin
     Open;
     while not Eof do
     begin
-      AlterConstraint(OraSession, FieldByName('TABLE_NAME').AsString, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint);
+      AlterConstraint(OraSession, SchemaParam, FieldByName('TABLE_NAME').AsString, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint);
       Next;
     end;
   finally
@@ -582,7 +582,7 @@ begin
     Open;
     while not Eof do
     begin
-      AlterConstraint(OraSession, FieldByName('TABLE_NAME').AsString, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint);
+      AlterConstraint(OraSession, SchemaParam, FieldByName('TABLE_NAME').AsString, FieldByName('CONSTRAINT_NAME').AsString, EnableConstraint);
       Next;
     end;
   finally
@@ -593,7 +593,7 @@ begin
   end;
 end;
 
-function GetAlterTriggerSQL(TriggerName: string; EnableTrigger: Boolean): string;
+function GetAlterTriggerSQL(SchemaParam: string; TriggerName: string; EnableTrigger: Boolean): string;
 var
   Action: string;
 begin
@@ -601,20 +601,20 @@ begin
     Action := 'ENABLE'
   else
     Action := 'DISABLE';
-  Result := Format('ALTER TRIGGER %s %s', [TriggerName, Action]);
+  Result := Format('ALTER TRIGGER %s.%s %s', [SchemaParam, TriggerName, Action]);
 end;
 
-procedure AlterTrigger(OraSession: TOraSession; TriggerName: string; EnableTrigger: Boolean);
+procedure AlterTrigger(OraSession: TOraSession; SchemaParam: string; TriggerName: string; EnableTrigger: Boolean);
 begin
   try
-    OraSession.ExecSQL(GetAlterTriggerSQL(TriggerName, EnableTrigger), []);
+    OraSession.ExecSQL(GetAlterTriggerSQL(SchemaParam, TriggerName, EnableTrigger), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);
   end;
 end;
 
-procedure AlterSelectedTriggers(OraSession: TOraSession; Grid: TBCDBGrid; EnableTrigger: Boolean);
+procedure AlterSelectedTriggers(OraSession: TOraSession; SchemaParam: string; Grid: TBCDBGrid; EnableTrigger: Boolean);
 var
   i: Integer;
 begin
@@ -626,7 +626,7 @@ begin
        for i := 0 to SelectedRows.Count - 1 do
        begin
          Datasource.DataSet.GotoBookmark(Pointer(SelectedRows[i]));
-         AlterTrigger(OraSession, Datasource.DataSet.FieldByName(TRIGGER_NAME).AsString, EnableTrigger);
+         AlterTrigger(OraSession, SchemaParam, Datasource.DataSet.FieldByName(TRIGGER_NAME).AsString, EnableTrigger);
        end;
      finally
        DataSource.DataSet.EnableControls();
@@ -635,18 +635,18 @@ begin
   end;
 end;
 
-procedure DropTrigger(OraSession: TOraSession; TriggerName: string);
+procedure DropTrigger(OraSession: TOraSession; SchemaParam: string; TriggerName: string);
 begin
   try
-    if Common.AskYesOrNo(Format('Drop trigger %s, are you sure?', [TriggerName])) then
-      OraSession.ExecSQL(Format('DROP TRIGGER %s', [TriggerName]), []);
+    if Common.AskYesOrNo(Format('Drop trigger %s.%s, are you sure?', [SchemaParam, TriggerName])) then
+      OraSession.ExecSQL(Format('DROP TRIGGER %s.%s', [SchemaParam, TriggerName]), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);
   end;
 end;
 
-procedure DropSelectedTriggers(OraSession: TOraSession; Grid: TBCDBGrid);
+procedure DropSelectedTriggers(OraSession: TOraSession; SchemaParam: string; Grid: TBCDBGrid);
 var
   i: Integer;
 begin
@@ -658,7 +658,7 @@ begin
        for i := 0 to SelectedRows.Count - 1 do
        begin
          Datasource.DataSet.GotoBookmark(Pointer(SelectedRows[i]));
-         DropTrigger(OraSession, Datasource.DataSet.FieldByName(TRIGGER_NAME).AsString);
+         DropTrigger(OraSession, SchemaParam, Datasource.DataSet.FieldByName(TRIGGER_NAME).AsString);
        end;
      finally
        DataSource.DataSet.EnableControls();
@@ -667,18 +667,18 @@ begin
   end;
 end;
 
-procedure RevokeGrant(OraSession: TOraSession; Privilege: string; ObjectName: string; Grantee: string);
+procedure RevokeGrant(OraSession: TOraSession; Privilege: string; SchemaParam: string; ObjectName: string; Grantee: string);
 begin
   try
     if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [Privilege])) then
-      OraSession.ExecSQL(Format('REVOKE %s ON %s FROM %s', [Privilege, ObjectName, Grantee]), []);
+      OraSession.ExecSQL(Format('REVOKE %s ON %s.%s FROM %s', [Privilege, SchemaParam, ObjectName, Grantee]), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);
   end;
 end;
 
-procedure RevokeSelectedGrants(OraSession: TOraSession; ObjectName: string; Grid: TBCDBGrid);
+procedure RevokeSelectedGrants(OraSession: TOraSession; SchemaParam: string; ObjectName: string; Grid: TBCDBGrid);
 var
   i: Integer;
 begin
@@ -690,7 +690,7 @@ begin
        for i := 0 to SelectedRows.Count - 1 do
        begin
          Datasource.DataSet.GotoBookmark(Pointer(SelectedRows[i]));
-         RevokeGrant(OraSession, Datasource.DataSet.FieldByName(PRIVILEGE).AsString, ObjectName,
+         RevokeGrant(OraSession, SchemaParam, Datasource.DataSet.FieldByName(PRIVILEGE).AsString, ObjectName,
            Datasource.DataSet.FieldByName(GRANTEE).AsString);
        end;
      finally
@@ -755,7 +755,7 @@ begin
     Open;
     while not Eof do
     begin
-      AlterTrigger(OraSession, FieldByName('TRIGGER_NAME').AsString, EnableConstraint);
+      AlterTrigger(OraSession, SchemaParam, FieldByName('TRIGGER_NAME').AsString, EnableConstraint);
       Next;
     end;
   finally
@@ -783,7 +783,7 @@ begin
     Open;
     while not Eof do
     begin
-      AlterTrigger(OraSession, FieldByName('TRIGGER_NAME').AsString, EnableConstraint);
+      AlterTrigger(OraSession, SchemaParam, FieldByName('TRIGGER_NAME').AsString, EnableConstraint);
       Next;
     end;
   finally

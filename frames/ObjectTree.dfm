@@ -48,6 +48,7 @@ object ObjectTreeFrame: TObjectTreeFrame
       Width = 260
       Height = 25
       Align = alClient
+      AutoSize = True
       BevelOuter = bvNone
       Padding.Top = 3
       Padding.Right = 1
@@ -97,7 +98,7 @@ object ObjectTreeFrame: TObjectTreeFrame
     IncrementalSearch = isAll
     Indent = 16
     TabOrder = 1
-    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoChangeScale, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes]
+    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
     TreeOptions.MiscOptions = [toEditable, toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning, toEditOnClick]
     TreeOptions.PaintOptions = [toShowBackground, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection]
     OnCreateEditor = VirtualDrawTreeCreateEditor
@@ -113,7 +114,7 @@ object ObjectTreeFrame: TObjectTreeFrame
     Left = 60
     Top = 284
     Bitmap = {
-      494C01015200E000100310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015200E000140310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005001000001002000000000000050
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

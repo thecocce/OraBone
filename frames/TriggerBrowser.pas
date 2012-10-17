@@ -147,13 +147,13 @@ end;
 
 procedure TTriggerBrowserFrame.DisableTriggerActionExecute(Sender: TObject);
 begin
-  AlterTrigger(FSession, SourceQuery.FieldByName(TRIGGER_NAME).AsString, False);
+  AlterTrigger(FSession, FSchemaParam, SourceQuery.FieldByName(TRIGGER_NAME).AsString, False);
   SourceQuery.Refresh;
 end;
 
 procedure TTriggerBrowserFrame.EnableTriggerActionExecute(Sender: TObject);
 begin
-  AlterTrigger(FSession, SourceQuery.FieldByName(TRIGGER_NAME).AsString, True);
+  AlterTrigger(FSession, FSchemaParam, SourceQuery.FieldByName(TRIGGER_NAME).AsString, True);
   SourceQuery.Refresh;
 end;
 

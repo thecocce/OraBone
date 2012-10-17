@@ -24,6 +24,10 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConstraintSplitter: TSplitter
         Left = 0
         Top = 83
@@ -215,7 +219,6 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     end
   end
   object ConstraintColumnsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT a.position "Position",'
       '       a.table_name || '#39'.'#39' || a.column_name "Constraint Column",'
@@ -252,7 +255,6 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Top = 244
   end
   object ConstraintsQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT constraint_name "Constraint Name",'
       
@@ -291,7 +293,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Left = 324
     Top = 140
     Bitmap = {
-      494C010104000800880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
