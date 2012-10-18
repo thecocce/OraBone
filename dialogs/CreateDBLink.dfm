@@ -124,6 +124,7 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Hint = 'Service name'
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
+        ItemHeight = 13
         ReadOnly = False
         TabOrder = 5
         EditColor = clInfoBk
@@ -132,22 +133,28 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 300
+      ExplicitHeight = 149
       inherited SourcePanel: TPanel
         Width = 300
-        Height = 124
+        Height = 149
         ExplicitWidth = 300
-        ExplicitHeight = 124
+        ExplicitHeight = 149
         inherited SourceSynEdit: TSynEdit
           Width = 298
-          Height = 123
+          Height = 124
           ExplicitWidth = 298
-          ExplicitHeight = 123
+          ExplicitHeight = 124
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 300
-          ExplicitWidth = 300
+        inherited SourceTopPanel: TPanel
+          Width = 298
+          ExplicitWidth = 298
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Height = 24
+              Align = alLeft
+            end
+          end
         end
       end
     end
@@ -166,7 +173,7 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E000C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

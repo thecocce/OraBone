@@ -4,12 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
+  Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, Dlg,
   JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCPageControl,
   DAScript, BCToolBar;
 
 type
-  TCreateObjectBaseDialog = class(TForm)
+  TCreateObjectBaseDialog = class(TDialog)
     ActionList: TActionList;
     OKAction: TAction;
     SQLEditorAction: TAction;
@@ -23,6 +23,7 @@ type
     SourceTabSheet: TTabSheet;
     SourcePanel: TPanel;
     SourceSynEdit: TSynEdit;
+    SourceTopPanel: TPanel;
     TopPanel: TPanel;
     SourceToolBar: TBCToolBar;
     SQLEditorToolButton: TToolButton;

@@ -58,10 +58,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -248,10 +244,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ReferencedColumnsTabSheet: TTabSheet [1]
       Caption = 'Referenced Columns'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RefColumnsPanel: TPanel
         Left = 0
         Top = 31
@@ -459,6 +451,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Height = 21
           Hint = 'Table name'
           Anchors = [akLeft, akTop, akRight]
+          ItemHeight = 13
           ReadOnly = False
           TabOrder = 0
           OnChange = RefTableNameComboBoxChange
@@ -471,10 +464,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ConditionTabSheet: TTabSheet [2]
       Caption = 'Condition'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ConditionPanel: TPanel
         Left = 0
         Top = 0
@@ -514,22 +503,26 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 363
+      ExplicitHeight = 273
       inherited SourcePanel: TPanel
         Width = 363
-        Height = 248
+        Height = 273
         ExplicitWidth = 363
-        ExplicitHeight = 248
+        ExplicitHeight = 273
         inherited SourceSynEdit: TSynEdit
           Width = 361
-          Height = 247
+          Height = 248
           ExplicitWidth = 361
-          ExplicitHeight = 247
+          ExplicitHeight = 248
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 363
-          ExplicitWidth = 363
+        inherited SourceTopPanel: TPanel
+          Width = 361
+          ExplicitWidth = 361
+          inherited TopPanel: TPanel
+            Width = 363
+            ExplicitWidth = 363
+          end
         end
       end
     end
@@ -609,6 +602,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Height = 21
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
+    ItemHeight = 13
     ReadOnly = False
     TabOrder = 5
     OnChange = TableNameComboBoxChange
@@ -636,7 +630,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00100210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

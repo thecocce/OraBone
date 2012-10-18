@@ -32,10 +32,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -448,26 +444,26 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 343
       ExplicitHeight = 233
       inherited SourcePanel: TPanel
         Width = 343
-        Height = 208
+        Height = 233
         ExplicitWidth = 343
-        ExplicitHeight = 208
+        ExplicitHeight = 233
         inherited SourceSynEdit: TSynEdit
           Width = 341
-          Height = 207
+          Height = 208
           ExplicitWidth = 341
-          ExplicitHeight = 207
+          ExplicitHeight = 208
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 343
-          ExplicitWidth = 343
+        inherited SourceTopPanel: TPanel
+          Width = 341
+          ExplicitWidth = 341
+          inherited TopPanel: TPanel
+            Width = 343
+            ExplicitWidth = 343
+          end
         end
       end
     end
@@ -508,6 +504,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Hint = 'Return type'
     Anchors = [akLeft, akTop, akRight]
     DropDownCount = 17
+    ItemHeight = 13
     ReadOnly = False
     TabOrder = 4
     OnChange = PageControlChange
@@ -557,7 +554,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E002C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

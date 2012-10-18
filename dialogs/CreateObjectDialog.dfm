@@ -32,15 +32,11 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     HoldShiftToDragDrop = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
-        Top = 22
+        Top = 0
         Width = 503
-        Height = 255
+        Height = 277
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -48,9 +44,9 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
         TabOrder = 0
         object SourceSynEdit: TSynEdit
           Left = 0
-          Top = 0
+          Top = 24
           Width = 501
-          Height = 254
+          Height = 252
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -73,39 +69,50 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           ReadOnly = True
           WantTabs = True
         end
-      end
-      object TopPanel: TPanel
-        Left = 0
-        Top = 0
-        Width = 503
-        Height = 22
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 1
-        object SourceToolBar: TBCToolBar
+        object SourceTopPanel: TPanel
           Left = 0
           Top = 0
-          Width = 69
-          Height = 503
-          Align = alNone
-          Caption = 'SourceToolBar'
-          DisabledImages = ImageList
-          Images = ImageList
-          TabOrder = 0
-          object SQLEditorToolButton: TToolButton
+          Width = 501
+          Height = 24
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 1
+          object TopPanel: TPanel
             Left = 0
             Top = 0
-            Action = SQLEditorAction
-          end
-          object CopyToClipboardToolButton: TToolButton
-            Left = 23
-            Top = 0
-            Action = CopyToClipboardAction
-          end
-          object SaveAsToolButton: TToolButton
-            Left = 46
-            Top = 0
-            Action = SaveToFileAction
+            Width = 69
+            Height = 24
+            Align = alLeft
+            AutoSize = True
+            BevelOuter = bvNone
+            TabOrder = 0
+            object SourceToolBar: TBCToolBar
+              Left = 0
+              Top = 0
+              Width = 69
+              Height = 22
+              Align = alNone
+              AutoSize = True
+              Caption = 'SourceToolBar'
+              DisabledImages = ImageList
+              Images = ImageList
+              TabOrder = 0
+              object SQLEditorToolButton: TToolButton
+                Left = 0
+                Top = 0
+                Action = SQLEditorAction
+              end
+              object CopyToClipboardToolButton: TToolButton
+                Left = 23
+                Top = 0
+                Action = CopyToClipboardAction
+              end
+              object SaveAsToolButton: TToolButton
+                Left = 46
+                Top = 0
+                Action = SaveToFileAction
+              end
+            end
           end
         end
       end
@@ -186,7 +193,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Left = 244
     Top = 158
     Bitmap = {
-      494C010103000E001C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

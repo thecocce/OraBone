@@ -25,10 +25,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
     object SpecificationTabSheet: TTabSheet [0]
       Caption = 'Specification'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SepcificationPanel: TPanel
         Left = 0
         Top = 0
@@ -70,10 +66,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
     object BodyTabSheet: TTabSheet [1]
       Caption = 'Body'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 278
       object BodyPanel: TPanel
         Left = 0
         Top = 0
@@ -84,7 +76,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitWidth = 724
         object BodySynEdit: TSynEdit
           Left = 0
           Top = 0
@@ -114,6 +105,10 @@ inherited CreatePackageDialog: TCreatePackageDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       inherited SourcePanel: TPanel
         Width = 726
         Height = 260
@@ -125,11 +120,13 @@ inherited CreatePackageDialog: TCreatePackageDialog
           ExplicitWidth = 724
           ExplicitHeight = 259
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 726
-          ExplicitWidth = 726
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 726
+              ExplicitWidth = 726
+            end
+          end
         end
       end
     end
@@ -164,7 +161,7 @@ inherited CreatePackageDialog: TCreatePackageDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
