@@ -84,7 +84,8 @@ begin
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, ClientConnectionsStringGrid.RowCount - 1] :=
         ConnectClientDialog.Username + '/' + ConnectClientDialog.Password + '@' + ConnectClientDialog.Database;
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, ClientConnectionsStringGrid.RowCount - 1] := ConnectClientDialog.HomeName;
-      ClientConnectionsStringGrid.SortGrid(0);
+      if ClientConnectionsStringGrid.RowCount > 2 then
+        ClientConnectionsStringGrid.SortGrid(0);
       WriteConnectionsToIniFile;
       ModalResult := mrOk;
     end;
@@ -113,7 +114,8 @@ begin
       end;
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, DirectConnectionsStringGrid.RowCount - 1] :=
         Database;
-      DirectConnectionsStringGrid.SortGrid(0);
+      if DirectConnectionsStringGrid.RowCount > 2 then
+        DirectConnectionsStringGrid.SortGrid(0);
       WriteConnectionsToIniFile;
       ModalResult := mrOk;
     end;

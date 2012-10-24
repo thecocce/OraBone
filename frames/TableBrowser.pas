@@ -291,6 +291,7 @@ type
     procedure SynonymsDBGridSelectionChanged(Sender: TObject);
     procedure DataDBGridTitleClick(Column: TColumnEh);
     procedure SourceOptionsActionExecute(Sender: TObject);
+    procedure DataDBGridSelectionChanged(Sender: TObject);
   private
     { Private declarations }
     FSession: TOraSession;
@@ -1388,6 +1389,12 @@ begin
   { this fixes the bug when popup is popped from grid - it won't get the focus }
   if Button = mbRight then
     DataPopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+end;
+
+procedure TTableBrowserFrame.DataDBGridSelectionChanged(Sender: TObject);
+begin
+  DuplicateRowAction.Enabled := DataDBGrid.SelectedRows.Count > 0;
+  DeleteRowAction.Enabled := DuplicateRowAction.Enabled;
 end;
 
 procedure TTableBrowserFrame.DataDBGridTitleClick(Column: TColumnEh);

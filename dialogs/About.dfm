@@ -397,13 +397,13 @@ object AboutDialog: TAboutDialog
   object LinkRow3Label: TLinkLabel
     Left = 61
     Top = 194
-    Width = 277
+    Width = 260
     Height = 17
     Caption = 
       '<a href="http://www.glyfx.com/">glyFX Icons</a>, <a href="http:/' +
       '/angusj.com/delphi/">Angus Johnson</a>, <a href="http://www.soft' +
-      '-gems.net">Mike Lischke</a> and <a href="http://poorsql.com/">Ta' +
-      'o Klerks</a>'
+      '-gems.net">Mike Lischke</a>, <a href="http://poorsql.com/">Tao K' +
+      'lerks</a>'
     TabOrder = 2
     OnLinkClick = LinkClick
   end

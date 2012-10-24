@@ -263,6 +263,7 @@ type
     { Private declarations }
     FOnProgress: Boolean;
     FOnStartUp: Boolean;
+    FConnecting: Boolean;
     procedure WriteIniFile;
     procedure ReadPreferences;
     procedure ReadIniFile;
@@ -745,6 +746,7 @@ begin
     SearchFindInFilesAction.Enabled := Assigned(SQLEditorFrame);
     SearchToggleBookmarkAction.Enabled := ActiveSQLDocumentFound;
     { database }
+    DatabaseNewConnectionMenuAction.Enabled := not FConnecting;
     DatabaseCommitAction.Enabled := ActiveSQLDocumentFound and SQLEditorFrame.InTransaction;
     DatabaseRollbackAction.Enabled := DatabaseCommitAction.Enabled;
     DatabaseCloseTabAction.Enabled := (PageControl.PageCount > 0) and ((not Assigned(SQLEditorFrame)) or (Assigned(SQLEditorFrame) and not SQLEditorFrame.OutputFrame.ProcessingTabSheet ));
@@ -1640,6 +1642,7 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FOnProgress := False;
   FOnStartUp := True;
+  FConnecting := False;
   ActionMainMenuBar.Font.Name := 'Tahoma'; // IDE is losing this for some reason... :/
   ActionMainMenuBar.Font.Size := 8;
   StatusBar.Font.Name := 'Tahoma';
@@ -2471,6 +2474,7 @@ var
   TabSheet: TTabSheet;
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
+  FConnecting := True;
   ActivePageIndex := PageControl.ActivePageIndex;
   { Create new tab }
   TabSheet := TTabSheet.Create(PageControl);
@@ -2520,6 +2524,7 @@ begin
       Common.ShowErrorMessage(E.Message);
   end;
   Screen.Cursor := crDefault;
+  FConnecting := False;
   Application.ProcessMessages;
 end;
 

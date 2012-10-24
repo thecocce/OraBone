@@ -56,7 +56,6 @@ object ConnectListDialog: TConnectListDialog
       TabOrder = 0
       TabStop = True
       OnClick = ModeClickActionExecute
-      ExplicitLeft = 321
     end
     object DirectModeRadioButton: TRadioButton
       Left = 373
@@ -67,7 +66,6 @@ object ConnectListDialog: TConnectListDialog
       Caption = ' Direct'
       TabOrder = 1
       OnClick = ModeClickActionExecute
-      ExplicitLeft = 375
     end
     object ActionToolBar1: TActionToolBar
       Left = 3
@@ -269,7 +267,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000800B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000035A0500035A0500035A

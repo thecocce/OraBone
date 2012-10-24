@@ -42,6 +42,8 @@
 
   Added SynHighlighterSQL: NOPARALLEL, BUILD, NONUNIQUE for Oracle
 
+
+
 }
 unit SQLEditor;
 
@@ -56,7 +58,7 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB;
+  Vcl.Themes, Data.DB, BCCheckBox;
 
 type
   TBCSynEdit = class(TSynEdit)
@@ -90,16 +92,10 @@ type
     SynEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
     SearchPanel: TPanel;
-    SearchForLabel: TLabel;
-    CaseSensitiveCheckBox: TCheckBox;
-    WholeWordsCheckBox: TCheckBox;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     SearchActionList: TActionList;
     SearchCloseAction: TAction;
     SearchFindNextAction: TAction;
     SearchFindPreviousAction: TAction;
-    JvSpeedButton1: TJvSpeedButton;
     DocumentPanel: TPanel;
     PageControl: TBCPageControl;
     OutputPanel: TPanel;
@@ -256,11 +252,25 @@ type
     FileSaveAsToolButton: TToolButton;
     FileSaveAllToolButton: TToolButton;
     Bevel6: TBevel;
-    SpeedButton3: TSpeedButton;
-    SearchForEdit: TBCEdit;
     ToggleBookmarkMenuItem: TMenuItem;
     ImageList25: TBCImageList;
     ImageList50: TBCImageList;
+    SearchPanel2: TPanel;
+    SearchForLabel: TLabel;
+    SearchPanel3: TPanel;
+    SearchForEdit: TBCEdit;
+    SearchPanel1: TPanel;
+    JvSpeedButton1: TSpeedButton;
+    SearchPanel4: TPanel;
+    JvSpeedButton2: TSpeedButton;
+    SearchPanel5: TPanel;
+    SpeedButton1: TSpeedButton;
+    SearchPanel6: TPanel;
+    SpeedButton2: TSpeedButton;
+    SearchPanel7: TPanel;
+    CaseSensitiveCheckBox: TBCCheckBox;
+    SearchPanel8: TPanel;
+    WholeWordsCheckBox: TBCCheckBox;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
