@@ -85,7 +85,8 @@ uses
   TNSNamesEditor in 'forms\TNSNamesEditor.pas' {TNSNamesEditorForm},
   BigIni in '..\..\Common\units\BigIni.pas',
   TableSourceOptions in 'dialogs\TableSourceOptions.pas' {TableSourceOptionsDialog},
-  Dlg in '..\..\Common\dialogs\Dlg.pas' {Dialog};
+  Dlg in '..\..\Common\dialogs\Dlg.pas' {Dialog},
+  HistoryEdit in 'dialogs\HistoryEdit.pas' {HistoryEditDialog};
 
 {$R *.res}
 

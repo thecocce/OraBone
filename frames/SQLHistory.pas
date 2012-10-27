@@ -20,15 +20,18 @@ type
     ToolButton1: TToolButton;
     GridPanel: TPanel;
     SQLHistoryStringGrid: TBCStringGrid;
-    BCToolBar1: TBCToolBar;
+    ToolBar2: TBCToolBar;
     ToolButton6: TToolButton;
-    BCToolBar2: TBCToolBar;
+    ToolBar3: TBCToolBar;
     ToolButton7: TToolButton;
     Bevel1: TBevel;
     Bevel2: TBevel;
+    EditHistoryAction: TAction;
+    ToolButton2: TToolButton;
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure CleanUpActionExecute(Sender: TObject);
     procedure RefreshActionExecute(Sender: TObject);
+    procedure EditHistoryActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure ReadSQLHistoryFile;
@@ -44,7 +47,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Lib, Preferences, Common;
+  Main, Lib, Preferences, Common, HistoryEdit;
 
 const
   GRID_COLUMN_DATETIME = 0;
@@ -82,6 +85,30 @@ begin
   ReadSQLHistoryFile;
   SetFields;
   Common.AutoSizeCol(SQLHistoryStringGrid);
+end;
+
+procedure TSQLHistoryFrame.EditHistoryActionExecute(Sender: TObject);
+begin
+  with HistoryEditDialog do
+  try
+    HistoryDate := SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.Row];
+    Schema := SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.Row];
+    SQLStatement := SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row];
+    if Open then
+    begin
+      SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.Row] := HistoryDate;
+      SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.Row] := Schema;
+      SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row] := SQLStatement;
+      SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] :=
+        Copy(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row], 0, 200);
+
+      if Length(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row]) > 200 then
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] :=
+          SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] + '...';
+    end;
+  finally
+    Release;
+  end;
 end;
 
 procedure TSQLHistoryFrame.ReadSQLHistoryFile;

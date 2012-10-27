@@ -2596,9 +2596,13 @@ begin
   SQLHistoryFrame := TSQLHistoryFrame.Create(TabSheet);
   SQLHistoryFrame.Parent := TabSheet;
   SQLHistoryFrame.DoInit;
+  { style repaint fix }
   PageControl.ActivePage := TabSheet;
   PageControl.ActivePage.Repaint;
   PageControl.Repaint;
+  SQLHistoryFrame.ToolBar.Repaint;
+  SQLHistoryFrame.ToolBar2.Repaint;
+  SQLHistoryFrame.ToolBar3.Repaint;
 end;
 
 procedure TMainForm.SQLHistoryActionExecute(Sender: TObject);
