@@ -2983,10 +2983,7 @@ begin
     // date;schema;sql#!ENDSQL!#
     History.Insert(0, Common.EncryptString(DateTimeToStr(Now) + ';' +
                 Lib.FormatSchema(OraSession.Schema + '@' + OraSession.Server) + ';' +
-                SQL + '#!SQLEND!#'));
-    //History.Insert(0, DateTimeToStr(Now) + ';' +
-    //            Common.FormatSchema(FSession.Schema + '@' + FSession.Server) + ';' +
-    //            SQL + '#!SQLEND!#');
+                SQL + END_OF_SQL_STATEMENT));
     History.SaveToFile(GetHistoryFile);
   finally
     History.Free;

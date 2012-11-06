@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin,
+  Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory,
   ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCPageControl,
   AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, JvStatusBar, BCPopupMenu,
   ActnPopup, JvToolBar, BCImageList, Vcl.Themes;
@@ -270,8 +270,8 @@ type
 
     procedure NewConnection(ConnectString: string = ''; SchemaParam: string = '');
     function GetActiveSQLEditor: TSQLEditorFrame;
+    function GetActiveSQLHistory: TSQLHistoryFrame;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
-//    function GetSchemaBrowserByName(Name: string): TSchemaBrowserFrame;
     function OpenSQLEditor(Schema: string; AddNewDocument: Boolean): TSQLEditorFrame;
     procedure OpenSQLHistory;
     procedure NextPage;
@@ -299,7 +299,7 @@ implementation
 
 uses
   About, Common, Lib, Preferences, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
-  SQLHistory, DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData,
+  DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor;
 
 {$R *.dfm}
@@ -318,7 +318,6 @@ end;
 
 procedure TMainForm.SetStyleName(Value: string);
 begin
-  //FStyleName := Value;
   StyleAmakritsAction.Checked := Value = STYLENAME_AMAKRITS;
   StyleAmethystKamriAction.Checked := Value = STYLENAME_AMETHYST_KAMRI;
   StyleAquaGraphiteAction.Checked := Value = STYLENAME_AQUA_GRAPHITE;
@@ -472,6 +471,16 @@ begin
           Result := TSQLEditorFrame(PageControl.ActivePage.Components[0]);
 end;
 
+function TMainForm.GetActiveSQLHistory: TSQLHistoryFrame;
+begin
+  Result := nil;
+  if PageControl.PageCount > 0 then
+    if Assigned(PageControl.ActivePage) then
+      if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_HISTORY then
+        if PageControl.ActivePage.Components[0] is TSQLHistoryFrame then
+          Result := TSQLHistoryFrame(PageControl.ActivePage.Components[0]);
+end;
+
 function TMainForm.GetActiveSchemaBrowser: TSchemaBrowserFrame;
 begin
   Result := nil;
@@ -481,22 +490,6 @@ begin
         if PageControl.ActivePage.Components[0] is TSchemaBrowserFrame then
           Result := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
 end;
-
-{function TMainForm.GetSchemaBrowserByName(Name: string): TSchemaBrowserFrame;
-var
-  i: Integer;
-begin
-  Result := nil;
-  if PageControl.PageCount > 0 then
-    for i := 0 to PageControl.PageCount - 1 do
-      if PageControl.Pages[i].Caption = Name then
-        if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-          if PageControl.Pages[i].Components[0] is TSchemaBrowserFrame then
-          begin
-            Result := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
-            Break;
-          end;
-end; }
 
 procedure TMainForm.SchemaDocumentActionExecute(Sender: TObject);
 var
@@ -1041,178 +1034,6 @@ begin
     Free;
   end;
 end;
- (*
-procedure ConvertConnections(Value: string);
-var
-  i: Integer;
-  Connections: TStrings;
-begin
-  Connections := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    { read }
-    ReadSectionValues(Value, Connections);
-    for i := 0 to Connections.Count - 1 do
-    begin
-      Application.ProcessMessages;
-      Connections.Strings[i] := Common.OldDecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])), OLD_CRYPT_KEY);
-    end;
-  finally
-     Free;
-  end;
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    { write }
-    EraseSection(Value);
-    for i := 0 to Connections.Count - 1 do
-    begin
-      Application.ProcessMessages;
-      WriteString(Value, IntToStr(i), Common.EncryptString(Connections.Strings[i]));
-    end;
-  finally
-     Connections.Free;
-     Free;
-  end;
-end;
-
-procedure ConvertSQL(Value: string; MakeConversion: Boolean = False);
-var
-  i: Integer;
-  SQLStrings: TStrings;
-  IniKey, IniValue: string;
-begin
-  SQLStrings := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    { read }
-    ReadSectionValues(Value, SQLStrings);
-    for i := 0 to SQLStrings.Count - 1 do
-    begin
-      Application.ProcessMessages;
-      SQLStrings.Strings[i] := Common.OldDecryptString(System.Copy(SQLStrings.Strings[i], 0, Pos('=', SQLStrings.Strings[i]) - 1), OLD_CRYPT_KEY) + '=' +
-        Common.OldDecryptString(System.Copy(SQLStrings.Strings[i], Pos('=', SQLStrings.Strings[i]) + 1, Length(SQLStrings.Strings[i])), OLD_CRYPT_KEY);
-    end;
-  finally
-    Free;
-  end;
-  with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    { write }
-    EraseSection(Value);
-    for i := 0 to SQLStrings.Count - 1 do
-    begin
-      Application.ProcessMessages;
-
-      IniKey := System.Copy(SQLStrings.Strings[i], 0, Pos('=', SQLStrings.Strings[i]) - 1);
-      IniValue := System.Copy(SQLStrings.Strings[i], Pos('=', SQLStrings.Strings[i]) + 1, Length(SQLStrings.Strings[i]));
-
-      if MakeConversion then
-      begin
-        if Pos(':CURRENT', IniKey) <> 0 then
-        begin
-          IniValue := Copy(IniKey, Pos(':$', IniKey) + 2, Length(IniKey));
-          IniValue := Copy(IniValue, 0, Pos('=', IniValue) - 1);
-          IniKey := Copy(IniKey, 0, Pos(':$', IniKey) - 1);
-        end
-        else
-          IniKey := StringReplace(IniKey, '$', '', [rfReplaceAll]);
-      end;
-      WriteString(Value, Common.EncryptString(IniKey), Common.EncryptString(IniValue));
-    end;
-  finally
-     SQLStrings.Free;
-     Free;
-  end;
-end;
-
-procedure ConvertSQLParameters;
-begin
-  ConvertSQL('SQLParameters');
-end;
-
-procedure ConvertSQLFilters;
-begin
-  ConvertSQL('SQLFilters', True);
-end;
-
-procedure ConvertSQLSorts;
-begin
-  ConvertSQL('SQLSorts', True);
-end;
-
-procedure ConvertSchemaFilters;
-begin
-  ConvertSQL('SchemaFilters' );
-end;
-
-procedure ConvertSQLHistory;
-var
-  i: Integer;
-  EndOfFile: string;
-  History, NewHistory: TStrings;
-begin
-  EndOfFile := '#!SQLEND!#';
-  if FileExists(GetHistoryFile) then
-  begin
-    History := TStringList.Create;
-    NewHistory := TStringList.Create;
-    with History do
-    try
-      LoadFromFile(GetHistoryFile);
-      for i := 0 to History.Count - 1 do
-      begin
-        Application.ProcessMessages;
-        History.Strings[i] := Common.EncryptString(Common.OldDecryptString(History.Strings[i], OLD_CRYPT_KEY));
-      end;
-      History.SaveToFile(GetHistoryFile);
-    finally
-      Free;
-      NewHistory.Free;
-    end;
-  end;
-end;
-
-procedure UpdateINIFile;
-var
-  i: Integer;
-  SynEdit: TSynEdit;
-  Filename: string;
-begin
-  {
-  [Customize_ => [Customize
-  Default_ => Default
-  }
-  Filename := Common.GetINIFilename;
-  if FileExists(Filename) then
-  begin
-    SynEdit := TSynEdit.Create(nil);
-    try
-      SynEdit.Lines.LoadFromFile(Filename);
-      for i := 0 to SynEdit.Lines.Count - 1 do
-      begin
-        if Pos('[Customize_', SynEdit.Lines.Strings[i]) <> 0 then
-          SynEdit.Lines.Strings[i] := StringReplace(SynEdit.Lines.Strings[i], '[Customize_', '[Customize', []);
-        if Pos('Default_', SynEdit.Lines.Strings[i]) <> 0 then
-          SynEdit.Lines.Strings[i] := StringReplace(SynEdit.Lines.Strings[i], 'Default_', 'Default', []);
-      end;
-      SynEdit.Lines.SaveToFile(Filename);
-    finally
-      SynEdit.Free;
-    end;
-  end;
-end;
-
-procedure ConvertSettings;
-begin
-  UpdateINIFile;
-  ConvertConnections('Connections');
-  ConvertConnections('OpenConnections');
-  ConvertSQLHistory;
-  ConvertSQLParameters;
-  ConvertSQLFilters;
-  ConvertSQLSorts;
-  ConvertSchemaFilters;
-end; *)
 
 procedure TMainForm.ReadIniFile;
 var
@@ -1228,18 +1049,6 @@ begin
   SQLSorts := TStringList.Create;
 
   PageControl.Enabled := False;
-  {with TBigIniFile.Create(Common.GetINIFilename) do
-  try
-    Version := ReadString('OraBone', 'Version', '');
-  finally
-    Free;
-  end;
-
-  {if (Version = '1.1') or (Version = '') then
-  begin
-    ProgressDialog(Self).InformationText := 'Converting settings for version 1.2.';
-    ConvertSettings;
-  end; }
 
   with TBigIniFile.Create(Common.GetINIFilename) do
   try
@@ -1249,7 +1058,6 @@ begin
       ProgressDialog(Self).Open(0, 1, False, True);
     for i := 0 to j - 1 do
     begin
-      //ProgressDialog.ProgressPosition := i + 1;
       ConnectString := Common.DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
 
       SchemaParam := '';
@@ -1264,33 +1072,18 @@ begin
 
     ReadSectionValues('SQLParameters', SQLParameters);
     j := SQLParameters.Count;
-   // ProgressDialog.SetRange(0, j);
     for i := 0 to j - 1 do
-    begin
-      //Parameter := Common.DecryptString(System.Copy(SQLParameters.Strings[i], 0, Pos('=', SQLParameters.Strings[i]) - 1)) + '=' +
-      //  Common.DecryptString(System.Copy(SQLParameters.Strings[i], Pos('=', SQLParameters.Strings[i]) + 1, Length(SQLParameters.Strings[i])));
-      ParametersDialog.ValuesList.Strings.Add(SQLParameters.Strings[i]); //Parameter);
-    end;
+      ParametersDialog.ValuesList.Strings.Add(SQLParameters.Strings[i]);
 
     ReadSectionValues('SQLFilters', SQLFilters);
     j := SQLFilters.Count;
-    //ProgressDialog.SetRange(0, j);
     for i := 0 to j - 1 do
-    begin
-      //Parameter := Common.DecryptString(System.Copy(SQLFilters.Strings[i], 0, Pos('=', SQLFilters.Strings[i]) - 1)) + '=' +
-      //  Common.DecryptString(System.Copy(SQLFilters.Strings[i], Pos('=', SQLFilters.Strings[i]) + 1, Length(SQLFilters.Strings[i])));
-      DataFilterDialog.ValuesList.Strings.Add(SQLFilters.Strings[i]); //Parameter);
-    end;
+      DataFilterDialog.ValuesList.Strings.Add(SQLFilters.Strings[i]);
 
     ReadSectionValues('SQLSorts', SQLSorts);
     j := SQLSorts.Count;
-    //ProgressDialog.SetRange(0, j);
     for i := 0 to j - 1 do
-    begin
-      //Parameter := Common.DecryptString(System.Copy(SQLSorts.Strings[i], 0, Pos('=', SQLSorts.Strings[i]) - 1)) + '=' +
-      //  Common.DecryptString(System.Copy(SQLSorts.Strings[i], Pos('=', SQLSorts.Strings[i]) + 1, Length(SQLSorts.Strings[i])));
-      DataSortDialog.ValuesList.Strings.Add(SQLSorts.Strings[i]); //Parameter);
-    end;
+      DataSortDialog.ValuesList.Strings.Add(SQLSorts.Strings[i]);
   finally
     Connections.Free;
     SQLParameters.Free;
@@ -1715,7 +1508,6 @@ begin
   Rslt := mrNone;
   PageIndex := PageControl.ActivePage.PageIndex;
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-    //DatabaseEndConnectionMenuActionExecute(Sender)
     Rslt := EndConnection(Confirm)
   else
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
@@ -2307,9 +2099,11 @@ procedure TMainForm.EditSelectAllActionExecute(Sender: TObject);
 var
   SchemaBrowserFrame: TSchemaBrowserFrame;
   SQLEditorFrame: TSQLEditorFrame;
+  SQLHistoryFrame: TSQLHistoryFrame;
   Grid: TBCDBGrid;
 begin
   SchemaBrowserFrame := GetActiveSchemaBrowser;
+  SQLEditorFrame := GetActiveSQLEditor;
 
   if Assigned(SchemaBrowserFrame) then
   begin
@@ -2384,19 +2178,22 @@ begin
     end
   end
   else
+  { sql data }
+  if Assigned(SQLEditorFrame) then
   begin
-    { sql data }
-    SQLEditorFrame := GetActiveSQLEditor;
-    if Assigned(SQLEditorFrame) then
-    begin
-      Grid := nil;
-      if Assigned(SQLEditorFrame.OutputFrame) then
-        Grid := SQLEditorFrame.OutputFrame.GetActiveGrid;
-      if Assigned(Grid) and Grid.Focused then
-        Grid.SelectedRows.SelectAll //Selection.SelectAll
-      else
-        SQLEditorFrame.ActiveSynEdit.SelectAll
-    end;
+    Grid := nil;
+    if Assigned(SQLEditorFrame.OutputFrame) then
+      Grid := SQLEditorFrame.OutputFrame.GetActiveGrid;
+    if Assigned(Grid) and Grid.Focused then
+      Grid.SelectedRows.SelectAll //Selection.SelectAll
+    else
+      SQLEditorFrame.ActiveSynEdit.SelectAll
+  end
+  else
+  begin
+    SQLHistoryFrame := GetActiveSQLHistory;
+    if Assigned(SQLHistoryFrame) then
+      SQLHistoryFrame.SelectAll;
   end;
 end;
 

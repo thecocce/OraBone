@@ -15,6 +15,7 @@ uses
 const
   OLD_CRYPT_KEY = '0129ABCDEFGHIJKQRSTUbcdijklmnstxyz';
   CAPTION_ERRORS = 'Errors';
+  END_OF_SQL_STATEMENT = '#!SQLEND!#';
 
   { Sql editor output }
   IMAGE_INDEX_FIND_IN_FILES = 0;

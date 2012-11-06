@@ -107,7 +107,6 @@ object SQLHistoryFrame: TSQLHistoryFrame
       Height = 279
       Hint = ' '
       Align = alClient
-      ColCount = 4
       DefaultColWidth = 130
       DefaultRowHeight = 17
       DoubleBuffered = False
@@ -123,6 +122,14 @@ object SQLHistoryFrame: TSQLHistoryFrame
       FixedFont.Height = -11
       FixedFont.Name = 'Tahoma'
       FixedFont.Style = []
+      BooleanCols.Strings = (
+        '0')
+      ColWidths = (
+        22
+        130
+        130
+        130
+        130)
     end
   end
   object ActionList: TActionList
@@ -157,7 +164,7 @@ object SQLHistoryFrame: TSQLHistoryFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010104000E009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000E00A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

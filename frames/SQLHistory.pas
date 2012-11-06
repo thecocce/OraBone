@@ -35,11 +35,16 @@ type
   private
     { Private declarations }
     procedure ReadSQLHistoryFile;
+    procedure WriteSQLHistoryFile;
     procedure SetFields;
+    function AllRowsSelected: Boolean;
+    function RowsSelected: Boolean;
+    procedure RemoveSelectedRows;
   public
     { Public declarations }
     procedure DoInit;
     procedure AssignPreferences;
+    procedure SelectAll;
   end;
 
 implementation
@@ -50,10 +55,11 @@ uses
   Main, Lib, Preferences, Common, HistoryEdit;
 
 const
-  GRID_COLUMN_DATETIME = 0;
-  GRID_COLUMN_SCHEMA = 1;
-  GRID_COLUMN_SQL_STATEMENT = 2;
-  GRID_COLUMN_SQL = 3;
+  GRID_COLUMN_BOOLEAN = 0;
+  GRID_COLUMN_DATETIME = 1;
+  GRID_COLUMN_SCHEMA = 2;
+  GRID_COLUMN_SQL_STATEMENT = 3;
+  GRID_COLUMN_SQL = 4;
 
 procedure TSQLHistoryFrame.SQLEditorActionExecute(Sender: TObject);
 begin
@@ -70,12 +76,78 @@ begin
     ToolBar.Align := alTop;
 end;
 
+function TSQLHistoryFrame.AllRowsSelected: Boolean;
+var
+  i: Integer;
+begin
+  Result := True;
+  for i := 1 to SQLHistoryStringGrid.RowCount - 1 do
+    if SQLHistoryStringGrid.Cells[GRID_COLUMN_BOOLEAN, i] = 'False' then
+    begin
+      Result := False;
+      Break;
+    end;
+end;
+
+function TSQLHistoryFrame.RowsSelected: Boolean;
+var
+  i: Integer;
+begin
+  Result := False;
+  for i := 1 to SQLHistoryStringGrid.RowCount - 1 do
+    if SQLHistoryStringGrid.Cells[GRID_COLUMN_BOOLEAN, i] = 'True' then
+    begin
+      Result := True;
+      Break;
+    end;
+end;
+
+procedure TSQLHistoryFrame.SelectAll;
+var
+  i: Integer;
+begin
+  for i := 1 to SQLHistoryStringGrid.RowCount - 1 do
+    SQLHistoryStringGrid.Cells[GRID_COLUMN_BOOLEAN, i] := 'True';
+end;
+
+procedure TSQLHistoryFrame.RemoveSelectedRows;
+var
+  i: Integer;
+begin
+  i := 1;
+  while i < SQLHistoryStringGrid.RowCount do
+  begin
+    if SQLHistoryStringGrid.Cells[GRID_COLUMN_BOOLEAN, i] = 'True' then
+      SQLHistoryStringGrid.RemoveRow(i)
+    else
+      Inc(i);
+  end;
+end;
+
 procedure TSQLHistoryFrame.CleanUpActionExecute(Sender: TObject);
 begin
   if CleanUpAction.Enabled then
   begin
-    System.SysUtils.DeleteFile(Lib.GetHistoryFile);
-    DoInit;
+    if AllRowsSelected then
+    begin
+      if Common.AskYesOrNo('Clean SQL history, are you sure?') then
+      begin
+        System.SysUtils.DeleteFile(Lib.GetHistoryFile);
+        DoInit;
+      end;
+    end
+    else
+    if RowsSelected then
+    begin
+      if Common.AskYesOrNo('Clean selected row(s) from SQL history, are you sure?') then
+      begin
+        RemoveSelectedRows;
+        WriteSQLHistoryFile;
+        DoInit;
+      end;
+    end
+    else
+      Common.ShowMessage('Select rows to clean. Select all with Ctrl + A.');
   end;
 end;
 
@@ -84,7 +156,7 @@ begin
   SQLHistoryStringGrid.HideCol(GRID_COLUMN_SQL);
   ReadSQLHistoryFile;
   SetFields;
-  Common.AutoSizeCol(SQLHistoryStringGrid);
+  Common.AutoSizeCol(SQLHistoryStringGrid, 1);
 end;
 
 procedure TSQLHistoryFrame.EditHistoryActionExecute(Sender: TObject);
@@ -96,18 +168,41 @@ begin
     SQLStatement := SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row];
     if Open then
     begin
-      SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.Row] := HistoryDate;
-      SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.Row] := Schema;
-      SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row] := SQLStatement;
-      SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] :=
-        Copy(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row], 0, 200);
-
-      if Length(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row]) > 200 then
+      if Common.AskYesOrNo('Save changes?') then
+      begin
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.Row] := HistoryDate;
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.Row] := Schema;
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row] := SQLStatement;
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] :=
-          SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] + '...';
+          Copy(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row], 0, 200);
+
+        if Length(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row]) > 200 then
+          SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] :=
+            SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.Row] + '...';
+        WriteSQLHistoryFile;
+      end;
     end;
   finally
     Release;
+  end;
+end;
+
+procedure TSQLHistoryFrame.WriteSQLHistoryFile;
+var
+  i: Integer;
+  History: TStringList;
+begin
+  History := TStringList.Create;
+  try
+    // date;schema;sql#!ENDSQL!#
+    for i := 1 to SQLHistoryStringGrid.RowCount - 1 do
+      History.Add(Common.EncryptString(
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, i] + ';' +
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, i] + ';' +
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, i] + END_OF_SQL_STATEMENT));
+    History.SaveToFile(GetHistoryFile);
+  finally
+    History.Free;
   end;
 end;
 
@@ -125,16 +220,12 @@ begin
     History := TStringList.Create;
     History.LoadFromFile(GetHistoryFile);
     for i := 0 to History.Count - 1 do
-    begin
-      //Application.ProcessMessages;
       History.Strings[i] := Common.DecryptString(History.Strings[i]);
-    end;
     try
       i := 0;
       while i < History.Count do
       begin
-        //Application.ProcessMessages;
-        //s := Common.DecryptString(History.Strings[i], CRYPT_KEY);
+        SQLHistoryStringGrid.Cells[GRID_COLUMN_BOOLEAN, SQLHistoryStringGrid.RowCount - 1] := 'False';
         s := History.Strings[i];
         SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.RowCount - 1] :=
           Copy(s, 0, Pos(';', s) - 1);
@@ -142,16 +233,16 @@ begin
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.RowCount - 1] :=
           Lib.FormatSchema(Copy(s, 0, Pos(';', s) - 1));
         s := Copy(s, Pos(';', s) + 1, Length(s));
-        while Pos('#!SQLEND!#', s) = 0 do
+        while Pos(END_OF_SQL_STATEMENT, s) = 0 do
         begin
           SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.RowCount - 1] :=
              SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.RowCount - 1] + s + ' ';
           Inc(i);
-          s := History.Strings[i]; //Common.DecryptString(History.Strings[i], CRYPT_KEY);
+          s := History.Strings[i];
         end;
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.RowCount - 1] :=
           SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.RowCount - 1] +
-          Copy(s, 0, Pos('#!SQLEND!#', s) - 1);
+          Copy(s, 0, Pos(END_OF_SQL_STATEMENT, s) - 1);
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL_STATEMENT, SQLHistoryStringGrid.RowCount - 1] :=
           Copy(SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.RowCount - 1], 0, 200);
 

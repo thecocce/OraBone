@@ -93,18 +93,19 @@ object ConnectListDialog: TConnectListDialog
     Left = 0
     Top = 28
     Width = 428
-    Height = 334
+    Height = 353
     Align = alClient
     BevelOuter = bvNone
     Padding.Left = 6
     Padding.Top = 3
     Padding.Right = 6
     TabOrder = 1
+    ExplicitHeight = 334
     object DirectConnectionsStringGrid: TBCStringGrid
       Left = 6
       Top = 3
       Width = 416
-      Height = 331
+      Height = 350
       Align = alClient
       ColCount = 4
       DefaultColWidth = 130
@@ -123,12 +124,13 @@ object ConnectListDialog: TConnectListDialog
       FixedFont.Height = -11
       FixedFont.Name = 'Tahoma'
       FixedFont.Style = []
+      ExplicitHeight = 331
     end
     object ClientConnectionsStringGrid: TBCStringGrid
       Left = 6
       Top = 3
       Width = 416
-      Height = 331
+      Height = 350
       Align = alClient
       ColCount = 4
       DefaultColWidth = 130
@@ -148,11 +150,12 @@ object ConnectListDialog: TConnectListDialog
       FixedFont.Height = -11
       FixedFont.Name = 'Tahoma'
       FixedFont.Style = []
+      ExplicitHeight = 331
     end
   end
   object BottomPanel: TPanel
     Left = 0
-    Top = 362
+    Top = 381
     Width = 428
     Height = 37
     Align = alBottom
@@ -162,6 +165,7 @@ object ConnectListDialog: TConnectListDialog
     Padding.Right = 6
     Padding.Bottom = 6
     TabOrder = 2
+    ExplicitTop = 362
     object ConnectButton: TButton
       Left = 266
       Top = 6
@@ -204,13 +208,6 @@ object ConnectListDialog: TConnectListDialog
       BevelOuter = bvNone
       TabOrder = 2
     end
-  end
-  object JvStatusBar1: TJvStatusBar
-    Left = 0
-    Top = 399
-    Width = 428
-    Height = 19
-    Panels = <>
   end
   object ActionManager: TActionManager
     ActionBars = <
@@ -267,7 +264,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000800BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000035A0500035A0500035A

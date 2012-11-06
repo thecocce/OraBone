@@ -28,7 +28,6 @@ type
     ConnectAction: TAction;
     ModeClickAction: TAction;
     EditConnectionAction: TAction;
-    JvStatusBar1: TJvStatusBar;
     Separator1Panel: TPanel;
     DirectConnectionsStringGrid: TBCStringGrid;
     procedure ConnectActionExecute(Sender: TObject);
