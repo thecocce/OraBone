@@ -60,7 +60,7 @@ type
     function Edit: Integer;
   end;
 
-function ConnectClientDialog: TConnectClientDialog;
+function ConnectClientDialog(AOwner: TComponent): TConnectClientDialog;
 
 implementation
 
@@ -72,10 +72,10 @@ uses
 var
   FConnectClientDialog: TConnectClientDialog;
 
-function ConnectClientDialog: TConnectClientDialog;
+function ConnectClientDialog(AOwner: TComponent): TConnectClientDialog;
 begin
   if FConnectClientDialog = nil then
-    Application.CreateForm(TConnectClientDialog, FConnectClientDialog);
+    FConnectClientDialog := TConnectClientDialog.Create(AOwner);
   Result := FConnectClientDialog;
   Common.SetStyledFormSize(Result);
 end;

@@ -14,7 +14,7 @@ object ConnectClientDialog: TConnectClientDialog
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = True
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
@@ -215,6 +215,7 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Align = alRight
       CharCase = ecUpperCase
+      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       EditColor = clInfoBk
@@ -257,6 +258,7 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Hint = 'Home'
       Align = alRight
+      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       OnKeyPress = HomeComboBoxKeyPress

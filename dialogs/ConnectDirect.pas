@@ -70,7 +70,7 @@ type
     function Edit: Integer;
   end;
 
-function ConnectDirectDialog: TConnectDirectDialog;
+function ConnectDirectDialog(AOwner: TComponent): TConnectDirectDialog;
 
 implementation
 
@@ -82,10 +82,10 @@ uses
 var
   FConnectDirectDialog: TConnectDirectDialog;
 
-function ConnectDirectDialog: TConnectDirectDialog;
+function ConnectDirectDialog(AOwner: TComponent): TConnectDirectDialog;
 begin
   if FConnectDirectDialog = nil then
-    Application.CreateForm(TConnectDirectDialog, FConnectDirectDialog);
+    FConnectDirectDialog := TConnectDirectDialog.Create(AOwner);
   Result := FConnectDirectDialog;
   Common.SetStyledFormSize(Result);
 end;

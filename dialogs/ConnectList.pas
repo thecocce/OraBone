@@ -71,18 +71,19 @@ var
   Database: string;
 begin
   if ClientModeRadioButton.Checked then
-    if ConnectClientDialog.Open(FConnectDialog) = mrOk then
+    with ConnectClientDialog(Self) do
+    if Open(FConnectDialog) = mrOk then
     begin
       ClientConnectionsStringGrid.RowCount := ClientConnectionsStringGrid.RowCount + 1;
 
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, ClientConnectionsStringGrid.RowCount - 1] :=
-        ConnectClientDialog.Username;
+        Username;
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, ClientConnectionsStringGrid.RowCount - 1] :=
-        ConnectClientDialog.Database;
+        Database;
       { Client: schema/password@database }
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, ClientConnectionsStringGrid.RowCount - 1] :=
-        ConnectClientDialog.Username + '/' + ConnectClientDialog.Password + '@' + ConnectClientDialog.Database;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, ClientConnectionsStringGrid.RowCount - 1] := ConnectClientDialog.HomeName;
+        Username + '/' + Password + '@' + Database;
+      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, ClientConnectionsStringGrid.RowCount - 1] := HomeName;
       if ClientConnectionsStringGrid.RowCount > 2 then
         ClientConnectionsStringGrid.SortGrid(0);
       WriteConnectionsToIniFile;
@@ -90,26 +91,26 @@ begin
     end;
 
   if DirectModeRadioButton.Checked then
-    if ConnectDirectDialog.Open(FConnectDialog) = mrOk then
+    with ConnectDirectDialog(Self) do
+    if Open(FConnectDialog) = mrOk then
     begin
       DirectConnectionsStringGrid.RowCount := DirectConnectionsStringGrid.RowCount + 1;
 
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, DirectConnectionsStringGrid.RowCount - 1] :=
-        ConnectDirectDialog.Username;
+        Username;
       { Direct: schema/password@host:port:sid=sid/sn=service name }
-      Database := ConnectDirectDialog.Username + '/' + ConnectDirectDialog.Password + '@' +
-        ConnectDirectDialog.Host + ':' + ConnectDirectDialog.Port + ':';
-      if ConnectDirectDialog.SID <> '' then
+      Database := Username + '/' + Password + '@' + Host + ':' + Port + ':';
+      if SID <> '' then
       begin
-        Database := Database + 'sid=' + ConnectDirectDialog.SID;
+        Database := Database + 'sid=' + SID;
         DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, DirectConnectionsStringGrid.RowCount - 1] :=
-          ConnectDirectDialog.SID;
+          SID;
       end
       else
       begin
-        Database := Database + 'sn=' + ConnectDirectDialog.ServiceName;
+        Database := Database + 'sn=' + ServiceName;
         DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, DirectConnectionsStringGrid.RowCount - 1] :=
-          ConnectDirectDialog.ServiceName;
+          ServiceName;
       end;
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, DirectConnectionsStringGrid.RowCount - 1] :=
         Database;
@@ -332,57 +333,57 @@ var
   s: string;
 begin
   if ClientModeRadioButton.Checked then
+  with ConnectClientDialog(Self) do
   begin
     i := ClientConnectionsStringGrid.Row;
-    ConnectClientDialog.Username := ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
-    ConnectClientDialog.Database := ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i];
+    Username := ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
+    Database := ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i];
     s := ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i];
     s := Copy(s, Pos('/', s) + 1, Length(s));
-    ConnectClientDialog.Password := Copy(s, 0, Pos('@', s) - 1);
-    ConnectClientDialog.HomeName := ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i];
-    if ConnectClientDialog.Edit = mrOk then
+    Password := Copy(s, 0, Pos('@', s) - 1);
+    HomeName := ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i];
+    if Edit = mrOk then
     begin
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] := ConnectClientDialog.Username;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ConnectClientDialog.Database;
+      ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] := Username;
+      ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := Database;
       { Client: schema/password@database }
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] :=
-        ConnectClientDialog.Username + '/' + ConnectClientDialog.Password + '@' + ConnectClientDialog.Database;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i] := ConnectClientDialog.HomeName;
+      ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := Username + '/' + Password + '@' + Database;
+      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i] := HomeName;
       WriteIniFile;
     end;
   end;
   if DirectModeRadioButton.Checked then
+  with ConnectDirectDialog(Self) do
   begin
     i := DirectConnectionsStringGrid.Row;
-    ConnectDirectDialog.Username := DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
+    Username := DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
     s := DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i];
     s := Copy(s, Pos('/', s) + 1, Length(s));
-    ConnectDirectDialog.Password := Copy(s, 0, Pos('@', s) - 1);
+    Password := Copy(s, 0, Pos('@', s) - 1);
     s := Copy(s, Pos('@', s) + 1, Length(s));
-    ConnectDirectDialog.Host :=  Copy(s, 0, Pos(':', s) - 1);
+    Host :=  Copy(s, 0, Pos(':', s) - 1);
     s := Copy(s, Pos(':', s) + 1, Length(s));
-    ConnectDirectDialog.Port :=  Copy(s, 0, Pos(':', s) - 1);
+    Port :=  Copy(s, 0, Pos(':', s) - 1);
     s := Copy(s, Pos(':', s) + 1, Length(s));
     if Pos('sid=', s) <> 0 then
-      ConnectDirectDialog.SID := Copy(s, 5, Length(s));
+      SID := Copy(s, 5, Length(s));
     if Pos('sn=', s) <> 0 then
-      ConnectDirectDialog.ServiceName := Copy(s, 4, Length(s));
-    if ConnectDirectDialog.Edit = mrOk then
+      ServiceName := Copy(s, 4, Length(s));
+    if Edit = mrOk then
     begin
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] :=
-        ConnectDirectDialog.Username;
+        Username;
       { Direct: schema/password@host:port:sid=sid/sn=service name }
-      s := ConnectDirectDialog.Username + '/' + ConnectDirectDialog.Password + '@' +
-        ConnectDirectDialog.Host + ':' + ConnectDirectDialog.Port + ':';
-      if ConnectDirectDialog.SID <> '' then
+      s := Username + '/' + Password + '@' + Host + ':' + Port + ':';
+      if ConnectDirectDialog(Self).SID <> '' then
       begin
-        s := s + 'sid=' + ConnectDirectDialog.SID;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ConnectDirectDialog.SID;
+        s := s + 'sid=' + SID;
+        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := SID;
       end
       else
       begin
-        s := s + 'sn=' + ConnectDirectDialog.ServiceName;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ConnectDirectDialog.ServiceName;
+        s := s + 'sn=' + ServiceName;
+        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ServiceName;
       end;
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := s;
       WriteIniFile;
@@ -396,34 +397,10 @@ begin
 end;
 
 procedure TConnectListDialog.ShowHideByMode;
-//var
-//  i: Integer;
 begin
   ClientConnectionsStringGrid.Visible := ClientModeRadioButton.Checked;
   DirectConnectionsStringGrid.Visible := DirectModeRadioButton.Checked;
 end;
-  (*for i := 1 to ConnectionsStringGrid.RowCount - 1 do
-  begin
-    ConnectionsStringGrid.RowHeights[i] := 17; //ShowRow(i, 17);
-    if ClientModeRadioButton.Checked then
-    begin
-      if (Pos(':', ConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i]) <> 0) or
-        (ConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] = '') then
-      begin
-        ConnectionsStringGrid.RowHeights[i] := 0; // HideRow(i);
-      end
-    end
-    else
-    if DirectModeRadioButton.Checked then
-    begin
-      if (Pos(':', ConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i]) = 0) or
-        (ConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] = '') then
-      begin
-        ConnectionsStringGrid.RowHeights[i] := 0; //HideRow(i);
-      end;
-    end
-  end; *
-end;   *)
 
 procedure TConnectListDialog.ModeClickActionExecute(Sender: TObject);
 begin

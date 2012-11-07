@@ -13,7 +13,7 @@ object ConnectDirectDialog: TConnectDirectDialog
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = True
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96

@@ -47,7 +47,7 @@ object DM: TDM
             '       DECODE(compression, '#39'ENABLED'#39', '#39'COMPRESS'#39', '#39'NOCOMPRESS'#39') ' +
             'compression,'
           '       DECODE(cache, '#39'Y'#39', '#39'CACHE'#39', '#39'NOCACHE'#39') cache,'
-          '       DECODE(degree, 1, '#39'NOPARALLEL'#39', '#39'PARALLEL'#39') parallel,'
+          '       DECODE(degree, '#39'1'#39', '#39'NOPARALLEL'#39', '#39'PARALLEL'#39') parallel,'
           
             '       DECODE(monitoring, '#39'YES'#39', '#39'MONITORING'#39', '#39'NOMONITORING'#39') m' +
             'onitoring'
@@ -123,6 +123,21 @@ object DM: TDM
           '    FROM all_indexes'
           '   WHERE owner = :P_SCHEMA'
           '  %s')
+      end
+      item
+        Name = 'IndexParametersSQL'
+        Strings.Strings = (
+          
+            'SELECT tablespace_name, pct_free, ini_trans, max_trans, initial_' +
+            'extent,'
+          '       next_extent,'
+          
+            '       min_extents, max_extents, NVL(pct_increase, 0) pct_increa' +
+            'se, buffer_pool,'
+          '       DECODE(degree, '#39'1'#39', '#39'NOPARALLEL'#39', '#39'PARALLEL'#39') parallel'
+          '  FROM all_indexes'
+          ' WHERE owner = :P_OWNER'
+          '   AND table_name = :P_TABLE_NAME')
       end
       item
         Name = 'SequencesSQL'
