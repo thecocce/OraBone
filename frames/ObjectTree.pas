@@ -1718,8 +1718,5 @@ begin
   FEdit.BoundsRect := R;
 end;
 
-initialization
-  TStyleManager.Engine.RegisterStyleHook(TBaseVirtualTree, TVirtualTreeStyleHook);
-
 end.
 

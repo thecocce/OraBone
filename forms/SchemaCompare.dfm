@@ -36,10 +36,6 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema1TabSheet: TTabSheet
       Caption = '<select schema>'
       ImageIndex = 24
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Schema1Panel: TPanel
         Left = 0
         Top = 0
@@ -58,6 +54,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Width = 603
           Height = 338
           Align = alClient
+          BorderWidth = 1
           Ctl3D = True
           DragOperations = []
           Header.AutoSizeIndex = 1
@@ -68,7 +65,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Header.Font.Name = 'Tahoma'
           Header.Font.Style = []
           Header.Height = 20
-          Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs]
+          Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible]
           Images = TreeImageList
           IncrementalSearch = isAll
           Indent = 16
@@ -92,7 +89,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 298
+              Width = 292
               WideText = 'Difference'
             end>
         end
@@ -101,10 +98,6 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema2TabSheet: TTabSheet
       Caption = '<select schema>'
       ImageIndex = 24
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Schema2Panel: TPanel
         Left = 0
         Top = 0
@@ -123,6 +116,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Width = 603
           Height = 338
           Align = alClient
+          BorderWidth = 1
           Ctl3D = True
           DragOperations = []
           Header.AutoSizeIndex = 1
@@ -133,7 +127,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Header.Font.Name = 'Tahoma'
           Header.Font.Style = []
           Header.Height = 20
-          Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs]
+          Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible]
           Images = TreeImageList
           IncrementalSearch = isAll
           Indent = 16
@@ -157,7 +151,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 298
+              Width = 292
               WideText = 'Difference'
             end>
         end
@@ -186,8 +180,6 @@ object SchemaCompareForm: TSchemaCompareForm
       Step = 1
       TabOrder = 0
       Visible = False
-      ExplicitLeft = 3
-      ExplicitTop = 3
     end
   end
   object SchemasGroupBox: TGroupBox
@@ -416,7 +408,7 @@ object SchemaCompareForm: TSchemaCompareForm
     Left = 140
     Top = 276
     Bitmap = {
-      494C01011900E000700210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011900E000740210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

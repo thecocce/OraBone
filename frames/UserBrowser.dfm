@@ -110,6 +110,7 @@ object UserBrowserFrame: TUserBrowserFrame
           Width = 441
           Height = 253
           Align = alClient
+          BorderWidth = 1
           Ctl3D = True
           DragOperations = []
           Header.AutoSizeIndex = 0
@@ -121,11 +122,11 @@ object UserBrowserFrame: TUserBrowserFrame
           Header.Font.Style = []
           Header.Height = 20
           Header.Images = ImageList
-          Header.Options = [hoColumnResize, hoShowSortGlyphs]
+          Header.Options = [hoColumnResize, hoShowSortGlyphs, hoVisible]
           Images = ImageList
           ParentCtl3D = False
           TabOrder = 0
-          TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoChangeScale, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes]
+          TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
           TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
           TreeOptions.PaintOptions = [toHideFocusRect, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages, toUseBlendedSelection, toFixedIndent]
           TreeOptions.SelectionOptions = [toFullRowSelect]
@@ -277,7 +278,6 @@ object UserBrowserFrame: TUserBrowserFrame
     end
   end
   object UserQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT '#39'User id'#39' "Field", TO_CHAR(user_id) "Value"'
       '  FROM dba_users'
@@ -375,7 +375,7 @@ object UserBrowserFrame: TUserBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000E00780110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E007C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
@@ -648,7 +648,6 @@ object UserBrowserFrame: TUserBrowserFrame
   end
   object RolesQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT grantee, granted_role, admin_option, default_role'
       '  FROM dba_role_privs'
@@ -691,7 +690,6 @@ object UserBrowserFrame: TUserBrowserFrame
   end
   object PrivilegesQuery: TOraQuery
     LocalUpdate = True
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT grantee, privilege, grantor, owner, table_name'
       '  FROM dba_tab_privs'

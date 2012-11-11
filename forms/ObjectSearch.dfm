@@ -149,6 +149,7 @@ object ObjectSearhForm: TObjectSearhForm
       Width = 603
       Height = 383
       Align = alClient
+      BorderWidth = 1
       Ctl3D = True
       DragOperations = []
       Header.AutoSizeIndex = 1
@@ -159,7 +160,7 @@ object ObjectSearhForm: TObjectSearhForm
       Header.Font.Name = 'Tahoma'
       Header.Font.Style = []
       Header.Height = 20
-      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs]
+      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible]
       Images = TreeImageList
       IncrementalSearch = isAll
       Indent = 16
@@ -185,7 +186,7 @@ object ObjectSearhForm: TObjectSearhForm
         item
           Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
           Position = 1
-          Width = 298
+          Width = 292
           WideText = 'Search Result'
         end>
     end
@@ -209,7 +210,7 @@ object ObjectSearhForm: TObjectSearhForm
     Left = 60
     Top = 284
     Bitmap = {
-      494C01011800E0006C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011800E000700210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
