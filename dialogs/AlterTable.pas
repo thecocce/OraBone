@@ -971,12 +971,12 @@ begin
           ColumnComments := ColumnComments + Format('COMMENT ON COLUMN %s.%s.%s IS %s;', [FSchemaParam,
             TableNameEdit.Text, Trim(FieldByName('COLUMN_NAME').AsWideString), QuotedStr(FieldByName('COLUMN_COMMENT').AsWideString)]) + CHR_ENTER;
 
-        if UpperCase(FieldByName('PRIMARY_KEY').AsWideString) = 'TRUE' then
+        {if UpperCase(FieldByName('PRIMARY_KEY').AsWideString) = 'TRUE' then
         begin
           if PrimaryKeyColumns <> '' then
             PrimaryKeyColumns := PrimaryKeyColumns + ', ';
           PrimaryKeyColumns := PrimaryKeyColumns + FieldByName('COLUMN_NAME').AsString;
-        end;
+        end; }
 
         Next;
         if not Eof then
@@ -1002,12 +1002,12 @@ begin
     SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- copy data to the new table' + CHR_ENTER;
     SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + GetCopyDataSQL + CHR_ENTER;
     SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'COMMIT;' + CHR_ENTER;
-    { create primary key }
+    (*{ create primary key }
     if PrimaryKeyColumns <> '' then
     begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- create primary key' + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + GetCreatePrimaryKeySQL + CHR_ENTER;
-    end;
+    end;*)
     { create constraints and triggers }
     if ConstraintsSQL <> '' then
     begin
