@@ -441,6 +441,7 @@ begin
       Canvas.Font.Color := clHighlightText;
     end;
 
+    Canvas.Font.Style := [];
     if Data.StateIndex = 1 then // status = disabled
     begin
       Canvas.Font.Style := [fsItalic];
