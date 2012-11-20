@@ -655,12 +655,55 @@ begin
         SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName(COLUMN_NAME).AsWideString;
         Next;
         if (TempObjectName <> FieldByName(INDEX_NAME).AsWideString) or Eof then
-          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ');' + CHR_ENTER
+        begin
+          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ')';
+          if TableSourceOptionsDialog.Storage or TableSourceOptionsDialog.Parameters then
+          begin
+            OraQuery := TOraQuery.Create(Self);
+            with OraQuery do
+            begin
+              Session := FSession;
+              SQL.Add(DM.StringHolder.StringsByName['IndexParametersSQL'].Text);
+              try
+                ParamByName('P_TABLE_NAME').AsWideString := FObjectName;
+                ParamByName('P_OWNER').AsWideString := FSchemaParam;
+                Open;
+                { storage }
+                if TableSourceOptionsDialog.Storage then
+                begin
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + Format('TABLESPACE    %s', [FieldByName('TABLESPACE_NAME').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('PCTFREE       %s', [FieldByName('PCT_FREE').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('INITRANS      %s', [FieldByName('INI_TRANS').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('MAXTRANS      %s', [FieldByName('MAX_TRANS').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'STORAGE (' + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  INITIAL     %s', [FieldByName('INITIAL_EXTENT').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  NEXT        %s', [FieldByName('NEXT_EXTENT').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MINEXTENTS  %s', [FieldByName('MIN_EXTENTS').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MAXEXTENTS  %s', [FieldByName('MAX_EXTENTS').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  PCTINCREASE %s', [FieldByName('PCT_INCREASE').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  BUFFER_POOL %s', [FieldByName('BUFFER_POOL').AsString]) + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ')';
+                end;
+                { parameters }
+                if TableSourceOptionsDialog.Parameters then
+                //begin
+                  //SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + FieldByName('LOGGING').AsString + CHR_ENTER;
+                  SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + FieldByName('PARALLEL').AsString;
+                //end;
+              finally
+                Close;
+                Free;
+              end;
+            end;
+          end;
+          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ';';
+          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + CHR_ENTER;
+        end
         else
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ', ';
       end;
     end;
-    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER;
+    //SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER;
     Application.ProcessMessages;
   end;
   { constraints }

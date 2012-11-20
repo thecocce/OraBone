@@ -38,7 +38,7 @@ object DM: TDM
           
             'SELECT tablespace_name, NVL(pct_used, 0) pct_used, pct_free, ini' +
             '_trans, max_trans, initial_extent,'
-          '       next_extent,'
+          '       NVL(next_extent, initial_extent) next_extent,'
           
             '       min_extents, max_extents, NVL(pct_increase, 0) pct_increa' +
             'se, buffer_pool,'
@@ -130,7 +130,7 @@ object DM: TDM
           
             'SELECT tablespace_name, pct_free, ini_trans, max_trans, initial_' +
             'extent,'
-          '       next_extent,'
+          '       NVL(next_extent, initial_extent) next_extent,'
           
             '       min_extents, max_extents, NVL(pct_increase, 0) pct_increa' +
             'se, buffer_pool,'
