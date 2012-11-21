@@ -114,8 +114,8 @@ begin
   HomeComboBox.Clear;
  // if (DefaultOracleHome >= 0) and (OracleHomeNames[DefaultOracleHome] <> '') then
  //   HomeComboBox.Items[0] := HomeComboBox.Items[0] + ' [' + OracleHomeNames[DefaultOracleHome] + ']';
-  for i := 0 to OracleHomeCount - 1 do
-    HomeComboBox.Items.Add(OracleHomeNames[i])
+  for i := 0 to Length(OraCall.OracleHomes) - 1 do
+    HomeComboBox.Items.Add(OraCall.OracleHomes[i].Name)
 end;
 
 procedure TConnectClientDialog.DoInit;
