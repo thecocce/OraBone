@@ -76,7 +76,6 @@ type
   protected
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
   public
-    constructor Create(AOwner: TComponent); override;
     property InThread: Boolean read FInThread write FInThread;
     property DocumentName: string read FDocumentName write FDocumentName;
     property FileDateTime: TDateTime read FFileDateTime write FFileDateTime;
@@ -313,7 +312,6 @@ type
     FNumberOfNewDocument: Integer;
     FOutputFrame: TOutputFrame;
     FSession: TOraSession;
- //   FDBMSOutputTime: TTime;
     FObjectNames: TStrings;
     FSchemaParam: string;
     FDBMSTimer: TTimer;
@@ -324,12 +322,10 @@ type
     function GetActiveDocumentName: string;
     function GetActiveDocumentFound: Boolean;
     function GetSynEdit(TabSheet: TTabSheet): TBCSynEdit;
-//    function ActiveSynEdit: TBCSynEdit;
     function Save(TabSheet: TTabSheet; ShowDialog: Boolean = False): string;
       overload;
     procedure InitializeSynEditPrint;
     function GetOpenTabSheets: Boolean;
-    // function GetModifiedDocuments(CheckActive: Boolean = True): Boolean;
     function GetSelectionFound: Boolean;
     function GetCanUndo: Boolean;
     function GetCanRedo: Boolean;
@@ -339,9 +335,7 @@ type
     procedure SetBookmarks(SynEdit: TBCSynEdit; Bookmarks: TStrings);
     procedure DoSearch;
     function GetFileDateTime(FileName: string): TDateTime;
-    // function GetTabIndex(Pager: TPageControl; X,Y: Integer): Integer;
     procedure SetHighlighterTableNames(Value: TStrings);
-//    function ExecSQL(SQL: string): Boolean;
     procedure ExecuteStatement(SynEdit: TBCSynEdit); overload;
     procedure ExecuteNoRowsStatement(SynEdit: TBCSynEdit);
     procedure SetSession(Value: TOraSession);
@@ -449,18 +443,9 @@ uses
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil;
 
 const
-  //SAVED_IMAGEINDEX = 0;
-  //CHANGED_IMAGEINDEX = 1;
-  //COMPARE_IMAGEINDEX = 2;
   DEFAULT_FILENAME = 'Sql';
 
   { TBCSynEdit }
-
-constructor TBCSynEdit.Create(AOwner: TComponent);
-begin
-  inherited;
-  //FColumnMode := False;
-end;
 
 function TBCSynEdit.GetQueryOpened: Boolean;
 begin
@@ -567,14 +552,10 @@ begin
   ViewSpecialCharsToolButton.Action := MainForm.ViewSpecialCharsAction;
   ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
-  //ToolsPreferencesToolButton.Action := MainForm.ToolsPreferencesAction;
-  //HelpHomeToolButton.Action := MainForm.HelpHomeAction;
 
   FSynEditsList := TList.Create;
 
   PageControl.Images := TImageList.Create(Self);
-  //PageControl.Images.
-  //FSystemImageList := TImageList.Create(Self);
   SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
   if SysImageList <> 0 then
   begin
@@ -763,7 +744,7 @@ var
   i, j: Integer;
 begin
   PageControl.DoubleBuffered := DoubleBuffered;
-  //FOutputFrame.PageControl.DoubleBuffered := DoubleBuffered;
+
   FOutputFrame.UpdateControls;
   for i := 0 to FSynEditsList.Count - 1 do
     UpdateGutter(TBCSynEdit(FSynEditsList.Items[i]));
@@ -776,13 +757,16 @@ begin
         else
           TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 1;
       end;
+  if StyleServices.GetStyleColor(scEdit) <> clWhite then
+    SynSQLSyn.KeyAttri.Foreground := StyleServices.GetSystemColor(clHighlight)
+  else
+    SynSQLSyn.KeyAttri.Foreground := clBlue;
 end;
 
 procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Integer;
   var Special: Boolean; var FG, BG: TColor);
 var
   LStyles: TCustomStyleServices;
-  //HighlightColor: TColor;
 begin
   if not TBCSynEdit(Sender).SelAvail then
     if TBCSynEdit(Sender).CaretY = Line then
@@ -790,32 +774,14 @@ begin
       Special := True;
       LStyles := StyleServices;
       if LStyles.Enabled then
-      begin
-       // if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecFillColor, LColor) or (LColor = clNone) then
-       //   LColor := GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight)));
-       // HighlightColor := LStyles.GetSystemColor(clHighlight);
-       // HighlightColor := LightenColor(HighlightColor, TBCSynEdit(Sender).Color, False);
-
-        BG := LightenColor(TBCSynEdit(Sender).Color);  //HighlightColor; //LStyles.GetSystemColor(clHighlight); // GetHighlightColor(ColorToRGB(StyleServices.GetSystemColor(clHighlight))); //LStyles.GetSystemColor(clHighlight);
-        //FG := LStyles.GetSystemColor(clHighlightText);
-      end;
+        BG := LightenColor(TBCSynEdit(Sender).Color);
     end;
- { if TBCSynEdit(Sender).SelAvail and (TBCSynEdit(Sender).CaretY = Line) then
-  begin
-    Special := True;
-    LStyles := StyleServices;
-    if LStyles.Enabled then
-    begin
-      BG := LStyles.GetStyleColor(scEdit);
-      FG := LStyles.GetStyleFontColor(sfEditBoxTextNormal); //LStyles.GetStyleFontColor(sfMenuItemTextSelected); //LStyles.GetSystemColor(clHighlightText);
-    end;
-  end; }
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
 var Editor : TSynEdit;
-    OpenChars: array [0..0] of WideChar;//[0..2] of WideChar=();
-    CloseChars: array [0..0] of WideChar;//[0..2] of WideChar=();
+    OpenChars: array [0..0] of WideChar;
+    CloseChars: array [0..0] of WideChar;
 
   function IsCharBracket(AChar: WideChar): Boolean;
   begin
@@ -832,36 +798,26 @@ var Editor : TSynEdit;
     Result := Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
   end;
 
-var P, PM: TBufferCoord;
-    Pix: TPoint;
-    D : TDisplayCoord;
-    S: UnicodeString;
-    I: Integer;
-    Attri: TSynHighlighterAttributes;
-    ArrayLength: Integer;
-    start: Integer;
-    TmpCharA, TmpCharB: WideChar;
+var
+  P, PM: TBufferCoord;
+  Pix: TPoint;
+  D : TDisplayCoord;
+  S: UnicodeString;
+  I: Integer;
+  Attri: TSynHighlighterAttributes;
+  ArrayLength: Integer;
+  start: Integer;
+  TmpCharA, TmpCharB: WideChar;
 begin
   if TSynEdit(Sender).SelAvail then
     Exit;
   Editor := TSynEdit(Sender);
 
   ArrayLength:= 1;
-//if you had a highlighter that used a markup language, like html or xml,
-//then you would want to highlight the greater and less than signs
-//as illustrated below
 
-//  if (Editor.Highlighter = shHTML) or (Editor.Highlighter = shXML) then
-//    inc(ArrayLength);
-
-  //SetLength(OpenChars, ArrayLength);
-  //SetLength(CloseChars, ArrayLength);
   for i := 0 to ArrayLength - 1 do
     Case i of
       0: begin OpenChars[i] := '('; CloseChars[i] := ')'; end;
-      //1: begin OpenChars[i] := '{'; CloseChars[i] := '}'; end;
-      //2: begin OpenChars[i] := '['; CloseChars[i] := ']'; end;
-      //3: begin OpenChars[i] := '<'; CloseChars[i] := '>'; end;
     end;
 
   P := Editor.CaretXY;
@@ -906,7 +862,6 @@ begin
       begin
         Pix := CharToPixels(P);
 
-        //Editor.Canvas.Brush.Style := bsSolid;//Clear;
         Canvas.Font.Assign(Editor.Font);
         Canvas.Font.Style := Attri.Style;
 
@@ -915,15 +870,6 @@ begin
           Canvas.Font.Color := clNone;
           Canvas.Brush.Color := clAqua;
         end;
-        {else
-        begin
-          Editor.Canvas.Font.Color := Attri.Foreground;
-          Editor.Canvas.Brush.Color := Attri.Background;
-        end;
-        if Editor.Canvas.Font.Color = clNone then
-          Editor.Canvas.Font.Color := Editor.Font.Color;
-        if Editor.Canvas.Brush.Color = clNone then
-          Editor.Canvas.Brush.Color := Editor.Color; }
 
         Canvas.TextOut(Pix.X, Pix.Y, S);
 
@@ -941,7 +887,6 @@ begin
         end;
       end; //if
     end;//for i :=
-    //Editor.Canvas.Brush.Style := bsSolid;
   end;
 end;
 
@@ -954,12 +899,7 @@ begin
     SQLTokenizer.SetText(Text);
     while not SQLTokenizer.Eof do
     begin
-      // doesn't work because lexer skips many things...
-      //if SQLTokenizer.TokenIsKeyword then
-      //  Result := Result + UpperCase(SQLTokenizer.TokenStr)
-      //else
-      //  Result := Result + SQLTokenizer.TokenStr;
-      //QueryParser.TokenString
+      // TODO
       SQLTokenizer.Next;
     end;
   finally
@@ -987,17 +927,6 @@ begin
 
     while Pos('(', Input) <> 0 do  // example function(alias.
       Input := System.Copy(Input, Pos('(', Input) + 1, Length(Input));
-
-   {
-    Line := 0;
-    Text := '';
-    while Line <= Proposal.Editor.CaretY - 1 do
-    begin
-      Text := Text + ' ' + Proposal.Editor.Lines[Line];
-      while Pos('(', Text) <> 0 do
-        Text := System.Copy(Text, Pos('(', Text) + 1, Length(Text));
-      Inc(Line);
-    end; }
 
     SQLTokenizer.SetText(Proposal.Editor.Text);
     while (not SQLTokenizer.Eof) and not SQLTokenizer.TokenStrIs('FROM') do
@@ -1043,35 +972,6 @@ begin
         end;
       end;
      end;
-   { QueryParser.CurrentStatement.AllTables.First;
-    while not QueryParser.CurrentStatement.AllTables.Eof do
-    begin
-      s := QueryParser.CurrentStatement.AllTables.CurrentItem.AsWideString;
-
-      Tablename := System.Copy(s, 0, Pos(' ', s) - 1);
-      s := Trim(System.Copy(s, Pos(' ', s) + 1, Length(s)));
-      s := System.SysUtils.StringReplace(s, 'AS ', '', [rfIgnoreCase]);  }
-
-     { if Input = s then
-      begin
-        with ColumnsQuery do
-        begin
-          ParamByName('P_OBJECT_NAME').AsWideString := UpperCase(Tablename);
-          Prepare;
-          Open;
-          while not Eof do
-          begin
-            Proposal.InsertList.Add(FieldByName('COLUMN_NAME').AsWideString);
-            Proposal.ItemList.Add(FieldByName('ITEM').AsWideString);
-            Next;
-          end;
-          Close;
-          UnPrepare;
-        end;
-        CanExecute := True;
-        Break;
-      end;   }
-      //QueryParser.CurrentStatement.AllTables.Next;
   finally
     SQLTokenizer.Free;
   end;
@@ -1117,7 +1017,6 @@ begin
   TabSheet.PageControl := PageControl;
   TabSheet.ImageIndex := FCompareImageIndex;
   TabSheet.Caption := 'Compare Files';
-  // TabSheet.DoubleBuffered := True;
   PageControl.ActivePage := TabSheet;
   { create a compare frame }
   Frame := TCompareFrame.Create(TabSheet);
@@ -1319,8 +1218,6 @@ begin
 
     if Rslt = mrYes then
       for i := 0 to PageControl.PageCount - 1 do
-       // if (PageControl.Pages[i].ImageIndex = CHANGED_IMAGEINDEX) and
-       //    (i <> Temp) then
       begin
         PageControl.ActivePage := PageControl.Pages[i];
         SynEdit := ActiveSynEdit;
@@ -1415,7 +1312,6 @@ begin
     PageControl.ActivePage := PageControl.Pages[i];
     SynEdit := ActiveSynEdit;
     if Assigned(SynEdit) and SynEdit.Modified then
-    //if PageControl.Pages[i].ImageIndex = CHANGED_IMAGEINDEX then
       Save(PageControl.Pages[i]);
   end;
   if Assigned(PageControl.Pages[Temp]) then
@@ -1856,18 +1752,6 @@ begin
     SynEdit := GetSynEdit(PageControl.Pages[i]);
     if Assigned(SynEdit) then
     begin
-     { if SynEdit.FColumnMode then
-      begin
-        SynEdit.Options := SynEdit.Options - [eoScrollPastEol,
-          eoAltSetsColumnMode];
-        SynEdit.FColumnMode := False;
-      end
-      else
-      begin
-        SynEdit.Options := SynEdit.Options + [eoScrollPastEol,
-          eoAltSetsColumnMode];
-        SynEdit.FColumnMode := True;
-      end;   }
       if SynEdit.SelectionMode = smColumn then
         SynEdit.SelectionMode := smNormal
       else
@@ -1952,7 +1836,6 @@ begin
     PageControl.ActivePage.Caption := PageControl.ActivePage.Caption + '~';
     PageControl.ActivePage.Repaint;
     PageControl.Repaint;
-    //MainForm.SetFields; { style fix (fuck me!!!) }
   end;
   RepaintToolButtons;
 end;
@@ -1990,7 +1873,7 @@ begin
       if SynEdit.DocumentName <> '' then
       begin
         Result := SynEdit.DocumentName;
-        if SynEdit.Modified then // PageControl.ActivePage.ImageIndex = CHANGED_IMAGEINDEX then
+        if SynEdit.Modified then
           Result := Result + ' - Modified';
       end
   end;
@@ -2007,7 +1890,6 @@ var
   SynEdit: TBCSynEdit;
 begin
   Result := False;
-  //Temp := PageControl.ActivePageIndex;
 
   SynEdit := ActiveSynEdit;
   for i := 0 to FSynEditsList.Count - 1 do
@@ -2258,17 +2140,6 @@ begin
     Open(Filename, nil, Ln, Ch);
 end;
 
-{function TSQLEditorFrame.ExecSQL(SQL: string): Boolean;
-begin
-  OraScript.SQL.Text := SQL;
-  try
-    OraScript.Execute;
-    Result := True;
-  except
-    Result := False;
-  end;
-end; }
-
 function GetOraScriptErrorPos(Msg: string; var Row, Col: Integer): Boolean;
 var
   Error: string;
@@ -2277,8 +2148,6 @@ begin
   Row := 1;
   Col := 1;
   Error := Msg;
-  //if Pos(CHR_ENTER, Error) <> 0 then
-  //  Error := System.Copy(Error, 1, Pos(CHR_ENTER, Error) - 1);
   if Pos(' ', Error) <> 0 then
     Error := System.Copy(Error, 1, Pos(' ', Error) - 1);
   if Pos('/', Error) <> 0 then
@@ -2308,7 +2177,6 @@ begin
   else
     s := Trim(SynEdit.Text);
 
-  //s := Trim(RemoveParenthesisFromBegin(RemoveComments(s)));
   CreateStatement := Pos(ShortString('CREATE'), UpperCase(Trim(RemoveParenthesisFromBegin(RemoveComments(s))))) = 1;
 
   OraScript.SQL.Text := s;
@@ -2340,26 +2208,8 @@ begin
   except
     on E: EOraError do
     begin
-      //FOutputFrame.AddErrors('Errors: ' + GetActivePageCaption, E.Message);
       if not GetOraScriptErrorPos(E.Message, Row, Col) then
         OraScript.DataSet.GetErrorPos(Row, Col);
-      {begin
-        ErrorOffset := OraScript.ErrorOffset;
-        i := 0;
-        Row := 1;
-        while i < SynEdit.Lines.Count do
-        begin
-          if ErrorOffset - Length(SynEdit.Lines[i]) > 0 then
-          begin
-            Inc(Row);
-            ErrorOffset := ErrorOffset - Length(SynEdit.Lines[i]) - 2; // -2 is enter
-            Inc(i);
-          end
-          else
-            Break
-        end;
-        Col := ErrorOffset + 1;
-      end; }
       OutputPanel.Visible := True;
       SynEdit.SetFocus;
       SynEdit.CaretY := Row;
@@ -2383,7 +2233,7 @@ begin
     SQLSynEdit.Text := s;
     for i := 0 to SQLSynEdit.Lines.Count - 1 do
     begin
-      Line := SQLSynEdit.Lines[i]; //SynEdit.Lines.Strings[i];
+      Line := SQLSynEdit.Lines[i];
 
       if not InComment then
       begin
@@ -2586,7 +2436,6 @@ end;
 procedure TSQLEditorFrame.OraSessionError(Sender: TObject; E: EDAError; var Fail: Boolean);
 begin
   FOutputFrame.AddErrors('Errors: ' + GetActivePageCaption, E.Message);
-  //OutputPanel.Visible := True;
   GetUserErrors;
   Application.ProcessMessages;
   Fail := True;
@@ -2628,7 +2477,6 @@ begin
     SynEdit.FOraQuery.Options.RequiredFields := False;
     SynEdit.FOraQuery.Options.RawAsString := True;
     SynEdit.FOraQuery.LocalUpdate := True;
-    //SynEdit.FOraQuery.ReadOnly := True;
     SynEdit.FOraQuery.NonBlocking := True;
 
     SynEdit.FOraQuery.Options.CacheLobs := False;
@@ -2666,7 +2514,6 @@ begin
   T1 := Now;
   QuerySuccess := False;
   try
-    //SynEdit.FOraQuery.DisableControls;
     SynEdit.InThread := True;
     SynEdit.FOraQuery.Prepare;
     AddAllFields(SynEdit.FOraQuery);              { these are important to do after prepare because if there is }
@@ -2677,12 +2524,7 @@ begin
       SynEdit.FOraQuery.Active := False;
     SynEdit.InThread := False;
   except
-    {on E: EOraError do
-    begin
-      FOutputFrame.AddErrors('Errors: ' + GetActivePageCaption, E.Message);
-      OutputPanel.Visible := True;
-      //Exit;
-    end; }
+
   end;
   if QuerySuccess then
   begin
@@ -2697,7 +2539,6 @@ begin
     SynEdit.CaretY := Row;
     SynEdit.CaretX := Col;
   end;
-  //SynEdit.FOraQuery.EnableControls;
   OutputPanel.Visible := True;
 end;
 
@@ -2737,14 +2578,11 @@ begin
   CreateNewSession := (Pos(WideString('UPDATE'), s) <> 1) and (Pos(WideString('INSERT'), s) <> 1) and
     (Pos(WideString('DELETE'), s) <> 1);
 
-  //if not Assigned(SynEdit.FOraSQL) then
-  //begin
   SynEdit.FOraSQL := TOraSQL.Create(nil);
   if CreateNewSession then
     SynEdit.FOraSQL.Session := CreateSession(FSession)
   else
     SynEdit.FOraSQL.Session := FSession;
-  //SynEdit.FOraSQL.Session.ThreadSafety := True;
   SynEdit.FOraSQL.AutoCommit := False;
   SynEdit.FOraSQL.AfterExecute := OraSQLAfterExecuteEvent;
   SynEdit.FOraSQL.NonBlocking := CreateNewSession;
@@ -2792,12 +2630,6 @@ begin
           GetDBMSOutput;
     except
       QuerySuccess := SynEdit.FOraSQL.ErrorOffset = 0;
-      {on E: EOraError do
-      begin
-        FOutputFrame.AddErrors('Errors: ' + GetActivePageCaption, E.Message);
-        OutputPanel.Visible := True;
-        //Exit;
-      end; }
     end;
     if not QuerySuccess then
     begin
@@ -2825,14 +2657,6 @@ begin
   StringList := TStringList.Create;
   StringList.Clear;
   try
-   { s := Format('Execution started %s', [System.SysUtils.FormatDateTime('dd.mm.yyyy hh:mm:ss', SynEdit.StartTime)]);
-    StringList.Add(s);
-    j := Length(s);
-    s := '';
-    for i := 0 to j - 1 do
-      s := s + '_';
-    StringList.Add(s);  }
-
     for i := 0 to OraScript.Params.Count-1 do
       StringList.Add(OraScript.Params[i].Name + ' = ' +
        OraScript.Params[i].AsWideString);
@@ -2841,17 +2665,6 @@ begin
       s := IntToStr(OraScript.DataSet.RowsProcessed) + ' row(s) processed.'
     else
       s := 'Success.';
-    //StringList.Add(s);
-
-   { T2 := Now;
-    Min := StrToInt(FormatDateTime('n', T2 - SynEdit.StartTime));
-    Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - SynEdit.StartTime));
-
-    if Secs < 60 then
-      s := s + System.SysUtils.FormatDateTime('s.zzz "s"', T2 - SynEdit.StartTime) + '.'
-    else
-      s := s + System.SysUtils.FormatDateTime('n "min" s.zzz "s"', T2 - SynEdit.StartTime) + '.';}
-
     StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
     FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
@@ -2875,14 +2688,6 @@ begin
   begin
     StringList := TStringList.Create;
     try
-      {s := Format('Execution started %s', [System.SysUtils.FormatDateTime('dd.mm.yyyy hh:mm:ss', SynEdit.StartTime)]);
-      StringList.Add(s);
-      j := Length(s);
-      s := '';
-      for i := 0 to j - 1 do
-        s := s + '_';
-      StringList.Add(s); }
-
       for i := 0 to SynEdit.FOraSQL.Params.Count-1 do
         StringList.Add(SynEdit.FOraSQL.Params[i].Name + ' = ' +
          SynEdit.FOraSQL.Params[i].AsWideString);
@@ -2891,19 +2696,7 @@ begin
         s := IntToStr(SynEdit.FOraSQL.RowsProcessed) + ' row(s) processed in '
       else
         s := 'Success.';
-      {T2 := Now;
-      Min := StrToInt(FormatDateTime('n', T2 - SynEdit.StartTime));
-      Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - SynEdit.StartTime));
-      StringList.Add('Success.');
 
-      'Elapsed time: 00:00:03.6'
-
-      if Secs < 60 then
-        s := s + System.SysUtils.FormatDateTime('s.zzz "s"', T2 - SynEdit.StartTime) + '.'
-      else
-        s := s + System.SysUtils.FormatDateTime('n "min" s.zzz "s"', T2 - SynEdit.StartTime) + '.';
-                          }
-      //StringList.Add(s);
       StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
       FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
@@ -2912,16 +2705,10 @@ begin
       StringList.Free;
     end;
   end
-  //else
-  //  FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, 'Fail.');
 end;
 
 procedure TSQLEditorFrame.GetDBMSOutput;
-//var
-  //SynEdit: TBCSynEdit;
-  //Timer: TTimer;
 begin
-  //SynEdit := ActiveSynEdit;
   { start timer }
   if not Assigned(FDBMSTimer) then
   begin
@@ -2930,7 +2717,6 @@ begin
     FDBMSTimer.OnTimer := DBMSOutputTimer;
   end;
   FDBMSTimer.Enabled := True;
-//  FDBMSOutputTime := Time;
 end;
 
 procedure TSQLEditorFrame.DBMSOutputTimer(Sender: TObject);
@@ -2938,7 +2724,6 @@ var
   Found: Boolean;
   SynEdit: TBCSynEdit;
   OraSession: TOraSession;
- // SynEdit: TBCSynEdit;
 begin
   Found := False;
   SynEdit := ActiveSynEdit;
@@ -3145,6 +2930,5 @@ begin
   SynEdit := ActiveSynEdit;
   Result := Assigned(SynEdit) and SynEdit.Modified;
 end;
-
 
 end.
