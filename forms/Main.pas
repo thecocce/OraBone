@@ -1093,6 +1093,7 @@ begin
     ProgressDialog(Self).Destroy;
     PageControl.Enabled := True;
     Screen.Cursor := crDefault;
+    FConnecting := False;
     FOnProgress := False;
   end;
 end;
@@ -1435,7 +1436,7 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FOnProgress := False;
   FOnStartUp := True;
-  FConnecting := False;
+  FConnecting := True;
   ActionMainMenuBar.Font.Name := 'Tahoma'; // IDE is losing this for some reason... :/
   ActionMainMenuBar.Font.Size := 8;
   StatusBar.Font.Name := 'Tahoma';

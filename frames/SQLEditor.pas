@@ -757,23 +757,18 @@ begin
         else
           TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 1;
       end;
-  if StyleServices.GetStyleColor(scEdit) <> clWhite then
-    SynSQLSyn.KeyAttri.Foreground := StyleServices.GetSystemColor(clHighlight)
-  else
-    SynSQLSyn.KeyAttri.Foreground := clBlue;
+
+  UpdateSQLSynColors(SynSQLSyn);
 end;
 
 procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Integer;
   var Special: Boolean; var FG, BG: TColor);
-var
-  LStyles: TCustomStyleServices;
 begin
   if not TBCSynEdit(Sender).SelAvail then
     if TBCSynEdit(Sender).CaretY = Line then
     begin
       Special := True;
-      LStyles := StyleServices;
-      if LStyles.Enabled then
+      if StyleServices.Enabled then
         BG := LightenColor(TBCSynEdit(Sender).Color);
     end;
 end;
