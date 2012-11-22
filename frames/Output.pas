@@ -791,6 +791,7 @@ begin
   end;
   TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
   UpdateGutter(SynEdit);
+  UpdateSQLSynColors(SynSQLSyn);
   Application.ProcessMessages;
   SynEdit.Text := Text + CHR_ENTER;
   TabSheet.TabVisible := True;

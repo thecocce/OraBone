@@ -262,19 +262,6 @@ object DataSortDialog: TDataSortDialog
       OnExecute = ClearSortActionExecute
     end
   end
-  object SynSQLSyn: TSynSQLSyn
-    CommentAttri.Foreground = clGreen
-    DataTypeAttri.Foreground = clRed
-    DataTypeAttri.Style = []
-    FunctionAttri.Foreground = clBlue
-    KeyAttri.Foreground = clBlue
-    KeyAttri.Style = []
-    NumberAttri.Foreground = clRed
-    StringAttri.Foreground = clPurple
-    VariableAttri.Foreground = clNavy
-    Left = 412
-    Top = 160
-  end
   object SortMultiStringHolder: TJvMultiStringHolder
     MultipleStrings = <>
     Left = 304
@@ -284,7 +271,7 @@ object DataSortDialog: TDataSortDialog
     Left = 60
     Top = 264
     Bitmap = {
-      494C010103000500440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000033140000451B00005722000057220000471C0000361600000000

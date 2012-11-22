@@ -1983,15 +1983,23 @@ begin
   FUserBrowserFrame.UserPageControl.DoubleBuffered := DoubleBuffered;
   UpdateGutter(FTableBrowserFrame.TriggerSynEdit);
   UpdateGutter(FTableBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FTableBrowserFrame.SynSQLSyn);
   UpdateGutter(FViewBrowserFrame.TriggerSynEdit);
   UpdateGutter(FViewBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FViewBrowserFrame.SynSQLSyn);
   UpdateGutter(FFuncProcBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FFuncProcBrowserFrame.SynSQLSyn);
   UpdateGutter(FPackageBrowserFrame.SpecSynEdit);
   UpdateGutter(FPackageBrowserFrame.BodySynEdit);
+  UpdateSQLSynColors(FPackageBrowserFrame.SynSQLSyn);
   UpdateGutter(FTriggerBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FTriggerBrowserFrame.SynSQLSyn);
   UpdateGutter(FSequenceBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FSequenceBrowserFrame.SynSQLSyn);
   UpdateGutter(FDBLinkBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FDBLinkBrowserFrame.SynSQLSyn);
   UpdateGutter(FUserBrowserFrame.SourceSynEdit);
+  UpdateSQLSynColors(FUserBrowserFrame.SynSQLSyn);
 end;
 
 end.

@@ -32,6 +32,10 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     HoldShiftToDragDrop = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -193,7 +197,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Left = 244
     Top = 158
     Bitmap = {
-      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00240210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

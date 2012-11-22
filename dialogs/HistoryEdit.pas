@@ -77,6 +77,7 @@ end;
 function THistoryEditDialog.Open: Boolean;
 begin
   UpdateGutter(SQLSynEdit);
+  UpdateSQLSynColors(SynSQLSyn);
 
   Result := ShowModal = mrOk;
 end;

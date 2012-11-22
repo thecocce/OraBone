@@ -13,7 +13,6 @@ type
   TDataSortDialog = class(TDialog)
     ActionList: TActionList;
     ColumnClickAction: TAction;
-    SynSQLSyn: TSynSQLSyn;
     SortMultiStringHolder: TJvMultiStringHolder;
     OKAction: TAction;
     ImageList: TBCImageList;

@@ -209,6 +209,7 @@ begin
   ValuesList := TValueListEditor.Create(nil);
   ValuesList.Strings.Clear;
   UpdateGutter(FilterSynEdit);
+  UpdateSQLSynColors(SynSQLSyn);
 end;
 
 procedure TDataFilterDialog.SetCurrentDataFilter(ObjectName: string; SchemaParam: string; Name: string);

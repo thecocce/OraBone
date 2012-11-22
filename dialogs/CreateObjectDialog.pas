@@ -99,6 +99,7 @@ begin
   SourceSynEdit.Text := '';
   PageControl.ActivePageIndex := 0;
   UpdateGutter(SourceSynEdit);
+  UpdateSQLSynColors(SynSQLSyn);
   if Assigned(TStyleManager.ActiveStyle) then
     PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
 end;

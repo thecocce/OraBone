@@ -1,20 +1,18 @@
 object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
-  Width = 706
-  Height = 498
+  Width = 451
+  Height = 304
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object TablePageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 706
-    Height = 498
-    ActivePage = ColumnsTabSheet
+    Width = 451
+    Height = 304
+    ActivePage = SourceTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -23,29 +21,23 @@ object TableBrowserFrame: TTableBrowserFrame
     OnChange = TablePageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
-    ExplicitWidth = 451
-    ExplicitHeight = 304
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitWidth = 443
-      ExplicitHeight = 276
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 698
-        Height = 448
+        Width = 443
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 2
         TabOrder = 0
-        ExplicitWidth = 443
-        ExplicitHeight = 254
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 696
-          Height = 446
+          Width = 441
+          Height = 252
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -78,14 +70,12 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 448
-        Width = 698
+        Top = 254
+        Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = 254
-        ExplicitWidth = 443
         object Bevel3: TBevel
           AlignWithMargins = True
           Left = 52
@@ -143,15 +133,11 @@ object TableBrowserFrame: TTableBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 10
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
-        Width = 790
-        Height = 415
+        Width = 443
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -160,8 +146,8 @@ object TableBrowserFrame: TTableBrowserFrame
         object SourceSynEdit: TSynEdit
           Left = 0
           Top = 0
-          Width = 788
-          Height = 414
+          Width = 441
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -187,8 +173,8 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 415
-        Width = 790
+        Top = 254
+        Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -1569,7 +1555,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 22
     Top = 36
     Bitmap = {
-      494C01011D000004480410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D0000044C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000008E5D
       59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
