@@ -423,10 +423,9 @@ object AboutDialog: TAboutDialog
     Height = 17
     Caption = 
       '<a href="http://www.delphi-jedi.org/">Jedi Project</a>, <a href=' +
-      '"http://www.da-soft.com/download/synedit/unicode-synedit-d2009-d' +
-      '2010-/details.html">Unicode SynEdit</a>, <a href="http://flatdev' +
-      '.ovh.org/">SynWeb</a>, <a href="http://www.customicondesign.com/' +
-      '">Custom Icon Design</a>,'
+      '"http://synedit.svn.sourceforge.net/viewvc/synedit/">Unicode Syn' +
+      'Edit</a>, <a href="http://flatdev.ovh.org/">SynWeb</a>, <a href=' +
+      '"http://www.customicondesign.com/">Custom Icon Design</a>,'
     TabOrder = 4
     OnLinkClick = LinkClick
   end

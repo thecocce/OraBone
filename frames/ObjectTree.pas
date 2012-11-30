@@ -423,6 +423,7 @@ begin
       LStyles.DrawElement(Canvas.Handle, LDetails, R);
     end;
 
+    LColor := clWindowText;
     if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
       LColor := LStyles.GetSystemColor(clWindowText);
     //get and set the background color

@@ -370,7 +370,7 @@ var
   MaxColumnLength, MaxDataTypeLength: Integer;
   DataType, OldTable: string;
   ColumnComments, PrimaryKeySQL, ConstraintsSQL, TriggersSQL, GrantsSQL, UnusedColumns,
-  RenameColumns, DropColumns, AddColumns, ModifyColumnType, ModifyColumn, PrimaryKeyColumns: WideString;
+  RenameColumns, DropColumns, AddColumns, ModifyColumnType, ModifyColumns, ModifyColumn, PrimaryKeyColumns: WideString;
   DefaultChange, PrimaryKeyChange, OriginalFound: Boolean;
 
   function GetDataTypeString(DataType: string; Precision: string; Scale: string; Size: string): string;
@@ -1037,7 +1037,7 @@ begin
       RenameColumns := '';
       DropColumns := '';
       AddColumns := '';
-      ModifyColumn := '';
+      ModifyColumns := '';
       ModifyColumnType := '';
       GetMaxLengths(MaxColumnLength, MaxDataTypeLength, True);
       First;
@@ -1105,49 +1105,51 @@ begin
            then
           begin
             if ModifyColumnType <> '' then
-              ModifyColumnType := ModifyColumnType + ', ' + CHR_ENTER;
+              ModifyColumnType := ModifyColumnType + ', ';
 
             DataType := GetDataTypeString(FieldByName('DATA_TYPE').AsWideString,
               FieldByName('COLUMN_PRECISION').AsString, FieldByName('SCALE').AsString,
               FieldByName('COLUMN_SIZE').AsString);
 
-            ModifyColumnType := ModifyColumnType + '  ' + TrimToMaxLength(FieldByName('COLUMN_NAME').AsWideString, MaxColumnLength);
+            ModifyColumnType := ModifyColumnType + '  ' + FieldByName('COLUMN_NAME').AsWideString + ' ' +
+              DataType;
+            {
             if (UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE') or (not FieldByName('COLUMN_DEFAULT').IsNull) then
               ModifyColumnType := ModifyColumnType + TrimToMaxLength(DataType, MaxDataTypeLength)
             else
-              ModifyColumnType := ModifyColumnType + Trim(DataType);
+              ModifyColumnType := ModifyColumnType + Trim(DataType); }
           end;
 
           { column nullable and default }
           if (FieldByName('NULLABLE').AsString <> OriginalColumnsQuery.FieldByName('NULLABLE').AsString) or
              (FieldByName('COLUMN_DEFAULT').AsString <> OriginalColumnsQuery.FieldByName('COLUMN_DEFAULT').AsString) then
           begin
-            if ModifyColumn <> '' then
-              ModifyColumn := ModifyColumn + ', ' + CHR_ENTER;
+            if ModifyColumns <> '' then
+              ModifyColumns := ModifyColumns + ', ';
 
             DataType := GetDataTypeString(FieldByName('DATA_TYPE').AsWideString,
               FieldByName('COLUMN_PRECISION').AsString, FieldByName('SCALE').AsString,
               FieldByName('COLUMN_SIZE').AsString);
 
-            ModifyColumn := ModifyColumn + '  ' + TrimToMaxLength(FieldByName('COLUMN_NAME').AsWideString, MaxColumnLength);
-            if (UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE') or (not FieldByName('COLUMN_DEFAULT').IsNull) then
-              ModifyColumn := ModifyColumn + TrimToMaxLength(DataType, MaxDataTypeLength)
+            ModifyColumns := ModifyColumns + '  ' + FieldByName('COLUMN_NAME').AsWideString + ' ' +
+              DataType;
+           { if (UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE') or (not FieldByName('COLUMN_DEFAULT').IsNull) then
+              ModifyColumns := ModifyColumns + TrimToMaxLength(DataType, MaxDataTypeLength)
             else
-              ModifyColumn := ModifyColumn + Trim(DataType);
+              ModifyColumns := ModifyColumns + Trim(DataType);}
 
             if (UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE') and
               (FieldByName('NULLABLE').AsWideString <> OriginalColumnsQuery.FieldByName('NULLABLE').AsWideString) then
-              // todo: jos not null, niin taulun oltava tyhjä!!!
-              ModifyColumn := ModifyColumn + ' NOT NULL'
+              ModifyColumns := ModifyColumns + ' NOT NULL'
             else
-              ModifyColumn := ModifyColumn + ' NULL';
+              ModifyColumns := ModifyColumns + ' NULL';
             if (not FieldByName('COLUMN_DEFAULT').IsNull) and
               (FieldByName('COLUMN_DEFAULT').AsWideString <> OriginalColumnsQuery.FieldByName('COLUMN_DEFAULT').AsWideString)  then
             begin
               DefaultChange := True;
               if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
-                 ModifyColumn := ModifyColumn + ' ';
-              ModifyColumn := ModifyColumn + 'DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
+                 ModifyColumns := ModifyColumns + ' ';
+              ModifyColumns := ModifyColumns + 'DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
             end;
           end;
 
@@ -1216,19 +1218,41 @@ begin
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + AddColumns + CHR_ENTER + ');' + CHR_ENTER;
     end;
-    if ModifyColumnType <> '' then
+    while ModifyColumnType <> '' do
     begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column type' + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('ALTER TABLE %s.%s MODIFY ',
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
-      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumnType + CHR_ENTER + ';' + CHR_ENTER;
+
+      if Pos(',', ModifyColumnType) <> 0 then
+        ModifyColumn := Copy(ModifyColumnType, 0, Pos(',', ModifyColumnType) - 1)
+      else
+        ModifyColumn := ModifyColumnType;
+
+      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + ';' + CHR_ENTER;
+
+      if Pos(',', ModifyColumnType) <> 0 then
+        ModifyColumnType := Copy(ModifyColumnType, Pos(',', ModifyColumnType) + 1, Length(ModifyColumnType))
+      else
+        ModifyColumnType := '';
     end;
-    if ModifyColumn <> '' then
+    while ModifyColumns <> '' do
     begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column' + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('ALTER TABLE %s.%s MODIFY ',
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
-      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + CHR_ENTER + ';' + CHR_ENTER;
+
+      if Pos(',', ModifyColumns) <> 0 then
+        ModifyColumn := Copy(ModifyColumns, 0, Pos(',', ModifyColumns) - 1)
+      else
+        ModifyColumn := ModifyColumns;
+
+      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + ';' + CHR_ENTER;
+
+      if Pos(',', ModifyColumns) <> 0 then
+        ModifyColumns := Copy(ModifyColumns, Pos(',', ModifyColumns) + 1, Length(ModifyColumns))
+      else
+        ModifyColumns := '';
     end;
     if DefaultChange then
     begin
