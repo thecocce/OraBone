@@ -403,9 +403,9 @@ begin
     if not Assigned(Data) then
       Exit;
 
-    {Canvas.Font.Color := clWindowText;
+    Canvas.Font.Color := clWindowText;
     Canvas.Font.Style := [];
-
+   {
     if (Column = VirtualDrawTree.FocusedColumn) and (not Focused) then
     begin
       Canvas.Brush.Color := clBtnFace;
@@ -423,8 +423,7 @@ begin
       LStyles.DrawElement(Canvas.Handle, LDetails, R);
     end;
 
-    LColor := clWindowText;
-    if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
+    if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) {or (LColor = clNone)} then
       LColor := LStyles.GetSystemColor(clWindowText);
     //get and set the background color
     Canvas.Brush.Color := LStyles.GetStyleColor(scEdit);
@@ -442,6 +441,7 @@ begin
       Canvas.Font.Color := clHighlightText;
     end;
 
+
     Canvas.Font.Style := [];
     if Data.StateIndex = 1 then // status = disabled
     begin
@@ -450,7 +450,6 @@ begin
     end;
     if Data.StateIndex = 2 then // invalid objects
       Canvas.Font.Color := clRed;
-
     SetBKMode(Canvas.Handle, TRANSPARENT);
 
     R := ContentRect;

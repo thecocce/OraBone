@@ -742,7 +742,7 @@ begin
     DatabaseNewConnectionMenuAction.Enabled := not FConnecting;
     DatabaseCommitAction.Enabled := ActiveSQLDocumentFound and SQLEditorFrame.InTransaction;
     DatabaseRollbackAction.Enabled := DatabaseCommitAction.Enabled;
-    DatabaseCloseTabAction.Enabled := (PageControl.PageCount > 0) and ((not Assigned(SQLEditorFrame)) or (Assigned(SQLEditorFrame) and not SQLEditorFrame.OutputFrame.ProcessingTabSheet ));
+    DatabaseCloseTabAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0) and ((not Assigned(SQLEditorFrame)) or (Assigned(SQLEditorFrame) and not SQLEditorFrame.OutputFrame.ProcessingTabSheet ));
     { view }
     ViewOutputAction.Enabled := Assigned(SQLEditorFrame) and SQLEditorFrame.OutputFrame.IsAnyOutput;
     if Assigned(SQLEditorFrame) then
@@ -876,13 +876,13 @@ begin
     //  (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
     { Tools }
     ToolsCompareFilesAction.Enabled := Assigned(SQLEditorFrame);
-    ToolsCompareSchemasAction.Enabled := PageControl.PageCount > 0;
-    ToolsPreferencesAction.Enabled := (PageControl.PageCount > 0) and (Assigned(SchemaBrowserFrame) or
+    ToolsCompareSchemasAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0);
+    ToolsPreferencesAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0) and (Assigned(SchemaBrowserFrame) or
       Assigned(SQLEditorFrame));
     ToolsSelectForCompareAction.Enabled := Assigned(SQLEditorFrame) and (not SQLEditorFrame.ActiveDocumentModified);
     DatabaseObjectSearchAction.Enabled := ToolsPreferencesAction.Enabled;
 
-    SchemaDocumentAction.Enabled := Assigned(SchemaBrowserFrame);
+    SchemaDocumentAction.Enabled := (not FConnecting) and Assigned(SchemaBrowserFrame);
 
     GetKeyboardState(KeyState);
     if KeyState[VK_INSERT] = 0 then
@@ -2273,6 +2273,7 @@ var
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
   FConnecting := True;
+  Application.ProcessMessages;
   ActivePageIndex := PageControl.ActivePageIndex;
   { Create new tab }
   TabSheet := TTabSheet.Create(PageControl);
