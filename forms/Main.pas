@@ -284,6 +284,7 @@ type
     procedure SetFields;
     function EndConnection(Confirm: Boolean): Integer;
     procedure CloseTab(Confirm: Boolean);
+    procedure RecreateStatusBar;
   public
     { Public declarations }
     procedure LoadSQLIntoEditor(Schema: string; SQLText: WideString);
@@ -346,6 +347,36 @@ begin
     if Value <> TStyleManager.ActiveStyle.Name then
       TStyleManager.TrySetStyle(Value);
     UpdateGuttersAndControls;
+    RecreateStatusBar; { style change will lose the handle }
+  end;
+end;
+
+procedure TMainForm.RecreateStatusBar;
+var
+  StatusPanel: TStatusPanel;
+begin
+  if Assigned(StatusBar) then
+  begin
+    StatusBar.Free;
+    StatusBar := nil;
+  end;
+  StatusBar := TStatusBar.Create(Self);
+  with StatusBar do
+  begin
+    Parent := Self;
+    { 1st panel }
+    StatusPanel := Panels.Add;
+    StatusPanel.Width := 99;
+    StatusPanel.Alignment := taCenter;
+    { 2nd panel }
+    StatusPanel := Panels.Add;
+    StatusPanel.Width := 99;
+    { 3rd panel }
+    StatusPanel := Panels.Add;
+    StatusPanel.Width := 99;
+    { 4th panel }
+    StatusPanel := Panels.Add;
+    StatusPanel.Width := 50;
   end;
 end;
 

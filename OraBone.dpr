@@ -1,4 +1,4 @@
-program OraBone;
+fprogram OraBone;
 
 uses
   Forms,
