@@ -189,11 +189,13 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
           ExplicitWidth = 348
           ExplicitHeight = 170
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 350
-          ExplicitWidth = 350
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 350
+              ExplicitWidth = 350
+            end
+          end
         end
       end
     end
@@ -212,7 +214,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00FC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

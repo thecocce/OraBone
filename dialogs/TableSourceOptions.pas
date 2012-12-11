@@ -60,7 +60,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BigIni, Common;
+  BigIni, Common, StyleHooks;
 
 var
   FTableSourceOptionsDialog: TTableSourceOptionsDialog;
@@ -71,7 +71,7 @@ begin
     Application.CreateForm(TTableSourceOptionsDialog, FTableSourceOptionsDialog);
   Result := FTableSourceOptionsDialog;
   FTableSourceOptionsDialog.ReadIniFile;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TTableSourceOptionsDialog.FormDestroy(Sender: TObject);

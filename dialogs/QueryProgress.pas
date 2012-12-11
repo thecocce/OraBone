@@ -40,7 +40,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 var
   FQueryProgressDialog: TQueryProgressDialog;
@@ -50,7 +50,7 @@ begin
   if FQueryProgressDialog = nil then
     Application.CreateForm(TQueryProgressDialog, FQueryProgressDialog);
   Result := FQueryProgressDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TQueryProgressDialog.CancelActionExecute(Sender: TObject);

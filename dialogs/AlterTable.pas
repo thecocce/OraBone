@@ -75,7 +75,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Lib, Vcl.Themes, Winapi.UxTheme;
+  Common, DataModule, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
 
 var
   FAlterTableDialog: TAlterTableDialog;
@@ -85,7 +85,7 @@ begin
   if FAlterTableDialog = nil then
     Application.CreateForm(TAlterTableDialog, FAlterTableDialog);
   Result := FAlterTableDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterTableDialog.AddColumnActionExecute(Sender: TObject);

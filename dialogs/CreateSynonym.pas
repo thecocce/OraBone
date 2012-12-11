@@ -44,7 +44,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Ora, DataModule;
+  Common, Ora, DataModule, StyleHooks;
 
 var
   FCreateSynonymDialog: TCreateSynonymDialog;
@@ -54,7 +54,7 @@ begin
   if FCreateSynonymDialog = nil then
     Application.CreateForm(TCreateSynonymDialog, FCreateSynonymDialog);
   Result := FCreateSynonymDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateSynonymDialog.FormDestroy(Sender: TObject);

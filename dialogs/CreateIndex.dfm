@@ -257,11 +257,13 @@ inherited CreateIndexDialog: TCreateIndexDialog
           ExplicitWidth = 289
           ExplicitHeight = 245
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 291
-          ExplicitWidth = 291
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 291
+              ExplicitWidth = 291
+            end
+          end
         end
       end
     end
@@ -340,7 +342,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E000C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

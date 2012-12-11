@@ -148,7 +148,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Math, UxTheme, DataModule;
+  Common, Math, UxTheme, DataModule, StyleHooks;
 
 const
   CELL_PADDING = 4;
@@ -212,7 +212,7 @@ begin
   if FPreferencesDialog = nil then
     Application.CreateForm(TPreferencesDialog, FPreferencesDialog);
   Result := FPreferencesDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
   if Assigned(TStyleManager.ActiveStyle) then
     Result.PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
 end;

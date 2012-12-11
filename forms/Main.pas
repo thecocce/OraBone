@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory,
   ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCPageControl,
-  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, JvStatusBar, BCPopupMenu,
+  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCPopupMenu,
   ActnPopup, JvToolBar, BCImageList, Vcl.Themes;
 
 const
@@ -19,7 +19,7 @@ type
     ActionManager: TActionManager;
     FileExitAction: TAction;
     MainPanel: TPanel;
-    StatusBar: TJvStatusBar;
+    StatusBar: TStatusBar;
     DatabaseNewConnectionMenuAction: TAction;
     DatabaseEndConnectionMenuAction: TAction;
     DatabaseEditorMenuAction: TAction;
@@ -300,7 +300,7 @@ implementation
 
 uses
   About, Common, Lib, Preferences, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
-  DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData,
+  DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor;
 
 {$R *.dfm}

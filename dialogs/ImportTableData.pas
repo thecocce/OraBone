@@ -66,7 +66,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Preferences, BigIni, ShellApi, Progress, SynEdit, Main, DB;
+  Common, Preferences, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks;
 
 var
   FImportTableDataDialog: TImportTableDataDialog;
@@ -76,7 +76,7 @@ begin
   if FImportTableDataDialog = nil then
     Application.CreateForm(TImportTableDataDialog, FImportTableDataDialog);
   Result := FImportTableDataDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TImportTableDataDialog.FormDestroy(Sender: TObject);

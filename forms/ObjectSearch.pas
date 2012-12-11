@@ -51,7 +51,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, DataModule, Vcl.Themes;
+  Common, DataModule, Vcl.Themes, StyleHooks;
 
 type
   PSearchRec = ^TSearchRec;
@@ -70,7 +70,7 @@ begin
   if FObjectSearhForm = nil then
     Application.CreateForm(TObjectSearhForm, FObjectSearhForm);
   Result := FObjectSearhForm;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TObjectSearhForm.FormClose(Sender: TObject; var Action: TCloseAction);

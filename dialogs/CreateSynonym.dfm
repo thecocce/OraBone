@@ -131,11 +131,13 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
           ExplicitWidth = 308
           ExplicitHeight = 122
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 310
-          ExplicitWidth = 310
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 310
+              ExplicitWidth = 310
+            end
+          end
         end
       end
     end
@@ -154,7 +156,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00F80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

@@ -66,7 +66,7 @@ begin
   if FHistoryEditDialog = nil then
     Application.CreateForm(THistoryEditDialog, FHistoryEditDialog);
   Result := FHistoryEditDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure THistoryEditDialog.FormDestroy(Sender: TObject);

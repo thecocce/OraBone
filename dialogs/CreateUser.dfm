@@ -106,13 +106,15 @@ inherited CreateUserDialog: TCreateUserDialog
           ExplicitWidth = 388
           ExplicitHeight = 220
         end
-      end
-      inherited TopPanel: TPanel
-        Width = 390
-        ExplicitWidth = 390
-        inherited SourceToolBar: TBCToolBar
-          Width = 390
-          ExplicitWidth = 390
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            Width = 390
+            ExplicitWidth = 390
+            inherited SourceToolBar: TBCToolBar
+              Width = 390
+              ExplicitWidth = 390
+            end
+          end
         end
       end
     end
@@ -173,7 +175,7 @@ inherited CreateUserDialog: TCreateUserDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E000C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

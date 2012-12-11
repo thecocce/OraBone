@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 const
   CAPTION_TEXT = 'Analyze Table: %s';
@@ -46,7 +46,7 @@ begin
   if FAnalyzeTableDialog = nil then
     Application.CreateForm(TAnalyzeTableDialog, FAnalyzeTableDialog);
   Result := FAnalyzeTableDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TAnalyzeTableDialog.FormDestroy(Sender: TObject);

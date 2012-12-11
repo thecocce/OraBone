@@ -75,7 +75,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Vcl.Themes;
+  Common, DataModule, Vcl.Themes, StyleHooks;
 
 type
   PCompareRec = ^TCompareRec;
@@ -94,7 +94,7 @@ begin
   if FSchemaCompareForm = nil then
     Application.CreateForm(TSchemaCompareForm, FSchemaCompareForm);
   Result := FSchemaCompareForm;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TSchemaCompareForm.FormClose(Sender: TObject; var Action: TCloseAction);

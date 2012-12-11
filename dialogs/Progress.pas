@@ -98,7 +98,7 @@ begin
   else
     Height := 99;
   OrigHeight := Height;
-  Common.SetStyledFormSize(Self);
+  StyleHooks.SetStyledFormSize(Self);
   ProgressBar.Marquee := Marquee;
   Visible := True;
 end;

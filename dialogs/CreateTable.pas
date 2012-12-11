@@ -64,7 +64,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, Vcl.Themes, Winapi.UxTheme;
+  Common, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
 
 var
   FCreateTableDialog: TCreateTableDialog;
@@ -74,7 +74,7 @@ begin
   if FCreateTableDialog = nil then
     Application.CreateForm(TCreateTableDialog, FCreateTableDialog);
   Result := FCreateTableDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateTableDialog.AddColumnActionExecute(Sender: TObject);

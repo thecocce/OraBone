@@ -58,6 +58,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -244,6 +248,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ReferencedColumnsTabSheet: TTabSheet [1]
       Caption = 'Referenced Columns'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RefColumnsPanel: TPanel
         Left = 0
         Top = 31
@@ -451,7 +459,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Height = 21
           Hint = 'Table name'
           Anchors = [akLeft, akTop, akRight]
-          ItemHeight = 13
           ReadOnly = False
           TabOrder = 0
           OnChange = RefTableNameComboBoxChange
@@ -464,6 +471,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ConditionTabSheet: TTabSheet [2]
       Caption = 'Condition'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConditionPanel: TPanel
         Left = 0
         Top = 0
@@ -602,7 +613,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Height = 21
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
-    ItemHeight = 13
     ReadOnly = False
     TabOrder = 5
     OnChange = TableNameComboBoxChange
@@ -630,7 +640,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00100210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00140210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

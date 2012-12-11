@@ -41,7 +41,7 @@ implementation
 {$R *.dfm}
 
 Uses
-  Common, DB;
+  Common, DB, StyleHooks;
 
 var
   FParametersDialog: TParametersDialog;
@@ -51,7 +51,7 @@ begin
   if FParametersDialog = nil then
     Application.CreateForm(TParametersDialog, FParametersDialog);
   Result := FParametersDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TParametersDialog.FormCreate(Sender: TObject);

@@ -46,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.UxTheme, Math, BigIni, Common;
+  Winapi.UxTheme, Math, BigIni, Common, StyleHooks;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -61,7 +61,7 @@ begin
   if FCustomizeObjectBrowserDialog = nil then
     Application.CreateForm(TCustomizeObjectBrowserDialog, FCustomizeObjectBrowserDialog);
   Result := FCustomizeObjectBrowserDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectBrowserDialog.FormDestroy(Sender: TObject);

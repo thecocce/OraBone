@@ -215,7 +215,6 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Align = alRight
       CharCase = ecUpperCase
-      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       EditColor = clInfoBk
@@ -258,7 +257,6 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Hint = 'Home'
       Align = alRight
-      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       OnKeyPress = HomeComboBoxKeyPress

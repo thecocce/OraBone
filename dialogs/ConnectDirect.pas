@@ -77,7 +77,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, Lib;
+  Common, Lib, StyleHooks;
 
 var
   FConnectDirectDialog: TConnectDirectDialog;
@@ -87,7 +87,7 @@ begin
   if FConnectDirectDialog = nil then
     FConnectDirectDialog := TConnectDirectDialog.Create(AOwner);
   Result := FConnectDirectDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 {
 procedure TOraSessionEditorForm.DivConnStr(Server : string; var Service, Port, Host: string);

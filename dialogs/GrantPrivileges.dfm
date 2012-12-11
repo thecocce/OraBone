@@ -188,11 +188,13 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           ExplicitWidth = 316
           ExplicitHeight = 209
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 318
-          ExplicitWidth = 318
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 318
+              ExplicitWidth = 318
+            end
+          end
         end
       end
     end
@@ -211,7 +213,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00FC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

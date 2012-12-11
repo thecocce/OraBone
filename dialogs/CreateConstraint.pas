@@ -71,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Lib;
+  Common, DataModule, Lib, StyleHooks;
 
 var
   FCreateConstraintDialog: TCreateConstraintDialog;
@@ -81,7 +81,7 @@ begin
   if FCreateConstraintDialog = nil then
     Application.CreateForm(TCreateConstraintDialog, FCreateConstraintDialog);
   Result := FCreateConstraintDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateConstraintDialog.FormDestroy(Sender: TObject);

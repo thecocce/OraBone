@@ -532,10 +532,12 @@ inherited AlterViewDialog: TAlterViewDialog
           ExplicitWidth = 436
           ExplicitHeight = 282
         end
-      end
-      inherited TopPanel: TPanel
-        Width = 438
-        ExplicitWidth = 438
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            Width = 438
+            ExplicitWidth = 438
+          end
+        end
       end
     end
   end
@@ -609,7 +611,7 @@ inherited AlterViewDialog: TAlterViewDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00300210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

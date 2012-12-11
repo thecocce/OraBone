@@ -51,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UxTheme, Math, BigIni, Common;
+  UxTheme, Math, BigIni, Common, StyleHooks;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -66,7 +66,7 @@ begin
   if FCustomizeTableColumnsrDialog = nil then
     Application.CreateForm(TCustomizeTableColumnsDialog, FCustomizeTableColumnsrDialog);
   Result := FCustomizeTableColumnsrDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeTableColumnsDialog.FormDestroy(Sender: TObject);

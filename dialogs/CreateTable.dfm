@@ -530,11 +530,13 @@ inherited CreateTableDialog: TCreateTableDialog
           ExplicitWidth = 671
           ExplicitHeight = 322
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 673
-          ExplicitWidth = 673
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 673
+              ExplicitWidth = 673
+            end
+          end
         end
       end
     end
@@ -610,7 +612,7 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

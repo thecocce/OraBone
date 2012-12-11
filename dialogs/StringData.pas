@@ -44,7 +44,7 @@ begin
   if FStringDataDialog = nil then
     Application.CreateForm(TStringDataDialog, FStringDataDialog);
   Result := FStringDataDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TStringDataDialog.FormDestroy(Sender: TObject);

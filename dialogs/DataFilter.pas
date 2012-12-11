@@ -103,7 +103,7 @@ begin
   if FDataFilterDialog = nil then
     Application.CreateForm(TDataFilterDialog, FDataFilterDialog);
   Result := FDataFilterDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TDataFilterDialog.SetFields;

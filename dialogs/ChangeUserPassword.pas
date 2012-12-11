@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 const
   CAPTION_TEXT = 'Change Password of %s';
@@ -46,7 +46,7 @@ begin
   if FChangeUserPasswordDialog = nil then
     Application.CreateForm(TChangeUserPasswordDialog, FChangeUserPasswordDialog);
   Result := FChangeUserPasswordDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TChangeUserPasswordDialog.FormDestroy(Sender: TObject);

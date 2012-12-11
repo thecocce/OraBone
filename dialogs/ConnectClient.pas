@@ -67,7 +67,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, OraServices, OraCall, Lib;
+  Common, OraServices, OraCall, Lib, StyleHooks;
 
 var
   FConnectClientDialog: TConnectClientDialog;
@@ -77,7 +77,7 @@ begin
   if FConnectClientDialog = nil then
     FConnectClientDialog := TConnectClientDialog.Create(AOwner);
   Result := FConnectClientDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TConnectClientDialog.FillDatabaseCombo;

@@ -53,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UxTheme, Math, BigIni, Common;
+  UxTheme, Math, BigIni, Common, StyleHooks;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -68,7 +68,7 @@ begin
   if FCustomizePageControlDialog = nil then
     Application.CreateForm(TCustomizePageControlDialog, FCustomizePageControlDialog);
   Result := FCustomizePageControlDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizePageControlDialog.FormDestroy(Sender: TObject);

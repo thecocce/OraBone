@@ -81,7 +81,7 @@ begin
   if FAlterViewDialog = nil then
     Application.CreateForm(TAlterViewDialog, FAlterViewDialog);
   Result := FAlterViewDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterViewDialog.FormDestroy(Sender: TObject);

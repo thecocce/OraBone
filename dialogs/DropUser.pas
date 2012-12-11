@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Math;
+  Common, Math, StyleHooks;
 
 const
   CAPTION_TEXT = 'Drop user %s, are you sure?';
@@ -47,7 +47,7 @@ begin
   if FDropUserDialog = nil then
     Application.CreateForm(TDropUserDialog, FDropUserDialog);
   Result := FDropUserDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TDropUserDialog.FormDestroy(Sender: TObject);

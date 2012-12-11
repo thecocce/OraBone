@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DBTables, Vcl.Themes;
+  Common, DBTables, Vcl.Themes, StyleHooks;
 
 var
   FBlobDialog: TBlobDialog;
@@ -42,7 +42,7 @@ begin
   if FBlobDialog = nil then
     Application.CreateForm(TBlobDialog, FBlobDialog);
   Result := FBlobDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TBlobDialog.FormDestroy(Sender: TObject);

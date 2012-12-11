@@ -79,7 +79,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 var
   FDataSortDialog: TDataSortDialog;
@@ -89,7 +89,7 @@ begin
   if FDataSortDialog = nil then
     Application.CreateForm(TDataSortDialog, FDataSortDialog);
   Result := FDataSortDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TDataSortDialog.SetFields;

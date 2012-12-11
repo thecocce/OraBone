@@ -82,7 +82,7 @@ implementation
 
 uses
   Common, Preferences, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Clipbrd,
-  Vcl.Themes;
+  Vcl.Themes, StyleHooks;
 
 var
   FExportTableDataDialog: TExportTableDataDialog;
@@ -92,7 +92,7 @@ begin
   if FExportTableDataDialog = nil then
     Application.CreateForm(TExportTableDataDialog, FExportTableDataDialog);
   Result := FExportTableDataDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TExportTableDataDialog.FormDestroy(Sender: TObject);

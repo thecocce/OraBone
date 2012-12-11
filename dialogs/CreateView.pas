@@ -61,7 +61,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, Vcl.Themes, Winapi.UxTheme;
+  Common, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
 
 var
   FCreateViewDialog: TCreateViewDialog;
@@ -71,7 +71,7 @@ begin
   if FCreateViewDialog = nil then
     Application.CreateForm(TCreateViewDialog, FCreateViewDialog);
   Result := FCreateViewDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateViewDialog.FormDestroy(Sender: TObject);

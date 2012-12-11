@@ -38,7 +38,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Winapi.UxTheme, Vcl.Themes, System.Math;
+  Common, Winapi.UxTheme, Vcl.Themes, System.Math, StyleHooks;
 
 const
   CELL_PADDING = 4;
@@ -51,7 +51,7 @@ begin
   if FCreateUserDialog = nil then
     Application.CreateForm(TCreateUserDialog, FCreateUserDialog);
   Result := FCreateUserDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateUserDialog.FormDestroy(Sender: TObject);

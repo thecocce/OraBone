@@ -43,7 +43,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib;
+  Common, Lib, StyleHooks;
 
 var
   FCreateDBLinkDialog: TCreateDBLinkDialog;
@@ -53,7 +53,7 @@ begin
   if FCreateDBLinkDialog = nil then
     Application.CreateForm(TCreateDBLinkDialog, FCreateDBLinkDialog);
   Result := FCreateDBLinkDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateDBLinkDialog.FormDestroy(Sender: TObject);

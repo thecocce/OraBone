@@ -48,7 +48,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Ora;
+  Common, DataModule, Ora, StyleHooks;
 
 var
   FGrantPrivilegesDialog: TGrantPrivilegesDialog;
@@ -58,7 +58,7 @@ begin
   if FGrantPrivilegesDialog = nil then
     Application.CreateForm(TGrantPrivilegesDialog, FGrantPrivilegesDialog);
   Result := FGrantPrivilegesDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TGrantPrivilegesDialog.FormDestroy(Sender: TObject);

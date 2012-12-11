@@ -59,7 +59,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, BigIni, Lib;
+  Common, BigIni, Lib, StyleHooks;
 
 const
   CAPTION_TEXT = 'Customize %s Filters';
@@ -72,7 +72,7 @@ begin
   if FCustomizeObjectFiltersDialog = nil then
     Application.CreateForm(TCustomizeObjectFiltersDialog, FCustomizeObjectFiltersDialog);
   Result := FCustomizeObjectFiltersDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectFiltersDialog.DeselectAllActionExecute(Sender: TObject);

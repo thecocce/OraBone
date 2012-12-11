@@ -36,7 +36,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 var
   FCreatePackageDialog: TCreatePackageDialog;
@@ -46,7 +46,7 @@ begin
   if FCreatePackageDialog = nil then
     Application.CreateForm(TCreatePackageDialog, FCreatePackageDialog);
   Result := FCreatePackageDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 

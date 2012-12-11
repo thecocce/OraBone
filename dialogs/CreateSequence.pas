@@ -44,7 +44,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common;
+  Common, StyleHooks;
 
 var
   FCreateSequenceDialog: TCreateSequenceDialog;
@@ -54,7 +54,7 @@ begin
   if FCreateSequenceDialog = nil then
     Application.CreateForm(TCreateSequenceDialog, FCreateSequenceDialog);
   Result := FCreateSequenceDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateSequenceDialog.FormDestroy(Sender: TObject);

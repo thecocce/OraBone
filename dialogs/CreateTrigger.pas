@@ -52,7 +52,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Ora, DataModule;
+  Common, Ora, DataModule, StyleHooks;
 
 var
   FCreateTriggerDialog: TCreateTriggerDialog;
@@ -62,7 +62,7 @@ begin
   if FCreateTriggerDialog = nil then
     Application.CreateForm(TCreateTriggerDialog, FCreateTriggerDialog);
   Result := FCreateTriggerDialog;
-  Common.SetStyledFormSize(TDialog(Result));
+  StyleHooks.SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateTriggerDialog.FormDestroy(Sender: TObject);

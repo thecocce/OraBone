@@ -44,7 +44,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, BigIni, Lib;
+  Common, BigIni, Lib, StyleHooks;
 
 var
   FSchemaFilterDialog: TSchemaFilterDialog;
@@ -54,7 +54,7 @@ begin
   if FSchemaFilterDialog = nil then
     Application.CreateForm(TSchemaFilterDialog, FSchemaFilterDialog);
   Result := FSchemaFilterDialog;
-  Common.SetStyledFormSize(Result);
+  StyleHooks.SetStyledFormSize(Result);
 end;
 
 procedure TSchemaFilterDialog.DeselectAllActionExecute(Sender: TObject);

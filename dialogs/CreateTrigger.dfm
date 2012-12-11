@@ -272,11 +272,13 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           ExplicitWidth = 340
           ExplicitHeight = 149
         end
-      end
-      inherited TopPanel: TPanel
-        inherited SourceToolBar: TBCToolBar
-          Width = 342
-          ExplicitWidth = 342
+        inherited SourceTopPanel: TPanel
+          inherited TopPanel: TPanel
+            inherited SourceToolBar: TBCToolBar
+              Width = 342
+              ExplicitWidth = 342
+            end
+          end
         end
       end
     end
@@ -325,7 +327,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
