@@ -91,19 +91,18 @@ uses
 {$R *.res}
 
 var
-  StyleName: string;
+  StyleFilename: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+   with TBigIniFile.Create(Common.GetINIFilename) do
   try
-    { Style }
-    StyleName := ReadString('Preferences', 'StyleName', 'Windows');
+    StyleFilename := ReadString('Preferences', 'StyleFilename', STYLENAME_WINDOWS);
   finally
     Free;
   end;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  if StyleName <> 'Windows' then
-    TStyleManager.TrySetStyle(StyleName);
+  if StyleFilename <> 'Windows' then
+    TStyleManager.SetStyle(TStyleManager.LoadFromFile(Format('%sStyles\%s', [ExtractFilePath(ParamStr(0)), StyleFilename])));
   Application.Title := 'OraBone';
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TDM, DM);
