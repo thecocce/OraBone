@@ -86,7 +86,11 @@ uses
   BigIni in '..\..\Common\units\BigIni.pas',
   TableSourceOptions in 'dialogs\TableSourceOptions.pas' {TableSourceOptionsDialog},
   Dlg in '..\..\Common\dialogs\Dlg.pas' {Dialog},
-  HistoryEdit in 'dialogs\HistoryEdit.pas' {HistoryEditDialog};
+  HistoryEdit in 'dialogs\HistoryEdit.pas' {HistoryEditDialog},
+  SQLFormatter in '..\..\Common\units\SQLFormatter.pas',
+  SQLParser in '..\..\Common\units\SQLParser.pas',
+  SQLParseTree in '..\..\Common\units\SQLParseTree.pas',
+  XMLConstants in '..\..\Common\units\XMLConstants.pas';
 
 {$R *.res}
 
@@ -102,7 +106,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   if StyleFilename <> 'Windows' then
-    TStyleManager.SetStyle(TStyleManager.LoadFromFile(Format('%sStyles\%s', [ExtractFilePath(ParamStr(0)), StyleFilename])));
+    TStyleManager.SetStyle(TStyleManager.LoadFromFile(System.SysUtils.Format('%sStyles\%s', [ExtractFilePath(ParamStr(0)), StyleFilename])));
   Application.Title := 'OraBone';
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TDM, DM);

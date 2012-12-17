@@ -326,7 +326,6 @@
 			<DCCReference Include="..\..\Common\units\BigIni.pas"/>
 			<DCCReference Include="dialogs\TableSourceOptions.pas">
 				<Form>TableSourceOptionsDialog</Form>
-				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="..\..\Common\dialogs\Dlg.pas">
 				<Form>Dialog</Form>
@@ -334,6 +333,10 @@
 			<DCCReference Include="dialogs\HistoryEdit.pas">
 				<Form>HistoryEditDialog</Form>
 			</DCCReference>
+			<DCCReference Include="..\..\Common\units\SQLFormatter.pas"/>
+			<DCCReference Include="..\..\Common\units\SQLParser.pas"/>
+			<DCCReference Include="..\..\Common\units\SQLParseTree.pas"/>
+			<DCCReference Include="..\..\Common\units\XMLConstants.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
