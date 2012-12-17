@@ -417,7 +417,6 @@ type
     procedure ExecuteScript;
     procedure ShowObjects;
     procedure ExplainPlan;
-    function FormatSQL(Text: string): string;
     procedure DecreaseIndent;
     procedure IncreaseIndent;
     procedure ToggleCase;
@@ -882,23 +881,6 @@ begin
         end;
       end; //if
     end;//for i :=
-  end;
-end;
-
-function TSQLEditorFrame.FormatSQL(Text: string): string;
-var
-  SQLTokenizer: TSQLTokenizer;
-begin
-  SQLTokenizer := TSQLTokenizer.Create;
-  try
-    SQLTokenizer.SetText(Text);
-    while not SQLTokenizer.Eof do
-    begin
-      // TODO
-      SQLTokenizer.Next;
-    end;
-  finally
-    SQLTokenizer.Free;
   end;
 end;
 

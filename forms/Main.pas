@@ -259,7 +259,7 @@ uses
   About, Common, Lib, Preferences, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils;
+  System.IOUtils, SQLFormatter;
 
 {$R *.dfm}
 
@@ -1413,7 +1413,7 @@ begin
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.ActiveSynEdit;
-    SynEdit.Text := SQLEditorFrame.FormatSQL(SynEdit.Text);
+    SynEdit.Text := SQLFormatter.FormatSQL(SynEdit.Text);
   end;
 end;
 
