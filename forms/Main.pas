@@ -758,6 +758,7 @@ begin
     EditDeleteWordAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteLineAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteEOLAction.Enabled := ActiveSQLDocumentFound;
+    FormatSQLAction.Enabled := ActiveSQLDocumentFound;
     try
       EditPasteAction.Enabled := Clipboard.HasFormat(CF_TEXT) and ActiveSQLDocumentFound and not OutputGridHasFocus; //ClipBoard.AsText <> '';
     except
