@@ -265,7 +265,8 @@ type
     SpeedButton2: TSpeedButton;
     SearchPanel7: TPanel;
     CaseSensitiveCheckBox: TBCCheckBox;
-    SearchPanel8: TPanel;
+    CaseSensitiveLabel: TLabel;
+    Panel1: TPanel;
     WholeWordsCheckBox: TBCCheckBox;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
@@ -1256,7 +1257,7 @@ begin
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
         AFileName := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
 
-      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName) then
+      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
       begin
         PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
         SynEdit.DocumentName := CommonDialogs.Files[0];

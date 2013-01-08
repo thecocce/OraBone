@@ -331,35 +331,13 @@ begin
 end;
 
 procedure TMainForm.HelpCheckForUpdateMenuActionExecute(Sender: TObject);
-var
-  Check: string;
 begin
-  try
-    try
-      Screen.Cursor := crHourGlass;
-      Check := GetAppVersion('http://www.bonecode.com/check.php?a=orabone&v=' + AboutDialog.Version);
-    finally
-      Screen.Cursor := crDefault;
-    end;
-    if Trim(Check) <> '' then
-    begin
-      if System.Pos('A new version', Check) <> 0 then
-      begin
-        if Common.AskYesOrNo(Check + CHR_ENTER + CHR_ENTER + 'Would you like to download it from the Internet?') then
-          DownloadURLDialog.Open('OraBone.zip', 'http://www.bonecode.com/downloads/OraBone.zip');
-      end
-      else
-        Common.ShowMessage(Check);
-    end;
-  except
-    on E: Exception do
-      Common.ShowErrorMessage(E.Message);
-  end;
+  Common.CheckForUpdates(Application.Title);
 end;
 
 procedure TMainForm.HelpHomeActionExecute(Sender: TObject);
 begin
-  BrowseURL('http://www.bonecode.com');
+  BrowseURL(BONECODE_URL);
 end;
 
 procedure TMainForm.ApplicationEventsActivate(Sender: TObject);
