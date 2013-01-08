@@ -49,7 +49,7 @@ object MainForm: TMainForm
       ColorMap.UnusedColor = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       HorzMargin = 2
@@ -86,6 +86,7 @@ object MainForm: TMainForm
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      HorzSeparator = False
       ParentFont = False
       Spacing = 0
     end
@@ -1106,7 +1107,7 @@ object MainForm: TMainForm
       Category = 'SQLEditor'
       Caption = 'Format SQL'
       Enabled = False
-      Hint = 'Format SQL'
+      Hint = 'Format SQL (upcoming feature)'
       ImageIndex = 53
       OnExecute = FormatSQLActionExecute
     end
@@ -1317,7 +1318,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C010158005802140510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010158005802200510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4424,5 +4425,11 @@ object MainForm: TMainForm
     object SelectforCompareMenuItem: TMenuItem
       Action = ToolsSelectForCompareAction
     end
+  end
+  object DragDrop: TJvDragDrop
+    DropTarget = Owner
+    OnDrop = DragDropDrop
+    Left = 212
+    Top = 144
   end
 end

@@ -301,6 +301,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Width = 255
       Height = 431
       Align = alClient
+      BorderWidth = 1
       DragOperations = []
       EditDelay = 500
       Header.AutoSizeIndex = 0
@@ -315,7 +316,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       IncrementalSearch = isAll
       Indent = 16
       TabOrder = 0
-      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoChangeScale, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes]
+      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
       TreeOptions.PaintOptions = [toShowBackground, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection]
       OnClick = VirtualDrawTreeClick
@@ -698,7 +699,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C010112005802040510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112005802080510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1459,7 +1460,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A003800380410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A0038003C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1867,27 +1868,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     OnMessage = ApplicationEventsMessage
     Left = 184
     Top = 62
-  end
-  object OpenDialog: TOpenDialog
-    DefaultExt = '.ora'
-    Filter = 'SQL*Net configuration files (*.ora)|*.ora'
-    Options = [ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Open'
-    Left = 68
-    Top = 202
-  end
-  object SaveDialog: TSaveDialog
-    DefaultExt = '.ora'
-    Filter = 'SQL*Net configuration files (*.ora)|*.ora'
-    Options = [ofOverwritePrompt, ofCreatePrompt, ofEnableSizing]
-    Title = 'Save'
-    Left = 64
-    Top = 252
-  end
-  object PrintDialog: TPrintDialog
-    Options = [poPageNums]
-    Left = 130
-    Top = 257
   end
   object SynEditSearch: TSynEditSearch
     Left = 198

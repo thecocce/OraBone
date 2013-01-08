@@ -120,6 +120,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Width = 120
         Height = 21
         Hint = 'Delimiter.'
+        ItemHeight = 13
         ReadOnly = False
         TabOrder = 3
         Text = 'Semicolon'
@@ -341,11 +342,5 @@ object ImportTableDataDialog: TImportTableDataDialog
     object SaveFileButtonAction: TAction
       OnExecute = SaveFileButtonActionExecute
     end
-  end
-  object OpenDialog: TOpenDialog
-    Filter = 'All files (*.*)|*.*'
-    Title = 'Select File'
-    Left = 222
-    Top = 108
   end
 end

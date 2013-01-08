@@ -3,17 +3,17 @@ unit ExportTableData;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCPageControl,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls,
-  JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess, SynEdit, BCEdit, Dlg,
-  JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, BCDBGrid, Vcl.Buttons;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, BCPageControl, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls,
+  JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess,
+  SynEdit, BCEdit, Dlg, JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, BCDBGrid,
+  Vcl.Buttons;
 
 type
   TExportTableDataDialog = class(TDialog)
     ActionList: TActionList;
     ExportAction: TAction;
     SelectFileButtonAction: TAction;
-    OpenDialog: TOpenDialog;
     Panel1: TPanel;
     FormatLabel: TLabel;
     FormatComboBox: TBCComboBox;
@@ -82,7 +82,7 @@ implementation
 
 uses
   Common, Preferences, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Clipbrd,
-  Vcl.Themes, StyleHooks;
+  Vcl.Themes, StyleHooks, CommonDialogs, Language;
 
 var
   FExportTableDataDialog: TExportTableDataDialog;
@@ -106,30 +106,31 @@ begin
 end;
 
 procedure TExportTableDataDialog.SelectFileButtonActionExecute(Sender: TObject);
+var
+  Filter, DefaultExt: string;
 begin
-  with OpenDialog do
-  begin
-    InitialDir := FilenameEdit.Text;
-    if Execute then
-      FilenameEdit.Text := FileName;
+  case FormatComboBox.ItemIndex of
+    0:
+      begin
+        Filter := 'CSV files (*.csv)'#0'*.csv'#0#0;
+        DefaultExt := 'csv';
+      end;
+    1:
+      begin
+        Filter := 'SQL files (*.sql)'#0'*.sql'#0#0;
+        DefaultExt := 'sql';
+      end;
   end;
+  if CommonDialogs.OpenFile(FilenameEdit.Text, Filter,
+    LanguageDataModule.GetConstant('SelectFile'), DefaultExt) then
+    FilenameEdit.Text := CommonDialogs.Files[0];
 end;
 
 procedure TExportTableDataDialog.SetFields;
 begin
   case FormatComboBox.ItemIndex of
-    0:
-      begin
-        OpenDialog.Filter := 'All files (*.csv)|*.csv';
-        OpenDialog.DefaultExt := 'csv';
-        FilenameEdit.Text := ChangeFileExt(FilenameEdit.Text, '.csv');
-      end;
-    1:
-      begin
-        OpenDialog.Filter := 'SQL files (*.sql)|*.sql';
-        OpenDialog.DefaultExt := 'sql';
-        FilenameEdit.Text := ChangeFileExt(FilenameEdit.Text, '.sql');
-      end;
+    0: FilenameEdit.Text := ChangeFileExt(FilenameEdit.Text, '.csv');
+    1: FilenameEdit.Text := ChangeFileExt(FilenameEdit.Text, '.sql');
   end;
 
   Options1TabSheet.TabVisible := FormatComboBox.ItemIndex = 0;

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess,
   MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCPageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
   Vcl.StdCtrls, JvMenus, BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
@@ -123,8 +123,6 @@ type
     SourceToolBar: TBCToolBar;
     SQLEditorToolButton: TToolButton;
     SetSourceClickAction: TAction;
-    OpenDialog: TOpenDialog;
-    SaveDialog: TSaveDialog;
     ToolButton11: TToolButton;
     ToolButton12: TToolButton;
     CopyToClipboardAction: TAction;
@@ -345,7 +343,7 @@ implementation
 uses
   DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
   CustomizeTableColumns, Preferences, Lib, NxColumns, NxSharedCommon, StyleHooks,
-  TableSourceOptions, DataModule;
+  TableSourceOptions, DataModule, CommonDialogs, Language;
 
 const
   { ColumnsQuery columns }
@@ -1394,24 +1392,23 @@ begin
   begin
     Rslt := BlobDialog.Open(TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)));
     if Rslt = mrYes then // load
-      if OpenDialog.Execute then
+      if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('Open')) then
       begin
         DataDBGrid.DataSource.DataSet.Edit;
         Stream := nil;
         BlobStream := nil;
         try
-          Stream := TFileStream.Create(OpenDialog.FileName, fmOpenRead);
+          Stream := TFileStream.Create(CommonDialogs.Files[0], fmOpenRead);
           BlobStream := DataDBGrid.DataSource.DataSet.CreateBlobStream(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName), bmWrite);
           BlobStream.CopyFrom(Stream, 0);
-
         finally
           BlobStream.Free;
           Stream.Free;
         end;
       end;
     if Rslt = mrNo then // save
-      if SaveDialog.Execute then
-        TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(SaveDialog.FileName);
+      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+        TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(CommonDialogs.Files[0]);
     if Rslt = mrAbort then
     begin
       DataDBGrid.DataSource.DataSet.Edit;

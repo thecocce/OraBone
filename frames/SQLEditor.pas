@@ -50,7 +50,7 @@ unit SQLEditor;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.CommDlg, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SynEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ImgList,
   JvExComCtrls, JvComCtrls, Vcl.Menus, SynHighlighterSQL, Output, SynEditHighlighter, SynEditPrint,
   OraError, SynEditMiscClasses, SynEditSearch, SynEditTypes, SynEditPlugins, Vcl.Buttons,
@@ -85,9 +85,6 @@ type
   end;
 
   TSQLEditorFrame = class(TFrame)
-    OpenDialog: TOpenDialog;
-    SaveDialog: TSaveDialog;
-    PrintDialog: TPrintDialog;
     SynEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
     SearchPanel: TPanel;
@@ -429,6 +426,7 @@ type
     procedure DeleteEOL;
     procedure UpdateGuttersAndControls(DoubleBuffered: Boolean);
     procedure RepaintToolButtons;
+    function IsCompareFilesActivePage: Boolean;
   end;
 
 implementation
@@ -439,7 +437,7 @@ uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks,
   Preferences, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
   Compare, Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
-  AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil;
+  AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
 
 const
   DEFAULT_FILENAME = 'Sql';
@@ -961,6 +959,7 @@ var
   Frame: TCompareFrame;
   TempList: TStringList;
   SynEdit: TBCSynEdit;
+  Panel: TPanel;
 begin
   { create list of open documents }
   TempList := TStringList.Create;
@@ -976,7 +975,7 @@ begin
     for i := 0 to PageControl.PageCount - 1 do
       if PageControl.Pages[i].ImageIndex = FCompareImageIndex then
       begin
-        Frame := TCompareFrame(PageControl.Pages[i].Components[0]);
+        Frame := TCompareFrame(PageControl.Pages[i].Components[0].Components[0]);
         { if there already are two files to compare then continue }
         if Frame.ComparedFilesSet then
           Continue
@@ -995,8 +994,23 @@ begin
   TabSheet.ImageIndex := FCompareImageIndex;
   TabSheet.Caption := 'Compare Files';
   PageControl.ActivePage := TabSheet;
+  Panel := TPanel.Create(TabSheet);
+  with Panel do
+  begin
+    Parent := TabSheet;
+    Align := alClient;
+    BevelOuter := bvNone;
+    Caption := '';
+    DoubleBuffered := False;
+    Padding.Left := 1;
+    Padding.Top := 1;
+    Padding.Right := 3;
+    Padding.Bottom := 2;
+    ParentColor := True;
+    ParentDoubleBuffered := False;
+  end;
   { create a compare frame }
-  Frame := TCompareFrame.Create(TabSheet);
+  Frame := TCompareFrame.Create(Panel);
   with Frame do
   begin
     Parent := TabSheet;
@@ -1085,10 +1099,9 @@ var
 begin
   if FileName = '' then
   begin
-    OpenDialog.Filter := 'SQL files (*.sql)|*.sql';
-    if OpenDialog.Execute then
-      for i := 0 to OpenDialog.Files.Count - 1 do
-        Open(OpenDialog.Files[i])
+    if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
+      for i := 0 to CommonDialogs.Files.Count - 1 do
+        Open(CommonDialogs.Files[i])
   end
   else
   begin
@@ -1242,17 +1255,17 @@ begin
       AFileName := TabSheet.Caption;
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
         AFileName := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
-      SaveDialog.FileName := AFileName;
 
-      if SaveDialog.Execute then
+      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName) then
       begin
-        PageControl.ActivePage.Caption := ExtractFileName(SaveDialog.FileName);
-        SynEdit.DocumentName := SaveDialog.FileName;
-        Result := SaveDialog.FileName;
+        PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
+        SynEdit.DocumentName := CommonDialogs.Files[0];
+        Result := CommonDialogs.Files[0];
       end
       else
       begin
-        SynEdit.SetFocus;
+        if SynEdit.CanFocus then
+          SynEdit.SetFocus;
         Exit;
       end;
     end;
@@ -1469,9 +1482,15 @@ begin
 end;
 
 procedure TSQLEditorFrame.Print;
+var
+  PrintDlgRec: TPrintDlg;
 begin
-  if PrintDialog.Execute then
+  if CommonDialogs.Print(Handle, PrintDlgRec) then
   begin
+    SynEditPrint.Copies := PrintDlgRec.nCopies;
+    SynEditPrint.SelectedOnly := PrintDlgRec.Flags and PD_SELECTION <> 0;
+    if PrintDlgRec.Flags and PD_PAGENUMS <> 0 then
+      SynEditPrint.PrintRange(PrintDlgRec.nFromPage, PrintDlgRec.nToPage);
     InitializeSynEditPrint;
     SynEditPrint.Print;
   end;
@@ -2906,6 +2925,11 @@ var
 begin
   SynEdit := ActiveSynEdit;
   Result := Assigned(SynEdit) and SynEdit.Modified;
+end;
+
+function TSQLEditorFrame.IsCompareFilesActivePage: Boolean;
+begin
+  Result := Assigned(PageControl.ActivePage) and (PageControl.ActivePage.ImageIndex = FCompareImageIndex);
 end;
 
 end.

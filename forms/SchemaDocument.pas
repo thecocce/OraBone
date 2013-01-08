@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
+  OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
   ActnList, Menus, WebBrowserContainer, BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
   JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup;
 
@@ -25,7 +25,6 @@ type
     Print1: TMenuItem;
     N2: TMenuItem;
     Close1: TMenuItem;
-    SaveDialog: TSaveDialog;
     DocumentPanel: TPanel;
     WebBrowser: TWebBrowser;
     ButtonPanel: TPanel;
@@ -78,7 +77,7 @@ implementation
 {$R *.dfm}
 
 uses
-  ActiveX, StrUtils, Progress, Preferences, Common, BigINI, Main;
+  ActiveX, StrUtils, Progress, Preferences, Common, BigINI, Main, CommonDialogs, Language;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;
@@ -129,10 +128,12 @@ begin
 end;
 
 procedure TSchemaDocumentForm.SaveActionExecute(Sender: TObject);
+var
+  Filename: string;
 begin
-  SaveDialog.FileName := Format('%s_%s.html', [FSchemaparam, StringReplace(FSession.Server, '.', '_',[rfReplaceAll])]);
-  if SaveDialog.Execute then
-    SaveAsHTML(WebBrowser, SaveDialog.FileName);
+  FileName := Format('%s_%s.html', [FSchemaparam, StringReplace(FSession.Server, '.', '_',[rfReplaceAll])]);
+  if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FileName) then
+    SaveAsHTML(WebBrowser, CommonDialogs.Files[0]);
 end;
 
 procedure TSchemaDocumentForm.WriteIniFile;

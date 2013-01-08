@@ -3,15 +3,14 @@ unit ImportTableData;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora, BCEdit, JvExStdCtrls, JvEdit,
-  JvCombobox, BCComboBox, BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, Dlg;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora,
+  BCEdit, JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, Dlg;
 
 type
   TImportTableDataDialog = class(TDialog)
     ActionList: TActionList;
     ImportAction: TAction;
-    OpenDialog: TOpenDialog;
     OpenFileButtonAction: TAction;
     SaveFileButtonAction: TAction;
     Panel1: TPanel;
@@ -66,7 +65,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Preferences, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks;
+  Common, Preferences, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks, CommonDialogs,
+  Language;
 
 var
   FImportTableDataDialog: TImportTableDataDialog;
@@ -107,12 +107,9 @@ end;
 
 procedure TImportTableDataDialog.OpenFileButtonActionExecute(Sender: TObject);
 begin
-  with OpenDialog do
-  begin
-    InitialDir := OpenFilenameEdit.Text;
-    if Execute then
-      OpenFilenameEdit.Text := FileName;
-  end;
+  if CommonDialogs.OpenFile(OpenFilenameEdit.Text, 'All Files'#0'*.*'#0#0,
+    LanguageDataModule.GetConstant('SelectFile')) then
+      OpenFilenameEdit.Text := CommonDialogs.Files[0];
 end;
 
 procedure TImportTableDataDialog.WriteIniFile;
@@ -149,12 +146,8 @@ end;
 
 procedure TImportTableDataDialog.SaveFileButtonActionExecute(Sender: TObject);
 begin
-  with OpenDialog do
-  begin
-    InitialDir := SaveFilenameEdit.Text;
-    if Execute then
-      SaveFilenameEdit.Text := FileName;
-  end;
+  if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+    SaveFilenameEdit.Text := CommonDialogs.Files[0];
 end;
 
 function TImportTableDataDialog.CheckFields: Boolean;

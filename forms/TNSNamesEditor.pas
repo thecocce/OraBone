@@ -3,8 +3,8 @@ unit TNSNamesEditor;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SynEdit, Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls,
+  Winapi.Windows, Winapi.CommDlg, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, SynEdit, Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls,
   Vcl.ToolWin, BCToolBar, Vcl.ImgList, BCImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
   JvEdit, BCEdit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
   SynEditSearch, SynEditMiscClasses, SynEditTypes;
@@ -80,9 +80,6 @@ type
     ViewLineNumbersAction: TAction;
     ViewSpecialCharsAction: TAction;
     ViewSelectionModeAction: TAction;
-    OpenDialog: TOpenDialog;
-    SaveDialog: TSaveDialog;
-    PrintDialog: TPrintDialog;
     SynEditSearch: TSynEditSearch;
     SynEditPrint: TSynEditPrint;
     SearchActionList: TActionList;
@@ -161,7 +158,7 @@ implementation
 
 uses
   System.RegularExpressions, Vcl.Themes, BigIni, StyleHooks, Common, OraServices, OraCall,
-  PrintPreview, SynEditKeyCmds;
+  PrintPreview, SynEditKeyCmds, CommonDialogs, Language;
 
 const
   FORM_CAPTION = 'TNSNames Editor - [%s]';
@@ -305,9 +302,9 @@ end;
 
 procedure TTNSNamesEditorForm.FileOpenActionExecute(Sender: TObject);
 begin
-  //OpenDialog.InitialDir := '';
-  if OpenDialog.Execute then
-    LoadTNSNames(OpenDialog.FileName)
+  if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
+        , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
+    LoadTNSNames(CommonDialogs.Files[0])
 end;
 
 procedure TTNSNamesEditorForm.InitializeSynEditPrint;
@@ -329,9 +326,15 @@ begin
 end;
 
 procedure TTNSNamesEditorForm.FilePrintActionExecute(Sender: TObject);
+var
+  PrintDlgRec: TPrintDlg;
 begin
-  if PrintDialog.Execute then
+  if CommonDialogs.Print(Handle, PrintDlgRec) then
   begin
+    SynEditPrint.Copies := PrintDlgRec.nCopies;
+    SynEditPrint.SelectedOnly := PrintDlgRec.Flags and PD_SELECTION <> 0;
+    if PrintDlgRec.Flags and PD_PAGENUMS <> 0 then
+      SynEditPrint.PrintRange(PrintDlgRec.nFromPage, PrintDlgRec.nToPage);
     InitializeSynEditPrint;
     SynEditPrint.Print;
   end;
@@ -356,10 +359,9 @@ begin
     AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
   if ShowDialog then
   begin
-    SaveDialog.InitialDir := ExtractFilePath(AFileName);
-    SaveDialog.FileName := ExtractFileName(AFileName);
-    if SaveDialog.Execute then
-      AFileName := SaveDialog.FileName
+   if CommonDialogs.SaveFile(ExtractFilePath(AFileName), 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
+        , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), ExtractFileName(AFileName)) then
+      AFileName := CommonDialogs.Files[0]
     else
     begin
       SynEdit.SetFocus;

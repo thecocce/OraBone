@@ -77,7 +77,7 @@ uses
   WebBrowserContainer in '..\..\Common\units\WebBrowserContainer.pas',
   ChangeUserPassword in 'dialogs\ChangeUserPassword.pas' {ChangeUserPasswordDialog},
   CustomizeObjectFilters in 'dialogs\CustomizeObjectFilters.pas' {CustomizeObjectFiltersDialog},
-  Common in '..\..\Common\units\Common.pas',
+  Language in '..\..\Common\units\Language.pas' {LanguageDataModule},
   SQLTokenizer in '..\..\Common\units\SQLTokenizer.pas',
   StyleHooks in '..\..\Common\units\StyleHooks.pas',
   DownloadURL in '..\..\Common\dialogs\DownloadURL.pas' {DownloadURLDialog},
@@ -90,7 +90,9 @@ uses
   SQLFormatter in '..\..\Common\units\SQLFormatter.pas',
   SQLParser in '..\..\Common\units\SQLParser.pas',
   SQLParseTree in '..\..\Common\units\SQLParseTree.pas',
-  XMLConstants in '..\..\Common\units\XMLConstants.pas';
+  XMLConstants in '..\..\Common\units\XMLConstants.pas',
+  Common in '..\..\Common\units\Common.pas',
+  CommonDialogs in '..\..\Common\units\CommonDialogs.pas';
 
 {$R *.res}
 

@@ -121,7 +121,7 @@ implementation
 
 uses
   System.SysUtils, Vcl.Dialogs, Clipbrd, Main, OraServices, DataModule, BigINI, Common,
-  Math, NxCustomGridControl;
+  Math, CommonDialogs, Language;
 
 const
   Codes64 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/';
@@ -843,16 +843,8 @@ end;
 
 procedure SaveSQL(SynEdit: TSynEdit);
 begin
-  with TSaveDialog.Create(nil) do
-  try
-    Title := 'Save As';
-    Filter := 'SQL files (*.sql)|*.sql';
-    DefaultExt := '.sql';
-    if Execute then
-      SynEdit.Lines.SaveToFile(FileName);
-  finally
-    Free;
-  end;
+  if CommonDialogs.SaveFile('', 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
+    SynEdit.Lines.SaveToFile(CommonDialogs.Files[0]);
 end;
 
 procedure CopyAllToClipboard(SynEdit: TSynEdit);
