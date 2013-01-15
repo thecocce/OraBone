@@ -76,6 +76,7 @@ type
   protected
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
   public
+    constructor Create(AOwner: TComponent);
     property InThread: Boolean read FInThread write FInThread;
     property DocumentName: string read FDocumentName write FDocumentName;
     property FileDateTime: TDateTime read FFileDateTime write FFileDateTime;
@@ -443,7 +444,14 @@ uses
 const
   DEFAULT_FILENAME = 'Sql';
 
-  { TBCSynEdit }
+{ TBCSynEdit }
+
+constructor TBCSynEdit.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Width := 0;
+  Height := 0;
+end;
 
 function TBCSynEdit.GetQueryOpened: Boolean;
 begin
@@ -665,10 +673,10 @@ begin
   with SynEdit do
   begin
     Visible := False;
+    Align := alClient;
     Parent := Panel;
     DocumentName := FileName;
     FileDateTime := GetFileDateTime(FileName);
-    Align := alClient;
     Font.Charset := DEFAULT_CHARSET;
     Font.Color := clWindowText;
     Font.Height := -13;

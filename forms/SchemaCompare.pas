@@ -113,15 +113,7 @@ procedure TSchemaCompareForm.Open(const SessionList: TList);
 var
   i: Integer;
   s: string;
-  LStyles: TCustomStyleServices;
 begin
-  LStyles := StyleServices;
-  if LStyles.Enabled then
-  begin
-    Schema1VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
-    Schema2VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
-  end;
-
   FSessionList := SessionList;
   for i := 0 to FSessionList.Count - 1 do
   begin

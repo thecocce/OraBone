@@ -359,7 +359,8 @@ begin
     AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
   if ShowDialog then
   begin
-   if CommonDialogs.SaveFile(ExtractFilePath(AFileName), 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
+   if CommonDialogs.SaveFile(ExtractFilePath(AFileName), LanguageDataModule.GetConstant('AllFiles') + #0'*.*'#0 +
+       Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
         , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), ExtractFileName(AFileName)) then
       AFileName := CommonDialogs.Files[0]
     else
@@ -412,6 +413,8 @@ end;
 
 procedure TTNSNamesEditorForm.FormCreate(Sender: TObject);
 begin
+  StatusBar.Font.Name := 'Tahoma';
+  StatusBar.Font.Size := 8;
   VirtualDrawTree.NodeDataSize := SizeOf(TObjectNodeRec);
 end;
 
@@ -563,9 +566,6 @@ begin
     if not Assigned(Data) then
       Exit;
 
-    if LStyles.Enabled then
-      VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
-
     if LStyles.Enabled and (vsSelected in PaintInfo.Node.States) then
     begin
       R := ContentRect;
@@ -642,7 +642,6 @@ begin
     ImageIndex := Data.ImageIndex;
   end;
 end;
-
 
 procedure TTNSNamesEditorForm.VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree;
   HintCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);

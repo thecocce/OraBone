@@ -139,9 +139,6 @@ begin
     if not Assigned(Data) then
       Exit;
 
-    if LStyles.Enabled then
-      VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
-
     if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
       LColor := LStyles.GetSystemColor(clWindowText);
     //get and set the background color
@@ -163,17 +160,6 @@ begin
       Canvas.Brush.Color := clHighlight;
       Canvas.Font.Color := clHighlightText;
     end;
-    //Canvas.FillRect(PaintInfo.CellRect);
-    (*if {(Column = FocusedColumn) and} (Node = FocusedNode) then
-      Canvas.Font.Color := clHighlightText
-    else
-      Canvas.Font.Color := clWindowText;
-
-    if { (Column = FocusedColumn) and} (not Sender.Focused) then
-    begin
-      Canvas.Brush.Color := clBtnFace;
-      Canvas.Font.Color := clBlack;
-    end;*)
 
     SetBKMode(Canvas.Handle, TRANSPARENT);
 
@@ -299,8 +285,6 @@ begin
   if PrivilegesQuery.Active and PrivilegesQuery.Locate('GRANTEE', Data.GrantedRole, []) then
     Include(InitialStates, ivsHasChildren);
 end;
-
-
 
 procedure TUserBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
@@ -469,16 +453,10 @@ begin
 end;
 
 procedure TUserBrowserFrame.SetObjectFrameAlign(Value: TAlign);
-var
-  LStyles: TCustomStyleServices;
 begin
   InfoButtonPanel.Align := Value;
   RolesButtonPanel.Align := Value;
   SourceButtonPanel.Align := Value;
-  { todo: move this to better place }
-  LStyles := StyleServices;
-  if LStyles.Enabled then
-    VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
 end;
 
 procedure TUserBrowserFrame.CopyToClipboard;

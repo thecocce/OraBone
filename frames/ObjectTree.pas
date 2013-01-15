@@ -405,14 +405,6 @@ begin
 
     Canvas.Font.Color := clWindowText;
     Canvas.Font.Style := [];
-   {
-    if (Column = VirtualDrawTree.FocusedColumn) and (not Focused) then
-    begin
-      Canvas.Brush.Color := clBtnFace;
-      Canvas.Font.Color := clBlack;
-    end;}
-    if LStyles.Enabled then
-      VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
 
     if LStyles.Enabled and (vsSelected in PaintInfo.Node.States) then
     begin

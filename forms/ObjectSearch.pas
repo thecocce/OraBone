@@ -138,12 +138,7 @@ begin
 end;
 
 procedure TObjectSearhForm.Open(OraSession: TOraSession);
-var
-  LStyles: TCustomStyleServices;
 begin
-  LStyles := StyleServices;
-  if LStyles.Enabled then
-    VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
   ObjectSearchQuery.Session := OraSession;
   ColumnsQuery.Session := OraSession;
   Show;
@@ -225,15 +220,6 @@ begin
 
     if not Assigned(Data) then
       Exit;
-
-    {Canvas.Font.Color := clWindowText;
-    if (Column = FocusedColumn) and (not Focused) then
-    begin
-      Canvas.Brush.Color := clBtnFace;
-      Canvas.Font.Color := clBlack;
-    end; }
-    if LStyles.Enabled then
-      VirtualDrawTree.Color := LStyles.GetStyleColor(scEdit);
 
     if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
       LColor := LStyles.GetSystemColor(clWindowText);
