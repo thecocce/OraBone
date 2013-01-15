@@ -109,7 +109,10 @@ procedure TImportTableDataDialog.OpenFileButtonActionExecute(Sender: TObject);
 begin
   if CommonDialogs.OpenFile(OpenFilenameEdit.Text, 'All Files'#0'*.*'#0#0,
     LanguageDataModule.GetConstant('SelectFile')) then
-      OpenFilenameEdit.Text := CommonDialogs.Files[0];
+  begin
+    Application.ProcessMessages;
+    OpenFilenameEdit.Text := CommonDialogs.Files[0];
+  end;
 end;
 
 procedure TImportTableDataDialog.WriteIniFile;

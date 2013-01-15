@@ -123,7 +123,10 @@ begin
   end;
   if CommonDialogs.OpenFile(FilenameEdit.Text, Filter,
     LanguageDataModule.GetConstant('SelectFile'), DefaultExt) then
+  begin
+    Application.ProcessMessages;
     FilenameEdit.Text := CommonDialogs.Files[0];
+  end;
 end;
 
 procedure TExportTableDataDialog.SetFields;
