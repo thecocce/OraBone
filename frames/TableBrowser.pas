@@ -1394,6 +1394,7 @@ begin
     if Rslt = mrYes then // load
       if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('Open')) then
       begin
+        Application.ProcessMessages;
         DataDBGrid.DataSource.DataSet.Edit;
         Stream := nil;
         BlobStream := nil;

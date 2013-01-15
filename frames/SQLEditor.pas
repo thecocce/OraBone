@@ -1109,8 +1109,11 @@ begin
   if FileName = '' then
   begin
     if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
+    begin
+      Application.ProcessMessages;
       for i := 0 to CommonDialogs.Files.Count - 1 do
         Open(CommonDialogs.Files[i])
+    end;
   end
   else
   begin

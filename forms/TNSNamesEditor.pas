@@ -304,7 +304,10 @@ procedure TTNSNamesEditorForm.FileOpenActionExecute(Sender: TObject);
 begin
   if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
         , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
+  begin
+    Application.ProcessMessages;
     LoadTNSNames(CommonDialogs.Files[0])
+  end;
 end;
 
 procedure TTNSNamesEditorForm.InitializeSynEditPrint;
