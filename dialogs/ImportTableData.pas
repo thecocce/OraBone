@@ -110,7 +110,7 @@ begin
   if CommonDialogs.OpenFile(OpenFilenameEdit.Text, 'All Files'#0'*.*'#0#0,
     LanguageDataModule.GetConstant('SelectFile')) then
   begin
-    Application.ProcessMessages;
+    Application.ProcessMessages; { style fix }
     OpenFilenameEdit.Text := CommonDialogs.Files[0];
   end;
 end;
@@ -150,7 +150,10 @@ end;
 procedure TImportTableDataDialog.SaveFileButtonActionExecute(Sender: TObject);
 begin
   if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+  begin
+    Application.ProcessMessages; { style fix }
     SaveFilenameEdit.Text := CommonDialogs.Files[0];
+  end;
 end;
 
 function TImportTableDataDialog.CheckFields: Boolean;

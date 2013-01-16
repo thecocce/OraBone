@@ -305,7 +305,7 @@ begin
   if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
     , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
   begin
-    Application.ProcessMessages;
+    Application.ProcessMessages; { style fix }
     LoadTNSNames(CommonDialogs.Files[0])
   end;
 end;
@@ -334,6 +334,7 @@ var
 begin
   if CommonDialogs.Print(Handle, PrintDlgRec) then
   begin
+    Application.ProcessMessages; { style fix }
     SynEditPrint.Copies := PrintDlgRec.nCopies;
     SynEditPrint.SelectedOnly := PrintDlgRec.Flags and PD_SELECTION <> 0;
     if PrintDlgRec.Flags and PD_PAGENUMS <> 0 then
@@ -362,10 +363,13 @@ begin
     AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
   if ShowDialog then
   begin
-   if CommonDialogs.SaveFile(ExtractFilePath(AFileName), LanguageDataModule.GetConstant('AllFiles') + #0'*.*'#0 +
+    if CommonDialogs.SaveFile(ExtractFilePath(AFileName), LanguageDataModule.GetConstant('AllFiles') + #0'*.*'#0 +
        Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
         , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), ExtractFileName(AFileName)) then
+    begin
+      Application.ProcessMessages; { style fix }
       AFileName := CommonDialogs.Files[0]
+    end
     else
     begin
       SynEdit.SetFocus;

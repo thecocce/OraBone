@@ -1110,7 +1110,7 @@ begin
   begin
     if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
     begin
-      Application.ProcessMessages;
+      Application.ProcessMessages; { style fix }
       for i := 0 to CommonDialogs.Files.Count - 1 do
         Open(CommonDialogs.Files[i])
     end;
@@ -1270,6 +1270,7 @@ begin
 
       if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
       begin
+        Application.ProcessMessages; { style fix }
         PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
         SynEdit.DocumentName := CommonDialogs.Files[0];
         Result := CommonDialogs.Files[0];
@@ -1499,6 +1500,7 @@ var
 begin
   if CommonDialogs.Print(Handle, PrintDlgRec) then
   begin
+    Application.ProcessMessages; { style fix }
     SynEditPrint.Copies := PrintDlgRec.nCopies;
     SynEditPrint.SelectedOnly := PrintDlgRec.Flags and PD_SELECTION <> 0;
     if PrintDlgRec.Flags and PD_PAGENUMS <> 0 then

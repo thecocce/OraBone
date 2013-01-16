@@ -124,7 +124,7 @@ begin
   if CommonDialogs.OpenFile(FilenameEdit.Text, Filter,
     LanguageDataModule.GetConstant('SelectFile'), DefaultExt) then
   begin
-    Application.ProcessMessages;
+    Application.ProcessMessages; { style fix }
     FilenameEdit.Text := CommonDialogs.Files[0];
   end;
 end;

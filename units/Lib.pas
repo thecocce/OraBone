@@ -843,8 +843,11 @@ end;
 
 procedure SaveSQL(SynEdit: TSynEdit);
 begin
-  if CommonDialogs.SaveFile('', 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
+  if CommonDialogs.SaveFile('', 'SQL Files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
+  begin
+    Application.ProcessMessages; { style fix }
     SynEdit.Lines.SaveToFile(CommonDialogs.Files[0]);
+  end;
 end;
 
 procedure CopyAllToClipboard(SynEdit: TSynEdit);

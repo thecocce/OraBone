@@ -1394,7 +1394,7 @@ begin
     if Rslt = mrYes then // load
       if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('Open')) then
       begin
-        Application.ProcessMessages;
+        Application.ProcessMessages; { style fix }
         DataDBGrid.DataSource.DataSet.Edit;
         Stream := nil;
         BlobStream := nil;
@@ -1409,7 +1409,10 @@ begin
       end;
     if Rslt = mrNo then // save
       if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+      begin
+        Application.ProcessMessages; { style fix }
         TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(CommonDialogs.Files[0]);
+      end;
     if Rslt = mrAbort then
     begin
       DataDBGrid.DataSource.DataSet.Edit;
