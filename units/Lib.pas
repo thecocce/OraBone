@@ -99,7 +99,7 @@ procedure AlterAllTriggers(OraSession: TOraSession; SchemaParam: string; EnableC
 procedure AlterObjectTriggers(OraSession: TOraSession; SchemaParam: string; ObjectName: string; EnableConstraint: Boolean);
 procedure CopyDataFromDBGridToClipboard(DBGrid: TBCDBGrid);
 function Lpad(Text: string; TextLength: Integer): string;
-procedure SaveSQL(SynEdit: TSynEdit);
+procedure SaveSQL(Handle: HWND; SynEdit: TSynEdit);
 procedure CopyAllToClipboard(SynEdit: TSynEdit);
 function TrimToMaxLength(Text: WideString; MaxLength: Integer): WideString;
 procedure AddAllFields(DataSet: TDataset);
@@ -841,9 +841,9 @@ begin
     Result := Result + ' ';
 end;
 
-procedure SaveSQL(SynEdit: TSynEdit);
+procedure SaveSQL(Handle: HWND; SynEdit: TSynEdit);
 begin
-  if CommonDialogs.SaveFile('', 'SQL Files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
+  if CommonDialogs.SaveFile(Handle, '', 'SQL Files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
   begin
     Application.ProcessMessages; { style fix }
     SynEdit.Lines.SaveToFile(CommonDialogs.Files[0]);

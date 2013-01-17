@@ -324,7 +324,7 @@ begin
     SynEdit := SpecSynEdit
   else
     SynEdit := BodySynEdit;
-  Lib.SaveSQL(SynEdit);
+  Lib.SaveSQL(Handle, SynEdit);
 end;
 
 procedure TPackageBrowserFrame.SetColumnWidths(OraQuery: TOraQuery);

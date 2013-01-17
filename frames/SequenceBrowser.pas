@@ -157,7 +157,7 @@ end;
 
 procedure TSequenceBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TSequenceBrowserFrame.SequencePageControlChange(Sender: TObject);

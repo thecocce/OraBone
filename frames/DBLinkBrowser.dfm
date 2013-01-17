@@ -24,6 +24,10 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBLinkPanel: TPanel
         Left = 0
         Top = 0
@@ -204,7 +208,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010105000E00D80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000E00DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -509,7 +513,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     end
   end
   object DBLinkQuery: TOraQuery
-    DataTypeMap = <>
     SQL.Strings = (
       'SELECT db_link "Link Name", host "Host", username "User Name"'
       '  FROM all_db_links'

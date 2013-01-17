@@ -80,7 +80,7 @@ end;
 
 procedure TCreateObjectBaseDialog.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TCreateObjectBaseDialog.SQLEditorActionExecute(Sender: TObject);

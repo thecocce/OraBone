@@ -254,7 +254,7 @@ end;
 
 procedure TFuncProcBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TFuncProcBrowserFrame.SetColumnWidths(OraQuery: TOraQuery);

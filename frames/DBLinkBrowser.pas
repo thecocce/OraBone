@@ -108,7 +108,7 @@ end;
 
 procedure TDBLinkBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TDBLinkBrowserFrame.SetSession(OraSession: TOraSession);

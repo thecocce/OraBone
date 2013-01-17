@@ -24,6 +24,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object UserPanel: TPanel
         Left = 0
         Top = 0
@@ -94,6 +98,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object RolesTabSheet: TTabSheet
       Caption = 'Roles && Privileges'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -203,6 +211,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -375,7 +387,7 @@ object UserBrowserFrame: TUserBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000E007C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E008C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D

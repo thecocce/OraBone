@@ -121,7 +121,7 @@ begin
         DefaultExt := 'sql';
       end;
   end;
-  if CommonDialogs.OpenFile(FilenameEdit.Text, Filter,
+  if CommonDialogs.OpenFile(Handle, FilenameEdit.Text, Filter,
     LanguageDataModule.GetConstant('SelectFile'), DefaultExt) then
   begin
     Application.ProcessMessages; { style fix }

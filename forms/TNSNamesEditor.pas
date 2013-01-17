@@ -302,8 +302,8 @@ end;
 
 procedure TTNSNamesEditorForm.FileOpenActionExecute(Sender: TObject);
 begin
-  if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0 + Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
-    , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
+  if CommonDialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
+    Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet'), '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
   begin
     Application.ProcessMessages; { style fix }
     LoadTNSNames(CommonDialogs.Files[0])
@@ -363,7 +363,8 @@ begin
     AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
   if ShowDialog then
   begin
-    if CommonDialogs.SaveFile(ExtractFilePath(AFileName), LanguageDataModule.GetConstant('AllFiles') + #0'*.*'#0 +
+    if CommonDialogs.SaveFile(Handle, ExtractFilePath(AFileName),
+       Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
        Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
         , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), ExtractFileName(AFileName)) then
     begin

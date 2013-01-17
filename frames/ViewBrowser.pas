@@ -919,7 +919,7 @@ end;
 
 procedure TViewBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TViewBrowserFrame.SetColumnWidths(OraQuery: TOraQuery);

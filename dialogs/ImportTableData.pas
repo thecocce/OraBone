@@ -107,7 +107,7 @@ end;
 
 procedure TImportTableDataDialog.OpenFileButtonActionExecute(Sender: TObject);
 begin
-  if CommonDialogs.OpenFile(OpenFilenameEdit.Text, 'All Files'#0'*.*'#0#0,
+  if CommonDialogs.OpenFile(Handle, OpenFilenameEdit.Text, Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
     LanguageDataModule.GetConstant('SelectFile')) then
   begin
     Application.ProcessMessages; { style fix }
@@ -149,7 +149,8 @@ end;
 
 procedure TImportTableDataDialog.SaveFileButtonActionExecute(Sender: TObject);
 begin
-  if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+  if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
+    LanguageDataModule.GetConstant('SaveAs')) then
   begin
     Application.ProcessMessages; { style fix }
     SaveFilenameEdit.Text := CommonDialogs.Files[0];

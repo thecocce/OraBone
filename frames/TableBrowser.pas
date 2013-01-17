@@ -1392,7 +1392,7 @@ begin
   begin
     Rslt := BlobDialog.Open(TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)));
     if Rslt = mrYes then // load
-      if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('Open')) then
+      if CommonDialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('Open')) then
       begin
         Application.ProcessMessages; { style fix }
         DataDBGrid.DataSource.DataSet.Edit;
@@ -1408,7 +1408,7 @@ begin
         end;
       end;
     if Rslt = mrNo then // save
-      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0#0, LanguageDataModule.GetConstant('SaveAs')) then
+      if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('SaveAs')) then
       begin
         Application.ProcessMessages; { style fix }
         TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(CommonDialogs.Files[0]);
@@ -1881,7 +1881,7 @@ end;
 
 procedure TTableBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TTableBrowserFrame.SetColumnWidths(OraQuery: TOraQuery);

@@ -288,7 +288,7 @@ end;
 
 procedure TUserBrowserFrame.SaveToFileActionExecute(Sender: TObject);
 begin
-  Lib.SaveSQL(SourceSynEdit);
+  Lib.SaveSQL(Handle, SourceSynEdit);
 end;
 
 procedure TUserBrowserFrame.SetSession(OraSession: TOraSession);

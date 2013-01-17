@@ -26,6 +26,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       ImageIndex = 6
       ExplicitLeft = 0
       ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -137,6 +139,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       ImageIndex = 7
       ExplicitLeft = 0
       ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -247,6 +251,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       ImageIndex = 9
       ExplicitLeft = 0
       ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -358,6 +364,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       ImageIndex = 6
       ExplicitLeft = 0
       ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -435,7 +443,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Left = 78
     Top = 166
     Bitmap = {
-      494C010109000E00140110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

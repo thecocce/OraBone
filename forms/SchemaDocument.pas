@@ -132,7 +132,8 @@ var
   Filename: string;
 begin
   FileName := Format('%s_%s.html', [FSchemaparam, StringReplace(FSession.Server, '.', '_',[rfReplaceAll])]);
-  if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FileName) then
+  if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
+    'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FileName) then
   begin
     Application.ProcessMessages; { style fix }
     SaveAsHTML(WebBrowser, CommonDialogs.Files[0]);

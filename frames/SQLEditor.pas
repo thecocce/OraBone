@@ -76,7 +76,7 @@ type
   protected
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
   public
-    constructor Create(AOwner: TComponent);
+    constructor Create(AOwner: TComponent); override;
     property InThread: Boolean read FInThread write FInThread;
     property DocumentName: string read FDocumentName write FDocumentName;
     property FileDateTime: TDateTime read FFileDateTime write FFileDateTime;
@@ -1108,7 +1108,8 @@ var
 begin
   if FileName = '' then
   begin
-    if CommonDialogs.OpenFiles('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
+    if CommonDialogs.OpenFiles(Handle, '',
+      Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
     begin
       Application.ProcessMessages; { style fix }
       for i := 0 to CommonDialogs.Files.Count - 1 do
@@ -1268,7 +1269,8 @@ begin
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
         AFileName := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
 
-      if CommonDialogs.SaveFile('', 'All Files'#0'*.*'#0'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
+      if CommonDialogs.SaveFile(Handle, '',
+        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
       begin
         Application.ProcessMessages; { style fix }
         PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
