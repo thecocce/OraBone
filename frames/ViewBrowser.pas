@@ -232,7 +232,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, Common, DataSort, CustomizePages, Preferences, Lib, Vcl.Themes, StyleHooks;
+  Main, DataFilter, Common, DataSort, CustomizePages, Options, Lib, Vcl.Themes, StyleHooks;
 
 const
   { ColumnsQuery columns }

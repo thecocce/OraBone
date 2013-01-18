@@ -7,7 +7,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, SynEdit, Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls,
   Vcl.ToolWin, BCToolBar, Vcl.ImgList, BCImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
   JvEdit, BCEdit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
-  SynEditSearch, SynEditMiscClasses, SynEditTypes;
+  SynEditSearch, SynEditMiscClasses, SynEditTypes, BCCheckBox, SynEditRegexSearch;
 
 type
   PObjectNodeRec = ^TObjectNodeRec;
@@ -30,7 +30,6 @@ type
     VirtualDrawTree: TVirtualDrawTree;
     Panel2: TPanel;
     VerticalSplitter: TSplitter;
-    SynEdit: TSynEdit;
     Bevel1: TBevel;
     PrintToolBar: TBCToolBar;
     ToolButton1: TToolButton;
@@ -44,15 +43,6 @@ type
     FilePrintAction: TAction;
     FilePrintPreviewAction: TAction;
     ToolButton3: TToolButton;
-    SearchPanel: TPanel;
-    SearchForLabel: TLabel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    JvSpeedButton1: TJvSpeedButton;
-    SpeedButton3: TSpeedButton;
-    CaseSensitiveCheckBox: TCheckBox;
-    WholeWordsCheckBox: TCheckBox;
-    SearchForEdit: TBCEdit;
     Bevel2: TBevel;
     BCToolBar1: TBCToolBar;
     ToolButton4: TToolButton;
@@ -88,6 +78,31 @@ type
     SearchFindPreviousAction: TAction;
     SearchClearAction: TAction;
     SearchAction: TAction;
+    SearchPanel: TPanel;
+    CaseSensitiveLabel: TLabel;
+    WholeWordsOnlyLabel: TLabel;
+    RegularExpressionLabel: TLabel;
+    SearchPanel2: TPanel;
+    SearchForLabel: TLabel;
+    SearchPanel3: TPanel;
+    SearchForEdit: TBCEdit;
+    SearchPanel1: TPanel;
+    JvSpeedButton1: TSpeedButton;
+    SearchPanel4: TPanel;
+    JvSpeedButton2: TSpeedButton;
+    SearchPanel5: TPanel;
+    SpeedButton1: TSpeedButton;
+    SearchPanel6: TPanel;
+    SpeedButton2: TSpeedButton;
+    SearchPanel7: TPanel;
+    CaseSensitiveCheckBox: TBCCheckBox;
+    Panel3: TPanel;
+    WholeWordsCheckBox: TBCCheckBox;
+    Panel4: TPanel;
+    RegularExpressionCheckBox: TBCCheckBox;
+    Panel5: TPanel;
+    SynEdit: TSynEdit;
+    SynEditRegexSearch: TSynEditRegexSearch;
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
     procedure FormDestroy(Sender: TObject);
@@ -185,16 +200,16 @@ begin
     Left := ReadInteger('TNSNamesEditorPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('TNSNamesEditorPosition', 'Top', (Screen.Height - Height) div 2);
 
-    ViewWordWrapAction.Checked := ReadBool('Preferences', 'EnableWordWrap', False);
+    ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
     if ViewWordWrapAction.Checked then
       ViewWordWrapAction.Execute;
-    ViewLineNumbersAction.Checked := ReadBool('Preferences', 'EnableLineNumbers', True);
+    ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True);
     if not ViewLineNumbersAction.Checked then
       ViewLineNumbersAction.Execute;
-    ViewSpecialCharsAction.Checked := ReadBool('Preferences', 'EnableSpecialChars', False);
+    ViewSpecialCharsAction.Checked := ReadBool('Options', 'EnableSpecialChars', False);
     if ViewSpecialCharsAction.Checked then
       ViewSpecialCharsAction.Execute;
-    ViewSelectionModeAction.Checked := ReadBool('Preferences', 'EnableSelectionMode', False);
+    ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False);
     if ViewSelectionModeAction.Checked then
       ViewSelectionModeAction.Execute;
   finally
@@ -741,6 +756,10 @@ begin
   if Trim(SearchForEdit.Text) = '' then
     Exit;
 
+  if RegularExpressionCheckBox.Checked then
+    SynEdit.SearchEngine := SynEditRegexSearch
+  else
+    SynEdit.SearchEngine := SynEditSearch;
   SynSearchOptions := SearchOptions(False);
 
   if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then

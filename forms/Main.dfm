@@ -555,8 +555,8 @@ object MainForm: TMainForm
                 Caption = '-'
               end
               item
-                Action = ToolsPreferencesAction
-                ImageIndex = 28
+                Action = ToolsOptionsAction
+                ImageIndex = 54
               end>
             Caption = '&Tools'
           end
@@ -672,8 +672,8 @@ object MainForm: TMainForm
             Caption = '-'
           end
           item
-            Action = ToolsPreferencesAction
-            ImageIndex = 28
+            Action = ToolsOptionsAction
+            ImageIndex = 54
             ShowCaption = False
           end
           item
@@ -758,12 +758,12 @@ object MainForm: TMainForm
       Hint = 'Show or hide the toolbar'
       OnExecute = ViewToolbarActionExecute
     end
-    object ToolsPreferencesAction: TAction
+    object ToolsOptionsAction: TAction
       Category = '&Tools'
-      Caption = '&Preferences...'
-      Hint = 'Set the preferences'
-      ImageIndex = 28
-      OnExecute = ToolsPreferencesActionExecute
+      Caption = '&Options...'
+      Hint = 'Set options'
+      ImageIndex = 54
+      OnExecute = ToolsOptionsActionExecute
     end
     object HelpCheckForUpdateMenuAction: TAction
       Category = '&Help'
@@ -1318,7 +1318,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C010158005802200510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010158005802280510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

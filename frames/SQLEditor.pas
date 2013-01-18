@@ -58,7 +58,7 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch;
 
 type
   TBCSynEdit = class(TSynEdit)
@@ -269,6 +269,11 @@ type
     CaseSensitiveLabel: TLabel;
     Panel1: TPanel;
     WholeWordsCheckBox: TBCCheckBox;
+    WholeWordsOnlyLabel: TLabel;
+    Panel2: TPanel;
+    RegularExpressionCheckBox: TBCCheckBox;
+    RegularExpressionLabel: TLabel;
+    SynEditRegexSearch: TSynEditRegexSearch;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -394,7 +399,7 @@ type
     function GetCaretInfo: string;
     function GetModifiedInfo: string;
     function ModifiedDocuments(CheckActive: Boolean = True): Boolean;
-    procedure AssignPreferences;
+    procedure AssignOptions;
     property ActiveTabSheetCaption: string read GetActiveTabSheetCaption;
     property ActiveDocumentName: string read GetActiveDocumentName;
     property ActiveDocumentFound: Boolean read GetActiveDocumentFound;
@@ -437,7 +442,7 @@ implementation
 
 uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks,
-  Preferences, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
+  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
   Compare, Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
 
@@ -1555,13 +1560,21 @@ begin
     Exit;
 
   SynEdit := ActiveSynEdit;
+  if RegularExpressionCheckBox.Checked then
+    SynEdit.SearchEngine := SynEditRegexSearch
+  else
+    SynEdit.SearchEngine := SynEditSearch;
   SynSearchOptions := SearchOptions(False);
 
-  if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
-  begin
-    MessageBeep(MB_ICONASTERISK);
-    SynEdit.BlockBegin := SynEdit.BlockEnd;
-    SynEdit.CaretXY := SynEdit.BlockBegin;
+  try
+    if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
+    begin
+      MessageBeep(MB_ICONASTERISK);
+      SynEdit.BlockBegin := SynEdit.BlockEnd;
+      SynEdit.CaretXY := SynEdit.BlockBegin;
+    end;
+  except
+    { silent }
   end;
 end;
 
@@ -2115,7 +2128,7 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.AssignPreferences;
+procedure TSQLEditorFrame.AssignOptions;
 var
   i: Integer;
   SynEdit: TBCSynEdit;

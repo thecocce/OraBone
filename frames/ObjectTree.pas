@@ -243,7 +243,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Preferences, Lib, BigIni, SchemaFilter, DataModule, SynEdit, SQLTokenizer, StrUtils, Common,
+  Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, SQLTokenizer, StrUtils, Common,
   StyleHooks;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);

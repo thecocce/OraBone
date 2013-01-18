@@ -148,7 +148,7 @@ type
     property SynonymBrowserFrame: TSynonymBrowserFrame read FSynonymBrowserFrame;
     property DBLinkBrowserFrame: TDBLinkBrowserFrame read FDBLinkBrowserFrame;
     property UserBrowserFrame: TUserBrowserFrame read FUserBrowserFrame;
-    procedure AssignPreferences;
+    procedure AssignOptions;
     function SelectionFound: Boolean;
     procedure UpdateGuttersAndControls(DoubleBuffered: Boolean);
   end;
@@ -158,7 +158,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, ClipBrd, Preferences, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
+  Common, ClipBrd, Options, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
   CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword,
@@ -186,10 +186,10 @@ const
 constructor TSchemaBrowserFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  AssignPreferences;
+  AssignOptions;
 end;
 
-procedure TSchemaBrowserFrame.AssignPreferences;
+procedure TSchemaBrowserFrame.AssignOptions;
 begin
   with ObjectTreeFrame do
   if OptionsContainer.SchemaBrowserAlign = 'Bottom' then

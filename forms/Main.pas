@@ -117,7 +117,7 @@ type
     ToolBarPanel: TPanel;
     ToolsCompareFilesAction: TAction;
     ToolsCompareSchemasAction: TAction;
-    ToolsPreferencesAction: TAction;
+    ToolsOptionsAction: TAction;
     ToolsSelectForCompareAction: TAction;
     ViewLineNumbersAction: TAction;
     ViewNextPageAction: TAction;
@@ -210,7 +210,7 @@ type
     procedure TNSNamesEditorActionExecute(Sender: TObject);
     procedure ToolsCompareFilesActionExecute(Sender: TObject);
     procedure ToolsCompareSchemasActionExecute(Sender: TObject);
-    procedure ToolsPreferencesActionExecute(Sender: TObject);
+    procedure ToolsOptionsActionExecute(Sender: TObject);
     procedure ToolsSelectForCompareActionExecute(Sender: TObject);
     procedure ViewLineNumbersActionExecute(Sender: TObject);
     procedure ViewNextPageActionExecute(Sender: TObject);
@@ -238,7 +238,7 @@ type
     procedure OpenSQLHistory;
     procedure PreviousPage;
     procedure ReadIniFile;
-    procedure ReadPreferences;
+    procedure ReadOptions;
     procedure RecreateStatusBar;
     procedure SetFields;
     procedure UpdateGuttersAndControls;
@@ -257,7 +257,7 @@ var
 implementation
 
 uses
-  About, Common, Lib, Preferences, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
+  About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
   System.IOUtils, SQLFormatter;
@@ -631,15 +631,14 @@ begin
     if Assigned(TStyleManager.Style[StyleInfo.Name]) then
       TStyleManager.TrySetStyle(StyleInfo.Name)
     else
-    begin
       TStyleManager.SetStyle(TStyleManager.LoadFromFile(Action.Caption));
-      with TBigIniFile.Create(Common.GetINIFilename) do
-      try
-        WriteString('Preferences', 'StyleFilename', ExtractFilename(Action.Caption));
-      finally
-        Free;
-      end;
-    end;
+  end;
+
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    WriteString('Options', 'StyleFilename', ExtractFilename(Action.Caption));
+  finally
+    Free;
   end;
 
   ActionClientItem := ActionMainMenuBar.ActionClient.Items[VIEW_MENU_ITEMINDEX];
@@ -895,10 +894,10 @@ begin
     { Tools }
     ToolsCompareFilesAction.Enabled := Assigned(SQLEditorFrame);
     ToolsCompareSchemasAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0);
-    ToolsPreferencesAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0) and (Assigned(SchemaBrowserFrame) or
+    ToolsOptionsAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0) and (Assigned(SchemaBrowserFrame) or
       Assigned(SQLEditorFrame));
     ToolsSelectForCompareAction.Enabled := Assigned(SQLEditorFrame) and (not SQLEditorFrame.ActiveDocumentModified);
-    DatabaseObjectSearchAction.Enabled := ToolsPreferencesAction.Enabled;
+    DatabaseObjectSearchAction.Enabled := ToolsOptionsAction.Enabled;
 
     SchemaDocumentAction.Enabled := (not FConnecting) and Assigned(SchemaBrowserFrame);
 
@@ -1022,26 +1021,26 @@ begin
   Repaint;
 end;
 
-procedure TMainForm.ReadPreferences;
+procedure TMainForm.ReadOptions;
 begin
   with TBigIniFile.Create(Common.GetINIFilename) do
   try
-    { Preferences }
-    OptionsContainer.FontName := ReadString('Preferences', 'FontName', 'Courier New');
-    OptionsContainer.FontSize := ReadInteger('Preferences', 'FontSize', 10);
-    OptionsContainer.RightEdge := ReadInteger('Preferences', 'RightEdge', 100);
-    OptionsContainer.ExtraLineSpacing := ReadInteger('Preferences', 'ExtraLineSpacing', 0);
-    OptionsContainer.TabWidth := ReadInteger('Preferences', 'TabWidth', 8);
-    OptionsContainer.GutterVisible := ReadBool('Preferences', 'GutterVisible', True);
-    OptionsContainer.GutterLineNumbers := ReadBool('Preferences', 'GutterLineNumbers', True);
-    OptionsContainer.MultiLine := ReadBool('Preferences', 'MultiLine', False);
-    OptionsContainer.PollingInterval := ReadInteger('Preferences', 'PollingInterval', 1);
-    OptionsContainer.DateFormat := ReadString('Preferences', 'DateFormat', 'DD.MM.YYYY');
-    OptionsContainer.TimeFormat := ReadString('Preferences', 'TimeFormat', 'HH24:MI:SS');
-    OptionsContainer.SchemaBrowserAlign := ReadString('Preferences', 'SchemaBrowserAlign', 'Bottom');
-    OptionsContainer.ObjectFrameAlign := ReadString('Preferences', 'ObjectFrameAlign', 'Bottom');
-    { Preferences }
-    ActionToolBar.Visible := ReadBool('Preferences', 'ShowToolBar', True);
+    { Options }
+    OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
+    OptionsContainer.FontSize := ReadInteger('Options', 'FontSize', 10);
+    OptionsContainer.RightEdge := ReadInteger('Options', 'RightEdge', 100);
+    OptionsContainer.ExtraLineSpacing := ReadInteger('Options', 'ExtraLineSpacing', 0);
+    OptionsContainer.TabWidth := ReadInteger('Options', 'TabWidth', 8);
+    OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
+    OptionsContainer.GutterLineNumbers := ReadBool('Options', 'GutterLineNumbers', True);
+    OptionsContainer.MultiLine := ReadBool('Options', 'MultiLine', False);
+    OptionsContainer.PollingInterval := ReadInteger('Options', 'PollingInterval', 1);
+    OptionsContainer.DateFormat := ReadString('Options', 'DateFormat', 'DD.MM.YYYY');
+    OptionsContainer.TimeFormat := ReadString('Options', 'TimeFormat', 'HH24:MI:SS');
+    OptionsContainer.SchemaBrowserAlign := ReadString('Options', 'SchemaBrowserAlign', 'Bottom');
+    OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
+
+    ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
     { Size }
     Width := ReadInteger('Size', 'Width', Round(Screen.Width * 0.8));
     Height := ReadInteger('Size', 'Height', Round(Screen.Height * 0.8));
@@ -1130,7 +1129,7 @@ begin
     SQLEditorFrame.CompareFiles;
 end;
 
-procedure TMainForm.ToolsPreferencesActionExecute(Sender: TObject);
+procedure TMainForm.ToolsOptionsActionExecute(Sender: TObject);
 var
   i: Integer;
   SQLEditorFrame: TSQLEditorFrame;
@@ -1149,8 +1148,8 @@ begin
       OraSession := SQLEditorFrame.Session;
   end;
   if Assigned(OraSession) then
-    { open preferences }
-    if PreferencesDialog.Execute(OraSession, OptionsContainer) then
+    { open Options }
+    if OptionsDialog.Execute(OraSession, OptionsContainer) then
     begin
       for i := 0 to PageControl.PageCount - 1 do
       begin
@@ -1158,21 +1157,21 @@ begin
         begin
           SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
           if Assigned(SchemaBrowserFrame) then
-            SchemaBrowserFrame.AssignPreferences;
+            SchemaBrowserFrame.AssignOptions;
         end
         else
         if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
         begin
           SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
           if Assigned(SQLEditorFrame) then
-            SQLEditorFrame.AssignPreferences;
+            SQLEditorFrame.AssignOptions;
         end
         else
         if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_HISTORY then
         begin
           SQLHistoryFrame := TSQLHistoryFrame(PageControl.Pages[i].Components[0]);
           if Assigned(SQLHistoryFrame) then
-            SQLHistoryFrame.AssignPreferences;
+            SQLHistoryFrame.AssignOptions;
         end
 
       end;
@@ -1304,23 +1303,23 @@ begin
   try
     try
       WriteString('OraBone', 'Version', AboutDialog.Version);
-      { Preferences }
-      WriteString('Preferences', 'FontName', OptionsContainer.FontName);
-      WriteString('Preferences', 'FontSize', IntToStr(OptionsContainer.FontSize));
-      WriteString('Preferences', 'RightEdge', IntToStr(OptionsContainer.RightEdge));
-      WriteString('Preferences', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
-      WriteString('Preferences', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
-      WriteBool('Preferences', 'GutterVisible', OptionsContainer.GutterVisible);
-      WriteBool('Preferences', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
-      WriteBool('Preferences', 'MultiLine', OptionsContainer.MultiLine);
-      WriteString('Preferences', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
-      WriteString('Preferences', 'DateFormat', OptionsContainer.DateFormat);
-      WriteString('Preferences', 'TimeFormat', OptionsContainer.TimeFormat);
-      WriteString('Preferences', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
-      WriteString('Preferences', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
-      WriteBool('Preferences', 'ShowToolBar', ActionToolBar.Visible);
+      { Options }
+      WriteString('Options', 'FontName', OptionsContainer.FontName);
+      WriteString('Options', 'FontSize', IntToStr(OptionsContainer.FontSize));
+      WriteString('Options', 'RightEdge', IntToStr(OptionsContainer.RightEdge));
+      WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
+      WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
+      WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
+      WriteBool('Options', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
+      WriteBool('Options', 'MultiLine', OptionsContainer.MultiLine);
+      WriteString('Options', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
+      WriteString('Options', 'DateFormat', OptionsContainer.DateFormat);
+      WriteString('Options', 'TimeFormat', OptionsContainer.TimeFormat);
+      WriteString('Options', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
+      WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
+      WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       if Assigned(TStyleManager.ActiveStyle) then
-        WriteString('Preferences', 'StyleName', TStyleManager.ActiveStyle.Name);
+        WriteString('Options', 'StyleName', TStyleManager.ActiveStyle.Name);
 
       if Windowstate = wsNormal then
       begin
@@ -1462,7 +1461,7 @@ begin
   StatusBar.Font.Name := 'Tahoma';
   StatusBar.Font.Size := 8;
   OraCall.OCIUnicode := True;
-  ReadPreferences;
+  ReadOptions;
 end;
 
 procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1533,10 +1532,10 @@ begin
     SQLEditorFrame := GetActiveSQLEditor;
     with TBigIniFile.Create(Common.GetINIFilename) do
     try
-      WriteBool('Preferences', 'EnableWordWrap', ViewWordWrapAction.Checked);
-      WriteBool('Preferences', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
-      WriteBool('Preferences', 'EnableSpecialChars', ViewSpecialCharsAction.Checked);
-      WriteBool('Preferences', 'EnableSelectionMode', ViewSelectionModeAction.Checked);
+      WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
+      WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
+      WriteBool('Options', 'EnableSpecialChars', ViewSpecialCharsAction.Checked);
+      WriteBool('Options', 'EnableSelectionMode', ViewSelectionModeAction.Checked);
        { Toolbar action visibility }
       EraseSection('ActionToolBar');
       for i := 0 to SQLEditorFrame.ToolbarPopupMenu.Items.Count - 1 do
@@ -1760,16 +1759,16 @@ begin
     SQLEditorFrame := OpenSQLEditor(PageControl.ActivePage.Caption, True);
     SetFields;
     PageControlChange(Sender);
-    ViewWordWrapAction.Checked := ReadBool('Preferences', 'EnableWordWrap', False);
+    ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
     if ViewWordWrapAction.Checked then
       ViewWordWrapAction.Execute;
-    ViewLineNumbersAction.Checked := ReadBool('Preferences', 'EnableLineNumbers', True);
+    ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True);
     if not ViewLineNumbersAction.Checked then
       ViewLineNumbersAction.Execute;
-    ViewSpecialCharsAction.Checked := ReadBool('Preferences', 'EnableSpecialChars', False);
+    ViewSpecialCharsAction.Checked := ReadBool('Options', 'EnableSpecialChars', False);
     if ViewSpecialCharsAction.Checked then
       ViewSpecialCharsAction.Execute;
-    ViewSelectionModeAction.Checked := ReadBool('Preferences', 'EnableSelectionMode', False);
+    ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False);
     if ViewSelectionModeAction.Checked then
       ViewSelectionModeAction.Execute;
     ActionToolBarStrings := TStringList.Create;

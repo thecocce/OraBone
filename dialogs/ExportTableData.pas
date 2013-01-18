@@ -81,7 +81,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Preferences, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Clipbrd,
+  Common, Options, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Clipbrd,
   Vcl.Themes, StyleHooks, CommonDialogs, Language;
 
 var

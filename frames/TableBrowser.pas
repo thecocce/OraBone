@@ -342,7 +342,7 @@ implementation
 
 uses
   DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
-  CustomizeTableColumns, Preferences, Lib, NxColumns, NxSharedCommon, StyleHooks,
+  CustomizeTableColumns, Options, Lib, NxColumns, NxSharedCommon, StyleHooks,
   TableSourceOptions, DataModule, CommonDialogs, Language;
 
 const

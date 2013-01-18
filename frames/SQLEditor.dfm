@@ -1,17 +1,19 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 886
+  Height = 439
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 78
-    Width = 451
+    Top = 213
+    Width = 886
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 886
     Height = 21
     Hint = ' '
     Align = alTop
@@ -31,6 +33,7 @@ object SQLEditorFrame: TSQLEditorFrame
     FullRepaint = False
     TabOrder = 0
     Visible = False
+    ExplicitWidth = 451
     object CaseSensitiveLabel: TLabel
       Left = 368
       Top = 0
@@ -38,6 +41,26 @@ object SQLEditorFrame: TSQLEditorFrame
       Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
+      Layout = tlCenter
+      ExplicitHeight = 13
+    end
+    object WholeWordsOnlyLabel: TLabel
+      Left = 465
+      Top = 0
+      Width = 89
+      Height = 21
+      Align = alLeft
+      Caption = 'Whole Words Only'
+      Layout = tlCenter
+      ExplicitHeight = 13
+    end
+    object RegularExpressionLabel: TLabel
+      Left = 581
+      Top = 0
+      Width = 92
+      Height = 21
+      Align = alLeft
+      Caption = 'Regular Expression'
       Layout = tlCenter
       ExplicitHeight = 13
     end
@@ -57,9 +80,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
+        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -420,29 +444,48 @@ object SQLEditorFrame: TSQLEditorFrame
     object WholeWordsCheckBox: TBCCheckBox
       Left = 446
       Top = 0
-      Width = 150
+      Width = 19
       Height = 21
       Align = alLeft
-      Caption = ' Whole words only'
       TabOrder = 8
+      ReadOnly = False
+    end
+    object Panel2: TPanel
+      Left = 554
+      Top = 0
+      Width = 8
+      Height = 21
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 9
+    end
+    object RegularExpressionCheckBox: TBCCheckBox
+      Left = 562
+      Top = 0
+      Width = 19
+      Height = 21
+      Align = alLeft
+      TabOrder = 10
       ReadOnly = False
     end
   end
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 34
+    Width = 886
+    Height = 169
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
     Padding.Top = 2
     TabOrder = 1
+    ExplicitWidth = 451
+    ExplicitHeight = 34
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 32
+      Width = 886
+      Height = 167
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -457,12 +500,14 @@ object SQLEditorFrame: TSQLEditorFrame
       OnChange = PageControlChange
       TabDragDrop = True
       HoldShiftToDragDrop = False
+      ExplicitWidth = 451
+      ExplicitHeight = 32
     end
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 81
-    Width = 451
+    Top = 216
+    Width = 886
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -470,11 +515,13 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 2
     Visible = False
+    ExplicitTop = 81
+    ExplicitWidth = 451
   end
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 886
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -483,6 +530,7 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentDoubleBuffered = False
     PopupMenu = ToolbarPopupMenu
     TabOrder = 3
+    ExplicitWidth = 451
     object ExecuteToolbarPanel: TPanel
       Left = 0
       Top = 0
@@ -1544,7 +1592,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 18
     Top = 162
     Bitmap = {
-      494C010106003800200410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060038002C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1820,7 +1868,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800E00310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800EC0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2341,7 +2389,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102009C04040514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102009C04100514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000A4676900A4676900A467
@@ -2561,7 +2609,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C01010200BC04080518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010200BC04140518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000A467
@@ -2864,5 +2912,9 @@ object SQLEditorFrame: TSQLEditorFrame
       0007FFE0000F000000000000000FFFE0001F000000000000001FFFE0003F0000
       00000000003FFFFFFFFF00000000000000000000000000000000000000000000
       000000000000}
+  end
+  object SynEditRegexSearch: TSynEditRegexSearch
+    Left = 60
+    Top = 100
   end
 end

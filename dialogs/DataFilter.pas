@@ -93,7 +93,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Preferences, Vcl.Themes, StyleHooks;
+  Common, Options, Vcl.Themes, StyleHooks;
 
 var
   FDataFilterDialog: TDataFilterDialog;

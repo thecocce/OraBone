@@ -1,4 +1,4 @@
-unit Preferences;
+unit Options;
 
 interface
 
@@ -13,7 +13,7 @@ uses
 type
   TOptionsContainer = class;
 
-  TPreferencesDialog = class(TDialog)
+  TOptionsDialog = class(TDialog)
     FontDialog: TFontDialog;
     ActionList: TActionList;
     SelectFontAction: TAction;
@@ -140,7 +140,7 @@ type
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
   end;
 
-function PreferencesDialog: TPreferencesDialog;
+function OptionsDialog: TOptionsDialog;
 function OptionsContainer: TOptionsContainer;
 
 implementation
@@ -157,7 +157,7 @@ const
 
 var
   FOptionsContainer: TOptionsContainer;
-  FPreferencesDialog: TPreferencesDialog;
+  FOptionsDialog: TOptionsDialog;
 
 function OptionsContainer: TOptionsContainer;
 begin
@@ -205,24 +205,24 @@ begin
   inherited;
 end;
 
-{ TPreferencesDialog }
+{ TOptionsDialog }
 
-function PreferencesDialog: TPreferencesDialog;
+function OptionsDialog: TOptionsDialog;
 begin
-  if FPreferencesDialog = nil then
-    Application.CreateForm(TPreferencesDialog, FPreferencesDialog);
-  Result := FPreferencesDialog;
+  if FOptionsDialog = nil then
+    Application.CreateForm(TOptionsDialog, FOptionsDialog);
+  Result := FOptionsDialog;
   StyleHooks.SetStyledFormSize(Result);
   if Assigned(TStyleManager.ActiveStyle) then
     Result.PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
 end;
 
-procedure TPreferencesDialog.FormDestroy(Sender: TObject);
+procedure TOptionsDialog.FormDestroy(Sender: TObject);
 begin
-  FPreferencesDialog := nil;
+  FOptionsDialog := nil;
 end;
 
-procedure TPreferencesDialog.SelectFontActionExecute(Sender: TObject);
+procedure TOptionsDialog.SelectFontActionExecute(Sender: TObject);
 begin
   FontDialog.Font.Name := FontLabel.Font.Name;
   FontDialog.Font.Size := FontLabel.Font.Size;
@@ -233,7 +233,7 @@ begin
   end;
 end;
 
-function TPreferencesDialog.GetSQLFormat(DateFormat: string): string;
+function TOptionsDialog.GetSQLFormat(DateFormat: string): string;
 var
   OraQuery: TOraQuery;
 begin
@@ -249,7 +249,7 @@ begin
   FreeAndNil(OraQuery);
 end;
 
-procedure TPreferencesDialog.DateFormatEditChange(Sender: TObject);
+procedure TOptionsDialog.DateFormatEditChange(Sender: TObject);
 begin
   if Trim(DateFormatEdit.Text) <> '' then
   begin
@@ -263,7 +263,7 @@ begin
   end;
 end;
 
-procedure TPreferencesDialog.TimeFormatEditChange(Sender: TObject);
+procedure TOptionsDialog.TimeFormatEditChange(Sender: TObject);
 begin
   if Trim(TimeFormatEdit.Text) <> '' then
   begin
@@ -277,7 +277,7 @@ begin
   end
 end;
 
-function TPreferencesDialog.Execute(OraSession: TOraSession; EditOptions: TOptionsContainer): Boolean;
+function TOptionsDialog.Execute(OraSession: TOraSession; EditOptions: TOptionsContainer): Boolean;
 begin
   FOraSession := OraSession;
   if (EditOptions = nil) then
@@ -296,7 +296,7 @@ begin
     PutData;
 end;
 
-procedure TPreferencesDialog.GetData;
+procedure TOptionsDialog.GetData;
 begin
   MultiLineCheckBox.Checked := FOptionsContainer.MultiLine;
   //Gutter
@@ -321,7 +321,7 @@ begin
   ObjectFrameComboBox.Text := FOptionsContainer.ObjectFrameAlign;
 end;
 
-procedure TPreferencesDialog.OKButtonActionExecute(Sender: TObject);
+procedure TOptionsDialog.OKButtonActionExecute(Sender: TObject);
 begin
   if DateFormatExampleEdit.Font.Color = clRed then
   begin
@@ -341,13 +341,13 @@ begin
   ModalResult := mrOk;
 end;
 
-procedure TPreferencesDialog.PollingIntervalSliderChange(Sender: TObject);
+procedure TOptionsDialog.PollingIntervalSliderChange(Sender: TObject);
 begin
   PollingIntervalGroupBox.Caption := Format(' DBMS output polling interval: %d second ', [
     PollingIntervalSlider.Value]);
 end;
 
-procedure TPreferencesDialog.PutData;
+procedure TOptionsDialog.PutData;
 var
   vOptions: TSynEditorOptions;
 
@@ -382,7 +382,7 @@ begin
   FOptionsContainer.ObjectFrameAlign := ObjectFrameComboBox.Text;
 end;
 
-procedure TPreferencesDialog.FormCreate(Sender: TObject);
+procedure TOptionsDialog.FormCreate(Sender: TObject);
 begin
   InChanging := False;
   DateFormatEditChange(nil);

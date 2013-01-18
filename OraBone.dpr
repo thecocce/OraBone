@@ -2,6 +2,7 @@ program OraBone;
 
 uses
   Forms,
+  System.Classes,
   System.SysUtils,
   Vcl.Themes,
   Vcl.Styles,
@@ -13,7 +14,7 @@ uses
   SQLEditor in 'frames\SQLEditor.pas' {SQLEditorFrame: TFrame},
   Replace in '..\..\Common\dialogs\Replace.pas' {ReplaceDialog},
   ConfirmReplace in '..\..\Common\dialogs\ConfirmReplace.pas' {ConfirmReplaceDialog},
-  Preferences in 'dialogs\Preferences.pas' {PreferencesDialog},
+  Options in 'dialogs\Options.pas' {OptionsDialog},
   SchemaBrowser in 'frames\SchemaBrowser.pas' {SchemaBrowserFrame: TFrame},
   DataFilter in 'dialogs\DataFilter.pas' {DataFilterDialog},
   ViewBrowser in 'frames\ViewBrowser.pas' {ViewBrowserFrame: TFrame},
@@ -97,11 +98,29 @@ uses
 {$R *.res}
 
 var
+  i: Integer;
   StyleFilename: string;
 begin
-   with TBigIniFile.Create(Common.GetINIFilename) do
+  { move preferences to options - version 5.6.0 }
+  // --- TODO: remove this later
+  if FileExists(Common.GetINIFilename) then
+  with TStringList.Create do
   try
-    StyleFilename := ReadString('Preferences', 'StyleFilename', STYLENAME_WINDOWS);
+    LoadFromFile(Common.GetINIFilename);
+    i := IndexOf('[Preferences]');
+    if i <> -1 then
+    begin
+      Strings[i] := '[Options]';
+      SaveToFile(Common.GetINIFilename);
+    end;
+  finally
+    Free;
+  end;
+  // ---
+
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    StyleFilename := ReadString('Options', 'StyleFilename', STYLENAME_WINDOWS);
   finally
     Free;
   end;

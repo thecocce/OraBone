@@ -65,7 +65,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Preferences, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks, CommonDialogs,
+  Common, Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks, CommonDialogs,
   Language;
 
 var

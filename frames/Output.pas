@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Preferences, Lib, Vcl.Themes, StyleHooks, ClipBrd;
+  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin

@@ -1,8 +1,8 @@
-object PreferencesDialog: TPreferencesDialog
+object OptionsDialog: TOptionsDialog
   Left = 580
   Top = 154
   BorderStyle = bsDialog
-  Caption = 'Preferences'
+  Caption = 'Options'
   ClientHeight = 358
   ClientWidth = 470
   Color = clBtnFace
@@ -95,10 +95,6 @@ object PreferencesDialog: TPreferencesDialog
       HoldShiftToDragDrop = False
       object EditorTabSheet: TTabSheet
         Caption = 'Editor'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object EditorFontGroupBox: TGroupBox
           Left = 6
           Top = 0
@@ -412,6 +408,7 @@ object PreferencesDialog: TPreferencesDialog
             Top = 20
             Width = 62
             Height = 21
+            ItemHeight = 13
             ReadOnly = False
             TabOrder = 0
             Text = 'Bottom'
@@ -427,6 +424,7 @@ object PreferencesDialog: TPreferencesDialog
             Top = 20
             Width = 64
             Height = 21
+            ItemHeight = 13
             ReadOnly = False
             TabOrder = 1
             Text = 'Bottom'

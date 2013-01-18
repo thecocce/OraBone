@@ -77,7 +77,7 @@ implementation
 {$R *.dfm}
 
 uses
-  ActiveX, StrUtils, Progress, Preferences, Common, BigINI, Main, CommonDialogs, Language;
+  ActiveX, StrUtils, Progress, Options, Common, BigINI, Main, CommonDialogs, Language;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;

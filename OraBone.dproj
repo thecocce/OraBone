@@ -112,8 +112,8 @@
 			<DCCReference Include="..\..\Common\dialogs\ConfirmReplace.pas">
 				<Form>ConfirmReplaceDialog</Form>
 			</DCCReference>
-			<DCCReference Include="dialogs\Preferences.pas">
-				<Form>PreferencesDialog</Form>
+			<DCCReference Include="dialogs\Options.pas">
+				<Form>OptionsDialog</Form>
 			</DCCReference>
 			<DCCReference Include="frames\SchemaBrowser.pas">
 				<Form>SchemaBrowserFrame</Form>

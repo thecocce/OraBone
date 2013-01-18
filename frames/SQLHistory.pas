@@ -43,7 +43,7 @@ type
   public
     { Public declarations }
     procedure DoInit;
-    procedure AssignPreferences;
+    procedure AssignOptions;
     procedure SelectAll;
   end;
 
@@ -52,7 +52,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Lib, Preferences, Common, HistoryEdit;
+  Main, Lib, Options, Common, HistoryEdit;
 
 const
   GRID_COLUMN_BOOLEAN = 0;
@@ -68,7 +68,7 @@ begin
       SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row]);
 end;
 
-procedure TSQLHistoryFrame.AssignPreferences;
+procedure TSQLHistoryFrame.AssignOptions;
 begin
   if OptionsContainer.ObjectFrameAlign = 'Bottom' then
     ToolBar.Align := alBottom
