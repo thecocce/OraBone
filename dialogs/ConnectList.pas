@@ -72,7 +72,7 @@ var
 begin
   if ClientModeRadioButton.Checked then
     with ConnectClientDialog(Self) do
-    if Open(FConnectDialog) = mrOk then
+    if Open(True) then
     begin
       ClientConnectionsStringGrid.RowCount := ClientConnectionsStringGrid.RowCount + 1;
 
@@ -87,12 +87,11 @@ begin
       if ClientConnectionsStringGrid.RowCount > 2 then
         ClientConnectionsStringGrid.SortGrid(0);
       WriteConnectionsToIniFile;
-      ModalResult := mrOk;
     end;
 
   if DirectModeRadioButton.Checked then
     with ConnectDirectDialog(Self) do
-    if Open(FConnectDialog) = mrOk then
+    if Open(True) then
     begin
       DirectConnectionsStringGrid.RowCount := DirectConnectionsStringGrid.RowCount + 1;
 
@@ -117,7 +116,7 @@ begin
       if DirectConnectionsStringGrid.RowCount > 2 then
         DirectConnectionsStringGrid.SortGrid(0);
       WriteConnectionsToIniFile;
-      ModalResult := mrOk;
+     // ModalResult := mrOk;
     end;
 end;
 
@@ -342,7 +341,7 @@ begin
     s := Copy(s, Pos('/', s) + 1, Length(s));
     Password := Copy(s, 0, Pos('@', s) - 1);
     HomeName := ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i];
-    if Edit = mrOk then
+    if Open(False) then
     begin
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] := Username;
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := Database;
@@ -369,7 +368,7 @@ begin
       SID := Copy(s, 5, Length(s));
     if Pos('sn=', s) <> 0 then
       ServiceName := Copy(s, 4, Length(s));
-    if Edit = mrOk then
+    if Open(False) then
     begin
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] :=
         Username;

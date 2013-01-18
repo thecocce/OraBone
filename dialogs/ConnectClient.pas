@@ -10,12 +10,11 @@ uses
 type
   TConnectClientDialog = class(TDialog)
     ActionList: TActionList;
-    ConnectAction: TAction;
+    OKAction: TAction;
     Panel1: TPanel;
     UsernameLabel: TLabel;
     UsernameEdit: TBCEdit;
     Panel2: TPanel;
-    ConnectButton: TButton;
     OKButton: TButton;
     CancelButton: TButton;
     Separator1Panel: TPanel;
@@ -28,15 +27,11 @@ type
     Panel5: TPanel;
     HomeLabel: TLabel;
     HomeComboBox: TBCComboBox;
-    procedure ConnectActionExecute(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure HomeComboBoxKeyPress(Sender: TObject; var Key: Char);
     procedure Formshow(Sender: TObject);
   private
-    FConnectDialog: TConnectDialog;
-    FRetries: Integer;
-    //FRetry: Boolean;
-    FEdit: Boolean;
     function GetUsername: string;
     procedure SetUsername(Value: string);
     function GetPassword: string;
@@ -46,18 +41,15 @@ type
     function GetHomeName: string;
     procedure SetHomeName(Value: string);
     procedure DoInit;
-    procedure DoConnect;
     procedure FillDatabaseCombo;
     procedure FillHomeCombo;
     procedure ClearFields;
   public
+    function Open(Clear: Boolean): Boolean;
     property Username: string read GetUsername write SetUsername;
     property Password: string read GetPassword write SetPassword;
     property Database: string read GetDatabase write SetDatabase;
     property HomeName: string read GetHomeName write SetHomeName;
-  published
-    function Open(ConnectDialog: TConnectDialog): Integer;
-    function Edit: Integer;
   end;
 
 function ConnectClientDialog(AOwner: TComponent): TConnectClientDialog;
@@ -75,7 +67,11 @@ var
 function ConnectClientDialog(AOwner: TComponent): TConnectClientDialog;
 begin
   if FConnectClientDialog = nil then
+  begin
     FConnectClientDialog := TConnectClientDialog.Create(AOwner);
+    FConnectClientDialog.FillHomeCombo;
+    FConnectClientDialog.FillDatabaseCombo;
+  end;
   Result := FConnectClientDialog;
   StyleHooks.SetStyledFormSize(Result);
 end;
@@ -95,9 +91,6 @@ begin
   Enum := TOraServerEnumerator.Create;
   DatabaseComboBox.Hint := Enum.GetTNSFileName;
   Enum.Free;
-
-  //GetOraServerList(edServer.Items, OracleHomePath, ConnectDialog.ReadAliases,
-  //    FLocalSession.Options.Net);
 end;
 
 procedure TConnectClientDialog.FillHomeCombo;
@@ -108,24 +101,15 @@ begin
   try
     DetectOCI; // to show homes info
   except
-    //on E: Exception do
-     // Common.ShowError(E.Message);
+
   end;
   HomeComboBox.Clear;
- // if (DefaultOracleHome >= 0) and (OracleHomeNames[DefaultOracleHome] <> '') then
- //   HomeComboBox.Items[0] := HomeComboBox.Items[0] + ' [' + OracleHomeNames[DefaultOracleHome] + ']';
   for i := 0 to Length(OraCall.OracleHomes) - 1 do
     HomeComboBox.Items.Add(OraCall.OracleHomes[i].Name)
 end;
 
 procedure TConnectClientDialog.DoInit;
 begin
-  //FRetry := False;
-  FRetries := FConnectDialog.Retries;
-  FillHomeCombo;
-  FillDatabaseCombo;
-  OKButton.Visible := False;
-  ConnectButton.Visible := True;
   HomeComboBox.Enabled := HomeComboBox.Items.Count > 0;
   if HomeComboBox.Enabled then
     HomeComboBox.Color := clWindow
@@ -192,7 +176,7 @@ begin
   HomeComboBox.ItemIndex := HomeComboBox.Items.IndexOf(Value)
 end;
 
-procedure TConnectClientDialog.ConnectActionExecute(Sender: TObject);
+procedure TConnectClientDialog.OKActionExecute(Sender: TObject);
 begin
   if UsernameEdit.Text = '' then
   begin
@@ -208,40 +192,7 @@ begin
     Exit;
   end;
 
-  if not FEdit then
-    DoConnect;
-
   ModalResult := mrOK
-end;
-
-procedure TConnectClientDialog.DoConnect;
-begin
-  FConnectDialog.Session.UserName := Username;
-  FConnectDialog.Session.Password := Password;
-  FConnectDialog.Session.Server := Database;
-  FConnectDialog.Session.HomeName := HomeName;
-  FConnectDialog.Session.Options.Direct := False;
-  try
-    FConnectDialog.Connection.PerformConnect(False); //FRetry);
-    ModalResult := mrOk;
-  except
-    on E:EOraError do begin
-      Dec(FRetries);
-      //FRetry := True;
-      if FRetries = 0 then
-        ModalResult := mrCancel;
-
-      case E.ErrorCode of
-        1005: ActiveControl := PasswordEdit;
-        1017: if ActiveControl <> UsernameEdit then
-                ActiveControl := PasswordEdit;
-        12203,12154: ActiveControl := DatabaseComboBox;
-      end;
-      raise;
-    end
-    else
-      raise;
-  end;
 end;
 
  procedure TConnectClientDialog.ClearFields;
@@ -252,24 +203,12 @@ end;
    HomeName := '';
  end;
 
-function TConnectClientDialog.Open(ConnectDialog: TConnectDialog): Integer;
+function TConnectClientDialog.Open(Clear: Boolean): Boolean;
 begin
-  FConnectDialog := ConnectDialog;
-  ClearFields;
+  if Clear then
+    ClearFields;
   DoInit;
-  Result := ShowModal;
-end;
-
-function TConnectClientDialog.Edit: Integer;
-begin
-  OKButton.Visible := True;
-  ConnectButton.Visible := False;
-  HomeComboBox.Enabled := HomeComboBox.Items.Count > 0;
-  if HomeComboBox.Enabled then
-    HomeComboBox.Color := clWindow
-  else
-    HomeComboBox.Color := clBtnFace;
-  Result := ShowModal;
+  Result := ShowModal = mrOk;
 end;
 
 end.

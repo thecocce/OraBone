@@ -76,29 +76,13 @@ object ConnectClientDialog: TConnectClientDialog
     Padding.Right = 6
     Padding.Bottom = 6
     TabOrder = 4
-    object ConnectButton: TButton
-      Left = 78
-      Top = 6
-      Width = 75
-      Height = 25
-      Action = ConnectAction
-      Align = alRight
-      Default = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-    end
     object OKButton: TButton
       Left = 153
       Top = 6
       Width = 75
       Height = 25
+      Action = OKAction
       Align = alRight
-      Caption = '&OK'
       Default = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -107,7 +91,7 @@ object ConnectClientDialog: TConnectClientDialog
       Font.Style = []
       ModalResult = 1
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 0
     end
     object CancelButton: TButton
       Left = 234
@@ -124,7 +108,7 @@ object ConnectClientDialog: TConnectClientDialog
       Font.Style = []
       ModalResult = 2
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
     object Separator1Panel: TPanel
       Left = 228
@@ -133,7 +117,7 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 25
       Align = alRight
       BevelOuter = bvNone
-      TabOrder = 3
+      TabOrder = 2
     end
   end
   object Panel3: TPanel
@@ -268,9 +252,9 @@ object ConnectClientDialog: TConnectClientDialog
   object ActionList: TActionList
     Left = 124
     Top = 16
-    object ConnectAction: TAction
-      Caption = '&Connect'
-      OnExecute = ConnectActionExecute
+    object OKAction: TAction
+      Caption = '&OK'
+      OnExecute = OKActionExecute
     end
   end
 end
