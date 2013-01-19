@@ -372,7 +372,6 @@ begin
     ParentBackground := True;
     //DoubleBuffered := False;
     ParentColor := True;
-    //ParentDoubleBuffered := False;
     Tag := 75;
   end;
   StatsTime := TLabel.Create(TabSheet);
@@ -380,7 +379,6 @@ begin
   begin
     Parent := StatsPanel;
     Align := alLeft;
-    //Caption := 'Execute time: ' + Time;
     Tag := 76;
   end;
   SetTime(TabCaption, Time);
@@ -389,11 +387,6 @@ begin
   begin
     Parent := StatsPanel;
     Align := alRight;
-    {Caption := 'Row 1 of ' + IntToStr(OraQuery.RecordCount);
-    if OraQuery.Fetched then
-      Caption := Caption + ' total'
-    else
-      Caption := Caption + ' fetched'; }
     Tag := 77;
   end;
   GridPanel := TPanel.Create(TabSheet);
@@ -407,9 +400,7 @@ begin
     Padding.Right := 2;
     Padding.Bottom := 2;
     ParentBackground := True;
-    //DoubleBuffered := False;
     ParentColor := True;
-    //ParentDoubleBuffered := False;
     Tag := 78;
   end;
   GridDataSource := TOraDataSource.Create(GridPanel);
@@ -420,17 +411,9 @@ begin
   begin
     Parent := GridPanel;
     Align := alClient;
-   // AutoSort := False;
-   // CanDelete := False;
-   // Options := [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgTitleClick, dgTitleHotTrack, dgMultiSelect];
     ReadOnly := False;
-   // SortWith := swFields;
-   // TitleArrow := False;
-   // TitleVcl.Buttons := True;
     DataSource := GridDataSource;
-  //  ShowGlyphs := False;
     Tag := 75;
-  //  OnDrawDataCell := DataDBGridDrawDataCell;
     Canvas.Font := Font;
     AllowedSelections := [gstRecordBookmarks, gstAll];
     DrawGraphicData := True;
@@ -441,12 +424,9 @@ begin
     IndicatorOptions := [gioShowRowselCheckboxesEh];
     OnMouseDown := DataDBGridMouseDown;
   end;
-  //OraQuery.DisableControls;
   SetGridColumnWidths(Grid, True);
-  //OraQuery.EnableControls;
   OraQuery.AfterScroll := DataQueryAfterScroll;
   DataQueryAfterScroll(OraQuery);
-  //SetRows(TabCaption);
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
 end;
@@ -520,9 +500,7 @@ begin
     Padding.Right := 2;
     Padding.Bottom := 2;
     ParentBackground := True;
-    //DoubleBuffered := False;
     ParentColor := True;
-    //ParentDoubleBuffered := False;
   end;
   GridDataSource := TOraDataSource.Create(GridPanel);
   GridDataSource.DataSet := OraQuery;
@@ -532,13 +510,7 @@ begin
   begin
     Parent := GridPanel;
     Align := alClient;
-    //AutoSort := False;
-    //CanDelete := False;
-    //Options := [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowSelect, dgRowLines, dgTabs, dgTitleClick, dgTitleHotTrack, dgMultiSelect];
     ReadOnly := True;
-    //SortWith := swFields;
-    //TitleArrow := False;
-    //TitleVcl.Buttons := False;
     DataSource := GridDataSource;
     Tag := 75;
     AllowedSelections := [gstRecordBookmarks, gstAll];
@@ -572,7 +544,7 @@ begin
   if TabFound(TabCaption) then
   begin
     ListBox := GetListBox(TabCaption);
-    ListBox.Items.Add(Trim(Text));
+    ListBox.Items.Add(Text);
     Exit;
   end;
   TabSheet := TTabSheet.Create(PageControl);

@@ -2692,7 +2692,7 @@ begin
       s := 'Success.';
     StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
-    FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
+    FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, StringList.Text);
   finally
     WriteHistory(OraScript.Session, SynEdit.Text);
     StringList.Free;
@@ -2724,7 +2724,7 @@ begin
 
       StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
-      FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, Trim(StringList.Text));
+      FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, StringList.Text);
     finally
       WriteHistory(SynEdit.FOraSQL.Session, SynEdit.Text);
       StringList.Free;

@@ -342,7 +342,7 @@ implementation
 
 uses
   DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
-  CustomizeTableColumns, Options, Lib, NxColumns, NxSharedCommon, StyleHooks,
+  CustomizeTableColumns, Options, Lib, StyleHooks,
   TableSourceOptions, DataModule, CommonDialogs, Language;
 
 const
@@ -684,10 +684,7 @@ begin
                 end;
                 { parameters }
                 if TableSourceOptionsDialog.Parameters then
-                //begin
-                  //SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + FieldByName('LOGGING').AsString + CHR_ENTER;
                   SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + FieldByName('PARALLEL').AsString;
-                //end;
               finally
                 Close;
                 Free;
@@ -701,7 +698,6 @@ begin
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ', ';
       end;
     end;
-    //SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER;
     Application.ProcessMessages;
   end;
   { constraints }
@@ -711,7 +707,6 @@ begin
     with ConstraintsQuery do
     begin
       First;
-      //TempObjectName := '';
       while not Eof do
       begin
         if (FieldByName(CONSTRAINT_TYPE).AsWideString = 'Referential Integrity') or (FieldByName(CONSTRAINT_TYPE).AsWideString = 'Primary Key') then
