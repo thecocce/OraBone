@@ -332,7 +332,7 @@ end;
 
 procedure TMainForm.HelpCheckForUpdateMenuActionExecute(Sender: TObject);
 begin
-  Common.CheckForUpdates(Application.Title);
+  Common.CheckForUpdates(Application.Title, AboutDialog.Version);
 end;
 
 procedure TMainForm.HelpHomeActionExecute(Sender: TObject);
