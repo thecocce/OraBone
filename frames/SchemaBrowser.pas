@@ -269,8 +269,6 @@ begin
           Common.ShowMessage('Table altered.')
         else
           Common.ShowMessage('Table recreated.');
-        if Assigned(FTableBrowserFrame) then
-          FTableBrowserFrame.RefreshAction.Execute;
       end;
   finally
     Release;
@@ -286,8 +284,6 @@ begin
       begin
         ObjectTreeFrame.VirtualDrawTree.OnClick(nil);
         Common.ShowMessage('View altered.');
-        if Assigned(FViewBrowserFrame) then
-          FViewBrowserFrame.RefreshAction.Execute;
       end;
   finally
     Release;

@@ -401,21 +401,25 @@ end;
 procedure TTableBrowserFrame.CreateConstraintActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateConstraintForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.CreateIndexActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateIndexForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.CreateTriggerActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateTriggerForObjectAction');
+  RefreshAction.Execute;
 end;
 
 function TTableBrowserFrame.GetQueryOpened: Boolean;
@@ -736,6 +740,41 @@ begin
               SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ')';
               if Temp <> '' then
                 SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + Temp + ')';
+
+              if (ConstraintsQuery.FieldByName(CONSTRAINT_TYPE).AsWideString <> 'Referential Integrity') and
+                TableSourceOptionsDialog.Storage then
+              begin
+                OraQuery := TOraQuery.Create(Self);
+                with OraQuery do
+                begin
+                  Session := FSession;
+                  SQL.Add(DM.StringHolder.StringsByName['TableParametersSQL'].Text);
+                  try
+                    ParamByName('P_TABLE_NAME').AsWideString := FObjectName;
+                    ParamByName('P_OWNER').AsWideString := FSchemaParam;
+                    Open;
+                    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + CHR_ENTER + 'USING INDEX' + CHR_ENTER;
+                    { storage }
+                    if TableSourceOptionsDialog.Storage then
+                    begin
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('TABLESPACE    %s', [FieldByName('TABLESPACE_NAME').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('PCTFREE       %s', [FieldByName('PCT_FREE').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('INITRANS      %s', [FieldByName('INI_TRANS').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('MAXTRANS      %s', [FieldByName('MAX_TRANS').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'STORAGE (' + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  INITIAL     %s', [FieldByName('INITIAL_EXTENT').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  NEXT        %s', [FieldByName('NEXT_EXTENT').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MINEXTENTS  %s', [FieldByName('MIN_EXTENTS').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  MAXEXTENTS  %s', [FieldByName('MAX_EXTENTS').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('  PCTINCREASE %s', [FieldByName('PCT_INCREASE').AsString]) + CHR_ENTER;
+                      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ')';
+                    end;
+                  finally
+                    Close;
+                    Free;
+                  end;
+                end;
+              end;
               SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ');' + CHR_ENTER + CHR_ENTER;
             end
             else
@@ -1278,11 +1317,13 @@ end;
 procedure TTableBrowserFrame.AlterTableActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'AlterTableAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.AnalyzeTableActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'AnalyzeTableAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.CommitActionExecute(Sender: TObject);
@@ -1934,6 +1975,7 @@ end;
 procedure TTableBrowserFrame.GrantPrivilegesActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'GrantPrivilegesForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TTableBrowserFrame.GrantsDBGridSelectionChanged(Sender: TObject);

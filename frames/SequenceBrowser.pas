@@ -250,6 +250,7 @@ end;
 procedure TSequenceBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TSequenceBrowserFrame.CustomizeActionExecute(Sender: TObject);
@@ -294,6 +295,7 @@ end;
 procedure TSequenceBrowserFrame.GrantPrivilegesActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'GrantPrivilegesForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TSequenceBrowserFrame.GrantsDBGridSelectionChanged(Sender: TObject);

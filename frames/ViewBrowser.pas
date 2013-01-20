@@ -270,11 +270,13 @@ end;
 procedure TViewBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TViewBrowserFrame.CreateTriggerActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateTriggerForObjectAction');
+  RefreshAction.Execute;
 end;
 
 function TViewBrowserFrame.GetQueryOpened: Boolean;
@@ -406,13 +408,6 @@ end;
 procedure TViewBrowserFrame.RevokePrivilegesActionExecute(Sender: TObject);
 begin
   Lib.RevokeSelectedGrants(FSession, FSchemaParam, FObjectName, GrantsDBGrid);
-
-  {if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [GrantsQuery.FieldByName(PRIVILEGE).AsString])) then
-  begin
-    GrantsQuery.Session.ExecSQL(Format('REVOKE %s ON %s FROM %s', [GrantsQuery.FieldByName(PRIVILEGE).AsString,
-      FObjectName, GrantsQuery.FieldByName(GRANTEE).AsString]), []);
-    GrantsQuery.Refresh;
-  end; }
 end;
 
 procedure TViewBrowserFrame.SetSession(OraSession: TOraSession);
@@ -540,6 +535,7 @@ end;
 procedure TViewBrowserFrame.GrantPrivilegesActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'GrantPrivilegesForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TViewBrowserFrame.GrantsDBGridSelectionChanged(Sender: TObject);
@@ -1051,6 +1047,7 @@ end;
 procedure TViewBrowserFrame.AlterViewActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'AlterViewAction');
+  RefreshAction.Execute;
 end;
 
 procedure TViewBrowserFrame.ColumnsDBGridTitleClick(Column: TColumnEh);

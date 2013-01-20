@@ -672,7 +672,7 @@ procedure RevokeGrant(OraSession: TOraSession; Privilege: string; SchemaParam: s
 begin
   try
     if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [Privilege])) then
-      OraSession.ExecSQL(Format('REVOKE %s ON %s.%s FROM %s', [Privilege, SchemaParam, ObjectName, Grantee]), []);
+      OraSession.ExecSQL(Format('REVOKE %s ON %s.%s FROM %s', [SchemaParam, Privilege, ObjectName, Grantee]), []);
   except
     on E: Exception do
       Common.ShowErrorMessage(E.message);

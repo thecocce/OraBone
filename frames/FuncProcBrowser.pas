@@ -149,7 +149,7 @@ end;
 procedure TFuncProcBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
-  SynonymsQuery.Refresh;
+  RefreshAction.Execute;
 end;
 
 procedure TFuncProcBrowserFrame.CustomizeActionExecute(Sender: TObject);
@@ -158,18 +158,8 @@ begin
 end;
 
 procedure TFuncProcBrowserFrame.DropSynonymActionExecute(Sender: TObject);
-//var
-//  SynonymAvailability: string;
 begin
   Lib.DropSelectedSynonyms(FSession, SynonymsDBGrid);
-{  if Common.AskYesOrNo(Format('Drop synonym %s, are you sure?', [SynonymsQuery.FieldByName(SYNONYM_NAME).AsString])) then
-  begin
-    SynonymAvailability := '';
-    if SynonymsQuery.FieldByName(SYNONYM_OWNER).AsString = 'PUBLIC' then
-      SynonymAvailability := 'PUBLIC ';
-    SynonymsQuery.Session.ExecSQL(Format('DROP %sSYNONYM %s', [SynonymAvailability, SynonymsQuery.FieldByName(SYNONYM_NAME).AsString]), []);
-    SynonymsQuery.Refresh;
-  end; }
 end;
 
 procedure TFuncProcBrowserFrame.FuncProcPageControlChange(Sender: TObject);
@@ -240,6 +230,7 @@ end;
 procedure TFuncProcBrowserFrame.GrantPrivilegesActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'GrantPrivilegesForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TFuncProcBrowserFrame.GrantsDBGridSelectionChanged(Sender: TObject);

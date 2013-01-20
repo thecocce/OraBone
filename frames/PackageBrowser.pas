@@ -225,6 +225,7 @@ end;
 procedure TPackageBrowserFrame.GrantPrivilegesActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'GrantPrivilegesForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TPackageBrowserFrame.GrantsDBGridSelectionChanged(Sender: TObject);
@@ -275,6 +276,7 @@ end;
 procedure TPackageBrowserFrame.CreateSynonymActionExecute(Sender: TObject);
 begin
   Lib.ExecuteActionFromList(SchemaActionList, 'CreateSynonymForObjectAction');
+  RefreshAction.Execute;
 end;
 
 procedure TPackageBrowserFrame.CustomizeActionExecute(Sender: TObject);
