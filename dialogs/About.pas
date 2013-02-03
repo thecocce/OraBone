@@ -13,8 +13,6 @@ type
     Kayttajanimi2Label: TLabel;
     LinkRow1Label: TLinkLabel;
     LinkRow3Label: TLinkLabel;
-    CopyrightLabel: TLabel;
-    BoneCodeLinkLabel: TLinkLabel;
     LinkRow2Label: TLinkLabel;
     TopPanel: TPanel;
     KayttovaltuusImage: TImage;
@@ -23,6 +21,7 @@ type
     OSLabel: TLabel;
     MemoryAvailableLabel: TLabel;
     GrayLinePanel: TPanel;
+    CopyrightLabel: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure LinkClick(Sender: TObject; const Link: string;

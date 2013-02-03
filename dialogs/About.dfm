@@ -4,8 +4,8 @@ object AboutDialog: TAboutDialog
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'About OraBone'
-  ClientHeight = 260
-  ClientWidth = 381
+  ClientHeight = 284
+  ClientWidth = 399
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,40 +18,43 @@ object AboutDialog: TAboutDialog
   OnClose = FormClose
   OnDestroy = FormDestroy
   DesignSize = (
-    381
-    260)
+    399
+    284)
   PixelsPerInch = 96
   TextHeight = 13
   object Kayttajanimi2Label: TLabel
     Left = 10
-    Top = 162
+    Top = 150
     Width = 47
     Height = 13
     Caption = 'Thanks to'
   end
   object CopyrightLabel: TLabel
     Left = 10
-    Top = 143
-    Width = 115
+    Top = 221
+    Width = 381
     Height = 13
-    Caption = 'Copyright '#169' 2010-2012'
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Copyright '#169' 2010-2013 Lasse Rautiainen. All Rights Reserved.'
   end
   object TopPanel: TPanel
     Left = -10
     Top = -2
-    Width = 409
+    Width = 427
     Height = 139
     Anchors = [akLeft, akTop, akRight]
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
-    TabOrder = 5
+    TabOrder = 4
+    ExplicitWidth = 409
     DesignSize = (
-      409
+      427
       139)
     object KayttovaltuusImage: TImage
-      Left = 269
-      Top = 5
+      Left = 281
+      Top = 9
       Width = 128
       Height = 128
       Anchors = [akTop, akRight]
@@ -326,7 +329,6 @@ object AboutDialog: TAboutDialog
         454E44AE426082}
       Stretch = True
       IsControl = True
-      ExplicitLeft = 272
     end
     object ProgramNameiLabel: TLabel
       Left = 20
@@ -371,8 +373,8 @@ object AboutDialog: TAboutDialog
     end
   end
   object OKButton: TButton
-    Left = 292
-    Top = 221
+    Left = 310
+    Top = 245
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -381,64 +383,61 @@ object AboutDialog: TAboutDialog
     Default = True
     ModalResult = 1
     TabOrder = 0
+    ExplicitLeft = 292
+    ExplicitTop = 221
   end
   object LinkRow1Label: TLinkLabel
-    Left = 61
-    Top = 162
-    Width = 315
+    Left = 10
+    Top = 166
+    Width = 381
     Height = 17
+    AutoSize = False
     Caption = 
       '<a href="http://www.embarcadero.com/products/rad-studio/">Embarc' +
       'adero RAD Studio XE2</a>, <a href="http://www.devart.com/odac/">' +
-      'Oracle Data Access Components</a>, '
+      'Oracle Data Access Components</a>, <a href="http://www.delphi-je' +
+      'di.org/">Jedi Project</a>,  '
     TabOrder = 1
     OnLinkClick = LinkClick
   end
   object LinkRow3Label: TLinkLabel
-    Left = 61
-    Top = 194
-    Width = 310
+    Left = 10
+    Top = 198
+    Width = 381
     Height = 17
+    AutoSize = False
     Caption = 
-      '<a href="http://code.google.com/p/omnixml/">OmniXML</a>, <a href' +
-      '="http://www.glyfx.com/">glyFX Icons</a>, <a href="http://angusj' +
-      '.com/delphi/">Angus Johnson</a>, <a href="http://www.soft-gems.n' +
-      'et">Mike Lischke</a>, <a href="http://poorsql.com/">Tao Klerks</' +
-      'a>'
+      '<a href="http://angusj.com/delphi/">Angus Johnson</a>, <a href="' +
+      'http://www.soft-gems.net">Mike Lischke</a>, <a href="http://poor' +
+      'sql.com/">Tao Klerks</a>'
     TabOrder = 2
     OnLinkClick = LinkClick
   end
-  object BoneCodeLinkLabel: TLinkLabel
-    Left = 130
-    Top = 143
-    Width = 85
-    Height = 17
-    Caption = '<a href="http://www.bonecode.com">Lasse Rautiainen</a>'
-    TabOrder = 3
-    OnLinkClick = LinkClick
-  end
   object LinkRow2Label: TLinkLabel
-    Left = 61
-    Top = 178
-    Width = 297
+    Left = 10
+    Top = 182
+    Width = 381
     Height = 17
+    AutoSize = False
     Caption = 
-      '<a href="http://www.delphi-jedi.org/">Jedi Project</a>, <a href=' +
-      '"http://synedit.svn.sourceforge.net/viewvc/synedit/">Unicode Syn' +
-      'Edit</a>, <a href="http://flatdev.ovh.org/">SynWeb</a>, <a href=' +
-      '"http://www.customicondesign.com/">Custom Icon Design</a>,'
-    TabOrder = 4
+      '<a href="http://synedit.svn.sourceforge.net/viewvc/synedit/">Uni' +
+      'code SynEdit</a>, <a href="http://flatdev.ovh.org/">SynWeb</a>, ' +
+      '<a href="http://www.customicondesign.com/">Custom Icon Design</a' +
+      '>, <a href="http://code.google.com/p/omnixml/">OmniXML</a>, <a h' +
+      'ref="http://www.glyfx.com/">glyFX Icons</a>, '
+    TabOrder = 3
     OnLinkClick = LinkClick
   end
   object GrayLinePanel: TPanel
     Left = 0
     Top = 137
-    Width = 387
+    Width = 405
     Height = 1
     Anchors = [akLeft, akTop, akRight]
     BevelOuter = bvNone
     Color = cl3DLight
     ParentBackground = False
-    TabOrder = 6
+    TabOrder = 5
+    ExplicitWidth = 387
   end
 end

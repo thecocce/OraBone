@@ -359,7 +359,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Padding.Right = 2
     Padding.Bottom = 2
     TabOrder = 3
-    ExplicitTop = 51
     object SearchPanel: TPanel
       Left = 0
       Top = 0
@@ -371,8 +370,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       FullRepaint = False
       TabOrder = 0
       Visible = False
-      ExplicitTop = 23
-      ExplicitWidth = 451
       object CaseSensitiveLabel: TLabel
         Left = 368
         Top = 0
@@ -419,10 +416,9 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Search for'
-          ExplicitHeight = 13
         end
       end
       object SearchPanel3: TPanel
@@ -852,7 +848,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C010112005802180510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101120058021C0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1613,7 +1609,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A0038004C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800500410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

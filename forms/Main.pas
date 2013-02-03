@@ -488,6 +488,7 @@ begin
               SynEdit.Lines.LoadFromFile(AddSlash(FolderText) + FName);
               try
                 Root := nil;
+                if Trim(SynEdit.Text) <> '' then
                 for Ln := 0 to SynEdit.Lines.Count - 1 do
                 begin
                   Found := True;

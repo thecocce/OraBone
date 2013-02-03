@@ -753,7 +753,7 @@ procedure TTNSNamesEditorForm.DoSearch;
 var
   SynSearchOptions: TSynSearchOptions;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
 
   if RegularExpressionCheckBox.Checked then
@@ -802,7 +802,7 @@ procedure TTNSNamesEditorForm.FindNext;
 var
   SynSearchOptions: TSynSearchOptions;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
   SynSearchOptions := SearchOptions(False);
 
@@ -818,7 +818,7 @@ procedure TTNSNamesEditorForm.FindPrevious;
 var
   SynSearchOptions: TSynSearchOptions;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
   SynSearchOptions := SearchOptions(True);
   if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then

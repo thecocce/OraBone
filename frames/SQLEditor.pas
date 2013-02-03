@@ -1556,7 +1556,7 @@ var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCSynEdit;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
 
   SynEdit := ActiveSynEdit;
@@ -1611,7 +1611,7 @@ var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCSynEdit;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
   SynSearchOptions := SearchOptions(False);
   SynEdit := ActiveSynEdit;
@@ -1629,7 +1629,7 @@ var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCSynEdit;
 begin
-  if Trim(SearchForEdit.Text) = '' then
+  if SearchForEdit.Text = '' then
     Exit;
   SynSearchOptions := SearchOptions(True);
   SynEdit := ActiveSynEdit;
