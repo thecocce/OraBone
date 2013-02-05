@@ -73,8 +73,6 @@ type
     FObjectFieldCompletionProposal: TSynCompletionProposal;
     FInThread: Boolean;
     function GetQueryOpened: Boolean;
-  protected
-    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
   public
     constructor Create(AOwner: TComponent); override;
     property InThread: Boolean read FInThread write FInThread;
@@ -698,7 +696,7 @@ begin
     WantTabs := True;
     Options := [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo,
       eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces,
-      eoTrimTrailingSpaces, eoScrollPastEol, eoSpecialLineDefaultFg];
+      eoTrimTrailingSpaces, eoScrollPastEol, eoSpecialLineDefaultFg, eoAltSetsColumnMode];
     OnChange := SynEditChange;
     OnReplaceText := SynEditorReplaceText;
     OnSpecialLineColors := SynEditSpecialLineColors;
@@ -1041,18 +1039,6 @@ begin
   CompareFiles(ActiveSynEdit.DocumentName);
 end;
 
-procedure TBCSynEdit.KeyDown(var Key: Word; Shift: TShiftState);
-begin
-  inherited;
-  if Shift = [ssAlt] then
-  begin
-    if SelectionMode = smNormal then
-      SelectionMode := smColumn
-    else
-      SelectionMode := smNormal
-  end;
-end;
-
 function TSQLEditorFrame.FindOpenFile(FileName: string): TBCSynEdit;
 var
   i: Integer;
@@ -1292,6 +1278,7 @@ begin
     SynEdit.Lines.SaveToFile(SynEdit.DocumentName);
     SynEdit.UndoList.Clear;
     SynEdit.FileDateTime := GetFileDateTime(SynEdit.DocumentName);
+    TabSheet.ImageIndex := GetImageIndex(SynEdit.DocumentName);
     SynEdit.Modified := False;
     if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
       TabSheet.Caption := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);

@@ -416,9 +416,10 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Search for'
+          ExplicitHeight = 13
         end
       end
       object SearchPanel3: TPanel
@@ -813,10 +814,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       BevelOuter = bvNone
       Padding.Top = 2
       TabOrder = 1
-      ExplicitLeft = 28
-      ExplicitTop = 80
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object SynEdit: TSynEdit
         Left = 0
         Top = 3
@@ -837,7 +834,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
         Gutter.ShowLineNumbers = True
-        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+        Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         SearchEngine = SynEditSearch
         WantTabs = True
         OnChange = SynEditChange
@@ -848,7 +845,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C0101120058021C0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112005802200510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1609,7 +1606,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A003800500410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800540410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

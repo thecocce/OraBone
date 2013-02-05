@@ -653,13 +653,16 @@ end;
 
 procedure TMainForm.CreateStyleMenu;
 var
-  FileName: string;
+  FilePath, FileName: string;
   StyleInfo: TStyleInfo;
   ActionClientItem: TActionClientItem;
   Action: TAction;
 begin
-  for FileName in TDirectory.GetFiles(IncludeTrailingPathDelimiter(Format('%s%s',
-    [ExtractFilePath(ParamStr(0)), 'Styles'])), '*.vsf') do
+  FilePath := IncludeTrailingPathDelimiter(Format('%s%s', [ExtractFilePath(ParamStr(0)), 'Styles']));
+  if not DirectoryExists(FilePath) then
+    Exit;
+
+  for FileName in TDirectory.GetFiles(FilePath, '*.vsf') do
   begin
     if TStyleManager.IsValidStyle(FileName, StyleInfo) then
     begin
