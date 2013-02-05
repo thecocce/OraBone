@@ -870,56 +870,46 @@ end;
 
 procedure AddAllFields(DataSet: TDataset);
 var
-   FieldsList: TStringList;
-   FieldName: WideString;
-   Field: TField;
-   WasActive: boolean;
-   FieldDef: TFieldDef;
-   i: Integer;
+  FieldsList: TStringList;
+  FieldName: WideString;
+  Field: TField;
+  WasActive: boolean;
+  FieldDef: TFieldDef;
+  i: Integer;
 begin
-   WasActive := DataSet.Active;
-   if WasActive then
-      DataSet.Active := False;
-   try
-      FieldsList := TStringList.Create;
-      try
-         DataSet.Fields.Clear;
-         DataSet.FieldDefs.Update;
-         // make a list of all the field names that aren't already on the DataSet
-         for i := 0 to DataSet.FieldDefList.Count - 1 do
-            with DataSet.FieldDefList[i] do
-               if (FieldClass <> nil) and not(faHiddenCol in Attributes) then
-               begin
-                  FieldName := DataSet.FieldDefList.Strings[i];
-                  Field := DataSet.FindField(FieldName);
-                  if (Field = nil) or (Field.Owner <> DataSet.Owner) then
-                     FieldsList.Add(FieldName);
-               end;
+  WasActive := DataSet.Active;
+  if WasActive then
+    DataSet.Active := False;
+  try
+    FieldsList := TStringList.Create;
+    try
+      DataSet.Fields.Clear;
+      DataSet.FieldDefs.Update;
+      // make a list of all the field names that aren't already on the DataSet
+      for i := 0 to DataSet.FieldDefList.Count - 1 do
+        with DataSet.FieldDefList[i] do
+        if (FieldClass <> nil) and not(faHiddenCol in Attributes) then
+        begin
+          FieldName := DataSet.FieldDefList.Strings[i];
+          Field := DataSet.FindField(FieldName);
+          if (Field = nil) or (Field.Owner <> DataSet.Owner) then
+            FieldsList.Add(FieldName);
+        end;
 
-         // add those fields to the dataset
-         for i := 0 to FieldsList.Count - 1 do
-         begin
-            FieldDef := DataSet.FieldDefList.FieldByName(FieldsList[i]);
-            //Field :=
-            FieldDef.CreateField(DataSet.Owner, nil, FieldsList[i], False);
-         end;
-      finally
-         FieldsList.Free;
+      // add those fields to the dataset
+      for i := 0 to FieldsList.Count - 1 do
+      begin
+        FieldDef := DataSet.FieldDefList.FieldByName(FieldsList[i]);
+        FieldDef.CreateField(DataSet.Owner, nil, FieldsList[i], False);
       end;
-   finally
-     if WasActive then
-       DataSet.Active := True;
-   end;
-end;
-
-{procedure FocusGridCell(const DBGrid: TDBGrid; const Column: integer);
-begin
-  with TStringGrid(DBGrid) do
-  begin
-    Col := Column;
-    SetFocus;
+    finally
+      FieldsList.Free;
+    end;
+  finally
+   if WasActive then
+     DataSet.Active := True;
   end;
-end;}
+end;
 
 procedure MoveGridRowDown(OraQuery: TOraQuery);
 var

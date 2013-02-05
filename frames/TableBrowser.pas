@@ -1287,6 +1287,7 @@ end;
 
 procedure TTableBrowserFrame.RollbackActionExecute(Sender: TObject);
 begin
+  FDataQuery.CancelUpdates;
   FDataQuery.Session.Rollback;
   OpenQuery(FDataQuery, True);
  // CommitAction.Enabled := False;
@@ -1328,12 +1329,16 @@ end;
 
 procedure TTableBrowserFrame.CommitActionExecute(Sender: TObject);
 begin
-  if FDataQuery.State in [dsEdit, dsInsert] then
+  {if FDataQuery.State in [dsEdit, dsInsert] then
   begin
     FDataQuery.Post;
     DataQueryAfterScroll(FDataQuery);
   end;
+  FDataQuery.Session.Commit; }
+  FDataQuery.ApplyUpdates;
+  FDataQuery.CommitUpdates;
   FDataQuery.Session.Commit;
+  DataQueryAfterScroll(FDataQuery);
   SetCommitRollback;
 end;
 
@@ -1342,8 +1347,6 @@ begin
   ARect.Left := X;
   DrawText(ACanvas.Handle, PChar(Text), -1, ARect, DT_LEFT or DT_VCENTER or DT_SINGLELINE or DT_NOCLIP);
 end;
-
-
 
 procedure TTableBrowserFrame.SetConstraintActions;
 begin
@@ -1516,7 +1519,10 @@ begin
   if DataDBGrid.SelectedRows.Count = 1 then
   begin
     if Common.AskYesOrNo('Delete record?') then
-      FDataQuery.Delete
+    begin
+      FDataQuery.Delete;
+      DataDBGrid.Selection.Clear;
+    end
     else
       Abort
   end
@@ -1844,6 +1850,7 @@ begin
     end;
     FDataQuery := TOraQuery.Create(Self);
     FDataQuery.Session := FSession;
+    FDataQuery.CachedUpdates := True;
     FDataQuery.AutoCommit := False;
     //FDataQuery.FetchAll := True;
     FDataQuery.FetchRows := 500;
@@ -1852,6 +1859,7 @@ begin
     FDataQuery.Options.CacheLobs := False;
     FDataQuery.Options.DeferredLobRead := True;
     FDataQuery.Options.RawAsString := True;
+
     FDataQuery.RefreshOptions := [roAfterInsert, roAfterUpdate, roBeforeEdit];
     FDataQuery.BeforeDelete := DataQueryBefore;
     FDataQuery.BeforeEdit := DataQueryBefore;
@@ -2041,9 +2049,6 @@ begin
           DataFilter := GetCurrentDataFilter;
           if DataFilter <> '' then
             SQL.Add('AND ' + DataFilter);
-
-
-          //DataDBGrid.SortedColumn := nil;
           Sort := GetCurrentDataSort;
           if Sort <> '' then
             SQL.Add('ORDER BY ' + Sort)
@@ -2053,10 +2058,8 @@ begin
         end;
         ParamByName('P_TABLE_NAME').AsWideString := FObjectName;
         if OraQuery <> FDataQuery then
-        //begin
-        //  ParamByName('P_TABLE_NAME').AsWideString := FObjectName;
           ParamByName('P_OWNER').AsWideString := FSchemaParam;
-        //end;
+
         if (OraQuery = FDataQuery) then
         begin
           AddAllFields(OraQuery);
@@ -2064,7 +2067,7 @@ begin
         end;
         Prepare;
         Open;
-     //   OraQuery.EnableControls;
+
         SetColumnWidths(OraQuery);
         if OraQuery = FDataQuery then
         begin
