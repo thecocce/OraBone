@@ -227,9 +227,4 @@ begin
   SourceSynEdit.Lines.EndUpdate;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
-
 end.

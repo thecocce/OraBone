@@ -847,8 +847,4 @@ begin
   DoSearch;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

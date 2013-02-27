@@ -58,31 +58,9 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit;
 
 type
-  TBCSynEdit = class(TSynEdit)
-  private
-    FDocumentName: string;
-    FFileDateTime: TDateTime;
-    FOraQuery: TOraQuery;
-    FPlanQuery: TOraQuery;
-    FOraSQL: TOraSQL;
-    FStartTime: TDateTime;
-    FObjectCompletionProposal: TSynCompletionProposal;
-    FObjectFieldCompletionProposal: TSynCompletionProposal;
-    FInThread: Boolean;
-    function GetQueryOpened: Boolean;
-  public
-    constructor Create(AOwner: TComponent); override;
-    property InThread: Boolean read FInThread write FInThread;
-    property DocumentName: string read FDocumentName write FDocumentName;
-    property FileDateTime: TDateTime read FFileDateTime write FFileDateTime;
-    property StartTime: TDateTime read FStartTime write FStartTime;
-    property QueryOpened: Boolean read GetQueryOpened;
-    property ObjectCompletionProposal: TSynCompletionProposal read FObjectCompletionProposal write FObjectCompletionProposal;
-  end;
-
   TSQLEditorFrame = class(TFrame)
     SynEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
@@ -319,11 +297,11 @@ type
     FDBMSTimer: TTimer;
     FSynEditsList: TList;
     FCompareImageIndex, FNewImageIndex: Integer;
-    function CreateNewTabSheet(FileName: string = ''): TBCSynEdit;
+    function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
     function GetActiveDocumentFound: Boolean;
-    function GetSynEdit(TabSheet: TTabSheet): TBCSynEdit;
+    function GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
     function Save(TabSheet: TTabSheet; ShowDialog: Boolean = False): string;
       overload;
     procedure InitializeSynEditPrint;
@@ -333,13 +311,13 @@ type
     function GetCanRedo: Boolean;
     function CanFindNextPrevious: Boolean;
     function SearchOptions(IncludeBackwards: Boolean): TSynSearchOptions;
-    function FindOpenFile(FileName: string): TBCSynEdit;
-    procedure SetBookmarks(SynEdit: TBCSynEdit; Bookmarks: TStrings);
+    function FindOpenFile(FileName: string): TBCOraSynEdit;
+    procedure SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
     procedure DoSearch;
     function GetFileDateTime(FileName: string): TDateTime;
     procedure SetHighlighterTableNames(Value: TStrings);
-    procedure ExecuteStatement(SynEdit: TBCSynEdit); overload;
-    procedure ExecuteNoRowsStatement(SynEdit: TBCSynEdit);
+    procedure ExecuteStatement(SynEdit: TBCOraSynEdit); overload;
+    procedure ExecuteNoRowsStatement(SynEdit: TBCOraSynEdit);
     procedure SetSession(Value: TOraSession);
     procedure EnableDBMSOutput;
     procedure GetDBMSOutput;
@@ -347,7 +325,7 @@ type
     function GetDataQueryOpened: Boolean;
     function CreateSession(OraSession: TOraSession): TOraSession;
     procedure GetUserErrors;
-    function RemoveComments(s: WideString): WideString; //SynEdit: TBCSynEdit): WideString;
+    function RemoveComments(s: WideString): WideString; //SynEdit: TBCOraSynEdit): WideString;
     function RemoveParenthesisFromBegin(Text: WideString): WideString;
     function GetOutputGridHasFocus: Boolean;
     function GetActivePageCaption: string;
@@ -393,7 +371,7 @@ type
     function SelectionMode: Boolean;
     procedure CompareFiles(FileName: string = '');
     procedure SelectForCompare;
-    function ActiveSynEdit: TBCSynEdit;
+    function ActiveSynEdit: TBCOraSynEdit;
     function GetCaretInfo: string;
     function GetModifiedInfo: string;
     function ModifiedDocuments(CheckActive: Boolean = True): Boolean;
@@ -446,20 +424,6 @@ uses
 
 const
   DEFAULT_FILENAME = 'Sql';
-
-{ TBCSynEdit }
-
-constructor TBCSynEdit.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  Width := 0;
-  Height := 0;
-end;
-
-function TBCSynEdit.GetQueryOpened: Boolean;
-begin
-  Result := (not InThread) and Assigned(FOraQuery) and FOraQuery.Session.Connected and FOraQuery.Active;
-end;
 
 { TDocumentFrame }
 
@@ -632,11 +596,11 @@ begin
   Result := GetIconIndex(Path, SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
 end;
 
-function TSQLEditorFrame.CreateNewTabSheet(FileName: string = ''): TBCSynEdit;
+function TSQLEditorFrame.CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
 var
   TabSheet: TTabSheet;
   Panel: TPanel;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   { create a TabSheet }
   TabSheet := TTabSheet.Create(PageControl);
@@ -672,7 +636,7 @@ begin
     ParentDoubleBuffered := False;
   end;
   { create a SynEdit }
-  SynEdit := TBCSynEdit.Create(Panel);
+  SynEdit := TBCOraSynEdit.Create(Panel);
   with SynEdit do
   begin
     Visible := False;
@@ -708,13 +672,12 @@ begin
     BookMarkOptions.BookmarkImages := BookmarkImagesList;
   end;
   UpdateGutter(SynEdit);
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook); //TMemoStyleHook);
   FSynEditsList.Add(SynEdit);
   OptionsContainer.AssignTo(SynEdit);
   PageControl.MultiLine := OptionsContainer.MultiLine;
 
-  SynEdit.FObjectCompletionProposal := TSynCompletionProposal.Create(nil);
-  with SynEdit.FObjectCompletionProposal do
+  SynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
+  with SynEdit.ObjectCompletionProposal do
   begin
     Editor := SynEdit;
     ShortCut := TextToShortCut('Ctrl+O');
@@ -723,8 +686,8 @@ begin
     ItemList.Assign(FObjectNames);
   end;
 
-  SynEdit.FObjectFieldCompletionProposal := TSynCompletionProposal.Create(nil);
-  with SynEdit.FObjectFieldCompletionProposal do
+  SynEdit.ObjectFieldCompletionProposal := TSynCompletionProposal.Create(nil);
+  with SynEdit.ObjectFieldCompletionProposal do
   begin
     Editor := SynEdit;
     Options := Options + [scoUseInsertList, scoUseBuiltInTimer, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
@@ -756,7 +719,7 @@ begin
 
   FOutputFrame.UpdateControls;
   for i := 0 to FSynEditsList.Count - 1 do
-    UpdateGutter(TBCSynEdit(FSynEditsList.Items[i]));
+    UpdateGutter(TBCOraSynEdit(FSynEditsList.Items[i]));
   for i := 0 to PageControl.PageCount - 1 do
     for j := 0 to PageControl.Pages[i].ComponentCount - 1 do
       if PageControl.Pages[i].Components[j] is TPanel then
@@ -773,12 +736,12 @@ end;
 procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Integer;
   var Special: Boolean; var FG, BG: TColor);
 begin
-  if not TBCSynEdit(Sender).SelAvail then
-    if TBCSynEdit(Sender).CaretY = Line then
+  if not TBCOraSynEdit(Sender).SelAvail then
+    if TBCOraSynEdit(Sender).CaretY = Line then
     begin
       Special := True;
       if StyleServices.Enabled then
-        BG := LightenColor(TBCSynEdit(Sender).Color);
+        BG := LightenColor(TBCOraSynEdit(Sender).Color);
     end;
 end;
 
@@ -970,7 +933,7 @@ var
   TabSheet: TTabSheet;
   Frame: TCompareFrame;
   TempList: TStringList;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   Panel: TPanel;
 begin
   { create list of open documents }
@@ -1039,10 +1002,10 @@ begin
   CompareFiles(ActiveSynEdit.DocumentName);
 end;
 
-function TSQLEditorFrame.FindOpenFile(FileName: string): TBCSynEdit;
+function TSQLEditorFrame.FindOpenFile(FileName: string): TBCOraSynEdit;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := nil;
   for i := 0 to PageControl.PageCount - 1 do
@@ -1065,7 +1028,7 @@ begin
   CreateNewTabSheet;
 end;
 
-procedure TSQLEditorFrame.SetBookmarks(SynEdit: TBCSynEdit; Bookmarks: TStrings);
+procedure TSQLEditorFrame.SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
 var
   i: Integer;
   Temp: string;
@@ -1095,7 +1058,7 @@ procedure TSQLEditorFrame.Open(FileName: string = ''; Bookmarks: TStrings = nil;
   Ln: Integer = 0; Ch: Integer = 0);
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if FileName = '' then
   begin
@@ -1144,7 +1107,7 @@ end;
 procedure TSQLEditorFrame.Close(IncludeCancel: Boolean);
 var
   i, Rslt: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Rslt := mrNone;
 
@@ -1199,7 +1162,7 @@ var
   i: Integer;
   Temp: Integer;
   Rslt: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Temp := PageControl.ActivePageIndex;
   PageControl.ActivePage.Tag := 1;
@@ -1246,7 +1209,7 @@ end;
 
 function TSQLEditorFrame.Save(TabSheet: TTabSheet; ShowDialog: Boolean): string;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   AFileName: string;
 begin
   Result := '';
@@ -1301,7 +1264,7 @@ procedure TSQLEditorFrame.SaveAll;
 var
   i: Integer;
   Temp: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Temp := PageControl.ActivePageIndex;
   for i := 0 to PageControl.PageCount - 1 do
@@ -1317,7 +1280,7 @@ end;
 
 procedure TSQLEditorFrame.Undo;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   SynEdit.Undo;
@@ -1332,7 +1295,7 @@ end;
 
 procedure TSQLEditorFrame.Redo;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -1343,7 +1306,7 @@ end;
 
 procedure TSQLEditorFrame.Cut;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -1353,7 +1316,7 @@ end;
 
 procedure TSQLEditorFrame.CopyToClipboard;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if SynEdit.Focused then
@@ -1373,7 +1336,7 @@ end;
 
 procedure TSQLEditorFrame.Paste;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if SynEdit.Focused then
@@ -1469,7 +1432,7 @@ end;
 
 procedure TSQLEditorFrame.InitializeSynEditPrint;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   with SynEditPrint.Header do
@@ -1541,7 +1504,7 @@ end;
 procedure TSQLEditorFrame.DoSearch;
 var
   SynSearchOptions: TSynSearchOptions;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if SearchForEdit.Text = '' then
     Exit;
@@ -1596,7 +1559,7 @@ end;
 procedure TSQLEditorFrame.FindNext;
 var
   SynSearchOptions: TSynSearchOptions;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if SearchForEdit.Text = '' then
     Exit;
@@ -1614,7 +1577,7 @@ end;
 procedure TSQLEditorFrame.FindPrevious;
 var
   SynSearchOptions: TSynSearchOptions;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if SearchForEdit.Text = '' then
     Exit;
@@ -1631,7 +1594,7 @@ end;
 procedure TSQLEditorFrame.Replace;
 var
   SynSearchOptions: TSynSearchOptions;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   i, page, MResult: Integer;
 begin
   with ReplaceDialog do
@@ -1681,7 +1644,7 @@ end;
 
 function TSQLEditorFrame.WordWrap: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1711,7 +1674,7 @@ end;
 
 function TSQLEditorFrame.SpecialChars: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1744,7 +1707,7 @@ end;
 
 function TSQLEditorFrame.SelectionMode: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1755,7 +1718,7 @@ end;
 function TSQLEditorFrame.ToggleSelectionMode: Boolean;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
 
@@ -1777,7 +1740,7 @@ end;
 
 function TSQLEditorFrame.LineNumbers: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1805,7 +1768,7 @@ begin
   PageControl.Repaint;
 end;
 
-function TSQLEditorFrame.GetSynEdit(TabSheet: TTabSheet): TBCSynEdit;
+function TSQLEditorFrame.GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
 var
   Panel: TPanel;
 begin
@@ -1816,13 +1779,13 @@ begin
     begin
       Panel := TPanel(TabSheet.Components[0]);
       if Panel.ComponentCount <> 0 then
-        if Panel.Components[0] is TBCSynEdit then
-          Result := TBCSynEdit(Panel.Components[0]);
+        if Panel.Components[0] is TBCOraSynEdit then
+          Result := TBCOraSynEdit(Panel.Components[0]);
     end;
   end;
 end;
 
-function TSQLEditorFrame.ActiveSynEdit: TBCSynEdit;
+function TSQLEditorFrame.ActiveSynEdit: TBCOraSynEdit;
 begin
   if Assigned(PageControl.ActivePage) then
     Result := GetSynEdit(PageControl.ActivePage)
@@ -1861,7 +1824,7 @@ end;
 
 function TSQLEditorFrame.GetActiveDocumentFound: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
 
@@ -1875,7 +1838,7 @@ end;
 
 function TSQLEditorFrame.GetActiveDocumentName: string;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := '';
   if Assigned(PageControl.ActivePage) then
@@ -1899,14 +1862,14 @@ end;
 function TSQLEditorFrame.ModifiedDocuments(CheckActive: Boolean): Boolean;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
 
   SynEdit := ActiveSynEdit;
   for i := 0 to FSynEditsList.Count - 1 do
-    if Assigned(FSynEditsList.Items[i]) and ( ((TBCSynEdit(FSynEditsList.Items[i]) <> SynEdit) and not CheckActive) or CheckActive) then
-      if TBCSynEdit(FSynEditsList.Items[i]).Modified then
+    if Assigned(FSynEditsList.Items[i]) and ( ((TBCOraSynEdit(FSynEditsList.Items[i]) <> SynEdit) and not CheckActive) or CheckActive) then
+      if TBCOraSynEdit(FSynEditsList.Items[i]).Modified then
       begin
         Result := True;
         Exit;
@@ -1915,7 +1878,7 @@ end;
 
 function TSQLEditorFrame.GetSelectionFound: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1925,7 +1888,7 @@ end;
 
 function TSQLEditorFrame.GetCanUndo: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1935,7 +1898,7 @@ end;
 
 function TSQLEditorFrame.GetCanRedo: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := False;
   SynEdit := ActiveSynEdit;
@@ -1949,7 +1912,7 @@ procedure TSQLEditorFrame.SynEditorReplaceText(Sender: TObject; const ASearch,
 var
   APos: TPoint;
   EditRect: TRect;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if ASearch = AReplace then
     Action := raSkip
@@ -1985,7 +1948,7 @@ end;
 procedure TSQLEditorFrame.ToggleBookMark;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   CaretX, CaretY: Integer;
 begin
   SynEdit := ActiveSynEdit;
@@ -2007,7 +1970,7 @@ end;
 
 procedure TSQLEditorFrame.ToggleBookmark0MenuItemClick(Sender: TObject);
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   Item: TMenuItem;
   SynEditorCommand: TSynEditorCommand;
 begin
@@ -2059,7 +2022,7 @@ end;
 procedure TSQLEditorFrame.CheckFileDateTimes;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   FileDateTime: TDateTime;
 begin
   for i := 0 to PageControl.PageCount - 1 do
@@ -2105,7 +2068,7 @@ end;
 
 procedure TSQLEditorFrame.Refresh(Page: Integer);
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := GetSynEdit(PageControl.Pages[Page]);
   if Assigned(SynEdit) then
@@ -2118,7 +2081,7 @@ end;
 procedure TSQLEditorFrame.AssignOptions;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   { assign to every synedit }
   for i := 0 to PageControl.PageCount - 1 do
@@ -2137,10 +2100,10 @@ end;
 
 procedure TSQLEditorFrame.ShowObjects;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
-  SynEdit.FObjectCompletionProposal.ActivateCompletion;
+  SynEdit.ObjectCompletionProposal.ActivateCompletion;
 end;
 
 procedure TSQLEditorFrame.OutputDblClickActionExecute(Sender: TObject);
@@ -2178,7 +2141,7 @@ end;
 procedure TSQLEditorFrame.ExecuteScript;
 var
   Row, Col: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   CreateStatement: Boolean;
   s: WideString;
 begin
@@ -2230,7 +2193,7 @@ begin
   end;
 end;
 
-function TSQLEditorFrame.RemoveComments(s: WideString): WideString; //SynEdit: TBCSynEdit): WideString;
+function TSQLEditorFrame.RemoveComments(s: WideString): WideString; //SynEdit: TBCOraSynEdit): WideString;
 var
   Line, Temp: string;
   i: Integer;
@@ -2286,7 +2249,7 @@ end;
 
 procedure TSQLEditorFrame.ExecuteStatement;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   s: WideString;
 begin
   SynEdit := ActiveSynEdit;
@@ -2309,18 +2272,18 @@ end;
 
 procedure TSQLEditorFrame.ExplainPlan;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Trim(SynEdit.Text) = '' then
     Exit;
-  if not Assigned(SynEdit.FPlanQuery) then
+  if not Assigned(SynEdit.PlanQuery) then
   begin
-    SynEdit.FPlanQuery := TOraQuery.Create(nil);
-    SynEdit.FPlanQuery.Session := FSession;
-    SynEdit.FPlanQuery.ReadOnly := True;
-    SynEdit.FPlanQuery.SQL.Clear;
-    SynEdit.FPlanQuery.SQL.Add(SQLStringHolder.StringsByName['ExplainPlanSQL'].Text);
+    SynEdit.PlanQuery := TOraQuery.Create(nil);
+    SynEdit.PlanQuery.Session := FSession;
+    SynEdit.PlanQuery.ReadOnly := True;
+    SynEdit.PlanQuery.SQL.Clear;
+    SynEdit.PlanQuery.SQL.Add(SQLStringHolder.StringsByName['ExplainPlanSQL'].Text);
   end;
   FSession.ExecSQL('DELETE plan_table', ['',0]);
   try
@@ -2333,11 +2296,11 @@ begin
       Exit;
     end;
   end;
-  SynEdit.FPlanQuery.Close;
-  SynEdit.FPlanQuery.UnPrepare;
-  SynEdit.FPlanQuery.Prepare;
-  SynEdit.FPlanQuery.Open;
-  FOutputFrame.AddPlan('Plan: ' + GetActivePageCaption, SynEdit.FPlanQuery);
+  SynEdit.PlanQuery.Close;
+  SynEdit.PlanQuery.UnPrepare;
+  SynEdit.PlanQuery.Prepare;
+  SynEdit.PlanQuery.Open;
+  FOutputFrame.AddPlan('Plan: ' + GetActivePageCaption, SynEdit.PlanQuery);
   OutputPanel.Visible := True;
 end;
 
@@ -2361,7 +2324,7 @@ var
   s: string;
   ObjectName: string;
   SQLTokenizer: TSQLTokenizer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   { Get objectname }
   SQLTokenizer := TSQLTokenizer.Create;
@@ -2422,7 +2385,7 @@ end;
 
 procedure TSQLEditorFrame.GotoBookmark0MenuItemClick(Sender: TObject);
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   Item: TMenuItem;
   SynEditorCommand: TSynEditorCommand;
 begin
@@ -2472,30 +2435,30 @@ begin
   end
 end;
 
-procedure TSQLEditorFrame.ExecuteStatement(SynEdit: TBCSynEdit);
+procedure TSQLEditorFrame.ExecuteStatement(SynEdit: TBCOraSynEdit);
 var
   s, Owner, TableName: string;
   T1, T2: TTime;
   QuerySuccess: Boolean;
   Row, Col: Integer;
 begin
-  if not Assigned(SynEdit.FOraQuery) then
+  if not Assigned(SynEdit.OraQuery) then
   begin
-    SynEdit.FOraQuery := TOraQuery.Create(nil);
-    SynEdit.FOraQuery.Session := CreateSession(FSession);
-    SynEdit.FOraQuery.AutoCommit := False;
-    SynEdit.FOraQuery.FetchRows := 500;
-    SynEdit.FOraQuery.Options.StrictUpdate := False;
-    SynEdit.FOraQuery.Options.RequiredFields := False;
-    SynEdit.FOraQuery.Options.RawAsString := True;
-    SynEdit.FOraQuery.LocalUpdate := True;
-    SynEdit.FOraQuery.NonBlocking := True;
+    SynEdit.OraQuery := TOraQuery.Create(nil);
+    SynEdit.OraQuery.Session := CreateSession(FSession);
+    SynEdit.OraQuery.AutoCommit := False;
+    SynEdit.OraQuery.FetchRows := 500;
+    SynEdit.OraQuery.Options.StrictUpdate := False;
+    SynEdit.OraQuery.Options.RequiredFields := False;
+    SynEdit.OraQuery.Options.RawAsString := True;
+    SynEdit.OraQuery.LocalUpdate := True;
+    SynEdit.OraQuery.NonBlocking := True;
 
-    SynEdit.FOraQuery.Options.CacheLobs := False;
-    SynEdit.FOraQuery.Options.DeferredLobRead := True;
+    SynEdit.OraQuery.Options.CacheLobs := False;
+    SynEdit.OraQuery.Options.DeferredLobRead := True;
   end;
 
-  SynEdit.FOraQuery.SQL.Clear;
+  SynEdit.OraQuery.SQL.Clear;
 
   if SynEdit.SelAvail then
     s := SynEdit.SelText
@@ -2516,24 +2479,24 @@ begin
     end;
     s := Format(SQLStringHolder.StringsByName['ColumnsSQL'].Text, [Owner, TableName, Owner, TableName]);
   end;
-  SynEdit.FOraQuery.SQL.Add(s);
+  SynEdit.OraQuery.SQL.Add(s);
   { parameters }
 
-  if SynEdit.FOraQuery.ParamCount > 0 then
-    if not ParametersDialog.Open(SynEdit.FOraQuery) then
+  if SynEdit.OraQuery.ParamCount > 0 then
+    if not ParametersDialog.Open(SynEdit.OraQuery) then
       Exit;
 
   T1 := Now;
   QuerySuccess := False;
   try
     SynEdit.InThread := True;
-    SynEdit.FOraQuery.Prepare;
-    AddAllFields(SynEdit.FOraQuery);              { these are important to do after prepare because if there is }
-    SetClobAndTimestampFields(SynEdit.FOraQuery); { problem with fields it may cause OCI_INVALID_HANDLE }
-    SynEdit.FOraQuery.Open;
-    QuerySuccess := QueryProgressDialog.Open(SynEdit.FOraQuery, T1);
+    SynEdit.OraQuery.Prepare;
+    AddAllFields(SynEdit.OraQuery);              { these are important to do after prepare because if there is }
+    SetClobAndTimestampFields(SynEdit.OraQuery); { problem with fields it may cause OCI_INVALID_HANDLE }
+    SynEdit.OraQuery.Open;
+    QuerySuccess := QueryProgressDialog.Open(SynEdit.OraQuery, T1);
     if not QuerySuccess then
-      SynEdit.FOraQuery.Active := False;
+      SynEdit.OraQuery.Active := False;
     SynEdit.InThread := False;
   except
 
@@ -2541,12 +2504,12 @@ begin
   if QuerySuccess then
   begin
     T2 := Now;
-    FOutputFrame.AddGrid('Data: ' + GetActivePageCaption, SynEdit.FOraQuery, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', T2 - T1));
-    WriteHistory(SynEdit.FOraQuery.Session, SynEdit.Text);
+    FOutputFrame.AddGrid('Data: ' + GetActivePageCaption, SynEdit.OraQuery, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', T2 - T1));
+    WriteHistory(SynEdit.OraQuery.Session, SynEdit.Text);
   end
   else
   begin
-    SynEdit.FOraQuery.GetErrorPos(Row, Col);
+    SynEdit.OraQuery.GetErrorPos(Row, Col);
     SynEdit.SetFocus;
     SynEdit.CaretY := Row;
     SynEdit.CaretX := Col;
@@ -2556,13 +2519,13 @@ end;
 
 procedure TSQLEditorFrame.EnableDBMSOutput;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   OraSession: TOraSession;
 begin
   SynEdit := ActiveSynEdit;
   OraSession := nil;
-  if Assigned(SynEdit) and Assigned(SynEdit.FOraSQL) then
-    OraSession := SynEdit.FOraSQL.Session
+  if Assigned(SynEdit) and Assigned(SynEdit.OraSQL) then
+    OraSession := SynEdit.OraSQL.Session
   else
   if Assigned(OraScript.Session) then
     OraSession := OraScript.Session;
@@ -2571,7 +2534,7 @@ begin
     OraSession.ExecSQL('BEGIN dbms_output.enable(1000000); END;', []);
 end;
 
-procedure TSQLEditorFrame.ExecuteNoRowsStatement(SynEdit: TBCSynEdit);
+procedure TSQLEditorFrame.ExecuteNoRowsStatement(SynEdit: TBCOraSynEdit);
 var
   s: WideString;
   QuerySuccess: Boolean;
@@ -2590,17 +2553,17 @@ begin
   CreateNewSession := (Pos(WideString('UPDATE'), s) <> 1) and (Pos(WideString('INSERT'), s) <> 1) and
     (Pos(WideString('DELETE'), s) <> 1);
 
-  SynEdit.FOraSQL := TOraSQL.Create(nil);
+  SynEdit.OraSQL := TOraSQL.Create(nil);
   if CreateNewSession then
-    SynEdit.FOraSQL.Session := CreateSession(FSession)
+    SynEdit.OraSQL.Session := CreateSession(FSession)
   else
-    SynEdit.FOraSQL.Session := FSession;
-  SynEdit.FOraSQL.AutoCommit := False;
-  SynEdit.FOraSQL.AfterExecute := OraSQLAfterExecuteEvent;
-  SynEdit.FOraSQL.NonBlocking := CreateNewSession;
+    SynEdit.OraSQL.Session := FSession;
+  SynEdit.OraSQL.AutoCommit := False;
+  SynEdit.OraSQL.AfterExecute := OraSQLAfterExecuteEvent;
+  SynEdit.OraSQL.NonBlocking := CreateNewSession;
   //end;
   try
-    SynEdit.FOraSQL.SQL.Clear;
+    SynEdit.OraSQL.SQL.Clear;
     if SynEdit.SelAvail then
       s := SynEdit.SelText
     else
@@ -2609,10 +2572,10 @@ begin
       s := 'BEGIN ' + System.Copy(s, 8, Length(s)) + ' END;';
     if System.Pos('EXEC', UpperCase(s)) = 1 then
       s := 'BEGIN ' + System.Copy(s, 5, Length(s)) + ' END;';
-    SynEdit.FOraSQL.SQL.Add(s);
+    SynEdit.OraSQL.SQL.Add(s);
     { parameters }
-    if SynEdit.FOraSQL.ParamCount > 0 then
-      if not ParametersDialog.Open(SynEdit.FOraSQL) then
+    if SynEdit.OraSQL.ParamCount > 0 then
+      if not ParametersDialog.Open(SynEdit.OraSQL) then
         Exit;
 
     SynEdit.StartTime := Now;
@@ -2627,31 +2590,31 @@ begin
         end;
       SynEdit.InThread := True;
       QuerySuccess := True;
-      SynEdit.FOraSQL.Prepare;
-      SynEdit.FOraSQL.Execute;
+      SynEdit.OraSQL.Prepare;
+      SynEdit.OraSQL.Execute;
 
       if CreateNewSession then
       begin
-        QuerySuccess := SQLProgressDialog.Open(SynEdit.FOraSQL, SynEdit.StartTime);
+        QuerySuccess := SQLProgressDialog.Open(SynEdit.OraSQL, SynEdit.StartTime);
         if not QuerySuccess then
-          SynEdit.FOraSQL.BreakExec;
+          SynEdit.OraSQL.BreakExec;
       end;
       SynEdit.InThread := False;
       if QuerySuccess then
         if DBMSOutputToolButton.Down then
           GetDBMSOutput;
     except
-      QuerySuccess := SynEdit.FOraSQL.ErrorOffset = 0;
+      QuerySuccess := SynEdit.OraSQL.ErrorOffset = 0;
     end;
     if not QuerySuccess then
     begin
       SynEdit.SetFocus;
-      SynEdit.SelStart := SynEdit.FOraSQL.ErrorOffset + 2;
+      SynEdit.SelStart := SynEdit.OraSQL.ErrorOffset + 2;
     end;
 
     OutputPanel.Visible := True;
   finally
-    SynEdit.FOraSQL.Destroy;
+    SynEdit.OraSQL.Destroy;
   end;
 end;
 
@@ -2660,7 +2623,7 @@ var
   i: Integer;
   StringList: TStringList;
   s: string;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 //  T2: TTime;
 //  Min, Secs: Integer;
 begin
@@ -2689,7 +2652,7 @@ end;
 procedure TSQLEditorFrame.OraSQLAfterExecuteEvent(Sender: TObject; Result: Boolean);
 var
   i:integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   StringList: TStringList;
 //  T2: TTime;
   s: string;
@@ -2700,12 +2663,12 @@ begin
   begin
     StringList := TStringList.Create;
     try
-      for i := 0 to SynEdit.FOraSQL.Params.Count-1 do
-        StringList.Add(SynEdit.FOraSQL.Params[i].Name + ' = ' +
-         SynEdit.FOraSQL.Params[i].AsWideString);
+      for i := 0 to SynEdit.OraSQL.Params.Count-1 do
+        StringList.Add(SynEdit.OraSQL.Params[i].Name + ' = ' +
+         SynEdit.OraSQL.Params[i].AsWideString);
 
-      if SynEdit.FOraSQL.RowsProcessed <> 0 then
-        s := IntToStr(SynEdit.FOraSQL.RowsProcessed) + ' row(s) processed in '
+      if SynEdit.OraSQL.RowsProcessed <> 0 then
+        s := IntToStr(SynEdit.OraSQL.RowsProcessed) + ' row(s) processed in '
       else
         s := 'Success.';
 
@@ -2713,7 +2676,7 @@ begin
 
       FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, StringList.Text);
     finally
-      WriteHistory(SynEdit.FOraSQL.Session, SynEdit.Text);
+      WriteHistory(SynEdit.OraSQL.Session, SynEdit.Text);
       StringList.Free;
     end;
   end
@@ -2734,14 +2697,14 @@ end;
 procedure TSQLEditorFrame.DBMSOutputTimer(Sender: TObject);
 var
   Found: Boolean;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   OraSession: TOraSession;
 begin
   Found := False;
   SynEdit := ActiveSynEdit;
   OraSession := nil;
-  if Assigned(SynEdit) and Assigned(SynEdit.FOraSQL) then
-    OraSession := SynEdit.FOraSQL.Session
+  if Assigned(SynEdit) and Assigned(SynEdit.OraSQL) then
+    OraSession := SynEdit.OraSQL.Session
   else
   if Assigned(OraScript.Session) then
     OraSession := OraScript.Session;
@@ -2789,7 +2752,7 @@ end;
 
 function TSQLEditorFrame.GetCaretInfo: string;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   Result := Format('%d: %d', [SynEdit.CaretY, SynEdit.CaretX]);
@@ -2797,7 +2760,7 @@ end;
 
 function TSQLEditorFrame.GetModifiedInfo: string;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   Result := '';
   SynEdit := ActiveSynEdit;
@@ -2807,7 +2770,7 @@ end;
 
 procedure TSQLEditorFrame.DecreaseIndent;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2818,7 +2781,7 @@ end;
 
 procedure TSQLEditorFrame.IncreaseIndent;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2829,7 +2792,7 @@ end;
 
 procedure TSQLEditorFrame.ToggleCase;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2840,7 +2803,7 @@ end;
 
 procedure TSQLEditorFrame.SortAsc;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   Strings: TWideStringList;
 begin
   SynEdit := ActiveSynEdit;
@@ -2859,7 +2822,7 @@ end;
 procedure TSQLEditorFrame.SortDesc;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   s: WideString;
   Strings: TWideStringList;
 begin
@@ -2881,7 +2844,7 @@ end;
 procedure TSQLEditorFrame.ClearBookmarks;
 var
   i: Integer;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2893,7 +2856,7 @@ end;
 
 procedure TSQLEditorFrame.InsertLine;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2904,7 +2867,7 @@ end;
 
 procedure TSQLEditorFrame.DeleteWord;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2915,7 +2878,7 @@ end;
 
 procedure TSQLEditorFrame.DeleteLine;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2926,7 +2889,7 @@ end;
 
 procedure TSQLEditorFrame.DeleteEOL;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
@@ -2937,7 +2900,7 @@ end;
 
 function TSQLEditorFrame.GetActiveDocumentModified: Boolean;
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SynEdit := ActiveSynEdit;
   Result := Assigned(SynEdit) and SynEdit.Modified;

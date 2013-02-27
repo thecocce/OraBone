@@ -169,8 +169,4 @@ begin
         TOraQuery(Components[i]).Close;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

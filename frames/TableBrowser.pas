@@ -2124,8 +2124,4 @@ begin
   DependenciesButtonPanel.Align := Value;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

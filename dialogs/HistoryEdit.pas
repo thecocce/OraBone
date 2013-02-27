@@ -123,8 +123,4 @@ begin
   SQLSynEdit.Text := Value;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

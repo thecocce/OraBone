@@ -260,7 +260,7 @@ uses
   About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter;
+  System.IOUtils, SQLFormatter, BCOraSynEdit;
 
 {$R *.dfm}
 
@@ -342,7 +342,7 @@ end;
 
 procedure TMainForm.ApplicationEventsActivate(Sender: TObject);
 var
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   if PageControl.PageCount > 0 then
     if Assigned(PageControl.ActivePage) then
@@ -484,7 +484,7 @@ begin
           //if SupportedFileExt(UpperCase(ExtractFileExt(FName))) then
             if (FileTypeText = '*.*') or (Pos(UpperCase(ExtractFileExt(FName)), UpperCase(FileTypeText)) <> 0) then
             try
-              SynEdit := TBCSynEdit.Create(nil);
+              SynEdit := TBCOraSynEdit.Create(nil);
               SynEdit.Lines.LoadFromFile(AddSlash(FolderText) + FName);
               try
                 Root := nil;
@@ -530,7 +530,7 @@ end;
 procedure TMainForm.SearchFindInFilesActionExecute(Sender: TObject);
 var
   T1, T2: TTime;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
   SQLEditorFrame: TSQLEditorFrame;
   Min, Secs: Integer;
   TimeDifference: string;
@@ -1393,7 +1393,7 @@ end;
 procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
@@ -1734,7 +1734,7 @@ end;
 procedure TMainForm.LoadSQLIntoEditor(Schema: string; SQLText: WideString);
 var
   SQLEditorFrame: TSQLEditorFrame;
-  SynEdit: TBCSynEdit;
+  SynEdit: TBCOraSynEdit;
 begin
   SQLEditorFrame := OpenSQLEditor(Schema, False); { open editor }
   //SQLEditorFrame := GetActiveSQLEditor;

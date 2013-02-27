@@ -761,7 +761,6 @@ begin
     ActiveLineColor := clSkyBlue;
     Highlighter := SynSQLSyn;
   end;
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
   UpdateGutter(SynEdit);
   UpdateSQLSynColors(SynSQLSyn);
   Application.ProcessMessages;

@@ -70,8 +70,4 @@ begin
   Result := StringDataEdit.Text;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

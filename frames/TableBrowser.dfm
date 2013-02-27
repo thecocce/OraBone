@@ -1,17 +1,19 @@
 object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
-  Width = 844
-  Height = 536
+  Width = 451
+  Height = 304
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitWidth = 844
+  ExplicitHeight = 536
   object TablePageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 844
-    Height = 536
+    Width = 451
+    Height = 304
     ActivePage = DataTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -21,8 +23,14 @@ object TableBrowserFrame: TTableBrowserFrame
     OnChange = TablePageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ExplicitWidth = 844
+    ExplicitHeight = 536
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -133,6 +141,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -266,6 +278,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object DataTabSheet: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DataPanel: TPanel
         Left = 0
         Top = 0
@@ -430,6 +446,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ConstraintsTabSheet: TTabSheet
       Caption = 'Constraints'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConstraintSplitter: TSplitter
         Left = 0
         Top = 315
@@ -622,6 +642,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object TriggersTabSheet: TTabSheet
       Caption = 'Triggers'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object TriggersSplitter: TSplitter
         Left = 0
         Top = 165
@@ -808,6 +832,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object IndexesTabSheet: TTabSheet
       Caption = 'Indexes'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object IndexesPanel: TPanel
         Left = 0
         Top = 0
@@ -913,6 +941,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -1018,6 +1050,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -1123,6 +1159,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencedByTabSheet: TTabSheet
       Caption = 'Referenced By'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ReferencedByPanel: TPanel
         Left = 0
         Top = 0
@@ -1194,6 +1234,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencesTabSheet: TTabSheet
       Caption = 'References'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ReferencesPanel: TPanel
         Left = 0
         Top = 0
@@ -1265,6 +1309,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -1519,7 +1567,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 22
     Top = 36
     Bitmap = {
-      494C01011D000004680410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D0000046C0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000008E5D
       59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D

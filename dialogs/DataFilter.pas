@@ -414,8 +414,4 @@ begin
   FilterSynEdit.CaretX := CaretX + 4;
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.

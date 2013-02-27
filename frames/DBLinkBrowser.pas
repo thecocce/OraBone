@@ -191,8 +191,4 @@ begin
   SourceSynEdit.CopyToClipboard
 end;
 
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TCustomSynEdit, TSynEditStyleHook);
-
 end.
