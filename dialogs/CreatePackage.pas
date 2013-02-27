@@ -10,23 +10,19 @@ uses
 
 type
   TCreatePackageDialog = class(TCreateObjectBaseDialog)
-    SpecificationTabSheet: TTabSheet;
-    BodyTabSheet: TTabSheet;
-    PackageNameLabel: TLabel;
-    PackageNameEdit: TBCEdit;
-    SepcificationPanel: TPanel;
-    SpecificationSynEdit: TSynEdit;
     BodyPanel: TPanel;
     BodySynEdit: TSynEdit;
+    BodyTabSheet: TTabSheet;
+    PackageNameEdit: TBCEdit;
+    PackageNameLabel: TLabel;
+    SepcificationPanel: TPanel;
+    SpecificationSynEdit: TSynEdit;
+    SpecificationTabSheet: TTabSheet;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure PackageNameEditExit(Sender: TObject);
-  private
-    { Private declarations }
   protected
     procedure CreateSQL; override;
-  public
-    { Public declarations }
   end;
 
 function CreatePackageDialog: TCreatePackageDialog;

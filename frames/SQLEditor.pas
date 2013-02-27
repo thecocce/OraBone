@@ -288,6 +288,8 @@ type
       var FG, BG: TColor);
   private
     { Private declarations }
+    FCaseCycle: Byte;
+    FSelectedText: UnicodeString;
     FInTransaction: Boolean;
     FNumberOfNewDocument: Integer;
     FOutputFrame: TOutputFrame;
@@ -418,7 +420,7 @@ implementation
 {$R *.dfm}
 
 uses
-  SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks,
+  SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks, SynUnicode,
   Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
   Compare, Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
@@ -461,6 +463,8 @@ var
 begin
   inherited Create(AOwner);
   FNumberOfNewDocument := 0;
+  FCaseCycle := 0;
+  FSelectedText := '';
   FInTransaction := False;
   FOutputFrame := TOutputFrame.Create(OutputPanel);
   FOutputFrame.Parent := OutputPanel;
@@ -759,9 +763,10 @@ begin
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
-var Editor : TSynEdit;
-    OpenChars: array [0..0] of WideChar;
-    CloseChars: array [0..0] of WideChar;
+var
+  Editor : TSynEdit;
+  OpenChars: array [0..0] of WideChar;
+  CloseChars: array [0..0] of WideChar;
 
   function IsCharBracket(AChar: WideChar): Boolean;
   begin
@@ -2769,12 +2774,53 @@ end;
 
 procedure TSQLEditorFrame.ToggleCase;
 var
+  SelStart, SelEnd: Integer;
   SynEdit: TBCOraSynEdit;
+
+  function Toggle(const aStr: UnicodeString): UnicodeString;
+  var
+    i: Integer;
+    sLower: UnicodeString;
+  begin
+    Result := SynWideUpperCase(aStr);
+    sLower := SynWideLowerCase(aStr);
+    for i := 1 to Length(aStr) do
+    begin
+      if Result[i] = aStr[i] then
+        Result[i] := sLower[i];
+    end;
+  end;
+
 begin
   SynEdit := ActiveSynEdit;
   if Assigned(SynEdit) then
-    SynEdit.ExecuteCommand(ecToggleCaseBlock, 'C', nil);
-  PageControlRepaint;
+    if SynEdit.Focused then
+    begin
+      if SynWideUpperCase(SynEdit.SelText) <> SynWideUpperCase(FSelectedText) then
+      begin
+        FCaseCycle := 0;
+        FSelectedText := SynEdit.SelText;
+      end;
+
+      SynEdit.BeginUpdate;
+      SelStart := SynEdit.SelStart;
+      SelEnd := SynEdit.SelEnd;
+      { UPPER/lower/Sentence/And Title }
+      case FCaseCycle of
+        0: SynEdit.SelText := SynWideUpperCase(FSelectedText);
+        1: SynEdit.SelText := SynWideLowerCase(FSelectedText);
+        2: SynEdit.SelText := Toggle(FSelectedText);
+        3: SynEdit.SelText := SynWideUpperCase(FSelectedText[1]) + SynWideLowerCase(System.Copy(FSelectedText, 2, Length(FSelectedText)));
+        4: SynEdit.SelText := FSelectedText;
+      end;
+      SynEdit.SelStart := SelStart;
+      SynEdit.SelEnd := SelEnd;
+
+      SynEdit.EndUpdate;
+      Inc(FCaseCycle);
+      if FCaseCycle > 4 then
+        FCaseCycle := 0;
+    end;
 end;
 
 procedure TSQLEditorFrame.SortAsc;
@@ -2788,7 +2834,7 @@ begin
     Strings := TWideStringList.Create;
     Strings.Text := SynEdit.SelText;
     Strings.Sort;
-    SynEdit.SelText := Trim(Strings.Text);
+    SynEdit.SelText := TrimRight(Strings.Text);
     Strings.Free;
   end;
   PageControlRepaint;
@@ -2809,7 +2855,7 @@ begin
     Strings.Sort;
     for i := Strings.Count - 1 downto 0 do
       s := s + Strings.Strings[i] + Chr(13) + Chr(10);
-    SynEdit.SelText := Trim(s);
+    SynEdit.SelText := TrimRight(s);
     Strings.Free;
   end;
   PageControlRepaint;

@@ -8,16 +8,16 @@ uses
 
 type
   TDropTableDialog = class(TDialog)
-    TopPanel: TPanel;
-    MessageLabel: TLabel;
+    CancelButton: TButton;
     CascadeConstraintsCheckBox: TCheckBox;
-    PurgeCheckBox: TCheckBox;
     GrayLinePanel: TPanel;
     InfoImage: TImage;
-    Panel1: TPanel;
+    MessageLabel: TLabel;
     OKButton: TButton;
-    CancelButton: TButton;
+    Panel1: TPanel;
+    PurgeCheckBox: TCheckBox;
     Separator1Panel: TPanel;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }

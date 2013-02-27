@@ -10,31 +10,27 @@ uses
 
 type
   TCreateSequenceDialog = class(TCreateObjectBaseDialog)
-    SettingsTabSheet: TTabSheet;
-    SequenceNameLabel: TLabel;
-    SequenceNameEdit: TBCEdit;
-    MinValueLabel: TLabel;
-    MinValueEdit: TBCEdit;
-    MaxValueLabel: TLabel;
-    MaxValueEdit: TBCEdit;
-    StartWithLabel: TLabel;
-    StartWithEdit: TBCEdit;
-    IncrementByLabel: TLabel;
-    IncrementByEdit: TBCEdit;
-    CacheLabel: TLabel;
     CacheEdit: TBCEdit;
-    OrderCheckBox: TCheckBox;
+    CacheLabel: TLabel;
     CycleCheckBox: TCheckBox;
+    IncrementByEdit: TBCEdit;
+    IncrementByLabel: TLabel;
+    MaxValueEdit: TBCEdit;
+    MaxValueLabel: TLabel;
+    MinValueEdit: TBCEdit;
+    MinValueLabel: TLabel;
+    OrderCheckBox: TCheckBox;
+    SequenceNameEdit: TBCEdit;
+    SequenceNameLabel: TLabel;
+    SettingsTabSheet: TTabSheet;
+    StartWithEdit: TBCEdit;
+    StartWithLabel: TLabel;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
-  private
-    { Private declarations }
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateSequenceDialog: TCreateSequenceDialog;

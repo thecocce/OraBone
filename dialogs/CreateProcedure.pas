@@ -12,39 +12,35 @@ uses
 
 type
   TCreateProcedureDialog = class(TCreateObjectBaseDialog)
-    ProcedureNameLabel: TLabel;
-    ProcedureNameEdit: TBCEdit;
-    ParametersTabSheet: TTabSheet;
-    BodyTabSheet: TTabSheet;
-    ColumnsDataSource: TOraDataSource;
-    ColumnsQuery: TOraQuery;
-    ColumnsPanel: TPanel;
-    ColumnButtonPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
+    AddColumnAction: TAction;
+    BCDBGrid1: TBCDBGrid;
     BodyPanel: TPanel;
     BodySynEdit: TSynEdit;
-    MoveupColumnAction: TAction;
-    MoveDownColumnAction: TAction;
-    AddColumnAction: TAction;
+    BodyTabSheet: TTabSheet;
+    ColumnButtonPanel: TPanel;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    BCDBGrid1: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
+    DownBitBtn: TJvBitBtn;
+    InsertBitBtn: TJvBitBtn;
+    MoveDownColumnAction: TAction;
+    MoveupColumnAction: TAction;
+    ParametersTabSheet: TTabSheet;
+    ProcedureNameEdit: TBCEdit;
+    ProcedureNameLabel: TLabel;
+    UpBitBtn: TJvBitBtn;
     procedure AddColumnActionExecute(Sender: TObject);
-    procedure Formshow(Sender: TObject);
     procedure DeleteColumnActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure Formshow(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);
     procedure MoveupColumnActionExecute(Sender: TObject);
-  private
-    { Private declarations }
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateProcedureDialog: TCreateProcedureDialog;

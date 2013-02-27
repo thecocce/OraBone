@@ -9,43 +9,43 @@ uses
 
 type
   TCustomizeObjectFiltersDialog = class(TDialog)
-    SQLStringHolder: TJvMultiStringHolder;
-    ObjectsQuery: TOraQuery;
     ActionList: TActionList;
-    DeselectAllAction: TAction;
-    SelectAllAction: TAction;
-    OKAction: TAction;
-    RemoveAction: TAction;
-    TopPanel: TPanel;
-    NameLabel: TLabel;
-    NameComboBox: TBCComboBox;
-    RemoveSpeedButton: TJvSpeedButton;
     BottomPanel: TPanel;
-    DeselectAllButton: TButton;
-    SelectAllButton: TButton;
-    OKButton: TButton;
     CancelButton: TButton;
     ClientPanel: TPanel;
+    DeselectAllAction: TAction;
+    DeselectAllButton: TButton;
+    NameComboBox: TBCComboBox;
+    NameLabel: TLabel;
     ObjectsCheckListBox: TCheckListBox;
+    ObjectsQuery: TOraQuery;
+    OKAction: TAction;
+    OKButton: TButton;
+    RemoveAction: TAction;
+    RemoveSpeedButton: TJvSpeedButton;
+    SelectAllAction: TAction;
+    SelectAllButton: TButton;
     Separator1Panel: TPanel;
     Separator2Panel: TPanel;
     Separator3Panel: TPanel;
-    procedure FormDestroy(Sender: TObject);
+    SQLStringHolder: TJvMultiStringHolder;
+    TopPanel: TPanel;
     procedure DeselectAllActionExecute(Sender: TObject);
-    procedure SelectAllActionExecute(Sender: TObject);
-    procedure OKActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure NameComboBoxChange(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
     procedure RemoveActionExecute(Sender: TObject);
+    procedure SelectAllActionExecute(Sender: TObject);
   private
     { Private declarations }
-    FSchemaParam: string;
     FObjectType: string;
     FSchemaName: string;
-    procedure SetObjects;
-    function GetObjects: string;
-    procedure GetTableAndField(var Table: string; var Field: String; var ExtraCondition: string);
-    procedure FillCombo;
+    FSchemaParam: string;
     function GetFilterName: string;
+    function GetObjects: string;
+    procedure FillCombo;
+    procedure GetTableAndField(var Table: string; var Field: String; var ExtraCondition: string);
+    procedure SetObjects;
   public
     { Public declarations }
     function Open(OraSession: TOraSession; SchemaParam: string; ObjectType: string; SchemaName: string): Boolean;

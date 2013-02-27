@@ -12,39 +12,38 @@ uses
 
 type
   TCreateConstraintDialog = class(TCreateObjectBaseDialog)
-    ConstraintNameLabel: TLabel;
-    ConstraintNameEdit: TBCEdit;
-    TypeLabel: TLabel;
-    PrimaryKeyRadioButton: TRadioButton;
-    ForeignKeyRadioButton: TRadioButton;
     CheckRadioButton: TRadioButton;
-    UniqueRadioButton: TRadioButton;
-    TableLabel: TLabel;
-    TableNameComboBox: TBCComboBox;
-    ColumnsTabSheet: TTabSheet;
-    ReferencedColumnsTabSheet: TTabSheet;
-    ConditionTabSheet: TTabSheet;
-    RefColumnsPanel: TPanel;
-    RefColumnsStringGrid: TBCStringGrid;
-    ReferencedColumnsBottomPanel: TPanel;
-    JvBitBtn1: TJvBitBtn;
-    JvBitBtn2: TJvBitBtn;
-    RefColumnTopPanel: TPanel;
-    Label1: TLabel;
-    RefTableNameComboBox: TBCComboBox;
+    ColumnBottomPanel: TPanel;
     ColumnsPanel: TPanel;
     ColumnsStringGrid: TBCStringGrid;
-    ColumnBottomPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
+    ColumnsTabSheet: TTabSheet;
     ConditionPanel: TPanel;
     ConditionSynEdit: TSynEdit;
-    MoveupColumnAction: TAction;
+    ConditionTabSheet: TTabSheet;
+    ConstraintNameEdit: TBCEdit;
+    ConstraintNameLabel: TLabel;
+    DownBitBtn: TJvBitBtn;
+    ForeignKeyRadioButton: TRadioButton;
+    JvBitBtn1: TJvBitBtn;
+    JvBitBtn2: TJvBitBtn;
+    Label1: TLabel;
     MoveDownColumnAction: TAction;
-    MoveupRefColumnAction: TAction;
     MoveDownRefColumnAction: TAction;
+    MoveupColumnAction: TAction;
+    MoveupRefColumnAction: TAction;
+    PrimaryKeyRadioButton: TRadioButton;
+    RefColumnsPanel: TPanel;
+    RefColumnsStringGrid: TBCStringGrid;
+    RefColumnTopPanel: TPanel;
+    ReferencedColumnsBottomPanel: TPanel;
+    ReferencedColumnsTabSheet: TTabSheet;
+    RefTableNameComboBox: TBCComboBox;
+    TableLabel: TLabel;
+    TableNameComboBox: TBCComboBox;
     TableNameEdit: TBCEdit;
-    procedure TableNameComboBoxChange(Sender: TObject);
+    TypeLabel: TLabel;
+    UniqueRadioButton: TRadioButton;
+    UpBitBtn: TJvBitBtn;
     procedure FormDestroy(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);
     procedure MoveDownRefColumnActionExecute(Sender: TObject);
@@ -52,13 +51,14 @@ type
     procedure MoveupRefColumnActionExecute(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure RefTableNameComboBoxChange(Sender: TObject);
+    procedure TableNameComboBoxChange(Sender: TObject);
   private
     { Private declarations }
-    procedure GetTableNames;
     procedure GetColumnNames(TableName: string; Grid: TBCStringGrid);
+    procedure GetTableNames;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
   public
     { Public declarations }

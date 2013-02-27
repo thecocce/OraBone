@@ -13,16 +13,16 @@ type
   end;
 
   TParametersDialog = class(TDialog)
-    Panel1: TPanel;
-    OKButton: TButton;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
+    OKButton: TButton;
+    Panel1: TPanel;
     Panel2: TPanel;
+    Separator1Panel: TPanel;
     ValueListEditor: TValueListEditor;
-    procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure ValueListEditorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
+    procedure ValueListEditorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     FOraQuery: TOraQuery;
@@ -31,7 +31,7 @@ type
     { Public declarations }
     ValuesList: TValueListEditor; { Save param values }
     function Open(OraQuery: TOraQuery): Boolean; overload;
-    function Open(OraSql: TOraSQL): Boolean; overload;
+    function Open(OraSQL: TOraSQL): Boolean; overload;
   end;
 
 function ParametersDialog: TParametersDialog;

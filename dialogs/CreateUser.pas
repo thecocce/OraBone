@@ -11,24 +11,20 @@ uses
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)
-    UsernameLabel: TLabel;
-    UsernameEdit: TBCEdit;
-    PasswordLabel: TLabel;
     PasswordEdit: TBCEdit;
     PasswordExpiredCheckBox: TCheckBox;
-    RolesTabSheet: TTabSheet;
+    PasswordLabel: TLabel;
     RolesPanel: TPanel;
-    RolesStringGrid: TBCStringGrid;
     RolesQuery: TOraQuery;
+    RolesStringGrid: TBCStringGrid;
+    RolesTabSheet: TTabSheet;
+    UsernameEdit: TBCEdit;
+    UsernameLabel: TLabel;
     procedure FormDestroy(Sender: TObject);
-  private
-    { Private declarations }
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateUserDialog: TCreateUserDialog;

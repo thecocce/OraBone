@@ -12,57 +12,54 @@ uses
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)
-    TableNameLabel: TLabel;
-    TableNameEdit: TBCEdit;
-    AlterTableRadioButton: TRadioButton;
-    RecreateTableRadioButton: TRadioButton;
-    CommentLabel: TLabel;
-    CommentEdit: TBCEdit;
-    ColumnsTabSheet: TTabSheet;
-    ColumnCommentsTabSheet: TTabSheet;
-    ColumnsPanel: TPanel;
-    ColumnButtonPanel: TPanel;
-    Bevel1: TBevel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
-    ResetBitBtn: TJvBitBtn;
-    DropUnusedColumnsCheckBox: TCheckBox;
-    ColumnsDataSource: TOraDataSource;
-    ColumnsQuery: TOraQuery;
-    OriginalColumnsQuery: TOraQuery;
-    ColumnCommentsPanel: TPanel;
-    MoveUpAction: TAction;
-    MoveDownAction: TAction;
     AddColumnAction: TAction;
-    DeleteColumnAction: TAction;
-    ResetColumnsAction: TAction;
-    ColumnsDBGrid: TBCDBGrid;
+    AlterTableRadioButton: TRadioButton;
+    Bevel1: TBevel;
+    ColumnButtonPanel: TPanel;
     ColumnCommentsDBGrid: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
+    ColumnCommentsPanel: TPanel;
+    ColumnCommentsTabSheet: TTabSheet;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsDBGrid: TBCDBGrid;
+    ColumnsPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    ColumnsTabSheet: TTabSheet;
+    CommentEdit: TBCEdit;
+    CommentLabel: TLabel;
+    DeleteBitBtn: TJvBitBtn;
+    DeleteColumnAction: TAction;
+    DownBitBtn: TJvBitBtn;
+    DropUnusedColumnsCheckBox: TCheckBox;
+    InsertBitBtn: TJvBitBtn;
+    MoveDownAction: TAction;
+    MoveUpAction: TAction;
+    OriginalColumnsQuery: TOraQuery;
+    RecreateTableRadioButton: TRadioButton;
+    ResetBitBtn: TJvBitBtn;
+    ResetColumnsAction: TAction;
+    TableNameEdit: TBCEdit;
+    TableNameLabel: TLabel;
+    UpBitBtn: TJvBitBtn;
     procedure AddColumnActionExecute(Sender: TObject);
+    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure ColumnsQueryAfterScroll(DataSet: TDataSet);
     procedure ColumnsQueryNewRecord(DataSet: TDataSet);
-    procedure PageControlChange(Sender: TObject);
-    procedure ResetColumnsActionExecute(Sender: TObject);
-    procedure MoveDownActionExecute(Sender: TObject);
-    procedure MoveUpActionExecute(Sender: TObject);
     procedure DataTypeDBComboBoxChange(Sender: TObject);
     procedure DeleteColumnActionExecute(Sender: TObject);
-    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
-    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
-  private
+    procedure MoveDownActionExecute(Sender: TObject);
+    procedure MoveUpActionExecute(Sender: TObject);
+    procedure PageControlChange(Sender: TObject);
+    procedure ResetColumnsActionExecute(Sender: TObject);
+   procedure FormDestroy(Sender: TObject);  private
     { Private declarations }
-    FRecordCount: Integer;
     FOriginalTableComment: string;
+    FRecordCount: Integer;
     procedure FillColumnQueries;
     procedure SetButtonActions;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
   public
     { Public declarations }

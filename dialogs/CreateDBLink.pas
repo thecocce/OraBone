@@ -11,29 +11,25 @@ uses
 
 type
   TCreateDBLinkDialog = class(TCreateObjectBaseDialog)
-    SettingsTabSheet: TTabSheet;
-    LinkNameLabel: TLabel;
-    LinkNameEdit: TBCEdit;
     AvailabilityLabel: TLabel;
-    PublicRadioButton: TRadioButton;
-    PrivateRadioButton: TRadioButton;
-    UserNameLabel: TLabel;
-    UserNameEdit: TBCEdit;
-    PasswordLabel: TLabel;
+    LinkNameEdit: TBCEdit;
+    LinkNameLabel: TLabel;
     PasswordEdit: TBCEdit;
-    ServiceNameLabel: TLabel;
+    PasswordLabel: TLabel;
+    PrivateRadioButton: TRadioButton;
+    PublicRadioButton: TRadioButton;
     ServiceNameComboBox: TBCComboBox;
+    ServiceNameLabel: TLabel;
+    SettingsTabSheet: TTabSheet;
+    UserNameEdit: TBCEdit;
+    UserNameLabel: TLabel;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
-  private
-    { Private declarations }
   protected
-    procedure GetServiceNames;
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
+    procedure GetServiceNames;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateDBLinkDialog: TCreateDBLinkDialog;

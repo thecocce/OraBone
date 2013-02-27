@@ -12,49 +12,47 @@ uses
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)
-    ViewNameLabel: TLabel;
-    ViewNameEdit: TBCEdit;
-    CommnetLabel: TLabel;
-    CommentEdit: TBCEdit;
-    ColumnsTabSheet: TTabSheet;
-    ColumnCommentsTabSheet: TTabSheet;
-    SelectStatementTabSheet: TTabSheet;
-    ColumnsQuery: TOraQuery;
-    ColumnsDataSource: TOraDataSource;
-    MoveUpAction: TAction;
-    MoveDownAction: TAction;
     AddColumnAction: TAction;
-    DeleteColumnAction: TAction;
-    ColumnsPanel: TPanel;
+    Bevel1: TBevel;
     ColumnButtonPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
+    ColumnCommentsDBGrid: TBCDBGrid;
+    ColumnCommentsPanel: TPanel;
+    ColumnCommentsTabSheet: TTabSheet;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsDBGrid: TBCDBGrid;
+    ColumnsPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    ColumnsTabSheet: TTabSheet;
+    CommentEdit: TBCEdit;
+    CommnetLabel: TLabel;
+    DeleteBitBtn: TJvBitBtn;
+    DeleteColumnAction: TAction;
     DownBitBtn: TJvBitBtn;
     InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
-    ColumnCommentsPanel: TPanel;
-    SQLPanel: TPanel;
-    SQLSynEdit: TSynEdit;
+    MoveDownAction: TAction;
+    MoveUpAction: TAction;
     OriginalColumnsQuery: TOraQuery;
-    Bevel1: TBevel;
     ResetBitBtn: TJvBitBtn;
     ResetColumnsAction: TAction;
-    ColumnCommentsDBGrid: TBCDBGrid;
-    ColumnsDBGrid: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
+    SelectStatementTabSheet: TTabSheet;
+    SQLPanel: TPanel;
+    SQLSynEdit: TSynEdit;
+    UpBitBtn: TJvBitBtn;
+    ViewNameEdit: TBCEdit;
+    ViewNameLabel: TLabel;
     procedure AddColumnActionExecute(Sender: TObject);
+    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure DeleteColumnActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure MoveDownActionExecute(Sender: TObject);
     procedure MoveUpActionExecute(Sender: TObject);
-    procedure ResetColumnsActionExecute(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
-    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
-    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
+    procedure ResetColumnsActionExecute(Sender: TObject);
   private
     { Private declarations }
-    FOriginalViewComment: string;
     FMaterialized: Boolean;
+    FOriginalViewComment: string;
     procedure GetViewData;
   protected
     procedure CreateSQL; override;

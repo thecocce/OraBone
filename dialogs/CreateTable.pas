@@ -12,49 +12,45 @@ uses
 
 type
   TCreateTableDialog = class(TCreateObjectBaseDialog)
-    ColumnsTabSheet: TTabSheet;
-    ColumnCommentsTabSheet: TTabSheet;
-    TableNameLabel: TLabel;
-    TableNameEdit: TBCEdit;
-    CommentLabel: TLabel;
-    CommentEdit: TBCEdit;
-    ColumnsPanel: TPanel;
+    AddColumnAction: TAction;
     ColumnButtonPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
+    ColumnCommentsDBGrid: TBCDBGrid;
+    ColumnCommentsPanel: TPanel;
+    ColumnCommentsTabSheet: TTabSheet;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsDBGrid: TBCDBGrid;
+    ColumnsPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    ColumnsTabSheet: TTabSheet;
+    CommentEdit: TBCEdit;
+    CommentLabel: TLabel;
+    DeleteBitBtn: TJvBitBtn;
+    DeleteColumnAction: TAction;
     DownBitBtn: TJvBitBtn;
     InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
-    ColumnsDataSource: TOraDataSource;
-    ColumnsQuery: TOraQuery;
-    ColumnCommentsPanel: TPanel;
-    MoveUpAction: TAction;
     MoveDownAction: TAction;
-    AddColumnAction: TAction;
-    DeleteColumnAction: TAction;
-    ColumnsDBGrid: TBCDBGrid;
-    ColumnCommentsDBGrid: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
-    procedure Formshow(Sender: TObject);
+    MoveUpAction: TAction;
+    TableNameEdit: TBCEdit;
+    TableNameLabel: TLabel;
+    UpBitBtn: TJvBitBtn;
     procedure AddColumnActionExecute(Sender: TObject);
-    procedure MoveDownActionExecute(Sender: TObject);
-    procedure MoveUpActionExecute(Sender: TObject);
+    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure ColumnsQueryAfterScroll(DataSet: TDataSet);
     procedure ColumnsQueryNewRecord(DataSet: TDataSet);
     procedure DeleteColumnActionExecute(Sender: TObject);
-    procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
-    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
+    procedure Formshow(Sender: TObject);
+    procedure MoveDownActionExecute(Sender: TObject);
+    procedure MoveUpActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FRecordCount: Integer;
     procedure SetButtonActions;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateTableDialog: TCreateTableDialog;

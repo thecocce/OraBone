@@ -9,21 +9,21 @@ uses
 
 type
   TChangeUserPasswordDialog = class(TDialog)
-    TopPanel: TPanel;
-    PasswordLabel: TLabel;
-    PasswordEdit: TBCEdit;
     BottomPanel: TPanel;
-    ExportButton: TButton;
     CancelButton: TButton;
+    ExportButton: TButton;
+    PasswordEdit: TBCEdit;
+    PasswordLabel: TLabel;
     Separator1Panel: TPanel;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FUserName: string;
   public
     { Public declarations }
-    function Open(UserName: string): Boolean;
     function GetSQL: string;
+    function Open(UserName: string): Boolean;
   end;
 
 function ChangeUserPasswordDialog: TChangeUserPasswordDialog;

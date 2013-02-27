@@ -11,44 +11,42 @@ uses
 
 type
   TConnectListDialog = class(TForm)
-    TopPanel: TPanel;
-    Label1: TLabel;
-    ClientModeRadioButton: TRadioButton;
-    DirectModeRadioButton: TRadioButton;
-    StringGridPanel: TPanel;
-    ClientConnectionsStringGrid: TBCStringGrid;
     ActionManager: TActionManager;
     ActionToolBar1: TActionToolBar;
-    ImageList: TBCImageList;
     AddConnectionAction: TAction;
-    RemoveConnectionAction: TAction;
     BottomPanel: TPanel;
-    ConnectButton: TButton;
     CancelButton: TButton;
+    ClientConnectionsStringGrid: TBCStringGrid;
+    ClientModeRadioButton: TRadioButton;
     ConnectAction: TAction;
-    ModeClickAction: TAction;
-    EditConnectionAction: TAction;
-    Separator1Panel: TPanel;
+    ConnectButton: TButton;
     DirectConnectionsStringGrid: TBCStringGrid;
-    procedure ConnectActionExecute(Sender: TObject);
-    procedure ModeClickActionExecute(Sender: TObject);
+    DirectModeRadioButton: TRadioButton;
+    EditConnectionAction: TAction;
+    ImageList: TBCImageList;
+    Label1: TLabel;
+    ModeClickAction: TAction;
+    RemoveConnectionAction: TAction;
+    Separator1Panel: TPanel;
+    StringGridPanel: TPanel;
+    TopPanel: TPanel;
     procedure AddConnectionActionExecute(Sender: TObject);
-    procedure RemoveConnectionActionExecute(Sender: TObject);
+    procedure ConnectActionExecute(Sender: TObject);
     procedure EditConnectionActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ModeClickActionExecute(Sender: TObject);
+    procedure RemoveConnectionActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnectDialog: TConnectDialog;
-    procedure DoInit;
     procedure DoConnect(StringGrid: TBCStringGrid);
-    procedure SetConnectDialog(Value: TConnectDialog);
+    procedure DoInit;
     procedure ReadIniFile;
+    procedure SetConnectDialog(Value: TConnectDialog);
+    procedure SetFields(StringGrid: TBCStringGrid);
+    procedure ShowHideByMode;
     procedure WriteConnectionsToIniFile;
     procedure WriteIniFile;
-    procedure ShowHideByMode;
-    procedure SetFields(StringGrid: TBCStringGrid);
-  public
-    { Public declarations }
   published
     property ConnectDialog: TConnectDialog read FConnectDialog write SetConnectDialog;
   end;

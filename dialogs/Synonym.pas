@@ -9,26 +9,26 @@ uses
 
 type
   TSynonymDialog = class(TForm)
-    OKButton: TButton;
+    ActionList: TActionList;
     CancelButton: TButton;
+    NameEdit: TBCEdit;
+    NameLabel: TLabel;
+    OKAction: TAction;
+    OKButton: TButton;
+    OwnerComboBox: TBCComboBox;
+    OwnerLabel: TLabel;
     PrivateRadioButton: TRadioButton;
     PublicRadioButton: TRadioButton;
-    OwnerComboBox: TBCComboBox;
-    NameEdit: TBCEdit;
-    OwnerLabel: TLabel;
-    NameLabel: TLabel;
-    ActionList: TActionList;
-    OKAction: TAction;
     procedure FormDestroy(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);
   private
     { Private declarations }
-    FSchemaParam: string;
     FObjectName: string;
+    FSchemaParam: string;
   public
     { Public declarations }
-     function Open(SchemaParam: string; ObjectName: string; SchemaItems: TStrings): Boolean;
      function GetSQL: string;
+     function Open(SchemaParam: string; ObjectName: string; SchemaItems: TStrings): Boolean;
   end;
 
 function SynonymDialog: TSynonymDialog;

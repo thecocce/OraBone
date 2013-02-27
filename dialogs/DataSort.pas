@@ -12,50 +12,50 @@ uses
 type
   TDataSortDialog = class(TDialog)
     ActionList: TActionList;
-    ColumnClickAction: TAction;
-    SortMultiStringHolder: TJvMultiStringHolder;
-    OKAction: TAction;
-    ImageList: TBCImageList;
     ActionManager: TActionManager;
-    UpAction: TAction;
-    DownAction: TAction;
-    RemoveAction: TAction;
-    ClearSortAction: TAction;
-    Panel1: TPanel;
-    Button1: TButton;
-    OKButton: TButton;
-    CancelButton: TButton;
-    Separator1Panel: TPanel;
-    ClientPanel: TPanel;
-    ColumnListBox: TJvListBox;
-    Panel2: TPanel;
-    Label1: TLabel;
-    OrderGroupBox: TGroupBox;
     AscRadioButton: TRadioButton;
+    Button1: TButton;
+    CancelButton: TButton;
+    ClearSortAction: TAction;
+    ClientPanel: TPanel;
+    ColumnClickAction: TAction;
+    ColumnListBox: TJvListBox;
     DescRadioButton: TRadioButton;
-    NullsGroupBox: TGroupBox;
+    DownAction: TAction;
     FirstRadioButton: TRadioButton;
+    ImageList: TBCImageList;
+    JvToolBar1: TBCToolBar;
+    Label1: TLabel;
     LastRadioButton: TRadioButton;
+    NullsGroupBox: TGroupBox;
+    OKAction: TAction;
+    OKButton: TButton;
+    OrderGroupBox: TGroupBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
-    JvToolBar1: TBCToolBar;
+    Panel5: TPanel;
+    RemoveAction: TAction;
+    Separator1Panel: TPanel;
+    SortListBox: TJvListBox;
+    SortMultiStringHolder: TJvMultiStringHolder;
+    SortNameEdit: TBCEdit;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton6: TToolButton;
-    SortNameEdit: TBCEdit;
-    Panel5: TPanel;
-    SortListBox: TJvListBox;
-    procedure FormDestroy(Sender: TObject);
+    UpAction: TAction;
+    procedure ClearSortActionExecute(Sender: TObject);
     procedure ColumnClickActionExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure SortNameEditKeyPress(Sender: TObject; var Key: Char);
-    procedure OKActionExecute(Sender: TObject);
-    procedure SortNameEditChange(Sender: TObject);
-    procedure UpActionExecute(Sender: TObject);
     procedure DownActionExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
     procedure RemoveActionExecute(Sender: TObject);
     procedure SortListBoxClick(Sender: TObject);
-    procedure ClearSortActionExecute(Sender: TObject);
+    procedure SortNameEditChange(Sender: TObject);
+    procedure SortNameEditKeyPress(Sender: TObject; var Key: Char);
+    procedure UpActionExecute(Sender: TObject);
   private
     { Private declarations }
     FObjectName: string;
@@ -65,10 +65,10 @@ type
   public
     { Public declarations }
     ValuesList: TValueListEditor; { Save filter values }
-    function Open(ObjectName: string; SchemaParam: string; Columns: TStrings{; DataSort: WideString}): Boolean;
     function GetCurrentDataSort(ObjectName: string; SchemaParam: string): string;
-    procedure SetCurrentDataSort(ObjectName: string; SchemaParam: string; Name: string);
     function GetCurrentSortName(ObjectName: string; SchemaParam: string): string;
+    function Open(ObjectName: string; SchemaParam: string; Columns: TStrings{; DataSort: WideString}): Boolean;
+    procedure SetCurrentDataSort(ObjectName: string; SchemaParam: string; Name: string);
     property DataSort: WideString read GetDataSort;
   end;
 

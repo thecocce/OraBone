@@ -8,11 +8,11 @@ uses
 
 type
   TStringDataDialog = class(TDialog)
-    Panel1: TPanel;
-    OKButton: TButton;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
+    OKButton: TButton;
+    Panel1: TPanel;
     Panel2: TPanel;
+    Separator1Panel: TPanel;
     StringDataEdit: TSynEdit;
     procedure FormDestroy(Sender: TObject);
   private

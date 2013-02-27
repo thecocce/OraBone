@@ -10,35 +10,33 @@ uses
 
 type
   TGrantPrivilegesDialog = class(TCreateObjectBaseDialog)
-    SettingsTabSheet: TTabSheet;
-    GrantGroupBox: TGroupBox;
-    DeleteCheckBox: TCheckBox;
-    SelectCheckBox: TCheckBox;
-    InsertCheckBox: TCheckBox;
-    UpdateCheckBox: TCheckBox;
-    OnGroupBox: TGroupBox;
-    OnEdit: TBCEdit;
-    ToGroupBox: TGroupBox;
-    UserRadioButton: TRadioButton;
-    RoleRadioButton: TRadioButton;
-    PublicRadioButton: TRadioButton;
-    UserComboBox: TBCComboBox;
-    RoleComboBox: TBCComboBox;
-    GrantOptionCheckBox: TCheckBox;
-    ExecuteCheckBox: TCheckBox;
     AlterCheckBox: TCheckBox;
     DebugCheckBox: TCheckBox;
+    DeleteCheckBox: TCheckBox;
+    ExecuteCheckBox: TCheckBox;
+    GrantGroupBox: TGroupBox;
+    GrantOptionCheckBox: TCheckBox;
+    InsertCheckBox: TCheckBox;
+    OnEdit: TBCEdit;
+    OnGroupBox: TGroupBox;
+    PublicRadioButton: TRadioButton;
+    RoleComboBox: TBCComboBox;
+    RoleRadioButton: TRadioButton;
+    SelectCheckBox: TCheckBox;
+    SettingsTabSheet: TTabSheet;
+    ToGroupBox: TGroupBox;
+    UpdateCheckBox: TCheckBox;
+    UserComboBox: TBCComboBox;
+    UserRadioButton: TRadioButton;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    procedure GetUsers;
     procedure GetRoles;
+    procedure GetUsers;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function GrantPrivilegesDialog: TGrantPrivilegesDialog;

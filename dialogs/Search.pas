@@ -8,14 +8,14 @@ uses
 
 type
   TSearchDialog = class(TForm)
-    SearchForLabel: TLabel;
-    SearchForComboBox: TComboBox;
-    DirectionRadioGroup: TRadioGroup;
-    OptionsGroupBox: TGroupBox;
-    CaseSensitiveCheckBox: TCheckBox;
-    WholeWordsCheckBox: TCheckBox;
-    OkButton: TButton;
     CancelButton: TButton;
+    CaseSensitiveCheckBox: TCheckBox;
+    DirectionRadioGroup: TRadioGroup;
+    OkButton: TButton;
+    OptionsGroupBox: TGroupBox;
+    SearchForComboBox: TComboBox;
+    SearchForLabel: TLabel;
+    WholeWordsCheckBox: TCheckBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
     procedure SearchForComboBoxChange(Sender: TObject);
@@ -27,8 +27,8 @@ type
   public
     property SearchBackwards: Boolean read GetSearchBackwards;
     property SearchCaseSensitive: Boolean read GetSearchCaseSensitive;
-    property SearchWholeWords: Boolean read GetSearchWholeWords;
     property SearchText: string read GetSearchText;
+    property SearchWholeWords: Boolean read GetSearchWholeWords;
   end;
 
 function SearchDialog(Sender: TComponent): TSearchDialog;

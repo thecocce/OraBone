@@ -8,15 +8,15 @@ uses
 
 type
   TDropUserDialog = class(TDialog)
-    TopPanel: TPanel;
-    MessageLabel: TLabel;
-    InfoImage: TImage;
+    CancelButton: TButton;
     CascadeCheckBox: TCheckBox;
     GrayLinePanel: TPanel;
-    Panel1: TPanel;
-    CancelButton: TButton;
+    InfoImage: TImage;
+    MessageLabel: TLabel;
     OKButton: TButton;
+    Panel1: TPanel;
     Separator1Panel: TPanel;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }

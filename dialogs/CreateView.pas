@@ -12,46 +12,41 @@ uses
 
 type
   TCreateViewDialog = class(TCreateObjectBaseDialog)
-    ViewNameLabel: TLabel;
-    ViewNameEdit: TBCEdit;
-    CommnetLabel: TLabel;
-    CommentEdit: TBCEdit;
+    AddColumnAction: TAction;
+    ColumnButtonPanel: TPanel;
+    ColumnCommentsDBGrid: TBCDBGrid;
+    ColumnCommentsPanel: TPanel;
+    ColumnCommentsTabSheet: TTabSheet;
     ColumnsDataSource: TOraDataSource;
+    ColumnsDBGrid: TBCDBGrid;
+    ColumnsPanel: TPanel;
     ColumnsQuery: TOraQuery;
     ColumnsTabSheet: TTabSheet;
-    ColumnCommentsTabSheet: TTabSheet;
-    SelectStatementTabSheet: TTabSheet;
-    ColumnsPanel: TPanel;
-    ColumnButtonPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
+    CommentEdit: TBCEdit;
+    CommnetLabel: TLabel;
+    DeleteBitBtn: TJvBitBtn;
+    DeleteColumnAction: TAction;
     DownBitBtn: TJvBitBtn;
     InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
-    ColumnCommentsPanel: TPanel;
+    MoveDownAction: TAction;
+    MoveUpAction: TAction;
+    SelectStatementTabSheet: TTabSheet;
     SQLPanel: TPanel;
     SQLSynEdit: TSynEdit;
-    MoveUpAction: TAction;
-    MoveDownAction: TAction;
-    AddColumnAction: TAction;
-    DeleteColumnAction: TAction;
-    ColumnCommentsDBGrid: TBCDBGrid;
-    ColumnsDBGrid: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
-    procedure Formshow(Sender: TObject);
+    UpBitBtn: TJvBitBtn;
+    ViewNameEdit: TBCEdit;
+    ViewNameLabel: TLabel;
     procedure AddColumnActionExecute(Sender: TObject);
+    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DeleteColumnActionExecute(Sender: TObject);
+    procedure Formshow(Sender: TObject);
     procedure MoveDownActionExecute(Sender: TObject);
     procedure MoveUpActionExecute(Sender: TObject);
-    procedure DeleteColumnActionExecute(Sender: TObject);
-    procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont;
-      var Background: TColor; State: TGridDrawState);
-  private
-    { Private declarations }
+    procedure FormDestroy(Sender: TObject);
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateViewDialog: TCreateViewDialog;

@@ -10,31 +10,29 @@ uses
 
 type
   TCreateSynonymDialog = class(TCreateObjectBaseDialog)
-    SettingsTabSheet: TTabSheet;
-    Label1: TLabel;
-    SynonymNameEdit: TBCEdit;
     AvailabilityLabel: TLabel;
-    PublicRadioButton: TRadioButton;
-    PrivateRadioButton: TRadioButton;
-    ObjectOwnerLabel: TLabel;
-    ObjectOwnerComboBox: TBCComboBox;
-    ObjectNameLabel: TLabel;
-    ObjectNameComboBox: TBCComboBox;
-    DBLinkLabel: TLabel;
     DBLinkComboBox: TBCComboBox;
+    DBLinkLabel: TLabel;
+    Label1: TLabel;
+    ObjectNameComboBox: TBCComboBox;
+    ObjectNameLabel: TLabel;
+    ObjectOwnerComboBox: TBCComboBox;
+    ObjectOwnerLabel: TLabel;
+    PrivateRadioButton: TRadioButton;
+    PublicRadioButton: TRadioButton;
+    SettingsTabSheet: TTabSheet;
+    SynonymNameEdit: TBCEdit;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
-    procedure GetObjectNames;
     procedure GetDBLinks;
+    procedure GetObjectNames;
     procedure GetObjectOwners;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateSynonymDialog: TCreateSynonymDialog;

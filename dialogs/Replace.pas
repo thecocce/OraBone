@@ -10,32 +10,32 @@ uses
 
 type
   TReplaceDialog = class(TForm)
-    ReplaceWithLabel: TLabel;
-    ReplaceWithComboBox: TBCComboBox;
-    SearchForLabel: TLabel;
-    SearchForComboBox: TBCComboBox;
-    OptionsGroupBox: TGroupBox;
-    CaseSensitiveCheckBox: TCheckBox;
-    WholeWordsCheckBox: TCheckBox;
-    ReplaceInRadioGroup: TRadioGroup;
-    FindButton: TButton;
     CancelButton: TButton;
+    CaseSensitiveCheckBox: TCheckBox;
+    FindButton: TButton;
+    OptionsGroupBox: TGroupBox;
     ReplaceAllButton: TButton;
+    ReplaceInRadioGroup: TRadioGroup;
+    ReplaceWithComboBox: TBCComboBox;
+    ReplaceWithLabel: TLabel;
+    SearchForComboBox: TBCComboBox;
+    SearchForLabel: TLabel;
+    WholeWordsCheckBox: TCheckBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
     procedure SearchForComboBoxKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
+    function GetReplaceInWholeFile: Boolean;
     function GetReplaceText: string;
     function GetSearchCaseSensitive: Boolean;
     function GetSearchText: string;
     function GetSearchWholeWords: Boolean;
-    function GetReplaceInWholeFile: Boolean;
   public
-    property SearchCaseSensitive: Boolean read GetSearchCaseSensitive;
-    property SearchWholeWords: Boolean read GetSearchWholeWords;
-    property SearchText: string read GetSearchText;
-    property ReplaceText: string read GetReplaceText;
     property ReplaceInWholeFile: Boolean read GetReplaceInWholeFile;
+    property ReplaceText: string read GetReplaceText;
+    property SearchCaseSensitive: Boolean read GetSearchCaseSensitive;
+    property SearchText: string read GetSearchText;
+    property SearchWholeWords: Boolean read GetSearchWholeWords;
   end;
 
 function ReplaceDialog: TReplaceDialog;

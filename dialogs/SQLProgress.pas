@@ -13,17 +13,17 @@ type
   TSQLProgressDialog = class(TDialog)
     ActionList: TActionList;
     CancelAction: TAction;
-    ExecutionTimeLabel: TLabel;
     CancelButton: TButton;
-    procedure FormDestroy(Sender: TObject);
+    ExecutionTimeLabel: TLabel;
     procedure CancelActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
-    FStartTime: TDateTime;
-    FOraSQL: TOraSQL;
     FOnProgress: Boolean;
+    FOraSQL: TOraSQL;
+    FStartTime: TDateTime;
     procedure SetExecutionTimeText(Value: string);
     procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
   public

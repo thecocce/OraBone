@@ -10,35 +10,35 @@ uses
 type
   TImportTableDataDialog = class(TDialog)
     ActionList: TActionList;
-    ImportAction: TAction;
-    OpenFileButtonAction: TAction;
-    SaveFileButtonAction: TAction;
-    Panel1: TPanel;
-    OptionsGroupBox: TGroupBox;
-    SchemaLabel: TLabel;
-    TableLabel: TLabel;
-    FilenameLabel: TLabel;
-    ComminIntervalLabel: TLabel;
-    Label1: TLabel;
-    DelimiterLabel: TLabel;
-    SchemaEdit: TBCEdit;
-    CommitIntervalSpinEdit: TBCSpinEdit;
-    TableEdit: TBCEdit;
-    DelimiterComboBox: TBCComboBox;
-    OpenFilenameEdit: TBCEdit;
-    FolderBitBtn: TBitBtn;
-    Panel2: TPanel;
-    ImportButton: TButton;
+    BitBtn1: TBitBtn;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
-    Panel3: TPanel;
-    OutputGroupBox: TGroupBox;
-    FileRadioButton: TRadioButton;
     ClipboardRadioButton: TRadioButton;
+    ComminIntervalLabel: TLabel;
+    CommitIntervalSpinEdit: TBCSpinEdit;
+    DelimiterComboBox: TBCComboBox;
+    DelimiterLabel: TLabel;
+    FilenameLabel: TLabel;
+    FileRadioButton: TRadioButton;
+    FolderBitBtn: TBitBtn;
+    ImportAction: TAction;
+    ImportButton: TButton;
+    Label1: TLabel;
     LaunchAfterCreationCheckBox: TCheckBox;
     LoadInEditorRadioButton: TRadioButton;
+    OpenFileButtonAction: TAction;
+    OpenFilenameEdit: TBCEdit;
+    OptionsGroupBox: TGroupBox;
+    OutputGroupBox: TGroupBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    SaveFileButtonAction: TAction;
     SaveFilenameEdit: TBCEdit;
-    BitBtn1: TBitBtn;
+    SchemaEdit: TBCEdit;
+    SchemaLabel: TLabel;
+    Separator1Panel: TPanel;
+    TableEdit: TBCEdit;
+    TableLabel: TLabel;
     procedure FormDestroy(Sender: TObject);
     procedure ImportActionExecute(Sender: TObject);
     procedure OpenFileButtonActionExecute(Sender: TObject);
@@ -46,13 +46,13 @@ type
   private
     { Private declarations }
     FSession: TOraSession;
-    procedure WriteIniFile;
-    procedure ReadIniFile;
-    function ImportData: Boolean;
     function CheckFields: Boolean;
     function GetColumns(Header: string): TStrings;
     function GetDelimiter: Char;
+    function ImportData: Boolean;
     function InsertStatementOutput(ColumnTypeQuery: TOraQuery; Columns: TStrings; Line: string): string;
+    procedure ReadIniFile;
+    procedure WriteIniFile;
   public
     { Public declarations }
     function Open(Session: TOraSession): Boolean;

@@ -8,30 +8,30 @@ uses
 
 type
   TSchemaFilterDialog = class(TDialog)
-    SchemasQuery: TOraQuery;
     ActionList: TActionList;
-    DeselectAllAction: TAction;
-    SelectAllAction: TAction;
-    OKAction: TAction;
-    SQLStringHolder: TJvMultiStringHolder;
     BottomPanel: TPanel;
-    DeselectAllButton: TButton;
-    SelectAllButton: TButton;
-    OKButton: TButton;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
-    Separator2Panel: TPanel;
+    DeselectAllAction: TAction;
+    DeselectAllButton: TButton;
+    OKAction: TAction;
+    OKButton: TButton;
     Panel2: TPanel;
     SchemaFilterCheckListBox: TCheckListBox;
-    procedure OKActionExecute(Sender: TObject);
+    SchemasQuery: TOraQuery;
+    SelectAllAction: TAction;
+    SelectAllButton: TButton;
+    Separator1Panel: TPanel;
+    Separator2Panel: TPanel;
+    SQLStringHolder: TJvMultiStringHolder;
     procedure DeselectAllActionExecute(Sender: TObject);
-    procedure SelectAllActionExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
+    procedure SelectAllActionExecute(Sender: TObject);
   private
     { Private declarations }
     FKeyValue: string;
-    procedure SetSchemaFilters(SchemaFilters: string; FilterLength: Integer);
     function GetSchemaFilters: string;
+    procedure SetSchemaFilters(SchemaFilters: string; FilterLength: Integer);
   public
     { Public declarations }
     function Open(OraSession: TOraSession; KeyValue: string; SchemaFilters: string): Boolean;

@@ -8,12 +8,12 @@ uses
 
 type
   TConfirmReplaceDialog = class(TForm)
-    YesButton: TButton;
-    ConfirmationLabel: TLabel;
-    NoButton: TButton;
     CancelButton: TButton;
-    YesToAllButton: TButton;
+    ConfirmationLabel: TLabel;
     Image: TImage;
+    NoButton: TButton;
+    YesButton: TButton;
+    YesToAllButton: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   public

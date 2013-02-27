@@ -5,32 +5,19 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList, Dlg,
-  //Vcl.Styles,
-  Vcl.Themes{, Winapi.CommCtrl};
+  Vcl.Themes;
 
 type
- {TProgressBarStyleHookMarquee = class(TProgressBarStyleHook)
-   private
-    Timer : TTimer;
-    FStep : Integer;
-    procedure TimerAction(Sender: TObject);
-   protected
-    procedure PaintBar(Canvas: TCanvas); override;
-   public
-    constructor Create(AControl: TWinControl); override;
-    destructor Destroy; override;
-  end; }
-
   TProgressDialog = class(TDialog)
-    ProgressPanel: TPanel;
-    CancelButton: TButton;
     ActionList: TActionList;
     CancelAction: TAction;
-    TopPanel: TPanel;
+    CancelButton: TButton;
     InformationLabel: TLabel;
     ProgressBar: TJvProgressBar;
-    procedure FormDestroy(Sender: TObject);
+    ProgressPanel: TPanel;
+    TopPanel: TPanel;
     procedure CancelActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FOnProgress: Boolean;
@@ -38,11 +25,11 @@ type
     procedure SetProgressPosition(Value: Integer);
   public
     { Public declarations }
-    property InformationText: string write SetInformationText;
-    property ProgressPosition: Integer write SetProgressPosition;
-    property OnProgress: Boolean read FOnProgress;
-    procedure SetRange(ProgressMin: Integer; ProgressMax: Integer);
     procedure Open(ProgressMin: Integer; ProgressMax: Integer; ShowCancel: Boolean; Marquee: Boolean = False);
+    procedure SetRange(ProgressMin: Integer; ProgressMax: Integer);
+    property InformationText: string write SetInformationText;
+    property OnProgress: Boolean read FOnProgress;
+    property ProgressPosition: Integer write SetProgressPosition;
   end;
 
 function ProgressDialog(AOwner: TComponent): TProgressDialog;

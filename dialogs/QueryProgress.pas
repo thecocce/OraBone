@@ -13,24 +13,24 @@ type
   TQueryProgressDialog = class(TDialog)
     ActionList: TActionList;
     CancelAction: TAction;
-    ExecutionTimeLabel: TLabel;
     CancelButton: TButton;
-    procedure FormDestroy(Sender: TObject);
+    ExecutionTimeLabel: TLabel;
     procedure CancelActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
-    FStartTime: TDateTime;
-    FOraQuery: TOraQuery;
     FOnProgress: Boolean;
+    FOraQuery: TOraQuery;
+    FStartTime: TDateTime;
     procedure SetExecutionTimeText(Value: string);
     procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
   public
     { Public declarations }
+    function Open(OraQuery: TOraQuery; StartTime: TDateTime): Boolean;
     property ExecutionTimeText: string write SetExecutionTimeText;
     property OnProgress: Boolean read FOnProgress;
-    function Open(OraQuery: TOraQuery; StartTime: TDateTime): Boolean;
   end;
 
 function QueryProgressDialog: TQueryProgressDialog;

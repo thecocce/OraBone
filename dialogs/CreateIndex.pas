@@ -11,22 +11,22 @@ uses
 
 type
   TCreateIndexDialog = class(TCreateObjectBaseDialog)
+    ColumnBottomPanel: TPanel;
+    ColumnsPanel: TPanel;
+    ColumnsStringGrid: TBCStringGrid;
     ColumnsTabSheet: TTabSheet;
-    IndexNameLabel: TLabel;
+    DownBitBtn: TJvBitBtn;
     IndexNameEdit: TBCEdit;
-    UniquenessLabel: TLabel;
-    UniqueRadioButton: TRadioButton;
+    IndexNameLabel: TLabel;
+    MoveDownColumnAction: TAction;
+    MoveupColumnAction: TAction;
     NonuniqueRadioButton: TRadioButton;
     TableLabel: TLabel;
     TableNameComboBox: TBCComboBox;
-    ColumnsPanel: TPanel;
-    ColumnsStringGrid: TBCStringGrid;
-    ColumnBottomPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    MoveupColumnAction: TAction;
-    MoveDownColumnAction: TAction;
     TableNameEdit: TBCEdit;
+    UniquenessLabel: TLabel;
+    UniqueRadioButton: TRadioButton;
+    UpBitBtn: TJvBitBtn;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);
@@ -34,14 +34,12 @@ type
     procedure TableNameComboBoxChange(Sender: TObject);
   private
     { Private declarations }
-    procedure GetTableNames;
     procedure GetColumnNames;
+    procedure GetTableNames;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateIndexDialog: TCreateIndexDialog;

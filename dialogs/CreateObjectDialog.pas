@@ -11,32 +11,31 @@ uses
 type
   TCreateObjectBaseDialog = class(TDialog)
     ActionList: TActionList;
-    OKAction: TAction;
-    SQLEditorAction: TAction;
-    CopyToClipboardAction: TAction;
-    SaveToFileAction: TAction;
-    SynSQLSyn: TSynSQLSyn;
-    ImageList: TImageList;
-    PageControl: TBCPageControl;
-    OKButton: TButton;
     CancelButton: TButton;
-    SourceTabSheet: TTabSheet;
+    CopyToClipboardAction: TAction;
+    CopyToClipboardToolButton: TToolButton;
+    ImageList: TImageList;
+    OKAction: TAction;
+    OKButton: TButton;
+    PageControl: TBCPageControl;
+    SaveAsToolButton: TToolButton;
+    SaveToFileAction: TAction;
     SourcePanel: TPanel;
     SourceSynEdit: TSynEdit;
-    SourceTopPanel: TPanel;
-    TopPanel: TPanel;
+    SourceTabSheet: TTabSheet;
     SourceToolBar: TBCToolBar;
+    SourceTopPanel: TPanel;
+    SQLEditorAction: TAction;
     SQLEditorToolButton: TToolButton;
-    CopyToClipboardToolButton: TToolButton;
-    SaveAsToolButton: TToolButton;
+    SynSQLSyn: TSynSQLSyn;
+    TopPanel: TPanel;
     procedure CopyToClipboardActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);
+    procedure OraScriptError(Sender: TObject; E: Exception; SQL: string; var Action: TErrorAction);
     procedure PageControlChange(Sender: TObject);
     procedure SaveToFileActionExecute(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure OraScriptError(Sender: TObject; E: Exception; SQL: string;
-      var Action: TErrorAction);
   private
     { Private declarations }
     function GetSQL: string;
@@ -44,14 +43,14 @@ type
     FObjectName: string;
     FOraSession: TOraSession;
     FSchemaParam: string;
-    procedure CreateSQL; virtual;
     function CheckFields: Boolean; virtual;
+    procedure CreateSQL; virtual;
     procedure Initialize; virtual;
   public
     { Public declarations }
+    function ExecuteSQL: Boolean;
     function Open(OraSession: TOraSession; SchemaParam: string): Boolean; overload;
     function Open(OraSession: TOraSession; SchemaParam: string; ObjectName: string): Boolean; overload;
-    function ExecuteSQL: Boolean;
   end;
 
 implementation

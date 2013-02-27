@@ -12,41 +12,37 @@ uses
 
 type
   TCreateFunctionDialog = class(TCreateObjectBaseDialog)
-    ParametersTabSheet: TTabSheet;
-    BodyTabSheet: TTabSheet;
-    FunctionNameLabel: TLabel;
-    FunctionNameEdit: TBCEdit;
-    ReturnTypeLabel: TLabel;
-    ReturnTypeComboBox: TBCComboBox;
-    ColumnsPanel: TPanel;
-    ColumnButtonPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
-    DeleteBitBtn: TJvBitBtn;
-    ColumnsDataSource: TOraDataSource;
-    ColumnsQuery: TOraQuery;
+    AddColumnAction: TAction;
+    BCDBGrid1: TBCDBGrid;
     BodyPanel: TPanel;
     BodySynEdit: TSynEdit;
-    MoveupColumnAction: TAction;
-    MoveDownColumnAction: TAction;
-    AddColumnAction: TAction;
+    BodyTabSheet: TTabSheet;
+    ColumnButtonPanel: TPanel;
+    ColumnsDataSource: TOraDataSource;
+    ColumnsPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    BCDBGrid1: TBCDBGrid;
-    procedure FormDestroy(Sender: TObject);
+    DownBitBtn: TJvBitBtn;
+    FunctionNameEdit: TBCEdit;
+    FunctionNameLabel: TLabel;
+    InsertBitBtn: TJvBitBtn;
+    MoveDownColumnAction: TAction;
+    MoveupColumnAction: TAction;
+    ParametersTabSheet: TTabSheet;
+    ReturnTypeComboBox: TBCComboBox;
+    ReturnTypeLabel: TLabel;
+    UpBitBtn: TJvBitBtn;
     procedure AddColumnActionExecute(Sender: TObject);
-    procedure Formshow(Sender: TObject);
     procedure DeleteColumnActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure Formshow(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);
     procedure MoveupColumnActionExecute(Sender: TObject);
-  private
-    { Private declarations }
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateFunctionDialog: TCreateFunctionDialog;

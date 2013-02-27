@@ -10,35 +10,34 @@ uses
 type
   TCustomizePageControlDialog = class(TDialog)
     ActionList: TActionList;
-    MoveUpAction: TAction;
-    MoveDownAction: TAction;
-    OKAction: TAction;
-    TopPanel: TPanel;
-    DefaultPageLabel: TJvLabel;
-    DefaultPageComboBox: TBCComboBox;
     BottomPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    OKButton: TButton;
     CancelButton: TButton;
+    ClientPanel: TPanel;
+    DefaultPageComboBox: TBCComboBox;
+    DefaultPageLabel: TJvLabel;
+    DownBitBtn: TJvBitBtn;
+    MoveDownAction: TAction;
+    MoveUpAction: TAction;
+    OKAction: TAction;
+    OKButton: TButton;
     Separator1Panel: TPanel;
     Separator2Panel: TPanel;
-    ClientPanel: TPanel;
+    TopPanel: TPanel;
+    UpBitBtn: TJvBitBtn;
     ValueListEditor: TValueListEditor;
-    procedure ValueListEditorDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
-      State: TGridDrawState);
     procedure FormDestroy(Sender: TObject);
-    procedure ValueListEditorClick(Sender: TObject);
-    procedure OKActionExecute(Sender: TObject);
-    procedure MoveUpActionExecute(Sender: TObject);
     procedure MoveDownActionExecute(Sender: TObject);
+    procedure MoveUpActionExecute(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
+    procedure ValueListEditorClick(Sender: TObject);
+    procedure ValueListEditorDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
   private
     { Private declarations }
     FInMouseClick: Boolean;
     FPageControl: TBCPageControl;
+    function CheckFields: Boolean;
     procedure FillComboAndValueList;
     procedure WriteIni;
-    function CheckFields: Boolean;
   public
     { Public declarations }
     function Open(PageControl: TBCPageControl): Boolean;

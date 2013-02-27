@@ -10,33 +10,33 @@ uses
 type
   THistoryEditDialog = class(TDialog)
     BottomPanel: TPanel;
-    OKButton: TButton;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
-    TopPanel: TPanel;
+    DateLabel: TLabel;
+    DatePicker: TDateTimePicker;
+    OKButton: TButton;
+    Panel1: TPanel;
     Panel3: TPanel;
-    TimePicker: TDateTimePicker;
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    SchemaEdit: TEdit;
+    SchemaLabel: TLabel;
+    Separator1Panel: TPanel;
+    SQLLabel: TLabel;
     SQLSynEdit: TSynEdit;
     SynSQLSyn: TSynSQLSyn;
-    SQLLabel: TLabel;
-    Panel7: TPanel;
-    DateLabel: TLabel;
-    Panel8: TPanel;
-    SchemaLabel: TLabel;
-    SchemaEdit: TEdit;
-    DatePicker: TDateTimePicker;
-    Panel1: TPanel;
+    TimePicker: TDateTimePicker;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     function GetHistoryDate: string;
-    procedure SetHistoryDate(Value: string);
     function GetSchema: string;
-    procedure SetSchema(Value: string);
     function GetSQLStatement: WideString;
+    procedure SetHistoryDate(Value: string);
+    procedure SetSchema(Value: string);
     procedure SetSQLStatement(Value: WideString);
   public
     { Public declarations }

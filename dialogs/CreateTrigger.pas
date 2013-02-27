@@ -10,39 +10,37 @@ uses
 
 type
   TCreateTriggerDialog = class(TCreateObjectBaseDialog)
-    TriggerNameLabel: TLabel;
-    TriggerNameEdit: TBCEdit;
-    TableLabel: TLabel;
-    TableNameComboBox: TBCComboBox;
-    SettingsTabSheet: TTabSheet;
-    v: TTabSheet;
-    BodyTabSheet: TTabSheet;
-    WhenRadioGroup: TRadioGroup;
-    OnGroupBox: TGroupBox;
-    DeleteCheckBox: TCheckBox;
-    InsertCheckBox: TCheckBox;
-    UpdateCheckBox: TCheckBox;
-    ReferencingGroupBox: TGroupBox;
-    NewAsLabel: TLabel;
-    OldAsLabel: TLabel;
-    ReferenceNewEdit: TBCEdit;
-    ReferenceOldEdit: TBCEdit;
-    WhenClausePanel: TPanel;
-    WhenClauseSynEdit: TSynEdit;
     BodyPanel: TPanel;
     BodySynEdit: TSynEdit;
+    BodyTabSheet: TTabSheet;
+    DeleteCheckBox: TCheckBox;
+    InsertCheckBox: TCheckBox;
+    NewAsLabel: TLabel;
+    OldAsLabel: TLabel;
+    OnGroupBox: TGroupBox;
+    ReferenceNewEdit: TBCEdit;
+    ReferenceOldEdit: TBCEdit;
+    ReferencingGroupBox: TGroupBox;
+    SettingsTabSheet: TTabSheet;
+    TableLabel: TLabel;
+    TableNameComboBox: TBCComboBox;
     TableNameEdit: TBCEdit;
+    TriggerNameEdit: TBCEdit;
+    TriggerNameLabel: TLabel;
+    UpdateCheckBox: TCheckBox;
+    WhenClausePanel: TPanel;
+    WhenClauseSynEdit: TSynEdit;
+    WhenClauseTabSheet: TTabSheet;
+    WhenRadioGroup: TRadioGroup;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
   private
     { Private declarations }
     procedure GetTableNames;
   protected
-    procedure CreateSQL; override;
     function CheckFields: Boolean; override;
+    procedure CreateSQL; override;
     procedure Initialize; override;
-  public
-    { Public declarations }
   end;
 
 function CreateTriggerDialog: TCreateTriggerDialog;

@@ -8,22 +8,22 @@ uses
 
 type
   TAnalyzeTableDialog = class(TDialog)
-    TopPanel: TPanel;
-    GroupBox1: TGroupBox;
+    BottomPanel: TPanel;
+    CancelButton: TButton;
     ComputeStatisticsRadioButton: TRadioButton;
     EstimateStatisticsRadioButton: TRadioButton;
-    BottomPanel: TPanel;
     ExportButton: TButton;
-    CancelButton: TButton;
+    GroupBox1: TGroupBox;
     Separator1Panel: TPanel;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FTableName: string;
   public
     { Public declarations }
-    function Open(TableName: string): Boolean;
     function GetSQL: string;
+    function Open(TableName: string): Boolean;
   end;
 
 function AnalyzeTableDialog: TAnalyzeTableDialog;

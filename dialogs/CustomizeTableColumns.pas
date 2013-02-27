@@ -11,26 +11,25 @@ uses
 type
   TCustomizeTableColumnsDialog = class(TDialog)
     ActionList: TActionList;
-    MoveUpAction: TAction;
-    MoveDownAction: TAction;
-    OKAction: TAction;
-    ColumnsQuery: TOraQuery;
     BottomPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
-    DownBitBtn: TJvBitBtn;
-    OKButton: TButton;
     CancelButton: TButton;
+    ClientPanel: TPanel;
+    ColumnsQuery: TOraQuery;
+    DownBitBtn: TJvBitBtn;
+    MoveDownAction: TAction;
+    MoveUpAction: TAction;
+    OKAction: TAction;
+    OKButton: TButton;
     Separator1Panel: TPanel;
     Separator2Panel: TPanel;
-    ClientPanel: TPanel;
+    UpBitBtn: TJvBitBtn;
     ValueListEditor: TValueListEditor;
-    procedure ValueListEditorDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
-      State: TGridDrawState);
     procedure FormDestroy(Sender: TObject);
-    procedure ValueListEditorClick(Sender: TObject);
-    procedure OKActionExecute(Sender: TObject);
-    procedure MoveUpActionExecute(Sender: TObject);
     procedure MoveDownActionExecute(Sender: TObject);
+    procedure MoveUpActionExecute(Sender: TObject);
+    procedure OKActionExecute(Sender: TObject);
+    procedure ValueListEditorClick(Sender: TObject);
+    procedure ValueListEditorDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
   private
     { Private declarations }
     FInMouseClick: Boolean;

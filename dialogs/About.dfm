@@ -22,7 +22,7 @@ object AboutDialog: TAboutDialog
     284)
   PixelsPerInch = 96
   TextHeight = 13
-  object Kayttajanimi2Label: TLabel
+  object ThanksToLabel: TLabel
     Left = 10
     Top = 150
     Width = 47
@@ -48,11 +48,10 @@ object AboutDialog: TAboutDialog
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitWidth = 409
     DesignSize = (
       427
       139)
-    object KayttovaltuusImage: TImage
+    object OraBoneImage: TImage
       Left = 281
       Top = 9
       Width = 128
@@ -383,8 +382,6 @@ object AboutDialog: TAboutDialog
     Default = True
     ModalResult = 1
     TabOrder = 0
-    ExplicitLeft = 292
-    ExplicitTop = 221
   end
   object LinkRow1Label: TLinkLabel
     Left = 10
@@ -438,6 +435,5 @@ object AboutDialog: TAboutDialog
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 5
-    ExplicitWidth = 387
   end
 end

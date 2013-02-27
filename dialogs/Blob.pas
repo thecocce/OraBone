@@ -8,15 +8,15 @@ uses
 
 type
   TBlobDialog = class(TDialog)
-    TopPanel: TPanel;
-    DataSizeLabel: TLabel;
     BottomPanel: TPanel;
-    LoadButton: TButton;
-    ClearButton: TButton;
-    SaveButton: TButton;
     CancelButton: TButton;
-    Separator1Panel: TPanel;
+    ClearButton: TButton;
+    DataSizeLabel: TLabel;
+    LoadButton: TButton;
     Panel1: TPanel;
+    SaveButton: TButton;
+    Separator1Panel: TPanel;
+    TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }

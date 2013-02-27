@@ -8,49 +8,49 @@ uses
 
 type
   TTableSourceOptionsDialog = class(TDialog)
-    Panel1: TPanel;
-    OKButton: TButton;
-    CancelButton: TButton;
-    Separator1Panel: TPanel;
     ActionList: TActionList;
-    OKAction: TAction;
-    Panel2: TPanel;
-    CreateTableCheckBox: TCheckBox;
+    CancelButton: TButton;
     CommentsCheckBox: TCheckBox;
-    IndexesCheckBox: TCheckBox;
     ConstraintsCheckBox: TCheckBox;
-    TriggersCheckBox: TCheckBox;
-    ParametersCheckBox: TCheckBox;
-    StorageCheckBox: TCheckBox;
+    CreateTableCheckBox: TCheckBox;
     GrantsCheckBox: TCheckBox;
+    IndexesCheckBox: TCheckBox;
+    OKAction: TAction;
+    OKButton: TButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    ParametersCheckBox: TCheckBox;
+    Separator1Panel: TPanel;
+    StorageCheckBox: TCheckBox;
     SynonymsCheckBox: TCheckBox;
+    TriggersCheckBox: TCheckBox;
     procedure FormDestroy(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);
   private
     { Private declarations }
+    function GetComments: Boolean;
+    function GetConstraints: Boolean;
+    function GetCreateTable: Boolean;
+    function GetGrants: Boolean;
+    function GetIndexes: Boolean;
+    function GetParameters: Boolean;
+    function GetStorage: Boolean;
+    function GetSynonyms: Boolean;
+    function GetTriggers: Boolean;
     procedure ReadIniFile;
     procedure WriteIniFile;
-    function GetCreateTable: Boolean;
-    function GetComments: Boolean;
-    function GetIndexes: Boolean;
-    function GetConstraints: Boolean;
-    function GetTriggers: Boolean;
-    function GetSynonyms: Boolean;
-    function GetGrants: Boolean;
-    function GetStorage: Boolean;
-    function GetParameters: Boolean;
   public
     { Public declarations }
     function Open: Boolean;
-    property CreateTable: Boolean read GetCreateTable;
     property Comments: Boolean read GetComments;
-    property Indexes: Boolean read GetIndexes;
     property Constraints: Boolean read GetConstraints;
-    property Triggers: Boolean read GetTriggers;
-    property Synonyms: Boolean read GetSynonyms;
+    property CreateTable: Boolean read GetCreateTable;
     property Grants: Boolean read GetGrants;
-    property Storage: Boolean read GetStorage;
+    property Indexes: Boolean read GetIndexes;
     property Parameters: Boolean read GetParameters;
+    property Storage: Boolean read GetStorage;
+    property Synonyms: Boolean read GetSynonyms;
+    property Triggers: Boolean read GetTriggers;
   end;
 
 function TableSourceOptionsDialog: TTableSourceOptionsDialog;

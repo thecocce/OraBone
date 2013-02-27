@@ -8,36 +8,36 @@ uses
 
 type
   TFindInFilesDialog = class(TForm)
-    FindWhatLabel: TLabel;
-    FindWhatComboBox: TBCComboBox;
-    FileTypeLabel: TLabel;
-    FileTypeComboBox: TBCComboBox;
-    FolderLabel: TLabel;
-    CaseSensitiveCheckBox: TCheckBox;
-    LookInSubfoldersCheckBox: TCheckBox;
-    FindButton: TButton;
     CancelButton: TButton;
+    CaseSensitiveCheckBox: TCheckBox;
+    FileTypeComboBox: TBCComboBox;
+    FileTypeLabel: TLabel;
+    FindButton: TButton;
+    FindWhatComboBox: TBCComboBox;
+    FindWhatLabel: TLabel;
     FolderDirectoryEdit: TJvDirectoryEdit;
-    procedure FormDestroy(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    FolderLabel: TLabel;
+    LookInSubfoldersCheckBox: TCheckBox;
     procedure FindWhatComboBoxKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    function GetFindWhatText: string;
     function GetFileTypeText: string;
+    function GetFindWhatText: string;
     function GetFolderText: string;
-    procedure SetFolderText(Value: string);
-    function GetSearchCaseSensitive: Boolean;
     function GetLookInSubfolders: Boolean;
+    function GetSearchCaseSensitive: Boolean;
     procedure SetExtensions(Value: string);
+    procedure SetFolderText(Value: string);
   public
     { Public declarations }
-    property FindWhatText: string read GetFindWhatText;
-    property FileTypeText: string read GetFileTypeText;
-    property FolderText: string read GetFolderText write SetFolderText;
-    property SearchCaseSensitive: Boolean read GetSearchCaseSensitive;
-    property LookInSubfolders: Boolean read GetLookInSubfolders;
     property Extensions: string write SetExtensions;
+    property FileTypeText: string read GetFileTypeText;
+    property FindWhatText: string read GetFindWhatText;
+    property FolderText: string read GetFolderText write SetFolderText;
+    property LookInSubfolders: Boolean read GetLookInSubfolders;
+    property SearchCaseSensitive: Boolean read GetSearchCaseSensitive;
   end;
 
 function FindInFilesDialog: TFindInFilesDialog;
