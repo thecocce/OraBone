@@ -1069,7 +1069,6 @@ begin
           else
             AddColumns := AddColumns + Trim(DataType);
           if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
-            // todo: jos not null, niin taulun oltava tyhjä!!!
             AddColumns := AddColumns + 'NOT NULL';
           if not FieldByName('COLUMN_DEFAULT').IsNull then
           begin
