@@ -349,7 +349,7 @@ begin
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
         if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
         begin
-          SynEdit := TSQLEditorFrame(PageControl.ActivePage.Components[0]).ActiveSynEdit;
+          SynEdit := TSQLEditorFrame(PageControl.ActivePage.Components[0]).GetActiveSynEdit;
           if Assigned(SynEdit) then
             SynEdit.SetFocus;
         end;
@@ -539,7 +539,7 @@ begin
   begin
     Extensions := '*.*|*.sql|';
     SQLEditorFrame := GetActiveSQLEditor;
-    SynEdit := SQLEditorFrame.ActiveSynEdit;
+    SynEdit := SQLEditorFrame.GetActiveSynEdit;
     if Assigned(SynEdit) then
       if SynEdit.SelAvail then
         FindWhatComboBox.Text := SynEdit.SelText;
@@ -782,7 +782,7 @@ begin
     //  (ActiveSQLDocumentFound and SQLEditorFrame.DataQueryOpened) or ActiveSQLDocumentFound or
     //  (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
     { SQL Editor }
-    ExecuteStatementAction.Enabled := ActiveSQLDocumentFound and (SQLEditorFrame.ActiveSynEdit.Text <> '');
+    ExecuteStatementAction.Enabled := ActiveSQLDocumentFound and (SQLEditorFrame.GetActiveSynEdit.Text <> '');
     ExecuteScriptAction.Enabled := ExecuteStatementAction.Enabled;
     ExplainPlanAction.Enabled := ExecuteStatementAction.Enabled;
     { Edit }
@@ -1217,10 +1217,10 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
-    if SQLEditorFrame.ActiveSynEdit.Focused then
+    if SQLEditorFrame.GetActiveSynEdit.Focused then
     begin
       SQLEditorFrame.NextPage;
-      SQLEditorFrame.ActiveSynEdit.SetFocus;
+      SQLEditorFrame.GetActiveSynEdit.SetFocus;
     end
     else
       NextPage;
@@ -1236,10 +1236,10 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
-    if SQLEditorFrame.ActiveSynEdit.Focused then
+    if SQLEditorFrame.GetActiveSynEdit.Focused then
     begin
       SQLEditorFrame.PreviousPage;
-      SQLEditorFrame.ActiveSynEdit.SetFocus;
+      SQLEditorFrame.GetActiveSynEdit.SetFocus;
     end
     else
       PreviousPage;
@@ -1398,7 +1398,7 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
-    SynEdit := SQLEditorFrame.ActiveSynEdit;
+    SynEdit := SQLEditorFrame.GetActiveSynEdit;
     SynEdit.Text := SQLFormatter.FormatSQL(SynEdit.Text);
   end;
 end;
@@ -1742,7 +1742,7 @@ begin
   begin
     SQLEditorFrame.New;
 
-    SynEdit := SQLEditorFrame.ActiveSynEdit;
+    SynEdit := SQLEditorFrame.GetActiveSynEdit;
     SynEdit.Lines.BeginUpdate;
     SynEdit.Lines.Text := SQLText;
     SynEdit.Lines.EndUpdate;
@@ -2225,7 +2225,7 @@ begin
     if Assigned(Grid) and Grid.Focused then
       Grid.SelectedRows.SelectAll //Selection.SelectAll
     else
-      SQLEditorFrame.ActiveSynEdit.SelectAll
+      SQLEditorFrame.GetActiveSynEdit.SelectAll
   end
   else
   begin
