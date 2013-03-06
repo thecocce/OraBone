@@ -58,7 +58,7 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -297,13 +297,13 @@ type
     FObjectNames: TStrings;
     FSchemaParam: string;
     FDBMSTimer: TTimer;
-    FSynEditsList: TList;
     FCompareImageIndex, FNewImageIndex: Integer;
     function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
     function GetActiveDocumentFound: Boolean;
     function GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
+    function GetSQLEditorTabSheetFrame(TabSheet: TTabSheet): TSQLEditorTabSheetFrame;
     function Save(TabSheet: TTabSheet; ShowDialog: Boolean = False): string;
       overload;
     procedure InitializeSynEditPrint;
@@ -428,11 +428,20 @@ uses
 const
   DEFAULT_FILENAME = 'Sql';
 
-{ TDocumentFrame }
+{ TSQLEditorFrame }
 
 function TSQLEditorFrame.GetDataQueryOpened: Boolean;
 begin
   Result := ActiveSynEdit.QueryOpened and Assigned(FOutputFrame) and (FOutputFrame.PageControl.PageCount > 0) and (FOutputFrame.PageControl.ActivePage.ImageIndex = IMAGE_INDEX_GRID);
+end;
+
+function TSQLEditorFrame.GetSQLEditorTabSheetFrame(TabSheet: TTabSheet): TSQLEditorTabSheetFrame;
+begin
+  Result := nil;
+  if Assigned(TabSheet) then
+    if TabSheet.ComponentCount <> 0 then
+      if TabSheet.Components[0] is TSQLEditorTabSheetFrame then
+        Result := TSQLEditorTabSheetFrame(TabSheet.Components[0]);
 end;
 
 function TSQLEditorFrame.GetOutputGridHasFocus: Boolean;
@@ -531,8 +540,6 @@ begin
   ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
 
-  FSynEditsList := TList.Create;
-
   PageControl.Images := TImageList.Create(Self);
   SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
   if SysImageList <> 0 then
@@ -579,8 +586,6 @@ end;
 
 destructor TSQLEditorFrame.Destroy;
 begin
-  FreeAndNil(FSynEditsList);
-
   PageControl.Images.Free;
 
   inherited Destroy;
@@ -604,137 +609,111 @@ end;
 function TSQLEditorFrame.CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
 var
   TabSheet: TTabSheet;
-  Panel: TPanel;
-  SynEdit: TBCOraSynEdit;
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
 begin
   { create a TabSheet }
   TabSheet := TTabSheet.Create(PageControl);
   TabSheet.PageControl := PageControl;
-    if FileName <> '' then
-    TabSheet.ImageIndex := GetImageIndex(FileName) // SAVED_IMAGEINDEX;
+  if FileName <> '' then
+    TabSheet.ImageIndex := GetImageIndex(FileName)
   else
     TabSheet.ImageIndex := FNewImageIndex;
-  // TabSheet.DoubleBuffered := True;
   { set the Caption property }
   if FileName = '' then
     TabSheet.Caption := DEFAULT_FILENAME + IntToStr(FNumberOfNewDocument)
   else
     TabSheet.Caption := ExtractFileName(FileName);
   PageControl.ActivePage := TabSheet;
-  { create a Panel }
-  Panel := TPanel.Create(TabSheet);
-  with Panel do
-  begin
-    Parent := TabSheet;
-    Align := alClient;
-    BevelOuter := bvNone;
-    Caption := '';
-    DoubleBuffered := False;
-    Padding.Left := 1;
-    Padding.Top := 1;
-    if TStyleManager.ActiveStyle.Name = 'Windows' then
-      Padding.Right := 3
-    else
-      Padding.Right := 1;
-    Padding.Bottom := 2;
-    ParentColor := True;
-    ParentDoubleBuffered := False;
-  end;
+
   { create a SynEdit }
-  SynEdit := TBCOraSynEdit.Create(Panel);
-  with SynEdit do
+  SQLEditorTabSheetFrame := TSQLEditorTabSheetFrame.Create(TabSheet);
+  with SQLEditorTabSheetFrame do
   begin
     Visible := False;
     Align := alClient;
-    Parent := Panel;
-    DocumentName := FileName;
-    FileDateTime := GetFileDateTime(FileName);
-    Font.Charset := DEFAULT_CHARSET;
-    Font.Color := clWindowText;
-    Font.Height := -13;
-    Font.Name := 'Courier New';
-    Font.Style := [];
-    Gutter.AutoSize := True;
-    Gutter.Font.Charset := DEFAULT_CHARSET;
-    Gutter.Font.Color := clWindowText;
-    Gutter.Font.Height := -11;
-    Gutter.Font.Name := 'Courier New';
-    Gutter.Font.Style := [];
-    Gutter.ShowLineNumbers := True;
-    Gutter.Gradient := False;
-    WantTabs := True;
-    Options := [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo,
-      eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces,
-      eoTrimTrailingSpaces, eoScrollPastEol, eoSpecialLineDefaultFg, eoAltSetsColumnMode];
-    OnChange := SynEditChange;
-    OnReplaceText := SynEditorReplaceText;
-    OnSpecialLineColors := SynEditSpecialLineColors;
-    SearchEngine := SynEditSearch;
-    ActiveLineColor := clSkyBlue;
-    Highlighter := SynSQLSyn;
-    PopupMenu := EditorPopupMenu;
-    OnPaintTransient := SynEditPaintTransient;
-    BookMarkOptions.BookmarkImages := BookmarkImagesList;
-  end;
-  UpdateGutter(SynEdit);
-  FSynEditsList.Add(SynEdit);
-  OptionsContainer.AssignTo(SynEdit);
-  PageControl.MultiLine := OptionsContainer.MultiLine;
+    Parent := TabSheet;
+    with OraSynEdit do
+    begin
+      DocumentName := FileName;
+      FileDateTime := GetFileDateTime(FileName);
+      OnChange := SynEditChange;
+      OnReplaceText := SynEditorReplaceText;
+      OnSpecialLineColors := SynEditSpecialLineColors;
+      SearchEngine := SynEditSearch;
+      Highlighter := SynSQLSyn;
+      PopupMenu := EditorPopupMenu;
+      OnPaintTransient := SynEditPaintTransient;
+      BookMarkOptions.BookmarkImages := BookmarkImagesList;
+    end;
+    UpdateGutter(OraSynEdit);
+    OptionsContainer.AssignTo(OraSynEdit);
 
-  SynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
-  with SynEdit.ObjectCompletionProposal do
-  begin
-    Editor := SynEdit;
-    ShortCut := TextToShortCut('Ctrl+O');
-    Options := Options + [scoUseInsertList, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
-    InsertList.Assign(SynSQLSyn.TableNames);
-    ItemList.Assign(FObjectNames);
-  end;
+    OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
+    with OraSynEdit.ObjectCompletionProposal do
+    begin
+      Editor := OraSynEdit;
+      ShortCut := TextToShortCut('Ctrl+O');
+      Options := Options + [scoUseInsertList, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
+      InsertList.Assign(SynSQLSyn.TableNames);
+      ItemList.Assign(FObjectNames);
+    end;
 
-  SynEdit.ObjectFieldCompletionProposal := TSynCompletionProposal.Create(nil);
-  with SynEdit.ObjectFieldCompletionProposal do
-  begin
-    Editor := SynEdit;
-    Options := Options + [scoUseInsertList, scoUseBuiltInTimer, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
-    TimerInterval := 500;
-    TriggerChars := '.';
-    //InsertList.Assign(SynSQLSyn.TableNames);
-    //ItemList.Assign(SynSQLSyn.TableNames);
-    OnExecute := ObjectFieldCompletionProposalExecute
-  end;
+    OraSynEdit.ObjectFieldCompletionProposal := TSynCompletionProposal.Create(nil);
+    with OraSynEdit.ObjectFieldCompletionProposal do
+    begin
+      Editor := OraSynEdit;
+      Options := Options + [scoUseInsertList, scoUseBuiltInTimer, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
+      TimerInterval := 500;
+      TriggerChars := '.';
+      OnExecute := ObjectFieldCompletionProposalExecute
+    end;
 
-  if Filename <> '' then
-    SynEdit.Lines.LoadFromFile(FileName);
-  Application.ProcessMessages;
-  SynEdit.Visible := True;
-  try
-    SynEdit.SetFocus;
-  except
-    { not possible if tab is not visible }
-  end;
+    if Filename <> '' then
+      OraSynEdit.Lines.LoadFromFile(FileName);
 
-  Result := SynEdit;
+    Application.ProcessMessages;
+    Visible := True;
+    try
+      OraSynEdit.SetFocus;
+    except
+      { not possible if tab is not visible }
+    end;
+    Result := OraSynEdit;
+  end;
 end;
 
 procedure TSQLEditorFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
 var
-  i, j: Integer;
+  i: Integer;
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+  LStyles: TCustomStyleServices;
+  PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := DoubleBuffered;
 
   FOutputFrame.UpdateControls;
-  for i := 0 to FSynEditsList.Count - 1 do
-    UpdateGutter(TBCOraSynEdit(FSynEditsList.Items[i]));
+  Application.ProcessMessages;
+  LStyles := StyleServices;
+  PanelColor := clNone;
+  if LStyles.Enabled then
+    PanelColor := LStyles.GetStyleColor(scPanel);
   for i := 0 to PageControl.PageCount - 1 do
-    for j := 0 to PageControl.Pages[i].ComponentCount - 1 do
-      if PageControl.Pages[i].Components[j] is TPanel then
-      begin
-        if TStyleManager.ActiveStyle.Name = 'Windows' then
-          TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 3
-        else
-          TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 1;
-      end;
+  begin
+    SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
+    if Assigned(SQLEditorTabSheetFrame) then
+    begin
+      UpdateGutter(SQLEditorTabSheetFrame.OraSynEdit);
 
+      if TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS then
+        SQLEditorTabSheetFrame.Panel.Padding.Right := 3
+      else
+      if LStyles.Enabled and
+        (GetRValue(PanelColor) + GetGValue(PanelColor) + GetBValue(PanelColor) > 500) then
+        SQLEditorTabSheetFrame.Panel.Padding.Right := 2
+      else
+        SQLEditorTabSheetFrame.Panel.Padding.Right := 1;
+    end;
+  end;
   UpdateSQLSynColors(SynSQLSyn);
 end;
 
@@ -1106,7 +1085,7 @@ end;
 
 procedure TSQLEditorFrame.Close(IncludeCancel: Boolean);
 var
-  i, Rslt: Integer;
+  Rslt: Integer;
   SynEdit: TBCOraSynEdit;
 begin
   Rslt := mrNone;
@@ -1121,9 +1100,6 @@ begin
 
   if Rslt <> mrCancel then
   begin
-    i := FSynEditsList.IndexOf(SynEdit);
-    if i <> -1 then
-      FSynEditsList.Delete(i);
     if PageControl.PageCount > 0 then
       PageControl.ActivePage.Destroy;
     if PageControl.PageCount > 0 then
@@ -1146,7 +1122,6 @@ begin
   end;
   if CloseDocuments and (Result <> mrCancel) then
   begin
-    FSynEditsList.Clear;
     while PageControl.PageCount > 0 do
       PageControl.ActivePage.Destroy;
     FNumberOfNewDocument := 0;
@@ -1189,12 +1164,7 @@ begin
       if PageControl.ActivePage.Tag = 1 then
         PageControl.ActivePage := PageControl.Pages[PageControl.ActivePageIndex + 1]
       else
-      begin
-        SynEdit := ActiveSynEdit;
-        if Assigned(SynEdit) then
-          FSynEditsList.Delete(FSynEditsList.IndexOf(SynEdit));
         PageControl.ActivePage.Destroy;
-      end;
 
     PageControl.ActivePage.Tag := 0; { important! }
 
@@ -1207,15 +1177,15 @@ end;
 
 function TSQLEditorFrame.Save(TabSheet: TTabSheet; ShowDialog: Boolean): string;
 var
-  SynEdit: TBCOraSynEdit;
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
   AFileName: string;
 begin
   Result := '';
   PageControl.ActivePage := TabSheet;
-  SynEdit := GetSynEdit(TabSheet);
-  if Assigned(SynEdit) then
+  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(TabSheet);
+  if Assigned(SQLEditorTabSheetFrame) then
   begin
-    if (SynEdit.DocumentName = '') or ShowDialog then
+    if (SQLEditorTabSheetFrame.OraSynEdit.DocumentName = '') or ShowDialog then
     begin
       AFileName := TabSheet.Caption;
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
@@ -1226,23 +1196,26 @@ begin
       begin
         Application.ProcessMessages; { style fix }
         PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
-        SynEdit.DocumentName := CommonDialogs.Files[0];
+        SQLEditorTabSheetFrame.OraSynEdit.DocumentName := CommonDialogs.Files[0];
         Result := CommonDialogs.Files[0];
       end
       else
       begin
-        if SynEdit.CanFocus then
-          SynEdit.SetFocus;
+        if SQLEditorTabSheetFrame.OraSynEdit.CanFocus then
+          SQLEditorTabSheetFrame.OraSynEdit.SetFocus;
         Exit;
       end;
     end;
-    SynEdit.Lines.SaveToFile(SynEdit.DocumentName);
-    SynEdit.UndoList.Clear;
-    SynEdit.FileDateTime := GetFileDateTime(SynEdit.DocumentName);
-    TabSheet.ImageIndex := GetImageIndex(SynEdit.DocumentName);
-    SynEdit.Modified := False;
-    if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
-      TabSheet.Caption := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
+    with SQLEditorTabSheetFrame.OraSynEdit do
+    begin
+      Lines.SaveToFile(DocumentName);
+      UndoList.Clear;
+      FileDateTime := GetFileDateTime(DocumentName);
+      TabSheet.ImageIndex := GetImageIndex(DocumentName);
+      Modified := False;
+      if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
+        TabSheet.Caption := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
+    end;
   end;
   PageControlRepaint;
 end;
@@ -1757,19 +1730,12 @@ end;
 
 function TSQLEditorFrame.GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
 var
-  Panel: TPanel;
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
 begin
   Result := nil;
-  if TabSheet.ComponentCount <> 0 then
-  begin
-    if TabSheet.Components[0] is TPanel then
-    begin
-      Panel := TPanel(TabSheet.Components[0]);
-      if Panel.ComponentCount <> 0 then
-        if Panel.Components[0] is TBCOraSynEdit then
-          Result := TBCOraSynEdit(Panel.Components[0]);
-    end;
-  end;
+  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(TabSheet);
+  if Assigned(SQLEditorTabSheetFrame) then
+    Result := SQLEditorTabSheetFrame.OraSynEdit;
 end;
 
 function TSQLEditorFrame.ActiveSynEdit: TBCOraSynEdit;
@@ -1850,16 +1816,19 @@ var
   i: Integer;
   SynEdit: TBCOraSynEdit;
 begin
-  Result := False;
+  Result := True;
 
-  SynEdit := ActiveSynEdit;
-  for i := 0 to FSynEditsList.Count - 1 do
-    if Assigned(FSynEditsList.Items[i]) and ( ((TBCOraSynEdit(FSynEditsList.Items[i]) <> SynEdit) and not CheckActive) or CheckActive) then
-      if TBCOraSynEdit(FSynEditsList.Items[i]).Modified then
-      begin
-        Result := True;
-        Exit;
-      end;
+  for i := 0 to PageControl.PageCount - 1 do
+  begin
+    if CheckActive or ((PageControl.ActivePageIndex = i) and not CheckActive) then
+    begin
+      SynEdit := GetSynEdit(PageControl.Pages[i]);
+      if Assigned(SynEdit) then
+        if SynEdit.Modified then
+          Exit;
+    end;
+  end;
+  Result := False;
 end;
 
 function TSQLEditorFrame.GetSelectionFound: Boolean;
@@ -2008,21 +1977,21 @@ end;
 procedure TSQLEditorFrame.CheckFileDateTimes;
 var
   i: Integer;
-  SynEdit: TBCOraSynEdit;
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
   FileDateTime: TDateTime;
 begin
   for i := 0 to PageControl.PageCount - 1 do
   begin
-    SynEdit := GetSynEdit(PageControl.Pages[i]);
-    if Assigned(SynEdit) then
-      if SynEdit.DocumentName <> '' then
+    SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
+    if Assigned(SQLEditorTabSheetFrame) then
+      if SQLEditorTabSheetFrame.OraSynEdit.DocumentName <> '' then
       begin
-        FileDateTime := GetFileDateTime(SynEdit.DocumentName);
-        if (FileDateTime <> 0) and (FileDateTime <> SynEdit.FileDateTime) then
+        FileDateTime := GetFileDateTime(SQLEditorTabSheetFrame.OraSynEdit.DocumentName);
+        if (FileDateTime <> 0) and (FileDateTime <> SQLEditorTabSheetFrame.OraSynEdit.FileDateTime) then
         begin
-          if FileExists(SynEdit.DocumentName) then
+          if FileExists(SQLEditorTabSheetFrame.OraSynEdit.DocumentName) then
           begin
-            if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [SynEdit.DocumentName])) then
+            if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [SQLEditorTabSheetFrame.OraSynEdit.DocumentName])) then
             begin
               Refresh(i);
               PageControlRepaint;
@@ -2030,7 +1999,7 @@ begin
           end
           else
           begin
-            SynEdit.Modified := True; //  PageControl.Pages[i].ImageIndex := CHANGED_IMAGEINDEX
+            SQLEditorTabSheetFrame.OraSynEdit.Modified := True;
             if Pos('~', PageControl.Pages[i].Caption) = 0 then
             begin
               PageControl.Pages[i].Caption := PageControl.Pages[i].Caption + '~';

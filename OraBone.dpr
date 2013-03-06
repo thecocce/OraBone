@@ -93,7 +93,8 @@ uses
   SQLParseTree in '..\..\Common\units\SQLParseTree.pas',
   XMLConstants in '..\..\Common\units\XMLConstants.pas',
   Common in '..\..\Common\units\Common.pas',
-  CommonDialogs in '..\..\Common\units\CommonDialogs.pas';
+  CommonDialogs in '..\..\Common\units\CommonDialogs.pas',
+  SQLEditorTabSheet in 'frames\SQLEditorTabSheet.pas' {SQLEditorTabSheetFrame: TFrame};
 
 {$R *.res}
 

@@ -1,17 +1,19 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 891
+  Height = 458
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 78
-    Width = 451
+    Top = 232
+    Width = 891
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 891
     Height = 21
     Hint = ' '
     Align = alTop
@@ -31,6 +33,7 @@ object SQLEditorFrame: TSQLEditorFrame
     FullRepaint = False
     TabOrder = 0
     Visible = False
+    ExplicitWidth = 451
     object CaseSensitiveLabel: TLabel
       Left = 368
       Top = 0
@@ -469,18 +472,20 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 34
+    Width = 891
+    Height = 188
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
     Padding.Top = 2
     TabOrder = 1
+    ExplicitWidth = 451
+    ExplicitHeight = 34
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 32
+      Width = 891
+      Height = 186
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -495,12 +500,14 @@ object SQLEditorFrame: TSQLEditorFrame
       OnChange = PageControlChange
       TabDragDrop = True
       HoldShiftToDragDrop = False
+      ExplicitWidth = 451
+      ExplicitHeight = 32
     end
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 81
-    Width = 451
+    Top = 235
+    Width = 891
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -508,11 +515,13 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 2
     Visible = False
+    ExplicitTop = 81
+    ExplicitWidth = 451
   end
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 891
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -521,6 +530,7 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentDoubleBuffered = False
     PopupMenu = ToolbarPopupMenu
     TabOrder = 3
+    ExplicitWidth = 451
     object ExecuteToolbarPanel: TPanel
       Left = 0
       Top = 0
@@ -553,15 +563,18 @@ object SQLEditorFrame: TSQLEditorFrame
         Align = alLeft
         Caption = 'ExecuteToolBar'
         DoubleBuffered = False
+        Images = MainForm.MenuImageList
         ParentDoubleBuffered = False
         TabOrder = 0
         object ExecuteToolButton: TToolButton
           Left = 0
           Top = 0
+          Action = MainForm.ExecuteStatementAction
         end
         object ExecuteScriptToolButton: TToolButton
           Left = 23
           Top = 0
+          Action = MainForm.ExecuteScriptAction
         end
       end
     end
@@ -1582,7 +1595,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 18
     Top = 162
     Bitmap = {
-      494C010106003800440410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800480410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1858,7 +1871,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800040410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800080410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2379,7 +2392,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102009C04280514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102009C042C0514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000A4676900A4676900A467
@@ -2599,7 +2612,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C01010200BC042C0518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010200BC04300518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000A467
