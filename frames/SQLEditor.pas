@@ -1177,15 +1177,15 @@ end;
 
 function TSQLEditorFrame.Save(TabSheet: TTabSheet; ShowDialog: Boolean): string;
 var
-  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+  OraSynEdit: TBCOraSynEdit;
   AFileName: string;
 begin
   Result := '';
   PageControl.ActivePage := TabSheet;
-  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(TabSheet);
-  if Assigned(SQLEditorTabSheetFrame) then
+  OraSynEdit := GetSynEdit(TabSheet);
+  if Assigned(OraSynEdit) then
   begin
-    if (SQLEditorTabSheetFrame.OraSynEdit.DocumentName = '') or ShowDialog then
+    if (OraSynEdit.DocumentName = '') or ShowDialog then
     begin
       AFileName := TabSheet.Caption;
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
@@ -1196,17 +1196,17 @@ begin
       begin
         Application.ProcessMessages; { style fix }
         PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
-        SQLEditorTabSheetFrame.OraSynEdit.DocumentName := CommonDialogs.Files[0];
+        OraSynEdit.DocumentName := CommonDialogs.Files[0];
         Result := CommonDialogs.Files[0];
       end
       else
       begin
-        if SQLEditorTabSheetFrame.OraSynEdit.CanFocus then
-          SQLEditorTabSheetFrame.OraSynEdit.SetFocus;
+        if OraSynEdit.CanFocus then
+          OraSynEdit.SetFocus;
         Exit;
       end;
     end;
-    with SQLEditorTabSheetFrame.OraSynEdit do
+    with OraSynEdit do
     begin
       Lines.SaveToFile(DocumentName);
       UndoList.Clear;
@@ -1977,21 +1977,21 @@ end;
 procedure TSQLEditorFrame.CheckFileDateTimes;
 var
   i: Integer;
-  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+  OraSynEdit: TBCOraSynEdit;
   FileDateTime: TDateTime;
 begin
   for i := 0 to PageControl.PageCount - 1 do
   begin
-    SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
-    if Assigned(SQLEditorTabSheetFrame) then
-      if SQLEditorTabSheetFrame.OraSynEdit.DocumentName <> '' then
+    OraSynEdit := GetSynEdit(PageControl.Pages[i]);
+    if Assigned(OraSynEdit) then
+      if OraSynEdit.DocumentName <> '' then
       begin
-        FileDateTime := GetFileDateTime(SQLEditorTabSheetFrame.OraSynEdit.DocumentName);
-        if (FileDateTime <> 0) and (FileDateTime <> SQLEditorTabSheetFrame.OraSynEdit.FileDateTime) then
+        FileDateTime := GetFileDateTime(OraSynEdit.DocumentName);
+        if (FileDateTime <> 0) and (FileDateTime <> OraSynEdit.FileDateTime) then
         begin
-          if FileExists(SQLEditorTabSheetFrame.OraSynEdit.DocumentName) then
+          if FileExists(OraSynEdit.DocumentName) then
           begin
-            if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [SQLEditorTabSheetFrame.OraSynEdit.DocumentName])) then
+            if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [OraSynEdit.DocumentName])) then
             begin
               Refresh(i);
               PageControlRepaint;
@@ -1999,7 +1999,7 @@ begin
           end
           else
           begin
-            SQLEditorTabSheetFrame.OraSynEdit.Modified := True;
+            OraSynEdit.Modified := True;
             if Pos('~', PageControl.Pages[i].Caption) = 0 then
             begin
               PageControl.Pages[i].Caption := PageControl.Pages[i].Caption + '~';
