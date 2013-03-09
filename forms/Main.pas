@@ -12,7 +12,7 @@ uses
 const
   WM_AFTER_SHOW = WM_USER + 345; // custom message
   VIEW_MENU_ITEMINDEX = 4;
-  STYLE_MENU_ITEMINDEX = 10;
+  VIEW_STYLE_MENU_ITEMINDEX = 10;
 
 type
   TMainForm = class(TForm)
@@ -224,6 +224,7 @@ type
     FConnecting: Boolean;
     FOnProgress: Boolean;
     FOnStartUp: Boolean;
+    function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
     function GetActiveSQLEditor: TSQLEditorFrame;
@@ -328,6 +329,12 @@ begin
         SQLEditorFrame.UpdateGuttersAndControls(PageControl.DoubleBuffered);
     end
   end;
+end;
+
+function TMainForm.GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
+begin
+  Result := ActionMainMenuBar.ActionClient.Items[MenuItemIndex];
+  Result := Result.Items[SubMenuItemIndex];
 end;
 
 procedure TMainForm.HelpCheckForUpdateMenuActionExecute(Sender: TObject);
@@ -617,7 +624,7 @@ end;
 
 procedure TMainForm.SelectStyleActionExecute(Sender: TObject);
 var
-  i: Integer;
+  i, j: Integer;
   Action: TAction;
   ActionClientItem: TActionClientItem;
   StyleInfo: TStyleInfo;
@@ -642,10 +649,10 @@ begin
     Free;
   end;
 
-  ActionClientItem := ActionMainMenuBar.ActionClient.Items[VIEW_MENU_ITEMINDEX];
-  ActionClientItem := ActionClientItem.Items[STYLE_MENU_ITEMINDEX];
+  ActionClientItem := GetActionClientItem(VIEW_MENU_ITEMINDEX, VIEW_STYLE_MENU_ITEMINDEX);
   for i := 0 to ActionClientItem.Items.Count - 1 do
-    TAction(ActionClientItem.Items[i].Action).Checked := False;
+    for j := 0 to ActionClientItem.Items[i].Items.Count - 1 do
+      TAction(ActionClientItem.Items[i].Items[j].Action).Checked := False;
   Action.Checked := True;
   UpdateGuttersAndControls;
   RecreateStatusBar;
@@ -653,10 +660,34 @@ end;
 
 procedure TMainForm.CreateStyleMenu;
 var
-  FilePath, FileName: string;
+  FilePath, FileName, StyleName, ActionCaption: string;
   StyleInfo: TStyleInfo;
   ActionClientItem: TActionClientItem;
   Action: TAction;
+
+  procedure SetMenuItem;
+  var
+    i: Integer;
+  begin
+    ActionClientItem := GetActionClientItem(VIEW_MENU_ITEMINDEX, VIEW_STYLE_MENU_ITEMINDEX);
+    { alphabet submenu }
+    for i := 0 to ActionClientItem.Items.Count - 1 do
+    begin
+      ActionCaption := StringReplace(ActionClientItem.Items[i].Caption, '&', '', [rfReplaceAll]);
+      if ActionCaption = StyleName[1] then
+      begin
+        ActionClientItem := ActionClientItem.Items[i];
+        Break;
+      end;
+    end;
+    ActionCaption := StringReplace(ActionClientItem.Caption, '&', '', [rfReplaceAll]);
+    if ActionCaption <> StyleName[1] then
+    begin
+      ActionClientItem := ActionClientItem.Items.Add;
+      ActionClientItem.Caption := StyleName[1];
+    end;
+    ActionClientItem := ActionClientItem.Items.Add;
+  end;
 begin
   FilePath := IncludeTrailingPathDelimiter(Format('%s%s', [ExtractFilePath(ParamStr(0)), 'Styles']));
   if not DirectoryExists(FilePath) then
@@ -666,35 +697,26 @@ begin
   begin
     if TStyleManager.IsValidStyle(FileName, StyleInfo) then
     begin
-      // TODO: Think better solution to find the Style menuitem.
-      // This is poor solution. If the menu changes, then you should also remember to fix the item numbers.
-      ActionClientItem := ActionMainMenuBar.ActionClient.Items[VIEW_MENU_ITEMINDEX];
-      ActionClientItem := ActionClientItem.Items[STYLE_MENU_ITEMINDEX];
-      // ---
-      ActionClientItem := ActionClientItem.Items.Add;
-
+      StyleName := ExtractFileName(FileName);
+      { Style menu item }
+      SetMenuItem;
       Action := TAction.Create(ActionManager);
       Action.Name := StringReplace(StyleInfo.Name, ' ', '', [rfReplaceAll]) + 'StyleSelectAction';
-      //Action.GroupIndex := 1;
       Action.Caption := FileName;
       Action.OnExecute := SelectStyleActionExecute;
       Action.Checked :=  TStyleManager.ActiveStyle.Name = StyleInfo.Name;
-      //Action.GroupIndex := 1;
       ActionClientItem.Action := Action;
       ActionClientItem.Caption := StyleInfo.Name;
     end;
   end;
   { Windows }
-  ActionClientItem := ActionMainMenuBar.ActionClient.Items[VIEW_MENU_ITEMINDEX];
-  ActionClientItem := ActionClientItem.Items[STYLE_MENU_ITEMINDEX];
-  ActionClientItem := ActionClientItem.Items.Add;
+  StyleName := 'Windows.vsf';
+  SetMenuItem;
   Action := TAction.Create(ActionManager);
   Action.Name := 'WindowsStyleSelectAction';
-  //Action.GroupIndex := 1;
   Action.Caption := STYLENAME_WINDOWS;
   Action.OnExecute := SelectStyleActionExecute;
   Action.Checked :=  TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS;
-  //Action.GroupIndex := 1;
   ActionClientItem.Action := Action;
 end;
 
@@ -1765,16 +1787,16 @@ begin
     PageControlChange(Sender);
     ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
     if ViewWordWrapAction.Checked then
-      ViewWordWrapAction.Execute;
+      ViewWordWrapActionExecute(nil);
     ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True);
     if not ViewLineNumbersAction.Checked then
-      ViewLineNumbersAction.Execute;
+      ViewLineNumbersActionExecute(nil);
     ViewSpecialCharsAction.Checked := ReadBool('Options', 'EnableSpecialChars', False);
     if ViewSpecialCharsAction.Checked then
-      ViewSpecialCharsAction.Execute;
+      ViewSpecialCharsActionExecute(nil);
     ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False);
     if ViewSelectionModeAction.Checked then
-      ViewSelectionModeAction.Execute;
+      ViewSelectionModeActionExecute(nil);
     ActionToolBarStrings := TStringList.Create;
     { Toolbar action visibility }
     ReadSectionValues('ActionToolBar', ActionToolBarStrings);

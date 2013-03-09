@@ -12,79 +12,70 @@ uses
 
 type
   TOutputFrame = class(TFrame)
+    ClearDBMSOutputAction: TAction;
+    ImageList: TImageList;
     OutputActionList: TActionList;
     OutputCloseAction: TAction;
-    ImageList: TImageList;
+    OutputCloseAllAction: TAction;
+    OutputCloseAllOtherPagesAction: TAction;
     PageControl: TBCPageControl;
     PopupMenu: TBCPopupMenu;
     SynSQLSyn: TSynSQLSyn;
-    ClearDBMSOutputAction: TAction;
-    OutputCloseAllAction: TAction;
-    OutputCloseAllOtherPagesAction: TAction;
-    procedure OutputCloseActionExecute(Sender: TObject);
-    procedure VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
-    procedure VirtualDrawTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
-    procedure VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree;
-      HintCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);
-    //procedure OutputTreeViewCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
-    //  State: TCustomDrawState; var DefaultDraw: Boolean);
-    procedure TabsheetDblClick(Sender: TObject);
-    procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
-    procedure DataQueryAfterScroll(DataSet: TDataSet);
-    procedure PageControlChange(Sender: TObject);
     procedure ClearDBMSOutputActionExecute(Sender: TObject);
+    procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
+    procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure DataQueryAfterScroll(DataSet: TDataSet);
+    procedure ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure OutputCloseActionExecute(Sender: TObject);
     procedure OutputCloseAllActionExecute(Sender: TObject);
     procedure OutputCloseAllOtherPagesActionExecute(Sender: TObject);
-    procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure PageControlChange(Sender: TObject);
+    procedure TabsheetDblClick(Sender: TObject);
+    procedure VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
+    procedure VirtualDrawTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
+    procedure VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree; HintCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);
   private
     { Private declarations }
-    FTabsheetDblClick: TNotifyEvent;
     FProcessingTabSheet: Boolean;
-    function GetIsEmpty: Boolean;
+    FTabsheetDblClick: TNotifyEvent;
     function GetCount: Integer;
+    function GetGrid(TabCaption: string): TBCDBGrid;
     function GetIsAnyOutput: Boolean;
-//    procedure DrawImage(Sender: TCustomTreeView; NodeRect: TRect; ImageIndex: Integer);
- //   function TreeView: TJvTreeView;
-    function VirtualDrawTree: TVirtualDrawTree;
-    procedure SetProcessingTabSheet(Value: Boolean);
+    function GetIsEmpty: Boolean;
+    function GetListBox(TabCaption: string): TListBox;
+    function GetPanel(TabCaption: string): TPanel;
+    function GetSynEdit(TabCaption: string): TSynEdit;
+    function GetVirtualDrawTree: TVirtualDrawTree;
     function TabFound(TabCaption: string): Boolean;
+    procedure SetProcessingTabSheet(Value: Boolean);
     procedure SetRows(TabCaption: string);
     procedure SetTime(TabCaption: string; Time: string);
-    function GetListBox(TabCaption: string): TListBox;
-    function GetGrid(TabCaption: string): TBCDBGrid;
-    function GetSynEdit(TabCaption: string): TSynEdit;
-    function GetPanel(TabCaption: string): TPanel;
     procedure UpdatePopupMenu;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
-   // procedure AddTreeView(TabCaption: string);
+    function GetActiveGrid: TBCDBGrid;
+    function SelectedLine(var Filename: string; var Ln: LongWord; var Ch: LongWord): Boolean;
+    procedure AddDBMSOutput(TabCaption: string; Text: string);
+    procedure AddErrors(TabCaption: string; Text: string);
     procedure AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
     procedure AddPlan(TabCaption: string; OraQuery: TOraQuery);
-    procedure ClearStrings(TabCaption: string);
     procedure AddStrings(TabCaption: string; Text: string);
-    procedure AddErrors(TabCaption: string; Text: string);
-    procedure AddDBMSOutput(TabCaption: string; Text: string);
     procedure AddTreeView(TabCaption: string; AutoExpand: Boolean = False);
     procedure AddTreeViewLine(Text: string); overload;
-  //  procedure AddTreeViewLine(Filename: string; Ln, Ch: Integer; Text: string); overload;
     procedure AddTreeViewLine(var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString = ''); overload;
-    procedure CloseTabSheet;
-    procedure CloseAllTabSheets;
-    procedure CloseAllOtherTabSheets;
     procedure Clear;
-    function SelectedLine(var Filename: string; var Ln: LongWord; var Ch: LongWord): Boolean;
-    property IsEmpty: Boolean read GetIsEmpty;
-    property Count: Integer read GetCount;
-    property IsAnyOutput: Boolean read GetIsAnyOutput;
-    property OnTabsheetDblClick: TNotifyEvent read FTabsheetDblClick write FTabsheetDblClick;
-    property ProcessingTabSheet: Boolean read FProcessingTabSheet write SetProcessingTabSheet;
-    function GetActiveGrid: TBCDBGrid;
+    procedure ClearStrings(TabCaption: string);
+    procedure CloseAllOtherTabSheets;
+    procedure CloseAllTabSheets;
+    procedure CloseTabSheet;
     procedure CopyToClipboard;
     procedure UpdateControls;
+    property Count: Integer read GetCount;
+    property IsAnyOutput: Boolean read GetIsAnyOutput;
+    property IsEmpty: Boolean read GetIsEmpty;
+    property OnTabsheetDblClick: TNotifyEvent read FTabsheetDblClick write FTabsheetDblClick;
+    property ProcessingTabSheet: Boolean read FProcessingTabSheet write SetProcessingTabSheet;
   end;
 
 implementation
@@ -99,9 +90,7 @@ begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
   PopupMenu.Images := MainForm.MenuImageList;
-//  PopupMenu.PopupDisabledImages := MainForm.DisabledMenuImageList;
   PageControl.MultiLine := OptionsContainer.MultiLine;
-  //ExportMenuItem.Action := MainForm.DatabaseExportTableDataAction;
 end;
 
 procedure TOutputFrame.OutputCloseActionExecute(Sender: TObject);
@@ -109,76 +98,11 @@ begin
   CloseTabSheet;
 end;
 
-(*procedure TOutputFrame.DrawImage(Sender: TCustomTreeView; NodeRect: TRect; ImageIndex: Integer);
-var
-  cy: Integer;
-begin
-  cy := NodeRect.Top + (NodeRect.Bottom - NodeRect.Top) div 2;
-  //center image in NodeRect.
-  ImageList.Draw(Sender.Canvas, NodeRect.Left, cy - ImageList.Height div 2, ImageIndex, True);
-end; *)
-
 procedure TOutputFrame.TabsheetDblClick(Sender: TObject);
 begin
   if Assigned(FTabsheetDblClick) then
     FTabsheetDblClick(Sender);
 end;
-
-(*procedure TOutputFrame.OutputTreeViewCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
-  State: TCustomDrawState; var DefaultDraw: Boolean);
-begin
-  DefaultDraw := True;
-
-  if Node.Selected and not Sender.Focused then
-  begin
-    Sender.Canvas.Brush.Color := clBtnFace;
-    Sender.Canvas.Font.Color := clBlack;
-  end;
-
-  with Sender do
-  begin
-    if Node.HasChildren then
-    begin
-      //draw the selection rect.
-     { if cdsSelected in State then
-      begin
-        NodeRect := Node.DisplayRect(True);
-        Canvas.FillRect(NodeRect);
-      end; }
-      //NodeRect := Node.DisplayRect(False);
-
-
-      //NodeRect.Left := NodeRect.Left + (Node.Level * TTreeView(Sender).Indent);
-      //rc := Node.DisplayRect(False);
-
-      //if Node.Expanded then
-      //begin
-        //DrawImage(Sender, NodeRect, 1);
-        //Node.ImageIndex := 1;
-        //Node.SelectedIndex := 1;
-      //end
-      //else
-      //begin
-        //DrawImage(Sender, NodeRect, 0);
-        //Node.ImageIndex := 0;
-        //Node.SelectedIndex := 0;
-      //end;
-      //Canvas.FillRect(NodeRect);
-      Canvas.Font.Style := [fsBold];
-      //Canvas.TextOut(Node.DisplayRect(True).Left, Node.DisplayRect(True).Top, Node.Text);
-    end
-    else
-    begin
-      //DefaultDraw := False;
-      //Canvas.TextOut(Node.DisplayRect(True).Left, Node.DisplayRect(True).Top, Node.Text);
-      // etsitty sana ensimmäisen ): jälkeen
-      //Canvas.TextOut(rc.Left + Canvas.TextWidth(Copy(Node.Text, 1, Pos('(', Node.Text))), rc.Top, EntreValores(Node.Text, '(', ')'));
-
-
-    end;
-    //Canvas.Refresh;
-  end;
-end; *)
 
 procedure TOutputFrame.PageControlChange(Sender: TObject);
 begin
@@ -726,15 +650,6 @@ begin
     //ParentDoubleBuffered := False;
   end;
 
- { ListBox := TListBox.Create(ListPanel);
-  with ListBox do
-  begin
-    Parent := ListPanel;
-    Align := alClient;
-    Items.Clear;
-    Items.Text := Text;
-    MultiSelect := True;
-  end; }
   { create a SynEdit }
   SynEdit := TSynEdit.Create(ListPanel);
   with SynEdit do
@@ -926,7 +841,7 @@ begin
   UpdatePopupMenu;
 end;
 
-function TOutputFrame.VirtualDrawTree: TVirtualDrawTree;
+function TOutputFrame.GetVirtualDrawTree: TVirtualDrawTree;
 var
   i: Integer;
 begin
@@ -1002,7 +917,7 @@ var
   OutputTreeView: TVirtualDrawTree;
   S: WideString;
 begin
-  OutputTreeView := VirtualDrawTree;
+  OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
 
@@ -1011,7 +926,7 @@ begin
     Root := OutputTreeView.GetFirst;
     while Assigned(Root) do
     begin
-      NodeData := VirtualDrawTree.GetNodeData(Root);
+      NodeData := OutputTreeView.GetNodeData(Root);
       if String(NodeData.Filename) = FileName then
         Break;
       Root := OutputTreeView.GetNext(Root);
@@ -1021,13 +936,13 @@ begin
   if not Assigned(Root) then
   begin
     Root := OutputTreeView.AddChild(nil);
-    NodeData := VirtualDrawTree.GetNodeData(Root);
+    NodeData := OutputTreeView.GetNodeData(Root);
     NodeData.Level := 0;
     NodeData.Filename := Filename;
   end;
 
   Node := OutputTreeView.AddChild(Root);
-  NodeData := VirtualDrawTree.GetNodeData(Node);
+  NodeData := OutputTreeView.GetNodeData(Node);
   NodeData.Level := 1;
   NodeData.Ln := Ln;
   NodeData.Ch := Ch;
@@ -1062,7 +977,7 @@ procedure TOutputFrame.Clear;
 var
   OutputTreeView: TVirtualDrawTree;
 begin
-  OutputTreeView := VirtualDrawTree;
+  OutputTreeView := GetVirtualDrawTree;
   if Assigned(OutputTreeView) then
   begin
     OutputTreeView.Clear;
@@ -1085,7 +1000,7 @@ var
   OutputTreeView: TVirtualDrawTree;
 begin
   Result := False;
-  OutputTreeView := VirtualDrawTree;
+  OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
 
@@ -1114,7 +1029,7 @@ var
   OutputTreeView: TVirtualDrawTree;
 begin
   Result := False;
-  OutputTreeView := VirtualDrawTree;
+  OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
   Result := OutputTreeView.GetFirst = nil;
@@ -1125,7 +1040,7 @@ var
   OutputTreeView: TVirtualDrawTree;
 begin
   Result := 0;
-  OutputTreeView := VirtualDrawTree;
+  OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
   Result := OutputTreeView.Tag;
