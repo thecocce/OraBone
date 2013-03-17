@@ -120,6 +120,8 @@ type
     FSchemaBrowserAlign: string;
     FTabWidth: Integer;
     FTimeFormat: string;
+    FIgnoreCase: Boolean;
+    FIgnoreBlanks: Boolean;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -131,6 +133,8 @@ type
     property FontSize: Integer read FFontSize write FFontSize;
     property GutterLineNumbers: Boolean read FGutterVisible write FGutterLineNumbers;
     property GutterVisible: Boolean read FGutterVisible write FGutterVisible;
+    property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
+    property IgnoreBlanks: Boolean read FIgnoreBlanks write FIgnoreBlanks;
     property MultiLine: Boolean read FMultiLine write FMultiLine;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
@@ -197,6 +201,8 @@ begin
   FTimeFormat := 'HH24:MI:SS';
   FSchemaBrowserAlign := 'Bottom';
   FObjectFrameAlign := 'Bottom';
+  FIgnoreCase := True;
+  FIgnoreBlanks := True;
 end;
 
 destructor TOptionsContainer.Destroy;
@@ -319,6 +325,9 @@ begin
   // Button Panel Align
   SchemaBrowserComboBox.Text := FOptionsContainer.SchemaBrowserAlign;
   ObjectFrameComboBox.Text := FOptionsContainer.ObjectFrameAlign;
+  { Compare }
+  //FOptionsCompareFrame.IgnoreCaseCheckBox.Checked := FOptionsContainer.IgnoreCase;
+  //FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked := FOptionsContainer.IgnoreBlanks;
 end;
 
 procedure TOptionsDialog.OKButtonActionExecute(Sender: TObject);
@@ -380,6 +389,9 @@ begin
   // Button Panel Align
   FOptionsContainer.SchemaBrowserAlign := SchemaBrowserComboBox.Text;
   FOptionsContainer.ObjectFrameAlign := ObjectFrameComboBox.Text;
+  { Compare }
+  //FOptionsContainer.IgnoreCase := FOptionsCompareFrame.IgnoreCaseCheckBox.Checked;
+  //FOptionsContainer.IgnoreBlanks := FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked;
 end;
 
 procedure TOptionsDialog.FormCreate(Sender: TObject);

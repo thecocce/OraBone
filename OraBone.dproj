@@ -347,6 +347,12 @@
 				<FormType>dfm</FormType>
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
+			<DCCReference Include="..\..\Common\units\Encoding.pas"/>
+			<DCCReference Include="frames\OutputGridTabSheet.pas">
+				<Form>OutputGridFrame</Form>
+				<FormType>dfm</FormType>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

@@ -94,7 +94,9 @@ uses
   XMLConstants in '..\..\Common\units\XMLConstants.pas',
   Common in '..\..\Common\units\Common.pas',
   CommonDialogs in '..\..\Common\units\CommonDialogs.pas',
-  SQLEditorTabSheet in 'frames\SQLEditorTabSheet.pas' {SQLEditorTabSheetFrame: TFrame};
+  SQLEditorTabSheet in 'frames\SQLEditorTabSheet.pas' {SQLEditorTabSheetFrame: TFrame},
+  Encoding in '..\..\Common\units\Encoding.pas',
+  OutputGridTabSheet in 'frames\OutputGridTabSheet.pas' {OutputGridFrame: TFrame};
 
 {$R *.res}
 

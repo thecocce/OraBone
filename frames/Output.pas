@@ -43,7 +43,6 @@ type
     function GetIsAnyOutput: Boolean;
     function GetIsEmpty: Boolean;
     function GetListBox(TabCaption: string): TListBox;
-    function GetPanel(TabCaption: string): TPanel;
     function GetSynEdit(TabCaption: string): TSynEdit;
     function GetVirtualDrawTree: TVirtualDrawTree;
     function TabFound(TabCaption: string): Boolean;
@@ -83,7 +82,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd;
+  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputGridTabSheet;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -164,19 +163,15 @@ begin
       Break;
     end;
   if Assigned(TabSheet) then
-  for i := 0 to TabSheet.ComponentCount - 1 do
-    if TabSheet.Components[i].Tag = 76 then
-    begin
-      TLabel(TabSheet.Components[i]).Caption := 'Time elapsed: ' + Time;
-      Break;
-    end
+    if TabSheet.ComponentCount <> 0 then
+      if TabSheet.Components[0] is TOutputGridFrame then
+        TOutputGridFrame(TabSheet.Components[0]).StatsTimeLabel.Caption := Format('Time elapsed: %s', [Time]);
 end;
 
 procedure TOutputFrame.SetRows(TabCaption: string);
 var
   i: Integer;
   TabSheet: TTabSheet;
-  DataSet: TDataSet;
 begin
   TabSheet := nil;
 
@@ -188,82 +183,33 @@ begin
     end;
 
   if Assigned(TabSheet) then
-  begin
-    DataSet := nil;
-
-    for i := 0 to TabSheet.ComponentCount - 1 do
-      if TabSheet.Components[i] is TBCDBGrid then
-       begin
-         DataSet := TBCDBGrid(TabSheet.Components[i]).DataSource.DataSet;
-         Break;
-       end;
-
-    if Assigned(DataSet) then
-      for i := 0 to TabSheet.ComponentCount - 1 do
-        if TabSheet.Components[i].Tag = 77 then
-        begin
-          TLabel(TabSheet.Components[i]).Caption := 'Row ' + IntToStr(DataSet.RecNo) + ' of ' + IntToStr(DataSet.RecordCount);
-          if TOraQuery(DataSet).Fetched then
-            TLabel(TabSheet.Components[i]).Caption := TLabel(TabSheet.Components[i]).Caption + ' total'
-          else
-            TLabel(TabSheet.Components[i]).Caption := TLabel(TabSheet.Components[i]).Caption + ' fetched';
-          Break;
-        end;
-  end;
-end;
-
-function TOutputFrame.GetPanel(TabCaption: string): TPanel;
-var
-  i: Integer;
-  TabSheet: TTabSheet;
-begin
-  Result := nil;
-  TabSheet := nil;
-
-  for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
-    begin
-      TabSheet := PageControl.Pages[i];
-      Break;
-    end;
-
-  if Assigned(TabSheet) then
-  begin
-    for i := 0 to TabSheet.ComponentCount - 1 do
-      if TabSheet.Components[i].Tag = 75 then
+    if TabSheet.ComponentCount <> 0 then
+      if TabSheet.Components[0] is TOutputGridFrame then
+      with TOutputGridFrame(TabSheet.Components[0]) do
       begin
-        Result := TPanel(TabSheet.Components[i]);
-        Break;
+        StatsRowsLabel.Caption := 'Row ' + IntToStr(Grid.DataSource.DataSet.RecNo) + ' of ' + IntToStr(Grid.DataSource.DataSet.RecordCount);
+        if TOraQuery(Grid.DataSource.DataSet).Fetched then
+          StatsRowsLabel.Caption := StatsRowsLabel.Caption + ' total'
+        else
+          StatsRowsLabel.Caption := StatsRowsLabel.Caption + ' fetched';
       end;
-  end;
 end;
-
 
 function TOutputFrame.GetActiveGrid: TBCDBGrid;
-var
-  i, j: Integer;
-  TabSheet: TTabSheet;
 begin
   Result := nil;
-  TabSheet := PageControl.ActivePage;
-  if Assigned(TabSheet) then
-  for i := 0 to TabSheet.ComponentCount - 1 do
-    if TabSheet.Components[i] is TPanel then
-    for j := 0 to TPanel(TabSheet.Components[i]).ComponentCount - 1 do
-      if  TPanel(TabSheet.Components[i]).Components[j] is TBCDBGrid then
-      begin
-        Result := TBCDBGrid(TPanel(TabSheet.Components[i]).Components[j]);
-        Break;
-      end;
+
+  if Assigned(PageControl.ActivePage) then
+    if PageControl.ActivePage.ComponentCount <> 0 then
+      if PageControl.ActivePage.Components[0] is TOutputGridFrame then
+        Result := TOutputGridFrame(PageControl.ActivePage.Components[0]).Grid;
 end;
 
 procedure TOutputFrame.AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
 var
   TabSheet: TTabSheet;
-  StatsPanel, GridPanel: TPanel;
-  StatsTime, StatsRows: TLabel;
   Grid: TBCDBGrid;
-  GridDataSource: TOraDataSource;
+  OutputGridFrame: TOutputGridFrame;
 begin
   if TabFound(TabCaption) then
   begin
@@ -282,73 +228,17 @@ begin
   TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  StatsPanel := TPanel.Create(TabSheet); //PageControl);
-  with StatsPanel do
+  OutputGridFrame := TOutputGridFrame.Create(TabSheet);
+  with OutputGridFrame do
   begin
     Parent := TabSheet;
-    Align := alBottom;
-    Height := 15;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 2;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    //DoubleBuffered := False;
-    ParentColor := True;
-    Tag := 75;
-  end;
-  StatsTime := TLabel.Create(TabSheet);
-  with StatsTime do
-  begin
-    Parent := StatsPanel;
-    Align := alLeft;
-    Tag := 76;
+    Align := alClient;
+    OutputGridFrame.Grid.Canvas.Font := Font;
+    OnMouseDown := DataDBGridMouseDown;
+    GridDataSource.DataSet := OraQuery;
   end;
   SetTime(TabCaption, Time);
-  StatsRows := TLabel.Create(TabSheet);
-  with StatsRows do
-  begin
-    Parent := StatsPanel;
-    Align := alRight;
-    Tag := 77;
-  end;
-  GridPanel := TPanel.Create(TabSheet);
-  with GridPanel do
-  begin
-    Parent := TabSheet;
-    Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 0;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    ParentColor := True;
-    Tag := 78;
-  end;
-  GridDataSource := TOraDataSource.Create(GridPanel);
-  GridDataSource.DataSet := OraQuery;
-
-  Grid := TBCDBGrid.Create(GridPanel);
-  with Grid do
-  begin
-    Parent := GridPanel;
-    Align := alClient;
-    ReadOnly := False;
-    DataSource := GridDataSource;
-    Tag := 75;
-    Canvas.Font := Font;
-    AllowedSelections := [gstRecordBookmarks, gstAll];
-    DrawGraphicData := True;
-    DrawMemoText := True;
-    Options := Options + [dgMultiSelect];
-    OptionsEh := OptionsEh + [dghRowHighlight, dghHotTrack, dghMultiSortMarking];
-    OptionsEh := OptionsEh - [dghExtendVertLines];
-    IndicatorOptions := [gioShowRowselCheckboxesEh];
-    OnMouseDown := DataDBGridMouseDown;
-  end;
-  SetGridColumnWidths(Grid, True);
+  SetGridColumnWidths(OutputGridFrame.Grid, True);
   OraQuery.AfterScroll := DataQueryAfterScroll;
   DataQueryAfterScroll(OraQuery);
   TabSheet.TabVisible := True;
@@ -365,26 +255,27 @@ end;
 
 procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
 var
-  StatisticsPanel: TPanel;
   RecCount: Integer;
 begin
   SetRows(PageControl.ActivePage.Caption);
 
-  StatisticsPanel := GetPanel(PageControl.ActivePage.Caption);
-  if Assigned(StatisticsPanel) then
-  begin
-    RecCount := DataSet.RecordCount;
-    if RecCount = 0 then
-      StatisticsPanel.Caption := 'No rows'
-    else
-    begin
-      StatisticsPanel.Caption := 'Row ' + IntToStr(DataSet.RecNo) + ' of ' + IntToStr(RecCount);
-      if TOraQuery(DataSet).Fetched then
-        StatisticsPanel.Caption := StatisticsPanel.Caption + ' total'
-      else
-        StatisticsPanel.Caption := StatisticsPanel.Caption + ' fetched';
-    end;
-  end;
+  if Assigned(PageControl.ActivePage) then
+    if PageControl.ActivePage.ComponentCount <> 0 then
+      if PageControl.ActivePage.Components[0] is TOutputGridFrame then
+      with TOutputGridFrame(PageControl.ActivePage.Components[0]) do
+      begin
+        RecCount := DataSet.RecordCount;
+        if RecCount = 0 then
+          StatisticsPanel.Caption := 'No rows'
+        else
+        begin
+          StatisticsPanel.Caption := 'Row ' + IntToStr(DataSet.RecNo) + ' of ' + IntToStr(RecCount);
+          if TOraQuery(DataSet).Fetched then
+            StatisticsPanel.Caption := StatisticsPanel.Caption + ' total'
+          else
+            StatisticsPanel.Caption := StatisticsPanel.Caption + ' fetched';
+        end;
+      end;
 end;
 
 procedure TOutputFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
@@ -539,8 +430,7 @@ end;
 
 function TOutputFrame.GetGrid(TabCaption: string): TBCDBGrid;
 var
-  i, j: Integer;
-  Panel: TPanel;
+  i: Integer;
   TabSheet: TTabSheet;
 begin
   Result := nil;
@@ -555,17 +445,8 @@ begin
 
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-    begin
-      for i := 0 to TabSheet.ComponentCount - 1 do
-      if TabSheet.Components[i].Tag = 78 then
-      begin
-        Panel := TPanel(TabSheet.Components[i]);
-        for j := 0 to Panel.ComponentCount - 1 do
-          if Panel.Components[j] is TBCDBGrid then
-            Result := TBCDBGrid(Panel.Components[j]);
-        Break;
-      end;
-    end;
+      if TabSheet.Components[0] is TOutputGridFrame then
+        Result := TOutputGridFrame(TabSheet.Components[0]).Grid;
 end;
 
 function TOutputFrame.GetSynEdit(TabCaption: string): TSynEdit;

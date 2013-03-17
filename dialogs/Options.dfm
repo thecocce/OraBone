@@ -93,6 +93,7 @@ object OptionsDialog: TOptionsDialog
       TabOrder = 0
       TabDragDrop = False
       HoldShiftToDragDrop = False
+      ShowCloseButton = False
       object EditorTabSheet: TTabSheet
         Caption = 'Editor'
         object EditorFontGroupBox: TGroupBox
