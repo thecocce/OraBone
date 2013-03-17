@@ -1,4 +1,4 @@
-object OutputGridFrame: TOutputGridFrame
+object OutputDataGridFrame: TOutputDataGridFrame
   Left = 0
   Top = 0
   Width = 320

@@ -82,7 +82,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputGridTabSheet;
+  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -164,8 +164,8 @@ begin
     end;
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-      if TabSheet.Components[0] is TOutputGridFrame then
-        TOutputGridFrame(TabSheet.Components[0]).StatsTimeLabel.Caption := Format('Time elapsed: %s', [Time]);
+      if TabSheet.Components[0] is TOutputDataGridFrame then
+        TOutputDataGridFrame(TabSheet.Components[0]).StatsTimeLabel.Caption := Format('Time elapsed: %s', [Time]);
 end;
 
 procedure TOutputFrame.SetRows(TabCaption: string);
@@ -184,8 +184,8 @@ begin
 
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-      if TabSheet.Components[0] is TOutputGridFrame then
-      with TOutputGridFrame(TabSheet.Components[0]) do
+      if TabSheet.Components[0] is TOutputDataGridFrame then
+      with TOutputDataGridFrame(TabSheet.Components[0]) do
       begin
         StatsRowsLabel.Caption := 'Row ' + IntToStr(Grid.DataSource.DataSet.RecNo) + ' of ' + IntToStr(Grid.DataSource.DataSet.RecordCount);
         if TOraQuery(Grid.DataSource.DataSet).Fetched then
@@ -201,15 +201,15 @@ begin
 
   if Assigned(PageControl.ActivePage) then
     if PageControl.ActivePage.ComponentCount <> 0 then
-      if PageControl.ActivePage.Components[0] is TOutputGridFrame then
-        Result := TOutputGridFrame(PageControl.ActivePage.Components[0]).Grid;
+      if PageControl.ActivePage.Components[0] is TOutputDataGridFrame then
+        Result := TOutputDataGridFrame(PageControl.ActivePage.Components[0]).Grid;
 end;
 
 procedure TOutputFrame.AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
 var
   TabSheet: TTabSheet;
   Grid: TBCDBGrid;
-  OutputGridFrame: TOutputGridFrame;
+  OutputGridFrame: TOutputDataGridFrame;
 begin
   if TabFound(TabCaption) then
   begin
@@ -228,7 +228,7 @@ begin
   TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  OutputGridFrame := TOutputGridFrame.Create(TabSheet);
+  OutputGridFrame := TOutputDataGridFrame.Create(TabSheet);
   with OutputGridFrame do
   begin
     Parent := TabSheet;
@@ -261,8 +261,8 @@ begin
 
   if Assigned(PageControl.ActivePage) then
     if PageControl.ActivePage.ComponentCount <> 0 then
-      if PageControl.ActivePage.Components[0] is TOutputGridFrame then
-      with TOutputGridFrame(PageControl.ActivePage.Components[0]) do
+      if PageControl.ActivePage.Components[0] is TOutputDataGridFrame then
+      with TOutputDataGridFrame(PageControl.ActivePage.Components[0]) do
       begin
         RecCount := DataSet.RecordCount;
         if RecCount = 0 then
@@ -445,8 +445,8 @@ begin
 
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-      if TabSheet.Components[0] is TOutputGridFrame then
-        Result := TOutputGridFrame(TabSheet.Components[0]).Grid;
+      if TabSheet.Components[0] is TOutputDataGridFrame then
+        Result := TOutputDataGridFrame(TabSheet.Components[0]).Grid;
 end;
 
 function TOutputFrame.GetSynEdit(TabCaption: string): TSynEdit;

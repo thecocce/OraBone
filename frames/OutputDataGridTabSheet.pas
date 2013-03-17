@@ -1,4 +1,4 @@
-unit OutputGridTabSheet;
+unit OutputDataGridTabSheet;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   Data.DB, DBAccess, Ora, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  TOutputGridFrame = class(TFrame)
+  TOutputDataGridFrame = class(TFrame)
     StatisticsPanel: TPanel;
     GridPanel: TPanel;
     StatsTimeLabel: TLabel;

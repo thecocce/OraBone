@@ -96,7 +96,7 @@ uses
   CommonDialogs in '..\..\Common\units\CommonDialogs.pas',
   SQLEditorTabSheet in 'frames\SQLEditorTabSheet.pas' {SQLEditorTabSheetFrame: TFrame},
   Encoding in '..\..\Common\units\Encoding.pas',
-  OutputGridTabSheet in 'frames\OutputGridTabSheet.pas' {OutputGridFrame: TFrame};
+  OutputDataGridTabSheet in 'frames\OutputDataGridTabSheet.pas' {OutputDataGridFrame: TFrame};
 
 {$R *.res}
 

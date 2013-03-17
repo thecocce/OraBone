@@ -348,8 +348,8 @@
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
 			<DCCReference Include="..\..\Common\units\Encoding.pas"/>
-			<DCCReference Include="frames\OutputGridTabSheet.pas">
-				<Form>OutputGridFrame</Form>
+			<DCCReference Include="frames\OutputDataGridTabSheet.pas">
+				<Form>OutputDataGridFrame</Form>
 				<FormType>dfm</FormType>
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
