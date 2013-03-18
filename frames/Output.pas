@@ -39,7 +39,7 @@ type
     FProcessingTabSheet: Boolean;
     FTabsheetDblClick: TNotifyEvent;
     function GetCount: Integer;
-    function GetGrid(TabCaption: string): TBCDBGrid;
+    function GetDataGrid(TabCaption: string): TBCDBGrid;
     function GetIsAnyOutput: Boolean;
     function GetIsEmpty: Boolean;
     function GetListBox(TabCaption: string): TListBox;
@@ -57,8 +57,8 @@ type
     function SelectedLine(var Filename: string; var Ln: LongWord; var Ch: LongWord): Boolean;
     procedure AddDBMSOutput(TabCaption: string; Text: string);
     procedure AddErrors(TabCaption: string; Text: string);
-    procedure AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
-    procedure AddPlan(TabCaption: string; OraQuery: TOraQuery);
+    procedure AddDataGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
+    procedure AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
     procedure AddStrings(TabCaption: string; Text: string);
     procedure AddTreeView(TabCaption: string; AutoExpand: Boolean = False);
     procedure AddTreeViewLine(Text: string); overload;
@@ -205,7 +205,7 @@ begin
         Result := TOutputDataGridFrame(PageControl.ActivePage.Components[0]).Grid;
 end;
 
-procedure TOutputFrame.AddGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
+procedure TOutputFrame.AddDataGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
 var
   TabSheet: TTabSheet;
   Grid: TBCDBGrid;
@@ -215,7 +215,7 @@ begin
   begin
     SetTime(TabCaption, Time);
     SetRows(TabCaption);
-    Grid := GetGrid(TabCaption);
+    Grid := GetDataGrid(TabCaption);
     Lib.SetGridColumnWidths(Grid, True);
     UpdatePopupMenu;
     Exit;
@@ -284,7 +284,7 @@ begin
   GridDrawStringDataCell(Sender, Rect, Field);
 end;
 
-procedure TOutputFrame.AddPlan(TabCaption: string; OraQuery: TOraQuery);
+procedure TOutputFrame.AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
 var
   TabSheet: TTabSheet;
   GridPanel: TPanel;
@@ -428,7 +428,7 @@ begin
     end;
 end;
 
-function TOutputFrame.GetGrid(TabCaption: string): TBCDBGrid;
+function TOutputFrame.GetDataGrid(TabCaption: string): TBCDBGrid;
 var
   i: Integer;
   TabSheet: TTabSheet;
@@ -995,7 +995,7 @@ procedure TOutputFrame.CopyToClipboard;
 var
  Grid: TBCDBGrid;
 begin
-  Grid := GetGrid(PageControl.ActivePage.Caption);
+  Grid := GetDataGrid(PageControl.ActivePage.Caption);
   if Assigned(Grid) then
     CopyDataFromDBGridToClipboard(Grid);
 end;

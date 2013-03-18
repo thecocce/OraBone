@@ -2255,7 +2255,7 @@ begin
   SynEdit.PlanQuery.UnPrepare;
   SynEdit.PlanQuery.Prepare;
   SynEdit.PlanQuery.Open;
-  FOutputFrame.AddPlan('Plan: ' + GetActivePageCaption, SynEdit.PlanQuery);
+  FOutputFrame.AddPlanGrid('Plan: ' + GetActivePageCaption, SynEdit.PlanQuery);
   OutputPanel.Visible := True;
 end;
 
@@ -2459,7 +2459,7 @@ begin
   if QuerySuccess then
   begin
     T2 := Now;
-    FOutputFrame.AddGrid('Data: ' + GetActivePageCaption, SynEdit.OraQuery, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', T2 - T1));
+    FOutputFrame.AddDataGrid('Data: ' + GetActivePageCaption, SynEdit.OraQuery, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', T2 - T1));
     WriteHistory(SynEdit.OraQuery.Session, SynEdit.Text);
   end
   else
