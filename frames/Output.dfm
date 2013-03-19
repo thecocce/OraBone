@@ -50,7 +50,7 @@ object OutputFrame: TOutputFrame
     Left = 192
     Top = 48
     Bitmap = {
-      494C010107005002C40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107005002C80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -325,29 +325,5 @@ object OutputFrame: TOutputFrame
     Images = ImageList
     Left = 264
     Top = 124
-  end
-  object SynSQLSyn: TSynSQLSyn
-    CommentAttri.Foreground = clGreen
-    ConditionalCommentAttri.Foreground = clGreen
-    DataTypeAttri.Foreground = clRed
-    DataTypeAttri.Style = []
-    DefaultPackageAttri.Style = [fsBold, fsItalic]
-    DelimitedIdentifierAttri.Foreground = clBlue
-    ExceptionAttri.Foreground = clRed
-    ExceptionAttri.Style = []
-    FunctionAttri.Foreground = clBlue
-    FunctionAttri.Style = []
-    KeyAttri.Foreground = clBlue
-    KeyAttri.Style = []
-    PLSQLAttri.Foreground = clBlue
-    PLSQLAttri.Style = []
-    SQLPlusAttri.Foreground = clBlue
-    SQLPlusAttri.Style = []
-    StringAttri.Foreground = clPurple
-    TableNameAttri.Foreground = clOlive
-    VariableAttri.Foreground = clNavy
-    SQLDialect = sqlOracle
-    Left = 364
-    Top = 72
   end
 end

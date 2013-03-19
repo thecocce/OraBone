@@ -6,9 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, JvExControls,
   JvLabel, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.StdCtrls, JvSpeedButton, JvExComCtrls,
-  JvComCtrls, Vcl.Menus, Ora, Vcl.Grids, SynEditHighlighter, SynHighlighterSQL, SynEdit,
-  BCPageControl, BCPopupMenu, VirtualTrees, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCDBGrid, DBGridEh, Data.DB;
+  JvComCtrls, Vcl.Menus, Ora, Vcl.Grids, BCSynEdit, BCPageControl, BCPopupMenu, VirtualTrees,
+  PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCDBGrid, DBGridEh, Data.DB;
 
 type
   TOutputFrame = class(TFrame)
@@ -20,7 +19,6 @@ type
     OutputCloseAllOtherPagesAction: TAction;
     PageControl: TBCPageControl;
     PopupMenu: TBCPopupMenu;
-    SynSQLSyn: TSynSQLSyn;
     procedure ClearDBMSOutputActionExecute(Sender: TObject);
     procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -43,7 +41,7 @@ type
     function GetIsAnyOutput: Boolean;
     function GetIsEmpty: Boolean;
     function GetListBox(TabCaption: string): TListBox;
-    function GetSynEdit(TabCaption: string): TSynEdit;
+    function GetSynEdit(TabCaption: string): TBCSynEdit;
     function GetVirtualDrawTree: TVirtualDrawTree;
     function TabFound(TabCaption: string): Boolean;
     procedure SetProcessingTabSheet(Value: Boolean);
@@ -82,7 +80,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet;
+  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet,
+  OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -287,9 +286,7 @@ end;
 procedure TOutputFrame.AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
 var
   TabSheet: TTabSheet;
-  GridPanel: TPanel;
-  Grid: TBCDBGrid;
-  GridDataSource: TOraDataSource;
+  OutputPlanGridFrame: TOutputPlanGridFrame;
 begin
   if TabFound(TabCaption) then
   begin
@@ -300,40 +297,16 @@ begin
   TabSheet := TTabSheet.Create(PageControl);
   TabSheet.TabVisible := False;
   TabSheet.PageControl := PageControl;
-  TabSheet.ImageIndex := IMAGE_INDEX_PLAN; // data
+  TabSheet.ImageIndex := IMAGE_INDEX_PLAN;
   TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  GridPanel := TPanel.Create(PageControl);
-  with GridPanel do
+  OutputPlanGridFrame := TOutputPlanGridFrame.Create(TabSheet);
+  with OutputPlanGridFrame do
   begin
     Parent := TabSheet;
     Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 0;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    ParentColor := True;
-  end;
-  GridDataSource := TOraDataSource.Create(GridPanel);
-  GridDataSource.DataSet := OraQuery;
-
-  Grid := TBCDBGrid.Create(GridPanel);
-  with Grid do
-  begin
-    Parent := GridPanel;
-    Align := alClient;
-    ReadOnly := True;
-    DataSource := GridDataSource;
-    Tag := 75;
-    AllowedSelections := [gstRecordBookmarks, gstAll];
-    DrawGraphicData := True;
-    DrawMemoText := True;
-    Options := Options + [dgMultiSelect];
-    OptionsEh := OptionsEh + [dghRowHighlight, dghHotTrack];
-    OptionsEh := OptionsEh - [dghExtendVertLines];
+    GridDataSource.DataSet := OraQuery;
   end;
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
@@ -353,8 +326,8 @@ end;
 procedure TOutputFrame.AddStrings(TabCaption: string; Text: string);
 var
   TabSheet: TTabSheet;
-  ListPanel: TPanel;
   ListBox: TListBox;
+  OutputListBoxFrame: TOutputListBoxFrame;
 begin
   if TabFound(TabCaption) then
   begin
@@ -369,30 +342,13 @@ begin
   TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  ListPanel := TPanel.Create(TabSheet);
-  with ListPanel do
+  OutputListBoxFrame := TOutputListBoxFrame.Create(TabSheet);
+  with OutputListBoxFrame do
   begin
     Parent := TabSheet;
     Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 0;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    //DoubleBuffered := False;
-    ParentColor := True;
-    //ParentDoubleBuffered := False;
-  end;
-
-  ListBox := TListBox.Create(ListPanel);
-  with ListBox do
-  begin
-    Parent := ListPanel;
-    Align := alClient;
-    Items.Clear;
-    Items.Text := Text;
-    MultiSelect := True;
+    ListBox.Items.Clear;
+    ListBox.Items.Text := Text;
     OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
@@ -402,7 +358,6 @@ end;
 function TOutputFrame.GetListBox(TabCaption: string): TListBox;
 var
   i: Integer;
-  Panel: TPanel;
   TabSheet: TTabSheet;
 begin
   Result := nil;
@@ -417,15 +372,8 @@ begin
 
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-    begin
-      if TabSheet.Components[0] is TPanel then
-      begin
-        Panel := TPanel(TabSheet.Components[0]);
-        if Panel.ComponentCount <> 0 then
-          if Panel.Components[0] is TListBox then
-            Result := TListBox(Panel.Components[0]);
-      end;
-    end;
+      if TabSheet.Components[0] is TOutputListBoxFrame then
+        Result := TOutputListBoxFrame(TabSheet.Components[0]).ListBox;
 end;
 
 function TOutputFrame.GetDataGrid(TabCaption: string): TBCDBGrid;
@@ -449,10 +397,9 @@ begin
         Result := TOutputDataGridFrame(TabSheet.Components[0]).Grid;
 end;
 
-function TOutputFrame.GetSynEdit(TabCaption: string): TSynEdit;
+function TOutputFrame.GetSynEdit(TabCaption: string): TBCSynEdit;
 var
   i: Integer;
-  Panel: TPanel;
   TabSheet: TTabSheet;
 begin
   Result := nil;
@@ -467,15 +414,8 @@ begin
 
   if Assigned(TabSheet) then
     if TabSheet.ComponentCount <> 0 then
-    begin
-      if TabSheet.Components[0] is TPanel then
-      begin
-        Panel := TPanel(TabSheet.Components[0]);
-        if Panel.ComponentCount <> 0 then
-          if Panel.Components[0] is TSynEdit then
-            Result := TSynEdit(Panel.Components[0]);
-      end;
-    end;
+      if TabSheet.Components[0] is TOutputSynEditFrame then
+        Result := TOutputSynEditFrame(TabSheet.Components[0]).SynEdit;
 end;
 
 procedure TOutputFrame.ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -494,15 +434,12 @@ end;
 procedure TOutputFrame.AddDBMSOutput(TabCaption: string; Text: string);
 var
   TabSheet: TTabSheet;
-  ListPanel: TPanel;
-  //ListBox: TListBox;
-  SynEdit: TSynEdit;
+  SynEdit: TBCSynEdit;
+  OutputSynEditFrame: TOutputSynEditFrame;
 begin
   if TabFound(TabCaption) then
   begin
-   // ListBox := GetListBox(TabCaption);
     SynEdit := GetSynEdit(TabCaption);
-   // ListBox.Items.Add(Text);
     SynEdit.Text := SynEdit.Text + Text + CHR_ENTER;
     UpdatePopupMenu;
     Exit;
@@ -515,52 +452,17 @@ begin
   TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  ListPanel := TPanel.Create(TabSheet);
-  with ListPanel do
+  { create a SynEdit }
+  OutputSynEditFrame := TOutputSynEditFrame.Create(TabSheet);
+  with OutputSynEditFrame do
   begin
     Parent := TabSheet;
     Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 0;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    //DoubleBuffered := False;
-    ParentColor := True;
-    //ParentDoubleBuffered := False;
+    UpdateGutter(SynEdit);
+    UpdateSQLSynColors(SynSQLSyn);
+    Application.ProcessMessages;
+    SynEdit.Text := Text + CHR_ENTER;
   end;
-
-  { create a SynEdit }
-  SynEdit := TSynEdit.Create(ListPanel);
-  with SynEdit do
-  begin
-    Parent := ListPanel;
-    Align := alClient;
-    Font.Charset := DEFAULT_CHARSET;
-    Font.Color := clWindowText;
-    Font.Height := -13;
-    Font.Name := 'Courier New';
-    Font.Style := [];
-    Gutter.AutoSize := True;
-    Gutter.Font.Charset := DEFAULT_CHARSET;
-    Gutter.Font.Color := clWindowText;
-    Gutter.Font.Height := -11;
-    Gutter.Font.Name := 'Courier New';
-    Gutter.Font.Style := [];
-    Gutter.ShowLineNumbers := True;
-    Gutter.Gradient := False;
-    WantTabs := True;
-    Options := [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo,
-      eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces,
-      eoTrimTrailingSpaces];
-    ActiveLineColor := clSkyBlue;
-    Highlighter := SynSQLSyn;
-  end;
-  UpdateGutter(SynEdit);
-  UpdateSQLSynColors(SynSQLSyn);
-  Application.ProcessMessages;
-  SynEdit.Text := Text + CHR_ENTER;
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
 end;
@@ -569,7 +471,7 @@ end;
 procedure TOutputFrame.AddErrors(TabCaption: string; Text: string);
 var
   TabSheet: TTabSheet;
-  ListPanel: TPanel;
+  OutputListBoxFrame: TOutputListBoxFrame;
   ListBox: TListBox;
 begin
   if TabFound(TabCaption) then
@@ -585,33 +487,15 @@ begin
   TabSheet.PageControl := PageControl;
   TabSheet.ImageIndex := IMAGE_INDEX_ERRORS; // errors
   TabSheet.Caption := TabCaption;
-
   PageControl.ActivePage := TabSheet;
 
-  ListPanel := TPanel.Create(TabSheet);
-  with ListPanel do
+  OutputListBoxFrame := TOutputListBoxFrame.Create(TabSheet);
+  with OutputListBoxFrame do
   begin
     Parent := TabSheet;
     Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 0;
-    Padding.Left := 0;
-    Padding.Right := 2;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    //DoubleBuffered := False;
-    ParentColor := True;
-    //ParentDoubleBuffered := False;
-  end;
-
-  ListBox := TListBox.Create(ListPanel);
-  with ListBox do
-  begin
-    Parent := ListPanel;
-    Align := alClient;
-    Items.Clear;
-    Items.Text := Text;
-    MultiSelect := True;
+    ListBox.Items.Clear;
+    ListBox.Items.Text := Text;
     OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
@@ -638,7 +522,6 @@ var
   TabSheet: TTabSheet;
   TreeViewPanel: TPanel;
   OutputTreeView: TVirtualDrawTree;
-  //OutputTreeView: TJvTreeView;
 begin
   { check if there already is a tab with same name }
   if TabFound(TabCaption) then
@@ -663,10 +546,6 @@ begin
     BevelOuter := bvNone;
     Padding.Top := 1;
     Padding.Left := 1;
-    if TStyleManager.ActiveStyle.Name = 'Windows' then
-      Padding.Right := 3
-    else
-      Padding.Right := 1;
     Padding.Bottom := 2;
     ParentBackground := True;
     //DoubleBuffered := False;
@@ -868,7 +747,7 @@ end;
 
 procedure TOutputFrame.ClearDBMSOutputActionExecute(Sender: TObject);
 var
-  SynEdit: TSynEdit;
+  SynEdit: TBCSynEdit;
 begin
   SynEdit := GetSynEdit(PageControl.ActivePage.Caption);
   SynEdit.Text := ''
