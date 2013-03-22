@@ -87,6 +87,7 @@ object ExportTableDataDialog: TExportTableDataDialog
       TabOrder = 0
       TabDragDrop = False
       HoldShiftToDragDrop = False
+      ShowCloseButton = False
       object Options1TabSheet: TTabSheet
         Caption = 'Options'
         ExplicitLeft = 0

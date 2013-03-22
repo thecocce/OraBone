@@ -103,7 +103,6 @@ procedure SaveSQL(Handle: HWND; SynEdit: TSynEdit);
 procedure CopyAllToClipboard(SynEdit: TSynEdit);
 function TrimToMaxLength(Text: WideString; MaxLength: Integer): WideString;
 procedure AddAllFields(DataSet: TDataset);
-//procedure FocusGridCell(const DBGrid: TDBGrid; const Column: integer);
 procedure MoveGridRowDown(OraQuery: TOraQuery);
 procedure MoveGridRowUp(OraQuery: TOraQuery);
 procedure MoveStringGridRow(Grid: TBCStringGrid; Direction: Integer);
@@ -116,6 +115,7 @@ function GetObjectFilterKeyValue(ObjectType: string; Name: string; SchemaName: s
 function GetFilterObjectsFromIni(KeyValue: string): string;
 function GetFilterObjectType(Index: Integer): string;
 function GetFilterObjectIndex(ObjectType: string): Integer;
+function GetSQLFormat(OraSession: TOraSession; DateFormat: string): string;
 
 implementation
 
@@ -1202,6 +1202,22 @@ begin
   else
   if ObjectType = OBJECT_TYPE_USER then
     Result := 11
+end;
+
+function GetSQLFormat(OraSession: TOraSession; DateFormat: string): string;
+var
+  OraQuery: TOraQuery;
+begin
+  OraQuery := TOraQuery.Create(nil);
+  with OraQuery do
+  begin
+    Session := OraSession;
+    SQL.Add(Format(DM.StringHolder.StringsByName['DateFromDualSQL'].Text, [DateFormat]));
+    Open;
+    Result := FieldByName('TEXT').AsString;
+    Close;
+  end;
+  FreeAndNil(OraQuery);
 end;
 
 end.

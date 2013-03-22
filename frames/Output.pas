@@ -81,7 +81,7 @@ implementation
 
 uses
   Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet,
-  OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet;
+  OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -520,8 +520,7 @@ end;
 procedure TOutputFrame.AddTreeView(TabCaption: string; AutoExpand: Boolean); //(TabCaption: string);
 var
   TabSheet: TTabSheet;
-  TreeViewPanel: TPanel;
-  OutputTreeView: TVirtualDrawTree;
+  OutputTreeViewFrame: TOutputTreeViewFrame;
 begin
   { check if there already is a tab with same name }
   if TabFound(TabCaption) then
@@ -535,83 +534,38 @@ begin
   TabSheet.TabVisible := False;
   TabSheet.PageControl := PageControl;
   TabSheet.ImageIndex := IMAGE_INDEX_FIND_IN_FILES; { find in files }
-  TabSheet.Caption := TabCaption; //Format('Search: ''%s''', [TabCaption]);
+  TabSheet.Caption := TabCaption;
   PageControl.ActivePage := TabSheet;
 
-  TreeViewPanel := TPanel.Create(PageControl);
-  with TreeViewPanel do
+  OutputTreeViewFrame := TOutputTreeViewFrame.Create(TabSheet);
+  with OutputTreeViewFrame do
   begin
     Parent := TabSheet;
     Align := alClient;
-    BevelOuter := bvNone;
-    Padding.Top := 1;
-    Padding.Left := 1;
-    Padding.Bottom := 2;
-    ParentBackground := True;
-    //DoubleBuffered := False;
-    ParentColor := True;
-    //ParentDoubleBuffered := False;
-  end;
-  OutputTreeView := TVirtualDrawTree.Create(TabSheet);
-  with OutputTreeView do
-  begin
-    Parent := TreeViewPanel;
-    Align := alClient;
-    DragOperations := [];
-    Header.Options := [];
-    ParentCtl3D := False;
-    Indent := 16;
-    TreeOptions.AutoOptions := [toAutoDropExpand, toAutoScroll, toAutoChangeScale, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes];
-    TreeOptions.MiscOptions := [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning];
-    TreeOptions.PaintOptions := [toShowButtons, toShowRoot, toUseBlendedSelection, toThemeAware];
-    if AutoExpand then
-      TreeOptions.AutoOptions := TreeOptions.AutoOptions + [toAutoExpand];
-    //TreeOptions.SelectionOptions := [toFullRowSelect];
-    OnDrawNode := VirtualDrawTreeDrawNode;
-    OnFreeNode := VirtualDrawTreeFreeNode;
-    OnGetNodeWidth := VirtualDrawTreeGetNodeWidth;
-    OnDblClick := TabsheetDblClick;
-    Colors.GridLineColor := clScrollBar;
-    NodeDataSize := SizeOf(TOutputRec);
+
+    with VirtualDrawTree do
+    begin
+      if AutoExpand then
+        TreeOptions.AutoOptions := TreeOptions.AutoOptions + [toAutoExpand];
+      OnDrawNode := VirtualDrawTreeDrawNode;
+      OnFreeNode := VirtualDrawTreeFreeNode;
+      OnGetNodeWidth := VirtualDrawTreeGetNodeWidth;
+      OnDblClick := TabsheetDblClick;
+      NodeDataSize := SizeOf(TOutputRec);
+    end;
   end;
   Self.Clear;
-
-  (*OutputTreeView := TJvTreeView.Create(TabSheet);
-  with OutputTreeView do
-  begin
-    Parent := TreeViewPanel;
-    Align := alClient;
-    DoubleBuffered := True;
-    HideSelection := False;
-    //Images := ImageList;
-    Indent := 19;
-    ParentDoubleBuffered := False;
-    RowSelect := True;
-    ShowLines := False;
-    ReadOnly := True;
-    //ShowRoot := False;
-    TabOrder := 0;
-    ToolTips := False;
-    OnCustomDrawItem := OutputTreeViewCustomDrawItem;
-    OnDblClick := TabsheetDblClick;
-    LineColor := clScrollBar;
-  end;
-  Self.Clear;  *)
   TabSheet.TabVisible := True;
   UpdatePopupMenu;
 end;
 
 function TOutputFrame.GetVirtualDrawTree: TVirtualDrawTree;
-var
-  i: Integer;
 begin
   Result := nil;
-  for i := 0 to PageControl.ActivePage.ComponentCount - 1 do
-    if  PageControl.ActivePage.Components[i] is TVirtualDrawTree then
-    begin
-      Result := TVirtualDrawTree(PageControl.ActivePage.Components[i]);
-      Break;
-    end;
+  if Assigned(PageControl.ActivePage) then
+    if PageControl.ActivePage.ComponentCount <> 0 then
+      if PageControl.ActivePage.Components[0] is TOutputTreeViewFrame then
+        Result := TOutputTreeViewFrame(PageControl.ActivePage.Components[0]).VirtualDrawTree;
 end;
 
 procedure TOutputFrame.AddTreeViewLine(Text: string);
@@ -620,55 +574,6 @@ var
 begin
   AddTreeViewLine(Root, '', 0, 0, Text);
 end;
-
-(*procedure TOutputFrame.AddTreeViewLine(Filename: string; Ln, Ch: Integer; Text: string);
-var
-  OutputObject: TOutputObject;
-  Root, Child: TTreeNode;
-  i: Integer;
-  OutputTreeView: TJvTreeView;
-begin
-  OutputTreeView := TreeView;
-  if not Assigned(OutputTreeView) then
-    Exit;
-
-  OutputObject := nil;
-  if Filename <> '' then
-  begin
-    OutputObject := TOutputObject.Create;
-    OutputObject.Filename := Filename;
-    OutputObject.Ln := Ln;
-    OutputObject.Ch := Ch;
-    OutputObject.Text := Text;
-  end;
-
-  Root := nil;
-
-  for i := 0 to OutputTreeView.Items.Count - 1 do
-    if (OutputTreeView.Items[i].Text = Filename) and (OutputTreeView.Items[i].Level = 0) then
-    begin
-      Root := OutputTreeView.Items[i];
-      Break;
-    end;
-
-  if not Assigned(Root) then
-  begin
-    Root := OutputTreeView.Items.Add(nil, Filename);
-    //Root.ImageIndex := 0;
-    //Root.SelectedIndex := 0;
-    //Root.HasChildren := True;
-  end;
-
-  if Assigned(OutputObject) then
-  begin
-    Child := OutputTreeView.Items.AddChildObject(Root, Format('%s (%d, %d): %s', [ExtractFilename(Filename), Ln, Ch, Text]), OutputObject);
-    Child.ImageIndex := -1;
-    Child.SelectedIndex := -1;
-    OutputTreeView.Tag := OutputTreeView.Tag + 1;
-  end;
-  Application.ProcessMessages;
-  //Show;
-end; *)
 
 procedure TOutputFrame.AddTreeViewLine(var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString);
 var
@@ -766,14 +671,6 @@ begin
 
   Node := OutputTreeView.GetFirstSelected;
   NodeData := OutputTreeView.GetNodeData(Node);
-  {NodeData := nil;
-  while Assigned(Node) do
-  begin
-    NodeData := OutputTreeView.GetNodeData(Node);
-    if OutputTreeView.Selected[Node] then
-      Break;
-    Node := OutputTreeView.GetNext(Node);
-  end;}
 
   Result := Assigned(NodeData) and (NodeData.Text <> '');
   if Result then
@@ -886,7 +783,6 @@ var
   S: UnicodeString;
   R: TRect;
   Format: Cardinal;
-  //StartPos: LongWord;
   LStyles: TCustomStyleServices;
   LDetails: TThemedElementDetails;
   LColor: TColor;
@@ -933,14 +829,6 @@ begin
       Canvas.Font.Style := Canvas.Font.Style + [fsBold]
     else
       Canvas.Font.Style := Canvas.Font.Style - [fsBold];
-
-    {Canvas.Font.Color := clWindowText;
-
-    if (Column = FocusedColumn) and (not Sender.Focused) then
-    begin
-      Canvas.Brush.Color := clBtnFace;
-      Canvas.Font.Color := clBlack;
-    end;  }
 
     SetBKMode(Canvas.Handle, TRANSPARENT);
 
@@ -1036,19 +924,48 @@ end;
 
 procedure TOutputFrame.UpdateControls;
 var
-  i, j: Integer;
+  i, Right: Integer;
+  LStyles: TCustomStyleServices;
+  PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
+  //PageControl.MultiLine := OptionsContainer.OutputMultiLine;
+  //PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
 
+  LStyles := StyleServices;
+  PanelColor := clNone;
+  if LStyles.Enabled then
+    PanelColor := LStyles.GetStyleColor(scPanel);
+  if TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS then
+    Right := 3
+  else
+  if LStyles.Enabled and (GetRValue(PanelColor) + GetGValue(PanelColor) + GetBValue(PanelColor) > 500) then
+    Right := 2
+  else
+    Right := 1;
   for i := 0 to PageControl.PageCount - 1 do
-    for j := 0 to PageControl.Pages[i].ComponentCount - 1 do
-      if PageControl.Pages[i].Components[j] is TPanel then
+  begin
+    if PageControl.Pages[i].ComponentCount > 0 then
+    begin
+      if PageControl.Pages[i].Components[0] is TOutputDataGridFrame then
       begin
-        if TStyleManager.ActiveStyle.Name = 'Windows' then
-          TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 3
-        else
-          TPanel(PageControl.Pages[i].Components[j]).Padding.Right := 1;
-      end;
+        TOutputDataGridFrame(PageControl.Pages[i].Components[0]).GridPanel.Padding.Right := Right;
+        TOutputDataGridFrame(PageControl.Pages[i].Components[0]).StatisticsPanel.Padding.Right := Right;;
+      end
+      else
+      if PageControl.Pages[i].Components[0] is TOutputPlanGridFrame then
+        TOutputPlanGridFrame(PageControl.Pages[i].Components[0]).GridPanel.Padding.Right := Right
+      else
+      if PageControl.Pages[i].Components[0] is TOutputListBoxFrame then
+        TOutputListBoxFrame(PageControl.Pages[i].Components[0]).Panel.Padding.Right := Right
+      else
+      if PageControl.Pages[i].Components[0] is TOutputSynEditFrame then
+        TOutputSynEditFrame(PageControl.Pages[i].Components[0]).Panel.Padding.Right := Right
+      else
+      if PageControl.Pages[i].Components[0] is TOutputTreeViewFrame then
+        TOutputTreeViewFrame(PageControl.Pages[i].Components[0]).Panel.Padding.Right := Right
+    end;
+  end;
 end;
 
 end.

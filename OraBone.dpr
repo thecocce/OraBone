@@ -100,7 +100,20 @@ uses
   OutputPlanGridTabSheet in 'frames\OutputPlanGridTabSheet.pas' {OutputPlanGridFrame: TFrame},
   OutputListBoxTabSheet in 'frames\OutputListBoxTabSheet.pas' {OutputListBoxFrame: TFrame},
   OutputSynEditTabSheet in 'frames\OutputSynEditTabSheet.pas' {OutputSynEditFrame: TFrame},
-  OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {Frame1: TFrame};
+  OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {OutputTreeViewFrame: TFrame},
+  OptionsEditorFont in 'frames\OptionsEditorFont.pas' {EditorFontFrame: TFrame},
+  OptionsEditorGutter in 'frames\OptionsEditorGutter.pas' {EditorGutterFrame: TFrame},
+  OptionsEditorOptions in 'frames\OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
+  OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
+  OptionsMainMenu in 'frames\OptionsMainMenu.pas' {MainMenuFrame: TFrame},
+  OptionsOutputTabs in 'frames\OptionsOutputTabs.pas' {OutputTabsFrame: TFrame},
+  OptionsDBMSOutput in 'frames\OptionsDBMSOutput.pas' {DBMSOutputFrame: TFrame},
+  OptionsSchemaBrowser in 'frames\OptionsSchemaBrowser.pas' {OptionsSchemaBrowserFrame: TFrame},
+  OptionsObjectFrame in 'frames\OptionsObjectFrame.pas' {ObjectFrameFrame: TFrame},
+  OptionsTimeFormat in 'frames\OptionsTimeFormat.pas' {TimeFormatFrame: TFrame},
+  OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
+  OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
+  OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame};
 
 {$R *.res}
 

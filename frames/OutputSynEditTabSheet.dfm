@@ -15,10 +15,6 @@ object OutputSynEditFrame: TOutputSynEditFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = 150
-    ExplicitTop = 94
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object SynEdit: TBCSynEdit
       Left = 0
       Top = 0
@@ -41,10 +37,6 @@ object OutputSynEditFrame: TOutputSynEditFrame
       Gutter.ShowLineNumbers = True
       Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
-      ExplicitLeft = 34
-      ExplicitTop = 36
-      ExplicitWidth = 200
-      ExplicitHeight = 150
     end
   end
   object SynSQLSyn: TSynSQLSyn

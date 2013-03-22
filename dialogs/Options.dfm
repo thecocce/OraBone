@@ -1,10 +1,9 @@
 object OptionsDialog: TOptionsDialog
   Left = 580
   Top = 154
-  BorderStyle = bsDialog
   Caption = 'Options'
-  ClientHeight = 358
-  ClientWidth = 470
+  ClientHeight = 455
+  ClientWidth = 512
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +18,8 @@ object OptionsDialog: TOptionsDialog
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 321
-    Width = 470
+    Top = 418
+    Width = 512
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
@@ -30,7 +29,7 @@ object OptionsDialog: TOptionsDialog
     Padding.Bottom = 6
     TabOrder = 0
     object OKButton: TButton
-      Left = 308
+      Left = 350
       Top = 6
       Width = 75
       Height = 25
@@ -43,7 +42,7 @@ object OptionsDialog: TOptionsDialog
       TabOrder = 0
     end
     object CancelButton: TButton
-      Left = 389
+      Left = 431
       Top = 6
       Width = 75
       Height = 25
@@ -57,7 +56,7 @@ object OptionsDialog: TOptionsDialog
       TabOrder = 1
     end
     object Separator1Panel: TPanel
-      Left = 383
+      Left = 425
       Top = 6
       Width = 6
       Height = 25
@@ -69,1116 +68,466 @@ object OptionsDialog: TOptionsDialog
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 470
-    Height = 321
+    Width = 512
+    Height = 418
     Align = alClient
     BevelOuter = bvNone
     Padding.Left = 6
     Padding.Top = 6
     Padding.Right = 6
     TabOrder = 1
-    object PageControl: TBCPageControl
+    object Splitter: TSplitter
+      Left = 206
+      Top = 6
+      Height = 412
+      ExplicitLeft = 262
+      ExplicitTop = 106
+      ExplicitHeight = 100
+    end
+    object OptionsVirtualStringTree: TVirtualStringTree
       Left = 6
       Top = 6
-      Width = 458
-      Height = 315
-      ActivePage = EditorTabSheet
-      Align = alClient
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
+      Width = 200
+      Height = 412
+      Align = alLeft
+      BorderWidth = 1
+      Header.AutoSizeIndex = 0
+      Header.Font.Charset = DEFAULT_CHARSET
+      Header.Font.Color = clWindowText
+      Header.Font.Height = -11
+      Header.Font.Name = 'Tahoma'
+      Header.Font.Style = []
+      Header.MainColumn = -1
       TabOrder = 0
-      TabDragDrop = False
-      HoldShiftToDragDrop = False
-      ShowCloseButton = False
-      object EditorTabSheet: TTabSheet
-        Caption = 'Editor'
-        object EditorFontGroupBox: TGroupBox
-          Left = 6
-          Top = 0
-          Width = 436
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Font '
-          TabOrder = 0
-          object SpeedButton1: TSpeedButton
-            Left = 398
-            Top = 20
-            Width = 23
-            Height = 22
-            Action = SelectFontAction
-            Glyph.Data = {
-              FE020000424DFE02000000000000FE0100002800000010000000100000000100
-              08000000000000010000120B0000120B0000720000007200000000000000FFFF
-              FF00FF00FF00705364009053550077494B00FF828300F27B7D00FF838400F47D
-              7F00CE6B6D00FF868700FC848600FF878800B6626300A65A5B00884D4E009957
-              5900A65F6000985759007D4B4C00D8707000D7707000D36E6E00AC5B5A00FF86
-              8600BD656500A15656008E4D4D00A75B5B00A65B5B00A0585800A15959009F58
-              58009C5656009C5757009A5656009F5A590098555500935353007F4949007A47
-              4700CF433F00CB433F00E36C6800744544007E4D4C00FE7E0000EA880900AB79
-              1F00BD882200968A3400837B310000F3ED0000EDEE0009D9FA0008CBF00008C1
-              E900019FD100048EBA000998C5000D779A0011A3D4001176A1002793C100006A
-              A600026398001290D3001B90D0004490BA000065A00000609A00056099000A7B
-              BD001593DD002295DD00299DE3002E99DD0036ADF80000569000025F9E00035D
-              9A000564A3000765A6000963A0000A6099000C66A4000F6EAF001273B400228B
-              CF002DA1EE001B5D8B003299DE00095E9E00095F9E0009609E00095D99001F62
-              9600428EC900459CEA005083B1004F759C004A6B8B003698FE00216EF2002269
-              FA0059658300374D87005B688B000F42F7006F7BA3007782A600062AF8007F82
-              9F00020202020202020202020202020202020202020202020202020202020202
-              02020202020202020202020202020202020202022821182E02020323121C0202
-              0202020202200B0F0202022C1925020202020202020222070414051606110202
-              020202020202021F17290216061302020202020202020202211A2D1506220202
-              020202020202020202210E0A081B02020202020202020202020226090D1D0202
-              0202020202020202020202240C1E020202020202020202020202020227100202
-              0202020202020202020202020202020202020202020202020202020202020202
-              0202020202020202020202020202020202020202020202020202020202020202
-              0202}
-          end
-          object Panel3: TPanel
-            Left = 10
-            Top = 20
-            Width = 283
-            Height = 37
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            BevelOuter = bvNone
-            TabOrder = 0
-            object FontLabel: TLabel
-              Left = 5
-              Top = 2
-              Width = 128
-              Height = 16
-              Margins.Left = 4
-              Margins.Top = 4
-              Margins.Right = 4
-              Margins.Bottom = 4
-              Caption = 'Courier New 10pt'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -13
-              Font.Name = 'Courier New'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
-        end
-        object LineSpacingGroupBox: TGroupBox
-          Left = 6
-          Top = 56
-          Width = 436
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Line spacing / Tab spacing '
-          TabOrder = 1
-          object Label8: TLabel
-            Left = 15
-            Top = 24
-            Width = 53
-            Height = 13
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = 'Extra Lines'
-          end
-          object Label9: TLabel
-            Left = 239
-            Top = 24
-            Width = 49
-            Height = 13
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = 'Tab Width'
-          end
-          object LineSpacingEdit: TBCEdit
-            Left = 135
-            Top = 20
-            Width = 64
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            TabOrder = 0
-            Text = '0'
-            OnlyNumbers = True
-            NumbersWithDots = False
-            NumbersWithSpots = False
-            EditColor = clInfoBk
-            NumbersAllowNegative = False
-          end
-          object TabWidthEdit: TBCEdit
-            Left = 357
-            Top = 20
-            Width = 64
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            TabOrder = 1
-            Text = '8'
-            OnlyNumbers = True
-            NumbersWithDots = False
-            NumbersWithSpots = False
-            EditColor = clInfoBk
-            NumbersAllowNegative = False
-          end
-        end
-        object RightEdgeGroupBox: TGroupBox
-          Left = 6
-          Top = 112
-          Width = 214
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Right Edge '
-          TabOrder = 2
-          object Label10: TLabel
-            Left = 14
-            Top = 24
-            Width = 62
-            Height = 13
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = 'Edge Column'
-          end
-          object EdgeColumnEdit: TBCEdit
-            Left = 135
-            Top = 20
-            Width = 63
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            TabOrder = 0
-            Text = '100'
-            OnlyNumbers = True
-            NumbersWithDots = False
-            NumbersWithSpots = False
-            EditColor = clInfoBk
-            NumbersAllowNegative = False
-          end
-        end
-        object GroupBox1: TGroupBox
-          Left = 228
-          Top = 112
-          Width = 214
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Tabs '
-          TabOrder = 3
-          object MultilineCheckBox: TCheckBox
-            Left = 15
-            Top = 20
-            Width = 147
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = ' Multiline'
-            TabOrder = 0
-          end
-        end
-        object GutterGroupBox: TGroupBox
-          Left = 6
-          Top = 168
-          Width = 214
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Gutter '
-          TabOrder = 4
-          object LineNumbersCheckBox: TCheckBox
-            Left = 15
-            Top = 20
-            Width = 90
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = ' Line numbers'
-            Checked = True
-            State = cbChecked
-            TabOrder = 0
-          end
-          object GutterVisibleCheckBox: TCheckBox
-            Left = 135
-            Top = 20
-            Width = 62
-            Height = 21
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = ' Visible'
-            Checked = True
-            State = cbChecked
-            TabOrder = 1
-          end
-        end
-        object PollingIntervalGroupBox: TGroupBox
-          Left = 228
-          Top = 168
-          Width = 214
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' DBMS output polling interval: 1 second '
-          TabOrder = 5
-          DesignSize = (
-            214
-            54)
-          object PollingIntervalSlider: TJvxSlider
-            Left = 10
-            Top = 15
-            Width = 196
-            Height = 40
-            Increment = 1
-            MinValue = 1
-            MaxValue = 10
-            Options = [soShowPoints, soSmooth]
-            TabOrder = 0
-            Value = 1
-            Anchors = [akLeft, akTop, akRight]
-            OnChange = PollingIntervalSliderChange
-          end
-        end
-        object GroupBox2: TGroupBox
-          Left = 6
-          Top = 224
-          Width = 436
-          Height = 54
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = ' Button Panel Align'
-          TabOrder = 6
-          object SchemaBrowserLabel: TLabel
-            Left = 14
-            Top = 24
-            Width = 79
-            Height = 13
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = 'Schema Browser'
-          end
-          object ObjectFrameLabel: TLabel
-            Left = 238
-            Top = 24
-            Width = 65
-            Height = 13
-            Margins.Left = 4
-            Margins.Top = 4
-            Margins.Right = 4
-            Margins.Bottom = 4
-            Caption = 'Object Frame'
-          end
-          object SchemaBrowserComboBox: TBCComboBox
-            Left = 136
-            Top = 20
-            Width = 62
-            Height = 21
-            ItemHeight = 13
-            ReadOnly = False
-            TabOrder = 0
-            Text = 'Bottom'
-            Items.Strings = (
-              'Bottom'
-              'Top')
-            EditColor = clInfoBk
-            DeniedKeyStrokes = True
-            DropDownFixedWidth = 0
-          end
-          object ObjectFrameComboBox: TBCComboBox
-            Left = 356
-            Top = 20
-            Width = 64
-            Height = 21
-            ItemHeight = 13
-            ReadOnly = False
-            TabOrder = 1
-            Text = 'Bottom'
-            Items.Strings = (
-              'Bottom'
-              'Top')
-            EditColor = clInfoBk
-            DeniedKeyStrokes = True
-            DropDownFixedWidth = 0
-          end
-        end
-      end
-      object DateFormatTabSheet: TTabSheet
-        Caption = 'Date Format'
-        ImageIndex = 1
-        DesignSize = (
-          450
-          287)
-        object DateFormatLabel: TLabel
-          Left = 11
-          Top = 13
-          Width = 60
-          Height = 13
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Date Format'
-        end
-        object DateFormat1Label: TLabel
-          Left = 11
-          Top = 60
-          Width = 425
-          Height = 32
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 
-            'Use the Date Format to specify the default date format used when' +
-            ' Oracle makes conversions from internal date format into string ' +
-            'values and vice versa.'
-          WordWrap = True
-          ExplicitWidth = 421
-        end
-        object DateFormat2Label: TLabel
-          Left = 11
-          Top = 89
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'D'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object DateFormat3Label: TLabel
-          Left = 53
-          Top = 89
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Day of week (1-7).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label4: TLabel
-          Left = 53
-          Top = 105
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Day of month (1-31).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label5: TLabel
-          Left = 11
-          Top = 105
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'DD'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object Label6: TLabel
-          Left = 53
-          Top = 121
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Day of year (1-366).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label7: TLabel
-          Left = 11
-          Top = 121
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'DDD'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object Label11: TLabel
-          Left = 11
-          Top = 137
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'DAY'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label12: TLabel
-          Left = 53
-          Top = 137
-          Width = 374
-          Height = 28
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 
-            'Name of day, padded with blanks to display width of the widest n' +
-            'ame of day in the date language used for this element.'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-        end
-        object Label17: TLabel
-          Left = 11
-          Top = 169
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'MM'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label18: TLabel
-          Left = 53
-          Top = 169
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Month (01-12; January = 01).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label19: TLabel
-          Left = 11
-          Top = 185
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'MON'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label20: TLabel
-          Left = 53
-          Top = 185
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Abbreviated name of month.'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label21: TLabel
-          Left = 11
-          Top = 201
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'MONTH'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label22: TLabel
-          Left = 53
-          Top = 201
-          Width = 374
-          Height = 28
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 
-            'Name of month, padded with blanks to display width of the widest' +
-            ' name of month in the date language used for this element.'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-        end
-        object Label23: TLabel
-          Left = 11
-          Top = 231
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'YY'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label24: TLabel
-          Left = 53
-          Top = 231
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Year last 2 digits'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label27: TLabel
-          Left = 11
-          Top = 247
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'YYYY'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label28: TLabel
-          Left = 53
-          Top = 247
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Year as 4 digits'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label15: TLabel
-          Left = 11
-          Top = 39
-          Width = 40
-          Height = 13
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Example'
-        end
-        object DateFormatEdit: TBCEdit
-          Left = 84
-          Top = 10
-          Width = 355
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          CharCase = ecUpperCase
-          TabOrder = 0
-          Text = 'DD.MM.YYYY'
-          OnChange = DateFormatEditChange
-          OnlyNumbers = False
-          NumbersWithDots = False
-          NumbersWithSpots = False
-          EditColor = clInfoBk
-          NumbersAllowNegative = False
-        end
-        object DateFormatExampleEdit: TBCEdit
-          Left = 84
-          Top = 36
-          Width = 355
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          TabStop = False
-          CharCase = ecUpperCase
-          Color = clBtnFace
-          ReadOnly = True
-          TabOrder = 1
-          OnlyNumbers = False
-          NumbersWithDots = False
-          NumbersWithSpots = False
-          EditColor = clInfoBk
-          NumbersAllowNegative = False
-        end
-      end
-      object TimeFormatTabSheet: TTabSheet
-        Caption = 'Time Format'
-        ImageIndex = 2
-        DesignSize = (
-          450
-          287)
-        object Label16: TLabel
-          Left = 11
-          Top = 13
-          Width = 60
-          Height = 13
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Date Format'
-        end
-        object Label25: TLabel
-          Left = 11
-          Top = 39
-          Width = 40
-          Height = 13
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Caption = 'Example'
-        end
-        object Label26: TLabel
-          Left = 11
-          Top = 65
-          Width = 425
-          Height = 32
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 
-            'Use the Time Format property to specify the default time format ' +
-            'used when Oracle makes conversions from internal time format int' +
-            'o string values and vice versa.'
-          WordWrap = True
-          ExplicitWidth = 421
-        end
-        object Label29: TLabel
-          Left = 11
-          Top = 94
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'HH'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object Label30: TLabel
-          Left = 53
-          Top = 94
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Hour of day (1-12).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label31: TLabel
-          Left = 53
-          Top = 110
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Hour of day (0-23).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label32: TLabel
-          Left = 11
-          Top = 110
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'HH24'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object Label33: TLabel
-          Left = 11
-          Top = 126
-          Width = 37
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'MI'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 33
-        end
-        object Label34: TLabel
-          Left = 11
-          Top = 142
-          Width = 45
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'SS'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 41
-        end
-        object Label47: TLabel
-          Left = 53
-          Top = 142
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Second (0-59).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object Label48: TLabel
-          Left = 52
-          Top = 126
-          Width = 393
-          Height = 16
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Minute (0-59).'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          WordWrap = True
-          ExplicitWidth = 389
-        end
-        object TimeFormatExampleEdit: TBCEdit
-          Left = 84
-          Top = 36
-          Width = 355
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          TabStop = False
-          CharCase = ecUpperCase
-          Color = clBtnFace
-          ReadOnly = True
-          TabOrder = 0
-          OnlyNumbers = False
-          NumbersWithDots = False
-          NumbersWithSpots = False
-          EditColor = clInfoBk
-          NumbersAllowNegative = False
-        end
-        object TimeFormatEdit: TBCEdit
-          Left = 84
-          Top = 10
-          Width = 355
-          Height = 21
-          Margins.Left = 4
-          Margins.Top = 4
-          Margins.Right = 4
-          Margins.Bottom = 4
-          CharCase = ecUpperCase
-          TabOrder = 1
-          Text = 'HH24:MI:SS'
-          OnChange = TimeFormatEditChange
-          OnlyNumbers = False
-          NumbersWithDots = False
-          NumbersWithSpots = False
-          EditColor = clInfoBk
-          NumbersAllowNegative = False
-        end
-      end
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
+      TreeOptions.PaintOptions = [toShowBackground, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection, toUseExplorerTheme]
+      TreeOptions.SelectionOptions = [toFullRowSelect]
+      TreeOptions.StringOptions = []
+      Columns = <>
     end
-  end
-  object FontDialog: TFontDialog
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    Options = [fdFixedPitchOnly, fdNoSimulations]
-    Left = 48
-    Top = 360
+    object OptionsPanel: TPanel
+      Left = 209
+      Top = 6
+      Width = 297
+      Height = 412
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+    end
   end
   object ActionList: TActionList
-    Left = 272
-    Top = 42
-    object SelectFontAction: TAction
-      OnExecute = SelectFontActionExecute
-    end
+    Left = 104
+    Top = 46
     object OKButtonAction: TAction
       Caption = '&OK'
       OnExecute = OKButtonActionExecute
     end
+  end
+  object ImageList: TImageList
+    Left = 106
+    Top = 158
+    Bitmap = {
+      494C01010B001001D80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000003000000001002000000000000030
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000108ABA001895C10006689700000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00008E5D59008E5D590000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000188C
+      BA00138FBD00066A99000982B2001399CA001E9DC9000B72A0000A6D9A002B96
+      BD002692BC000000000000000000000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008424050084240500842405008424
+      0500842405000000000000000000000000000000000000000000000000000000
+      00008E5D5900FFC48B0084535100845351000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000001D8F
+      BA0021A5D1000999CE00078ABC000EB7EB002FCBF6001F90BB0041B0D3004CB4
+      D400288EB6000000000000000000000000000000000000000000000000000000
+      0000BD4C0000BD4C0000BD4C0000C24F000084240500FFC17900E58E4000D36E
+      1A00842405000000000000000000000000000000000000000000000000000000
+      00008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
+      59008E5D59008E5D59008E5D5900734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000001073A0001880AB0035A1
+      C9006BD0EA0037AFD40023B8E6000FCBFF0023D0FF0044C7ED005AB6D5009CD8
+      E60077C0D8000D72A10000000000000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008323040084240500842305008323
+      0400842405000000000000000000000000000000000000000000000000009262
+      5A0092625A00FEE0C000FEDDBC00FED9B500FFD4AA00FFCC9D00FFC79200FFC4
+      8B00FFC48B00FFC48B00FFC48B00734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000045A7CB002F9CC50039AC
+      D7007DE7FF0074EAFF0040DDFF0015CFFF000DCCFF0038D9FF005EE1FF0063E5
+      FF0028BCE9001C9DCE00188EC000000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000009262
+      5A0092625A00FEE1C500FEDDBC00FFD9B400FFD5AC00FFD1A500FFCE9D00FECA
+      9700FFC79000FFC48B00FFC48B00734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000878AF001190CB0035B2
+      E30067D5F40079EAFF0056C6E10041A5BD00369EBA0017B7E50002C4FF0001C1
+      FE0003C2FE0003BAF20005A0D800000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008424050084240500842405008424
+      0500842405000000000000000000000000000000000000000000000000009262
+      5A0098665D00FEE5CB0000008200FFE0C0009F675A009F675A009F675A009F67
+      5A009F675A009F675A00FFC48B00734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000D75A5001698D40028A9
+      E00052CBF30078B7C6007F7E7E007F7E7E007F7E7E007F7E7E002DAACC0000C5
+      FF0009C6FE000FC5FA000487BC00000000000000000000000000000000000000
+      0000BD4C0000BD4C0000BD4C0000BD4C000084240500FFC17900E58E4000D36E
+      1A00842405000000000000000000000000000000000000000000A66F5B00FFF7
+      D100A06C5F00FEE7D100FEE9D300FEE9D300FEE9D300FEE9D300FEE2C500FED8
+      B200FECFA000FEC99300FEC99300734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000F79AA001598D5001CA0
+      DA0040C1F0007F7E7E00E2DAD9009E9F9F00978B8B00D8A4A1007F7E7E003FD1
+      F80084EBFF00A1EAFB002683AB00000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008323040084240500842305008323
+      0400842405000000000000000000000000000000000000000000A66F5B00E7DC
+      DE00A7746300FEEBD90000008200FEEAD5009F675A009F675A009F675A009F67
+      5A009F675A009F675A00FECE9F00734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000973A5000F86BF001597
+      D3002EB5EA007F7E7E00E2D9D7009D9E9E00978B8B00D1A1A0007F7E7E0062DC
+      FA0097E6F70070BCD7002F8FB400000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000A66F5B00D1D0
+      E900B17D6700FEEFE000FEF3E600FEF3E600FEF3E600FEF3E600FEEDD900FEE3
+      C900FFDCB800FED4AB00FFD5AC00734241000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000005669500108B
+      C60020AAE5007F7E7E00E2D9D7009D9E9E00978B8B00D3A3A0007F7E7E004AD8
+      FC004DBBDE00015E8E0000000000000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008424050084240500842405008424
+      05008424050000000000000000000000000000000000C5876300E5C5B100FFFF
+      FF00BB836900FEF3E70000008200FFF7EF009F675A009F675A009E665A009E66
+      59009A6457009F675A00F6D5B400724141000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000086F
+      A0000576AC007F7E7E00E6DDD9009D9E9E00978B8B00D7A5A3007F7E7E000F82
+      B000117AA7000000000000000000000000000000000000000000000000000000
+      0000BD4C0000BD4C0000BD4C0000BD4C000084240500FFC17900E58E4000D36E
+      1A008424050000000000000000000000000000000000C5876300F6E6DD00FFFF
+      FF00C48B6C00FEF7EE00FEFAF700FEFAF700FEFBF800FEF8F300FEF0E300FEE7
+      D000FEE1C200FEE1C200E2C9AD006D3F3E000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007F7E7E00DDDAD900999A9A00968A8A00CCA3A3007F7E7E000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000BD4C00000000000000000000000000008323040084240500842305008323
+      04008424050000000000000000000000000000000000E1A57700FEFBFA00FEFE
+      FE00CC937000FEF8F400FEFEFC00FEFBF800FEF8F300FEF6ED00FEF2E600FEED
+      DC00FEE9D400BBA99600C7B19900673C3B000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007F7E7E009E9E9E0089898900817E7E00968989007F7E7E000000
+      0000000000000000000000000000000000000000000000000000842405008424
+      0500842405008424050084240500000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000E1A57700FFFFFF00FFFF
+      FF00D59C7400FEFBFA00FEFEFE00FEFEFE00FEFBFA00FEFAF400FEF6EE00FEFA
+      F600A0675B00A0675B00A0675B009D6559000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007F7E7E00D8D7D700B6B7B7008F8C8C009F8F8F007F7E7E000000
+      000000000000000000000000000000000000000000000000000084240500FFC1
+      7900E58E4000D36E1A0084240500000000000000000000000000000000000000
+      000000000000000000000000000000000000E1A67700E1A57700EDD1C100F7EF
+      E900DCA17500FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFA
+      F600A7726000FFDD9A00FFDD9A00C1836C000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007F7E7E00DDDCDC00E3E2E200AAAAAA008C8787007F7E7E000000
+      0000000000000000000000000000000000000000000000000000832304008424
+      0500842305008323040084240500000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000CB865E00CE8A
+      6300DCA17500FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFCFB00FEFAF600FBF7
+      F300AA746200FFDD9A00C1836C00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000007F7E7E007F7E7E007F7E7E007F7E7E00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000E1A57700D1926D00D1926D00D1926D00D1926D00D1926D00D1926D00D192
+      6D00AA746200C1836C0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000066666600666666006666
+      6600666666006666660066666600666666006666660066666600666666006666
+      6600666666006666660066666600000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000A4676900A4676900A4676900A467
+      6900A4676900A4676900A4676900A4676900A4676900A4676900A4676900A467
+      6900A4676900A4676900A4676900A467690066666600FFFFFF009CECFF009CEC
+      FF009CECFF009CECFF009CECFF009CECFF009CECFF009CECFF009CECFF009CEC
+      FF009CECFF009CECFF009CECFF00666666000000000000000000000000000000
+      00000000000000009A0000009A0000009A0000009A0000009A0000009A000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000A4676900E7C59600E7C59600A467
+      6900FEE9C700F4DAB500F3D5AA00F2D0A000EFCB9600EFC68B00EDC18200EBC1
+      7F00D1926D00EBC18000F2C78200A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF00666666000000000000000000000000000000
+      000000009A001E4FFD001748FE001143FE000C3DFE000738FE000434FE000000
+      9A000000000000000000000000000000000000000000000000007F4949009F58
+      5800AC5B5A007E4D4C000000000000000000705364009C575700A65F60008E4D
+      4D0000000000000000000000000000000000A4676900E7C5960097979700A467
+      6900FCEACE00F3DABC00F2D5B100F0D0A700EECB9E00EDC79300EDC28B00E9BD
+      8100D1926D00E9BD7F00EFC48100A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF00666666000000000000000000000000000000
+      9A002B5CFD002556FD001E50FD00FFFFFF00FFFFFF000C3EFE000839FE000435
+      FE0000009A00000000000000000000000000000000000000000000000000A159
+      5900FF868700A65A5B00000000000000000000000000E36C6800FF8686009F5A
+      590000000000000000000000000000000000A4676900EACBA300BABABA00A467
+      6900FEEFDA00F6E0C600F2DABC00F2D5B200EFD0A900EECB9E00EDC79600EBC2
+      8C00D1926D00E9BD7F00EFC48100A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A00386A
+      FC003363FD002C5EFC002657FD00FFFFFF00FFFFFF001345FD000E3FFD00093A
+      FE000436FE0000009A0000000000000000000000000000000000000000000000
+      00009C565600F27B7D00905355007D4B4C0077494B00D7707000FF8283009957
+      590000000000000000000000000000000000A4676900EAD1B1009C9C9C00A467
+      6900FFF4E500F7E5CF00F4E0C500F3DABB00F2D5B100F0D0A600EECB9E00EDC7
+      9500D1926D00EABF8100EFC48000A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A003E6F
+      FD003A6BFC003465FC002E5FFD002858FC002152FE001B4BFD001446FD000E40
+      FE00093AFE0000009A0000000000000000000000000000000000000000000000
+      000000000000A0585800D36E6E007A47470000000000D7707000FF8283009857
+      590000000000000000000000000000000000A4676900EFD9C100C1C1C100A467
+      6900FFFBF000F8EADC00F6E3CF00F4E0C600F2D9BC00F2D5B100F0D0A900EDCB
+      9E00D1926D00EBC28A00EFC58300A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A004475
+      FC004071FC003A6CFD003466FD00FFFFFF00FFFFFF002253FD001C4CFD001547
+      FD000F41FD0000009A0000000000000000000000000000000000000000000000
+      000000000000000000009F585800BD65650074454400D8707000FF8283009C56
+      560000000000000000000000000000000000A5686A00F7E7D400F7E7D400A467
+      6900FFFFFC00FAF0E600F8EADA00F7E5CF00F4E0C500F2DABA00F2D5B100F0D0
+      A700D1926D00EBC79300F2C98C00A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A004879
+      FC004575FC004171FC003B6CFC00FFFFFF00FFFFFF00295AFD002354FD001C4E
+      FE001647FD0000009A0000000000000000000000000000000000000000000000
+      00000000000000000000000000009F585800B6626300CE6B6D00FF838400A156
+      560000000000000000000000000000000000A7756B00FBEFE500CBCBCB00A467
+      6900FFFFFF00FEF7F200FAEFE600F8EAD900F7E3CF00F6E0C500F2DABB00F2D4
+      B100D1926D00EECC9E00F3CE9700A467690066666600FFFFFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A00497A
+      FC004979FC004577FD004172FC00FFFFFF00FFFFFF003062FC002B5BFC002455
+      FD001D4FFD0000009A0000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000098555500F47D7F00FF878800A75B
+      5B0000000000000000000000000000000000A7756B00FFFBF700C2C2C200A467
+      6900FFFFFF00FFFEFC00FCF6F000FAEFE600F7EADA00F6E3CF00F4E0C500F3D9
+      BB00D1926D00F0D0A600F6D3A000A467690066666600FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00C3FAFF00C3FAFF00C3FAFF00C3FAFF00C3FA
+      FF00C3FAFF00C3FAFF009CECFF0066666600000000000000000000009A00497A
+      FC00497AFC00497AFC004677FC00FFFFFF00FFFFFF003868FC003163FD002B5D
+      FD002556FD0000009A0000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000009A565600FC848600A65B
+      5B0000000000000000000000000000000000BC826800F5F5F500DEDEDE00A467
+      6900FFFFFF00FFFFFF00FFFEFC00FEF7F000FAEFE500F8EAD900F7E5CE00F6DE
+      C400D1926D00F4D8B100EBCFA400A467690066666600FFFFFF00666666006666
+      6600666666006666660066666600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00666666000000000000000000000000000000
+      9A00497AFC00497AFC00497AFC00FFFFFF00FFFFFF003E6FFC003969FC003364
+      FD0000009A000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000093535300884D
+      4E0000000000000000000000000000000000BC826800FFFFFF00B9B9B900A467
+      6900FFFFFF00FFFFFF00FFFFFF00FFFEFC00FCF7F000FAEFE500F8E9D900F8E7
+      D100D1926D00F3D9BB00F4D8B100A46769006666660066666600669999006699
+      9900669999006699990066999900666666006666660066666600666666006666
+      6600666666006666660066666600666666000000000000000000000000000000
+      000000009A00497AFC00497AFC00497AFC004778FC004374FC003E70FD000000
+      9A00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000D1926D00FEFEFE00FEFEFE00A467
+      6900FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FCF7F000FAEFE500F8E9
+      D900D1926D00F8E7D100F3D9BB00A4676900666666006699990099CCCC0099CC
+      CC0099CCCC0099CCCC0099CCCC00669999006666660099CCCC0099CCCC0099CC
+      CC0099CCCC0099CCCC0099CCCC00666666000000000000000000000000000000
+      00000000000000009A0000009A0000009A0000009A0000009A0000009A000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000DA9D7500FEFEFE00FEFEFE00A467
+      6900FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FCF7F000FAEF
+      E500D1926D00F8E9D900F8E7D100A46769006666660099FFFF0033CCFF0033CC
+      FF0033CCFF0033CCFF0033CCFF0033CCFF0066666600CCFFFF00CCFFFF00CCFF
+      FF00CCFFFF00CCFFFF00CCFFFF00666666000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000E7AB7900FEFEFE00FEFEFE00A467
+      6900FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FCF7
+      F000D1926D00FAEFE500F8E9D900A4676900000000006666660099FFFF0099FF
+      FF0099FFFF0099FFFF0033CCFF00666666000000000066666600CCFFFF00CCFF
+      FF00CCFFFF00CCFFFF0066666600000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000E7AB7900D1926D00D1926D00D192
+      6D00D1926D00D1926D00D1926D00D1926D00D1926D00D1926D00D1926D00D192
+      6D00D1926D00D1926D00D1926D00D1926D000000000099999900666666006666
+      6600666666006666660066666600999999000000000099999900666666006666
+      6600666666006666660099999900000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000A3666800A3666800A3666800A3666800A467
+      6900A4676900A4676900A4676900A46769000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005C
+      FF00005CFF00005CFF00005CFF00005CFF00A4676900A4676900A4676900A467
+      6900A4676900A4676900A4676900A4676900A4676900A4676900A4676900A467
+      6900A46769000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000009F646600F7E5C600F2D9B100EED1A100EECC
+      9300F0C78700EFC58000F7D08300A4676900A4676900A4676900A4676900A467
+      6900A4676900A4676900A4676900A4676900A4676900A4676900A4676900A467
+      6900A467690000000000000000000000000095655F00A5696A00A5696A00A569
+      6A00A5696A00005CFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00005CFF00A4676900FCEACE00F0D8BA00DCC1
+      A000C4AA8900BFA48000CFAF8200DCB58100E2B87E00E7BC7E00E9BD7F00EFC4
+      8100A46769000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000008E595B00D8CAB700D3C0A700D1B89A00DCBD
+      9700E6C29200E7BF8400F0C68100A4676900A4676900E7C59600E7C59600E7C5
+      9600E7C59600E7C59600E7C59600E7C59600E7C59600E7C59600E7C59600E7C5
+      9600A467690000000000000000000000000098686000FBE5C000F4D5AD00F0CF
+      9F00EFCA9600005CFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF009FC2FF00DFEB
+      FF00FFFFFF00FFFFFF00FFFFFF00005CFF00A0675B00FEEFDA00F6E0C600302D
+      2D00212527003745460099846800AD926F00C2A07400DCB27A00E7BC7E00EFC4
+      8100A46769000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000076575100A19C93009E928400A0917F00C0A9
+      8C00DABC9500E6C19000F0C98700A4676900A4676900E7C59600979797008A8A
+      8A009D9D9D008D8D8D00E7C596009A9A9A0099999900E7C59600E7C59600E7C5
+      9600A46769000000000000000000000000009D6B6200FCE7C900F2D5B500F0D0
+      A900EECB9E00005CFF00FFFFFF00EFF5FF00BFD6FF00FFFFFF003F84FF00BFD6
+      FF00EFF5FF00BFD6FF00FFFFFF00005CFF00A0675B00FFF4E500F7E5CF009C8F
+      80000D466300036292000B3B54004B474100917B5E00B5976C00D1AB7400E9BF
+      7D00A46769000000000000000000000000000000000000000000000000000000
+      00000000000000000000005CFF0056413B006B696800005CFF00736A5F009688
+      7600C0A98C00DDBD9600EECC9300A4676900A4676900EACBA300BABABA00EACB
+      A300EACBA300EACBA300EACBA300C8C8C800EACBA300EACBA300EACBA300EACB
+      A300A4676900000000000000000000000000A36F6400FEEED400F4DDC000F2D7
+      B500F0D1AA00005CFF00FFFFFF00AFCCFF00005CFF006FA3FF002F7AFF007FAD
+      FF001F70FF002F7AFF00FFFFFF00005CFF00A7756B00FFFBF000F8EADC00EEDD
+      CA0022576C00165E8200745D65007D5254005E3F390086725800A78C6600CEAA
+      7300A0656700000000000000000000000000A5686A00A6696A00A4686900A066
+      67008F5B5B006D454500005CFF00005CFF00005CFF00005CFF005B5652007269
+      5F00A0927F00D1B69800F2D3A300A3666800A4676900EAD1B1009C9C9C008D8D
+      8D00ABABAB0090909000EAD1B100EAD1B100EAD1B100EAD1B100EAD1B100EAD1
+      B100A4676900000000000000000000000000A7746600FFF4E100F6E1CA00F3DC
+      BF00F2D7B400005CFF00FFFFFF00FFFFFF00DFEBFF003F84FF00005CFF000F66
+      FF008FB7FF00FFFFFF00FFFFFF00005CFF00A7756B00FFFFFC00FAF0E600F8EA
+      DA008F9F9D0062555D00DD908C00B87979008E5757005B3D37007D6B51009A81
+      5D00925C5E00000000000000000000000000A4676900FCE6C100EECFA600E7C5
+      9600005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005C
+      FF009F928400DAC9AD00EAD8B200A3666800A4676900EFD9C100C1C1C100EFD9
+      C100EFD9C100EFD9C100EFD9C100EFD9C100EFD9C100EFD9C100EFD9C100EFD9
+      C100A4676900000000000000000000000000AD786900FFFBEE00F7E7D500F4E1
+      CA00F3DCBF00005CFF00FFFFFF00FFFFFF009FC2FF000F66FF00005CFF00005C
+      FF005F99FF00DFEBFF00FFFFFF00005CFF00BC826800FFFFFF00FEF7F200FAEF
+      E600F0E5D5006B5D6200E9A4A100CF909000B275750087535300583C35007A69
+      500081535400000000000000000000000000A5686A00FEEED300F0D5B500EACB
+      A300CEAD8300005CFF00005CFF005541330077777700005CFF00005CFF006B69
+      6700A19990008C5B51009D665B00A3666800A5686A00F7E7D400F7E7D400F7E7
+      D400F7E7D400F7E7D400F7E7D400F7E7D400F7E7D400F7E7D400F7E7D400F7E7
+      D400A4676900000000000000000000000000B47E6B00FFFFFB00F8EDE100F7E6
+      D400F6E1C900005CFF00FFFFFF00AFCCFF000F66FF00AFCCFF003F84FF00AFCC
+      FF004F8EFF002F7AFF00FFFFFF00005CFF00BC826800FFFFFF00FFFEFC00FCF6
+      F000FAEFE600EBDCCE008C5E5D00E2A1A100CE8F8F00B4767600865252005C3F
+      3800764C4E00000000000000000000000000A7756B00FFF7E300F3DDC400EAD1
+      B100D0B59100005CFF00005CFF005441320060606000005CFF00005CFF007676
+      7600A4A19F008C5B5100DA904400BD724700A7756B00FBEFE500CBCBCB00BABA
+      BA00C5C5C500CACACA00CBCBCB00DADADA00E3E3E300FBEFE500FBEFE500FBEF
+      E500A4676900000000000000000000000000BA836D00FFFFFF00FCF4EE00FAED
+      E100F8E9D500005CFF00FFFFFF00FFFFFF00EFF5FF00FFFFFF003F84FF00BFD6
+      FF00FFFFFF00EFF5FF00FFFFFF00005CFF00D1926D00FFFFFF00FFFFFF00FFFE
+      FC00FEF7F000FAEFE500E1CEC00087595800E1A1A100CC8E8E00B07474008651
+      5100633B3C00000000000000000000000000A7756B00FFFEF700F7E7D400EFD9
+      C100005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005C
+      FF00C0BABA0095605600C584600000000000A7756B00FFFBF700C2C2C200FFFB
+      F700FFFBF700FFFBF700FFFBF700FFFBF700FFFBF700FFFBF700FFFBF700FFFB
+      F700A4676900000000000000000000000000BF877000FFFFFF00FFFBFA00FEF4
+      ED00FAEEE000005CFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00CFE0FF00EFF5
+      FF00FFFFFF00FFFFFF00FFFFFF00005CFF00D1926D00FFFFFF00FFFFFF00FFFF
+      FF00FFFEFC00FCF7F000FAEFE500D7C1B5008A5B5B00E6A6A600CA8B8B00B675
+      75007E4442003E4145000000000000000000BC826800FFFFFF00FBEFE500F6E5
+      D300EED9C000DDC4A600005CFF00005CFF00005CFF00005CFF00D1926D00D192
+      6D00D1926D009D665B000000000000000000BC826800F5F5F500DEDEDE00C1C1
+      C100CECECE00CECECE00E1E1E100ECECEC00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00A4676900000000000000000000000000C48C7200FFFFFF00FFFFFF00FFFC
+      FA00FCF4ED00005CFF00005CFF00005CFF00005CFF00005CFF00005CFF00005C
+      FF00005CFF00005CFF00005CFF00005CFF00DA9D7500FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFEFC00FCF6EF00FCF3E600CFB5AA0097666600EFAAA9008C6D
+      73001E799F000C98BD000C98BD0000000000BC826800FFFFFF00FFFBF700FAF0
+      E500F6E5D100EFD9C000005CFF00CFB692008C585A00005CFF00000000000000
+      000000000000000000000000000000000000BC826800FFFFFF00B9B9B900FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00A4676900000000000000000000000000CA917400FFFFFF00FFFFFF00FFFF
+      FF00FFFCFA00FCF4ED00FAEDDE00F8E7D400FCEBD300E3D3BB00B7AD9C00A569
+      6A0000000000000000000000000000000000DA9D7500FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFEFB00FFFEF700DAC1BA00955F56009E5D58002D84
+      A70006BBF000008EDE00000F950000008100D1926D00FFFFFF00FFFFFF00FEFB
+      F700FBEFE500F7E5D100A1695D00A0685C009E63650000000000000000000000
+      000000000000000000000000000000000000D1926D00FEFEFE00FEFEFE00FEFE
+      FE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFEFE00FEFE
+      FE00A4676900000000000000000000000000CE957600FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FEFCFA00FCF6EB00FAEFE000A5696A00A5696A00A5696A00A569
+      6A0000000000000000000000000000000000E7AB7900FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00DCC7C500A56B5F00D1914F00068F
+      C1000393DE000320BA000318B200010B9900DA9D7500FFFFFF00FFFFFF00FFFF
+      FF00FFFEFC00E5D3CC00A56B5F00CF834300AF6A540000000000000000000000
+      000000000000000000000000000000000000DA9D7500A4676900A4676900A467
+      6900A4676900A4676900A4676900A4676900A4676900A4676900A4676900A467
+      6900A4676900000000000000000000000000D3977800FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFC00F4EBE600A5696A00E2A35B00EF993800BB70
+      4F0000000000000000000000000000000000E7AB7900FBF4F000FBF4EF00FAF3
+      EF00FAF3EF00F8F2EF00F7F2EF00F7F2EF00D8C2C000A56B5F00C1836C000000
+      00000263BF002F45ED001031D300010A9500E7AB7900FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00E1D5D900A56B5F00D48E5A000000000000000000000000000000
+      000000000000000000000000000000000000E7AB7900CF834300CF834300CF83
+      4300CF834300CF834300A56B5F00000000000000000000000000000000000000
+      000000000000000000000000000000000000D59A7900FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00F8F8FE00A5696A00E5A55F00C2805C000000
+      000000000000000000000000000000000000E7AB7900D1926D00D1926D00D192
+      6D00D1926D00D1926D00D1926D00D1926D00D1926D00A56B5F00000000000000
+      0000000000002732D0000C19B40000000000E7AB7900D1926D00D1926D00D192
+      6D00D1926D00D1926D00A56B5F00000000000000000000000000000000000000
+      000000000000000000000000000000000000E7AB7900D1926D00D1926D00D192
+      6D00D1926D00D1926D00D1926D00000000000000000000000000000000000000
+      000000000000000000000000000000000000D0906B00D0906B00D0906B00D090
+      6B00D0906B00D0906B00D0906B00D0906B00A5696A00BB7F6A00000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000040000000300000000100010000000000800100000000000000000000
+      000000000000000000000000FFFFFF00FE3FFFFFF3FF0000E007F707F0FF0000
+      E007F007F00000008003F707E00000008001F7FFE00000008001F707E0000000
+      8001F007C00000008001F707C00000008001F7FFC0000000C003F70780000000
+      E007F00780000000F81FF70780000000F81FC1FF80000000F81FC1FF00000000
+      F81FC1FFC0010000FC3FFFFFF0030000FFFFFFFF8001FFFFFFFF00000000F81F
+      FFFF00000000F00FC30F00000000E007E38F00000000C003F00F00000000C003
+      F88F00000000C003FC0F00000000C003FE0F00000000C003FF0F00000000C003
+      FF8F00000000E007FFCF00000000F00FFFFF00000000F81FFFFF00000000FFFF
+      FFFF00008081FFFFFFFF00008081FFFFFFFFFE00FFFFF8000007FE0000070000
+      0007FE00000700000007FE00000700000007FC00000700000007000000070000
+      0007000000070000000700000007000000070000000700000007000100070000
+      00030003000700000001003F0007000F0000007F0007000F0000007F0007000F
+      001000FF01FF001F003901FF01FF003F00000000000000000000000000000000
+      000000000000}
   end
 end

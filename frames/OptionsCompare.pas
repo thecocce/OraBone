@@ -1,15 +1,16 @@
-unit OutputTreeViewTabSheet;
+unit OptionsCompare;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, VirtualTrees;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, BCCheckBox;
 
 type
-  TOutputTreeViewFrame = class(TFrame)
+  TOptionsCompareFrame = class(TFrame)
     Panel: TPanel;
-    VirtualDrawTree: TVirtualDrawTree;
+    IgnoreCaseCheckBox: TBCCheckBox;
+    IgnoreBlanksCheckBox: TBCCheckBox;
   private
     { Private declarations }
   public

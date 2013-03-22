@@ -239,8 +239,9 @@ type
     procedure OpenSQLHistory;
     procedure PreviousPage;
     procedure ReadIniFile;
-    procedure ReadOptions;
+    procedure ReadIniOptions;
     procedure RecreateStatusBar;
+    procedure RecreateDragDrop;
     procedure SetFields;
     procedure UpdateGuttersAndControls;
     procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
@@ -304,6 +305,19 @@ begin
     StatusPanel := Panels.Add;
     StatusPanel.Width := 50;
   end;
+end;
+
+procedure TMainForm.RecreateDragDrop;
+begin
+  if Assigned(DragDrop) then
+  begin
+    DragDrop.Free;
+    DragDrop := nil
+  end;
+  DragDrop := TJvDragDrop.Create(MainForm);
+  DragDrop.DropTarget := MainForm;
+  DragDrop.OnDrop := DragDropDrop;
+  DragDrop.AcceptDrag := True;
 end;
 
 procedure TMainForm.UpdateGuttersAndControls;
@@ -656,6 +670,7 @@ begin
   Action.Checked := True;
   UpdateGuttersAndControls;
   RecreateStatusBar;
+  RecreateDragDrop;
 end;
 
 procedure TMainForm.CreateStyleMenu;
@@ -1047,14 +1062,14 @@ begin
   Repaint;
 end;
 
-procedure TMainForm.ReadOptions;
+procedure TMainForm.ReadIniOptions;
 begin
   with TBigIniFile.Create(Common.GetINIFilename) do
   try
     { Options }
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
     OptionsContainer.FontSize := ReadInteger('Options', 'FontSize', 10);
-    OptionsContainer.RightEdge := ReadInteger('Options', 'RightEdge', 100);
+    OptionsContainer.RightMargin := ReadInteger('Options', 'RightEdge', 100);
     OptionsContainer.ExtraLineSpacing := ReadInteger('Options', 'ExtraLineSpacing', 0);
     OptionsContainer.TabWidth := ReadInteger('Options', 'TabWidth', 8);
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
@@ -1782,21 +1797,15 @@ var
 begin
   with TBigIniFile.Create(Common.GetINIFilename) do
   try
+    ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
+    ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
+    ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
+    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
+
     SQLEditorFrame := OpenSQLEditor(PageControl.ActivePage.Caption, True);
     SetFields;
     PageControlChange(Sender);
-    ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
-    if ViewWordWrapAction.Checked then
-      ViewWordWrapActionExecute(nil);
-    ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True);
-    if not ViewLineNumbersAction.Checked then
-      ViewLineNumbersActionExecute(nil);
-    ViewSpecialCharsAction.Checked := ReadBool('Options', 'EnableSpecialChars', False);
-    if ViewSpecialCharsAction.Checked then
-      ViewSpecialCharsActionExecute(nil);
-    ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False);
-    if ViewSelectionModeAction.Checked then
-      ViewSelectionModeActionExecute(nil);
+
     ActionToolBarStrings := TStringList.Create;
     { Toolbar action visibility }
     ReadSectionValues('ActionToolBar', ActionToolBarStrings);
@@ -2012,8 +2021,11 @@ begin
   if Assigned(SQLEditorFrame) then
   begin
     if SQLEditorFrame.IsCompareFilesActivePage then
+    if Value.Count > 1 then
       for i := 0 to Value.Count - 1 do
         SQLEditorFrame.CompareFiles(Value.Strings[i])
+    else
+      SQLEditorFrame.CompareFiles(Value.Strings[0], True)
     else
     for i := 0 to Value.Count - 1 do
       SQLEditorFrame.Open(Value.Strings[i]);

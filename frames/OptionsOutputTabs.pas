@@ -1,15 +1,16 @@
-unit OutputTreeViewTabSheet;
+unit OptionsOutputTabs;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, VirtualTrees;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, BCCheckBox, Vcl.ExtCtrls;
 
 type
-  TOutputTreeViewFrame = class(TFrame)
+  TOutputTabsFrame = class(TFrame)
     Panel: TPanel;
-    VirtualDrawTree: TVirtualDrawTree;
+    MultilineCheckBox: TBCCheckBox;
+    ShowCloseButtonCheckBox: TBCCheckBox;
   private
     { Private declarations }
   public

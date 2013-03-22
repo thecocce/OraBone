@@ -372,7 +372,7 @@ type
     function SpecialChars: Boolean;
     function ToggleSelectionMode: Boolean;
     function SelectionMode: Boolean;
-    procedure CompareFiles(FileName: string = '');
+    procedure CompareFiles(FileName: string = ''; AFileDragDrop: Boolean = False);
     procedure SelectForCompare;
     function GetActiveSynEdit: TBCOraSynEdit;
     function GetCaretInfo: string;
@@ -384,7 +384,6 @@ type
     property ActiveDocumentFound: Boolean read GetActiveDocumentFound;
     property ActiveDocumentModified: Boolean read GetActiveDocumentModified;
     property OpenTabSheets: Boolean read GetOpenTabSheets;
-    // property ModifiedDocuments: Boolean read GetModifiedDocuments;
     property SelectionFound: Boolean read GetSelectionFound;
     property CanUndo: Boolean read GetCanUndo;
     property CanRedo: Boolean read GetCanRedo;
@@ -684,7 +683,7 @@ end;
 
 procedure TSQLEditorFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
 var
-  i: Integer;
+  i, Right: Integer;
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
   LStyles: TCustomStyleServices;
   PanelColor: TColor;
@@ -697,21 +696,21 @@ begin
   PanelColor := clNone;
   if LStyles.Enabled then
     PanelColor := LStyles.GetStyleColor(scPanel);
+  if TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS then
+    Right := 3
+  else
+  if LStyles.Enabled and
+    (GetRValue(PanelColor) + GetGValue(PanelColor) + GetBValue(PanelColor) > 500) then
+    Right := 2
+  else
+    Right := 1;
   for i := 0 to PageControl.PageCount - 1 do
   begin
     SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
     if Assigned(SQLEditorTabSheetFrame) then
     begin
       UpdateGutter(SQLEditorTabSheetFrame.OraSynEdit);
-
-      if TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS then
-        SQLEditorTabSheetFrame.Panel.Padding.Right := 3
-      else
-      if LStyles.Enabled and
-        (GetRValue(PanelColor) + GetGValue(PanelColor) + GetBValue(PanelColor) > 500) then
-        SQLEditorTabSheetFrame.Panel.Padding.Right := 2
-      else
-        SQLEditorTabSheetFrame.Panel.Padding.Right := 1;
+      SQLEditorTabSheetFrame.Panel.Padding.Right := Right;
     end;
   end;
   UpdateSQLSynColors(SynSQLSyn);
@@ -924,7 +923,7 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.CompareFiles(FileName: string);
+procedure TSQLEditorFrame.CompareFiles(FileName: string; AFileDragDrop: Boolean);
 var
   i: Integer;
   TabSheet: TTabSheet;
@@ -954,7 +953,7 @@ begin
         begin
           { else set file and exit}
           PageControl.ActivePageIndex := i;
-          Frame.SetCompareFile(Filename);
+          Frame.SetCompareFile(Filename, AFileDragDrop);
           Exit;
         end;
       end;
