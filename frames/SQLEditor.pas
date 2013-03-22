@@ -1538,6 +1538,11 @@ begin
     MessageBeep(MB_ICONASTERISK);
     SynEdit.BlockBegin := SynEdit.BlockEnd;
     SynEdit.CaretXY := SynEdit.BlockBegin;
+    if Common.AskYesOrNo(Format(LanguageDataModule.GetYesOrNo('SearchMatchNotFound'), [Common.CHR_DOUBLE_ENTER])) then
+    begin
+      SynEdit.CaretX := 0;
+      SynEdit.CaretY := 0;
+    end;
   end;
 end;
 
