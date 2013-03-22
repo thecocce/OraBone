@@ -396,7 +396,7 @@ procedure TExportTableDataDialog.InsertStatementOutput({SynEdit: TSynEdit;}SList
 var
   i: Integer;
   s, row, FieldValue: string;
-  RightEdge: Integer;
+  RightMargin: Integer;
   StringList: TStrings;
   IncludeNullColumns, AddField: Boolean;
 begin
@@ -412,7 +412,7 @@ begin
         StringList.Add(SchemaFilterCheckListBox.Items[i]);
     end;
 
-    RightEdge := OptionsContainer.RightMargin;
+    RightMargin := OptionsContainer.RightMargin;
     //SynEdit.Text := SynEdit.Text + 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
     row := 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
     s := '            (';
@@ -426,7 +426,7 @@ begin
       begin
         s := s + ', ';
 
-        if Length(s) + Length(Trim(StringList.Strings[i])) > RightEdge then
+        if Length(s) + Length(Trim(StringList.Strings[i])) > RightMargin then
         begin
           //SynEdit.Text := SynEdit.Text + s + CHR_ENTER;
           Row := Row + s + CHR_ENTER;
@@ -469,7 +469,7 @@ begin
       begin
         s := s + ', ';
 
-        if Length(s) + Length(Trim(OraQuery.FieldByName(StringList.Strings[i]).AsWideString)) > RightEdge then
+        if Length(s) + Length(Trim(OraQuery.FieldByName(StringList.Strings[i]).AsWideString)) > RightMargin then
         begin
           //SynEdit.Text := SynEdit.Text + s + CHR_ENTER;
           Row := Row + s + CHR_ENTER;

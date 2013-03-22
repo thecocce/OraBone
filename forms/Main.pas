@@ -1068,13 +1068,35 @@ begin
   try
     { Options }
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
-    OptionsContainer.FontSize := ReadInteger('Options', 'FontSize', 10);
-    OptionsContainer.RightMargin := ReadInteger('Options', 'RightEdge', 100);
-    OptionsContainer.ExtraLineSpacing := ReadInteger('Options', 'ExtraLineSpacing', 0);
-    OptionsContainer.TabWidth := ReadInteger('Options', 'TabWidth', 8);
+    OptionsContainer.FontSize := StrToInt(ReadString('Options', 'FontSize', '10'));
+    OptionsContainer.GutterFontName := ReadString('Options', 'GutterFontName', 'Courier New');
+    OptionsContainer.GutterFontSize := StrToInt(ReadString('Options', 'GutterFontSize', '8'));
+    OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));
+    OptionsContainer.RightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
+    OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
+    OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
     OptionsContainer.GutterLineNumbers := ReadBool('Options', 'GutterLineNumbers', True);
-    OptionsContainer.MultiLine := ReadBool('Options', 'MultiLine', False);
+    OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
+    OptionsContainer.ConnectionShowCloseButton := ReadBool('Options', 'ConnectionShowCloseButton', False);
+    OptionsContainer.EditorMultiLine := ReadBool('Options', 'EditorMultiLine', False);
+    OptionsContainer.EditorShowCloseButton := ReadBool('Options', 'EditorShowCloseButton', False);
+    OptionsContainer.OutputMultiLine := ReadBool('Options', 'OutputMultiLine', False);
+    OptionsContainer.OutputShowCloseButton := ReadBool('Options', 'OutputShowCloseButton', False);
+    OptionsContainer.AutoIndent := ReadBool('Options', 'AutoIndent', True);
+    OptionsContainer.TrimTrailingSpaces := ReadBool('Options', 'TrimTrailingSpaces', True);
+    OptionsContainer.ScrollPastEof := ReadBool('Options', 'ScrollPastEof', False);
+    OptionsContainer.ScrollPastEol := ReadBool('Options', 'ScrollPastEol', True);
+    OptionsContainer.TabsToSpaces := ReadBool('Options', 'TabsToSpaces', True);
+    OptionsContainer.IgnoreCase := ReadBool('Options', 'IgnoreCase', True);
+    OptionsContainer.IgnoreBlanks := ReadBool('Options', 'IgnoreBlanks', True);
+    OptionsContainer.PersistentHotKeys := ReadBool('Options', 'PersistentHotKeys', False);
+    OptionsContainer.Shadows := ReadBool('Options', 'Shadows', True);
+    OptionsContainer.UseSystemFont := ReadBool('Options', 'UseSystemFont', False);
+    OptionsContainer.MainMenuFontName := ReadString('Options', 'MainMenuFontName', 'Tahoma');
+    OptionsContainer.MainMenuFontSize := StrToInt(ReadString('Options', 'MainMenuFontSize', '8'));
+    OptionsContainer.AnimationStyle := TAnimationStyle(StrToInt(ReadString('Options', 'AnimationStyle', '1')));
+    OptionsContainer.AnimationDuration := StrToInt(ReadString('Options', 'AnimationDuration', '150'));
     OptionsContainer.PollingInterval := ReadInteger('Options', 'PollingInterval', 1);
     OptionsContainer.DateFormat := ReadString('Options', 'DateFormat', 'DD.MM.YYYY');
     OptionsContainer.TimeFormat := ReadString('Options', 'TimeFormat', 'HH24:MI:SS');
@@ -1082,6 +1104,8 @@ begin
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
 
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
+    PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+    PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
     { Size }
     Width := ReadInteger('Size', 'Width', Round(Screen.Width * 0.8));
     Height := ReadInteger('Size', 'Height', Round(Screen.Height * 0.8));
@@ -1192,6 +1216,8 @@ begin
     { open Options }
     if OptionsDialog.Execute(OraSession, OptionsContainer) then
     begin
+      PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+      PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
       for i := 0 to PageControl.PageCount - 1 do
       begin
         if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
@@ -1214,7 +1240,6 @@ begin
           if Assigned(SQLHistoryFrame) then
             SQLHistoryFrame.AssignOptions;
         end
-
       end;
     end;
 end;
@@ -1347,12 +1372,34 @@ begin
       { Options }
       WriteString('Options', 'FontName', OptionsContainer.FontName);
       WriteString('Options', 'FontSize', IntToStr(OptionsContainer.FontSize));
-      WriteString('Options', 'RightEdge', IntToStr(OptionsContainer.RightEdge));
+      WriteString('Options', 'GutterFontName', OptionsContainer.GutterFontName);
+      WriteString('Options', 'GutterFontSize', IntToStr(OptionsContainer.GutterFontSize));
+      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.RightMargin));
       WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
+      WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
       WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
       WriteBool('Options', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
-      WriteBool('Options', 'MultiLine', OptionsContainer.MultiLine);
+      WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
+      WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
+      WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
+      WriteBool('Options', 'ConnectionShowCloseButton', OptionsContainer.ConnectionShowCloseButton);
+      WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
+      WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
+      WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
+      WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
+      WriteBool('Options', 'ScrollPastEof', OptionsContainer.ScrollPastEof);
+      WriteBool('Options', 'ScrollPastEol', OptionsContainer.ScrollPastEol);
+      WriteBool('Options', 'TabsToSpaces', OptionsContainer.TabsToSpaces);
+      WriteBool('Options', 'IgnoreCase', OptionsContainer.IgnoreCase);
+      WriteBool('Options', 'IgnoreBlanks', OptionsContainer.IgnoreBlanks);
+      WriteBool('Options', 'PersistentHotKeys', OptionsContainer.PersistentHotKeys);
+      WriteBool('Options', 'Shadows', OptionsContainer.Shadows);
+      WriteBool('Options', 'UseSystemFont', OptionsContainer.UseSystemFont);
+      WriteString('Options', 'MainMenuFontName', OptionsContainer.MainMenuFontName);
+      WriteString('Options', 'MainMenuFontSize', IntToStr(OptionsContainer.MainMenuFontSize));
+      WriteString('Options', 'AnimationStyle', IntToStr(Ord(OptionsContainer.AnimationStyle)));
+      WriteString('Options', 'AnimationDuration', IntToStr(OptionsContainer.AnimationDuration));
       WriteString('Options', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
       WriteString('Options', 'DateFormat', OptionsContainer.DateFormat);
       WriteString('Options', 'TimeFormat', OptionsContainer.TimeFormat);
@@ -1443,43 +1490,11 @@ end;
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i, j: Integer;
-  //SchemaBrowserFrame: TSchemaBrowserFrame;
-  //SQLEditorFrame: TSQLEditorFrame;
 begin
   try
     WriteIniFile;
     ApplicationEvents.Destroy;
-  (*  { Disconnect all connections }
-    while PageControl.PageCount > 0 do
-    begin
-      i := PageControl.PageCount - 1;
-      PageControl.ActivePageIndex := i;
-      if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-      begin
-        SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
-        if Assigned(SchemaBrowserFrame) then
-        begin
-          try
-            SchemaBrowserFrame.ObjectTreeFrame.Disconnect;
-          except
-            { no need to show message }
-          end;
-          SchemaBrowserFrame.Destroy;
-        end;
-      end
-      else
-      if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
-      begin
-        SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
-        if Assigned(SQLEditorFrame) then
-          SQLEditorFrame.CloseAll(True, False);
-      end;
-      PageControl.Pages[i].Destroy;
-      Application.ProcessMessages;
-    end;
-  except
-    { silent }
-  end;        *)
+
     j := PageControl.PageCount - 1;
     for i := j downto 0 do
     begin
@@ -1502,7 +1517,7 @@ begin
   StatusBar.Font.Name := 'Tahoma';
   StatusBar.Font.Size := 8;
   OraCall.OCIUnicode := True;
-  ReadOptions;
+  ReadIniOptions;
 end;
 
 procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

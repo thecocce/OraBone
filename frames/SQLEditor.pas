@@ -2044,7 +2044,8 @@ begin
     if Assigned(SynEdit) then
       OptionsContainer.AssignTo(SynEdit);
   end;
-  PageControl.MultiLine := OptionsContainer.MultiLine;
+  PageControl.MultiLine := OptionsContainer.EditorMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
 end;
 
 procedure TSQLEditorFrame.SetHighlighterTableNames(Value: TStrings);

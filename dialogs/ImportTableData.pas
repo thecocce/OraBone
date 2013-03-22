@@ -336,9 +336,9 @@ function TImportTableDataDialog.InsertStatementOutput(ColumnTypeQuery: TOraQuery
 var
   i: Integer;
   s, FieldValue: string;
-  RightEdge: Integer;
+  RightMargin: Integer;
 begin
-  RightEdge := OptionsContainer.RightEdge;
+  RightMargin := OptionsContainer.RightMargin;
   Result := 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
   s := '            (';
   i := 0;
@@ -351,7 +351,7 @@ begin
     begin
       s := s + ', ';
 
-      if Length(s) + Length(Trim(Columns.Strings[i])) > RightEdge then
+      if Length(s) + Length(Trim(Columns.Strings[i])) > RightMargin then
       begin
         Result := Result + s + CHR_ENTER;
         s := '             ';
@@ -398,7 +398,7 @@ begin
     begin
       s := s + ', ';
 
-      if Length(s) + Length(FieldValue) > RightEdge then
+      if Length(s) + Length(FieldValue) > RightMargin then
       begin
         Result := Result + s + CHR_ENTER;
         s := '             ';

@@ -88,7 +88,8 @@ begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
   PopupMenu.Images := MainForm.MenuImageList;
-  PageControl.MultiLine := OptionsContainer.MultiLine;
+  PageControl.MultiLine := OptionsContainer.OutputMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
 end;
 
 procedure TOutputFrame.OutputCloseActionExecute(Sender: TObject);

@@ -224,9 +224,9 @@ end;
 procedure TSchemaBrowserFrame.GenerateViewSelectStatementActionExecute(Sender: TObject);
 var
   s: string;
-  RightEdge: Integer;
+  RightMargin: Integer;
 begin
-  RightEdge := OptionsContainer.RightEdge;
+  RightMargin := OptionsContainer.RightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   ViewBrowserFrame.OpenQuery(FViewBrowserFrame.ColumnsQuery);
@@ -241,7 +241,7 @@ begin
       if not Eof then
         s := s + ', ';
 
-      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightEdge then
+      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightMargin then
       begin
         Clipboard.AsText := Clipboard.AsText + s;
         if not Eof then
@@ -1497,9 +1497,9 @@ end;
 procedure TSchemaBrowserFrame.GenerateInsertStatementActionExecute(Sender: TObject);
 var
   s: string;
-  RightEdge: Integer;
+  RightMargin: Integer;
 begin
-  RightEdge := OptionsContainer.RightEdge;
+  RightMargin := OptionsContainer.RightMargin;
   Clipboard.Clear;
   Clipboard.AsText := Clipboard.AsText + 'INSERT INTO ' + LowerCase(ObjectTreeFrame.SchemaParam) + '.' + LowerCase(ObjectTreeFrame.ObjectName) + CHR_ENTER;
   s := '            (';
@@ -1515,7 +1515,7 @@ begin
       if not Eof then
         s := s + ', ';
 
-      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightEdge then
+      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightMargin then
       begin
         Clipboard.AsText := Clipboard.AsText + s + CHR_ENTER;
         s := '             ';
@@ -1539,7 +1539,7 @@ begin
       if not Eof then
         s := s + ', ';
 
-      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightEdge then
+      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightMargin then
       begin
         Clipboard.AsText := Clipboard.AsText + s + CHR_ENTER;
         s := '             ';
@@ -1556,9 +1556,9 @@ end;
 procedure TSchemaBrowserFrame.GenerateTableSelectStatementActionExecute(Sender: TObject);
 var
   s: string;
-  RightEdge: Integer;
+  RightMargin: Integer;
 begin
-  RightEdge := OptionsContainer.RightEdge;
+  RightMargin := OptionsContainer.RightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   TableBrowserFrame.OpenQuery(FTableBrowserFrame.ColumnsQuery);
@@ -1573,7 +1573,7 @@ begin
       if not Eof then
         s := s + ', ';
 
-      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightEdge then
+      if Length(s) + Length(Trim(FieldByName(COLUMN_NAME).AsWideString)) > RightMargin then
       begin
         Clipboard.AsText := Clipboard.AsText + s;
         if not Eof then
