@@ -33,9 +33,32 @@ type
     Panel2: TPanel;
     Separator1Panel: TPanel;
     Splitter: TSplitter;
+    EditorAction: TAction;
+    EditorFontAction: TAction;
+    EditorGutterAction: TAction;
+    EditorTabsAction: TAction;
+    OutputAction: TAction;
+    DBMSOutputAction: TAction;
+    SchemaBrowserAction: TAction;
+    ObjectFrameAction: TAction;
+    ConnectionAction: TAction;
+    ConnectionTabsAction: TAction;
+    OutputTabsAction: TAction;
+    CompareAction: TAction;
+    MainMenuAction: TAction;
+    DBSettingsAction: TAction;
+    DateFormatAction: TAction;
+    TimeFormatAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
+    procedure OptionsVirtualStringTreeClick(Sender: TObject);
+    procedure OptionsVirtualStringTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
+    procedure OptionsVirtualStringTreeGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean; var ImageIndex: Integer);
+    procedure OptionsVirtualStringTreeGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+    procedure FormShow(Sender: TObject);
   private
     FOptionsContainer: TOptionsContainer;
     FEditorOptionsFrame: TEditorOptionsFrame;
@@ -51,8 +74,10 @@ type
     FTimeFormatFrame: TTimeFormatFrame;
     FConnectionTabsFrame: TConnectionTabsFrame;
     FOptionsCompareFrame: TOptionsCompareFrame;
+    procedure CreateTree;
     procedure GetData;
     procedure PutData;
+    procedure SetVisibleFrame;
   public
     function Execute(OraSession: TOraSession; EditOptions: TOptionsContainer): Boolean;
   end;
@@ -316,6 +341,125 @@ begin
   FOptionsDialog := nil;
 end;
 
+procedure TOptionsDialog.FormShow(Sender: TObject);
+var
+  Node: PVirtualNode;
+begin
+  inherited;
+  Node := OptionsVirtualStringTree.GetFirstSelected;
+  CreateTree;
+  OptionsVirtualStringTree.Selected[Node] := True;
+  SetVisibleFrame;
+end;
+
+procedure TOptionsDialog.CreateTree;
+var
+  Data: POptionsRec;
+  Node, ChildNode: PVirtualNode;
+begin
+  with OptionsVirtualStringTree do
+  begin
+    Clear;
+    { Editor }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := EditorAction.ImageIndex;
+    Data.Caption := EditorAction.Caption;
+    { Font }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorFontAction.ImageIndex;
+    Data.Caption := EditorFontAction.Caption;
+    { Gutter }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorGutterAction.ImageIndex;
+    Data.Caption := EditorGutterAction.Caption;
+    { Tabs }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorTabsAction.ImageIndex;
+    Data.Caption := EditorTabsAction.Caption;
+    Node.ChildCount := 3;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
+    { Schema Browser }
+    Node := AddChild(nil);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := SchemaBrowserAction.ImageIndex;
+    Data.Caption := SchemaBrowserAction.Caption;
+    { Object Frame }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := ObjectFrameAction.ImageIndex;
+    Data.Caption := ObjectFrameAction.Caption;
+    Node.ChildCount := 1;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
+    { Connection }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := ConnectionAction.ImageIndex;
+    Data.Caption := ConnectionAction.Caption;
+    { Tabs }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := ConnectionTabsAction.ImageIndex;
+    Data.Caption := ConnectionTabsAction.Caption;
+    Node.ChildCount := 1;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
+    { Output }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := OutputAction.ImageIndex;
+    Data.Caption := OutputAction.Caption;
+    { DBMS }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := DBMSOutputAction.ImageIndex;
+    Data.Caption := DBMSOutputAction.Caption;
+    { Tabs }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := OutputTabsAction.ImageIndex;
+    Data.Caption := OutputTabsAction.Caption;
+    Node.ChildCount := 2;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
+    { Compare }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := CompareAction.ImageIndex;
+    Data.Caption := CompareAction.Caption;
+    { Main menu }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := MainMenuAction.ImageIndex;
+    Data.Caption := MainMenuAction.Caption;
+    { DB Settings }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := DBSettingsAction.ImageIndex;
+    Data.Caption := DBSettingsAction.Caption;
+    { Date Format }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := DateFormatAction.ImageIndex;
+    Data.Caption := DateFormatAction.Caption;
+    { Time Format }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := TimeFormatAction.ImageIndex;
+    Data.Caption := TimeFormatAction.Caption;
+    Node.ChildCount := 2;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
+
+    OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
+  end;
+end;
+
 function TOptionsDialog.Execute(OraSession: TOraSession; EditOptions: TOptionsContainer): Boolean;
 begin
   FDateFormatFrame.Session := OraSession;
@@ -403,6 +547,88 @@ begin
   end;
 
   ModalResult := mrOk;
+end;
+
+procedure TOptionsDialog.OptionsVirtualStringTreeClick(Sender: TObject);
+begin
+  inherited;
+  SetVisibleFrame;
+end;
+
+procedure TOptionsDialog.OptionsVirtualStringTreeFreeNode(Sender: TBaseVirtualTree;
+  Node: PVirtualNode);
+var
+  Data: POptionsRec;
+begin
+  Data := Sender.GetNodeData(Node);
+  Finalize(Data^);
+end;
+
+procedure TOptionsDialog.OptionsVirtualStringTreeGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+  var ImageIndex: Integer);
+var
+  Data: POptionsRec;
+begin
+  inherited;
+  if not (Kind in [ikNormal, ikSelected]) then
+    Exit;
+  Data := Sender.GetNodeData(Node);
+  if Assigned(Data) then
+    ImageIndex := Data.ImageIndex;
+end;
+
+procedure TOptionsDialog.OptionsVirtualStringTreeGetText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+var
+  Data: POptionsRec;
+begin
+  Data := Sender.GetNodeData(Node);
+  if Assigned(Data) then
+    CellText := Data.Caption;
+end;
+
+procedure TOptionsDialog.SetVisibleFrame;
+var
+  i, Level, ParentIndex: Integer;
+  TreeNode: PVirtualNode;
+begin
+  inherited;
+  TreeNode := OptionsVirtualStringTree.GetFirstSelected;
+  if Assigned(TreeNode) then
+  begin
+    { hide all frames }
+    for i := 0 to ComponentCount - 1 do
+      if Components[i]  is TFrame then
+        TFrame(Components[i]).Visible := False;
+    Level := OptionsVirtualStringTree.GetNodeLevel(TreeNode);
+    ParentIndex := -1;
+    if Level = 1 then
+      ParentIndex := TreeNode.Parent.Index;
+    FEditorOptionsFrame.Visible := (Level = 0) and (TreeNode.Index = 0);
+    FEditorFontFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 0);
+    if FEditorFontFrame.Visible then
+    begin
+      FOptionsContainer.AssignTo(FEditorFontFrame.SynEdit);
+      StyleHooks.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
+    end;
+    FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
+    FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
+
+    FOptionsSchemaBrowserFrame.Visible := (ParentIndex = 1) and (Level = 0) and (TreeNode.Index = 0);
+    FObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
+
+    FConnectionTabsFrame.Visible := (ParentIndex = 2) and (Level = 1) and (TreeNode.Index = 0);
+
+    FDBMSOutputFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 0);
+    FOutputTabsFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 1);
+
+    FOptionsCompareFrame.Visible := (Level = 0) and (TreeNode.Index = 4);
+    FMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 5);
+
+    FDateFormatFrame.Visible := (ParentIndex = 6) and (Level = 1) and (TreeNode.Index = 0);
+    FTimeFormatFrame.Visible := (ParentIndex = 6) and (Level = 1) and (TreeNode.Index = 1);
+  end;
 end;
 
 procedure TOptionsDialog.PutData;
