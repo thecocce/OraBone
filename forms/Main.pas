@@ -242,6 +242,7 @@ type
     procedure ViewWordWrapActionExecute(Sender: TObject);
     procedure GotoBookmarks0ActionExecute(Sender: TObject);
     procedure ToggleBookmarks0ActionExecute(Sender: TObject);
+    procedure PageControlCloseButtonClick(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -350,6 +351,8 @@ var
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
   PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS;
+  PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
   for i := 0 to PageControl.PageCount - 1 do
   begin
     if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
@@ -1139,8 +1142,6 @@ begin
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
 
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
-    PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
-    PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
     { Size }
     Width := ReadInteger('Size', 'Width', Round(Screen.Width * 0.8));
     Height := ReadInteger('Size', 'Height', Round(Screen.Height * 0.8));
@@ -1284,6 +1285,7 @@ begin
             SQLHistoryFrame.AssignOptions;
         end
       end;
+      Repaint;
     end;
 end;
 
@@ -2500,6 +2502,11 @@ begin
   if Assigned(PageControl.ActivePage) then
     PageControl.ActivePage.Repaint;
   PageControl.Repaint;
+end;
+
+procedure TMainForm.PageControlCloseButtonClick(Sender: TObject);
+begin
+  DatabaseEndConnectionMenuAction.Execute;
 end;
 
 procedure TMainForm.OpenSQLHistory;

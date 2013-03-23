@@ -16,10 +16,6 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = 176
-    ExplicitTop = 70
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object OraSynEdit: TBCOraSynEdit
       Left = 1
       Top = 1
@@ -40,14 +36,8 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Gutter.Font.Name = 'Courier New'
       Gutter.Font.Style = []
       Gutter.ShowLineNumbers = True
-      Lines.Strings = (
-        'OraSynEdit')
       Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
-      ExplicitLeft = 144
-      ExplicitTop = 94
-      ExplicitWidth = 100
-      ExplicitHeight = 41
     end
   end
 end

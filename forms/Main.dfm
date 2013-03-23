@@ -121,6 +121,7 @@ object MainForm: TMainForm
       TabDragDrop = True
       HoldShiftToDragDrop = True
       ShowCloseButton = False
+      OnCloseButtonClick = PageControlCloseButtonClick
     end
   end
   object StatusBar: TStatusBar

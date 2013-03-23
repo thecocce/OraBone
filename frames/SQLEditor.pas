@@ -644,7 +644,7 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
-    UpdateGutter(OraSynEdit);
+    UpdateGuttersAndControls(PageControl.DoubleBuffered);
     OptionsContainer.AssignTo(OraSynEdit);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
@@ -689,6 +689,8 @@ var
   PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := DoubleBuffered;
+  PageControl.MultiLine := OptionsContainer.EditorMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
 
   FOutputFrame.UpdateControls;
   Application.ProcessMessages;
@@ -973,6 +975,7 @@ begin
     OpenDocumentsList := TempList;
     SetCompareFile(Filename);
   end;
+  UpdateGuttersAndControls(PageControl.DoubleBuffered);
   PageControlRepaint;
 end;
 
@@ -1215,6 +1218,7 @@ begin
       if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
         TabSheet.Caption := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
     end;
+    UpdateGuttersAndControls(PageControl.DoubleBuffered);
   end;
   PageControlRepaint;
 end;
@@ -1258,6 +1262,7 @@ begin
     SynEdit.Modified := False; //PageControl.ActivePage.ImageIndex := SAVED_IMAGEINDEX
     PageControl.ActivePage.Caption := GetActivePageCaption;
   end;
+  UpdateGuttersAndControls(PageControl.DoubleBuffered);
   PageControlRepaint;
 end;
 
@@ -1268,6 +1273,7 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.Redo;
+  UpdateGuttersAndControls(PageControl.DoubleBuffered);
   PageControlRepaint;
 end;
 
@@ -2049,8 +2055,6 @@ begin
     if Assigned(SynEdit) then
       OptionsContainer.AssignTo(SynEdit);
   end;
-  PageControl.MultiLine := OptionsContainer.EditorMultiLine;
-  PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
 end;
 
 procedure TSQLEditorFrame.SetHighlighterTableNames(Value: TStrings);
