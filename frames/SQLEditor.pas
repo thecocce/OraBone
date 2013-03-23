@@ -335,6 +335,7 @@ type
     procedure SetClobAndTimestampFields(OraQuery: TOraQuery);
     function GetActiveDocumentModified: Boolean;
     procedure PageControlRepaint;
+    procedure SetActivePageCaptionModified;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -1073,9 +1074,9 @@ end;
 
 function TSQLEditorFrame.GetActivePageCaption: string;
 begin
-  Result := PageControl.ActivePage.Caption;
-  if Pos('~', PageControl.ActivePage.Caption) = Length(PageControl.ActivePage.Caption) then
-    Result := System.Copy(PageControl.ActivePage.Caption, 0, Length(PageControl.ActivePage.Caption) - 1);
+  Result := Trim(PageControl.ActivePage.Caption);
+  if Pos('~', Result) = Length(Result) then
+    Result := System.Copy(Result, 0, Length(Result) - 1);
 end;
 
 procedure TSQLEditorFrame.OraScriptError(Sender: TObject; E: Exception; SQL: string;
@@ -1189,9 +1190,9 @@ begin
   begin
     if (OraSynEdit.DocumentName = '') or ShowDialog then
     begin
-      AFileName := TabSheet.Caption;
-      if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
-        AFileName := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
+      AFileName := Trim(TabSheet.Caption);
+      if Pos('~', AFileName) = Length(AFileName) then
+        AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
 
       if CommonDialogs.SaveFile(Handle, '',
         Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
@@ -1215,8 +1216,9 @@ begin
       FileDateTime := GetFileDateTime(DocumentName);
       TabSheet.ImageIndex := GetImageIndex(DocumentName);
       Modified := False;
-      if Pos('~', TabSheet.Caption) = Length(TabSheet.Caption) then
-        TabSheet.Caption := System.Copy(TabSheet.Caption, 0, Length(TabSheet.Caption) - 1);
+      AFileName := Trim(TabSheet.Caption);
+      if Pos('~', AFileName) = Length(AFileName) then
+        TabSheet.Caption := System.Copy(AFileName, 0, Length(AFileName) - 1);
     end;
     UpdateGuttersAndControls(PageControl.DoubleBuffered);
   end;
@@ -1768,14 +1770,25 @@ begin
       TToolButton(Components[i]).Repaint;
 end;
 
-procedure TSQLEditorFrame.SynEditChange(Sender: TObject);
+procedure TSQLEditorFrame.SetActivePageCaptionModified;
 begin
-  GetActiveSynEdit.Modified := True;
   if Pos('~', PageControl.ActivePage.Caption) = 0 then
   begin
-    PageControl.ActivePage.Caption := PageControl.ActivePage.Caption + '~';
+    PageControl.ActivePage.Caption := Format('%s~', [Trim(PageControl.ActivePage.Caption)]);
+    PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
     PageControlRepaint;
   end;
+end;
+
+procedure TSQLEditorFrame.SynEditChange(Sender: TObject);
+var
+  SynEdit: TBCOraSynEdit;
+begin
+  Application.ProcessMessages;
+  SynEdit := GetActiveSynEdit;
+  if Assigned(SynEdit) then
+    SynEdit.Modified := True;
+  SetActivePageCaptionModified;
   RepaintToolButtons;
 end;
 
@@ -1783,7 +1796,7 @@ function TSQLEditorFrame.GetActiveTabSheetCaption: string;
 begin
   Result := '';
   if Assigned(PageControl.ActivePage) then
-    Result := PageControl.ActivePage.Caption;
+    Result := Trim(PageControl.ActivePage.Caption);
 end;
 
 function TSQLEditorFrame.GetActiveDocumentFound: Boolean;
