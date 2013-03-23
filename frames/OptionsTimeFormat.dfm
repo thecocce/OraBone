@@ -1,23 +1,21 @@
 object TimeFormatFrame: TTimeFormatFrame
   Left = 0
   Top = 0
-  Width = 582
+  Width = 451
   Height = 304
   Align = alClient
   TabOrder = 0
-  ExplicitWidth = 451
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 582
+    Width = 451
     Height = 304
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 451
     object TimeFormatLabel: TLabel
-      Left = 11
-      Top = 13
+      Left = 7
+      Top = 9
       Width = 59
       Height = 13
       Margins.Left = 4
@@ -27,8 +25,8 @@ object TimeFormatFrame: TTimeFormatFrame
       Caption = 'Time Format'
     end
     object Label25: TLabel
-      Left = 11
-      Top = 39
+      Left = 7
+      Top = 35
       Width = 40
       Height = 13
       Margins.Left = 4
@@ -38,14 +36,15 @@ object TimeFormatFrame: TTimeFormatFrame
       Caption = 'Example'
     end
     object Label26: TLabel
-      Left = 11
-      Top = 65
-      Width = 493
-      Height = 26
+      Left = 7
+      Top = 61
+      Width = 294
+      Height = 44
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      AutoSize = False
       Caption = 
         'Use the Time Format property to specify the default time format ' +
         'used when Oracle makes conversions from internal time format int' +
@@ -53,8 +52,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label29: TLabel
-      Left = 11
-      Top = 94
+      Left = 7
+      Top = 108
       Width = 14
       Height = 13
       Margins.Left = 4
@@ -71,8 +70,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label32: TLabel
-      Left = 11
-      Top = 110
+      Left = 7
+      Top = 124
       Width = 26
       Height = 13
       Margins.Left = 4
@@ -89,8 +88,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label33: TLabel
-      Left = 11
-      Top = 126
+      Left = 7
+      Top = 140
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -107,8 +106,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label34: TLabel
-      Left = 11
-      Top = 142
+      Left = 7
+      Top = 156
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -125,8 +124,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label47: TLabel
-      Left = 53
-      Top = 142
+      Left = 49
+      Top = 156
       Width = 72
       Height = 13
       Margins.Left = 4
@@ -143,8 +142,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label48: TLabel
-      Left = 52
-      Top = 126
+      Left = 48
+      Top = 140
       Width = 69
       Height = 13
       Margins.Left = 4
@@ -161,8 +160,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label31: TLabel
-      Left = 53
-      Top = 110
+      Left = 49
+      Top = 124
       Width = 94
       Height = 13
       Margins.Left = 4
@@ -179,8 +178,8 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object Label30: TLabel
-      Left = 53
-      Top = 94
+      Left = 49
+      Top = 108
       Width = 94
       Height = 13
       Margins.Left = 4
@@ -197,9 +196,9 @@ object TimeFormatFrame: TTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatExampleEdit: TBCEdit
-      Left = 84
-      Top = 36
-      Width = 355
+      Left = 80
+      Top = 32
+      Width = 221
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
@@ -217,9 +216,9 @@ object TimeFormatFrame: TTimeFormatFrame
       NumbersAllowNegative = False
     end
     object TimeFormatEdit: TBCEdit
-      Left = 84
-      Top = 10
-      Width = 355
+      Left = 80
+      Top = 6
+      Width = 221
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
@@ -228,7 +227,6 @@ object TimeFormatFrame: TTimeFormatFrame
       CharCase = ecUpperCase
       TabOrder = 1
       Text = 'HH24:MI:SS'
-      Visible = False
       OnChange = TimeFormatEditChange
       OnlyNumbers = False
       NumbersWithDots = False

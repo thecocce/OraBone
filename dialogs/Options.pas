@@ -385,7 +385,7 @@ begin
     OptionsVirtualStringTree.Expanded[Node] := True;
     { Schema Browser }
     Node := AddChild(nil);
-    Data := GetNodeData(ChildNode);
+    Data := GetNodeData(Node);
     Data.ImageIndex := SchemaBrowserAction.ImageIndex;
     Data.Caption := SchemaBrowserAction.Caption;
     { Object Frame }
@@ -615,7 +615,7 @@ begin
     FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
 
-    FOptionsSchemaBrowserFrame.Visible := (ParentIndex = 1) and (Level = 0) and (TreeNode.Index = 0);
+    FOptionsSchemaBrowserFrame.Visible := (Level = 0) and (TreeNode.Index = 1);
     FObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
 
     FConnectionTabsFrame.Visible := (ParentIndex = 2) and (Level = 1) and (TreeNode.Index = 0);

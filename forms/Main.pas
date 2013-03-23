@@ -127,6 +127,27 @@ type
     ViewSpecialCharsAction: TAction;
     ViewToolbarAction: TAction;
     ViewWordWrapAction: TAction;
+    ViewGotoLineAction: TAction;
+    GotoBookmarks0Action: TAction;
+    GotoBookmarks1Action: TAction;
+    GotoBookmarks2Action: TAction;
+    GotoBookmarks3Action: TAction;
+    GotoBookmarks4Action: TAction;
+    GotoBookmarks5Action: TAction;
+    GotoBookmarks6Action: TAction;
+    GotoBookmarks7Action: TAction;
+    GotoBookmarks8Action: TAction;
+    GotoBookmarks9Action: TAction;
+    ToggleBookmarks0Action: TAction;
+    ToggleBookmarks1Action: TAction;
+    ToggleBookmarks2Action: TAction;
+    ToggleBookmarks3Action: TAction;
+    ToggleBookmarks4Action: TAction;
+    ToggleBookmarks5Action: TAction;
+    ToggleBookmarks6Action: TAction;
+    ToggleBookmarks7Action: TAction;
+    ToggleBookmarks8Action: TAction;
+    ToggleBookmarks9Action: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -219,6 +240,8 @@ type
     procedure ViewSpecialCharsActionExecute(Sender: TObject);
     procedure ViewToolbarActionExecute(Sender: TObject);
     procedure ViewWordWrapActionExecute(Sender: TObject);
+    procedure GotoBookmarks0ActionExecute(Sender: TObject);
+    procedure ToggleBookmarks0ActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -409,6 +432,18 @@ begin
       if Assigned(SchemaBrowserFrame) then
         Result.Add(SchemaBrowserFrame.ObjectTreeFrame.Session);
     end;
+end;
+
+procedure TMainForm.GotoBookmarks0ActionExecute(Sender: TObject);
+var
+  Action: TAction;
+begin
+  Action := Sender as TAction;
+  if PageControl.PageCount > 0 then
+    if Assigned(PageControl.ActivePage) then
+      if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
+        if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
+          ;// TSQLEditorFrame(PageControl.ActivePage.Components[0]).GotoBookMarks(Action.Tag);
 end;
 
 procedure TMainForm.ToolsCompareSchemasActionExecute(Sender: TObject);
@@ -1183,6 +1218,14 @@ end;
 procedure TMainForm.TNSNamesEditorActionExecute(Sender: TObject);
 begin
   TNSNamesEditorForm.Open;
+end;
+
+procedure TMainForm.ToggleBookmarks0ActionExecute(Sender: TObject);
+var
+  Action: TAction;
+begin
+  Action := Sender as TAction;
+  //FDocumentFrame.ToggleBookMarks(Action.Tag);
 end;
 
 procedure TMainForm.ToolsCompareFilesActionExecute(Sender: TObject);

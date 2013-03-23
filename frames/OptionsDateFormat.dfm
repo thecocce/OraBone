@@ -1,26 +1,22 @@
 object DateFormatFrame: TDateFormatFrame
   Left = 0
   Top = 0
-  Width = 523
-  Height = 306
+  Width = 451
+  Height = 304
   Align = alClient
   TabOrder = 0
   Visible = False
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 523
-    Height = 306
+    Width = 451
+    Height = 304
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 451
-    ExplicitHeight = 304
     object DateFormatLabel: TLabel
-      Left = 11
-      Top = 13
+      Left = 7
+      Top = 9
       Width = 60
       Height = 13
       Margins.Left = 4
@@ -30,8 +26,8 @@ object DateFormatFrame: TDateFormatFrame
       Caption = 'Date Format'
     end
     object Label15: TLabel
-      Left = 11
-      Top = 39
+      Left = 7
+      Top = 35
       Width = 40
       Height = 13
       Margins.Left = 4
@@ -41,14 +37,15 @@ object DateFormatFrame: TDateFormatFrame
       Caption = 'Example'
     end
     object DateFormat1Label: TLabel
-      Left = 11
-      Top = 60
-      Width = 391
-      Height = 26
+      Left = 7
+      Top = 56
+      Width = 294
+      Height = 41
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      AutoSize = False
       Caption = 
         'Use the Date Format to specify the default date format used when' +
         ' Oracle makes conversions from internal date format into string ' +
@@ -56,8 +53,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object DateFormat2Label: TLabel
-      Left = 11
-      Top = 89
+      Left = 7
+      Top = 101
       Width = 7
       Height = 13
       Margins.Left = 4
@@ -74,8 +71,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label5: TLabel
-      Left = 11
-      Top = 105
+      Left = 7
+      Top = 117
       Width = 14
       Height = 13
       Margins.Left = 4
@@ -92,8 +89,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label7: TLabel
-      Left = 11
-      Top = 121
+      Left = 7
+      Top = 133
       Width = 21
       Height = 13
       Margins.Left = 4
@@ -110,8 +107,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label11: TLabel
-      Left = 11
-      Top = 137
+      Left = 7
+      Top = 149
       Width = 20
       Height = 13
       Margins.Left = 4
@@ -128,8 +125,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object DateFormat3Label: TLabel
-      Left = 53
-      Top = 89
+      Left = 49
+      Top = 101
       Width = 91
       Height = 13
       Margins.Left = 4
@@ -146,8 +143,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label4: TLabel
-      Left = 53
-      Top = 105
+      Left = 49
+      Top = 117
       Width = 102
       Height = 13
       Margins.Left = 4
@@ -164,8 +161,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label6: TLabel
-      Left = 53
-      Top = 121
+      Left = 49
+      Top = 133
       Width = 100
       Height = 13
       Margins.Left = 4
@@ -182,14 +179,15 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label12: TLabel
-      Left = 53
-      Top = 137
-      Width = 370
-      Height = 26
+      Left = 49
+      Top = 149
+      Width = 252
+      Height = 38
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      AutoSize = False
       Caption = 
         'Name of day, padded with blanks to display width of the widest n' +
         'ame of day in the date language used for this element.'
@@ -202,8 +200,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label17: TLabel
-      Left = 11
-      Top = 169
+      Left = 7
+      Top = 191
       Width = 16
       Height = 13
       Margins.Left = 4
@@ -220,8 +218,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label19: TLabel
-      Left = 11
-      Top = 185
+      Left = 7
+      Top = 207
       Width = 23
       Height = 13
       Margins.Left = 4
@@ -238,8 +236,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label21: TLabel
-      Left = 11
-      Top = 201
+      Left = 7
+      Top = 223
       Width = 36
       Height = 13
       Margins.Left = 4
@@ -256,8 +254,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label23: TLabel
-      Left = 11
-      Top = 231
+      Left = 7
+      Top = 265
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -274,8 +272,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label27: TLabel
-      Left = 11
-      Top = 247
+      Left = 7
+      Top = 281
       Width = 24
       Height = 13
       Margins.Left = 4
@@ -292,8 +290,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label28: TLabel
-      Left = 53
-      Top = 247
+      Left = 49
+      Top = 281
       Width = 73
       Height = 13
       Margins.Left = 4
@@ -310,8 +308,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label24: TLabel
-      Left = 53
-      Top = 231
+      Left = 49
+      Top = 265
       Width = 79
       Height = 13
       Margins.Left = 4
@@ -328,14 +326,15 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label22: TLabel
-      Left = 53
-      Top = 201
-      Width = 361
-      Height = 26
+      Left = 49
+      Top = 223
+      Width = 252
+      Height = 44
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      AutoSize = False
       Caption = 
         'Name of month, padded with blanks to display width of the widest' +
         ' name of month in the date language used for this element.'
@@ -348,8 +347,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label18: TLabel
-      Left = 53
-      Top = 169
+      Left = 49
+      Top = 191
       Width = 145
       Height = 13
       Margins.Left = 4
@@ -366,8 +365,8 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object Label20: TLabel
-      Left = 53
-      Top = 185
+      Left = 49
+      Top = 207
       Width = 138
       Height = 13
       Margins.Left = 4
@@ -384,9 +383,9 @@ object DateFormatFrame: TDateFormatFrame
       WordWrap = True
     end
     object DateFormatExampleEdit: TBCEdit
-      Left = 84
-      Top = 36
-      Width = 355
+      Left = 80
+      Top = 32
+      Width = 221
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
@@ -404,9 +403,9 @@ object DateFormatFrame: TDateFormatFrame
       NumbersAllowNegative = False
     end
     object DateFormatEdit: TBCEdit
-      Left = 84
-      Top = 10
-      Width = 355
+      Left = 80
+      Top = 6
+      Width = 221
       Height = 21
       Margins.Left = 4
       Margins.Top = 4

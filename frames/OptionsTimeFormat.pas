@@ -13,7 +13,6 @@ type
     TimeFormatLabel: TLabel;
     Label25: TLabel;
     TimeFormatExampleEdit: TBCEdit;
-    TimeFormatEdit: TBCEdit;
     Label26: TLabel;
     Label29: TLabel;
     Label32: TLabel;
@@ -23,6 +22,7 @@ type
     Label48: TLabel;
     Label31: TLabel;
     Label30: TLabel;
+    TimeFormatEdit: TBCEdit;
     procedure TimeFormatEditChange(Sender: TObject);
   private
     { Private declarations }
