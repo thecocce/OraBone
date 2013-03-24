@@ -1521,54 +1521,63 @@ object MainForm: TMainForm
       Caption = 'Bookmark &1'
       ImageIndex = 62
       ShortCut = 24625
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks2Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &2'
       ImageIndex = 63
       ShortCut = 24626
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks3Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &3'
       ImageIndex = 64
       ShortCut = 24627
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks4Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &4'
       ImageIndex = 65
       ShortCut = 24628
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks5Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &5'
       ImageIndex = 66
       ShortCut = 24629
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks6Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &6'
       ImageIndex = 67
       ShortCut = 24630
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks7Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &7'
       ImageIndex = 68
       ShortCut = 24631
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks8Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &8'
       ImageIndex = 69
       ShortCut = 24632
+      OnExecute = ToggleBookmarks0ActionExecute
     end
     object ToggleBookmarks9Action: TAction
       Category = 'T&oggle Bookmarks'
       Caption = 'Bookmark &9'
       ImageIndex = 70
       ShortCut = 24633
+      OnExecute = ToggleBookmarks0ActionExecute
     end
   end
   object MenuImageList: TBCImageList

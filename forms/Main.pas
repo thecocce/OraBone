@@ -446,7 +446,7 @@ begin
     if Assigned(PageControl.ActivePage) then
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
         if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
-          ;// TSQLEditorFrame(PageControl.ActivePage.Components[0]).GotoBookMarks(Action.Tag);
+          TSQLEditorFrame(PageControl.ActivePage.Components[0]).GotoBookmarks(Action.Tag);
 end;
 
 procedure TMainForm.ToolsCompareSchemasActionExecute(Sender: TObject);
@@ -1226,7 +1226,11 @@ var
   Action: TAction;
 begin
   Action := Sender as TAction;
-  //FDocumentFrame.ToggleBookMarks(Action.Tag);
+  if PageControl.PageCount > 0 then
+    if Assigned(PageControl.ActivePage) then
+      if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
+        if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
+          TSQLEditorFrame(PageControl.ActivePage.Components[0]).ToggleBookmarks(Action.Tag);
 end;
 
 procedure TMainForm.ToolsCompareFilesActionExecute(Sender: TObject);
@@ -1834,11 +1838,9 @@ var
   SynEdit: TBCOraSynEdit;
 begin
   SQLEditorFrame := OpenSQLEditor(Schema, False); { open editor }
-  //SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
     SQLEditorFrame.New;
-
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     SynEdit.Lines.BeginUpdate;
     SynEdit.Lines.Text := SQLText;
@@ -1933,7 +1935,6 @@ begin
   begin
     { Create new tab }
     TabSheet := TTabSheet.Create(PageControl);
-    //TabSheet.TabVisible := False;
     TabSheet.PageControl := PageControl;
     TabSheet.ImageIndex := IMAGE_INDEX_SQL_EDITOR;
     TabSheet.Caption := FormattedSchema;

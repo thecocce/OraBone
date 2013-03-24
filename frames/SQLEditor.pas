@@ -250,6 +250,17 @@ type
     RegularExpressionCheckBox: TBCCheckBox;
     RegularExpressionLabel: TLabel;
     SynEditRegexSearch: TSynEditRegexSearch;
+    GotoLinePanel: TPanel;
+    GotoLineClosePanel: TPanel;
+    GotoLineCloseSpeedButton: TSpeedButton;
+    GotoLineLabelPanel: TPanel;
+    GotoLineLabel: TLabel;
+    LineNumberPanel: TPanel;
+    GotoLineNumberEdit: TBCEdit;
+    GotoLineButtonPanel: TPanel;
+    GotoLineGoSpeedButton: TSpeedButton;
+    GotoLineAction: TAction;
+    GotoLineCloseAction: TAction;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -268,8 +279,6 @@ type
     procedure DBMSOutputTimer(Sender: TObject);
     procedure OraSessionError(Sender: TObject; E: EDAError; var Fail: Boolean);
     procedure SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
-    procedure ToggleBookmark0MenuItemClick(Sender: TObject);
-    procedure GotoBookmark0MenuItemClick(Sender: TObject);
     procedure SearchClearActionExecute(Sender: TObject);
     procedure PopupMenuExecuteActionExecute(Sender: TObject);
     procedure PopupMenuTransactionActionExecute(Sender: TObject);
@@ -286,6 +295,9 @@ type
     procedure PopupMenuToolsActionExecute(Sender: TObject);
     procedure SynEditSpecialLineColors(Sender: TObject; Line: Integer; var Special: Boolean;
       var FG, BG: TColor);
+    procedure GotoLineActionExecute(Sender: TObject);
+    procedure GotoLineCloseActionExecute(Sender: TObject);
+    procedure GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -413,6 +425,9 @@ type
     procedure UpdateGuttersAndControls(DoubleBuffered: Boolean);
     procedure RepaintToolButtons;
     function IsCompareFilesActivePage: Boolean;
+    procedure GotoBookmarks(ItemIndex: Integer);
+    procedure ToggleBookmarks(ItemIndex: Integer);
+    procedure GotoLine;
   end;
 
 implementation
@@ -539,6 +554,26 @@ begin
   ViewSpecialCharsToolButton.Action := MainForm.ViewSpecialCharsAction;
   ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
+  ToggleBookmark0MenuItem.Action := MainForm.ToggleBookmarks0Action;
+  ToggleBookmark1MenuItem.Action := MainForm.ToggleBookmarks1Action;
+  ToggleBookmark2MenuItem.Action := MainForm.ToggleBookmarks2Action;
+  ToggleBookmark3MenuItem.Action := MainForm.ToggleBookmarks3Action;
+  ToggleBookmark4MenuItem.Action := MainForm.ToggleBookmarks4Action;
+  ToggleBookmark5MenuItem.Action := MainForm.ToggleBookmarks5Action;
+  ToggleBookmark6MenuItem.Action := MainForm.ToggleBookmarks6Action;
+  ToggleBookmark7MenuItem.Action := MainForm.ToggleBookmarks7Action;
+  ToggleBookmark8MenuItem.Action := MainForm.ToggleBookmarks8Action;
+  ToggleBookmark9MenuItem.Action := MainForm.ToggleBookmarks9Action;
+  GotoBookmark0MenuItem.Action := MainForm.GotoBookmarks0Action;
+  GotoBookmark1MenuItem.Action := MainForm.GotoBookmarks1Action;
+  GotoBookmark2MenuItem.Action := MainForm.GotoBookmarks2Action;
+  GotoBookmark3MenuItem.Action := MainForm.GotoBookmarks3Action;
+  GotoBookmark4MenuItem.Action := MainForm.GotoBookmarks4Action;
+  GotoBookmark5MenuItem.Action := MainForm.GotoBookmarks5Action;
+  GotoBookmark6MenuItem.Action := MainForm.GotoBookmarks6Action;
+  GotoBookmark7MenuItem.Action := MainForm.GotoBookmarks7Action;
+  GotoBookmark8MenuItem.Action := MainForm.GotoBookmarks8Action;
+  GotoBookmark9MenuItem.Action := MainForm.GotoBookmarks9Action;
 
   PageControl.Images := TImageList.Create(Self);
   SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
@@ -934,6 +969,8 @@ var
   TempList: TStringList;
   SynEdit: TBCOraSynEdit;
 begin
+  SearchPanel.Visible := False;
+  GotoLinePanel.Visible := False;
   { create list of open documents }
   TempList := TStringList.Create;
   for i := 0 to PageControl.PageCount - 1 do
@@ -1302,7 +1339,15 @@ begin
 end;
 
 procedure TSQLEditorFrame.PageControlChange(Sender: TObject);
+var
+  SynEdit: TBCOraSynEdit;
 begin
+  SynEdit := GetActiveSynEdit;
+  if not Assigned(SynEdit) then
+  begin
+    SearchPanel.Visible := False;
+    GotoLinePanel.Visible := False;
+  end;
   CheckFileDateTimes; { compare can change file datetime }
   PageControlRepaint;
 end;
@@ -1948,15 +1993,13 @@ begin
     end;
 end;
 
-procedure TSQLEditorFrame.ToggleBookmark0MenuItemClick(Sender: TObject);
+procedure TSQLEditorFrame.ToggleBookmarks(ItemIndex: Integer);
 var
   SynEdit: TBCOraSynEdit;
-  Item: TMenuItem;
   SynEditorCommand: TSynEditorCommand;
 begin
-  Item := Sender as TMenuItem;
   SynEditorCommand := ecNone;
-  case Item.Tag of
+  case ItemIndex of
     0: SynEditorCommand := ecSetMarker0;
     1: SynEditorCommand := ecSetMarker1;
     2: SynEditorCommand := ecSetMarker2;
@@ -1970,7 +2013,7 @@ begin
   end;
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
-    SynEdit.ExecuteCommand(SynEditorCommand, Char(Item.Tag), nil);
+    SynEdit.ExecuteCommand(SynEditorCommand, Char(ItemIndex), nil);
 end;
 
 procedure TSQLEditorFrame.NextPage;
@@ -2360,15 +2403,13 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.GotoBookmark0MenuItemClick(Sender: TObject);
+procedure TSQLEditorFrame.GotoBookmarks(ItemIndex: Integer);
 var
   SynEdit: TBCOraSynEdit;
-  Item: TMenuItem;
   SynEditorCommand: TSynEditorCommand;
 begin
-  Item := Sender as TMenuItem;
   SynEditorCommand := ecNone;
-  case Item.Tag of
+  case ItemIndex of
     0: SynEditorCommand := ecGotoMarker0;
     1: SynEditorCommand := ecGotoMarker1;
     2: SynEditorCommand := ecGotoMarker2;
@@ -2382,7 +2423,7 @@ begin
   end;
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
-    SynEdit.ExecuteCommand(SynEditorCommand, Char(Item.Tag), nil);
+    SynEdit.ExecuteCommand(SynEditorCommand, Char(ItemIndex), nil);
 end;
 
 procedure TSQLEditorFrame.OraSessionError(Sender: TObject; E: EDAError; var Fail: Boolean);
@@ -2917,6 +2958,34 @@ end;
 function TSQLEditorFrame.IsCompareFilesActivePage: Boolean;
 begin
   Result := Assigned(PageControl.ActivePage) and (PageControl.ActivePage.ImageIndex = FCompareImageIndex);
+end;
+
+procedure TSQLEditorFrame.GotoLine;
+begin
+  GotoLinePanel.Visible := not GotoLinePanel.Visible;
+  if GotoLinePanel.Visible then
+    if GotoLineNumberEdit.CanFocus then
+      GotoLineNumberEdit.SetFocus;
+end;
+
+procedure TSQLEditorFrame.GotoLineActionExecute(Sender: TObject);
+begin
+  try
+    GetActiveSynEdit.CaretY := StrToInt(GotoLineNumberEdit.Text);
+  except
+    { silent }
+  end;
+end;
+
+procedure TSQLEditorFrame.GotoLineCloseActionExecute(Sender: TObject);
+begin
+  GotoLinePanel.Hide;
+end;
+
+procedure TSQLEditorFrame.GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    GotoLineAction.Execute;
 end;
 
 end.

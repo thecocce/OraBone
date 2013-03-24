@@ -1,17 +1,19 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 663
+  Height = 395
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 78
-    Width = 451
+    Top = 169
+    Width = 663
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 663
     Height = 21
     Hint = ' '
     Align = alTop
@@ -31,6 +33,7 @@ object SQLEditorFrame: TSQLEditorFrame
     FullRepaint = False
     TabOrder = 0
     Visible = False
+    ExplicitWidth = 451
     object CaseSensitiveLabel: TLabel
       Left = 368
       Top = 0
@@ -77,9 +80,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
+        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -468,18 +472,20 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 34
+    Width = 663
+    Height = 100
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
     Padding.Top = 2
     TabOrder = 1
+    ExplicitWidth = 451
+    ExplicitHeight = 34
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 32
+      Width = 663
+      Height = 98
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -495,12 +501,14 @@ object SQLEditorFrame: TSQLEditorFrame
       TabDragDrop = True
       HoldShiftToDragDrop = False
       ShowCloseButton = False
+      ExplicitWidth = 451
+      ExplicitHeight = 32
     end
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 81
-    Width = 451
+    Top = 172
+    Width = 663
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -508,11 +516,13 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 2
     Visible = False
+    ExplicitTop = 81
+    ExplicitWidth = 451
   end
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 663
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -521,6 +531,7 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentDoubleBuffered = False
     PopupMenu = ToolbarPopupMenu
     TabOrder = 3
+    ExplicitWidth = 451
     object ExecuteToolbarPanel: TPanel
       Left = 0
       Top = 0
@@ -1128,6 +1139,210 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
   end
+  object GotoLinePanel: TPanel
+    Left = 0
+    Top = 144
+    Width = 663
+    Height = 25
+    Align = alBottom
+    BevelOuter = bvNone
+    FullRepaint = False
+    Padding.Top = 2
+    ParentColor = True
+    TabOrder = 4
+    Visible = False
+    ExplicitTop = 119
+    object GotoLineClosePanel: TPanel
+      Left = 0
+      Top = 2
+      Width = 21
+      Height = 23
+      Align = alLeft
+      AutoSize = True
+      BevelOuter = bvNone
+      Padding.Right = 2
+      Padding.Bottom = 2
+      TabOrder = 0
+      object GotoLineCloseSpeedButton: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 19
+        Height = 21
+        Action = GotoLineCloseAction
+        Align = alLeft
+        Flat = True
+        Glyph.Data = {
+          36060000424D3606000000000000360000002800000020000000100000000100
+          18000000000000060000120B0000120B00000000000000000000FF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FF717171717171FF00FFFF00FFFF00FF717171717171FF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171717171FF00FFFF
+          00FFFF00FF717171717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FF717171DBDBDBDBDBDB717171FF00FF717171DBDBDBDBDBDB717171FF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFF717171FF
+          00FF717171FFFFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FF717171DBDBDBDBDBDBDBDBDB717171DBDBDBDBDBDBDBDBDB717171FF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFFFFFFFF71
+          7171FFFFFFFFFFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FF717171DBDBDBDBDBDBDBDBDBDBDBDBDBDBDB787878FF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF787878FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FF717171DBDBDBDBDBDBDBDBDB717171FF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFF
+          FFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FF717171DBDBDBDBDBDBDBDBDBDBDBDBDBDBDB717171FF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FF717171DBDBDBDBDBDBDBDBDB717171DBDBDBDBDBDBDBDBDB717171FF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFFFFFFFF71
+          7171FFFFFFFFFFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FF717171DBDBDBDBDBDB717171FF00FF717171DBDBDBDBDBDB717171FF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171FFFFFFFFFFFF717171FF
+          00FF717171FFFFFFFFFFFF717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FF717171717171FF00FFFF00FFFF00FF717171717171FF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF717171717171FF00FFFF
+          00FFFF00FF717171717171FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+          FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+          FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+          00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        Margin = 2
+        NumGlyphs = 2
+        ExplicitHeight = 25
+      end
+    end
+    object GotoLineLabelPanel: TPanel
+      Left = 21
+      Top = 2
+      Width = 58
+      Height = 23
+      Align = alLeft
+      AutoSize = True
+      BevelOuter = bvNone
+      Padding.Left = 4
+      Padding.Top = 3
+      Padding.Right = 6
+      TabOrder = 1
+      object GotoLineLabel: TLabel
+        Left = 4
+        Top = 3
+        Width = 48
+        Height = 20
+        Align = alLeft
+        Caption = 'Go to Line'
+        ExplicitHeight = 13
+      end
+    end
+    object LineNumberPanel: TPanel
+      Left = 79
+      Top = 2
+      Width = 100
+      Height = 23
+      Align = alLeft
+      BevelOuter = bvNone
+      Caption = 'SearchPanel3'
+      Padding.Left = 4
+      TabOrder = 2
+      object GotoLineNumberEdit: TBCEdit
+        Left = 4
+        Top = 0
+        Width = 96
+        Height = 21
+        Align = alTop
+        TabOrder = 0
+        OnKeyPress = GotoLineNumberEditKeyPress
+        OnlyNumbers = True
+        NumbersWithDots = False
+        NumbersWithSpots = False
+        EditColor = clInfoBk
+        NumbersAllowNegative = False
+      end
+    end
+    object GotoLineButtonPanel: TPanel
+      Left = 179
+      Top = 2
+      Width = 23
+      Height = 23
+      Align = alLeft
+      AutoSize = True
+      BevelOuter = bvNone
+      Padding.Left = 2
+      Padding.Right = 2
+      Padding.Bottom = 2
+      TabOrder = 3
+      object GotoLineGoSpeedButton: TSpeedButton
+        Left = 2
+        Top = 0
+        Width = 19
+        Height = 21
+        Action = GotoLineAction
+        Align = alLeft
+        Flat = True
+        Glyph.Data = {
+          36050000424D3605000000000000360400002800000010000000100000000100
+          0800000000000001000000000000000000000001000000010000FF00FF000152
+          0200015403000256040002590500035D06000462080006680D00047D0B00096B
+          1000096F110009761100097811000A7F14000D77180005820D0007840F00058F
+          0E0006920E000781100009931300099813000A9815000E911C000C9818000F9D
+          1F00168A28001398250018932D0016982A00169C28001C9C330013A3250015AB
+          290018AA2D001BAF32001FA539001EB1370023B43F0024AA420024BD420029B1
+          490028B748002BB44C002CB84F002ECC540036D362003FE06F0042E276000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000300000000000000000000000000000303000000
+          000000000000000000000004040000000000000000000000000000060A000000
+          0000000000000000000000071C0300000000000300000000000000072C0A0000
+          0000000303000000000000042B2703000000000313030000000000001A301F03
+          030303031508030000000000032B2F2B1D1B1E1715110803000000000003272E
+          2D28232018111213030000000000030A2426232218150D030000000000000000
+          04040603220A03000000000000000000000000030A0400000000000000000000
+          0000000303000000000000000000000000000003000000000000}
+        Margin = 2
+        ExplicitTop = 2
+        ExplicitHeight = 19
+      end
+    end
+  end
   object SynEditPrint: TSynEditPrint
     Copies = 1
     Header.ShadedColor = clNone
@@ -1169,8 +1384,8 @@ object SQLEditorFrame: TSQLEditorFrame
     Top = 62
   end
   object SearchActionList: TActionList
-    Left = 166
-    Top = 118
+    Left = 168
+    Top = 94
     object SearchCloseAction: TAction
       Hint = 'Close Search'
       OnExecute = SearchCloseActionExecute
@@ -1189,6 +1404,14 @@ object SQLEditorFrame: TSQLEditorFrame
     end
     object SearchClearAction: TAction
       OnExecute = SearchClearActionExecute
+    end
+    object GotoLineAction: TAction
+      Hint = 'Go to line'
+      OnExecute = GotoLineActionExecute
+    end
+    object GotoLineCloseAction: TAction
+      Hint = 'Close'
+      OnExecute = GotoLineCloseActionExecute
     end
   end
   object SynSQLSyn: TSynSQLSyn
@@ -1256,70 +1479,60 @@ object SQLEditorFrame: TSQLEditorFrame
         Caption = 'Bookmark &0'
         ImageIndex = 61
         ShortCut = 24624
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark1MenuItem: TMenuItem
         Tag = 1
         Caption = 'Bookmark &1'
         ImageIndex = 62
         ShortCut = 24625
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark2MenuItem: TMenuItem
         Tag = 2
         Caption = 'Bookmark &2'
         ImageIndex = 63
         ShortCut = 24626
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark3MenuItem: TMenuItem
         Tag = 3
         Caption = 'Bookmark &3'
         ImageIndex = 64
         ShortCut = 24627
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark4MenuItem: TMenuItem
         Tag = 4
         Caption = 'Bookmark &4'
         ImageIndex = 65
         ShortCut = 24628
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark5MenuItem: TMenuItem
         Tag = 5
         Caption = 'Bookmark &5'
         ImageIndex = 66
         ShortCut = 24629
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark6MenuItem: TMenuItem
         Tag = 6
         Caption = 'Bookmark &6'
         ImageIndex = 67
         ShortCut = 24630
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark7MenuItem: TMenuItem
         Tag = 7
         Caption = 'Bookmark &7'
         ImageIndex = 68
         ShortCut = 24631
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark8MenuItem: TMenuItem
         Tag = 8
         Caption = 'Bookmark &8'
         ImageIndex = 69
         ShortCut = 24632
-        OnClick = ToggleBookmark0MenuItemClick
       end
       object ToggleBookmark9MenuItem: TMenuItem
         Tag = 9
         Caption = 'Bookmark &9'
         ImageIndex = 70
         ShortCut = 24633
-        OnClick = ToggleBookmark0MenuItemClick
       end
     end
     object GotoBookmarksMenuItem: TMenuItem
@@ -1329,70 +1542,60 @@ object SQLEditorFrame: TSQLEditorFrame
         Caption = 'Bookmark &0'
         ImageIndex = 61
         ShortCut = 16432
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark1MenuItem: TMenuItem
         Tag = 1
         Caption = 'Bookmark &1'
         ImageIndex = 62
         ShortCut = 16433
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark2MenuItem: TMenuItem
         Tag = 2
         Caption = 'Bookmark &2'
         ImageIndex = 63
         ShortCut = 16434
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark3MenuItem: TMenuItem
         Tag = 3
         Caption = 'Bookmark &3'
         ImageIndex = 64
         ShortCut = 16435
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark4MenuItem: TMenuItem
         Tag = 4
         Caption = 'Bookmark &4'
         ImageIndex = 65
         ShortCut = 16436
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark5MenuItem: TMenuItem
         Tag = 5
         Caption = 'Bookmark &5'
         ImageIndex = 66
         ShortCut = 16437
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark6MenuItem: TMenuItem
         Tag = 6
         Caption = 'Bookmark &6'
         ImageIndex = 67
         ShortCut = 16438
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark7MenuItem: TMenuItem
         Tag = 7
         Caption = 'Bookmark &7'
         ImageIndex = 68
         ShortCut = 16439
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark8MenuItem: TMenuItem
         Tag = 8
         Caption = 'Bookmark &8'
         ImageIndex = 69
         ShortCut = 16440
-        OnClick = GotoBookmark0MenuItemClick
       end
       object GotoBookmark9MenuItem: TMenuItem
         Tag = 9
         Caption = 'Bookmark &9'
         ImageIndex = 70
         ShortCut = 16441
-        OnClick = GotoBookmark0MenuItemClick
       end
     end
     object ClearBookmarksMenuItem: TMenuItem
