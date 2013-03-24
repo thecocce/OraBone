@@ -8,8 +8,6 @@ object SQLEditorFrame: TSQLEditorFrame
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object HorizontalSplitter: TJvSplitter
     Left = 0
     Top = 169
@@ -1151,7 +1149,6 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 4
     Visible = False
-    ExplicitTop = 119
     object GotoLineClosePanel: TPanel
       Left = 0
       Top = 2

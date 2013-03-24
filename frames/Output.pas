@@ -88,8 +88,6 @@ begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
   PopupMenu.Images := MainForm.MenuImageList;
-  PageControl.MultiLine := OptionsContainer.OutputMultiLine;
-  PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
 end;
 
 procedure TOutputFrame.OutputCloseActionExecute(Sender: TObject);
@@ -157,7 +155,7 @@ var
 begin
   TabSheet := nil;
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       TabSheet := PageControl.Pages[i];
       Break;
@@ -176,7 +174,7 @@ begin
   TabSheet := nil;
 
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       TabSheet := PageControl.Pages[i];
       Break;
@@ -257,7 +255,7 @@ procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
 var
   RecCount: Integer;
 begin
-  SetRows(PageControl.ActivePage.Caption);
+  SetRows(Trim(PageControl.ActivePage.Caption));
 
   if Assigned(PageControl.ActivePage) then
     if PageControl.ActivePage.ComponentCount <> 0 then
@@ -365,7 +363,7 @@ begin
   TabSheet := nil;
 
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       TabSheet := PageControl.Pages[i];
       Break;
@@ -386,7 +384,7 @@ begin
   TabSheet := nil;
 
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       TabSheet := PageControl.Pages[i];
       Break;
@@ -407,7 +405,7 @@ begin
   TabSheet := nil;
 
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       TabSheet := PageControl.Pages[i];
       Break;
@@ -510,7 +508,7 @@ begin
   Result := False;
   { check if there already is a tab with same name }
   for i := 0 to PageControl.PageCount - 1 do
-    if PageControl.Pages[i].Caption = TabCaption then
+    if Trim(PageControl.Pages[i].Caption) = TabCaption then
     begin
       PageControl.ActivePageIndex := i;
       Result := True;
@@ -655,7 +653,7 @@ procedure TOutputFrame.ClearDBMSOutputActionExecute(Sender: TObject);
 var
   SynEdit: TBCSynEdit;
 begin
-  SynEdit := GetSynEdit(PageControl.ActivePage.Caption);
+  SynEdit := GetSynEdit(Trim(PageControl.ActivePage.Caption));
   SynEdit.Text := ''
 end;
 
@@ -772,7 +770,7 @@ procedure TOutputFrame.CopyToClipboard;
 var
  Grid: TBCDBGrid;
 begin
-  Grid := GetDataGrid(PageControl.ActivePage.Caption);
+  Grid := GetDataGrid(Trim(PageControl.ActivePage.Caption));
   if Assigned(Grid) then
     CopyDataFromDBGridToClipboard(Grid);
 end;
@@ -930,8 +928,8 @@ var
   PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
-  //PageControl.MultiLine := OptionsContainer.OutputMultiLine;
-  //PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
+  PageControl.MultiLine := OptionsContainer.OutputMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
 
   LStyles := StyleServices;
   PanelColor := clNone;

@@ -2070,7 +2070,7 @@ begin
             OraSynEdit.Modified := True;
             if Pos('~', PageControl.Pages[i].Caption) = 0 then
             begin
-              PageControl.Pages[i].Caption := PageControl.Pages[i].Caption + '~';
+              PageControl.Pages[i].Caption := Format('%s~', [Trim(PageControl.Pages[i].Caption)]);
               PageControlRepaint;
             end;
           end;

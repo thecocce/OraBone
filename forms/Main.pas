@@ -936,9 +936,9 @@ begin
       (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
 
     { Mainform caption }
-    if (PageControl.PageCount > 0) and (PageControl.ActivePage.Caption <> '') then
+    if (PageControl.PageCount > 0) and (Trim(PageControl.ActivePage.Caption) <> '') then
     begin
-      CaptionText := Format(MAIN_CAPTION + MAIN_CAPTION_TAB, [PageControl.ActivePage.Caption]);
+      CaptionText := Format(MAIN_CAPTION + MAIN_CAPTION_TAB, [Trim(PageControl.ActivePage.Caption)]);
 
       if Assigned(SchemaBrowserFrame) then
       begin
@@ -1655,7 +1655,7 @@ begin
       begin
         if SQLEditorFrame.InTransaction then
         begin
-          if Lib.AskCommit(PageControl.ActivePage.Caption) then
+          if Lib.AskCommit(Trim(PageControl.ActivePage.Caption)) then
             SQLEditorFrame.Session.Commit
           else
             SQLEditorFrame.Session.Rollback
@@ -1864,7 +1864,7 @@ begin
     ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
     ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
 
-    SQLEditorFrame := OpenSQLEditor(PageControl.ActivePage.Caption, True);
+    SQLEditorFrame := OpenSQLEditor(Trim(PageControl.ActivePage.Caption), True);
     SetFields;
     PageControlChange(Sender);
 
@@ -1911,7 +1911,7 @@ begin
   { check if sql editor tab already exists }
   for i := 0 to PageControl.PageCount - 1 do
     if (PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR) and
-       (PageControl.Pages[i].Caption = FormattedSchema) then
+       (Trim(PageControl.Pages[i].Caption) = FormattedSchema) then
     begin
       PageControl.ActivePage := PageControl.Pages[i];
       Result := TSQLEditorFrame(PageControl.ActivePage.Components[0]);
@@ -1922,7 +1922,7 @@ begin
   { check if connection exists }
   for i := 0 to PageControl.PageCount - 1 do
     if (PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER) and
-       (PageControl.Pages[i].Caption = FormattedSchema) then
+       (Trim(PageControl.Pages[i].Caption) = FormattedSchema) then
       SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
 
   if not Assigned(SchemaBrowserFrame) then
@@ -1969,10 +1969,10 @@ begin
   Result := mrNo;
   try
     if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-      if not Confirm or Common.AskYesOrNo(Format('End connection %s, are you sure?', [PageControl.ActivePage.Caption])) then
+      if not Confirm or Common.AskYesOrNo(Format('End connection %s, are you sure?', [Trim(PageControl.ActivePage.Caption)])) then
       begin
         Result := mrYes;
-        s := PageControl.ActivePage.Caption;
+        s := Trim(PageControl.ActivePage.Caption);
         SchemaBrowserFrame := GetActiveSchemaBrowser;
         if Assigned(SchemaBrowserFrame) then
         begin
@@ -1989,7 +1989,7 @@ begin
           i := 0;
           while i < PageControl.PageCount do
           begin
-            if PageControl.Pages[i].Caption = s then
+            if Trim(PageControl.Pages[i].Caption) = s then
               PageControl.Pages[i].Destroy;
             Inc(i);
           end;
@@ -2428,7 +2428,7 @@ begin
       Found := 0;
       for i := 0 to PageControl.PageCount - 1 do
         if (PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER) and
-           (Schema = PageControl.Pages[i].Caption) then
+           (Schema = Trim(PageControl.Pages[i].Caption)) then
           Inc(Found);
 
       TabSheet.Caption := Schema;
@@ -2507,7 +2507,7 @@ end;
 
 procedure TMainForm.PageControlCloseButtonClick(Sender: TObject);
 begin
-  DatabaseEndConnectionMenuAction.Execute;
+  CloseTab(True);
 end;
 
 procedure TMainForm.OpenSQLHistory;
