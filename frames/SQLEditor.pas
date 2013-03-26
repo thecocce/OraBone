@@ -177,8 +177,6 @@ type
     StandardToolBar: TBCToolBar;
     FileNewToolButton: TToolButton;
     FileOpenToolButton: TToolButton;
-    FileCloseToolButton: TToolButton;
-    FileCloseAllToolButton: TToolButton;
     Bevel5: TBevel;
     PrintToolbarPanel: TPanel;
     PrintToolBar: TBCToolBar;
@@ -261,6 +259,8 @@ type
     GotoLineGoSpeedButton: TSpeedButton;
     GotoLineAction: TAction;
     GotoLineCloseAction: TAction;
+    FileCloseToolButton: TToolButton;
+    FileCloseAllToolButton: TToolButton;
     procedure SynEditChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -756,17 +756,22 @@ end;
 
 procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Integer;
   var Special: Boolean; var FG, BG: TColor);
+var
+  LStyles: TCustomStyleServices;
 begin
   if not TBCOraSynEdit(Sender).SelAvail then
     if TBCOraSynEdit(Sender).CaretY = Line then
     begin
       Special := True;
-      if StyleServices.Enabled then
-        BG := LightenColor(TBCOraSynEdit(Sender).Color);
+      LStyles := StyleServices;
+      if LStyles.Enabled then
+        BG := LightenColor(TBCOraSynEdit(Sender).Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
     end;
 end;
 
 procedure TSQLEditorFrame.PageControlRepaint;
+var
+  i: Integer;
 var
   SynEdit: TBCOraSynEdit;
 begin
@@ -775,6 +780,10 @@ begin
     SynEdit.Repaint;
   if Assigned(PageControl.ActivePage) then
     PageControl.ActivePage.Repaint;
+  Application.ProcessMessages;
+  for i := 0 to ComponentCount - 1 do
+    if Components[i] is TBCToolBar then
+      TBCToolBar(Components[i]).Repaint;
   PageControl.Repaint;
 end;
 
@@ -1167,7 +1176,7 @@ begin
     FNumberOfNewDocument := 0;
     Result := mrYes;
   end;
-  PageControl.Repaint;
+  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.CloseAllOtherPages;

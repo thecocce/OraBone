@@ -173,7 +173,7 @@ implementation
 
 uses
   System.RegularExpressions, Vcl.Themes, BigIni, StyleHooks, Common, OraServices, OraCall,
-  PrintPreview, SynEditKeyCmds, CommonDialogs, Language;
+  PrintPreview, SynEditKeyCmds, CommonDialogs, Language, Options;
 
 const
   FORM_CAPTION = 'TNSNames Editor - [%s]';
@@ -200,7 +200,12 @@ begin
     Left := ReadInteger('TNSNamesEditorPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('TNSNamesEditorPosition', 'Top', (Screen.Height - Height) div 2);
 
-    ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
+    ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
+    ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
+    ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
+    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
+
+   { ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False);
     if ViewWordWrapAction.Checked then
       ViewWordWrapAction.Execute;
     ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True);
@@ -211,7 +216,7 @@ begin
       ViewSpecialCharsAction.Execute;
     ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False);
     if ViewSelectionModeAction.Checked then
-      ViewSelectionModeAction.Execute;
+      ViewSelectionModeAction.Execute; }
   finally
     Free;
   end;
@@ -509,6 +514,7 @@ end;
 procedure TTNSNamesEditorForm.Open;
 begin
   ReadIniFile;
+  OptionsContainer.AssignTo(SynEdit);
   UpdateGutter(SynEdit);
   LoadTNSNames(GetTNSFileName);
   Show;

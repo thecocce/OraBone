@@ -478,6 +478,7 @@ object MainForm: TMainForm
                 Action = ViewGotoLineAction
                 Caption = 'Go to &Line'
                 ImageIndex = 88
+                ShortCut = 16455
               end>
             Caption = '&Search'
           end
@@ -1438,6 +1439,8 @@ object MainForm: TMainForm
       Category = '&Search'
       Caption = 'Go to Line'
       ImageIndex = 88
+      ShortCut = 16455
+      OnExecute = ViewGotoLineActionExecute
     end
     object GotoBookmarks0Action: TAction
       Category = 'Go to Bookmarks'

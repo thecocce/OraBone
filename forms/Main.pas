@@ -243,6 +243,7 @@ type
     procedure GotoBookmarks0ActionExecute(Sender: TObject);
     procedure ToggleBookmarks0ActionExecute(Sender: TObject);
     procedure PageControlCloseButtonClick(Sender: TObject);
+    procedure ViewGotoLineActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -787,6 +788,8 @@ begin
     SQLEditorSelectionFound := Assigned(SQLEditorFrame) and SQLEditorFrame.SelectionFound;
     OutputGridHasFocus := Assigned(SQLEditorFrame) and SQLEditorFrame.OutputGridHasFocus;
     ModifiedDocuments := Assigned(SQLEditorFrame) and SQLEditorFrame.ModifiedDocuments;
+
+    DBMSOutputAction.Enabled := ActiveSQLDocumentFound;
     { file }
     FileNewAction.Enabled := Assigned(SQLEditorFrame);
     FileOpenAction.Enabled := FileNewAction.Enabled;
@@ -967,9 +970,6 @@ begin
     else
       Caption := MAIN_CAPTION;
 
-
-    //DatabaseExportTableDataAction.Enabled := DatabaseExportTableDataAction.Enabled or
-    //  (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
     { Tools }
     ToolsCompareFilesAction.Enabled := Assigned(SQLEditorFrame);
     ToolsCompareSchemasAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0);
@@ -1114,7 +1114,6 @@ begin
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
-    OptionsContainer.GutterLineNumbers := ReadBool('Options', 'GutterLineNumbers', True);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
     OptionsContainer.ConnectionShowCloseButton := ReadBool('Options', 'ConnectionShowCloseButton', False);
     OptionsContainer.EditorMultiLine := ReadBool('Options', 'EditorMultiLine', False);
@@ -1140,8 +1139,16 @@ begin
     OptionsContainer.TimeFormat := ReadString('Options', 'TimeFormat', 'HH24:MI:SS');
     OptionsContainer.SchemaBrowserAlign := ReadString('Options', 'SchemaBrowserAlign', 'Bottom');
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
+    OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
+    OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
+    OptionsContainer.EnableSpecialChars := ReadBool('Options', 'EnableSpecialChars', False);
+    OptionsContainer.EnableSelectionMode := ReadBool('Options', 'EnableSelectionMode', False);
 
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
+    ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
+    ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
+    ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
+    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
     { Size }
     Width := ReadInteger('Size', 'Width', Round(Screen.Width * 0.8));
     Height := ReadInteger('Size', 'Height', Round(Screen.Height * 0.8));
@@ -1264,6 +1271,7 @@ begin
     { open Options }
     if OptionsDialog.Execute(OraSession, OptionsContainer) then
     begin
+      OptionsContainer.AssignTo(ActionMainMenuBar);
       PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
       PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
       for i := 0 to PageControl.PageCount - 1 do
@@ -1310,6 +1318,15 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     SQLEditorFrame.ToggleSelectionMode;
+end;
+
+procedure TMainForm.ViewGotoLineActionExecute(Sender: TObject);
+var
+  SQLEditorFrame: TSQLEditorFrame;
+begin
+  SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+    SQLEditorFrame.GotoLine;
 end;
 
 procedure TMainForm.ViewLineNumbersActionExecute(Sender: TObject);
@@ -1428,7 +1445,6 @@ begin
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
       WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
-      WriteBool('Options', 'GutterLineNumbers', OptionsContainer.GutterLineNumbers);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
       WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
       WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
@@ -1455,6 +1471,14 @@ begin
       WriteString('Options', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
+
+      DeleteKey('Options', 'GutterLineNumbers'); { depricated }
+
+      WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
+      WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
+      WriteBool('Options', 'EnableSpecialChars', ViewSpecialCharsAction.Checked);
+      WriteBool('Options', 'EnableSelectionMode', ViewSelectionModeAction.Checked);
+
       if Assigned(TStyleManager.ActiveStyle) then
         WriteString('Options', 'StyleName', TStyleManager.ActiveStyle.Name);
 
@@ -1567,6 +1591,7 @@ begin
   StatusBar.Font.Size := 8;
   OraCall.OCIUnicode := True;
   ReadIniOptions;
+  OptionsContainer.AssignTo(ActionMainMenuBar);
 end;
 
 procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -1637,11 +1662,7 @@ begin
     SQLEditorFrame := GetActiveSQLEditor;
     with TBigIniFile.Create(Common.GetINIFilename) do
     try
-      WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
-      WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
-      WriteBool('Options', 'EnableSpecialChars', ViewSpecialCharsAction.Checked);
-      WriteBool('Options', 'EnableSelectionMode', ViewSelectionModeAction.Checked);
-       { Toolbar action visibility }
+    { Toolbar action visibility }
       EraseSection('ActionToolBar');
       for i := 0 to SQLEditorFrame.ToolbarPopupMenu.Items.Count - 1 do
         WriteBool('ActionToolBar', SQLEditorFrame.ToolbarPopupMenu.Items[i].Caption, SQLEditorFrame.ToolbarPopupMenu.Items[i].Checked);
@@ -1938,10 +1959,12 @@ begin
     TabSheet.PageControl := PageControl;
     TabSheet.ImageIndex := IMAGE_INDEX_SQL_EDITOR;
     TabSheet.Caption := FormattedSchema;
+
     Result := TSQLEditorFrame.Create(TabSheet);
     Result.Parent := TabSheet;
     Result.PopupMenu := DocumentPopupMenu;
-
+    PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+    PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
     Result.HighlighterTableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
     Result.ObjectNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
@@ -1952,6 +1975,7 @@ begin
     PageControl.ActivePage := TabSheet;
     if AddNewDocument then
       Result.New;
+
   end;
 end;
 
