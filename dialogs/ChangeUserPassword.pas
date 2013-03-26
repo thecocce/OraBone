@@ -43,7 +43,7 @@ var
 
 function ChangeUserPasswordDialog: TChangeUserPasswordDialog;
 begin
-  if FChangeUserPasswordDialog = nil then
+  if not Assigned(FChangeUserPasswordDialog) then
     Application.CreateForm(TChangeUserPasswordDialog, FChangeUserPasswordDialog);
   Result := FChangeUserPasswordDialog;
   StyleHooks.SetStyledFormSize(Result);

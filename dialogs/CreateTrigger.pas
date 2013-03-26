@@ -57,7 +57,7 @@ var
 
 function CreateTriggerDialog: TCreateTriggerDialog;
 begin
-  if FCreateTriggerDialog = nil then
+  if not Assigned(FCreateTriggerDialog) then
     Application.CreateForm(TCreateTriggerDialog, FCreateTriggerDialog);
   Result := FCreateTriggerDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

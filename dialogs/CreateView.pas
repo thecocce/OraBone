@@ -63,7 +63,7 @@ var
 
 function CreateViewDialog: TCreateViewDialog;
 begin
-  if FCreateViewDialog = nil then
+  if not Assigned(FCreateViewDialog) then
     Application.CreateForm(TCreateViewDialog, FCreateViewDialog);
   Result := FCreateViewDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

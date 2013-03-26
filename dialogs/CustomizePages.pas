@@ -64,7 +64,7 @@ var
 
 function CustomizePageControlDialog: TCustomizePageControlDialog;
 begin
-  if FCustomizePageControlDialog = nil then
+  if not Assigned(FCustomizePageControlDialog) then
     Application.CreateForm(TCustomizePageControlDialog, FCustomizePageControlDialog);
   Result := FCustomizePageControlDialog;
   StyleHooks.SetStyledFormSize(Result);

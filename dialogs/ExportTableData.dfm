@@ -40,7 +40,6 @@ object ExportTableDataDialog: TExportTableDataDialog
       Width = 120
       Height = 21
       Hint = 'Export Format.'
-      ItemHeight = 13
       ReadOnly = False
       TabOrder = 0
       Text = 'CSV File'
@@ -108,7 +107,6 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 120
           Height = 21
           Hint = 'Delimiter.'
-          ItemHeight = 13
           ReadOnly = False
           TabOrder = 0
           Text = 'Semicolon'
@@ -269,6 +267,10 @@ object ExportTableDataDialog: TExportTableDataDialog
       object ColumnsTabSheet: TTabSheet
         Caption = 'Columns'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ColumnsPanel: TPanel
           Left = 0
           Top = 0

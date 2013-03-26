@@ -47,7 +47,7 @@ var
 
 function QueryProgressDialog: TQueryProgressDialog;
 begin
-  if FQueryProgressDialog = nil then
+  if not Assigned(FQueryProgressDialog) then
     Application.CreateForm(TQueryProgressDialog, FQueryProgressDialog);
   Result := FQueryProgressDialog;
   StyleHooks.SetStyledFormSize(Result);

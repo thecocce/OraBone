@@ -43,7 +43,7 @@ var
 
 function AnalyzeTableDialog: TAnalyzeTableDialog;
 begin
-  if FAnalyzeTableDialog = nil then
+  if not Assigned(FAnalyzeTableDialog) then
     Application.CreateForm(TAnalyzeTableDialog, FAnalyzeTableDialog);
   Result := FAnalyzeTableDialog;
   StyleHooks.SetStyledFormSize(Result);

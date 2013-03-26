@@ -62,7 +62,7 @@ var
 
 function CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog;
 begin
-  if FCustomizeTableColumnsrDialog = nil then
+  if not Assigned(FCustomizeTableColumnsrDialog) then
     Application.CreateForm(TCustomizeTableColumnsDialog, FCustomizeTableColumnsrDialog);
   Result := FCustomizeTableColumnsrDialog;
   StyleHooks.SetStyledFormSize(Result);

@@ -48,7 +48,7 @@ var
 
 function ParametersDialog: TParametersDialog;
 begin
-  if FParametersDialog = nil then
+  if not Assigned(FParametersDialog) then
     Application.CreateForm(TParametersDialog, FParametersDialog);
   Result := FParametersDialog;
   StyleHooks.SetStyledFormSize(Result);

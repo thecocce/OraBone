@@ -86,7 +86,7 @@ var
 
 function DataSortDialog: TDataSortDialog;
 begin
-  if FDataSortDialog = nil then
+  if not Assigned(FDataSortDialog) then
     Application.CreateForm(TDataSortDialog, FDataSortDialog);
   Result := FDataSortDialog;
   StyleHooks.SetStyledFormSize(Result);

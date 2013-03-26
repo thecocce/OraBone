@@ -44,7 +44,7 @@ var
 
 function DropUserDialog: TDropUserDialog;
 begin
-  if FDropUserDialog = nil then
+  if not Assigned(FDropUserDialog) then
     Application.CreateForm(TDropUserDialog, FDropUserDialog);
   Result := FDropUserDialog;
   StyleHooks.SetStyledFormSize(Result);

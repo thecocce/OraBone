@@ -66,7 +66,7 @@ var
 
 function ConnectClientDialog(AOwner: TComponent): TConnectClientDialog;
 begin
-  if FConnectClientDialog = nil then
+  if not Assigned(FConnectClientDialog) then
   begin
     FConnectClientDialog := TConnectClientDialog.Create(AOwner);
     FConnectClientDialog.FillHomeCombo;

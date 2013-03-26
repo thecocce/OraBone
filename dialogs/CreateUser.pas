@@ -44,7 +44,7 @@ var
 
 function CreateUserDialog: TCreateUserDialog;
 begin
-  if FCreateUserDialog = nil then
+  if not Assigned(FCreateUserDialog) then
     Application.CreateForm(TCreateUserDialog, FCreateUserDialog);
   Result := FCreateUserDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

@@ -73,7 +73,7 @@ var
 
 function ImportTableDataDialog: TImportTableDataDialog;
 begin
-  if FImportTableDataDialog = nil then
+  if not Assigned(FImportTableDataDialog) then
     Application.CreateForm(TImportTableDataDialog, FImportTableDataDialog);
   Result := FImportTableDataDialog;
   StyleHooks.SetStyledFormSize(Result);

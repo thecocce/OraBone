@@ -416,7 +416,7 @@ end;
 
 initialization
 
-  if GetClass('TConnectListDialog') = nil then
+  if not Assigned(GetClass('TConnectListDialog')) then
     System.Classes.RegisterClass(TConnectListDialog);
 
 end.

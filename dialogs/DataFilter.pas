@@ -100,7 +100,7 @@ var
 
 function DataFilterDialog: TDataFilterDialog;
 begin
-  if FDataFilterDialog = nil then
+  if not Assigned(FDataFilterDialog) then
     Application.CreateForm(TDataFilterDialog, FDataFilterDialog);
   Result := FDataFilterDialog;
   StyleHooks.SetStyledFormSize(Result);

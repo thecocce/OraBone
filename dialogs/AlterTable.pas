@@ -79,7 +79,7 @@ var
 
 function AlterTableDialog: TAlterTableDialog;
 begin
-  if FAlterTableDialog = nil then
+  if not Assigned(FAlterTableDialog) then
     Application.CreateForm(TAlterTableDialog, FAlterTableDialog);
   Result := FAlterTableDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

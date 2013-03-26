@@ -18,7 +18,6 @@ object MainForm: TMainForm
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
-  OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -475,7 +474,7 @@ object MainForm: TMainForm
                 Caption = '-'
               end
               item
-                Action = ViewGotoLineAction
+                Action = SearchGotoLineAction
                 Caption = 'Go to &Line'
                 ImageIndex = 88
                 ShortCut = 16455
@@ -1435,12 +1434,12 @@ object MainForm: TMainForm
       ImageIndex = 71
       OnExecute = ClearBookmarksActionExecute
     end
-    object ViewGotoLineAction: TAction
+    object SearchGotoLineAction: TAction
       Category = '&Search'
       Caption = 'Go to Line'
       ImageIndex = 88
       ShortCut = 16455
-      OnExecute = ViewGotoLineActionExecute
+      OnExecute = SearchGotoLineActionExecute
     end
     object GotoBookmarks0Action: TAction
       Category = 'Go to Bookmarks'

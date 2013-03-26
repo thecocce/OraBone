@@ -91,7 +91,7 @@ var
 
 function SchemaCompareForm: TSchemaCompareForm;
 begin
-  if FSchemaCompareForm = nil then
+  if not Assigned(FSchemaCompareForm) then
     Application.CreateForm(TSchemaCompareForm, FSchemaCompareForm);
   Result := FSchemaCompareForm;
   StyleHooks.SetStyledFormSize(Result);

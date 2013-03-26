@@ -184,7 +184,7 @@ var
 
 function TNSNamesEditorForm: TTNSNamesEditorForm;
 begin
-  if FTNSNamesEditorForm = nil then
+  if not Assigned(FTNSNamesEditorForm) then
     Application.CreateForm(TTNSNamesEditorForm, FTNSNamesEditorForm);
   Result := FTNSNamesEditorForm;
 end;

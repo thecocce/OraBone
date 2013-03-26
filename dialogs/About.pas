@@ -46,7 +46,7 @@ var
 
 function AboutDialog: TAboutDialog;
 begin
-  if FAboutDialog = nil then
+  if not Assigned(FAboutDialog) then
     Application.CreateForm(TAboutDialog, FAboutDialog);
   Result := FAboutDialog;
   StyleHooks.SetStyledFormSize(Result);

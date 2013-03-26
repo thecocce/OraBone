@@ -41,7 +41,7 @@ var
 
 function StringDataDialog: TStringDataDialog;
 begin
-  if FStringDataDialog = nil then
+  if not Assigned(FStringDataDialog) then
     Application.CreateForm(TStringDataDialog, FStringDataDialog);
   Result := FStringDataDialog;
   StyleHooks.SetStyledFormSize(Result);

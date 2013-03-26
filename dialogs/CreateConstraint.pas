@@ -78,7 +78,7 @@ var
 
 function CreateConstraintDialog: TCreateConstraintDialog;
 begin
-  if FCreateConstraintDialog = nil then
+  if not Assigned(FCreateConstraintDialog) then
     Application.CreateForm(TCreateConstraintDialog, FCreateConstraintDialog);
   Result := FCreateConstraintDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

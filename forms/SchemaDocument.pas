@@ -84,7 +84,7 @@ var
 
 function SchemaDocumentForm: TSchemaDocumentForm;
 begin
-  if FSchemaDocumentForm = nil then
+  if not Assigned(FSchemaDocumentForm) then
     Application.CreateForm(TSchemaDocumentForm, FSchemaDocumentForm);
   Result := FSchemaDocumentForm;
 end;

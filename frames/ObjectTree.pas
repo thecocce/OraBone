@@ -1459,13 +1459,13 @@ begin
   end;
   if (SelectedLevel = 1) or (SelectedLevel = 3) then
   begin
-    FObjectType := GetSelectedObjectType; // TRootNodeData(ObjectTreeFrame.ObjectTreeView.Selected.Parent.Data).RootType;
+    FObjectType := GetSelectedObjectType;
     OldObjectName := FObjectName;
     if SelectedLevel = 1 then
-      FObjectName := GetSelectedObjectText // ObjectTreeView.Selected.Text;
+      FObjectName := GetSelectedObjectText
     else
       FObjectName := GetSelectedObjectName;
-    Result := FObjectName <> OldObjectName; //Sender = nil;
+    Result := FObjectName <> OldObjectName;
   end;
 end;
 

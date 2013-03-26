@@ -59,7 +59,7 @@ var
 
 function CreateFunctionDialog: TCreateFunctionDialog;
 begin
-  if FCreateFunctionDialog = nil then
+  if not Assigned(FCreateFunctionDialog) then
     Application.CreateForm(TCreateFunctionDialog, FCreateFunctionDialog);
   Result := FCreateFunctionDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

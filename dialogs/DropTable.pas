@@ -47,7 +47,7 @@ var
 
 function DropTableDialog: TDropTableDialog;
 begin
-  if FDropTableDialog = nil then
+  if not Assigned(FDropTableDialog) then
     Application.CreateForm(TDropTableDialog, FDropTableDialog);
   Result := FDropTableDialog;
   StyleHooks.SetStyledFormSize(Result);

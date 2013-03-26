@@ -67,7 +67,7 @@ var
 
 function CreateTableDialog: TCreateTableDialog;
 begin
-  if FCreateTableDialog = nil then
+  if not Assigned(FCreateTableDialog) then
     Application.CreateForm(TCreateTableDialog, FCreateTableDialog);
   Result := FCreateTableDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

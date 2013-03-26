@@ -67,7 +67,7 @@ var
 
 function TableSourceOptionsDialog: TTableSourceOptionsDialog;
 begin
-  if FTableSourceOptionsDialog = nil then
+  if not Assigned(FTableSourceOptionsDialog) then
     Application.CreateForm(TTableSourceOptionsDialog, FTableSourceOptionsDialog);
   Result := FTableSourceOptionsDialog;
   FTableSourceOptionsDialog.ReadIniFile;

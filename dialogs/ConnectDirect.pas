@@ -76,7 +76,7 @@ var
 
 function ConnectDirectDialog(AOwner: TComponent): TConnectDirectDialog;
 begin
-  if FConnectDirectDialog = nil then
+  if not Assigned(FConnectDirectDialog) then
     FConnectDirectDialog := TConnectDirectDialog.Create(AOwner);
   Result := FConnectDirectDialog;
   StyleHooks.SetStyledFormSize(Result);

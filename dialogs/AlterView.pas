@@ -76,7 +76,7 @@ var
 
 function AlterViewDialog: TAlterViewDialog;
 begin
-  if FAlterViewDialog = nil then
+  if not Assigned(FAlterViewDialog) then
     Application.CreateForm(TAlterViewDialog, FAlterViewDialog);
   Result := FAlterViewDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

@@ -39,7 +39,7 @@ var
 
 function CreatePackageDialog: TCreatePackageDialog;
 begin
-  if FCreatePackageDialog = nil then
+  if not Assigned(FCreatePackageDialog) then
     Application.CreateForm(TCreatePackageDialog, FCreatePackageDialog);
   Result := FCreatePackageDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

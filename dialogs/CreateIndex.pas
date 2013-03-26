@@ -56,7 +56,7 @@ var
 
 function CreateIndexDialog: TCreateIndexDialog;
 begin
-  if FCreateIndexDialog = nil then
+  if not Assigned(FCreateIndexDialog) then
     Application.CreateForm(TCreateIndexDialog, FCreateIndexDialog);
   Result := FCreateIndexDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

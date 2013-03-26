@@ -47,7 +47,7 @@ var
 
 function CreateSequenceDialog: TCreateSequenceDialog;
 begin
-  if FCreateSequenceDialog = nil then
+  if not Assigned(FCreateSequenceDialog) then
     Application.CreateForm(TCreateSequenceDialog, FCreateSequenceDialog);
   Result := FCreateSequenceDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

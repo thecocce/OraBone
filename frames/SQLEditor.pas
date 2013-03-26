@@ -58,7 +58,7 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -321,6 +321,7 @@ type
     procedure InitializeSynEditPrint;
     function GetOpenTabSheets: Boolean;
     function GetSelectionFound: Boolean;
+    function GetOpenTabSheetCount: Integer;
     function GetCanUndo: Boolean;
     function GetCanRedo: Boolean;
     function CanFindNextPrevious: Boolean;
@@ -348,6 +349,7 @@ type
     function GetActiveDocumentModified: Boolean;
     procedure PageControlRepaint;
     procedure SetActivePageCaptionModified;
+    function GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -408,6 +410,7 @@ type
     property DataQueryOpened: Boolean read GetDataQueryOpened;
     property OutputGridHasFocus: Boolean read GetOutputGridHasFocus;
     property InTransaction: Boolean read FInTransaction write FInTransaction;
+    property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
     procedure ExecuteStatement; overload;
     procedure ExecuteScript;
     procedure ShowObjects;
@@ -437,7 +440,7 @@ implementation
 uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks, SynUnicode,
   Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
-  Compare, Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
+  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
 
 const
@@ -721,6 +724,7 @@ procedure TSQLEditorFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
 var
   i, Right: Integer;
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+  CompareFrame: TCompareFrame;
   LStyles: TCustomStyleServices;
   PanelColor: TColor;
 begin
@@ -750,6 +754,9 @@ begin
       UpdateGutter(SQLEditorTabSheetFrame.OraSynEdit);
       SQLEditorTabSheetFrame.Panel.Padding.Right := Right;
     end;
+    CompareFrame := GetCompareFrame(PageControl.Pages[i]);
+    if Assigned(CompareFrame) then
+      CompareFrame.Panel.Padding.Right := Right
   end;
   UpdateSQLSynColors(SynSQLSyn);
 end;
@@ -970,6 +977,15 @@ begin
   end;
 end;
 
+function TSQLEditorFrame.GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
+begin
+  Result := nil;
+  if Assigned(TabSheet) then
+    if TabSheet.ComponentCount <> 0 then
+      if TabSheet.Components[0] is TCompareFrame then
+        Result := TCompareFrame(TabSheet.Components[0]);
+end;
+
 procedure TSQLEditorFrame.CompareFiles(FileName: string; AFileDragDrop: Boolean);
 var
   i: Integer;
@@ -994,7 +1010,7 @@ begin
     for i := 0 to PageControl.PageCount - 1 do
       if PageControl.Pages[i].ImageIndex = FCompareImageIndex then
       begin
-        Frame := TCompareFrame(PageControl.Pages[i].Components[0].Components[0]);
+        Frame := GetCompareFrame(PageControl.Pages[i]);
         { if there already are two files to compare then continue }
         if Frame.ComparedFilesSet then
           Continue
@@ -1021,6 +1037,8 @@ begin
     Align := alClient;
     OpenDocumentsList := TempList;
     SetCompareFile(Filename);
+    SpecialChars := OptionsContainer.EnableSpecialChars;
+    LineNumbers := OptionsContainer.EnableLineNumbers;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
   PageControlRepaint;
@@ -1713,6 +1731,11 @@ begin
     Result := eoShowSpecialChars in SynEdit.Options;
 end;
 
+function TSQLEditorFrame.GetOpenTabSheetCount: Integer;
+begin
+  Result := PageControl.PageCount;
+end;
+
 function TSQLEditorFrame.ToggleSpecialChars: Boolean;
 var
   i: Integer;
@@ -1731,6 +1754,8 @@ begin
         SynEdit.Options := SynEdit.Options + [eoShowSpecialChars];
       Result := eoShowSpecialChars in SynEdit.Options;
     end;
+    if PageControl.Pages[i].Components[0] is TCompareFrame then
+      Result := TCompareFrame(PageControl.Pages[i].Components[0]).ToggleSpecialChars
   end;
   PageControlRepaint;
 end;
@@ -1792,6 +1817,8 @@ begin
       SynEdit.Gutter.ShowLineNumbers := not SynEdit.Gutter.ShowLineNumbers;
       Result := SynEdit.Gutter.ShowLineNumbers;
     end;
+    if PageControl.Pages[i].Components[0] is TCompareFrame then
+      Result := TCompareFrame(PageControl.Pages[i].Components[0]).ToggleLineNumbers
   end;
   PageControlRepaint;
 end;

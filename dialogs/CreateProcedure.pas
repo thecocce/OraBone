@@ -57,7 +57,7 @@ var
 
 function CreateProcedureDialog: TCreateProcedureDialog;
 begin
-  if FCreateProcedureDialog = nil then
+  if not Assigned(FCreateProcedureDialog) then
     Application.CreateForm(TCreateProcedureDialog, FCreateProcedureDialog);
   Result := FCreateProcedureDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

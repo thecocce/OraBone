@@ -46,8 +46,7 @@ var
 
 function ProgressDialog(AOwner: TComponent): TProgressDialog;
 begin
-  if FProgressDialog = nil then
-    //Application.CreateForm(TProgressDialog, FProgressDialog);
+  if not Assigned(FProgressDialog) then
     FProgressDialog := TProgressDialog.Create(AOwner);
   Result := FProgressDialog;
 end;

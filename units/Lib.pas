@@ -892,7 +892,7 @@ begin
         begin
           FieldName := DataSet.FieldDefList.Strings[i];
           Field := DataSet.FindField(FieldName);
-          if (Field = nil) or (Field.Owner <> DataSet.Owner) then
+          if not Assigned(Field) or (Field.Owner <> DataSet.Owner) then
             FieldsList.Add(FieldName);
         end;
 

@@ -89,7 +89,7 @@ var
 
 function ExportTableDataDialog: TExportTableDataDialog;
 begin
-  if FExportTableDataDialog = nil then
+  if not Assigned(FExportTableDataDialog) then
     Application.CreateForm(TExportTableDataDialog, FExportTableDataDialog);
   Result := FExportTableDataDialog;
   StyleHooks.SetStyledFormSize(Result);

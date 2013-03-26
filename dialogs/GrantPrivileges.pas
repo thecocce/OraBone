@@ -53,7 +53,7 @@ var
 
 function GrantPrivilegesDialog: TGrantPrivilegesDialog;
 begin
-  if FGrantPrivilegesDialog = nil then
+  if not Assigned(FGrantPrivilegesDialog) then
     Application.CreateForm(TGrantPrivilegesDialog, FGrantPrivilegesDialog);
   Result := FGrantPrivilegesDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

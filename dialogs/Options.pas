@@ -188,7 +188,7 @@ var
 
 function OptionsContainer: TOptionsContainer;
 begin
-  if FOptionsContainer = nil then
+  if not Assigned(FOptionsContainer) then
     FOptionsContainer := TOptionsContainer.Create(nil);
   Result := FOptionsContainer;
 end;
@@ -311,7 +311,7 @@ end;
 
 function OptionsDialog: TOptionsDialog;
 begin
-  if FOptionsDialog = nil then
+  if not Assigned(FOptionsDialog) then
     Application.CreateForm(TOptionsDialog, FOptionsDialog);
   Result := FOptionsDialog;
   StyleHooks.SetStyledFormSize(Result);

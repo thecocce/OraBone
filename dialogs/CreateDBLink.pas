@@ -46,7 +46,7 @@ var
 
 function CreateDBLinkDialog: TCreateDBLinkDialog;
 begin
-  if FCreateDBLinkDialog = nil then
+  if not Assigned(FCreateDBLinkDialog) then
     Application.CreateForm(TCreateDBLinkDialog, FCreateDBLinkDialog);
   Result := FCreateDBLinkDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

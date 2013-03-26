@@ -67,7 +67,7 @@ var
 
 function ObjectSearhForm: TObjectSearhForm;
 begin
-  if FObjectSearhForm = nil then
+  if not Assigned(FObjectSearhForm) then
     Application.CreateForm(TObjectSearhForm, FObjectSearhForm);
   Result := FObjectSearhForm;
   StyleHooks.SetStyledFormSize(Result);

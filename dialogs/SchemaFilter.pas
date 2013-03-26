@@ -51,7 +51,7 @@ var
 
 function SchemaFilterDialog: TSchemaFilterDialog;
 begin
-  if FSchemaFilterDialog = nil then
+  if not Assigned(FSchemaFilterDialog) then
     Application.CreateForm(TSchemaFilterDialog, FSchemaFilterDialog);
   Result := FSchemaFilterDialog;
   StyleHooks.SetStyledFormSize(Result);

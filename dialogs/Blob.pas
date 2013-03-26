@@ -39,7 +39,7 @@ var
 
 function BlobDialog: TBlobDialog;
 begin
-  if FBlobDialog = nil then
+  if not Assigned(FBlobDialog) then
     Application.CreateForm(TBlobDialog, FBlobDialog);
   Result := FBlobDialog;
   StyleHooks.SetStyledFormSize(Result);

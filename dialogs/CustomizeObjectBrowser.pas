@@ -57,7 +57,7 @@ var
 
 function CustomizeObjectBrowserDialog: TCustomizeObjectBrowserDialog;
 begin
-  if FCustomizeObjectBrowserDialog = nil then
+  if not Assigned(FCustomizeObjectBrowserDialog) then
     Application.CreateForm(TCustomizeObjectBrowserDialog, FCustomizeObjectBrowserDialog);
   Result := FCustomizeObjectBrowserDialog;
   StyleHooks.SetStyledFormSize(Result);

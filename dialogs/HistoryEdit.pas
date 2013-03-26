@@ -63,7 +63,7 @@ var
 
 function HistoryEditDialog: THistoryEditDialog;
 begin
-  if FHistoryEditDialog = nil then
+  if not Assigned(FHistoryEditDialog) then
     Application.CreateForm(THistoryEditDialog, FHistoryEditDialog);
   Result := FHistoryEditDialog;
   StyleHooks.SetStyledFormSize(Result);

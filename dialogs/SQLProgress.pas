@@ -46,7 +46,7 @@ var
 
 function SQLProgressDialog: TSQLProgressDialog;
 begin
-  if FSQLProgressDialog = nil then
+  if not Assigned(FSQLProgressDialog) then
     Application.CreateForm(TSQLProgressDialog, FSQLProgressDialog);
   Result := FSQLProgressDialog;
   StyleHooks.SetStyledFormSize(Result);

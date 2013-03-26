@@ -69,7 +69,7 @@ var
 
 function CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog;
 begin
-  if FCustomizeObjectFiltersDialog = nil then
+  if not Assigned(FCustomizeObjectFiltersDialog) then
     Application.CreateForm(TCustomizeObjectFiltersDialog, FCustomizeObjectFiltersDialog);
   Result := FCustomizeObjectFiltersDialog;
   StyleHooks.SetStyledFormSize(Result);

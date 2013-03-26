@@ -49,7 +49,7 @@ var
 
 function CreateSynonymDialog: TCreateSynonymDialog;
 begin
-  if FCreateSynonymDialog = nil then
+  if not Assigned(FCreateSynonymDialog) then
     Application.CreateForm(TCreateSynonymDialog, FCreateSynonymDialog);
   Result := FCreateSynonymDialog;
   StyleHooks.SetStyledFormSize(TDialog(Result));

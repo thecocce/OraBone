@@ -127,7 +127,7 @@ type
     ViewSpecialCharsAction: TAction;
     ViewToolbarAction: TAction;
     ViewWordWrapAction: TAction;
-    ViewGotoLineAction: TAction;
+    SearchGotoLineAction: TAction;
     GotoBookmarks0Action: TAction;
     GotoBookmarks1Action: TAction;
     GotoBookmarks2Action: TAction;
@@ -211,7 +211,6 @@ type
     procedure FormatSQLActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure HelpAboutMenuActionExecute(Sender: TObject);
@@ -243,7 +242,7 @@ type
     procedure GotoBookmarks0ActionExecute(Sender: TObject);
     procedure ToggleBookmarks0ActionExecute(Sender: TObject);
     procedure PageControlCloseButtonClick(Sender: TObject);
-    procedure ViewGotoLineActionExecute(Sender: TObject);
+    procedure SearchGotoLineActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -287,7 +286,7 @@ uses
   About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCOraSynEdit;
+  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar;
 
 {$R *.dfm}
 
@@ -832,6 +831,7 @@ begin
     else
       SearchAction.ShortCut := scNone;
     SearchAction.Enabled := ActiveSQLDocumentFound;
+    SearchGotoLineAction.Enabled := ActiveSQLDocumentFound;
     SearchReplaceAction.Enabled := ActiveSQLDocumentFound;
     SearchFindNextAction.Enabled := ActiveSQLDocumentFound;
     SearchFindPreviousAction.Enabled := ActiveSQLDocumentFound;
@@ -851,8 +851,8 @@ begin
       SQLEditorFrame.HorizontalSplitter.Visible := SQLEditorFrame.OutputPanel.Visible;
     end;
     ViewWordWrapAction.Enabled := ActiveSQLDocumentFound;
-    ViewLineNumbersAction.Enabled := ActiveSQLDocumentFound;
-    ViewSpecialCharsAction.Enabled := ActiveSQLDocumentFound;
+    ViewLineNumbersAction.Enabled := Assigned(SQLEditorFrame) and (SQLEditorFrame.OpenTabSheetCount > 0);
+    ViewSpecialCharsAction.Enabled := ViewLineNumbersAction.Enabled;
     ViewSelectionModeAction.Enabled := ActiveSQLDocumentFound;
     ViewSelectionModeAction.Checked := ActiveSQLDocumentFound and SQLEditorFrame.SelectionMode;
     { Database Export }
@@ -957,8 +957,6 @@ begin
 
       CaptionText := CaptionText + MAIN_CAPTION_CLOSE;
 
-
-
       if Assigned(SchemaBrowserFrame) then
         if Assigned(SchemaBrowserFrame.ObjectTreeFrame) then
           if SchemaBrowserFrame.ObjectTreeFrame.Session.Connected then
@@ -975,7 +973,8 @@ begin
     ToolsCompareSchemasAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0);
     ToolsOptionsAction.Enabled := (not FConnecting) and (PageControl.PageCount > 0) and (Assigned(SchemaBrowserFrame) or
       Assigned(SQLEditorFrame));
-    ToolsSelectForCompareAction.Enabled := Assigned(SQLEditorFrame) and (not SQLEditorFrame.ActiveDocumentModified);
+    ToolsSelectForCompareAction.Enabled := Assigned(SQLEditorFrame) and SQLEditorFrame.ActiveDocumentFound and
+      (not SQLEditorFrame.ActiveDocumentModified);
     DatabaseObjectSearchAction.Enabled := ToolsOptionsAction.Enabled;
 
     SchemaDocumentAction.Enabled := (not FConnecting) and Assigned(SchemaBrowserFrame);
@@ -1320,7 +1319,7 @@ begin
     SQLEditorFrame.ToggleSelectionMode;
 end;
 
-procedure TMainForm.ViewGotoLineActionExecute(Sender: TObject);
+procedure TMainForm.SearchGotoLineActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
 begin
@@ -1585,19 +1584,11 @@ begin
   FOnProgress := False;
   FOnStartUp := True;
   FConnecting := True;
-  ActionMainMenuBar.Font.Name := 'Tahoma'; // IDE is losing this for some reason... :/
-  ActionMainMenuBar.Font.Size := 8;
   StatusBar.Font.Name := 'Tahoma';
   StatusBar.Font.Size := 8;
   OraCall.OCIUnicode := True;
   ReadIniOptions;
   OptionsContainer.AssignTo(ActionMainMenuBar);
-end;
-
-procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  //if (Shift = [ssCtrl]) and (Key = 9) then
-  //  NextPage;
 end;
 
 procedure TMainForm.FormResize(Sender: TObject);
@@ -1975,7 +1966,6 @@ begin
     PageControl.ActivePage := TabSheet;
     if AddNewDocument then
       Result.New;
-
   end;
 end;
 
@@ -2155,16 +2145,7 @@ begin
   begin
     { sql data }
     SQLEditorFrame := GetActiveSQLEditor;
-    {if Assigned(SQLEditorFrame) then
-    begin
-      Grid := nil;
-      if Assigned(SQLEditorFrame.OutputFrame) then
-        Grid := SQLEditorFrame.OutputFrame.GetActiveGrid;
-      if Assigned(Grid) and Grid.Focused then
-        SQLEditorFrame.OutputFrame.CopyToClipboard
-      else
-        SQLEditorFrame.Copy
-    end;              }
+
     if Assigned(SQLEditorFrame) then
       SQLEditorFrame.CopyToClipboard;
   end;
@@ -2383,7 +2364,6 @@ begin
     SQLEditorFrame.ToggleCase;
 end;
 
-
 procedure TMainForm.EditUndoActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
@@ -2560,9 +2540,9 @@ begin
   PageControl.ActivePage := TabSheet;
   PageControl.ActivePage.Repaint;
   PageControl.Repaint;
-  SQLHistoryFrame.ToolBar.Repaint;
-  SQLHistoryFrame.ToolBar2.Repaint;
-  SQLHistoryFrame.ToolBar3.Repaint;
+  for i := 0 to SQLHistoryFrame.ComponentCount - 1 do
+    if SQLHistoryFrame.Components[i] is TBCToolBar then
+      TBCToolBar(SQLHistoryFrame.Components[i]).Repaint;
 end;
 
 procedure TMainForm.SQLHistoryActionExecute(Sender: TObject);
