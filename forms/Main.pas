@@ -11,6 +11,9 @@ uses
 
 const
   WM_AFTER_SHOW = WM_USER + 345; // custom message
+  { Main menu item indexes }
+  FILE_MENU_ITEMINDEX = 0;
+  FILE_REOPEN_MENU_ITEMINDEX = 2;
   VIEW_MENU_ITEMINDEX = 4;
   VIEW_STYLE_MENU_ITEMINDEX = 10;
 
@@ -148,6 +151,9 @@ type
     ToggleBookmarks7Action: TAction;
     ToggleBookmarks8Action: TAction;
     ToggleBookmarks9Action: TAction;
+    FileReopenClearAction: TAction;
+    SelectReopenFileAction: TAction;
+    FileReopenAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -243,6 +249,9 @@ type
     procedure ToggleBookmarks0ActionExecute(Sender: TObject);
     procedure PageControlCloseButtonClick(Sender: TObject);
     procedure SearchGotoLineActionExecute(Sender: TObject);
+    procedure FileReopenClearActionExecute(Sender: TObject);
+    procedure SelectReopenFileActionExecute(Sender: TObject);
+    procedure FileReopenActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -264,6 +273,7 @@ type
     procedure PreviousPage;
     procedure ReadIniFile;
     procedure ReadIniOptions;
+    procedure ReadWindowState;
     procedure RecreateStatusBar;
     procedure RecreateDragDrop;
     procedure SetFields;
@@ -272,6 +282,7 @@ type
     procedure WriteIniFile;
   public
     { Public declarations }
+    procedure CreateFileReopenList;
     procedure LoadSQLIntoEditor(Schema: string; SQLText: WideString);
     procedure SetSQLEditorFields;
     property OnProgress: Boolean write FOnProgress;
@@ -674,6 +685,19 @@ begin
     SQLEditorFrame.ToggleBookMark;
 end;
 
+procedure TMainForm.SelectReopenFileActionExecute(Sender: TObject);
+var
+  FileName: string;
+  Action: TAction;
+  SQLEditorFrame: TSQLEditorFrame;
+begin
+  Action := Sender as TAction;
+  FileName := System.Copy(Action.Caption, Pos(' ', Action.Caption) + 1, Length(Action.Caption));
+  SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+    SQLEditorFrame.Open(FileName);
+end;
+
 procedure TMainForm.SelectStyleActionExecute(Sender: TObject);
 var
   i, j: Integer;
@@ -778,6 +802,7 @@ var
   InfoText: string;
   SQLEditorFrame: TSQLEditorFrame;
   ActiveSQLDocumentFound, OutputGridHasFocus, ModifiedDocuments, SQLEditorSelectionFound: Boolean;
+  ReopenActionClientItem: TActionClientItem;
 begin
   if FOnProgress then
     Exit;
@@ -792,6 +817,8 @@ begin
     { file }
     FileNewAction.Enabled := Assigned(SQLEditorFrame);
     FileOpenAction.Enabled := FileNewAction.Enabled;
+    ReopenActionClientItem := GetActionClientItem(FILE_MENU_ITEMINDEX, FILE_REOPEN_MENU_ITEMINDEX);
+    FileReopenAction.Enabled := ActiveSQLDocumentFound and (ReopenActionClientItem.Items.Count > 0);
     FileCloseAction.Enabled := Assigned(SQLEditorFrame) and SQLEditorFrame.OpenTabSheets;
     FileCloseAllAction.Enabled := FileCloseAction.Enabled;
     FileSaveAsAction.Enabled := FileCloseAction.Enabled and ActiveSQLDocumentFound;
@@ -1069,6 +1096,74 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     SQLEditorFrame.PrintPreview;
+end;
+
+procedure TMainForm.CreateFileReopenList;
+var
+  i, j: Integer;
+  s: string;
+  ReopenActionClientItem, ActionClientItem: TActionClientItem;
+  Files: TStrings;
+  Action: TAction;
+begin
+  ReopenActionClientItem := GetActionClientItem(FILE_MENU_ITEMINDEX, FILE_REOPEN_MENU_ITEMINDEX);
+  { Destroy actions }
+  for i := ReopenActionClientItem.Items.Count - 1 downto 0 do
+    if Assigned(ReopenActionClientItem.Items[i].Action) then
+      if ReopenActionClientItem.Items[i].Action.Tag = 1 then
+        ReopenActionClientItem.Items[i].Action.Free;
+  ReopenActionClientItem.Items.Clear;
+
+  Files := TStringList.Create;
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    ReadSectionValues('FileReopenFiles', Files);
+    { Files }
+    j := 0;
+    for i := 0 to Files.Count - 1 do
+    begin
+      s := System.Copy(Files.Strings[i], Pos('=', Files.Strings[i]) + 1, Length(Files.Strings[i]));
+      if FileExists(FileName) then
+      begin
+        ActionClientItem := ReopenActionClientItem.Items.Add;
+        Action := TAction.Create(ActionManager);
+        Action.Name := Format('ReopenFile%dSelectAction', [j]);
+        Action.Caption := Format('%d %s', [j, s]);
+        Action.OnExecute := SelectReopenFileActionExecute;
+        Action.Tag := 1;
+        ActionClientItem.Action := Action;
+        Inc(j);
+      end;
+    end;
+    { Divider }
+    if Files.Count > 0 then
+    begin
+      ActionClientItem := ReopenActionClientItem.Items.Add;
+      ActionClientItem.Caption := '-';
+      { Clear }
+      ActionClientItem := ReopenActionClientItem.Items.Add;
+      ActionClientItem.Action := FileReopenClearAction;
+    end;
+  finally
+    Free;
+    Files.Free;
+  end;
+end;
+
+procedure TMainForm.FileReopenActionExecute(Sender: TObject);
+begin
+  { dummy }
+end;
+
+procedure TMainForm.FileReopenClearActionExecute(Sender: TObject);
+begin
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    EraseSection('FileReopenFiles');
+  finally
+    Free;
+  end;
+  CreateFileReopenList;
 end;
 
 procedure TMainForm.FileSaveActionExecute(Sender: TObject);
@@ -1481,15 +1576,12 @@ begin
       if Assigned(TStyleManager.ActiveStyle) then
         WriteString('Options', 'StyleName', TStyleManager.ActiveStyle.Name);
 
-      if Windowstate = wsNormal then
-      begin
-        { Position }
-        WriteInteger('Position', 'Left', Left);
-        WriteInteger('Position', 'Top', Top);
-        { Size }
-        WriteInteger('Size', 'Width', Width);
-        WriteInteger('Size', 'Height', Height);
-      end;
+      { Position }
+      WriteInteger('Position', 'Left', Left);
+      WriteInteger('Position', 'Top', Top);
+      { Size }
+      WriteInteger('Size', 'Width', Width);
+      WriteInteger('Size', 'Height', Height);
       { Open connections }
       EraseSection('OpenConnections');
       for i := 0 to PageControl.PageCount - 1 do
@@ -1527,6 +1619,23 @@ begin
   end;
 end;
 
+procedure TMainForm.ReadWindowState;
+var
+  State: Integer;
+begin
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    State := ReadInteger('Size', 'State', 0);
+    case State of
+      0: WindowState := wsNormal;
+      1: WindowState := wsMinimized;
+      2: WindowState := wsMaximized;
+    end;
+  finally
+    Free;
+  end;
+end;
+
 procedure TMainForm.WMAfterShow(var Msg: TMessage);
 begin
   if FOnStartUp then
@@ -1535,8 +1644,10 @@ begin
     Application.ProcessMessages;
     ReadIniFile;
     CreateStyleMenu;
+    CreateFileReopenList;
     UpdateGuttersAndControls;
     FOnStartUp := False;
+    ReadWindowState; { because of styles this cannot be done before... }
     Repaint;
   end;
 end;

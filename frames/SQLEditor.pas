@@ -329,6 +329,7 @@ type
     function FindOpenFile(FileName: string): TBCOraSynEdit;
     procedure SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
     procedure DoSearch;
+    procedure AddToReopenFiles(FileName: string);
     function GetFileDateTime(FileName: string): TDateTime;
     procedure SetHighlighterTableNames(Value: TStrings);
     procedure ExecuteStatement(SynEdit: TBCOraSynEdit); overload;
@@ -440,7 +441,7 @@ implementation
 uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks, SynUnicode,
   Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
-  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main,
+  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main, BigIni,
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
 
 const
@@ -1101,6 +1102,39 @@ begin
   end;
 end;
 
+procedure TSQLEditorFrame.AddToReopenFiles(FileName: string);
+var
+  i: Integer;
+  Files: TStrings;
+begin
+  Files := TStringList.Create;
+  { Read section }
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    ReadSectionValues('FileReopenFiles', Files);
+  finally
+    Free;
+  end;
+  { Insert filename }
+  for i := 0 to Files.Count - 1 do
+    Files[i] := System.Copy(Files[i], Pos('=', Files[i]) + 1, Length(Files[i]));
+  for i := Files.Count - 1 downto 0 do
+    if Files[i] = FileName then
+      Files.Delete(i);
+  Files.Insert(0, FileName);
+  while Files.Count > 10 do
+    Files.Delete(Files.Count - 1);
+  { write section }
+  with TBigIniFile.Create(Common.GetINIFilename) do
+  try
+    EraseSection('FileReopenFiles');
+    for i := 0 to Files.Count - 1 do
+      WriteString('FileReopenFiles', IntToStr(i), Files.Strings[i]);
+  finally
+    Free;
+  end;
+end;
+
 procedure TSQLEditorFrame.Open(FileName: string = ''; Bookmarks: TStrings = nil;
   Ln: Integer = 0; Ch: Integer = 0);
 var
@@ -1126,12 +1160,11 @@ begin
         SynEdit := CreateNewTabSheet(FileName);
       SynEdit.CaretXY := BufferCoord(Ch, Ln);
       SetBookmarks(SynEdit, Bookmarks);
-      try
-        PageControlRepaint;
+      PageControlRepaint;
+      if SynEdit.CanFocus then
         SynEdit.SetFocus;
-      except
-        { It is not always possible to focus... }
-      end;
+      AddToReopenFiles(FileName);
+      MainForm.CreateFileReopenList;
     end;
   end;
 end;
