@@ -200,18 +200,7 @@ var
   Data: PRoleRec;
 begin
   Data := Sender.GetNodeData(Node);
-  if Assigned(Data) then
-  begin
-    Data^.Grantee := '';
-    Data^.Grantor := '';
-    Data^.Owner := '';
-    Data^.ObjectName := '';
-    Data^.GrantedRole := '';
-    Data^.AdminOption := '';
-    Data^.DefaultRole := '';
-    Data^.ImageIndex := 0;
-  end;
-  //Finalize(Data^);
+  Finalize(Data^);
 end;
 
 procedure TUserBrowserFrame.VirtualDrawTreeGetImageIndex(Sender: TBaseVirtualTree;

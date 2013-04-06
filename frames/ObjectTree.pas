@@ -112,12 +112,12 @@ type
   PObjectNodeRec = ^TObjectNodeRec;
   TObjectNodeRec = record
     Level: Byte;
-    NodeText: ShortString;
-    NodeType: ShortString;
+    NodeText: string;
+    NodeType: string;
     ImageIndex: Byte;
     StateIndex: Byte;
     { Package specification and body }
-    SourceType: ShortString;
+    SourceType: string;
     CaretX, CaretY: Integer;
   end;
 
@@ -164,18 +164,15 @@ type
     FObjectName, FObjectType: string;
     FTreeObjects: TStrings;
     FUpdatingSchema: Boolean;
-   // FTableFilterObjects, FViewFilterObjects: string;
     FFilterObjects: array [0..11] of string;
     procedure ClearTree;
     function CreateSession(ConnectString: string = ''): TOraSession;
     procedure CreateConnectionTree;
-    //procedure UpdateImageOfInvalidObjects(NodeRoot: TTreeNode);
     procedure AddObjects;
     procedure AddInvalidObjects;
     procedure AddUsers;
     procedure AddRecycleBin;
-    function AddNode(Query: TOraQuery; ImageIndexes: array of Byte; NodeType: ShortString; NodeText: ShortString): PVirtualNode;
-    //function GetSelectedRoot: TTreeNode;
+    function AddNode(Query: TOraQuery; ImageIndexes: array of Byte; NodeType: string; NodeText: string): PVirtualNode;
     procedure LoadSchemas;
     procedure SetSchemaParam(Value: string);
     function GetSchemaFilters(SchemaName: string): string;
@@ -189,15 +186,11 @@ type
     function Connect(ConnectString: string = ''): Boolean;
     procedure Disconnect;
     procedure Refresh;
-    //procedure SaveConnections;
-    //procedure LoadConnections;
-    //function ProcessClick: string;
     function GetSchemaName: string;
     function GetConnectString: string;
     function GetSchemaItems: TStringList;
     function GetSelectedObjectText: string;
     function GetSelectedObjectName: string;
-    //function GetSelectedObjectName2: string;
     function GetSelectedObjectParentText: string;
     function GetSelectedObjectType: string;
     function GetSelectedObjectStateIndex: Byte;
@@ -206,8 +199,6 @@ type
     property SchemaParam: string read FSchemaParam write SetSchemaParam;
     property ObjectName: string read FObjectName write FObjectName;
     property ObjectType: string read FObjectType write FObjectType;
-    //property TableFilterObjects: string read FTableFilterObjects write FTableFilterObjects;
-    //property ViewFilterObjects: string read FViewFilterObjects write FViewFilterObjects;
     function SetObjectTypeAndName{(Sender: TObject)}: Boolean;
     procedure SetObjectFilter(Name: string; ObjectType: string);
     procedure SetCurrentFilter(Name: string; ObjectType: string);
@@ -221,7 +212,7 @@ type
     FColumn: Integer;          // The column of the node being edited.
     FOraSession: TOraSession;
     FSchemaParam: string;
-    procedure RenameObject(Data: PObjectNodeRec; NewName: ShortString);
+    procedure RenameObject(Data: PObjectNodeRec; NewName: string);
   protected
     procedure EditKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   public
@@ -449,7 +440,7 @@ begin
     Dec(R.Right);
     Dec(R.Bottom);
 
-    S := String(Data.NodeText);
+    S := Data.NodeText;
     if Data.Level = 0 then
       if Node.ChildCount > 0 then
         S := S + Format(TEXT_COUNT, [Node.ChildCount]);
@@ -469,20 +460,8 @@ procedure TObjectTreeFrame.VirtualDrawTreeFreeNode(Sender: TBaseVirtualTree; Nod
 var
   Data: PObjectNodeRec;
 begin
-  inherited;
-  Data := VirtualDrawTree.GetNodeData(Node);
-  if Assigned(Data) then
-  begin
-    Data^.Level := 0;
-    Data^.NodeText := '';
-    Data^.NodeType := '';
-    Data^.ImageIndex := 0;
-    Data^.StateIndex := 0;
-    Data^.SourceType := '';
-    Data^.CaretX := 0;
-    Data^.CaretY := 0;
-  end;
-  //Finalize(Data^); // Clear string data.
+  Data := Sender.GetNodeData(Node);
+  Finalize(Data^);
 end;
 
 procedure TObjectTreeFrame.VirtualDrawTreeGetImageIndex(Sender: TBaseVirtualTree;
@@ -515,7 +494,7 @@ begin
   Data := VirtualDrawTree.GetNodeData(Node);
   if Assigned(Data) then
   begin
-    S := Trim(String(Data.NodeText));
+    S := Trim(Data.NodeText);
     if Data.Level = 0 then
       if Node.ChildCount > 0 then
         S := S + Format(TEXT_COUNT, [Node.ChildCount]);
@@ -534,7 +513,7 @@ var
   s, Token: string;
   i: Integer;
   InsideComment, InsideSourceType, {InsideBrackets,} Wrapped, PackageSpec: Boolean;
-  NodeText, NodeType: ShortString;
+  NodeText, NodeType: string;
   ImageIndex, StateIndex: Integer;
 begin
   if VirtualDrawTree.SelectedCount = 0 then
@@ -556,7 +535,7 @@ begin
     try
       { Open queries }
       SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text;
-      ParamByName('P_OBJECT_NAME').AsWideString := string(ParentData.NodeText); // FObjectName;
+      ParamByName('P_OBJECT_NAME').AsWideString := ParentData.NodeText; // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;
       { read SQL to editor }
@@ -670,49 +649,49 @@ begin
                 else
                 if PackageSpec and SQLTokenizer.TokenStrIs('CONSTANT') then
                 begin
-                  NodeText := ShortString(Token);
+                  NodeText := Token;
                   NodeType := 'CONSTANT';
                   ImageIndex := 77;
                 end
                 else
                 if PackageSpec and SQLTokenizer.TokenStrIs('EXCEPTION') then
                 begin
-                  NodeText := ShortString(Token);
+                  NodeText := Token;
                   NodeType := 'EXCEPTION';
                   ImageIndex := 78;
                 end
                 else
                 if PackageSpec and (Token = 'TYPE') then
                 begin
-                  NodeText := SQLTokenizer.ShortTokenStr;
+                  NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'TYPE';
                   ImageIndex := 79;
                 end
                 else
                 if Token = 'PROCEDURE' then
                 begin
-                  NodeText := SQLTokenizer.ShortTokenStr;
+                  NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'PROCEDURE';
                   ImageIndex := 76;
                 end
                 else
                 if Token = 'FUNCTION' then
                 begin
-                  NodeText := SQLTokenizer.ShortTokenStr;
+                  NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'FUNCTION';
                   ImageIndex := 75;
                 end
                 else
                 if PackageSpec and (Token = 'CURSOR') then
                 begin
-                  NodeText := SQLTokenizer.ShortTokenStr;
+                  NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'CURSOR';
                   ImageIndex := 80;
                 end
                 else
                 if PackageSpec then
                 begin
-                  NodeText := ShortString(Token);
+                  NodeText := Token;
                   NodeType := NodeText;
                   ImageIndex := 81;
                 end;
@@ -729,7 +708,7 @@ begin
                 Data.SourceType := NodeType;
                 Data.ImageIndex := ImageIndex;
                 Data.StateIndex := StateIndex;
-                Data.CaretX := Pos(string(NodeText), SynEdit.Lines[i]);
+                Data.CaretX := Pos(NodeText, SynEdit.Lines[i]);
                 Data.CaretY := i + 1;
 
                 if (NodeType = 'FUNCTION') or (NodeType = 'PROCEDURE') then
@@ -738,7 +717,7 @@ begin
                   { read everything until next ;
                     if first word AS or string empty then skip
                     else remove () and make childnodes (items are separated by ,)}
-                  s := Copy(s, Pos(string(NodeText), s) + Length(NodeText) + 1, Length(s));
+                  s := Copy(s, Pos(NodeText, s) + Length(NodeText) + 1, Length(s));
                   if Pos(';', SynEdit.Lines[i]) = 0 then
                   repeat
                     Inc(i);
@@ -765,7 +744,7 @@ begin
                           SQLTokenizer.Next;
                           while (not SQLTokenizer.Eof) and (SQLTokenizer.TokenType = ttWhiteSpace) do
                             SQLTokenizer.Next;
-                          Data.NodeText := Data.NodeText + ': ' + SQLTokenizer.ShortTokenStr;
+                          Data.NodeText := Data.NodeText + ': ' + SQLTokenizer.TokenStr;
                         end;
 
                         if SQLTokenizer.TokenType = ttColon then
@@ -774,7 +753,7 @@ begin
                         if SQLTokenizer.TokenStrIs('=') then
                           Token := Token + '='
                         else
-                          Token := Trim(Token + ' ' + string(SQLTokenizer.TokenStr));
+                          Token := Trim(Token + ' ' + SQLTokenizer.TokenStr);
 
                         SQLTokenizer.Next;
                         while (not SQLTokenizer.Eof) and (SQLTokenizer.TokenType = ttWhiteSpace) and
@@ -789,7 +768,7 @@ begin
                           ChildData.Level := 4;
                           ChildData.NodeType := OBJECT_TYPE_PACKAGE;
                           Token := StringReplace(Token, ' . ', '.', []);
-                          ChildData.NodeText := ShortString(Token);
+                          ChildData.NodeText := Token;
 
                           ChildData.ImageIndex := 81;
                           Token := '';
@@ -1105,7 +1084,7 @@ begin
   else
     Root := ARoot;
   { find the root }
-  while Assigned(Node) and (AnsiCompareText(Root, String(Data.NodeText)) <> 0) do
+  while Assigned(Node) and (AnsiCompareText(Root, Data.NodeText) <> 0) do
   begin
     Node := Node.NextSibling;
     Data := ATree.GetNodeData(Node);
@@ -1121,7 +1100,7 @@ begin
     { find the child }
     Node := Node.FirstChild;
     Data := ATree.GetNodeData(Node);
-    while Assigned(Node) and (AnsiCompareText(AValue, String(Data.NodeText)) <> 0) do
+    while Assigned(Node) and (AnsiCompareText(AValue, Data.NodeText) <> 0) do
     begin
       Node := Node.NextSibling;
       Data := ATree.GetNodeData(Node);
@@ -1254,7 +1233,7 @@ begin
   if VirtualDrawTree.SelectedCount > 0 then
   begin
     Data := VirtualDrawTree.GetNodeData(VirtualDrawTree.GetFirstSelected);
-    Result := string(Data.NodeType);
+    Result := Data.NodeType;
   end;
 end;
 
@@ -1271,7 +1250,7 @@ begin
     begin
       Data := VirtualDrawTree.GetNodeData(Node.Parent);
       if Assigned(Data) then
-        Result := String(Data.NodeText);
+        Result := Data.NodeText;
     end;
   end;
 end;
@@ -1284,7 +1263,7 @@ begin
   if VirtualDrawTree.SelectedCount > 0 then
   begin
     Data := VirtualDrawTree.GetNodeData(VirtualDrawTree.GetFirstSelected);
-    Result := String(Data.NodeText);
+    Result := Data.NodeText;
   end;
 end;
 
@@ -1296,7 +1275,7 @@ begin
   if VirtualDrawTree.SelectedCount > 0 then
   begin
     Data := VirtualDrawTree.GetNodeData(VirtualDrawTree.GetFirstSelected.Parent.Parent);
-    Result := String(Data.NodeText);
+    Result := Data.NodeText;
   end;
 end;
 
@@ -1312,18 +1291,6 @@ begin
   end;
 end;
 
-{function TObjectTreeFrame.GetSelectedObjectName2: string;
-var
-  Data: PObjectNodeRec;
-begin
-  Result := '';
-  if VirtualDrawTree.SelectedCount > 0 then
-  begin
-    Data := VirtualDrawTree.GetNodeData(VirtualDrawTree.GetFirstSelected.Parent);
-    Result := String(Data.NodeText);
-  end;
-end;  }
-
 function TObjectTreeFrame.GetSelectedLevel: Byte;
 var
   Data: PObjectNodeRec;
@@ -1337,7 +1304,7 @@ begin
 end;
 
 function TObjectTreeFrame.AddNode(Query: TOraQuery; ImageIndexes: array of Byte;
-  NodeType: ShortString; NodeText: ShortString): PVirtualNode;
+  NodeType: string; NodeText: string): PVirtualNode;
 var
   Node, RootNode, PackageRootNode: PVirtualNode;
   Data: PObjectNodeRec;
@@ -1352,7 +1319,7 @@ begin
   Data.Level := 0;
   with Query do
   begin
-    while (not Eof) and (FieldByName('TYPE').AsString = String(NodeType)) do
+    while (not Eof) and (FieldByName('TYPE').AsString = NodeType) do
     begin
       //Application.ProcessMessages;
       //Screen.Cursor := crSQLWait;
@@ -1391,7 +1358,7 @@ begin
       else
       if FieldByName('STATUS').AsWideString  = 'DISABLED' then
         Data.StateIndex := 2;
-      Data.NodeText := ShortString(FieldByName('NAME').AsString);
+      Data.NodeText := FieldByName('NAME').AsString;
 
       if NodeType = 'PACKAGE' then
       begin
@@ -1588,11 +1555,10 @@ begin
   FEdit.Hide;
 end;
 
-procedure TEditLink.RenameObject(Data: PObjectNodeRec; NewName: ShortString);
+procedure TEditLink.RenameObject(Data: PObjectNodeRec; NewName: string);
 var
-  OldName: ShortString;
+  OldName: string;
   ObjectType, ObjectName: string;
-  //OraQuery: TOraQuery;
 begin
   OldName := Data.NodeText;
   if Data.NodeType = OBJECT_TYPE_CONSTRAINT then
@@ -1603,7 +1569,7 @@ begin
     try
       Session := FOraSession;
       SQL.Add(DM.StringHolder.StringsByName['ConstraintTypeAndNameSQL'].Text);
-      ParamByName('CONSTRAINT_NAME').AsWideString := String(OldName);
+      ParamByName('CONSTRAINT_NAME').AsWideString := OldName;
       Open;
       ObjectType := FieldByName('TYPE').AsWideString;
       ObjectName := FieldByName('NAME').AsWideString;
@@ -1644,19 +1610,19 @@ begin
       Exit;
     end;
 
-    if String(Data.NodeText) = S then
+    if Data.NodeText = S then
       Exit;
 
     if not Common.AskYesOrNo(Format('Do you want to rename %s %s to %s?', [Data.NodeType, Data.NodeText, S])) then
     begin
-      S := String(Data.NodeText);
+      S := Data.NodeText;
       Exit;
     end;
     FTree.SetFocus;
-    RenameObject(Data, ShortString(S));
-    if ShortString(S) <> Data.NodeText then
+    RenameObject(Data, S);
+    if S <> Data.NodeText then
     begin
-      Data.NodeText := ShortString(S);
+      Data.NodeText := S;
       FTree.InvalidateNode(FNode);
     end;
     FTree.SetFocus;
@@ -1690,7 +1656,7 @@ begin
     Visible := False;
     Parent := Tree;
     Flat := True;
-    Text := String(Data.NodeText);
+    Text := Data.NodeText;
     OnKeyDown := EditKeyDown;
     CharCase := ecUpperCase;
   end;

@@ -80,7 +80,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet,
+  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
@@ -710,13 +710,16 @@ begin
 end;
 
 procedure TOutputFrame.CloseTabSheet;
+var
+  ActivePageIndex: Integer;
 begin
   if PageControl.PageCount > 0 then
   begin
     Self.Clear;
+    ActivePageIndex := PageControl.ActivePageIndex;
     PageControl.ActivePage.Destroy;
     if PageControl.PageCount > 0 then
-      PageControl.ActivePageIndex := PageControl.PageCount - 1;
+      PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
   end;
 end;
 
@@ -908,17 +911,7 @@ var
 begin
   inherited;
   Data := Sender.GetNodeData(Node);
-  if Assigned(Data) then
-  begin
-    Data^.Level := 0;
-    Data^.Filename := '';
-    Data^.Ln := 0;
-    Data^.Ch := 0;
-    Data^.TextCh := 0;
-    Data^.Text := '';
-    Data^.SearchString := '';
-  end;
-  //Finalize(Data^);
+  Finalize(Data^);
 end;
 
 procedure TOutputFrame.UpdateControls;

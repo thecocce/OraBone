@@ -297,7 +297,7 @@ uses
   About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar;
+  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math;
 
 {$R *.dfm}
 
@@ -1750,12 +1750,12 @@ end;
 
 procedure TMainForm.CloseTab(Confirm: Boolean);
 var
-  PageIndex: Integer;
+  ActivePageIndex: Integer;
   i, Rslt: Integer;
   SQLEditorFrame: TSQLEditorFrame;
 begin
   Rslt := mrNone;
-  PageIndex := PageControl.ActivePage.PageIndex;
+  ActivePageIndex := PageControl.ActivePageIndex;
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
     Rslt := EndConnection(Confirm)
   else
@@ -1794,8 +1794,7 @@ begin
     Rslt := mrYes;
   end;
   if Rslt = mrYes then
-    if PageIndex > 1 then
-      PageControl.ActivePageIndex := PageIndex - 1;
+    PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
   PageControl.Repaint;
 end;
 

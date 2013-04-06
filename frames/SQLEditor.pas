@@ -440,7 +440,7 @@ implementation
 
 uses
   SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks, SynUnicode,
-  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData,
+  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, Math,
   Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main, BigIni,
   AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
 
@@ -662,6 +662,7 @@ begin
     TabSheet.Caption := DEFAULT_FILENAME + IntToStr(FNumberOfNewDocument)
   else
     TabSheet.Caption := ExtractFileName(FileName);
+  UpdateGuttersAndControls(PageControl.DoubleBuffered); { prevent flickering }
   PageControl.ActivePage := TabSheet;
 
   { create a SynEdit }
@@ -1185,6 +1186,7 @@ end;
 
 procedure TSQLEditorFrame.Close(IncludeCancel: Boolean);
 var
+  ActivePageIndex: Integer;
   Rslt: Integer;
   SynEdit: TBCOraSynEdit;
 begin
@@ -1200,10 +1202,11 @@ begin
 
   if Rslt <> mrCancel then
   begin
+    ActivePageIndex := PageControl.ActivePageIndex;
     if PageControl.PageCount > 0 then
       PageControl.ActivePage.Destroy;
     if PageControl.PageCount > 0 then
-      PageControl.ActivePageIndex := PageControl.PageCount - 1;
+      PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;
