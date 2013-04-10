@@ -113,7 +113,8 @@ uses
   OptionsTimeFormat in 'frames\OptionsTimeFormat.pas' {TimeFormatFrame: TFrame},
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
-  OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame};
+  OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame},
+  OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame};
 
 {$R *.res}
 

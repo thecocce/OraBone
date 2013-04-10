@@ -10,7 +10,8 @@ uses
   ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCEdit, JvExStdCtrls, JvEdit, JvCombobox,
   BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
-  OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare;
+  OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
+  OptionsStatusBar;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -49,6 +50,7 @@ type
     DBSettingsAction: TAction;
     DateFormatAction: TAction;
     TimeFormatAction: TAction;
+    StatusBarAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -74,6 +76,7 @@ type
     FTimeFormatFrame: TTimeFormatFrame;
     FConnectionTabsFrame: TConnectionTabsFrame;
     FOptionsCompareFrame: TOptionsCompareFrame;
+    FStatusBarFrame: TStatusBarFrame;
     procedure CreateTree;
     procedure GetData;
     procedure PutData;
@@ -107,6 +110,8 @@ type
     FIgnoreCase: Boolean;
     FMainMenuFontName: string;
     FMainMenuFontSize: Integer;
+    FMainMenuSystemFontName: string;
+    FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
     FOutputMultiLine: Boolean;
     FOutputShowCloseButton: Boolean;
@@ -114,6 +119,8 @@ type
     FPollingInterval: Integer;
     FRightMargin: Integer;
     FSchemaBrowserAlign: string;
+    FSchemaBrowserShowTreeLines: Boolean;
+    FSchemaBrowserIndent: Integer;
     FScrollPastEof: Boolean;
     FScrollPastEol: Boolean;
     FShadows: Boolean;
@@ -121,7 +128,10 @@ type
     FTabWidth: Integer;
     FTimeFormat: string;
     FTrimTrailingSpaces: Boolean;
-    FUseSystemFont: Boolean;
+    FMainMenuUseSystemFont: Boolean;
+    FStatusBarUseSystemFont: Boolean;
+    FStatusBarFontName: string;
+    FStatusBarFontSize: Integer;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -150,6 +160,8 @@ type
     property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
     property MainMenuFontName: string read FMainMenuFontName write FMainMenuFontName;
     property MainMenuFontSize: Integer read FMainMenuFontSize write FMainMenuFontSize;
+    property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
+    property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
     property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
@@ -157,6 +169,8 @@ type
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
     property RightMargin: Integer read FRightMargin write FRightMargin;
     property SchemaBrowserAlign: string read FSchemaBrowserAlign write FSchemaBrowserAlign;
+    property SchemaBrowserShowTreeLines: Boolean read FSchemaBrowserShowTreeLines write FSchemaBrowserShowTreeLines;
+    property SchemaBrowserIndent: Integer read FSchemaBrowserIndent write FSchemaBrowserIndent;
     property ScrollPastEof: Boolean read FScrollPastEof write FScrollPastEof;
     property ScrollPastEol: Boolean read FScrollPastEol write FScrollPastEol;
     property Shadows: Boolean read FShadows write FShadows;
@@ -164,7 +178,10 @@ type
     property TabWidth: Integer read FTabWidth write FTabWidth;
     property TimeFormat: string read FTimeFormat write FTimeFormat;
     property TrimTrailingSpaces: Boolean read FTrimTrailingSpaces write FTrimTrailingSpaces;
-    property UseSystemFont: Boolean read FUseSystemFont write FUseSystemFont;
+    property MainMenuUseSystemFont: Boolean read FMainMenuUseSystemFont write FMainMenuUseSystemFont;
+    property StatusBarUseSystemFont: Boolean read FStatusBarUseSystemFont write FStatusBarUseSystemFont;
+    property StatusBarFontName: string read FStatusBarFontName write FStatusBarFontName;
+    property StatusBarFontSize: Integer read FStatusBarFontSize write FStatusBarFontSize;
   end;
 
 function OptionsDialog: TOptionsDialog;
@@ -245,11 +262,30 @@ begin
   begin
     TActionMainMenuBar(Dest).PersistentHotKeys := FPersistentHotKeys;
     TActionMainMenuBar(Dest).Shadows := FShadows;
-    TActionMainMenuBar(Dest).UseSystemFont := FUseSystemFont;
-    Screen.MenuFont.Name := FMainMenuFontName;
-    Screen.MenuFont.Size := FMainMenuFontSize;
+    TActionMainMenuBar(Dest).UseSystemFont := FMainMenuUseSystemFont;
+    if FMainMenuUseSystemFont then
+    begin
+      Screen.MenuFont.Name := FMainMenuSystemFontName;
+      Screen.MenuFont.Size := FMainMenuSystemFontSize;
+    end
+    else
+    begin
+      Screen.MenuFont.Name := FMainMenuFontName;
+      Screen.MenuFont.Size := FMainMenuFontSize;
+    end;
     TActionMainMenuBar(Dest).AnimationStyle := FAnimationStyle;
     TActionMainMenuBar(Dest).AnimateDuration := FAnimationDuration;
+  end
+  else
+  if Assigned(Dest) and (Dest is TStatusBar) then
+  begin
+    TStatusBar(Dest).UseSystemFont := FStatusBarUseSystemFont;
+    if not FStatusBarUseSystemFont then
+    begin
+      TStatusBar(Dest).Font.Name := FStatusBarFontName;
+      TStatusBar(Dest).Font.Size := FStatusBarFontSize;
+      TStatusBar(Dest).Height := FStatusBarFontSize + 11;
+    end;
   end
   else
     inherited;
@@ -294,11 +330,16 @@ begin
   FTabWidth := 8;
   FPersistentHotKeys := False;
   FShadows := True;
-  FUseSystemFont := False;
+  FMainMenuUseSystemFont := False;
+  FMainMenuSystemFontName := Screen.MenuFont.Name;
+  FMainMenuSystemFontSize := Screen.MenuFont.Size;
   FMainMenuFontName := 'Tahoma';
   FMainMenuFontSize := 8;
   FAnimationStyle := asDefault;
   FAnimationDuration := 150;
+  FStatusBarUseSystemFont := False;
+  FStatusBarFontName := 'Tahoma';
+  FStatusBarFontSize := 8;
 end;
 
 destructor TOptionsContainer.Destroy;
@@ -332,6 +373,7 @@ begin
   FTimeFormatFrame.Destroy;
   FConnectionTabsFrame.Destroy;
   FOptionsCompareFrame.Destroy;
+  FStatusBarFrame.Destroy;
 
   FOptionsDialog := nil;
 end;
@@ -432,6 +474,11 @@ begin
     Data := GetNodeData(Node);
     Data.ImageIndex := MainMenuAction.ImageIndex;
     Data.Caption := MainMenuAction.Caption;
+    { Status Bar }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := StatusBarAction.ImageIndex;
+    Data.Caption := StatusBarAction.Caption;
     { DB Settings }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
@@ -511,7 +558,7 @@ begin
   { Main menu }
   FMainMenuFrame.PersistentHotKeysCheckBox.Checked := FOptionsContainer.PersistentHotKeys;
   FMainMenuFrame.ShadowsCheckBox.Checked := FOptionsContainer.Shadows;
-  FMainMenuFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.UseSystemFont;
+  FMainMenuFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.MainMenuUseSystemFont;
   FMainMenuFrame.FontLabel.Font.Name := FOptionsContainer.MainMenuFontName;
   FMainMenuFrame.FontLabel.Font.Size := FOptionsContainer.MainMenuFontSize;
   FMainMenuFrame.FontLabel.Caption := Format('%s %dpt', [FMainMenuFrame.FontLabel.Font.Name, FMainMenuFrame.FontLabel.Font.Size]);
@@ -525,6 +572,13 @@ begin
   { SchemaBrowser }
   FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.SchemaBrowserAlign;
   FObjectFrameFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.ObjectFrameAlign;
+  FOptionsSchemaBrowserFrame.ShowTreeLinesCheckBox.Checked := FOptionsContainer.SchemaBrowserShowTreeLines;
+  FOptionsSchemaBrowserFrame.IndentEdit.Text := IntToStr(FOptionsContainer.SchemaBrowserIndent);
+  { Status bar }
+  FStatusBarFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.StatusBarUseSystemFont;
+  FStatusBarFrame.FontLabel.Font.Name := FOptionsContainer.StatusBarFontName;
+  FStatusBarFrame.FontLabel.Font.Size := FOptionsContainer.StatusBarFontSize;
+  FStatusBarFrame.FontLabel.Caption := Format('%s %dpt', [FStatusBarFrame.FontLabel.Font.Name, FStatusBarFrame.FontLabel.Font.Size]);
 end;
 
 procedure TOptionsDialog.OKButtonActionExecute(Sender: TObject);
@@ -619,9 +673,10 @@ begin
 
     FOptionsCompareFrame.Visible := (Level = 0) and (TreeNode.Index = 4);
     FMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 5);
+    FStatusBarFrame.Visible := (Level = 0) and (TreeNode.Index = 6);
 
-    FDateFormatFrame.Visible := (ParentIndex = 6) and (Level = 1) and (TreeNode.Index = 0);
-    FTimeFormatFrame.Visible := (ParentIndex = 6) and (Level = 1) and (TreeNode.Index = 1);
+    FDateFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 0);
+    FTimeFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 1);
   end;
 end;
 
@@ -659,7 +714,7 @@ begin
   { Main menu }
   FOptionsContainer.PersistentHotKeys := FMainMenuFrame.PersistentHotKeysCheckBox.Checked;
   FOptionsContainer.Shadows := FMainMenuFrame.ShadowsCheckBox.Checked;
-  FOptionsContainer.UseSystemFont := FMainMenuFrame.UseSystemFontCheckBox.Checked;
+  FOptionsContainer.MainMenuUseSystemFont := FMainMenuFrame.UseSystemFontCheckBox.Checked;
   FOptionsContainer.MainMenuFontName := FMainMenuFrame.FontLabel.Font.Name;
   FOptionsContainer.MainMenuFontSize := FMainMenuFrame.FontLabel.Font.Size;
   FOptionsContainer.AnimationStyle := TAnimationStyle(FMainMenuFrame.AnimationStyleComboBox.ItemIndex);
@@ -671,8 +726,13 @@ begin
   FOptionsContainer.TimeFormat := FTimeFormatFrame.TimeFormatEdit.Text;
   { Schema browser }
   FOptionsContainer.SchemaBrowserAlign := FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text;
-  FOptionsContainer.ObjectFrameAlign := FObjectFrameFrame.ButtonPanelAlignComboBox.Text;
-
+  FOptionsContainer.ObjectFrameAlign := FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text;
+  FOptionsContainer.SchemaBrowserShowTreeLines := FOptionsSchemaBrowserFrame.ShowTreeLinesCheckBox.Checked;
+  FOptionsContainer.SchemaBrowserIndent := StrToIntDef(FOptionsSchemaBrowserFrame.IndentEdit.Text, 16);
+  { Status bar }
+  FOptionsContainer.StatusBarUseSystemFont := FStatusBarFrame.UseSystemFontCheckBox.Checked;
+  FOptionsContainer.StatusBarFontName := FStatusBarFrame.FontLabel.Font.Name;
+  FOptionsContainer.StatusBarFontSize := FStatusBarFrame.FontLabel.Font.Size;
 end;
 
 procedure TOptionsDialog.FormCreate(Sender: TObject);
@@ -704,6 +764,8 @@ begin
   FConnectionTabsFrame.Parent := OptionsPanel;
   FOptionsCompareFrame := TOptionsCompareFrame.Create(OptionsPanel);
   FOptionsCompareFrame.Parent := OptionsPanel;
+  FStatusBarFrame := TStatusBarFrame.Create(OptionsPanel);
+  FStatusBarFrame.Parent := OptionsPanel;
 end;
 
 end.

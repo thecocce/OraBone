@@ -191,6 +191,12 @@ end;
 
 procedure TSchemaBrowserFrame.AssignOptions;
 begin
+  ObjectTreeFrame.VirtualDrawTree.Indent := OptionsContainer.SchemaBrowserIndent;
+  if OptionsContainer.SchemaBrowserShowTreeLines then
+    ObjectTreeFrame.VirtualDrawTree.TreeOptions.PaintOptions := ObjectTreeFrame.VirtualDrawTree.TreeOptions.PaintOptions + [toShowTreeLines]
+  else
+    ObjectTreeFrame.VirtualDrawTree.TreeOptions.PaintOptions := ObjectTreeFrame.VirtualDrawTree.TreeOptions.PaintOptions - [toShowTreeLines];
+
   with ObjectTreeFrame do
   if OptionsContainer.SchemaBrowserAlign = 'Bottom' then
   begin
@@ -1965,6 +1971,7 @@ end;
 
 procedure TSchemaBrowserFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
 begin
+  AssignOptions;
   FTableBrowserFrame.TablePageControl.DoubleBuffered := DoubleBuffered;
   FViewBrowserFrame.ViewPageControl.DoubleBuffered := DoubleBuffered;
   FFuncProcBrowserFrame.FuncProcPageControl.DoubleBuffered := DoubleBuffered;

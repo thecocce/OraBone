@@ -323,6 +323,7 @@ begin
     StatusBar := nil;
   end;
   StatusBar := TStatusBar.Create(Self);
+  OptionsContainer.AssignTo(StatusBar);
   with StatusBar do
   begin
     Parent := Self;
@@ -1223,7 +1224,8 @@ begin
     OptionsContainer.IgnoreBlanks := ReadBool('Options', 'IgnoreBlanks', True);
     OptionsContainer.PersistentHotKeys := ReadBool('Options', 'PersistentHotKeys', False);
     OptionsContainer.Shadows := ReadBool('Options', 'Shadows', True);
-    OptionsContainer.UseSystemFont := ReadBool('Options', 'UseSystemFont', False);
+    DeleteKey('Options', 'UseSystemFont'); { Depricated }
+    OptionsContainer.MainMenuUseSystemFont := ReadBool('Options', 'MainMenuUseSystemFont', False);
     OptionsContainer.MainMenuFontName := ReadString('Options', 'MainMenuFontName', 'Tahoma');
     OptionsContainer.MainMenuFontSize := StrToInt(ReadString('Options', 'MainMenuFontSize', '8'));
     OptionsContainer.AnimationStyle := TAnimationStyle(StrToInt(ReadString('Options', 'AnimationStyle', '1')));
@@ -1232,11 +1234,19 @@ begin
     OptionsContainer.DateFormat := ReadString('Options', 'DateFormat', 'DD.MM.YYYY');
     OptionsContainer.TimeFormat := ReadString('Options', 'TimeFormat', 'HH24:MI:SS');
     OptionsContainer.SchemaBrowserAlign := ReadString('Options', 'SchemaBrowserAlign', 'Bottom');
+    OptionsContainer.SchemaBrowserShowTreeLines:= ReadBool('Options', 'SchemaBrowserShowTreeLines', False);
+    OptionsContainer.SchemaBrowserIndent := StrToInt(ReadString('Options', 'SchemaBrowserIndent', '16'));
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
     OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
     OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
     OptionsContainer.EnableSpecialChars := ReadBool('Options', 'EnableSpecialChars', False);
     OptionsContainer.EnableSelectionMode := ReadBool('Options', 'EnableSelectionMode', False);
+    OptionsContainer.StatusBarUseSystemFont := ReadBool('Options', 'StatusBarUseSystemFont', False);
+    OptionsContainer.StatusBarFontName := ReadString('Options', 'StatusBarFontName', 'Tahoma');
+    OptionsContainer.StatusBarFontSize := StrToInt(ReadString('Options', 'StatusBarFontSize', '8'));
+    OptionsContainer.MainMenuSystemFontName := ReadString('Options', 'MainMenuSystemFontName', Screen.MenuFont.Name);
+    OptionsContainer.MainMenuSystemFontSize := StrToInt(ReadString('Options', 'MainMenuSystemFontSize', IntToStr(Screen.MenuFont.Size)));
+
 
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
     ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
@@ -1352,6 +1362,7 @@ var
   SQLHistoryFrame: TSQLHistoryFrame;
 begin
   OraSession := nil;
+
   SchemaBrowserFrame := GetActiveSchemaBrowser;
   if Assigned(SchemaBrowserFrame) then
     OraSession := SchemaBrowserFrame.ObjectTreeFrame.Session
@@ -1366,6 +1377,7 @@ begin
     if OptionsDialog.Execute(OraSession, OptionsContainer) then
     begin
       OptionsContainer.AssignTo(ActionMainMenuBar);
+      RecreateStatusBar;
       PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
       PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
       for i := 0 to PageControl.PageCount - 1 do
@@ -1554,7 +1566,7 @@ begin
       WriteBool('Options', 'IgnoreBlanks', OptionsContainer.IgnoreBlanks);
       WriteBool('Options', 'PersistentHotKeys', OptionsContainer.PersistentHotKeys);
       WriteBool('Options', 'Shadows', OptionsContainer.Shadows);
-      WriteBool('Options', 'UseSystemFont', OptionsContainer.UseSystemFont);
+      WriteBool('Options', 'MainMenuUseSystemFont', OptionsContainer.MainMenuUseSystemFont);
       WriteString('Options', 'MainMenuFontName', OptionsContainer.MainMenuFontName);
       WriteString('Options', 'MainMenuFontSize', IntToStr(OptionsContainer.MainMenuFontSize));
       WriteString('Options', 'AnimationStyle', IntToStr(Ord(OptionsContainer.AnimationStyle)));
@@ -1563,8 +1575,15 @@ begin
       WriteString('Options', 'DateFormat', OptionsContainer.DateFormat);
       WriteString('Options', 'TimeFormat', OptionsContainer.TimeFormat);
       WriteString('Options', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
+      WriteBool('Options', 'SchemaBrowserShowTreeLines', OptionsContainer.SchemaBrowserShowTreeLines);
+      WriteString('Options', 'SchemaBrowserIndent', IntToStr(OptionsContainer.SchemaBrowserIndent));
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
+      WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);
+      WriteString('Options', 'StatusBarFontName', OptionsContainer.StatusBarFontName);
+      WriteString('Options', 'StatusBarFontSize', IntToStr(OptionsContainer.StatusBarFontSize));
+      WriteString('Options', 'MainMenuSystemFontName', OptionsContainer.MainMenuSystemFontName);
+      WriteString('Options', 'MainMenuSystemFontSize', IntToStr(OptionsContainer.MainMenuSystemFontSize));
 
       DeleteKey('Options', 'GutterLineNumbers'); { depricated }
 
@@ -1695,8 +1714,6 @@ begin
   FOnProgress := False;
   FOnStartUp := True;
   FConnecting := True;
-  StatusBar.Font.Name := 'Tahoma';
-  StatusBar.Font.Size := 8;
   OraCall.OCIUnicode := True;
   ReadIniOptions;
   OptionsContainer.AssignTo(ActionMainMenuBar);

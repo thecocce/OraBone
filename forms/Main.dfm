@@ -107,7 +107,6 @@ object MainForm: TMainForm
       Top = 2
       Width = 915
       Height = 489
-      Hint = 'Hold shift down to move connection tabs.'
       Align = alClient
       DoubleBuffered = False
       Images = MenuImageList
@@ -118,7 +117,7 @@ object MainForm: TMainForm
       TabOrder = 0
       OnChange = PageControlChange
       TabDragDrop = True
-      HoldShiftToDragDrop = True
+      HoldShiftToDragDrop = False
       ShowCloseButton = False
       OnCloseButtonClick = PageControlCloseButtonClick
     end
@@ -1609,7 +1608,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015A005802740510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015A005802780510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
