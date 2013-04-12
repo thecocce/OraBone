@@ -261,7 +261,7 @@ type
     GotoLineCloseAction: TAction;
     FileCloseToolButton: TToolButton;
     FileCloseAllToolButton: TToolButton;
-    procedure SynEditChange(Sender: TObject);
+    procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
       var Action: TSynReplaceAction);
@@ -676,7 +676,7 @@ begin
     begin
       DocumentName := FileName;
       FileDateTime := GetFileDateTime(FileName);
-      OnChange := SynEditChange;
+      OnChange := SynEditOnChange;
       OnReplaceText := SynEditorReplaceText;
       OnSpecialLineColors := SynEditSpecialLineColors;
       SearchEngine := SynEditSearch;
@@ -1897,15 +1897,19 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.SynEditChange(Sender: TObject);
+procedure TSQLEditorFrame.SynEditOnChange(Sender: TObject);
 var
   SynEdit: TBCOraSynEdit;
 begin
-  Application.ProcessMessages;
-  SynEdit := GetActiveSynEdit;
-  if Assigned(SynEdit) then
+  if OptionsContainer.AutoSave then
+    Save
+  else
+  begin
+    Application.ProcessMessages;
+    SynEdit := GetActiveSynEdit;
     SynEdit.Modified := True;
-  SetActivePageCaptionModified;
+    SetActivePageCaptionModified;
+  end;
   RepaintToolButtons;
 end;
 

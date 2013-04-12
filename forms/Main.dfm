@@ -603,6 +603,9 @@ object MainForm: TMainForm
                 Action = ViewToolbarAction
               end
               item
+                Action = StatusBarAction
+              end
+              item
                 Action = ViewOutputAction
               end
               item
@@ -610,6 +613,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SQLHistoryAction
+                Caption = 'S&QL History'
                 ImageIndex = 46
                 ShortCut = 122
               end
@@ -1084,6 +1088,13 @@ object MainForm: TMainForm
       ImageIndex = 51
       ShortCut = 16497
       OnExecute = SearchToggleBookmarkActionExecute
+    end
+    object StatusBarAction: TAction
+      Category = '&View'
+      Caption = '&Status Bar'
+      Checked = True
+      Hint = 'Show or hide the status bar'
+      OnExecute = StatusBarActionExecute
     end
     object ViewOutputAction: TAction
       Category = '&View'
@@ -1608,7 +1619,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015A005802780510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015A005802800510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

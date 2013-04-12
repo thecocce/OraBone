@@ -154,6 +154,7 @@ type
     FileReopenClearAction: TAction;
     SelectReopenFileAction: TAction;
     FileReopenAction: TAction;
+    StatusBarAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -252,6 +253,7 @@ type
     procedure FileReopenClearActionExecute(Sender: TObject);
     procedure SelectReopenFileActionExecute(Sender: TObject);
     procedure FileReopenActionExecute(Sender: TObject);
+    procedure StatusBarActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -802,7 +804,8 @@ procedure TMainForm.SetSQLEditorFields;
 var
   InfoText: string;
   SQLEditorFrame: TSQLEditorFrame;
-  ActiveSQLDocumentFound, OutputGridHasFocus, ModifiedDocuments, SQLEditorSelectionFound: Boolean;
+  ActiveSQLDocumentFound, OutputGridHasFocus, ModifiedDocuments, SQLEditorSelectionFound,
+  ActiveDocumentModified: Boolean;
   ReopenActionClientItem: TActionClientItem;
 begin
   if FOnProgress then
@@ -813,6 +816,7 @@ begin
     SQLEditorSelectionFound := Assigned(SQLEditorFrame) and SQLEditorFrame.SelectionFound;
     OutputGridHasFocus := Assigned(SQLEditorFrame) and SQLEditorFrame.OutputGridHasFocus;
     ModifiedDocuments := Assigned(SQLEditorFrame) and SQLEditorFrame.ModifiedDocuments;
+    ActiveDocumentModified := Assigned(SQLEditorFrame) and SQLEditorFrame.ActiveDocumentModified;
 
     DBMSOutputAction.Enabled := ActiveSQLDocumentFound;
     { file }
@@ -827,8 +831,8 @@ begin
       FileSaveAction.ShortCut :=  Menus.ShortCut(Word('S'), [ssCtrl])
     else
       FileSaveAction.ShortCut :=  scNone;
-    FileSaveAction.Enabled := ActiveSQLDocumentFound and ModifiedDocuments;
-    FileSaveAllAction.Enabled := FileSaveAction.Enabled and ActiveSQLDocumentFound;
+    FileSaveAction.Enabled := ActiveSQLDocumentFound and ActiveDocumentModified;
+    FileSaveAllAction.Enabled := ModifiedDocuments and ActiveSQLDocumentFound;
     FilePrintAction.Enabled := FileCloseAction.Enabled and ActiveSQLDocumentFound;
     FilePrintPreviewAction.Enabled := FileCloseAction.Enabled and ActiveSQLDocumentFound;
     { Edit }
@@ -956,6 +960,7 @@ begin
     DatabaseCreateViewAction.Enabled := DatabaseCreateConstraintAction.Enabled;
     { View }
     ViewToolbarAction.Checked := ActionToolBar.Visible;
+    StatusBarAction.Checked := StatusBar.Visible;
 
     ViewNextPageAction.Enabled := PageControl.PageCount > 1; //FileCloseAction.Enabled or DatabaseEndConnectionMenuAction.Enabled;
     ViewPreviousPageAction.Enabled := ViewNextPageAction.Enabled;
@@ -1216,6 +1221,7 @@ begin
     OptionsContainer.OutputMultiLine := ReadBool('Options', 'OutputMultiLine', False);
     OptionsContainer.OutputShowCloseButton := ReadBool('Options', 'OutputShowCloseButton', False);
     OptionsContainer.AutoIndent := ReadBool('Options', 'AutoIndent', True);
+    OptionsContainer.AutoSave := ReadBool('Options', 'AutoSave', False);
     OptionsContainer.TrimTrailingSpaces := ReadBool('Options', 'TrimTrailingSpaces', True);
     OptionsContainer.ScrollPastEof := ReadBool('Options', 'ScrollPastEof', False);
     OptionsContainer.ScrollPastEol := ReadBool('Options', 'ScrollPastEol', True);
@@ -1247,8 +1253,8 @@ begin
     OptionsContainer.MainMenuSystemFontName := ReadString('Options', 'MainMenuSystemFontName', Screen.MenuFont.Name);
     OptionsContainer.MainMenuSystemFontSize := StrToInt(ReadString('Options', 'MainMenuSystemFontSize', IntToStr(Screen.MenuFont.Size)));
 
-
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
+    StatusBar.Visible := ReadBool('Options', 'ShowStatusBar', True);
     ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
     ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
     ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
@@ -1558,6 +1564,7 @@ begin
       WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
       WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
       WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
+      WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
       WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
       WriteBool('Options', 'ScrollPastEof', OptionsContainer.ScrollPastEof);
       WriteBool('Options', 'ScrollPastEol', OptionsContainer.ScrollPastEol);
@@ -1579,6 +1586,7 @@ begin
       WriteString('Options', 'SchemaBrowserIndent', IntToStr(OptionsContainer.SchemaBrowserIndent));
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
+      WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
       WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);
       WriteString('Options', 'StatusBarFontName', OptionsContainer.StatusBarFontName);
       WriteString('Options', 'StatusBarFontSize', IntToStr(OptionsContainer.StatusBarFontSize));
@@ -1715,6 +1723,7 @@ begin
   FOnStartUp := True;
   FConnecting := True;
   OraCall.OCIUnicode := True;
+  RecreateStatusBar;
   ReadIniOptions;
   OptionsContainer.AssignTo(ActionMainMenuBar);
 end;
@@ -1984,7 +1993,7 @@ begin
     SynEdit.Lines.BeginUpdate;
     SynEdit.Lines.Text := SQLText;
     SynEdit.Lines.EndUpdate;
-    SQLEditorFrame.SynEditChange(nil);
+    SQLEditorFrame.SynEditOnChange(nil);
 
     PageControlChange(nil);
   end;
@@ -2675,6 +2684,12 @@ end;
 procedure TMainForm.SQLHistoryActionExecute(Sender: TObject);
 begin
   OpenSQLHistory;
+end;
+
+procedure TMainForm.StatusBarActionExecute(Sender: TObject);
+begin
+  with StatusBar do
+  Visible := not Visible;
 end;
 
 end.

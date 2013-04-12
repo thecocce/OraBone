@@ -90,6 +90,7 @@ type
     FAnimationDuration: Integer;
     FAnimationStyle: TAnimationStyle;
     FAutoIndent: Boolean;
+    FAutoSave: Boolean;
     FColorBrightness: Integer;
     FConnectionMultiLine: Boolean;
     FConnectionShowCloseButton: Boolean;
@@ -140,6 +141,7 @@ type
     property AnimationDuration: Integer read FAnimationDuration write FAnimationDuration;
     property AnimationStyle: TAnimationStyle read FAnimationStyle write FAnimationStyle;
     property AutoIndent: Boolean read FAutoIndent write FAutoIndent;
+    property AutoSave: Boolean read FAutoSave write FAutoSave;
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
     property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
@@ -308,6 +310,7 @@ begin
   FIgnoreCase := True;
   FIgnoreBlanks := True;
   FAutoIndent := True;
+  FAutoSave := False;
   FTrimTrailingSpaces := True;
   FScrollPastEof := False;
   FScrollPastEol := True;
@@ -526,6 +529,7 @@ procedure TOptionsDialog.GetData;
 begin
   { Options }
   FEditorOptionsFrame.AutoIndentCheckBox.Checked := FOptionsContainer.AutoIndent;
+  FEditorOptionsFrame.AutoSaveCheckBox.Checked := FOptionsContainer.AutoSave;
   FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked := FOptionsContainer.TrimTrailingSpaces;
   FEditorOptionsFrame.ScrollPastEofCheckBox.Checked := FOptionsContainer.ScrollPastEof;
   FEditorOptionsFrame.ScrollPastEolCheckBox.Checked := FOptionsContainer.ScrollPastEol;
@@ -684,6 +688,7 @@ procedure TOptionsDialog.PutData;
 begin
   { Options }
   FOptionsContainer.AutoIndent := FEditorOptionsFrame.AutoIndentCheckBox.Checked;
+  FOptionsContainer.AutoSave := FEditorOptionsFrame.AutoSaveCheckBox.Checked;
   FOptionsContainer.TrimTrailingSpaces := FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked;
   FOptionsContainer.ScrollPastEof := FEditorOptionsFrame.ScrollPastEofCheckBox.Checked;
   FOptionsContainer.ScrollPastEol := FEditorOptionsFrame.ScrollPastEolCheckBox.Checked;
