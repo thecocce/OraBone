@@ -1359,6 +1359,7 @@ var
 begin
   SynEdit := GetActiveSynEdit;
   SynEdit.Undo;
+  SynEdit.SelEnd := 0;
   if SynEdit.UndoList.ItemCount = 0 then
   begin
     SynEdit.Modified := False; //PageControl.ActivePage.ImageIndex := SAVED_IMAGEINDEX
@@ -2187,6 +2188,9 @@ begin
     if Assigned(SynEdit) then
       OptionsContainer.AssignTo(SynEdit);
   end;
+  { set output options }
+  if Assigned(FOutputFrame) then
+    FOutputFrame.SetOptions;
 end;
 
 procedure TSQLEditorFrame.SetHighlighterTableNames(Value: TStrings);
@@ -2911,7 +2915,6 @@ begin
         FCaseCycle := 0;
         FSelectedText := SynEdit.SelText;
       end;
-
       SynEdit.BeginUpdate;
       SelStart := SynEdit.SelStart;
       SelEnd := SynEdit.SelEnd;
@@ -2925,7 +2928,6 @@ begin
       end;
       SynEdit.SelStart := SelStart;
       SynEdit.SelEnd := SelEnd;
-
       SynEdit.EndUpdate;
       Inc(FCaseCycle);
       if FCaseCycle > 4 then

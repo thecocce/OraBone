@@ -17,10 +17,11 @@ object OutputTreeViewFrame: TOutputTreeViewFrame
     ParentColor = True
     TabOrder = 0
     object VirtualDrawTree: TVirtualDrawTree
-      Left = 116
-      Top = 54
-      Width = 200
-      Height = 100
+      Left = 1
+      Top = 1
+      Width = 319
+      Height = 237
+      Align = alClient
       Colors.GridLineColor = clScrollBar
       Ctl3D = True
       DragOperations = []
@@ -38,6 +39,10 @@ object OutputTreeViewFrame: TOutputTreeViewFrame
       TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
       TreeOptions.PaintOptions = [toShowButtons, toShowRoot, toThemeAware, toUseBlendedSelection]
+      ExplicitLeft = 116
+      ExplicitTop = 54
+      ExplicitWidth = 200
+      ExplicitHeight = 100
       Columns = <>
     end
   end

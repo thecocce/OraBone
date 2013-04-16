@@ -4,7 +4,7 @@
 			<ProjectVersion>13.4</ProjectVersion>
 			<MainSource>OraBone.dpr</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
@@ -430,6 +430,10 @@
 			</DCCReference>
 			<DCCReference Include="frames\OptionsStatusBar.pas">
 				<Form>StatusBarFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="frames\OptionsOutput.pas">
+				<Form>OptionsOutputFrame</Form>
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
 			<BuildConfiguration Include="Release">

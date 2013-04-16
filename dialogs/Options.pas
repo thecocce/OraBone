@@ -11,7 +11,7 @@ uses
   BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
-  OptionsStatusBar;
+  OptionsStatusBar, OptionsOutput;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -68,6 +68,7 @@ type
     FEditorGutterFrame: TEditorGutterFrame;
     FEditorTabsFrame: TEditorTabsFrame;
     FMainMenuFrame: TMainMenuFrame;
+    FOptionsOutputFrame: TOptionsOutputFrame;
     FOutputTabsFrame: TOutputTabsFrame;
     FDBMSOutputFrame: TDBMSOutputFrame;
     FOptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame;
@@ -114,6 +115,8 @@ type
     FMainMenuSystemFontName: string;
     FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
+    FOutputShowTreeLines: Boolean;
+    FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
     FOutputShowCloseButton: Boolean;
     FPersistentHotKeys: Boolean;
@@ -165,6 +168,8 @@ type
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
+    property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
+    property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
     property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
@@ -343,6 +348,10 @@ begin
   FStatusBarUseSystemFont := False;
   FStatusBarFontName := 'Tahoma';
   FStatusBarFontSize := 8;
+  FSchemaBrowserShowTreeLines := False;
+  FSchemaBrowserIndent := 16;
+  FOutputShowTreeLines := False;
+  FOutputIndent := 16;
 end;
 
 destructor TOptionsContainer.Destroy;
@@ -368,6 +377,7 @@ begin
   FEditorGutterFrame.Destroy;
   FEditorTabsFrame.Destroy;
   FMainMenuFrame.Destroy;
+  FOptionsOutputFrame.Destroy;
   FOutputTabsFrame.Destroy;
   FDBMSOutputFrame.Destroy;
   FOptionsSchemaBrowserFrame.Destroy;
@@ -568,6 +578,9 @@ begin
   FMainMenuFrame.FontLabel.Caption := Format('%s %dpt', [FMainMenuFrame.FontLabel.Font.Name, FMainMenuFrame.FontLabel.Font.Size]);
   FMainMenuFrame.AnimationStyleComboBox.ItemIndex := Ord(FOptionsContainer.AnimationStyle);
   FMainMenuFrame.AnimationDurationEdit.Text := IntToStr(FOptionsContainer.AnimationDuration);
+  { Output }
+  FOptionsOutputFrame.ShowTreeLinesCheckBox.Checked := FOptionsContainer.OutputShowTreeLines;
+  FOptionsOutputFrame.IndentEdit.Text := IntToStr(FOptionsContainer.OutputIndent);
   { DBMS Output }
   FDBMSOutputFrame.PollingIntervalTrackBar.Position := FOptionsContainer.PollingInterval;
   { Format }
@@ -672,6 +685,7 @@ begin
 
     FConnectionTabsFrame.Visible := (ParentIndex = 2) and (Level = 1) and (TreeNode.Index = 0);
 
+    FOptionsOutputFrame.Visible := (Level = 0) and (TreeNode.Index = 3);
     FDBMSOutputFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 0);
     FOutputTabsFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 1);
 
@@ -724,6 +738,9 @@ begin
   FOptionsContainer.MainMenuFontSize := FMainMenuFrame.FontLabel.Font.Size;
   FOptionsContainer.AnimationStyle := TAnimationStyle(FMainMenuFrame.AnimationStyleComboBox.ItemIndex);
   FOptionsContainer.AnimationDuration := StrToIntDef(FMainMenuFrame.AnimationDurationEdit.Text, 150);
+  { Output }
+  FOptionsContainer.OutputShowTreeLines := FOptionsOutputFrame.ShowTreeLinesCheckBox.Checked;
+  FOptionsContainer.OutputIndent := StrToIntDef(FOptionsOutputFrame.IndentEdit.Text, 16);
   { DBMS Output }
   FOptionsContainer.PollingInterval := FDBMSOutputFrame.PollingIntervalTrackBar.Position;
   { Format }
@@ -753,6 +770,8 @@ begin
   FEditorTabsFrame.Parent := OptionsPanel;
   FMainMenuFrame := TMainMenuFrame.Create(OptionsPanel);
   FMainMenuFrame.Parent := OptionsPanel;
+  FOptionsOutputFrame := TOptionsOutputFrame.Create(OptionsPanel);
+  FOptionsOutputFrame.Parent := OptionsPanel;
   FOutputTabsFrame := TOutputTabsFrame.Create(OptionsPanel);
   FOutputTabsFrame.Parent := OptionsPanel;
   FDBMSOutputFrame := TDBMSOutputFrame.Create(OptionsPanel);

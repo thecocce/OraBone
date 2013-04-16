@@ -114,7 +114,8 @@ uses
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
   OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame},
-  OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame};
+  OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
+  OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame};
 
 {$R *.res}
 

@@ -68,6 +68,7 @@ type
     procedure CloseTabSheet;
     procedure CopyToClipboard;
     procedure UpdateControls;
+    procedure SetOptions;
     property Count: Integer read GetCount;
     property IsAnyOutput: Boolean read GetIsAnyOutput;
     property IsEmpty: Boolean read GetIsEmpty;
@@ -914,6 +915,27 @@ begin
   Finalize(Data^);
 end;
 
+procedure TOutputFrame.SetOptions;
+var
+  i: Integer;
+  VirtualDrawTree: TVirtualDrawTree;
+begin
+  PageControl.MultiLine := OptionsContainer.OutputMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
+  for i := 0 to PageControl.PageCount - 1 do
+  begin
+    if PageControl.Pages[i].Components[0] is TOutputTreeViewFrame then
+    begin
+      VirtualDrawTree := TOutputTreeViewFrame(PageControl.Pages[i].Components[0]).VirtualDrawTree;
+      VirtualDrawTree.Indent := OptionsContainer.OutputIndent;
+      if OptionsContainer.OutputShowTreeLines then
+        VirtualDrawTree.TreeOptions.PaintOptions := VirtualDrawTree.TreeOptions.PaintOptions + [toShowTreeLines]
+      else
+        VirtualDrawTree.TreeOptions.PaintOptions := VirtualDrawTree.TreeOptions.PaintOptions - [toShowTreeLines]
+    end;
+  end;
+end;
+
 procedure TOutputFrame.UpdateControls;
 var
   i, Right: Integer;
@@ -921,8 +943,7 @@ var
   PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';
-  PageControl.MultiLine := OptionsContainer.OutputMultiLine;
-  PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
+  SetOptions;
 
   LStyles := StyleServices;
   PanelColor := clNone;

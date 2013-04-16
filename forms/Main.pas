@@ -299,7 +299,7 @@ uses
   About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math;
+  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math, SynEditKeyCmds;
 
 {$R *.dfm}
 
@@ -1242,6 +1242,8 @@ begin
     OptionsContainer.SchemaBrowserAlign := ReadString('Options', 'SchemaBrowserAlign', 'Bottom');
     OptionsContainer.SchemaBrowserShowTreeLines:= ReadBool('Options', 'SchemaBrowserShowTreeLines', False);
     OptionsContainer.SchemaBrowserIndent := StrToInt(ReadString('Options', 'SchemaBrowserIndent', '16'));
+    OptionsContainer.OutputShowTreeLines:= ReadBool('Options', 'OutputShowTreeLines', False);
+    OptionsContainer.OutputIndent := StrToInt(ReadString('Options', 'OutputIndent', '16'));
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
     OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
     OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
@@ -1584,6 +1586,8 @@ begin
       WriteString('Options', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
       WriteBool('Options', 'SchemaBrowserShowTreeLines', OptionsContainer.SchemaBrowserShowTreeLines);
       WriteString('Options', 'SchemaBrowserIndent', IntToStr(OptionsContainer.SchemaBrowserIndent));
+      WriteBool('Options', 'OutputShowTreeLines', OptionsContainer.OutputShowTreeLines);
+      WriteString('Options', 'OutputIndent', IntToStr(OptionsContainer.OutputIndent));
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
@@ -1693,7 +1697,14 @@ begin
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
-    SynEdit.Text := SQLFormatter.FormatSQL(SynEdit.Text);
+    SynEdit.BeginUndoBlock;
+    try
+      SynEdit.SelectAll;
+      SynEdit.SelText := SQLFormatter.FormatSQL(SynEdit.Text);
+    finally
+      SynEdit.EndUndoBlock;
+      SynEdit.SetFocus;
+    end;
   end;
 end;
 

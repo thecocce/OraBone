@@ -74,7 +74,6 @@ type
     FObjectName: string;
     FSchemaParam: string;
     function GetDataFilter: WideString;
-    procedure InsertText(Text: string);
     procedure SetFields;
   public
     { Public declarations }
@@ -93,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Options, Vcl.Themes, StyleHooks;
+  Common, Options, Vcl.Themes, StyleHooks, SynEditKeyCmds;
 
 var
   FDataFilterDialog: TDataFilterDialog;
@@ -112,37 +111,17 @@ begin
     (Trim(FilterSynEdit.Text) <> '');
 end;
 
-procedure TDataFilterDialog.InsertText(Text: string);
-var
-  CurPoint: TBufferCoord;
-  TempText: string;
-begin
-  CurPoint := FilterSynEdit.CaretXY;
-  TempText := FilterSynEdit.Lines[CurPoint.Line - 1];
-  TempText := Copy(TempText, 0, CurPoint.Char - 1) + Text + Copy(TempText, CurPoint.Char + 1, Length(TempText));
-  FilterSynEdit.Lines[CurPoint.Line - 1] := TempText;
-end;
-
 procedure TDataFilterDialog.AndActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' AND ');
- // FilterSynEdit.Text := FilterSynEdit.Text + ' AND ';
-  FilterSynEdit.CaretX := CaretX + 5;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' AND '));
 end;
 
 procedure TDataFilterDialog.BetweenActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' BETWEEN  AND ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' BETWEEN  AND ';
-  FilterSynEdit.CaretX := CaretX + 9;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' BETWEEN  AND '));
+  FilterSynEdit.CaretX := FilterSynEdit.CaretX - 5;
 end;
 
 procedure TDataFilterDialog.ClearFilterActionExecute(Sender: TObject);
@@ -153,39 +132,23 @@ end;
 procedure TDataFilterDialog.ColumnClickActionExecute(Sender: TObject);
 var
   i: Integer;
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
   for i := 0 to ColumnListBox.Count - 1 do
     if ColumnListBox.Selected[i] then
-    begin
-      //FilterSynEdit.Text := FilterSynEdit.Text + Trim(ColumnListBox.Items.Strings[i]);
-      InsertText(Trim(ColumnListBox.Items.Strings[i]));
-      FilterSynEdit.CaretX := CaretX + Length(Trim(ColumnListBox.Items.Strings[i]));
-    end;
+      FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(Trim(ColumnListBox.Items.Strings[i])));
 end;
 
 procedure TDataFilterDialog.EqualActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' = ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' = ';
-  FilterSynEdit.CaretX := CaretX + 3;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' = '));
 end;
 
 procedure TDataFilterDialog.EqualOrGreaterActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' => ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' => ';
-  FilterSynEdit.CaretX := CaretX + 4;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' => '));
 end;
 
 procedure TDataFilterDialog.FilterNameEditChange(Sender: TObject);
@@ -244,36 +207,22 @@ begin
 end;
 
 procedure TDataFilterDialog.SmallerActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' < ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' < ';
-  FilterSynEdit.CaretX := CaretX + 3;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' < '));
 end;
 
 procedure TDataFilterDialog.SmallerOrEqualActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' <= ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' <= ';
-  FilterSynEdit.CaretX := CaretX + 4;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' <= '));
 end;
 
 procedure TDataFilterDialog.ToDateActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText('TO_DATE('''', ' + QuotedStr(OptionsContainer.DateFormat + ' ' + OptionsContainer.TimeFormat) + ') ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + 'TO_DATE('''', ' + QuotedStr(OptionsContainer.DateFormat) + ')';
-  FilterSynEdit.CaretX := CaretX + 9;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar('TO_DATE('''', ' + QuotedStr(OptionsContainer.DateFormat + ' ' + OptionsContainer.TimeFormat) + ') '));
+  FilterSynEdit.CaretX := FilterSynEdit.CaretX - Length(QuotedStr(OptionsContainer.DateFormat + ' ' + OptionsContainer.TimeFormat)) - 5;
 end;
 
 function TDataFilterDialog.GetCurrentDataFilter(ObjectName: string; SchemaParam: string): string;
@@ -366,14 +315,9 @@ begin
 end;
 
 procedure TDataFilterDialog.OrActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' OR ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' OR ';
-  FilterSynEdit.CaretX := CaretX + 4;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' OR '));
 end;
 
 function TDataFilterDialog.GetDataFilter: WideString;
@@ -382,36 +326,22 @@ begin
 end;
 
 procedure TDataFilterDialog.GreaterActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' > ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' > ';
-  FilterSynEdit.CaretX := CaretX + 3;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' > '));
 end;
 
 procedure TDataFilterDialog.InActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' IN ()');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' BETWEEN  AND ';
-  FilterSynEdit.CaretX := CaretX + 5;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' IN ()'));
+  FilterSynEdit.CaretX := FilterSynEdit.CaretX - 1;
 end;
 
 procedure TDataFilterDialog.InequalActionExecute(Sender: TObject);
-var
-  CaretX: Integer;
 begin
   FilterSynEdit.SetFocus;
-  CaretX := FilterSynEdit.CaretX;
-  InsertText(' <> ');
-  //FilterSynEdit.Text := FilterSynEdit.Text + ' <> ';
-  FilterSynEdit.CaretX := CaretX + 4;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' <> '));
 end;
 
 end.
