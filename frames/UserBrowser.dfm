@@ -12,7 +12,7 @@ object UserBrowserFrame: TUserBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = InfoTabSheet
+    ActivePage = RolesTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -25,10 +25,6 @@ object UserBrowserFrame: TUserBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object UserPanel: TPanel
         Left = 0
         Top = 0
@@ -99,10 +95,6 @@ object UserBrowserFrame: TUserBrowserFrame
     object RolesTabSheet: TTabSheet
       Caption = 'Roles && Privileges'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -119,7 +111,6 @@ object UserBrowserFrame: TUserBrowserFrame
           Width = 441
           Height = 253
           Align = alClient
-          BorderWidth = 1
           Ctl3D = True
           DragOperations = []
           Header.AutoSizeIndex = 0
@@ -212,10 +203,6 @@ object UserBrowserFrame: TUserBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -388,7 +375,7 @@ object UserBrowserFrame: TUserBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000E00A00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E00A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D

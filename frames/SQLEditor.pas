@@ -1359,10 +1359,9 @@ var
 begin
   SynEdit := GetActiveSynEdit;
   SynEdit.Undo;
-  SynEdit.SelEnd := 0;
   if SynEdit.UndoList.ItemCount = 0 then
   begin
-    SynEdit.Modified := False; //PageControl.ActivePage.ImageIndex := SAVED_IMAGEINDEX
+    SynEdit.Modified := False;
     PageControl.ActivePage.Caption := GetActivePageCaption;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
@@ -2722,8 +2721,6 @@ var
   StringList: TStringList;
   s: string;
   SynEdit: TBCOraSynEdit;
-//  T2: TTime;
-//  Min, Secs: Integer;
 begin
   SynEdit := GetActiveSynEdit;
 
