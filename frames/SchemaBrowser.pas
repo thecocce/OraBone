@@ -232,7 +232,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.RightMargin;
+  RightMargin := OptionsContainer.GutterRightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   ViewBrowserFrame.OpenQuery(FViewBrowserFrame.ColumnsQuery);
@@ -1505,7 +1505,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.RightMargin;
+  RightMargin := OptionsContainer.GutterRightMargin;
   Clipboard.Clear;
   Clipboard.AsText := Clipboard.AsText + 'INSERT INTO ' + LowerCase(ObjectTreeFrame.SchemaParam) + '.' + LowerCase(ObjectTreeFrame.ObjectName) + CHR_ENTER;
   s := '            (';
@@ -1564,7 +1564,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.RightMargin;
+  RightMargin := OptionsContainer.GutterRightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   TableBrowserFrame.OpenQuery(FTableBrowserFrame.ColumnsQuery);

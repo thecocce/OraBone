@@ -105,9 +105,13 @@ type
     FExtraLineSpacing: Integer;
     FFontName: string;
     FFontSize: Integer;
+    FGutterAutoSize: Boolean;
     FGutterFontName: string;
     FGutterFontSize: Integer;
+    FGutterRightMargin: Integer;
     FGutterVisible: Boolean;
+    FGutterVisibleRightMargin: Boolean;
+    FGutterWidth: Integer;
     FIgnoreBlanks: Boolean;
     FIgnoreCase: Boolean;
     FMainMenuFontName: string;
@@ -121,7 +125,6 @@ type
     FOutputShowCloseButton: Boolean;
     FPersistentHotKeys: Boolean;
     FPollingInterval: Integer;
-    FRightMargin: Integer;
     FSchemaBrowserAlign: string;
     FSchemaBrowserShowTreeLines: Boolean;
     FSchemaBrowserIndent: Integer;
@@ -158,9 +161,13 @@ type
     property ExtraLineSpacing: Integer read FExtraLineSpacing write FExtraLineSpacing;
     property FontName: string read FFontName write FFontName;
     property FontSize: Integer read FFontSize write FFontSize;
+    property GutterAutoSize: Boolean read FGutterAutoSize write FGutterAutoSize;
     property GutterFontName: string read FGutterFontName write FGutterFontName;
     property GutterFontSize: Integer read FGutterFontSize write FGutterFontSize;
+    property GutterRightMargin: Integer read FGutterRightMargin write FGutterRightMargin;
     property GutterVisible: Boolean read FGutterVisible write FGutterVisible;
+    property GutterVisibleRightMargin: Boolean read FGutterVisibleRightMargin write FGutterVisibleRightMargin;
+    property GutterWidth: Integer read FGutterWidth write FGutterWidth;
     property IgnoreBlanks: Boolean read FIgnoreBlanks write FIgnoreBlanks;
     property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
     property MainMenuFontName: string read FMainMenuFontName write FMainMenuFontName;
@@ -174,7 +181,6 @@ type
     property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
-    property RightMargin: Integer read FRightMargin write FRightMargin;
     property SchemaBrowserAlign: string read FSchemaBrowserAlign write FSchemaBrowserAlign;
     property SchemaBrowserShowTreeLines: Boolean read FSchemaBrowserShowTreeLines write FSchemaBrowserShowTreeLines;
     property SchemaBrowserIndent: Integer read FSchemaBrowserIndent write FSchemaBrowserIndent;
@@ -227,7 +233,12 @@ begin
     TCustomSynEdit(Dest).Gutter.Font.Name := FGutterFontName;
     TCustomSynEdit(Dest).Gutter.Font.Size := FGutterFontSize;
     TCustomSynEdit(Dest).ExtraLineSpacing := FExtraLineSpacing;
-    TCustomSynEdit(Dest).RightEdge := FRightMargin;
+    if FGutterVisibleRightMargin then
+      TCustomSynEdit(Dest).RightEdge := FGutterRightMargin
+    else
+      TCustomSynEdit(Dest).RightEdge := 0;
+    TCustomSynEdit(Dest).Gutter.AutoSize := FGutterAutoSize;
+    TCustomSynEdit(Dest).Gutter.Width := FGutterWidth;
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
     if FAutoIndent then
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoAutoIndent]
@@ -302,6 +313,10 @@ constructor TOptionsContainer.Create(AOwner: TComponent);
 begin
   inherited;
   FGutterVisible := True;
+  FGutterRightMargin := 80;
+  FGutterAutoSize := True;
+  FGutterVisibleRightMargin := True;
+  FGutterWidth := 48;
   FEditorMultiLine := False;
   FFontName := 'Courier New';
   FFontSize := 10;
@@ -334,7 +349,6 @@ begin
   FGutterFontName := 'Courier New';
   FGutterFontSize := 8;
   FExtraLineSpacing := 0;
-  FRightMargin := 80;
   FTabWidth := 8;
   FPersistentHotKeys := False;
   FShadows := True;
@@ -552,11 +566,14 @@ begin
   FEditorFontFrame.FontLabel.Font.Size := FOptionsContainer.FontSize;
   FEditorFontFrame.FontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.FontLabel.Font.Name, FEditorFontFrame.FontLabel.Font.Size]);
   { Gutter }
+  FEditorGutterFrame.AutoSizeCheckBox.Checked := FOptionsContainer.GutterAutoSize;
   FEditorGutterFrame.GutterVisibleCheckBox.Checked := FOptionsContainer.GutterVisible;
-  FEditorGutterFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.RightMargin);
+  FEditorGutterFrame.VisibleRightMarginCheckBox.Checked := FOptionsContainer.GutterVisibleRightMargin;
+  FEditorGutterFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.GutterRightMargin);
   FEditorGutterFrame.FontLabel.Font.Name := FOptionsContainer.GutterFontName;
   FEditorGutterFrame.FontLabel.Font.Size := FOptionsContainer.GutterFontSize;
   FEditorGutterFrame.FontLabel.Caption := Format('%s %dpt', [FEditorGutterFrame.FontLabel.Font.Name, FEditorGutterFrame.FontLabel.Font.Size]);
+  FEditorGutterFrame.WidthEdit.Text := IntToStr(FOptionsContainer.GutterWidth);
   { Document tabs }
   FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
@@ -714,10 +731,13 @@ begin
   FOptionsContainer.FontName := FEditorFontFrame.FontLabel.Font.Name;
   FOptionsContainer.FontSize := FEditorFontFrame.FontLabel.Font.Size;
   { Gutter }
+  FOptionsContainer.GutterAutoSize := FEditorGutterFrame.AutoSizeCheckBox.Checked;
   FOptionsContainer.GutterVisible := FEditorGutterFrame.GutterVisibleCheckBox.Checked;
-  FOptionsContainer.RightMargin := StrToIntDef(FEditorGutterFrame.RightMarginEdit.Text, 80);
+  FOptionsContainer.GutterRightMargin := StrToIntDef(FEditorGutterFrame.RightMarginEdit.Text, 80);
   FOptionsContainer.GutterFontName := FEditorGutterFrame.FontLabel.Font.Name;
   FOptionsContainer.GutterFontSize := FEditorGutterFrame.FontLabel.Font.Size;
+  FOptionsContainer.GutterVisibleRightMargin := FEditorGutterFrame.VisibleRightMarginCheckBox.Checked;
+  FOptionsContainer.GutterWidth := StrToIntDef(FEditorGutterFrame.WidthEdit.Text, 48);
   { Editor tabs }
   FOptionsContainer.EditorMultiLine := FEditorTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;

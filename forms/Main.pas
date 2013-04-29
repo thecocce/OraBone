@@ -1129,7 +1129,7 @@ begin
     for i := 0 to Files.Count - 1 do
     begin
       s := System.Copy(Files.Strings[i], Pos('=', Files.Strings[i]) + 1, Length(Files.Strings[i]));
-      if FileExists(FileName) then
+      if FileExists(s) then
       begin
         ActionClientItem := ReopenActionClientItem.Items.Add;
         Action := TAction.Create(ActionManager);
@@ -1210,7 +1210,10 @@ begin
     OptionsContainer.GutterFontName := ReadString('Options', 'GutterFontName', 'Courier New');
     OptionsContainer.GutterFontSize := StrToInt(ReadString('Options', 'GutterFontSize', '8'));
     OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));
-    OptionsContainer.RightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
+    OptionsContainer.GutterAutoSize := ReadBool('Options', 'GutterAutoSize', True);
+    OptionsContainer.GutterVisibleRightMargin := ReadBool('Options', 'GutterVisibleRightMargin', True);
+    OptionsContainer.GutterRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
+    OptionsContainer.GutterWidth := StrToInt(ReadString('Options', 'GutterWidth', '48'));
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
@@ -1554,7 +1557,10 @@ begin
       WriteString('Options', 'FontSize', IntToStr(OptionsContainer.FontSize));
       WriteString('Options', 'GutterFontName', OptionsContainer.GutterFontName);
       WriteString('Options', 'GutterFontSize', IntToStr(OptionsContainer.GutterFontSize));
-      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.RightMargin));
+      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.GutterRightMargin));
+      WriteBool('Options', 'GutterAutoSize', OptionsContainer.GutterAutoSize);
+      WriteString('Options', 'GutterWidth', IntToStr(OptionsContainer.GutterWidth));
+      WriteBool('Options', 'GutterVisibleRightMargin', OptionsContainer.GutterVisibleRightMargin);
       WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
