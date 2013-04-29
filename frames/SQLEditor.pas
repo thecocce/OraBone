@@ -393,6 +393,7 @@ type
     function GetActiveSynEdit: TBCOraSynEdit;
     function GetCaretInfo: string;
     function GetModifiedInfo: string;
+    function GetActiveBookmarkList: TSynEditMarkList;
     function ModifiedDocuments(CheckActive: Boolean = True): Boolean;
     procedure AssignOptions;
     property ActiveTabSheetCaption: string read GetActiveTabSheetCaption;
@@ -3061,6 +3062,16 @@ procedure TSQLEditorFrame.GotoLineNumberEditKeyPress(Sender: TObject; var Key: C
 begin
   if Key = #13 then
     GotoLineAction.Execute;
+end;
+
+function TSQLEditorFrame.GetActiveBookmarkList: TSynEditMarkList;
+var
+  SynEdit: TBCOraSynEdit;
+begin
+  Result := nil;
+  SynEdit := GetActiveSynEdit;
+  if Assigned(SynEdit) then
+    Result := SynEdit.Marks;
 end;
 
 end.

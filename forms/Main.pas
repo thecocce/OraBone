@@ -299,7 +299,7 @@ uses
   About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
   DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math, SynEditKeyCmds;
+  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math, SynEditKeyCmds, Language;
 
 {$R *.dfm}
 
@@ -802,11 +802,14 @@ end;
 
 procedure TMainForm.SetSQLEditorFields;
 var
+  i: Integer;
   InfoText: string;
   SQLEditorFrame: TSQLEditorFrame;
   ActiveSQLDocumentFound, OutputGridHasFocus, ModifiedDocuments, SQLEditorSelectionFound,
   ActiveDocumentModified: Boolean;
   ReopenActionClientItem: TActionClientItem;
+  BookmarkList: TSynEditMarkList;
+  GotoBookmarksAction, ToggleBookmarksAction: TAction;
 begin
   if FOnProgress then
     Exit;
@@ -817,6 +820,7 @@ begin
     OutputGridHasFocus := Assigned(SQLEditorFrame) and SQLEditorFrame.OutputGridHasFocus;
     ModifiedDocuments := Assigned(SQLEditorFrame) and SQLEditorFrame.ModifiedDocuments;
     ActiveDocumentModified := Assigned(SQLEditorFrame) and SQLEditorFrame.ActiveDocumentModified;
+    BookmarkList := SQLEditorFrame.GetActiveBookmarkList;
 
     DBMSOutputAction.Enabled := ActiveSQLDocumentFound;
     { file }
@@ -895,9 +899,27 @@ begin
     ExecuteStatementAction.Enabled := ActiveSQLDocumentFound and (SQLEditorFrame.GetActiveSynEdit.Text <> '');
     ExecuteScriptAction.Enabled := ExecuteStatementAction.Enabled;
     ExplainPlanAction.Enabled := ExecuteStatementAction.Enabled;
+    { Bookmarks }
+    for i := 0 to 9 do
+    begin
+      GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [i])));
+      GotoBookmarksAction.Enabled := False;
+      GotoBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
+      ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [i])));
+      ToggleBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
+    end;
+    if Assigned(BookmarkList) then
+    for i := 0 to BookmarkList.Count - 1 do
+    begin
+      GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
+      GotoBookmarksAction.Enabled := True;
+      GotoBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
+        BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
+      ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
+      ToggleBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
+        BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
+    end;
     { Edit }
-   // EditSelectAllAction.Enabled := DatabaseExportTableDataAction.Enabled;
-
     if ActiveSQLDocumentFound then
     begin
       InfoText := SQLEditorFrame.GetCaretInfo;

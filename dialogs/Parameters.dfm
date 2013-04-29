@@ -80,7 +80,6 @@ object ParametersDialog: TParametersDialog
       Height = 249
       Align = alClient
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goAlwaysShowEditor, goThumbTracking]
-      ScrollBars = ssHorizontal
       TabOrder = 0
       TitleCaptions.Strings = (
         'Parameter'
