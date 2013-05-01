@@ -115,7 +115,8 @@ uses
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
   OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame},
   OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
-  OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame};
+  OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame},
+  OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame};
 
 {$R *.res}
 

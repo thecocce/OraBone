@@ -11,7 +11,7 @@ uses
   BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
-  OptionsStatusBar, OptionsOutput;
+  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -51,6 +51,7 @@ type
     DateFormatAction: TAction;
     TimeFormatAction: TAction;
     StatusBarAction: TAction;
+    EditorToolBarAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -67,6 +68,7 @@ type
     FEditorFontFrame: TEditorFontFrame;
     FEditorGutterFrame: TEditorGutterFrame;
     FEditorTabsFrame: TEditorTabsFrame;
+    FEditorToolBarFrame: TEditorToolBarFrame;
     FMainMenuFrame: TMainMenuFrame;
     FOptionsOutputFrame: TOptionsOutputFrame;
     FOutputTabsFrame: TOutputTabsFrame;
@@ -95,9 +97,11 @@ type
     FColorBrightness: Integer;
     FConnectionMultiLine: Boolean;
     FConnectionShowCloseButton: Boolean;
+    FConnectionShowImage: Boolean;
     FDateFormat: string;
     FEditorMultiLine: Boolean;
     FEditorShowCloseButton: Boolean;
+    FEditorShowImage: Boolean;
     FEnableLineNumbers: Boolean;
     FEnableSelectionMode: Boolean;
     FEnableSpecialChars: Boolean;
@@ -123,6 +127,7 @@ type
     FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
     FOutputShowCloseButton: Boolean;
+    FOutputShowImage: Boolean;
     FPersistentHotKeys: Boolean;
     FPollingInterval: Integer;
     FSchemaBrowserAlign: string;
@@ -134,6 +139,19 @@ type
     FTabsToSpaces: Boolean;
     FTabWidth: Integer;
     FTimeFormat: string;
+    FToolBarExecute: Boolean;
+    FToolBarTransaction: Boolean;
+    FToolBarDBMS: Boolean;
+    FToolBarExplainPlan: Boolean;
+    FToolBarStandard: Boolean;
+    FToolBarPrint: Boolean;
+    FToolBarIndent: Boolean;
+    FToolBarSort: Boolean;
+    FToolBarCase: Boolean;
+    FToolBarCommand: Boolean;
+    FToolBarSearch: Boolean;
+    FToolBarMode: Boolean;
+    FToolBarTools: Boolean;
     FTrimTrailingSpaces: Boolean;
     FMainMenuUseSystemFont: Boolean;
     FStatusBarUseSystemFont: Boolean;
@@ -151,9 +169,11 @@ type
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
     property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
+    property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
     property DateFormat: string read FDateFormat write FDateFormat;
     property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
     property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
+    property EditorShowImage: Boolean read FEditorShowImage write FEditorShowImage;
     property EnableLineNumbers: Boolean read FEnableLineNumbers write FEnableLineNumbers;
     property EnableSelectionMode: Boolean read FEnableSelectionMode write FEnableSelectionMode;
     property EnableSpecialChars: Boolean read FEnableSpecialChars write FEnableSpecialChars;
@@ -179,6 +199,7 @@ type
     property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
     property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
+    property OutputShowImage: Boolean read FOutputShowImage write FOutputShowImage;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
     property SchemaBrowserAlign: string read FSchemaBrowserAlign write FSchemaBrowserAlign;
@@ -190,6 +211,19 @@ type
     property TabsToSpaces: Boolean read FTabsToSpaces write FTabsToSpaces;
     property TabWidth: Integer read FTabWidth write FTabWidth;
     property TimeFormat: string read FTimeFormat write FTimeFormat;
+    property ToolBarExecute: Boolean read FToolBarExecute write FToolBarExecute;
+    property ToolBarTransaction: Boolean read FToolBarTransaction write FToolBarTransaction;
+    property ToolBarDBMS: Boolean read FToolBarDBMS write FToolBarDBMS;
+    property ToolBarExplainPlan: Boolean read FToolBarExplainPlan write FToolBarExplainPlan;
+    property ToolBarStandard: Boolean read FToolBarStandard write FToolBarStandard;
+    property ToolBarPrint: Boolean read FToolBarPrint write FToolBarPrint;
+    property ToolBarIndent: Boolean read FToolBarIndent write FToolBarIndent;
+    property ToolBarSort: Boolean read FToolBarSort write FToolBarSort;
+    property ToolBarCase: Boolean read FToolBarCase write FToolBarCase;
+    property ToolBarCommand: Boolean read FToolBarCommand write FToolBarCommand;
+    property ToolBarSearch: Boolean read FToolBarSearch write FToolBarSearch;
+    property ToolBarMode: Boolean read FToolBarMode write FToolBarMode;
+    property ToolBarTools: Boolean read FToolBarTools write FToolBarTools;
     property TrimTrailingSpaces: Boolean read FTrimTrailingSpaces write FTrimTrailingSpaces;
     property MainMenuUseSystemFont: Boolean read FMainMenuUseSystemFont write FMainMenuUseSystemFont;
     property StatusBarUseSystemFont: Boolean read FStatusBarUseSystemFont write FStatusBarUseSystemFont;
@@ -338,10 +372,13 @@ begin
   FGutterVisible := True;
   FEditorMultiLine := False;
   FEditorShowCloseButton := False;
+  FEditorShowImage := True;
   FConnectionMultiLine := False;
   FConnectionShowCloseButton := False;
+  FConnectionShowImage := True;
   FOutputMultiLine := False;
   FOutputShowCloseButton := False;
+  FOutputShowImage := True;
   FIgnoreCase := True;
   FIgnoreBlanks := True;
   FFontName := 'Courier New';
@@ -366,6 +403,19 @@ begin
   FSchemaBrowserIndent := 16;
   FOutputShowTreeLines := False;
   FOutputIndent := 16;
+  FToolBarExecute := True;
+  FToolBarTransaction := True;
+  FToolBarDBMS := True;
+  FToolBarExplainPlan := True;
+  FToolBarStandard := True;
+  FToolBarPrint := True;
+  FToolBarIndent := True;
+  FToolBarSort := True;
+  FToolBarCase := True;
+  FToolBarCommand := True;
+  FToolBarSearch := True;
+  FToolBarMode := True;
+  FToolBarTools := True;
 end;
 
 destructor TOptionsContainer.Destroy;
@@ -390,6 +440,7 @@ begin
   FEditorFontFrame.Destroy;
   FEditorGutterFrame.Destroy;
   FEditorTabsFrame.Destroy;
+  FEditorToolBarFrame.Destroy;
   FMainMenuFrame.Destroy;
   FOptionsOutputFrame.Destroy;
   FOutputTabsFrame.Destroy;
@@ -444,7 +495,12 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorTabsAction.ImageIndex;
     Data.Caption := EditorTabsAction.Caption;
-    Node.ChildCount := 3;
+    { Tool bar }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorToolBarAction.ImageIndex;
+    Data.Caption := EditorToolBarAction.Caption;
+    Node.ChildCount := 4;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     { Schema Browser }
@@ -577,12 +633,29 @@ begin
   { Document tabs }
   FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
+  FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
+  { Tool bar }
+  FEditorToolBarFrame.ExecuteCheckBox.Checked := FOptionsContainer.ToolBarExecute;
+  FEditorToolBarFrame.TransactionCheckBox.Checked := FOptionsContainer.ToolBarTransaction;
+  FEditorToolBarFrame.DBMSCheckBox.Checked := FOptionsContainer.ToolBarDBMS;
+  FEditorToolBarFrame.ExplainPlanCheckBox.Checked := FOptionsContainer.ToolBarExplainPlan;
+  FEditorToolBarFrame.StandardCheckBox.Checked := FOptionsContainer.ToolBarStandard;
+  FEditorToolBarFrame.PrintCheckBox.Checked := FOptionsContainer.ToolBarPrint;
+  FEditorToolBarFrame.IndentCheckBox.Checked := FOptionsContainer.ToolBarIndent;
+  FEditorToolBarFrame.SortCheckBox.Checked := FOptionsContainer.ToolBarSort;
+  FEditorToolBarFrame.CaseCheckBox.Checked := FOptionsContainer.ToolBarCase;
+  FEditorToolBarFrame.CommandCheckBox.Checked := FOptionsContainer.ToolBarCommand;
+  FEditorToolBarFrame.SearchCheckBox.Checked := FOptionsContainer.ToolBarSearch;
+  FEditorToolBarFrame.ModeCheckBox.Checked := FOptionsContainer.ToolBarMode;
+  FEditorToolBarFrame.ToolsCheckBox.Checked := FOptionsContainer.ToolBarTools;
   { Connection tabs }
   FConnectionTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.ConnectionMultiLine;
   FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.ConnectionShowCloseButton;
+  FConnectionTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.ConnectionShowImage;
   { Output tabs }
   FOutputTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.OutputMultiLine;
   FOutputTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.OutputShowCloseButton;
+  FOutputTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.OutputShowImage;
   { Compare }
   FOptionsCompareFrame.IgnoreCaseCheckBox.Checked := FOptionsContainer.IgnoreCase;
   FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked := FOptionsContainer.IgnoreBlanks;
@@ -696,6 +769,7 @@ begin
     end;
     FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
+    FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
 
     FOptionsSchemaBrowserFrame.Visible := (Level = 0) and (TreeNode.Index = 1);
     FObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
@@ -741,12 +815,29 @@ begin
   { Editor tabs }
   FOptionsContainer.EditorMultiLine := FEditorTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;
+  FOptionsContainer.EditorShowImage := FEditorTabsFrame.ShowImageCheckBox.Checked;
+  { Tool bar }
+  FOptionsContainer.ToolBarExecute := FEditorToolBarFrame.ExecuteCheckBox.Checked;
+  FOptionsContainer.ToolBarTransaction := FEditorToolBarFrame.TransactionCheckBox.Checked;
+  FOptionsContainer.ToolBarDBMS := FEditorToolBarFrame.DBMSCheckBox.Checked;
+  FOptionsContainer.ToolBarExplainPlan := FEditorToolBarFrame.ExplainPlanCheckBox.Checked;
+  FOptionsContainer.ToolBarStandard := FEditorToolBarFrame.StandardCheckBox.Checked;
+  FOptionsContainer.ToolBarPrint := FEditorToolBarFrame.PrintCheckBox.Checked;
+  FOptionsContainer.ToolBarIndent := FEditorToolBarFrame.IndentCheckBox.Checked;
+  FOptionsContainer.ToolBarSort := FEditorToolBarFrame.SortCheckBox.Checked;
+  FOptionsContainer.ToolBarCase := FEditorToolBarFrame.CaseCheckBox.Checked;
+  FOptionsContainer.ToolBarCommand := FEditorToolBarFrame.CommandCheckBox.Checked;
+  FOptionsContainer.ToolBarSearch := FEditorToolBarFrame.SearchCheckBox.Checked;
+  FOptionsContainer.ToolBarMode := FEditorToolBarFrame.ModeCheckBox.Checked;
+  FOptionsContainer.ToolBarTools := FEditorToolBarFrame.ToolsCheckBox.Checked;
   { Connection tabs }
   FOptionsContainer.ConnectionMultiLine := FConnectionTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.ConnectionShowCloseButton := FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked;
+  FOptionsContainer.ConnectionShowImage := FConnectionTabsFrame.ShowImageCheckBox.Checked;
   { Output tabs }
   FOptionsContainer.OutputMultiLine := FOutputTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.OutputShowCloseButton := FOutputTabsFrame.ShowCloseButtonCheckBox.Checked;
+  FOptionsContainer.OutputShowImage := FOutputTabsFrame.ShowImageCheckBox.Checked;
   { Compare }
   FOptionsContainer.IgnoreCase := FOptionsCompareFrame.IgnoreCaseCheckBox.Checked;
   FOptionsContainer.IgnoreBlanks := FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked;
@@ -788,6 +879,8 @@ begin
   FEditorGutterFrame.Parent := OptionsPanel;
   FEditorTabsFrame := TEditorTabsFrame.Create(OptionsPanel);
   FEditorTabsFrame.Parent := OptionsPanel;
+  FEditorToolBarFrame := TEditorToolBarFrame.Create(OptionsPanel);
+  FEditorToolBarFrame.Parent := OptionsPanel;
   FMainMenuFrame := TMainMenuFrame.Create(OptionsPanel);
   FMainMenuFrame.Parent := OptionsPanel;
   FOptionsOutputFrame := TOptionsOutputFrame.Create(OptionsPanel);

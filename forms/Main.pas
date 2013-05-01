@@ -279,6 +279,7 @@ type
     procedure RecreateStatusBar;
     procedure RecreateDragDrop;
     procedure SetFields;
+    procedure SetPageControlOptions;
     procedure UpdateGuttersAndControls;
     procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure WriteIniFile;
@@ -358,15 +359,24 @@ begin
   DragDrop.AcceptDrag := True;
 end;
 
+procedure TMainForm.SetPageControlOptions;
+begin
+  PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS;
+  PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+  PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
+  if OptionsContainer.ConnectionShowImage then
+    PageControl.Images := MenuImageList
+  else
+    PageControl.Images := nil;
+end;
+
 procedure TMainForm.UpdateGuttersAndControls;
 var
   i: Integer;
   SQLEditorFrame: TSQLEditorFrame;
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
-  PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS;
-  PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
-  PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
+  SetPageControlOptions;
   for i := 0 to PageControl.PageCount - 1 do
   begin
     if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
@@ -1241,10 +1251,13 @@ begin
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
     OptionsContainer.ConnectionShowCloseButton := ReadBool('Options', 'ConnectionShowCloseButton', False);
+    OptionsContainer.ConnectionShowImage := ReadBool('Options', 'ConnectionShowImage', True);
     OptionsContainer.EditorMultiLine := ReadBool('Options', 'EditorMultiLine', False);
     OptionsContainer.EditorShowCloseButton := ReadBool('Options', 'EditorShowCloseButton', False);
+    OptionsContainer.EditorShowImage := ReadBool('Options', 'EditorShowImage', True);
     OptionsContainer.OutputMultiLine := ReadBool('Options', 'OutputMultiLine', False);
     OptionsContainer.OutputShowCloseButton := ReadBool('Options', 'OutputShowCloseButton', False);
+    OptionsContainer.OutputShowImage := ReadBool('Options', 'OutputShowImage', True);
     OptionsContainer.AutoIndent := ReadBool('Options', 'AutoIndent', True);
     OptionsContainer.AutoSave := ReadBool('Options', 'AutoSave', False);
     OptionsContainer.TrimTrailingSpaces := ReadBool('Options', 'TrimTrailingSpaces', True);
@@ -1411,8 +1424,7 @@ begin
     begin
       OptionsContainer.AssignTo(ActionMainMenuBar);
       RecreateStatusBar;
-      PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
-      PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
+      SetPageControlOptions;
       for i := 0 to PageControl.PageCount - 1 do
       begin
         if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
@@ -1589,10 +1601,13 @@ begin
       WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
       WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
+      WriteBool('Options', 'EditorShowImage', OptionsContainer.EditorShowImage);
       WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
       WriteBool('Options', 'ConnectionShowCloseButton', OptionsContainer.ConnectionShowCloseButton);
+      WriteBool('Options', 'ConnectionShowImage', OptionsContainer.ConnectionShowImage);
       WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
       WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
+      WriteBool('Options', 'OutputShowImage', OptionsContainer.OutputShowImage);
       WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
       WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
       WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
@@ -1829,7 +1844,7 @@ begin
     SQLEditorFrame := GetActiveSQLEditor;
     with TBigIniFile.Create(Common.GetINIFilename) do
     try
-    { Toolbar action visibility }
+      { Toolbar }
       EraseSection('ActionToolBar');
       for i := 0 to SQLEditorFrame.ToolbarPopupMenu.Items.Count - 1 do
         WriteBool('ActionToolBar', SQLEditorFrame.ToolbarPopupMenu.Items[i].Caption, SQLEditorFrame.ToolbarPopupMenu.Items[i].Checked);
@@ -2056,7 +2071,7 @@ begin
     PageControlChange(Sender);
 
     ActionToolBarStrings := TStringList.Create;
-    { Toolbar action visibility }
+    { Toolbar }
     ReadSectionValues('ActionToolBar', ActionToolBarStrings);
     for i := 0 to ActionToolBarStrings.Count - 1 do
       if not StrToBool(System.Copy(ActionToolBarStrings.Strings[i],
@@ -2129,8 +2144,6 @@ begin
     Result := TSQLEditorFrame.Create(TabSheet);
     Result.Parent := TabSheet;
     Result.PopupMenu := DocumentPopupMenu;
-    PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
-    PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
     Result.HighlighterTableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
     Result.ObjectNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
@@ -2138,6 +2151,7 @@ begin
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;
     Result.SchemaParam := SchemaBrowserFrame.ObjectTreeFrame.SchemaParam;
     Result.UpdateGuttersAndControls(PageControl.DoubleBuffered);
+    SetPageControlOptions;
     PageControl.ActivePage := TabSheet;
     if AddNewDocument then
       Result.New;

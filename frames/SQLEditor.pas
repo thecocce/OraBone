@@ -198,7 +198,7 @@ type
     EditToggleCaseToolButton: TToolButton;
     Bevel10: TBevel;
     CommandToolbarPanel: TPanel;
-    UndoRedoToolBar: TBCToolBar;
+    CommandToolBar: TBCToolBar;
     EditUndoToolButton: TToolButton;
     EditRedoToolButton: TToolButton;
     Bevel11: TBevel;
@@ -310,6 +310,7 @@ type
     FSchemaParam: string;
     FDBMSTimer: TTimer;
     FCompareImageIndex, FNewImageIndex: Integer;
+    FImages: TImageList;
     function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
@@ -523,7 +524,7 @@ begin
   IncreaseToolBar.Images := MainForm.MenuImageList;
   SortToolBar.Images := MainForm.MenuImageList;
   CaseToolBar.Images := MainForm.MenuImageList;
-  UndoRedoToolBar.Images := MainForm.MenuImageList;
+  CommandToolBar.Images := MainForm.MenuImageList;
   SearchToolBar.Images := MainForm.MenuImageList;
   ViewToolBar.Images := MainForm.MenuImageList;
   CompareToolBar.Images := MainForm.MenuImageList;
@@ -580,15 +581,15 @@ begin
   GotoBookmark8MenuItem.Action := MainForm.GotoBookmarks8Action;
   GotoBookmark9MenuItem.Action := MainForm.GotoBookmarks9Action;
 
-  PageControl.Images := TImageList.Create(Self);
+  FImages := TImageList.Create(Self);
   SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
   if SysImageList <> 0 then
   begin
-    PageControl.Images.Handle := SysImageList;
-    PageControl.Images.BkColor := ClNone;
-    PageControl.Images.ShareImages := True;
+    FImages.Handle := SysImageList;
+    FImages.BkColor := ClNone;
+    FImages.ShareImages := True;
   end;
-
+  PageControl.Images := FImages;
   { compare and new image index }
   Icon := TIcon.Create;
   try
@@ -734,7 +735,10 @@ begin
   PageControl.DoubleBuffered := DoubleBuffered;
   PageControl.MultiLine := OptionsContainer.EditorMultiLine;
   PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
-
+  if OptionsContainer.EditorShowImage then
+    PageControl.Images := FImages
+  else
+    PageControl.Images := nil;
   FOutputFrame.UpdateControls;
   Application.ProcessMessages;
   LStyles := StyleServices;
@@ -1433,81 +1437,94 @@ begin
   PageControlRepaint;
 end;
 
+procedure TSQLEditorFrame.PopupMenuExecuteActionExecute(Sender: TObject);
+begin
+  OptionsContainer.ToolBarExecute := not OptionsContainer.ToolBarExecute;
+  PopupMenuExecuteAction.Checked := OptionsContainer.ToolBarExecute;
+  ExecuteToolbarPanel.Visible := PopupMenuExecuteAction.Checked;
+end;
+
 procedure TSQLEditorFrame.PopupMenuCaseActionExecute(Sender: TObject);
 begin
-  PopupMenuCaseAction.Checked := not PopupMenuCaseAction.Checked;
+  OptionsContainer.ToolBarCase := not OptionsContainer.ToolBarCase;
+  PopupMenuCaseAction.Checked := OptionsContainer.ToolBarCase;
   CaseToolbarPanel.Visible := PopupMenuCaseAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuCommandActionExecute(Sender: TObject);
 begin
-  PopupMenuCommandAction.Checked := not PopupMenuCommandAction.Checked;
+  OptionsContainer.ToolBarCommand := not OptionsContainer.ToolBarCommand;
+  PopupMenuCommandAction.Checked := OptionsContainer.ToolBarCommand;
   CommandToolbarPanel.Visible := PopupMenuCommandAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuDBMSActionExecute(Sender: TObject);
 begin
-  PopupMenuDBMSAction.Checked := not PopupMenuDBMSAction.Checked;
+  OptionsContainer.ToolBarDBMS := not OptionsContainer.ToolBarDBMS;
+  PopupMenuDBMSAction.Checked := OptionsContainer.ToolBarDBMS;
   DBMSToolbarPanel.Visible := PopupMenuDBMSAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuExecuteActionExecute(Sender: TObject);
-begin
-  PopupMenuExecuteAction.Checked := not PopupMenuExecuteAction.Checked;
-  ExecuteToolbarPanel.Visible := PopupMenuExecuteAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuExplainPlanActionExecute(Sender: TObject);
 begin
-  PopupMenuExplainPlanAction.Checked := not PopupMenuExplainPlanAction.Checked;
+  OptionsContainer.ToolBarExplainPlan := not OptionsContainer.ToolBarExplainPlan;
+  PopupMenuExplainPlanAction.Checked := OptionsContainer.ToolBarExplainPlan;
   ExplainPlanToolbarPanel.Visible := PopupMenuExplainPlanAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuIndentActionExecute(Sender: TObject);
 begin
-  PopupMenuIndentAction.Checked := not PopupMenuIndentAction.Checked;
+  OptionsContainer.ToolBarIndent := not OptionsContainer.ToolBarIndent;
+  PopupMenuIndentAction.Checked := OptionsContainer.ToolBarIndent;
   IndentToolbarPanel.Visible := PopupMenuIndentAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuModeActionExecute(Sender: TObject);
 begin
-  PopupMenuModeAction.Checked := not PopupMenuModeAction.Checked;
+  OptionsContainer.ToolBarMode := not OptionsContainer.ToolBarMode;
+  PopupMenuModeAction.Checked := OptionsContainer.ToolBarMode;
   ModeToolbarPanel.Visible := PopupMenuModeAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuPrintActionExecute(Sender: TObject);
 begin
-  PopupMenuPrintAction.Checked := not PopupMenuPrintAction.Checked;
+  OptionsContainer.ToolBarPrint := not OptionsContainer.ToolBarPrint;
+  PopupMenuPrintAction.Checked := OptionsContainer.ToolBarPrint;
   PrintToolbarPanel.Visible := PopupMenuPrintAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuSearchActionExecute(Sender: TObject);
 begin
-  PopupMenuSearchAction.Checked := not PopupMenuSearchAction.Checked;
+  OptionsContainer.ToolBarSearch := not OptionsContainer.ToolBarSearch;
+  PopupMenuSearchAction.Checked := OptionsContainer.ToolBarSearch;
   SearchToolbarPanel.Visible := PopupMenuSearchAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuSortActionExecute(Sender: TObject);
 begin
-  PopupMenuSortAction.Checked := not PopupMenuSortAction.Checked;
+  OptionsContainer.ToolBarSort := not OptionsContainer.ToolBarSort;
+  PopupMenuSortAction.Checked := OptionsContainer.ToolBarSort;
   SortToolbarPanel.Visible := PopupMenuSortAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuStandardActionExecute(Sender: TObject);
 begin
-  PopupMenuStandardAction.Checked := not PopupMenuStandardAction.Checked;
+  OptionsContainer.ToolBarStandard := not OptionsContainer.ToolBarStandard;
+  PopupMenuStandardAction.Checked := OptionsContainer.ToolBarStandard;
   StandardToolbarPanel.Visible := PopupMenuStandardAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuToolsActionExecute(Sender: TObject);
 begin
-  PopupMenuToolsAction.Checked := not PopupMenuToolsAction.Checked;
+  OptionsContainer.ToolBarTools := not OptionsContainer.ToolBarTools;
+  PopupMenuToolsAction.Checked := OptionsContainer.ToolBarTools;
   ToolsToolbarPanel.Visible := PopupMenuToolsAction.Checked;
 end;
 
 procedure TSQLEditorFrame.PopupMenuTransactionActionExecute(Sender: TObject);
 begin
-  PopupMenuTransactionAction.Checked := not PopupMenuTransactionAction.Checked;
+  OptionsContainer.ToolBarTransaction := not OptionsContainer.ToolBarTransaction;
+  PopupMenuTransactionAction.Checked := OptionsContainer.ToolBarTransaction;
   TransactionToolbarPanel.Visible := PopupMenuTransactionAction.Checked;
 end;
 
