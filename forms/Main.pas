@@ -830,7 +830,9 @@ begin
     OutputGridHasFocus := Assigned(SQLEditorFrame) and SQLEditorFrame.OutputGridHasFocus;
     ModifiedDocuments := Assigned(SQLEditorFrame) and SQLEditorFrame.ModifiedDocuments;
     ActiveDocumentModified := Assigned(SQLEditorFrame) and SQLEditorFrame.ActiveDocumentModified;
-    BookmarkList := SQLEditorFrame.GetActiveBookmarkList;
+    BookmarkList := nil;
+    if Assigned(SQLEditorFrame) then
+      BookmarkList := SQLEditorFrame.GetActiveBookmarkList;
 
     DBMSOutputAction.Enabled := ActiveSQLDocumentFound;
     { file }
@@ -1728,6 +1730,7 @@ end;
 
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
+  OptionsContainer.AssignTo(ActionMainMenuBar);
   Repaint;
 end;
 
@@ -1779,7 +1782,6 @@ begin
   OraCall.OCIUnicode := True;
   RecreateStatusBar;
   ReadIniOptions;
-  OptionsContainer.AssignTo(ActionMainMenuBar);
 end;
 
 procedure TMainForm.FormResize(Sender: TObject);

@@ -4,8 +4,8 @@ object AboutDialog: TAboutDialog
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'About OraBone'
-  ClientHeight = 284
-  ClientWidth = 399
+  ClientHeight = 277
+  ClientWidth = 383
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,30 +18,31 @@ object AboutDialog: TAboutDialog
   OnClose = FormClose
   OnDestroy = FormDestroy
   DesignSize = (
-    399
-    284)
+    383
+    277)
   PixelsPerInch = 96
   TextHeight = 13
   object ThanksToLabel: TLabel
     Left = 10
-    Top = 150
+    Top = 144
     Width = 47
     Height = 13
     Caption = 'Thanks to'
   end
   object CopyrightLabel: TLabel
-    Left = 10
-    Top = 221
-    Width = 381
+    Left = 0
+    Top = 217
+    Width = 383
     Height = 13
     Alignment = taCenter
+    Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'Copyright '#169' 2010-2013 Lasse Rautiainen. All Rights Reserved.'
   end
   object TopPanel: TPanel
     Left = -10
     Top = -2
-    Width = 427
+    Width = 411
     Height = 139
     Anchors = [akLeft, akTop, akRight]
     BevelOuter = bvNone
@@ -49,10 +50,10 @@ object AboutDialog: TAboutDialog
     ParentBackground = False
     TabOrder = 4
     DesignSize = (
-      427
+      411
       139)
     object OraBoneImage: TImage
-      Left = 281
+      Left = 265
       Top = 9
       Width = 128
       Height = 128
@@ -328,6 +329,7 @@ object AboutDialog: TAboutDialog
         454E44AE426082}
       Stretch = True
       IsControl = True
+      ExplicitLeft = 281
     end
     object ProgramNameiLabel: TLabel
       Left = 20
@@ -372,8 +374,8 @@ object AboutDialog: TAboutDialog
     end
   end
   object OKButton: TButton
-    Left = 310
-    Top = 245
+    Left = 294
+    Top = 238
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -384,22 +386,22 @@ object AboutDialog: TAboutDialog
     TabOrder = 0
   end
   object LinkRow1Label: TLinkLabel
-    Left = 10
-    Top = 166
-    Width = 381
+    Left = 18
+    Top = 163
+    Width = 365
     Height = 17
     AutoSize = False
     Caption = 
       '<a href="http://www.embarcadero.com/products/rad-studio/">Embarc' +
-      'adero RAD Studio XE2</a>, <a href="http://www.devart.com/odac/">' +
-      'Oracle Data Access Components</a>, <a href="http://www.delphi-je' +
-      'di.org/">Jedi Project</a>,  '
+      'adero RAD Studio</a>, <a href="http://www.devart.com/odac/">Orac' +
+      'le Data Access Components</a>, <a href="http://www.delphi-jedi.o' +
+      'rg/">Jedi Project</a>,  '
     TabOrder = 1
     OnLinkClick = LinkClick
   end
   object LinkRow3Label: TLinkLabel
-    Left = 10
-    Top = 198
+    Left = 18
+    Top = 195
     Width = 381
     Height = 17
     AutoSize = False
@@ -411,8 +413,8 @@ object AboutDialog: TAboutDialog
     OnLinkClick = LinkClick
   end
   object LinkRow2Label: TLinkLabel
-    Left = 10
-    Top = 182
+    Left = 18
+    Top = 179
     Width = 381
     Height = 17
     AutoSize = False
@@ -428,7 +430,7 @@ object AboutDialog: TAboutDialog
   object GrayLinePanel: TPanel
     Left = 0
     Top = 137
-    Width = 405
+    Width = 389
     Height = 1
     Anchors = [akLeft, akTop, akRight]
     BevelOuter = bvNone
