@@ -414,8 +414,9 @@ type
     property OutputGridHasFocus: Boolean read GetOutputGridHasFocus;
     property InTransaction: Boolean read FInTransaction write FInTransaction;
     property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
-    procedure ExecuteStatement; overload;
-    procedure ExecuteScript;
+    procedure ExecuteStatement(Current: Boolean = False); overload;
+    procedure ExecuteCurrentStatement;
+    procedure ExecuteScript(Current: Boolean = False);
     procedure ShowObjects;
     procedure ExplainPlan;
     procedure DecreaseIndent;
@@ -2255,9 +2256,9 @@ begin
   end
 end;
 
-procedure TSQLEditorFrame.ExecuteScript;
+procedure TSQLEditorFrame.ExecuteScript(Current: Boolean);
 var
-  Row, Col: Integer;
+  i, Row, Col: Integer;
   SynEdit: TBCOraSynEdit;
   CreateStatement: Boolean;
   s: WideString;
@@ -2272,6 +2273,18 @@ begin
   CreateStatement := Pos(ShortString('CREATE'), UpperCase(Trim(RemoveParenthesisFromBegin(RemoveComments(s))))) = 1;
 
   OraScript.SQL.Text := s;
+  if Current then
+  begin
+    { find current script }
+    for i := 0 to OraScript.Statements.Count - 1 do
+    if (OraScript.Statements.Items[i].StartLine <= SynEdit.CaretXY.Line) and
+     (OraScript.Statements.Items[i].EndLine >= SynEdit.CaretXY.Line) then
+    begin
+      s := OraScript.Statements.Items[i].SQL;
+      OraScript.SQL.Text := s;
+      Break;
+    end;
+  end;
   ScriptQuery.SQL.Text := s;
   try
     OraScript.Session := FSession;
@@ -2282,11 +2295,9 @@ begin
     if DBMSOutputToolButton.Down then
       EnableDBMSOutput;
     { parameters }
-
     if ScriptQuery.ParamCount > 0 then
       if not ParametersDialog.Open(ScriptQuery) then
         Exit;
-
     if not CreateStatement then
       if not FInTransaction then
       begin
@@ -2364,7 +2375,12 @@ begin
     Result := Trim(System.Copy(Result, 2, Length(Result)));
 end;
 
-procedure TSQLEditorFrame.ExecuteStatement;
+procedure TSQLEditorFrame.ExecuteCurrentStatement;
+begin
+  ExecuteStatement(True);
+end;
+
+procedure TSQLEditorFrame.ExecuteStatement(Current: Boolean);
 var
   SynEdit: TBCOraSynEdit;
   s: WideString;
@@ -2382,7 +2398,7 @@ begin
     ExecuteStatement(SynEdit)
   else
   if s[Length(s)] = ';' then
-    ExecuteScript
+    ExecuteScript(Current)
   else
     ExecuteNoRowsStatement(SynEdit);
 end;

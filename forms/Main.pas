@@ -155,6 +155,7 @@ type
     SelectReopenFileAction: TAction;
     FileReopenAction: TAction;
     StatusBarAction: TAction;
+    ExecuteCurrentStatementAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -254,6 +255,7 @@ type
     procedure SelectReopenFileActionExecute(Sender: TObject);
     procedure FileReopenActionExecute(Sender: TObject);
     procedure StatusBarActionExecute(Sender: TObject);
+    procedure ExecuteCurrentStatementActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -2562,6 +2564,15 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     SQLEditorFrame.Undo;
+end;
+
+procedure TMainForm.ExecuteCurrentStatementActionExecute(Sender: TObject);
+var
+  SQLEditorFrame: TSQLEditorFrame;
+begin
+  SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+    SQLEditorFrame.ExecuteCurrentStatement;
 end;
 
 procedure TMainForm.ExecuteScriptActionExecute(Sender: TObject);
