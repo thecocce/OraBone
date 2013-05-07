@@ -33,7 +33,6 @@ object MainForm: TMainForm
     Padding.Right = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 919
     object ActionMainMenuBar: TActionMainMenuBar
       Left = 0
       Top = 0
@@ -69,7 +68,6 @@ object MainForm: TMainForm
     Padding.Right = 2
     ParentColor = True
     TabOrder = 3
-    ExplicitWidth = 921
     object ActionToolBar: TActionToolBar
       Left = 2
       Top = 2
@@ -90,7 +88,6 @@ object MainForm: TMainForm
       HorzSeparator = False
       ParentFont = False
       Spacing = 0
-      ExplicitWidth = 915
     end
   end
   object MainPanel: TPanel
@@ -105,8 +102,6 @@ object MainForm: TMainForm
     Padding.Right = 1
     Padding.Bottom = 2
     TabOrder = 1
-    ExplicitWidth = 919
-    ExplicitHeight = 493
     object PageControl: TBCPageControl
       Left = 3
       Top = 2
@@ -125,8 +120,7 @@ object MainForm: TMainForm
       HoldShiftToDragDrop = False
       ShowCloseButton = False
       OnCloseButtonClick = PageControlCloseButtonClick
-      ExplicitWidth = 915
-      ExplicitHeight = 489
+      OnDblClick = PageControlDblClick
     end
   end
   object StatusBar: TStatusBar
@@ -148,8 +142,6 @@ object MainForm: TMainForm
       item
         Width = 50
       end>
-    ExplicitTop = 546
-    ExplicitWidth = 919
   end
   object ActionManager: TActionManager
     ActionBars = <
@@ -1194,7 +1186,9 @@ object MainForm: TMainForm
     object ExecuteStatementAction: TAction
       Category = 'SQLEditor'
       Caption = 'Execute Statement'
-      Hint = 'Execute statement'
+      Hint = 
+        'Execute statement. Execute current statement by using Ctrl+Enter' +
+        '.'
       ImageIndex = 36
       ShortCut = 120
       OnExecute = ExecuteStatementActionExecute
@@ -1636,7 +1630,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015B005802A80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015B005802AC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

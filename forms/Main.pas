@@ -256,6 +256,7 @@ type
     procedure FileReopenActionExecute(Sender: TObject);
     procedure StatusBarActionExecute(Sender: TObject);
     procedure ExecuteCurrentStatementActionExecute(Sender: TObject);
+    procedure PageControlDblClick(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -1253,12 +1254,15 @@ begin
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
+    OptionsContainer.ConnectionCloseTabByDblClick := ReadBool('Options', 'ConnectionCloseTabByDblClick', False);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
     OptionsContainer.ConnectionShowCloseButton := ReadBool('Options', 'ConnectionShowCloseButton', False);
     OptionsContainer.ConnectionShowImage := ReadBool('Options', 'ConnectionShowImage', True);
+    OptionsContainer.EditorCloseTabByDblClick := ReadBool('Options', 'EditorCloseTabByDblClick', False);
     OptionsContainer.EditorMultiLine := ReadBool('Options', 'EditorMultiLine', False);
     OptionsContainer.EditorShowCloseButton := ReadBool('Options', 'EditorShowCloseButton', False);
     OptionsContainer.EditorShowImage := ReadBool('Options', 'EditorShowImage', True);
+    OptionsContainer.OutputCloseTabByDblClick := ReadBool('Options', 'OutputCloseTabByDblClick', False);
     OptionsContainer.OutputMultiLine := ReadBool('Options', 'OutputMultiLine', False);
     OptionsContainer.OutputShowCloseButton := ReadBool('Options', 'OutputShowCloseButton', False);
     OptionsContainer.OutputShowImage := ReadBool('Options', 'OutputShowImage', True);
@@ -1603,12 +1607,15 @@ begin
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
       WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
+      WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
       WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
       WriteBool('Options', 'EditorShowImage', OptionsContainer.EditorShowImage);
+      WriteBool('Options', 'ConnectionCloseTabByDblClick', OptionsContainer.ConnectionCloseTabByDblClick);
       WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
       WriteBool('Options', 'ConnectionShowCloseButton', OptionsContainer.ConnectionShowCloseButton);
       WriteBool('Options', 'ConnectionShowImage', OptionsContainer.ConnectionShowImage);
+      WriteBool('Options', 'OutputCloseTabByDblClick', OptionsContainer.OutputCloseTabByDblClick);
       WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
       WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
       WriteBool('Options', 'OutputShowImage', OptionsContainer.OutputShowImage);
@@ -2714,6 +2721,12 @@ end;
 procedure TMainForm.PageControlCloseButtonClick(Sender: TObject);
 begin
   CloseTab(True);
+end;
+
+procedure TMainForm.PageControlDblClick(Sender: TObject);
+begin
+  if OptionsContainer.ConnectionCloseTabByDblClick then
+    CloseTab(True);
 end;
 
 procedure TMainForm.OpenSQLHistory;

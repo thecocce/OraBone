@@ -298,6 +298,8 @@ type
     procedure GotoLineActionExecute(Sender: TObject);
     procedure GotoLineCloseActionExecute(Sender: TObject);
     procedure GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
+    procedure PageControlCloseButtonClick(Sender: TObject);
+    procedure PageControlDblClick(Sender: TObject);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -787,14 +789,19 @@ end;
 procedure TSQLEditorFrame.PageControlRepaint;
 var
   i: Integer;
-var
   SynEdit: TBCOraSynEdit;
+  CompareFrame: TCompareFrame;
 begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.Repaint;
   if Assigned(PageControl.ActivePage) then
+  begin
+    CompareFrame := GetCompareFrame(PageControl.ActivePage);
+    if Assigned(CompareFrame) then
+      CompareFrame.RepaintFrame;
     PageControl.ActivePage.Repaint;
+  end;
   Application.ProcessMessages;
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TBCToolBar then
@@ -1419,6 +1426,17 @@ begin
   end;
   CheckFileDateTimes; { compare can change file datetime }
   PageControlRepaint;
+end;
+
+procedure TSQLEditorFrame.PageControlCloseButtonClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TSQLEditorFrame.PageControlDblClick(Sender: TObject);
+begin
+  if OptionsContainer.EditorCloseTabByDblClick then
+    Close;
 end;
 
 procedure TSQLEditorFrame.Paste;

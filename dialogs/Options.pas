@@ -95,10 +95,12 @@ type
     FAutoIndent: Boolean;
     FAutoSave: Boolean;
     FColorBrightness: Integer;
+    FConnectionCloseTabByDblClick: Boolean;
     FConnectionMultiLine: Boolean;
     FConnectionShowCloseButton: Boolean;
     FConnectionShowImage: Boolean;
     FDateFormat: string;
+    FEditorCloseTabByDblClick: Boolean;
     FEditorMultiLine: Boolean;
     FEditorShowCloseButton: Boolean;
     FEditorShowImage: Boolean;
@@ -123,6 +125,7 @@ type
     FMainMenuSystemFontName: string;
     FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
+    FOutputCloseTabByDblClick: Boolean;
     FOutputShowTreeLines: Boolean;
     FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
@@ -167,10 +170,12 @@ type
     property AutoIndent: Boolean read FAutoIndent write FAutoIndent;
     property AutoSave: Boolean read FAutoSave write FAutoSave;
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
+    property ConnectionCloseTabByDblClick: Boolean read FConnectionCloseTabByDblClick write FConnectionCloseTabByDblClick;
     property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
     property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
     property DateFormat: string read FDateFormat write FDateFormat;
+    property EditorCloseTabByDblClick: Boolean read FEditorCloseTabByDblClick write FEditorCloseTabByDblClick;
     property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
     property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
     property EditorShowImage: Boolean read FEditorShowImage write FEditorShowImage;
@@ -195,6 +200,7 @@ type
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
+    property OutputCloseTabByDblClick: Boolean read FOutputCloseTabByDblClick write FOutputCloseTabByDblClick;
     property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
     property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
@@ -370,9 +376,11 @@ begin
   FScrollPastEol := True;
   FTabsToSpaces := True;
   FGutterVisible := True;
+  FEditorCloseTabByDblClick := False;
   FEditorMultiLine := False;
   FEditorShowCloseButton := False;
   FEditorShowImage := True;
+  FConnectionCloseTabByDblClick := False;
   FConnectionMultiLine := False;
   FConnectionShowCloseButton := False;
   FConnectionShowImage := True;
@@ -401,6 +409,7 @@ begin
   FStatusBarFontSize := 8;
   FSchemaBrowserShowTreeLines := False;
   FSchemaBrowserIndent := 16;
+  FOutputCloseTabByDblClick := False;
   FOutputShowTreeLines := False;
   FOutputIndent := 16;
   FToolBarExecute := True;
@@ -631,6 +640,7 @@ begin
   FEditorGutterFrame.FontLabel.Caption := Format('%s %dpt', [FEditorGutterFrame.FontLabel.Font.Name, FEditorGutterFrame.FontLabel.Font.Size]);
   FEditorGutterFrame.WidthEdit.Text := IntToStr(FOptionsContainer.GutterWidth);
   { Document tabs }
+  FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
   FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
   FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
@@ -649,10 +659,12 @@ begin
   FEditorToolBarFrame.ModeCheckBox.Checked := FOptionsContainer.ToolBarMode;
   FEditorToolBarFrame.ToolsCheckBox.Checked := FOptionsContainer.ToolBarTools;
   { Connection tabs }
+  FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByDblClick;
   FConnectionTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.ConnectionMultiLine;
   FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.ConnectionShowCloseButton;
   FConnectionTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.ConnectionShowImage;
   { Output tabs }
+  FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByDblClick;
   FOutputTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.OutputMultiLine;
   FOutputTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.OutputShowCloseButton;
   FOutputTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.OutputShowImage;
@@ -813,6 +825,7 @@ begin
   FOptionsContainer.GutterVisibleRightMargin := FEditorGutterFrame.VisibleRightMarginCheckBox.Checked;
   FOptionsContainer.GutterWidth := StrToIntDef(FEditorGutterFrame.WidthEdit.Text, 48);
   { Editor tabs }
+  FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.EditorMultiLine := FEditorTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.EditorShowImage := FEditorTabsFrame.ShowImageCheckBox.Checked;
@@ -831,10 +844,12 @@ begin
   FOptionsContainer.ToolBarMode := FEditorToolBarFrame.ModeCheckBox.Checked;
   FOptionsContainer.ToolBarTools := FEditorToolBarFrame.ToolsCheckBox.Checked;
   { Connection tabs }
+  FOptionsContainer.ConnectionCloseTabByDblClick := FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.ConnectionMultiLine := FConnectionTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.ConnectionShowCloseButton := FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.ConnectionShowImage := FConnectionTabsFrame.ShowImageCheckBox.Checked;
   { Output tabs }
+  FOptionsContainer.OutputCloseTabByDblClick := FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.OutputMultiLine := FOutputTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.OutputShowCloseButton := FOutputTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.OutputShowImage := FOutputTabsFrame.ShowImageCheckBox.Checked;

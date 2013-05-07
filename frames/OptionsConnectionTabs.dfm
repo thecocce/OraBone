@@ -16,7 +16,7 @@ object ConnectionTabsFrame: TConnectionTabsFrame
     TabOrder = 0
     object MultilineCheckBox: TBCCheckBox
       Left = 9
-      Top = 6
+      Top = 28
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -24,12 +24,12 @@ object ConnectionTabsFrame: TConnectionTabsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Multiline'
-      TabOrder = 0
+      TabOrder = 1
       ReadOnly = False
     end
     object ShowCloseButtonCheckBox: TBCCheckBox
       Left = 9
-      Top = 26
+      Top = 50
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -37,12 +37,12 @@ object ConnectionTabsFrame: TConnectionTabsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Close Button'
-      TabOrder = 1
+      TabOrder = 2
       ReadOnly = False
     end
     object ShowImageCheckBox: TBCCheckBox
       Left = 9
-      Top = 48
+      Top = 72
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -50,7 +50,20 @@ object ConnectionTabsFrame: TConnectionTabsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Image'
-      TabOrder = 2
+      TabOrder = 3
+      ReadOnly = False
+    end
+    object CloseTabByDblClickCheckBox: TBCCheckBox
+      Left = 9
+      Top = 6
+      Width = 218
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = ' Close Tab by Double Click'
+      TabOrder = 0
       ReadOnly = False
     end
   end
