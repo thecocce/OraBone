@@ -1251,6 +1251,7 @@ begin
     OptionsContainer.GutterVisibleRightMargin := ReadBool('Options', 'GutterVisibleRightMargin', True);
     OptionsContainer.GutterRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.GutterWidth := StrToInt(ReadString('Options', 'GutterWidth', '48'));
+    OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
@@ -1603,6 +1604,7 @@ begin
       WriteBool('Options', 'GutterAutoSize', OptionsContainer.GutterAutoSize);
       WriteString('Options', 'GutterWidth', IntToStr(OptionsContainer.GutterWidth));
       WriteBool('Options', 'GutterVisibleRightMargin', OptionsContainer.GutterVisibleRightMargin);
+      WriteString('Options', 'InsertCaret', IntToStr(Ord(OptionsContainer.InsertCaret)));
       WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));

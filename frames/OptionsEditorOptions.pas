@@ -22,6 +22,8 @@ type
     ActiveLineColorBrightnessLabel: TLabel;
     TabsToSpacesCheckBox: TBCCheckBox;
     AutoSaveCheckBox: TBCCheckBox;
+    InsertCaretComboBox: TBCComboBox;
+    InsertCaretLabel: TLabel;
   private
     { Private declarations }
   public
