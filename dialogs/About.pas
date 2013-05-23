@@ -56,7 +56,8 @@ procedure TAboutDialog.Open;
 var
   MemoryStatus: TMemoryStatusEx;
 begin
-  VersionLabel.Caption := Format(VersionLabel.Caption, [Common.GetFileVersion(Application.ExeName)]);
+  VersionLabel.Caption := Format(VersionLabel.Caption, [Common.GetFileVersion(Application.ExeName),
+    {$IFDEF WIN64}64{$ELSE}32{$ENDIF}]);
   { initialize the structure }
   FillChar(MemoryStatus, SizeOf(MemoryStatus), 0);
   MemoryStatus.dwLength := SizeOf(MemoryStatus);

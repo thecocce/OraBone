@@ -348,9 +348,9 @@ object AboutDialog: TAboutDialog
     object VersionLabel: TLabel
       Left = 20
       Top = 52
-      Width = 65
+      Width = 117
       Height = 16
-      Caption = 'Version %s'
+      Caption = 'Version %s (%d-bit)'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
