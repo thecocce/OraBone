@@ -58,7 +58,7 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare, SynEditWildcardSearch;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -261,6 +261,7 @@ type
     GotoLineCloseAction: TAction;
     FileCloseToolButton: TToolButton;
     FileCloseAllToolButton: TToolButton;
+    SynEditWildcardSearch: TSynEditWildcardSearch;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -1297,7 +1298,6 @@ var
   AFileName: string;
 begin
   Result := '';
-  PageControl.ActivePage := TabSheet;
   OraSynEdit := GetSynEdit(TabSheet);
   if Assigned(OraSynEdit) then
   begin
@@ -1351,19 +1351,14 @@ end;
 procedure TSQLEditorFrame.SaveAll;
 var
   i: Integer;
-  Temp: Integer;
   SynEdit: TBCOraSynEdit;
 begin
-  Temp := PageControl.ActivePageIndex;
   for i := 0 to PageControl.PageCount - 1 do
   begin
-    PageControl.ActivePage := PageControl.Pages[i];
-    SynEdit := GetActiveSynEdit;
+    SynEdit := GetSynEdit(PageControl.Pages[i]);
     if Assigned(SynEdit) and SynEdit.Modified then
       Save(PageControl.Pages[i]);
   end;
-  if Assigned(PageControl.Pages[Temp]) then
-    PageControl.ActivePage := PageControl.Pages[Temp];
 end;
 
 procedure TSQLEditorFrame.Undo;
@@ -1633,6 +1628,9 @@ begin
   if RegularExpressionCheckBox.Checked then
     SynEdit.SearchEngine := SynEditRegexSearch
   else
+  if (Pos('*', SearchForEdit.Text) <> 0) or (Pos('?', SearchForEdit.Text) <> 0) then
+    SynEdit.SearchEngine := SynEditWildCardSearch
+  else
     SynEdit.SearchEngine := SynEditSearch;
   SynSearchOptions := SearchOptions(False);
 
@@ -1642,6 +1640,7 @@ begin
       MessageBeep(MB_ICONASTERISK);
       SynEdit.BlockBegin := SynEdit.BlockEnd;
       SynEdit.CaretXY := SynEdit.BlockBegin;
+      Common.ShowMessage(Format(LanguageDataModule.GetYesOrNo('SearchStringNotFound'), [SearchForEdit.Text]))
     end;
   except
     { silent }
@@ -1695,6 +1694,7 @@ begin
     begin
       SynEdit.CaretX := 0;
       SynEdit.CaretY := 0;
+      FindNext;
     end;
   end;
 end;
