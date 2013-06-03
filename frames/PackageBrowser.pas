@@ -215,7 +215,7 @@ begin
     Next;
     while not Eof do
     begin
-      SynEdit.Lines.Add(TrimRight(FieldByName('TEXT').AsWideString));
+      SynEdit.Text := SynEdit.Text + FieldByName('TEXT').AsWideString;
       Next;
     end;
     SynEdit.Lines.EndUpdate;
