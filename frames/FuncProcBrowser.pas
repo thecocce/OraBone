@@ -188,7 +188,7 @@ begin
     Next;
     while not Eof do
     begin
-      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + FieldByName('TEXT').AsWideString;
+      SourceSynEdit.Lines.Add(TrimRight(FieldByName('TEXT').AsWideString));
       Next;
     end;
     SourceSynEdit.Lines.Text := Trim(SourceSynEdit.Lines.Text);

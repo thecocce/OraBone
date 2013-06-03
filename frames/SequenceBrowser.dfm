@@ -21,13 +21,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     OnChange = SequencePageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SequencePanel: TPanel
         Left = 0
         Top = 0
@@ -138,6 +135,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -498,7 +496,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

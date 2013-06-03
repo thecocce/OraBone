@@ -21,13 +21,10 @@ object PackageBrowserFrame: TPackageBrowserFrame
     OnChange = PackagePageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object SpecificationTabSheet: TTabSheet
       Caption = 'Specification'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SpecPanel: TPanel
         Left = 0
         Top = 0
@@ -65,6 +62,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
           ReadOnly = True
           SearchEngine = SynEditSearch
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object SpecificationButtonPanel: TPanel
@@ -173,6 +171,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
           ReadOnly = True
           SearchEngine = SynEditSearch
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object BodyButtonPanel: TPanel
@@ -535,7 +534,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

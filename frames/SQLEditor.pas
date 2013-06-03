@@ -842,9 +842,12 @@ var
   start: Integer;
   TmpCharA, TmpCharB: WideChar;
 begin
-  if TSynEdit(Sender).SelAvail then
-    Exit;
   Editor := TSynEdit(Sender);
+
+  if Editor.SelAvail then
+    Exit;
+  if Length(Editor.Text) = 0 then
+    Exit;
 
   ArrayLength:= 1;
 
@@ -863,7 +866,7 @@ begin
   else
     TmpCharA := #0;
 
-  if (Start < length(Editor.Text)) then
+  if Start < Length(Editor.Text) then
     TmpCharB := Editor.Text[Start + 1]
   else
     TmpCharB := #0;

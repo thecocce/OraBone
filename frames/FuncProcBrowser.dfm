@@ -21,6 +21,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     OnChange = FuncProcPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
@@ -64,6 +65,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -425,7 +427,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Left = 78
     Top = 166
     Bitmap = {
-      494C010109000E00200110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00240110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
