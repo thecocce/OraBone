@@ -9,7 +9,8 @@ uses
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
   Vcl.StdCtrls, JvMenus, BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.StdStyleActnCtrls, BCImageList, BCToolBar, BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh,
-  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox;
+  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox, ToolCtrlsEh, DBGridEhToolCtrls,
+  System.Actions, DBAxisGridsEh;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -342,8 +343,8 @@ implementation
 
 uses
   DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
-  CustomizeTableColumns, Options, Lib, StyleHooks,
-  TableSourceOptions, DataModule, CommonDialogs, Language;
+  CustomizeTableColumns, Options, Lib, StyleHooks, TableSourceOptions, DataModule, CommonDialogs,
+  Language;
 
 const
   { ColumnsQuery columns }

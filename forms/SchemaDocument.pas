@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
   ActnList, Menus, WebBrowserContainer, BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup;
+  JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup,
+  System.Actions;
 
 type
   TSchemaDocumentForm = class(TForm)
@@ -77,7 +78,8 @@ implementation
 {$R *.dfm}
 
 uses
-  ActiveX, StrUtils, Progress, Options, Common, BigINI, Main, CommonDialogs, Language;
+  ActiveX, StrUtils, Progress, Options, Common, BigINI, Main, CommonDialogs, Language,
+  Data.DB;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;

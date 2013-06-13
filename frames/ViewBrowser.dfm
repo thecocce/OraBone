@@ -1,17 +1,19 @@
 object ViewBrowserFrame: TViewBrowserFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 553
+  Height = 372
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object ViewPageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 451
-    Height = 304
+    Width = 553
+    Height = 372
     ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -21,6 +23,9 @@ object ViewBrowserFrame: TViewBrowserFrame
     OnChange = ViewPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
+    ExplicitWidth = 451
+    ExplicitHeight = 304
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
       ExplicitLeft = 0
@@ -45,27 +50,17 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = ColumnsDBGridTitleClick
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -166,6 +161,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -255,26 +251,16 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = False
-          DataGrouping.GroupLevels = <>
           DataSource = DataDataSource
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
           ParentCtl3D = False
           EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDrawDataCell = DataDBGridDrawDataCell
           OnMouseDown = DataDBGridMouseDown
           object RowDetailData: TRowDetailPanelControlEh
@@ -310,7 +296,6 @@ object ViewBrowserFrame: TViewBrowserFrame
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alRight
           Flat = True
-          Kind = dbnHorizontal
           TabOrder = 0
         end
         object JvToolBar1: TBCToolBar
@@ -385,27 +370,17 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = TriggersDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnSelectionChanged = TriggersDBGridSelectionChanged
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -539,6 +514,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
     end
@@ -567,27 +543,17 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = GrantsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnSelectionChanged = GrantsDBGridSelectionChanged
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -676,27 +642,17 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = SynonymsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnSelectionChanged = SynonymsDBGridSelectionChanged
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -785,27 +741,17 @@ object ViewBrowserFrame: TViewBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = DependenciesDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -886,10 +832,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object ColumnsDataSource: TOraDataSource
@@ -910,7 +858,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114000002000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114000002040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1861,10 +1809,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object TriggersDataSource: TOraDataSource
@@ -1897,10 +1847,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object DependenciesDataSource: TOraDataSource
@@ -1927,10 +1879,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object FilterMultiStringHolder: TJvMultiStringHolder
@@ -1957,10 +1911,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SynonymsDataSource: TOraDataSource
@@ -1989,10 +1945,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_view_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SourceDataSource: TOraDataSource

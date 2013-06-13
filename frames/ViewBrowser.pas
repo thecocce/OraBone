@@ -8,7 +8,8 @@ uses
   Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCPageControl, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar, Vcl.Menus,
   BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCImageList, BCToolBar,
-  BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB;
+  BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh,
+  DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
 
 type
   TViewBrowserFrame = class(TFrame)

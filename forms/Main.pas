@@ -7,7 +7,8 @@ uses
   Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory,
   ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCPageControl,
   AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCPopupMenu,
-  ActnPopup, JvToolBar, BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop;
+  ActnPopup, JvToolBar, BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
+  System.Actions;
 
 const
   WM_AFTER_SHOW = WM_USER + 345; // custom message

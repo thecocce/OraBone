@@ -62,7 +62,6 @@ end;
 procedure TSQLProgressDialog.WMAfterShow(var Msg: TMessage);
 var
   Success, UserCancel: Boolean;
-//  Secs, Min: Integer;
 begin
   Success := False;
   UserCancel := False;
@@ -71,15 +70,6 @@ begin
   begin
     while FOraSQL.Executing do
     begin
-      {Min := StrToInt(FormatDateTime('n', Now - FStartTime));
-      Secs := Min * 60 + StrToInt(FormatDateTime('s', Now - FStartTime));
-      if Secs < 1 then
-        ExecutionTimeText := FormatDateTime('"Execution time:" s.zzz "s."', Now - FStartTime)
-      else
-      if Secs < 60 then
-        ExecutionTimeText := FormatDateTime('"Execution time:" s "s."', Now - FStartTime)
-      else
-        ExecutionTimeText := FormatDateTime('"Execution time:" n "min" s "s."', Now - FStartTime);}
       ExecutionTimeText := Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - FStartTime)]);
       if not FOnProgress then
       begin

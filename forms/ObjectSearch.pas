@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCEdit, Dlg,
-  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, JvExComCtrls, JvHeaderControl;
+  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, JvExComCtrls, JvHeaderControl,
+  System.Actions;
 
 type
   TObjectSearhForm = class(TDialog)
@@ -51,7 +52,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, DataModule, Vcl.Themes, StyleHooks;
+  Common, DataModule, Vcl.Themes, StyleHooks, System.UITypes;
 
 type
   PSearchRec = ^TSearchRec;
