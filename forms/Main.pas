@@ -11,7 +11,7 @@ uses
   System.Actions;
 
 const
-  WM_AFTER_SHOW = WM_USER + 345; // custom message
+  //WM_AFTER_SHOW = WM_USER + 345; // custom message
   { Main menu item indexes }
   FILE_MENU_ITEMINDEX = 0;
   FILE_REOPEN_MENU_ITEMINDEX = 2;
@@ -263,6 +263,7 @@ type
     FConnecting: Boolean;
     FOnProgress: Boolean;
     FOnStartUp: Boolean;
+    FProcessingEventHandler: Boolean;
     function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
@@ -280,12 +281,14 @@ type
     procedure ReadIniFile;
     procedure ReadIniOptions;
     procedure ReadWindowState;
-    procedure RecreateStatusBar;
-    procedure RecreateDragDrop;
+    //procedure RecreateStatusBar;
+    //procedure RecreateDragDrop;
     procedure SetFields;
     procedure SetPageControlOptions;
+    procedure UpdateMainMenuBar;
+    procedure UpdateStatusBar;
     procedure UpdateGuttersAndControls;
-    procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    //procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure WriteIniFile;
   public
     { Public declarations }
@@ -320,7 +323,7 @@ begin
   AboutDialog.Open;
 end;
 
-procedure TMainForm.RecreateStatusBar;
+(*procedure TMainForm.RecreateStatusBar;
 var
   StatusPanel: TStatusPanel;
 begin
@@ -361,7 +364,7 @@ begin
   DragDrop.DropTarget := MainForm;
   DragDrop.OnDrop := DragDropDrop;
   DragDrop.AcceptDrag := True;
-end;
+end; *)
 
 procedure TMainForm.SetPageControlOptions;
 begin
@@ -438,6 +441,8 @@ end;
 procedure TMainForm.ApplicationEventsMessage(var Msg: tagMSG;
   var Handled: Boolean);
 begin
+  if FProcessingEventHandler then
+    Exit;
   SetFields;
 end;
 
@@ -748,8 +753,8 @@ begin
       TAction(ActionClientItem.Items[i].Items[j].Action).Checked := False;
   Action.Checked := True;
   UpdateGuttersAndControls;
-  RecreateStatusBar;
-  RecreateDragDrop;
+  //RecreateStatusBar;
+  //RecreateDragDrop;
 end;
 
 procedure TMainForm.CreateStyleMenu;
@@ -965,6 +970,7 @@ var
 begin
   if FOnProgress then
     Exit;
+  FProcessingEventHandler := True;
   try
     SQLEditorFrame := GetActiveSQLEditor;
     SetSQLEditorFields;
@@ -1060,6 +1066,7 @@ begin
   except
     // silent
   end;
+  FProcessingEventHandler := False;
 end;
 
 procedure TMainForm.InsertObjectActionExecute(Sender: TObject);
@@ -1409,6 +1416,11 @@ begin
     SQLEditorFrame.CompareFiles;
 end;
 
+procedure TMainForm.UpdateMainMenuBar;
+begin
+  OptionsContainer.AssignTo(ActionMainMenuBar);
+end;
+
 procedure TMainForm.ToolsOptionsActionExecute(Sender: TObject);
 var
   i: Integer;
@@ -1432,8 +1444,8 @@ begin
     { open Options }
     if OptionsDialog.Execute(OraSession, OptionsContainer) then
     begin
-      OptionsContainer.AssignTo(ActionMainMenuBar);
-      RecreateStatusBar;
+      UpdateMainMenuBar;
+      UpdateStatusBar;
       SetPageControlOptions;
       for i := 0 to PageControl.PageCount - 1 do
       begin
@@ -1724,7 +1736,7 @@ begin
   end;
 end;
 
-procedure TMainForm.WMAfterShow(var Msg: TMessage);
+(*procedure TMainForm.WMAfterShow(var Msg: TMessage);
 begin
   if FOnStartUp then
   begin
@@ -1738,11 +1750,11 @@ begin
     ReadWindowState; { because of styles this cannot be done before... }
     Repaint;
   end;
-end;
+end;*)
 
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
-  OptionsContainer.AssignTo(ActionMainMenuBar);
+  UpdateMainMenuBar;
   Repaint;
 end;
 
@@ -1786,13 +1798,18 @@ begin
   Action := caFree;
 end;
 
+procedure TMainForm.UpdateStatusBar;
+begin
+  OptionsContainer.AssignTo(StatusBar);
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FOnProgress := False;
   FOnStartUp := True;
   FConnecting := True;
   OraCall.OCIUnicode := True;
-  RecreateStatusBar;
+  //RecreateStatusBar;
   ReadIniOptions;
 end;
 
@@ -1805,9 +1822,22 @@ end;
 procedure TMainForm.Formshow(Sender: TObject);
 begin
   // Post the custom message WM_AFTER_SHOW to our form
+  //if FOnStartUp then
+  //  PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
   if FOnStartUp then
-    PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
-  Repaint;
+  begin
+    //Repaint;
+    //Application.ProcessMessages;
+    ReadIniFile;
+    CreateStyleMenu;
+    CreateFileReopenList;
+    UpdateGuttersAndControls;
+    UpdateStatusBar;
+    FOnStartUp := False;
+    ReadWindowState; { because of styles this cannot be done before... }
+    //Repaint;
+  end;
+  //Repaint;
 end;
 
 procedure TMainForm.DatabaseCloseAllOtherTabsActionExecute(Sender: TObject);

@@ -58,7 +58,8 @@ uses
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
   BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare, SynEditWildcardSearch;
+  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare, SynEditWildcardSearch,
+  System.Actions;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -84,7 +85,7 @@ type
     Separator7MenuItem: TMenuItem;
     FormatSQLMenuItem: TMenuItem;
     ErrorsQuery: TOraQuery;
-    ImageList: TImageList;
+    ImageList16: TImageList;
     BookmarkImagesList: TBCImageList;
     CutMenuItem: TMenuItem;
     CopyMenuItem: TMenuItem;
@@ -224,8 +225,8 @@ type
     FileSaveAllToolButton: TToolButton;
     Bevel6: TBevel;
     ToggleBookmarkMenuItem: TMenuItem;
-    ImageList25: TBCImageList;
-    ImageList50: TBCImageList;
+    ImageList20: TBCImageList;
+    ImageList24: TBCImageList;
     SearchPanel2: TPanel;
     SearchForLabel: TLabel;
     SearchPanel3: TPanel;
@@ -599,29 +600,28 @@ begin
   try
     { windows font size causing problems here!
       Icon size will be smaller than PageControl.Images size }
-    try
-      { smaller }
-      ImageList.GetIcon(0, Icon);
-      FCompareImageIndex := PageControl.Images.AddIcon(Icon);
-      ImageList.GetIcon(1, Icon);
-      FNewImageIndex := PageControl.Images.AddIcon(Icon);
-    except
-      try
-        { medium }
-        ImageList25.GetIcon(0, Icon);
+    case PageControl.Images.Height of
+      16:
+      begin
+        { smaller }
+        ImageList16.GetIcon(0, Icon);
         FCompareImageIndex := PageControl.Images.AddIcon(Icon);
-        ImageList25.GetIcon(1, Icon);
+        ImageList16.GetIcon(1, Icon);
         FNewImageIndex := PageControl.Images.AddIcon(Icon);
-      except
-        try
-          { larger }
-          ImageList50.GetIcon(0, Icon);
-          FCompareImageIndex := PageControl.Images.AddIcon(Icon);
-          ImageList50.GetIcon(1, Icon);
-          FNewImageIndex := PageControl.Images.AddIcon(Icon);
-        except
-
-        end;
+      end;
+      20:
+      begin
+        ImageList20.GetIcon(0, Icon);
+        FCompareImageIndex := PageControl.Images.AddIcon(Icon);
+        ImageList20.GetIcon(1, Icon);
+        FNewImageIndex := PageControl.Images.AddIcon(Icon);
+      end;
+      24:
+      begin
+        ImageList24.GetIcon(0, Icon);
+        FCompareImageIndex := PageControl.Images.AddIcon(Icon);
+        ImageList24.GetIcon(1, Icon);
+        FNewImageIndex := PageControl.Images.AddIcon(Icon);
       end;
     end;
   finally

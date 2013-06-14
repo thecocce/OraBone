@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 553
+  Height = 372
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -10,8 +10,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 78
-    Width = 451
+    Top = 146
+    Width = 553
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +23,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 553
     Height = 21
     Hint = ' '
     Align = alTop
@@ -32,39 +32,42 @@ object SQLEditorFrame: TSQLEditorFrame
     TabOrder = 0
     Visible = False
     object CaseSensitiveLabel: TLabel
-      Left = 368
+      Left = 378
       Top = 0
-      Width = 70
+      Width = 83
       Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
-      ExplicitHeight = 13
+      ExplicitLeft = 368
+      ExplicitHeight = 16
     end
     object WholeWordsOnlyLabel: TLabel
-      Left = 465
+      Left = 488
       Top = 0
-      Width = 89
+      Width = 106
       Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
-      ExplicitHeight = 13
+      ExplicitLeft = 465
+      ExplicitHeight = 16
     end
     object RegularExpressionLabel: TLabel
-      Left = 581
+      Left = 621
       Top = 0
-      Width = 92
+      Width = 109
       Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
-      ExplicitHeight = 13
+      ExplicitLeft = 581
+      ExplicitHeight = 16
     end
     object SearchPanel2: TPanel
       Left = 21
       Top = 0
-      Width = 60
+      Width = 70
       Height = 21
       Align = alLeft
       AutoSize = True
@@ -76,14 +79,15 @@ object SQLEditorFrame: TSQLEditorFrame
       object SearchForLabel: TLabel
         Left = 4
         Top = 3
-        Width = 50
-        Height = 13
+        Width = 60
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
+        ExplicitHeight = 16
       end
     end
     object SearchPanel3: TPanel
-      Left = 81
+      Left = 91
       Top = 0
       Width = 185
       Height = 21
@@ -96,9 +100,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 0
         Width = 181
-        Height = 21
+        Height = 24
         Align = alTop
         TabOrder = 0
+        Text = ''
         OnChange = SearchForEditChange
         OnlyNumbers = False
         NumbersWithDots = False
@@ -182,7 +187,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel4: TPanel
-      Left = 266
+      Left = 276
       Top = 0
       Width = 23
       Height = 21
@@ -230,7 +235,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel5: TPanel
-      Left = 289
+      Left = 299
       Top = 0
       Width = 29
       Height = 21
@@ -319,7 +324,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel6: TPanel
-      Left = 318
+      Left = 328
       Top = 0
       Width = 23
       Height = 21
@@ -408,7 +413,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel7: TPanel
-      Left = 341
+      Left = 351
       Top = 0
       Width = 27
       Height = 21
@@ -429,7 +434,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object Panel1: TPanel
-      Left = 438
+      Left = 461
       Top = 0
       Width = 8
       Height = 21
@@ -438,7 +443,7 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 7
     end
     object WholeWordsCheckBox: TBCCheckBox
-      Left = 446
+      Left = 469
       Top = 0
       Width = 19
       Height = 21
@@ -447,7 +452,7 @@ object SQLEditorFrame: TSQLEditorFrame
       ReadOnly = False
     end
     object Panel2: TPanel
-      Left = 554
+      Left = 594
       Top = 0
       Width = 8
       Height = 21
@@ -456,7 +461,7 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 9
     end
     object RegularExpressionCheckBox: TBCCheckBox
-      Left = 562
+      Left = 602
       Top = 0
       Width = 19
       Height = 21
@@ -468,8 +473,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 9
+    Width = 553
+    Height = 77
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -478,8 +483,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 7
+      Width = 553
+      Height = 75
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -501,8 +506,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 81
-    Width = 451
+    Top = 149
+    Width = 553
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -514,7 +519,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 553
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1132,8 +1137,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 53
-    Width = 451
+    Top = 121
+    Width = 553
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1220,7 +1225,7 @@ object SQLEditorFrame: TSQLEditorFrame
     object GotoLineLabelPanel: TPanel
       Left = 21
       Top = 2
-      Width = 58
+      Width = 67
       Height = 23
       Align = alLeft
       AutoSize = True
@@ -1232,14 +1237,15 @@ object SQLEditorFrame: TSQLEditorFrame
       object GotoLineLabel: TLabel
         Left = 4
         Top = 3
-        Width = 48
-        Height = 13
+        Width = 57
+        Height = 20
         Align = alLeft
         Caption = 'Go to Line'
+        ExplicitHeight = 16
       end
     end
     object LineNumberPanel: TPanel
-      Left = 79
+      Left = 88
       Top = 2
       Width = 100
       Height = 23
@@ -1252,9 +1258,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 0
         Width = 96
-        Height = 21
+        Height = 24
         Align = alTop
         TabOrder = 0
+        Text = ''
         OnKeyPress = GotoLineNumberEditKeyPress
         OnlyNumbers = True
         NumbersWithDots = False
@@ -1264,7 +1271,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object GotoLineButtonPanel: TPanel
-      Left = 179
+      Left = 188
       Top = 2
       Width = 23
       Height = 23
@@ -1664,10 +1671,12 @@ object SQLEditorFrame: TSQLEditorFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SQLStringHolder: TJvMultiStringHolder
@@ -1759,14 +1768,15 @@ object SQLEditorFrame: TSQLEditorFrame
       item
         DataType = ftUnknown
         Name = 'p_name'
+        Value = nil
       end>
   end
-  object ImageList: TImageList
+  object ImageList16: TImageList
     ShareImages = True
-    Left = 18
-    Top = 162
+    Left = 378
+    Top = 106
     Bitmap = {
-      494C010106003800B00410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800B40410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2042,7 +2052,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800700410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800740410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2557,13 +2567,13 @@ object SQLEditorFrame: TSQLEditorFrame
       OnExecute = PopupMenuToolsActionExecute
     end
   end
-  object ImageList25: TBCImageList
+  object ImageList20: TBCImageList
     Height = 20
     Width = 20
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102009C04940514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102009C04980514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000A4676900A4676900A467
@@ -2777,13 +2787,13 @@ object SQLEditorFrame: TSQLEditorFrame
       0F00000000000000007FFC001F0000000000000000FFFFFFFF00000000000000
       00000000000000000000000000000000000000000000}
   end
-  object ImageList50: TBCImageList
+  object ImageList24: TBCImageList
     Height = 24
     Width = 24
     Left = 380
     Top = 212
     Bitmap = {
-      494C01010200BC04980518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010200BC049C0518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000A467
