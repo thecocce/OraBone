@@ -156,6 +156,8 @@ type
     FileReopenAction: TAction;
     StatusBarAction: TAction;
     ExecuteCurrentStatementAction: TAction;
+    SearchToggleBookmarksAction: TAction;
+    SearchGotoBookmarksAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -253,7 +255,7 @@ type
     procedure SearchGotoLineActionExecute(Sender: TObject);
     procedure FileReopenClearActionExecute(Sender: TObject);
     procedure SelectReopenFileActionExecute(Sender: TObject);
-    procedure FileReopenActionExecute(Sender: TObject);
+    procedure DummyActionExecute(Sender: TObject);
     procedure StatusBarActionExecute(Sender: TObject);
     procedure ExecuteCurrentStatementActionExecute(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
@@ -832,6 +834,7 @@ begin
     EditRedoAction.Enabled := FileCloseAction.Enabled and Assigned(SQLEditorFrame) and SQLEditorFrame.CanRedo and ActiveSQLDocumentFound;
     EditCutAction.Enabled := SQLEditorSelectionFound and ActiveSQLDocumentFound;
     EditCopyAction.Enabled := EditCutAction.Enabled or OutputGridHasFocus;
+   // EditSelectAllAction.Enabled := ActiveSQLDocumentFound;
     EditIncreaseIndentAction.Enabled := SQLEditorSelectionFound;
     EditDecreaseIndentAction.Enabled := SQLEditorSelectionFound;
     EditSortAscAction.Enabled := SQLEditorSelectionFound;
@@ -861,6 +864,9 @@ begin
     SearchFindPreviousAction.Enabled := ActiveSQLDocumentFound;
     SearchFindInFilesAction.Enabled := Assigned(SQLEditorFrame);
     SearchToggleBookmarkAction.Enabled := ActiveSQLDocumentFound;
+    SearchToggleBookmarksAction.Enabled := ActiveSQLDocumentFound;
+    SearchGotoBookmarksAction.Enabled := ActiveSQLDocumentFound;
+    ClearBookmarksAction.Enabled := ActiveSQLDocumentFound;
     { database }
     DatabaseNewConnectionMenuAction.Enabled := not FConnecting;
     DatabaseCommitAction.Enabled := ActiveSQLDocumentFound and SQLEditorFrame.InTransaction;
@@ -946,8 +952,6 @@ begin
 
     BrowserSelectionFound := Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.SelectionFound;
     EditCopyAction.Enabled := EditCopyAction.Enabled or BrowserSelectionFound;
-
-
     { Database }
     DatabaseEndConnectionMenuAction.Enabled := (PageControl.PageCount > 0) and Assigned(PageControl.ActivePage) and (PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER);
     DatabaseEditorMenuAction.Enabled := DatabaseEndConnectionMenuAction.Enabled;
@@ -1168,7 +1172,7 @@ begin
   end;
 end;
 
-procedure TMainForm.FileReopenActionExecute(Sender: TObject);
+procedure TMainForm.DummyActionExecute(Sender: TObject);
 begin
   { dummy }
 end;
@@ -1703,22 +1707,6 @@ begin
   end;
 end;
 
-(*procedure TMainForm.WMAfterShow(var Msg: TMessage);
-begin
-  if FOnStartUp then
-  begin
-    Repaint;
-    Application.ProcessMessages;
-    ReadIniFile;
-    CreateStyleMenu;
-    CreateFileReopenList;
-    UpdateGuttersAndControls;
-    FOnStartUp := False;
-    ReadWindowState; { because of styles this cannot be done before... }
-    Repaint;
-  end;
-end;*)
-
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
   UpdateMainMenuBar;
@@ -1788,13 +1776,8 @@ end;
 
 procedure TMainForm.Formshow(Sender: TObject);
 begin
-  // Post the custom message WM_AFTER_SHOW to our form
-  //if FOnStartUp then
-  //  PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
   if FOnStartUp then
   begin
-    //Repaint;
-    //Application.ProcessMessages;
     ReadIniFile;
     CreateStyleMenu;
     CreateFileReopenList;
@@ -1802,9 +1785,7 @@ begin
     UpdateStatusBar;
     FOnStartUp := False;
     ReadWindowState; { because of styles this cannot be done before... }
-    //Repaint;
   end;
-  //Repaint;
 end;
 
 procedure TMainForm.DatabaseCloseAllOtherTabsActionExecute(Sender: TObject);

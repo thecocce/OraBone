@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 553
-  Height = 372
+  Width = 451
+  Height = 304
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -10,8 +10,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 146
-    Width = 553
+    Top = 78
+    Width = 451
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +23,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 553
+    Width = 451
     Height = 21
     Hint = ' '
     Align = alTop
@@ -32,42 +32,42 @@ object SQLEditorFrame: TSQLEditorFrame
     TabOrder = 0
     Visible = False
     object CaseSensitiveLabel: TLabel
-      Left = 378
+      Left = 368
       Top = 0
-      Width = 83
+      Width = 70
       Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
-      ExplicitLeft = 368
-      ExplicitHeight = 16
+      ExplicitLeft = 378
+      ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
-      Left = 488
+      Left = 465
       Top = 0
-      Width = 106
+      Width = 89
       Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
-      ExplicitLeft = 465
-      ExplicitHeight = 16
+      ExplicitLeft = 488
+      ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
-      Left = 621
+      Left = 581
       Top = 0
-      Width = 109
+      Width = 92
       Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
-      ExplicitLeft = 581
-      ExplicitHeight = 16
+      ExplicitLeft = 621
+      ExplicitHeight = 13
     end
     object SearchPanel2: TPanel
       Left = 21
       Top = 0
-      Width = 70
+      Width = 60
       Height = 21
       Align = alLeft
       AutoSize = True
@@ -79,15 +79,15 @@ object SQLEditorFrame: TSQLEditorFrame
       object SearchForLabel: TLabel
         Left = 4
         Top = 3
-        Width = 60
+        Width = 50
         Height = 18
         Align = alLeft
         Caption = 'Search for'
-        ExplicitHeight = 16
+        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
-      Left = 91
+      Left = 81
       Top = 0
       Width = 185
       Height = 21
@@ -100,7 +100,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 0
         Width = 181
-        Height = 24
+        Height = 21
         Align = alTop
         TabOrder = 0
         Text = ''
@@ -187,7 +187,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel4: TPanel
-      Left = 276
+      Left = 266
       Top = 0
       Width = 23
       Height = 21
@@ -235,7 +235,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel5: TPanel
-      Left = 299
+      Left = 289
       Top = 0
       Width = 29
       Height = 21
@@ -324,7 +324,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel6: TPanel
-      Left = 328
+      Left = 318
       Top = 0
       Width = 23
       Height = 21
@@ -413,7 +413,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel7: TPanel
-      Left = 351
+      Left = 341
       Top = 0
       Width = 27
       Height = 21
@@ -434,7 +434,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object Panel1: TPanel
-      Left = 461
+      Left = 438
       Top = 0
       Width = 8
       Height = 21
@@ -443,7 +443,7 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 7
     end
     object WholeWordsCheckBox: TBCCheckBox
-      Left = 469
+      Left = 446
       Top = 0
       Width = 19
       Height = 21
@@ -452,7 +452,7 @@ object SQLEditorFrame: TSQLEditorFrame
       ReadOnly = False
     end
     object Panel2: TPanel
-      Left = 594
+      Left = 554
       Top = 0
       Width = 8
       Height = 21
@@ -461,7 +461,7 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 9
     end
     object RegularExpressionCheckBox: TBCCheckBox
-      Left = 602
+      Left = 562
       Top = 0
       Width = 19
       Height = 21
@@ -473,8 +473,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 553
-    Height = 77
+    Width = 451
+    Height = 9
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -483,8 +483,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 553
-      Height = 75
+      Width = 451
+      Height = 7
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -506,8 +506,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 149
-    Width = 553
+    Top = 81
+    Width = 451
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -519,7 +519,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 553
+    Width = 451
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1137,8 +1137,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 121
-    Width = 553
+    Top = 53
+    Width = 451
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1225,7 +1225,7 @@ object SQLEditorFrame: TSQLEditorFrame
     object GotoLineLabelPanel: TPanel
       Left = 21
       Top = 2
-      Width = 67
+      Width = 58
       Height = 23
       Align = alLeft
       AutoSize = True
@@ -1237,15 +1237,15 @@ object SQLEditorFrame: TSQLEditorFrame
       object GotoLineLabel: TLabel
         Left = 4
         Top = 3
-        Width = 57
+        Width = 48
         Height = 20
         Align = alLeft
         Caption = 'Go to Line'
-        ExplicitHeight = 16
+        ExplicitHeight = 13
       end
     end
     object LineNumberPanel: TPanel
-      Left = 88
+      Left = 79
       Top = 2
       Width = 100
       Height = 23
@@ -1258,7 +1258,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 0
         Width = 96
-        Height = 24
+        Height = 21
         Align = alTop
         TabOrder = 0
         Text = ''
@@ -1271,7 +1271,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object GotoLineButtonPanel: TPanel
-      Left = 188
+      Left = 179
       Top = 2
       Width = 23
       Height = 23
@@ -1776,7 +1776,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 378
     Top = 106
     Bitmap = {
-      494C010106003800B40410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800B80410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2052,7 +2052,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800740410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800780410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2573,7 +2573,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102009C04980514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102009C049C0514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000A4676900A4676900A467
@@ -2793,7 +2793,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C01010200BC049C0518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010200BC04A00518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000A467
