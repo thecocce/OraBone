@@ -2,12 +2,12 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'OraBone'
-  ClientHeight = 681
-  ClientWidth = 1126
+  ClientHeight = 521
+  ClientWidth = 861
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIForm
@@ -20,32 +20,24 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 120
-  TextHeight = 17
+  PixelsPerInch = 96
+  TextHeight = 13
   object MainMenuPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1126
-    Height = 33
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Width = 861
+    Height = 25
     Align = alTop
     BevelOuter = bvNone
-    Padding.Top = 3
-    Padding.Right = 3
+    Padding.Top = 2
+    Padding.Right = 2
     ParentColor = True
     TabOrder = 0
     object ActionMainMenuBar: TActionMainMenuBar
       Left = 0
       Top = 0
-      Width = 891
-      Height = 39
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Width = 681
+      Height = 30
       UseSystemFont = False
       ActionManager = ActionManager
       Align = alNone
@@ -56,7 +48,7 @@ object MainForm: TMainForm
       ColorMap.UnusedColor = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -15
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = []
       HorzMargin = 2
@@ -65,30 +57,22 @@ object MainForm: TMainForm
   end
   object ToolBarPanel: TPanel
     Left = 0
-    Top = 33
-    Width = 1126
-    Height = 31
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 25
+    Width = 861
+    Height = 28
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    Padding.Left = 3
-    Padding.Top = 3
-    Padding.Right = 3
+    Padding.Left = 2
+    Padding.Top = 2
+    Padding.Right = 2
     ParentColor = True
     TabOrder = 3
     object ActionToolBar: TActionToolBar
-      Left = 3
-      Top = 3
-      Width = 1120
-      Height = 28
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 2
+      Top = 2
+      Width = 857
+      Height = 26
       ActionManager = ActionManager
       Color = clMenuBar
       ColorMap.DisabledFontColor = 7171437
@@ -98,7 +82,7 @@ object MainForm: TMainForm
       EdgeInner = esNone
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -15
+      Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
       HorzSeparator = False
@@ -108,29 +92,21 @@ object MainForm: TMainForm
   end
   object MainPanel: TPanel
     Left = 0
-    Top = 64
-    Width = 1126
-    Height = 598
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 53
+    Width = 861
+    Height = 449
     Align = alClient
     BevelOuter = bvNone
-    Padding.Left = 4
-    Padding.Top = 3
+    Padding.Left = 3
+    Padding.Top = 2
     Padding.Right = 1
-    Padding.Bottom = 3
+    Padding.Bottom = 2
     TabOrder = 1
     object PageControl: TBCPageControl
-      Left = 4
-      Top = 3
-      Width = 1121
-      Height = 592
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 3
+      Top = 2
+      Width = 857
+      Height = 445
       Align = alClient
       DoubleBuffered = False
       Images = MenuImageList
@@ -149,13 +125,9 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 662
-    Width = 1126
+    Top = 502
+    Width = 861
     Height = 19
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
     Panels = <
       item
         Alignment = taCenter
@@ -1658,7 +1630,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015B005802C40510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015B005802CC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6

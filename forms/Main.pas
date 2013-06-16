@@ -11,7 +11,6 @@ uses
   System.Actions;
 
 const
-  //WM_AFTER_SHOW = WM_USER + 345; // custom message
   { Main menu item indexes }
   FILE_MENU_ITEMINDEX = 0;
   FILE_REOPEN_MENU_ITEMINDEX = 2;
@@ -281,14 +280,12 @@ type
     procedure ReadIniFile;
     procedure ReadIniOptions;
     procedure ReadWindowState;
-    //procedure RecreateStatusBar;
-    //procedure RecreateDragDrop;
+    procedure RecreateDragDrop;
     procedure SetFields;
     procedure SetPageControlOptions;
     procedure UpdateMainMenuBar;
     procedure UpdateStatusBar;
     procedure UpdateGuttersAndControls;
-    //procedure WMAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     procedure WriteIniFile;
   public
     { Public declarations }
@@ -323,36 +320,6 @@ begin
   AboutDialog.Open;
 end;
 
-(*procedure TMainForm.RecreateStatusBar;
-var
-  StatusPanel: TStatusPanel;
-begin
-  if Assigned(StatusBar) then
-  begin
-    StatusBar.Free;
-    StatusBar := nil;
-  end;
-  StatusBar := TStatusBar.Create(Self);
-  OptionsContainer.AssignTo(StatusBar);
-  with StatusBar do
-  begin
-    Parent := Self;
-    { 1st panel }
-    StatusPanel := Panels.Add;
-    StatusPanel.Width := 99;
-    StatusPanel.Alignment := taCenter;
-    { 2nd panel }
-    StatusPanel := Panels.Add;
-    StatusPanel.Width := 99;
-    { 3rd panel }
-    StatusPanel := Panels.Add;
-    StatusPanel.Width := 99;
-    { 4th panel }
-    StatusPanel := Panels.Add;
-    StatusPanel.Width := 50;
-  end;
-end;
-
 procedure TMainForm.RecreateDragDrop;
 begin
   if Assigned(DragDrop) then
@@ -364,7 +331,7 @@ begin
   DragDrop.DropTarget := MainForm;
   DragDrop.OnDrop := DragDropDrop;
   DragDrop.AcceptDrag := True;
-end; *)
+end;
 
 procedure TMainForm.SetPageControlOptions;
 begin
@@ -753,8 +720,8 @@ begin
       TAction(ActionClientItem.Items[i].Items[j].Action).Checked := False;
   Action.Checked := True;
   UpdateGuttersAndControls;
-  //RecreateStatusBar;
-  //RecreateDragDrop;
+  UpdateStatusBar;
+  RecreateDragDrop;
 end;
 
 procedure TMainForm.CreateStyleMenu;

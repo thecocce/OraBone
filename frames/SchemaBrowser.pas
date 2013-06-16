@@ -8,7 +8,7 @@ uses
   JvExExtCtrls, JvSplitter, JvExForms, JvScrollBox, JvComCtrls, Vcl.ComCtrls, FuncProcBrowser,
   PackageBrowser, TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser,
   DBLinkBrowser, RecycleBinBrowser, UserBrowser, MemDS, DBAccess, Ora, Vcl.Menus, Vcl.ActnList,
-  BCPopupMenu, VirtualTrees, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup;
+  BCPopupMenu, VirtualTrees, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
 
 type
   TSchemaBrowserFrame = class(TFrame)

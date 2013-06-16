@@ -68,7 +68,6 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
           inherited SchemaComboBox: TBCComboBox
             Width = 260
             Hint = 'Schema name'
-            ParentFlat = False
             ExplicitWidth = 260
           end
         end
@@ -88,7 +87,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       end
       inherited TreeImageList: TImageList
         Bitmap = {
-          494C01015200E000100310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+          494C01015200E0002C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
           0000000000003600000028000000400000005001000001002000000000000050
           0100000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000000000000000
