@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCStringGrid, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, JvExComCtrls, JvStatusBar, JvStringGrid,
-  BCImageList;
+  BCImageList, System.Actions;
 
 type
   TConnectListDialog = class(TForm)
@@ -346,7 +346,7 @@ begin
       { Client: schema/password@database }
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := Username + '/' + Password + '@' + Database;
       ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i] := HomeName;
-      WriteIniFile;
+      WriteConnectionsToIniFile;
     end;
   end;
   if DirectModeRadioButton.Checked then
@@ -383,7 +383,7 @@ begin
         DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ServiceName;
       end;
       DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := s;
-      WriteIniFile;
+      WriteConnectionsToIniFile;
     end;
   end;
 end;
