@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCStringGrid, Vcl.ComCtrls,
-  Vcl.ToolWin, JvExComCtrls, JvToolBar, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCImageList,
-  BCToolBar, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.BCStringGrid, Vcl.ComCtrls,
+  Vcl.ToolWin, JvExComCtrls, JvToolBar, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCControls.BCImageList,
+  BCControls.BCToolBar, Vcl.ExtCtrls, System.Actions;
 
 type
   TSQLHistoryFrame = class(TFrame)
@@ -52,7 +52,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Lib, Options, Common, HistoryEdit;
+  Main, Lib, Options, HistoryEdit, BCCommon.Messages, BCCommon.StringUtils, BCCommon;
 
 const
   GRID_COLUMN_BOOLEAN = 0;
@@ -130,7 +130,7 @@ begin
   begin
     if AllRowsSelected then
     begin
-      if Common.AskYesOrNo('Clean SQL history, are you sure?') then
+      if AskYesOrNo('Clean SQL history, are you sure?') then
       begin
         System.SysUtils.DeleteFile(Lib.GetHistoryFile);
         DoInit;
@@ -139,7 +139,7 @@ begin
     else
     if RowsSelected then
     begin
-      if Common.AskYesOrNo('Clean selected row(s) from SQL history, are you sure?') then
+      if AskYesOrNo('Clean selected row(s) from SQL history, are you sure?') then
       begin
         RemoveSelectedRows;
         WriteSQLHistoryFile;
@@ -147,7 +147,7 @@ begin
       end;
     end
     else
-      Common.ShowMessage('Select rows to clean. Select all with Ctrl + A.');
+      ShowMessage('Select rows to clean. Select all with Ctrl + A.');
   end;
 end;
 
@@ -156,7 +156,7 @@ begin
   SQLHistoryStringGrid.HideCol(GRID_COLUMN_SQL);
   ReadSQLHistoryFile;
   SetFields;
-  Common.AutoSizeCol(SQLHistoryStringGrid, 1);
+  AutoSizeCol(SQLHistoryStringGrid, 1);
 end;
 
 procedure TSQLHistoryFrame.EditHistoryActionExecute(Sender: TObject);
@@ -168,7 +168,7 @@ begin
     SQLStatement := SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, SQLHistoryStringGrid.Row];
     if Open then
     begin
-      if Common.AskYesOrNo('Save changes?') then
+      if AskYesOrNo('Save changes?') then
       begin
         SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, SQLHistoryStringGrid.Row] := HistoryDate;
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, SQLHistoryStringGrid.Row] := Schema;
@@ -196,7 +196,7 @@ begin
   try
     // date;schema;sql#!ENDSQL!#
     for i := 1 to SQLHistoryStringGrid.RowCount - 1 do
-      History.Add(Common.EncryptString(
+      History.Add(EncryptString(
         SQLHistoryStringGrid.Cells[GRID_COLUMN_DATETIME, i] + ';' +
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SCHEMA, i] + ';' +
         SQLHistoryStringGrid.Cells[GRID_COLUMN_SQL, i] + END_OF_SQL_STATEMENT));
@@ -220,7 +220,7 @@ begin
     History := TStringList.Create;
     History.LoadFromFile(GetHistoryFile);
     for i := 0 to History.Count - 1 do
-      History.Strings[i] := Common.DecryptString(History.Strings[i]);
+      History.Strings[i] := DecryptString(History.Strings[i]);
     try
       i := 0;
       while i < History.Count do

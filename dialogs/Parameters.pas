@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvListBox, SynEdit, Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvListBox, SynEdit, Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TValueListEditor = class(ValEdit.TValueListEditor)
@@ -41,7 +41,7 @@ implementation
 {$R *.dfm}
 
 Uses
-  Common, DB, StyleHooks;
+  DB, BCCommon.StyleHooks, BCCommon.StringUtils;
 
 var
   FParametersDialog: TParametersDialog;
@@ -51,7 +51,7 @@ begin
   if not Assigned(FParametersDialog) then
     Application.CreateForm(TParametersDialog, FParametersDialog);
   Result := FParametersDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TParametersDialog.FormCreate(Sender: TObject);
@@ -87,7 +87,7 @@ begin
   FOraQuery := OraQuery;
   ValueListEditor.Strings.Clear;
   for i := 0 to OraQuery.ParamCount - 1 do
-    ValueListEditor.InsertRow(OraQuery.Params[i].Name, Common.DecryptString(ValuesList.Values[Common.EncryptString(OraQuery.Params[i].Name)]), True);
+    ValueListEditor.InsertRow(OraQuery.Params[i].Name, DecryptString(ValuesList.Values[EncryptString(OraQuery.Params[i].Name)]), True);
 
   Rslt := ShowModal;
 
@@ -96,8 +96,8 @@ begin
 
   for i := 0 to OraQuery.ParamCount - 1 do
   begin
-    KeyName := Common.EncryptString(OraQuery.Params[i].Name);
-    KeyValue := Common.EncryptString(OraQuery.Params[i].Value);
+    KeyName := EncryptString(OraQuery.Params[i].Name);
+    KeyValue := EncryptString(OraQuery.Params[i].Value);
     ValuesList.FindRow(KeyName, j);
     if j <> -1 then
       ValuesList.Values[KeyName] := KeyValue
@@ -117,7 +117,7 @@ begin
   FOraSQL := OraSQL;
   ValueListEditor.Strings.Clear;
   for i := 0 to OraSQL.ParamCount - 1 do
-    ValueListEditor.InsertRow(OraSQL.Params[i].Name, Common.DecryptString(ValuesList.Values[Common.EncryptString(OraSQL.Params[i].Name)]), True);
+    ValueListEditor.InsertRow(OraSQL.Params[i].Name, DecryptString(ValuesList.Values[EncryptString(OraSQL.Params[i].Name)]), True);
 
   Rslt := ShowModal;
 
@@ -126,8 +126,8 @@ begin
 
   for i := 0 to OraSQL.ParamCount - 1 do
   begin
-    KeyName := Common.EncryptString(OraSQL.Params[i].Name);
-    KeyValue := Common.EncryptString(OraSQL.Params[i].Value);
+    KeyName := EncryptString(OraSQL.Params[i].Name);
+    KeyValue := EncryptString(OraSQL.Params[i].Value);
     ValuesList.FindRow(KeyName, j);
     if j <> -1 then
       ValuesList.Values[KeyName] := KeyValue

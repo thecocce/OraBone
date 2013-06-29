@@ -37,6 +37,7 @@ object OutputSynEditFrame: TOutputSynEditFrame
       Gutter.ShowLineNumbers = True
       Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
+      FontSmoothing = fsmNone
     end
   end
   object SynSQLSyn: TSynSQLSyn

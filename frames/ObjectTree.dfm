@@ -67,13 +67,13 @@ object ObjectTreeFrame: TObjectTreeFrame
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        ReadOnly = False
         TabOrder = 0
         OnChange = SchemaComboBoxChange
         OnDrawItem = SchemaComboBoxDrawItem
         OnKeyDown = SchemaComboBoxKeyDown
         EditColor = clInfoBk
         DeniedKeyStrokes = False
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
     end
@@ -114,7 +114,7 @@ object ObjectTreeFrame: TObjectTreeFrame
     Left = 60
     Top = 284
     Bitmap = {
-      494C01015200E000440310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015200E000580310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005001000001002000000000000050
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2916,6 +2916,7 @@ object ObjectTreeFrame: TObjectTreeFrame
       item
         DataType = ftUnknown
         Name = 'P_SCHEMA'
+        Value = nil
       end>
   end
   object RecycleBinQuery: TOraQuery
@@ -2973,6 +2974,7 @@ object ObjectTreeFrame: TObjectTreeFrame
       item
         DataType = ftUnknown
         Name = 'P_SCHEMA'
+        Value = nil
       end>
   end
 end

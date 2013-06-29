@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, Vcl.StdCtrls,
-  ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl,
-  JvExStdCtrls, JvEdit, BCEdit, BCToolBar, Dlg;
+  ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl,
+  JvExStdCtrls, JvEdit, BCControls.BCEdit, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreatePackageDialog = class(TCreateObjectBaseDialog)
@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks, BCCommon;
 
 var
   FCreatePackageDialog: TCreatePackageDialog;
@@ -42,7 +42,7 @@ begin
   if not Assigned(FCreatePackageDialog) then
     Application.CreateForm(TCreatePackageDialog, FCreatePackageDialog);
   Result := FCreatePackageDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 

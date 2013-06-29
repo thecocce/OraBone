@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, CheckLst, ActnList, DB, MemDS, DBAccess, Ora, JvStringHolder, JvExStdCtrls,
-  JvCombobox, BCComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls, Dlg;
+  JvCombobox, BCControls.BCComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
 
 type
   TCustomizeObjectFiltersDialog = class(TDialog)
@@ -59,7 +59,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, BigIni, Lib, StyleHooks;
+  BigIni, Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon.Files, BCCommon.StringUtils;
 
 const
   CAPTION_TEXT = 'Customize %s Filters';
@@ -72,7 +72,7 @@ begin
   if not Assigned(FCustomizeObjectFiltersDialog) then
     Application.CreateForm(TCustomizeObjectFiltersDialog, FCustomizeObjectFiltersDialog);
   Result := FCustomizeObjectFiltersDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectFiltersDialog.DeselectAllActionExecute(Sender: TObject);
@@ -117,24 +117,24 @@ var
 begin
   if FilterName = '' then
   begin
-    Common.ShowErrorMessage('Set name.');
+    ShowErrorMessage('Set name.');
     Exit;
   end;
   Objects := GetObjects;
   SchemaObjectFilters := TStringList.Create;
   KeyValue := Lib.GetObjectFilterKeyValue(FObjectType, FilterName, FSchemaName);
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { delete key, string is crypted, so it must be deleted like this }
     ReadSectionValues('SchemaObjectFilters', SchemaObjectFilters);
     for i := 0 to SchemaObjectFilters.Count - 1 do
-      if KeyValue = Common.DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
+      if KeyValue = DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
       begin
         DeleteKey('SchemaObjectFilters', System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1));
         Break;
       end;
     { write ini }
-    WriteString('SchemaObjectFilters', Common.EncryptString(KeyValue), Common.EncryptString(Objects));
+    WriteString('SchemaObjectFilters', EncryptString(KeyValue), EncryptString(Objects));
   finally
     Free;
   end;
@@ -319,20 +319,20 @@ var
 begin
   if FilterName = '' then
   begin
-    Common.ShowErrorMessage('Choose a filter.');
+    ShowErrorMessage('Choose a filter.');
     NameComboBox.SetFocus;
     Exit;
   end;
-  if Common.AskYesOrNo(Format('Remove filter %s, are you sure?', [FilterName])) then
+  if AskYesOrNo(Format('Remove filter %s, are you sure?', [FilterName])) then
   begin
     SchemaObjectFilters := TStringList.Create;
     KeyValue := Lib.GetObjectFilterKeyValue(FObjectType, FilterName, FSchemaName);
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
       { delete key, string is crypted, so it must be deleted like this }
       ReadSectionValues('SchemaObjectFilters', SchemaObjectFilters);
       for i := 0 to SchemaObjectFilters.Count - 1 do
-        if KeyValue = Common.DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
+        if KeyValue = DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
         begin
           DeleteKey('SchemaObjectFilters', System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1));
           Break;

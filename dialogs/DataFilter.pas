@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter, Dlg,
-  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCEdit, JvEdit, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter, BCDialogs.Dlg,
+  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCControls.BCEdit, JvEdit, Vcl.ExtCtrls, System.Actions;
 
 type
   TDataFilterDialog = class(TDialog)
@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Options, Vcl.Themes, StyleHooks, SynEditKeyCmds;
+  Options, Vcl.Themes, BCCommon.StyleHooks, SynEditKeyCmds, BCCommon.StringUtils;
 
 var
   FDataFilterDialog: TDataFilterDialog;
@@ -102,7 +102,7 @@ begin
   if not Assigned(FDataFilterDialog) then
     Application.CreateForm(TDataFilterDialog, FDataFilterDialog);
   Result := FDataFilterDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TDataFilterDialog.SetFields;
@@ -182,28 +182,28 @@ var
   KeyValue: string;
 begin
   { Get Data Filter }
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':' + Name);
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':' + Name);
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      FilterNameEdit.Text := Name; // Copy(ValuesList.Keys[i], Pos(':', ValuesList.Keys[i]) + 1, Length(ValuesList.Keys[i]));
-      FilterSynEdit.Text := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      FilterNameEdit.Text := Name;
+      FilterSynEdit.Text := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Break;
     end;
   { Update Current Data Filter }
   Found := False;
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
        Found := True;
        //ValuesList.Keys[i] := ObjectName + '@' + SchemaParam + ':CURRENT';
-       ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(Name);
+       ValuesList.Values[ValuesList.Keys[i]] := EncryptString(Name);
        Break;
     end;
   { insert if not found }
   if not Found then
-    ValuesList.InsertRow(KeyValue, Common.EncryptString(Name), True);
+    ValuesList.InsertRow(KeyValue, EncryptString(Name), True);
 end;
 
 procedure TDataFilterDialog.SmallerActionExecute(Sender: TObject);
@@ -232,11 +232,11 @@ var
 begin
   Result := '';
   FilterName := GetCurrentFilterName(ObjectName, SchemaParam);
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':' + FilterName);
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':' + FilterName);
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      Result := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      Result := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Break;
     end;
 end;
@@ -247,11 +247,11 @@ var
   KeyValue: string;
 begin
   Result := '';
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      Result := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      Result := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Break;
     end;
 end;
@@ -273,24 +273,24 @@ var
 begin
   { Update Current Data Filter }
   Found := False;
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
        Found := True;
       // ValuesList.Keys[i] := FObjectName + '@' + FSchemaParam + ':CURRENT' + ':' + FilterNameEdit.Text;
-       ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(FilterNameEdit.Text);
+       ValuesList.Values[ValuesList.Keys[i]] := EncryptString(FilterNameEdit.Text);
        Break;
     end;
   { insert if not found }
   if not Found then
-    ValuesList.InsertRow(KeyValue, Common.EncryptString(FilterNameEdit.Text), True);
+    ValuesList.InsertRow(KeyValue, EncryptString(FilterNameEdit.Text), True);
 
-  FilterName := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterNameEdit.Text);
+  FilterName := EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterNameEdit.Text);
   if not ValuesList.FindRow(FilterName, i) then
-    ValuesList.InsertRow(FilterName, Common.EncryptString(DataFilter), True)
+    ValuesList.InsertRow(FilterName, EncryptString(DataFilter), True)
   else
-    ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(DataFilter);
+    ValuesList.Values[ValuesList.Keys[i]] := EncryptString(DataFilter);
 
   ModalResult := mrOk;
 end;

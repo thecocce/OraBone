@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Grids, JvExGrids, JvStringGrid,
-  BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit, BCEdit, Vcl.ImgList,
+  BCControls.BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, BCControls.BCEdit, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, Dlg;
+  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions, JvEdit;
 
 type
   TCreateIndexDialog = class(TCreateObjectBaseDialog)
@@ -49,7 +49,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Ora, Lib, Vcl.Themes, StyleHooks;
+  DataModule, Ora, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateIndexDialog: TCreateIndexDialog;
@@ -59,7 +59,7 @@ begin
   if not Assigned(FCreateIndexDialog) then
     Application.CreateForm(TCreateIndexDialog, FCreateIndexDialog);
   Result := FCreateIndexDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateIndexDialog.FormDestroy(Sender: TObject);
@@ -101,13 +101,13 @@ begin
   Result := False;
   if Trim(IndexNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set index name.');
+    ShowErrorMessage('Set index name.');
     IndexNameEdit.SetFocus;
     Exit;
   end;
   if Trim(TableNameComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set table name.');
+    ShowErrorMessage('Set table name.');
     TableNameComboBox.SetFocus;
     Exit;
   end;
@@ -122,7 +122,7 @@ begin
   end;
   if not Found then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   Result := True;

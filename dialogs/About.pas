@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, Winapi.Windows, Winapi.Messages, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Dlg;
+  Vcl.Imaging.pngimage, BCDialogs.Dlg;
 
 type
   TAboutDialog = class(TDialog)
@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon, BCCommon.StyleHooks, BCCommon.Files;
 
 var
   FAboutDialog: TAboutDialog;
@@ -49,14 +49,14 @@ begin
   if not Assigned(FAboutDialog) then
     Application.CreateForm(TAboutDialog, FAboutDialog);
   Result := FAboutDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TAboutDialog.Open;
 var
   MemoryStatus: TMemoryStatusEx;
 begin
-  VersionLabel.Caption := Format(VersionLabel.Caption, [Common.GetFileVersion(Application.ExeName),
+  VersionLabel.Caption := Format(VersionLabel.Caption, [BCCommon.Files.GetFileVersion(Application.ExeName),
     {$IFDEF WIN64}64{$ELSE}32{$ENDIF}]);
   { initialize the structure }
   FillChar(MemoryStatus, SizeOf(MemoryStatus), 0);
@@ -88,7 +88,7 @@ end;
 
 function TAboutDialog.GetVersion: string;
 begin
-  Result := Common.GetFileVersion(Application.ExeName);
+  Result := BCCommon.Files.GetFileVersion(Application.ExeName);
 end;
 
 end.

@@ -1,19 +1,23 @@
 object ObjectFrameFrame: TObjectFrameFrame
   Left = 0
   Top = 0
-  Width = 320
-  Height = 240
+  Width = 451
+  Height = 304
   Align = alClient
   TabOrder = 0
   Visible = False
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 320
-    Height = 240
+    Width = 451
+    Height = 304
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 320
+    ExplicitHeight = 240
     object ButtonPanelAlignLabel: TLabel
       Left = 8
       Top = 8
@@ -30,8 +34,6 @@ object ObjectFrameFrame: TObjectFrameFrame
       Top = 26
       Width = 64
       Height = 21
-      ItemHeight = 13
-      ReadOnly = False
       TabOrder = 0
       Text = 'Bottom'
       Items.Strings = (
@@ -39,6 +41,7 @@ object ObjectFrameFrame: TObjectFrameFrame
         'Top')
       EditColor = clInfoBk
       DeniedKeyStrokes = True
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
   end

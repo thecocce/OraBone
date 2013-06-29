@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, BCPageControl, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls,
+  Vcl.Controls, Vcl.Forms, BCControls.BCPageControl, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess,
-  SynEdit, BCEdit, Dlg, JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, BCDBGrid,
-  Vcl.Buttons;
+  SynEdit, BCControls.BCEdit, BCDialogs.Dlg, JvExStdCtrls, JvEdit, JvCombobox, BCControls.BCComboBox, BCControls.BCSpinEdit, BCControls.BCDBGrid,
+  Vcl.Buttons, System.Actions;
 
 type
   TExportTableDataDialog = class(TDialog)
@@ -81,8 +81,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Options, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Clipbrd,
-  Vcl.Themes, StyleHooks, CommonDialogs, Language;
+  Options, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd, BCCommon.Files, BCCommon,
+  Vcl.Themes, BCCommon.StyleHooks, BCCommon.Dialogs, BCCommon.Language, BCCommon.Messages;
 
 var
   FExportTableDataDialog: TExportTableDataDialog;
@@ -92,7 +92,7 @@ begin
   if not Assigned(FExportTableDataDialog) then
     Application.CreateForm(TExportTableDataDialog, FExportTableDataDialog);
   Result := FExportTableDataDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TExportTableDataDialog.FormDestroy(Sender: TObject);
@@ -121,11 +121,11 @@ begin
         DefaultExt := 'sql';
       end;
   end;
-  if CommonDialogs.OpenFile(Handle, FilenameEdit.Text, Filter,
+  if BCCommon.Dialogs.OpenFile(Handle, FilenameEdit.Text, Filter,
     LanguageDataModule.GetConstant('SelectFile'), DefaultExt) then
   begin
     Application.ProcessMessages; { style fix }
-    FilenameEdit.Text := CommonDialogs.Files[0];
+    FilenameEdit.Text := BCCommon.Dialogs.Files[0];
   end;
 end;
 
@@ -239,20 +239,20 @@ begin
   begin
     if Trim(SchemaEdit.Text) = '' then
     begin
-      Common.ShowErrorMessage('Enter Schema.');
+      ShowErrorMessage('Enter Schema.');
       SchemaEdit.SetFocus;
       Exit;
     end;
     if Trim(TableEdit.Text) = '' then
     begin
-      Common.ShowErrorMessage('Enter Table.');
+      ShowErrorMessage('Enter Table.');
       TableEdit.SetFocus;
       Exit;
     end;
   end;
   if FileRadioButton.Checked and (Trim(FilenameEdit.Text) = '') then
   begin
-    Common.ShowErrorMessage('Enter Filename.');
+    ShowErrorMessage('Enter Filename.');
     FilenameEdit.SetFocus;
     Exit;
   end;
@@ -338,13 +338,13 @@ begin
     ProgressDialog(Self).Destroy;
   end;
 
-  Common.ShowMessage('Export Done.');
+  ShowMessage('Export Done.');
   Result := True;
 end;
 
 procedure TExportTableDataDialog.ReadIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     FormatComboBox.ItemIndex := ReadInteger('ExportSettings', 'Format', 0);
     DelimiterComboBox.ItemIndex := ReadInteger('ExportSettings', 'Delimiter', 2);
@@ -368,7 +368,7 @@ end;
 
 procedure TExportTableDataDialog.WriteIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     WriteInteger('ExportSettings', 'Format', FormatComboBox.ItemIndex);
     WriteInteger('ExportSettings', 'Delimiter', DelimiterComboBox.ItemIndex);

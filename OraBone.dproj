@@ -8,7 +8,7 @@
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -133,10 +133,10 @@
             <Form>SQLEditorFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Common\dialogs\Replace.pas">
+        <DCCReference Include="..\..\Common\dialogs\BCDialogs.Replace.pas">
             <Form>ReplaceDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\dialogs\ConfirmReplace.pas">
+        <DCCReference Include="..\..\Common\dialogs\BCDialogs.ConfirmReplace.pas">
             <Form>ConfirmReplaceDialog</Form>
         </DCCReference>
         <DCCReference Include="dialogs\Options.pas">
@@ -195,7 +195,7 @@
             <Form>RecycleBinBrowserFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Common\dialogs\FindInFiles.pas">
+        <DCCReference Include="..\..\Common\dialogs\BCDialogs.FindInFiles.pas">
             <Form>FindInFilesDialog</Form>
         </DCCReference>
         <DCCReference Include="frames\Output.pas">
@@ -323,12 +323,12 @@
         <DCCReference Include="forms\SchemaCompare.pas">
             <Form>SchemaCompareForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\forms\PrintPreview.pas">
+        <DCCReference Include="..\..\Common\forms\BCForms.PrintPreview.pas">
             <Form>PrintPreviewDialog</Form>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BaseWebBrowserContainer.pas"/>
         <DCCReference Include="..\..\Common\units\Diff.pas"/>
-        <DCCReference Include="..\..\Common\units\Hash.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.Hash.pas"/>
         <DCCReference Include="..\..\Common\units\IntfDocHostUIHandler.pas"/>
         <DCCReference Include="..\..\Common\units\WebBrowserContainer.pas"/>
         <DCCReference Include="dialogs\ChangeUserPassword.pas">
@@ -337,15 +337,15 @@
         <DCCReference Include="dialogs\CustomizeObjectFilters.pas">
             <Form>CustomizeObjectFiltersDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\units\Language.pas">
+        <DCCReference Include="..\..\Common\units\BCCommon.Language.pas">
             <Form>LanguageDataModule</Form>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\SQLTokenizer.pas"/>
-        <DCCReference Include="..\..\Common\units\StyleHooks.pas"/>
-        <DCCReference Include="..\..\Common\dialogs\DownloadURL.pas">
+        <DCCReference Include="..\..\Common\units\BCCommon.StyleHooks.pas"/>
+        <DCCReference Include="..\..\Common\dialogs\BCDialogs.DownloadURL.pas">
             <Form>DownloadURLDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\frames\Compare.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.Compare.pas">
             <Form>CompareFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -356,7 +356,7 @@
         <DCCReference Include="dialogs\TableSourceOptions.pas">
             <Form>TableSourceOptionsDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\dialogs\Dlg.pas">
+        <DCCReference Include="..\..\Common\dialogs\BCDialogs.Dlg.pas">
             <Form>Dialog</Form>
         </DCCReference>
         <DCCReference Include="dialogs\HistoryEdit.pas">
@@ -366,14 +366,15 @@
         <DCCReference Include="..\..\Common\units\SQLParser.pas"/>
         <DCCReference Include="..\..\Common\units\SQLParseTree.pas"/>
         <DCCReference Include="..\..\Common\units\XMLConstants.pas"/>
-        <DCCReference Include="..\..\Common\units\Common.pas"/>
-        <DCCReference Include="..\..\Common\units\CommonDialogs.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.Dialogs.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.Files.pas"/>
         <DCCReference Include="frames\SQLEditorTabSheet.pas">
             <Form>SQLEditorTabSheetFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Common\units\Encoding.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.Encoding.pas"/>
         <DCCReference Include="frames\OutputDataGridTabSheet.pas">
             <Form>OutputDataGridFrame</Form>
             <FormType>dfm</FormType>

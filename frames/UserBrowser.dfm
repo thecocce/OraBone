@@ -25,6 +25,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object UserPanel: TPanel
         Left = 0
         Top = 0
@@ -43,27 +47,17 @@ object UserBrowserFrame: TUserBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = UserDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -95,6 +89,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object RolesTabSheet: TTabSheet
       Caption = 'Roles && Privileges'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -203,6 +201,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -239,6 +241,7 @@ object UserBrowserFrame: TUserBrowserFrame
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -323,6 +326,7 @@ object UserBrowserFrame: TUserBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end>
   end
   object UserDataSource: TOraDataSource
@@ -375,7 +379,7 @@ object UserBrowserFrame: TUserBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000E00A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E00BC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
@@ -662,6 +666,7 @@ object UserBrowserFrame: TUserBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end>
   end
   object SynSQLSyn: TSynSQLSyn
@@ -706,6 +711,7 @@ object UserBrowserFrame: TUserBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end>
   end
 end

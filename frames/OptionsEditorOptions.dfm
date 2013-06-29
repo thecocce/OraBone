@@ -2,19 +2,17 @@ object EditorOptionsFrame: TEditorOptionsFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 346
+  Height = 304
   Align = alClient
   TabOrder = 0
-  ExplicitHeight = 304
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 451
-    Height = 346
+    Height = 304
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitHeight = 304
     object ExtraLinesLabel: TLabel
       Left = 9
       Top = 131
@@ -128,6 +126,7 @@ object EditorOptionsFrame: TEditorOptionsFrame
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
     object TabWidthEdit: TBCEdit
@@ -145,6 +144,7 @@ object EditorOptionsFrame: TEditorOptionsFrame
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
     object BrightnessTrackBar: TTrackBar
@@ -194,11 +194,10 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       DropDownCount = 9
-      ItemHeight = 13
-      ReadOnly = False
       TabOrder = 9
       EditColor = clInfoBk
       DeniedKeyStrokes = True
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
   end

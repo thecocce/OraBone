@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCEdit, Dlg,
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCControls.BCEdit, BCDialogs.Dlg,
   ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, JvExComCtrls, JvHeaderControl,
   System.Actions;
 
@@ -52,7 +52,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, DataModule, Vcl.Themes, StyleHooks, System.UITypes;
+  DataModule, Vcl.Themes, BCCommon.StyleHooks, System.UITypes;
 
 type
   PSearchRec = ^TSearchRec;
@@ -71,7 +71,7 @@ begin
   if not Assigned(FObjectSearhForm) then
     Application.CreateForm(TObjectSearhForm, FObjectSearhForm);
   Result := FObjectSearhForm;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TObjectSearhForm.FormClose(Sender: TObject; var Action: TCloseAction);

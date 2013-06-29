@@ -4,11 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
   DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCPopupMenu, Vcl.ToolWin, JvToolBar,
-  BCToolBar, DBGridEhGrouping, GridsEh, DBGridEh;
+  BCControls.BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
+  Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCPopupMenu, Vcl.ToolWin, JvToolBar,
+  BCControls.BCToolBar, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh,
+  DBGridEh;
 
 type
   TIndexBrowserFrame = class(TFrame)
@@ -52,7 +53,7 @@ type
 implementation
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib;
 
 {$R *.dfm}
 

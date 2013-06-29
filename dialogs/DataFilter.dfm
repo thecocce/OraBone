@@ -232,6 +232,7 @@ object DataFilterDialog: TDataFilterDialog
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         WantTabs = True
         OnChange = FilterSynEditChange
+        FontSmoothing = fsmNone
       end
       object Panel5: TPanel
         Left = 0
@@ -250,12 +251,14 @@ object DataFilterDialog: TDataFilterDialog
           Height = 21
           Align = alClient
           TabOrder = 0
+          Text = ''
           OnChange = FilterNameEditChange
           OnKeyPress = FilterNameEditKeyPress
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
       end

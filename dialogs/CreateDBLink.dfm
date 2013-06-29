@@ -63,10 +63,12 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 0
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object PublicRadioButton: TRadioButton
@@ -96,10 +98,12 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 3
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object PasswordEdit: TBCEdit
@@ -110,10 +114,12 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Hint = 'Password'
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 4
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object ServiceNameComboBox: TBCComboBox
@@ -124,10 +130,10 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Hint = 'Service name'
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
-        ReadOnly = False
         TabOrder = 5
         EditColor = clInfoBk
         DeniedKeyStrokes = True
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
     end
@@ -173,7 +179,7 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00100210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E002C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

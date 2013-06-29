@@ -5,10 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, MemDS, DBAccess, Ora, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.DBCtrls,
-  BCDBComboBox, Vcl.Mask, BCDBEdit, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, Dlg,
-  BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls,
-  ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar,
-  DBGridEhGrouping, GridsEh, DBGridEh, BCDBGrid, Data.DB;
+  Vcl.Mask, BCControls.BCDBEdit, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCDialogs.Dlg,
+  BCControls.BCComboBox, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls,
+  ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar,
+  BCControls.BCDBGrid, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
+  DBAxisGridsEh, DBGridEh;
 
 type
   TCreateFunctionDialog = class(TCreateObjectBaseDialog)
@@ -52,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, StyleHooks;
+  Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateFunctionDialog: TCreateFunctionDialog;
@@ -62,7 +63,7 @@ begin
   if not Assigned(FCreateFunctionDialog) then
     Application.CreateForm(TCreateFunctionDialog, FCreateFunctionDialog);
   Result := FCreateFunctionDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateFunctionDialog.FormDestroy(Sender: TObject);
@@ -106,13 +107,13 @@ begin
   Result := False;
   if Trim(FunctionNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set function name.');
+    ShowErrorMessage('Set function name.');
     FunctionNameEdit.SetFocus;
     Exit;
   end;
   if Trim(ReturnTypeComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set return type.');
+    ShowErrorMessage('Set return type.');
     ReturnTypeComboBox.SetFocus;
     Exit;
   end;

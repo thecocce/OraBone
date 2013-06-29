@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, Dlg;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TBlobDialog = class(TDialog)
@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Vcl.Themes, StyleHooks;
+  Vcl.Themes, BCCommon.StyleHooks;
 
 var
   FBlobDialog: TBlobDialog;
@@ -42,7 +42,7 @@ begin
   if not Assigned(FBlobDialog) then
     Application.CreateForm(TBlobDialog, FBlobDialog);
   Result := FBlobDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TBlobDialog.FormDestroy(Sender: TObject);

@@ -3,9 +3,10 @@ unit CustomizePages;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCPageControl,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, Dlg,
-  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, BCComboBox, Vcl.ExtCtrls;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.BCPageControl,
+  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, BCDialogs.Dlg,
+  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, BCControls.BCComboBox, Vcl.ExtCtrls,
+  System.Actions;
 
 type
   TCustomizePageControlDialog = class(TDialog)
@@ -52,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UxTheme, Math, BigIni, Common, StyleHooks;
+  UxTheme, Math, BigIni, BCCommon.StyleHooks, BCCommon.Messages, BCCommon.Files;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -67,7 +68,7 @@ begin
   if not Assigned(FCustomizePageControlDialog) then
     Application.CreateForm(TCustomizePageControlDialog, FCustomizePageControlDialog);
   Result := FCustomizePageControlDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TCustomizePageControlDialog.FormDestroy(Sender: TObject);
@@ -101,7 +102,7 @@ begin
 
   if Trim(DefaultPageComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter Default Page.');
+    ShowErrorMessage('Enter Default Page.');
     DefaultPageComboBox.SetFocus;
     Exit;
   end;
@@ -111,7 +112,7 @@ begin
   begin
     if ValueListEditor.Values[DefaultPageComboBox.Text] = 'False' then
     begin
-      Common.ShowErrorMessage('Default page not visible.');
+      ShowErrorMessage('Default page not visible.');
       DefaultPageComboBox.SetFocus;
       Exit;
     end;
@@ -341,7 +342,7 @@ begin
     ValueListEditor.Strings.Add(s);
   end;
 
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     DefaultPage := ReadString('CustomizePageControl', 'Default_' + FPageControl.Name, '');
 
@@ -360,7 +361,7 @@ var
   i: Integer;
 begin
   { read from ini }
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     DefaultItem := ReadString('CustomizePageControl', 'Default' + PageControl.Name, '');
   finally
@@ -385,7 +386,7 @@ begin
   PageColumns := TStringList.Create;
   ValueList := TValueListEditor.Create(nil);
   try
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
       ReadSectionValues('Customize' +  PageControl.Name, PageColumns);
     finally
@@ -426,7 +427,7 @@ var
   i: Integer;
   Section: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     Section := 'Customize' +  FPageControl.Name;
     EraseSection(Section);

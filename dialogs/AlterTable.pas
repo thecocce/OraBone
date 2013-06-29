@@ -5,10 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Ora, Vcl.StdCtrls,
-  Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, BCDBComboBox, Vcl.Mask, BCDBEdit,
-  JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
-  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCPageControl, Vcl.Menus,
-  BCToolBar, DBGridEhGrouping, GridsEh, BCDBGrid, DBGridEh, Data.DB, MemDS, DBAccess, Dlg;
+  Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, BCControls.BCDBEdit,
+  JvExStdCtrls, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
+  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCControls.BCPageControl, Vcl.Menus,
+  BCControls.BCToolBar, BCControls.BCDBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)
@@ -72,7 +73,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FAlterTableDialog: TAlterTableDialog;
@@ -82,7 +83,7 @@ begin
   if not Assigned(FAlterTableDialog) then
     Application.CreateForm(TAlterTableDialog, FAlterTableDialog);
   Result := FAlterTableDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterTableDialog.AddColumnActionExecute(Sender: TObject);
@@ -266,7 +267,7 @@ begin
   Result := False;
   if ColumnsQuery.RecordCount = 0 then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   Result := True;

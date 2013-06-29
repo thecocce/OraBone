@@ -25,6 +25,10 @@ object PackageBrowserFrame: TPackageBrowserFrame
     object SpecificationTabSheet: TTabSheet
       Caption = 'Specification'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SpecPanel: TPanel
         Left = 0
         Top = 0
@@ -261,27 +265,17 @@ object PackageBrowserFrame: TPackageBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = GrantsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnSelectionChanged = GrantsDBGridSelectionChanged
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -370,27 +364,17 @@ object PackageBrowserFrame: TPackageBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = SynonymsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnSelectionChanged = SynonymsDBGridSelectionChanged
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -479,27 +463,17 @@ object PackageBrowserFrame: TPackageBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = DependenciesDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -534,7 +508,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00300110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1022,10 +996,12 @@ object PackageBrowserFrame: TPackageBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object DependenciesDataSource: TOraDataSource
@@ -1054,10 +1030,12 @@ object PackageBrowserFrame: TPackageBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SynonymsQuery: TOraQuery
@@ -1079,10 +1057,12 @@ object PackageBrowserFrame: TPackageBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SynonymsDataSource: TOraDataSource
@@ -1108,10 +1088,12 @@ object PackageBrowserFrame: TPackageBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object SpecDataSource: TOraDataSource
@@ -1161,10 +1143,12 @@ object PackageBrowserFrame: TPackageBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object BodyDataSource: TOraDataSource

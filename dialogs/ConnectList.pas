@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCStringGrid, Vcl.StdCtrls,
+  Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.BCStringGrid, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, JvExComCtrls, JvStatusBar, JvStringGrid,
-  BCImageList, System.Actions;
+  BCControls.BCImageList, System.Actions;
 
 type
   TConnectListDialog = class(TForm)
@@ -56,7 +56,7 @@ implementation
 {$R *.dfm}
 
 uses
-  OraError, BigIni, Common, ConnectClient, ConnectDirect;
+  OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.Files, BCCommon.Messages, BCCommon.StringUtils;
 
 const
   GRID_COLUMN_USER = 0;
@@ -158,7 +158,7 @@ var
   StringGrid: TBCStringGrid;
 begin
   Connections := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Size }
     Width := ReadInteger('ConnectListSize', 'Width', 444);
@@ -170,7 +170,7 @@ begin
     ReadSectionValues('Connections', Connections);
     for i := 0 to Connections.Count - 1 do
     begin
-      ConnectString := Common.DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
+      ConnectString := DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
       { Direct: schema/password@host:port:sid=sid/sn=service name
         Client: schema/password@database^homename }
       Database := Copy(ConnectString, Pos('@', ConnectString) + 1, Length(ConnectString));
@@ -222,7 +222,7 @@ begin
   else
     StringGrid := DirectConnectionsStringGrid;
 
-  if Common.AskYesOrNo(Format('Remove selected connection %s@%s, are you sure?', [
+  if AskYesOrNo(Format('Remove selected connection %s@%s, are you sure?', [
     StringGrid.Cells[GRID_COLUMN_USER, StringGrid.Row], StringGrid.Cells[GRID_COLUMN_DATABASE, StringGrid.Row]])) then
   begin
     StringGrid.RemoveRow(StringGrid.Row);
@@ -255,13 +255,13 @@ var
         { add homename }
         if StringGrid.Cells[GRID_COLUMN_HOMENAME, i] <> '' then
           s := s + '^' + StringGrid.Cells[GRID_COLUMN_HOMENAME, i];
-        BigIniFile.WriteString('Connections', IntToStr(Ident), Common.EncryptString(s));
+        BigIniFile.WriteString('Connections', IntToStr(Ident), EncryptString(s));
         Inc(Ident);
       end;
   end;
 
 begin
-  BigIniFile := TBigIniFile.Create(Common.GetINIFilename);
+  BigIniFile := TBigIniFile.Create(GetINIFilename);
   with BigIniFile do
   try
     EraseSection('Connections');
@@ -277,7 +277,7 @@ procedure TConnectListDialog.WriteIniFile;
 var
   BigIniFile: TBigIniFile;
 begin
-  BigIniFile := TBigIniFile.Create(Common.GetINIFilename);
+  BigIniFile := TBigIniFile.Create(GetINIFilename);
   with BigIniFile do
   try
     if Windowstate = wsNormal then

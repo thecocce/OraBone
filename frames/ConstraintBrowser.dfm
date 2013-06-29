@@ -21,6 +21,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     OnChange = ConstraintPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
@@ -54,27 +55,17 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = ConstraintsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -155,27 +146,17 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = ConstraintColumnsDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -239,14 +220,17 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_constraint_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_r_constraint_name'
+        Value = nil
       end>
   end
   object ConstraintColumnsDataSource: TOraDataSource
@@ -278,10 +262,12 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
       item
         DataType = ftUnknown
         Name = 'p_object_name'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
   object ConstraintsDataSource: TOraDataSource
@@ -293,7 +279,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Left = 324
     Top = 140
     Bitmap = {
-      494C0101040008008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

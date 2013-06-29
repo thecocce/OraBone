@@ -5,12 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Ora, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess,
-  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCPageControl,
+  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.BCPageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
-  Vcl.StdCtrls, JvMenus, BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  Vcl.StdStyleActnCtrls, BCImageList, BCToolBar, BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh,
-  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox, ToolCtrlsEh, DBGridEhToolCtrls,
-  System.Actions, DBAxisGridsEh;
+  Vcl.StdCtrls, JvMenus, BCControls.BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  Vcl.StdStyleActnCtrls, BCControls.BCImageList, BCControls.BCToolBar, BCControls.BCDBGrid,
+  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox, DBGridEhToolCtrls,
+  System.Actions, DBGridEhGrouping, ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -342,9 +342,9 @@ type
 implementation
 
 uses
-  DataFilter, DataSort, Main, Common, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob,
-  CustomizeTableColumns, Options, Lib, StyleHooks, TableSourceOptions, DataModule, CommonDialogs,
-  Language;
+  DataFilter, DataSort, Main, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob, BCCommon, BCCommon.StringUtils,
+  CustomizeTableColumns, Options, Lib, BCCommon.StyleHooks, TableSourceOptions, DataModule, BCCommon.Dialogs,
+  BCCommon.Language, BCCommon.Messages;
 
 const
   { ColumnsQuery columns }
@@ -1178,8 +1178,8 @@ begin
       Break;
     end;
   FilterName := StringReplace(FilterName, '&', '', []);
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterName);
-  CurrentKeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterName);
+  CurrentKeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   { Remove from valuelist (also remove current) }
   for i := DataFilterDialog.ValuesList.RowCount - 1 downto 0 do
   begin
@@ -1191,7 +1191,7 @@ begin
    else
    //if Pos(FObjectName + '@' + FSchemaParam + ':CURRENT', DataFilterDialog.ValuesList.Keys[i]) <> 0 then
    if (CurrentKeyValue = DataFilterDialog.ValuesList.Keys[i]) and
-     (DataFilterDialog.ValuesList.Values[DataFilterDialog.ValuesList.Keys[i]] = Common.EncryptString(FilterName)) then
+     (DataFilterDialog.ValuesList.Values[DataFilterDialog.ValuesList.Keys[i]] = EncryptString(FilterName)) then
    begin
      DataFilterDialog.ValuesList.DeleteRow(i);
      //Break;
@@ -1215,8 +1215,8 @@ begin
       Break;
     end;
   SortName := StringReplace(SortName, '&', '', []);
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortName);
-  CurrentKeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortName);
+  CurrentKeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   { Remove from valuelist (also remove current) }
   for i := DataSortDialog.ValuesList.RowCount - 1 downto 0 do
   begin
@@ -1255,7 +1255,7 @@ begin
   { remove current filter }
   for i := DataFilterDialog.ValuesList.RowCount - 1 downto 0 do
   begin
-     if Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataFilterDialog.ValuesList.Keys[i] then
+     if EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataFilterDialog.ValuesList.Keys[i] then
      begin
        DataFilterDialog.ValuesList.DeleteRow(i);
        Break;
@@ -1274,7 +1274,7 @@ begin
   { remove current filter }
   for i := DataSortDialog.ValuesList.RowCount - 1 downto 0 do
   begin
-     if Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataSortDialog.ValuesList.Keys[i] then
+     if EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataSortDialog.ValuesList.Keys[i] then
      begin
        DataSortDialog.ValuesList.DeleteRow(i);
        Break;
@@ -1418,6 +1418,7 @@ var
   Rslt: Integer;
   Stream: TStream;
   BlobStream: TStream;
+  FilterIndex: Cardinal;
 begin
   if (DataDBGrid.SelectedField.DataType = ftVarBytes) or (DataDBGrid.SelectedField is TStringField) or (DataDBGrid.SelectedField is TWideMemoField) then
   begin
@@ -1432,14 +1433,14 @@ begin
   begin
     Rslt := BlobDialog.Open(TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)));
     if Rslt = mrYes then // load
-      if CommonDialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('Open')) then
+      if BCCommon.Dialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('Open')) then
       begin
         Application.ProcessMessages; { style fix }
         DataDBGrid.DataSource.DataSet.Edit;
         Stream := nil;
         BlobStream := nil;
         try
-          Stream := TFileStream.Create(CommonDialogs.Files[0], fmOpenRead);
+          Stream := TFileStream.Create(BCCommon.Dialogs.Files[0], fmOpenRead);
           BlobStream := DataDBGrid.DataSource.DataSet.CreateBlobStream(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName), bmWrite);
           BlobStream.CopyFrom(Stream, 0);
         finally
@@ -1448,10 +1449,10 @@ begin
         end;
       end;
     if Rslt = mrNo then // save
-      if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('SaveAs')) then
+      if BCCommon.Dialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]), LanguageDataModule.GetConstant('SaveAs'), FilterIndex) then
       begin
         Application.ProcessMessages; { style fix }
-        TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(CommonDialogs.Files[0]);
+        TBlobField(DataDBGrid.DataSource.DataSet.FieldByName(DataDBGrid.Columns.Items[DataDBGrid.SelectedIndex].FieldName)).SaveToFile(BCCommon.Dialogs.Files[0]);
       end;
     if Rslt = mrAbort then
     begin
@@ -1519,7 +1520,7 @@ var
 begin
   if DataDBGrid.SelectedRows.Count = 1 then
   begin
-    if Common.AskYesOrNo('Delete record?') then
+    if AskYesOrNo('Delete record?') then
     begin
       FDataQuery.Delete;
       DataDBGrid.Selection.Clear;
@@ -1530,7 +1531,7 @@ begin
   else
   if DataDBGrid.SelectedRows.Count > 1 then
   begin
-    if Common.AskYesOrNo('Delete selected records?') then
+    if AskYesOrNo('Delete selected records?') then
     begin
      for i := 0 to DataDBGrid.SelectedRows.Count - 1 do
       begin
@@ -1580,7 +1581,7 @@ end;
 
 procedure TTableBrowserFrame.DropIndexActionExecute(Sender: TObject);
 begin
-  if Common.AskYesOrNo(Format('Drop index %s, are you sure?', [IndexesQuery.FieldByName(INDEX_NAME).AsString])) then
+  if AskYesOrNo(Format('Drop index %s, are you sure?', [IndexesQuery.FieldByName(INDEX_NAME).AsString])) then
   begin
     IndexesQuery.Session.ExecSQL(Format('DROP INDEX %s', [IndexesQuery.FieldByName(INDEX_NAME).AsString]), []);
     IndexesQuery.Refresh;
@@ -1668,8 +1669,8 @@ var
   KeyValue, CurrentValue, s: string;
   Item: TMenuItem;
 begin
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam);
-  CurrentValue := Common.EncryptString(':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam);
+  CurrentValue := EncryptString(':CURRENT');
   for i := 0 to DataFilterDialog.ValuesList.RowCount - 1 do
     if Pos(KeyValue, DataFilterDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataFilterDialog.ValuesList.Keys[i]) = 0 then { skip current }
@@ -1678,7 +1679,7 @@ begin
         Item.Tag := 1;
         Item.GroupIndex := 1;
         Item.RadioItem := True;
-        s :=  Common.DecryptString(DataFilterDialog.ValuesList.Keys[i]);
+        s :=  DecryptString(DataFilterDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownFilterMenuClick;
         PopupMenu.Items.Add(Item);
@@ -1691,8 +1692,8 @@ var
   KeyValue, CurrentValue, s: string;
   Item: TMenuItem;
 begin
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam);
-  CurrentValue := Common.EncryptString(':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam);
+  CurrentValue := EncryptString(':CURRENT');
   for i := 0 to DataSortDialog.ValuesList.RowCount - 1 do
     if Pos(KeyValue, DataSortDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataSortDialog.ValuesList.Keys[i]) = 0 then
@@ -1701,7 +1702,7 @@ begin
         Item.Tag := 1;
         Item.GroupIndex := 1;
         Item.RadioItem := True;
-        s :=  Common.DecryptString(DataSortDialog.ValuesList.Keys[i]);
+        s :=  DecryptString(DataSortDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownSortMenuClick;
         PopupMenu.Items.Add(Item);

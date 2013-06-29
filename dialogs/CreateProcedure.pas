@@ -4,11 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.StdCtrls, Vcl.DBCtrls, BCDBComboBox,
-  Vcl.Mask, BCDBEdit, MemDS, DBAccess, Ora, JvExStdCtrls, JvEdit, BCEdit, Dlg,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Mask, BCControls.BCDBEdit, MemDS, DBAccess, Ora, JvExStdCtrls, JvEdit, BCControls.BCEdit, BCDialogs.Dlg,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, DBGridEhGrouping, GridsEh,
-  DBGridEh, BCDBGrid, Data.DB;
+  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar,
+  BCControls.BCDBGrid, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
+  DBAxisGridsEh, DBGridEh;
 
 type
   TCreateProcedureDialog = class(TCreateObjectBaseDialog)
@@ -50,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, StyleHooks;
+  Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateProcedureDialog: TCreateProcedureDialog;
@@ -60,7 +61,7 @@ begin
   if not Assigned(FCreateProcedureDialog) then
     Application.CreateForm(TCreateProcedureDialog, FCreateProcedureDialog);
   Result := FCreateProcedureDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateProcedureDialog.FormDestroy(Sender: TObject);
@@ -104,7 +105,7 @@ begin
   Result := False;
   if Trim(ProcedureNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set procedure name.');
+    ShowErrorMessage('Set procedure name.');
     ProcedureNameEdit.SetFocus;
     Exit;
   end;

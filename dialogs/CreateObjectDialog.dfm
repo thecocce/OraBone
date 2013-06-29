@@ -30,6 +30,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     OnChange = PageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ExplicitLeft = 0
@@ -72,6 +73,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
+          FontSmoothing = fsmNone
         end
         object SourceTopPanel: TPanel
           Left = 0
@@ -197,7 +199,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Left = 244
     Top = 158
     Bitmap = {
-      494C010103000E00240210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00480210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

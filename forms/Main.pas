@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory,
-  ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCPageControl,
-  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCPopupMenu,
-  ActnPopup, JvToolBar, BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
+  ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.BCPageControl,
+  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCControls.BCPopupMenu,
+  ActnPopup, JvToolBar, BCControls.BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
   System.Actions;
 
 const
@@ -303,10 +303,11 @@ var
 implementation
 
 uses
-  About, Common, Lib, Options, BigIni, FindInFiles, Clipbrd, Parameters, SynEdit, OraCall,
-  DataFilter, BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, StyleHooks,
-  SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCOraSynEdit, BCToolBar, Math, SynEditKeyCmds, Language;
+  About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
+  DataFilter, BCControls.BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
+  SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
+  System.IOUtils, SQLFormatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
+  BCCommon.Language, BCCommon.StringUtils, BCCommon.Messages, BCCommon.Files;
 
 {$R *.dfm}
 
@@ -379,7 +380,7 @@ end;
 
 procedure TMainForm.HelpCheckForUpdateMenuActionExecute(Sender: TObject);
 begin
-  Common.CheckForUpdates(Application.Title, AboutDialog.Version);
+  CheckForUpdates(Application.Title, AboutDialog.Version);
 end;
 
 procedure TMainForm.HelpHomeActionExecute(Sender: TObject);
@@ -578,7 +579,7 @@ begin
                 SynEdit.Free;
               end;
             except
-              Common.ShowWarningMessage(Format('File %s access error.', [AddSlash(FolderText) + FName]));
+              ShowWarningMessage(Format('File %s access error.', [AddSlash(FolderText) + FName]));
             end;
         end;
       end;
@@ -629,7 +630,7 @@ begin
         end
         else
         begin
-          Common.ShowMessage(Format('Cannot find the string ''%s''', [FindWhatText]));
+          ShowMessage(Format('Cannot find the string ''%s''', [FindWhatText]));
           SQLEditorFrame.OutputFrame.CloseTabSheet;
           StatusBar.Panels[3].Text := '';
         end;
@@ -709,7 +710,7 @@ begin
       TStyleManager.SetStyle(TStyleManager.LoadFromFile(Action.Caption));
   end;
 
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     WriteString('Options', 'StyleFilename', ExtractFilename(Action.Caption));
   finally
@@ -1137,7 +1138,7 @@ begin
   ReopenActionClientItem.Items.Clear;
 
   Files := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     ReadSectionValues('FileReopenFiles', Files);
     { Files }
@@ -1179,7 +1180,7 @@ end;
 
 procedure TMainForm.FileReopenClearActionExecute(Sender: TObject);
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     EraseSection('FileReopenFiles');
   finally
@@ -1218,7 +1219,7 @@ end;
 
 procedure TMainForm.ReadIniOptions;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Options }
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
@@ -1313,7 +1314,7 @@ begin
 
   PageControl.Enabled := False;
 
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     ReadSectionValues('OpenConnections', Connections);
     j := Connections.Count;
@@ -1321,7 +1322,7 @@ begin
       ProgressDialog(Self).Open(0, 1, False, True);
     for i := 0 to j - 1 do
     begin
-      ConnectString := Common.DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
+      ConnectString := DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
 
       SchemaParam := '';
       if Pos('||', ConnectString) <> 0 then
@@ -1575,7 +1576,7 @@ var
   i: Integer;
   SchemaBrowserFrame: TSchemaBrowserFrame;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     try
       WriteString('OraBone', 'Version', AboutDialog.Version);
@@ -1661,7 +1662,7 @@ begin
         begin
           SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
           if Assigned(SchemaBrowserFrame) then
-            WriteString('OpenConnections', IntToStr(i), Common.EncryptString(SchemaBrowserFrame.ObjectTreeFrame.GetConnectString + '||' + SchemaBrowserFrame.ObjectTreeFrame.SchemaParam));
+            WriteString('OpenConnections', IntToStr(i), EncryptString(SchemaBrowserFrame.ObjectTreeFrame.GetConnectString + '||' + SchemaBrowserFrame.ObjectTreeFrame.SchemaParam));
         end;
       end;
       { Parameters }
@@ -1694,7 +1695,7 @@ procedure TMainForm.ReadWindowState;
 var
   State: Integer;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     State := ReadInteger('Size', 'State', 0);
     case State of
@@ -1834,7 +1835,7 @@ begin
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
   begin
     SQLEditorFrame := GetActiveSQLEditor;
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
       { Toolbar }
       EraseSection('ActionToolBar');
@@ -2051,7 +2052,7 @@ var
   ActionToolBarStrings: TStrings;
   SQLEditorFrame: TSQLEditorFrame;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
     ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
@@ -2121,7 +2122,7 @@ begin
 
   if not Assigned(SchemaBrowserFrame) then
   begin
-    Common.ShowMessage(Format('Connection for the schema ''%s'' not found.', [Schema]));
+    ShowMessage(Format('Connection for the schema ''%s'' not found.', [Schema]));
     Result := nil;
     Exit;
   end
@@ -2164,7 +2165,7 @@ begin
   Result := mrNo;
   try
     if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-      if not Confirm or Common.AskYesOrNo(Format('End connection %s, are you sure?', [Trim(PageControl.ActivePage.Caption)])) then
+      if not Confirm or AskYesOrNo(Format('End connection %s, are you sure?', [Trim(PageControl.ActivePage.Caption)])) then
       begin
         Result := mrYes;
         s := Trim(PageControl.ActivePage.Caption);
@@ -2646,7 +2647,7 @@ begin
   except
     { silent }
     on E: Exception do
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
   end;
   Screen.Cursor := crDefault;
   FConnecting := False;

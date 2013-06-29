@@ -4,11 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCDBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.BCDBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
   DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCImageList, BCToolBar, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, BCPopupMenu, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB;
+  BCControls.BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
+  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.BCImageList, BCControls.BCToolBar, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnPopup, BCControls.BCPopupMenu, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
+  DBAxisGridsEh, DBGridEh;
 
 type
   TTriggerBrowserFrame = class(TFrame)
@@ -77,7 +78,7 @@ type
 implementation
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib, Vcl.Themes, StyleHooks;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks;
 
 const
   TRIGGER_NAME = 'Trigger Name';

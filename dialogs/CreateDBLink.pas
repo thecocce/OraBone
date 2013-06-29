@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
-  BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
+  BCControls.BCComboBox, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCPageControl, Ora, BCToolBar, Dlg;
+  BCControls.BCPageControl, Ora, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateDBLinkDialog = class(TCreateObjectBaseDialog)
@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, StyleHooks;
+  Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateDBLinkDialog: TCreateDBLinkDialog;
@@ -49,7 +49,7 @@ begin
   if not Assigned(FCreateDBLinkDialog) then
     Application.CreateForm(TCreateDBLinkDialog, FCreateDBLinkDialog);
   Result := FCreateDBLinkDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateDBLinkDialog.FormDestroy(Sender: TObject);
@@ -69,25 +69,25 @@ begin
   Result := False;
   if Trim(LinkNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set link name.');
+    ShowErrorMessage('Set link name.');
     LinkNameEdit.SetFocus;
     Exit;
   end;
   if Trim(UserNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set user name.');
+    ShowErrorMessage('Set user name.');
     UserNameEdit.SetFocus;
     Exit;
   end;
   if Trim(PasswordEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set password.');
+    ShowErrorMessage('Set password.');
     PasswordEdit.SetFocus;
     Exit;
   end;
   if Trim(ServiceNameComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set service name.');
+    ShowErrorMessage('Set service name.');
     ServiceNameComboBox.SetFocus;
     Exit;
   end;

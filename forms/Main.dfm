@@ -418,6 +418,7 @@ object MainForm: TMainForm
                     ShortCut = 24633
                   end>
                 Action = SearchToggleBookmarksAction
+                Caption = 'T&oggle Bookmarks'
                 UsageCount = 1
               end
               item
@@ -473,6 +474,7 @@ object MainForm: TMainForm
                     ShortCut = 16441
                   end>
                 Action = SearchGotoBookmarksAction
+                Caption = '&Go to Bookmarks'
                 UsageCount = 1
               end
               item
@@ -1641,7 +1643,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015B005802DC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015B005802F80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6

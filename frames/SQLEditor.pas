@@ -56,10 +56,10 @@ uses
   OraError, SynEditMiscClasses, SynEditSearch, SynEditTypes, SynEditPlugins, Vcl.Buttons,
   Vcl.StdCtrls, Vcl.ActnList, JvExControls, JvSpeedButton, JvExExtCtrls, JvSplitter, DAScript,
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
-  BCPageControl, BCPopupMenu, BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCToolBar, BCImageList, BCButtonedEdit, BCDBGrid,
-  Vcl.Themes, Data.DB, BCCheckBox, SynEditRegexSearch, BCOraSynEdit, SQLEditorTabSheet, Compare, SynEditWildcardSearch,
-  System.Actions;
+  BCControls.BCPageControl, BCControls.BCPopupMenu, BCControls.BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCControls.BCToolBar, BCControls.BCImageList, BCControls.BCDBGrid,
+  Vcl.Themes, Data.DB, BCControls.BCCheckBox, SynEditRegexSearch, BCControls.BCOraSynEdit, SQLEditorTabSheet,
+  BCFrames.Compare, SynEditWildcardSearch, System.Actions;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -446,10 +446,10 @@ implementation
 {$R *.dfm}
 
 uses
-  SynEditKeyCmds, PrintPreview, Replace, ConfirmReplace, Lib, StyleHooks, SynUnicode,
-  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, Math,
-  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main, BigIni,
-  AnsiStrings, ShellAPI, WideStrings, Common, Vcl.GraphUtil, CommonDialogs, Language;
+  SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleHooks, SynUnicode,
+  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, System.Math, BCCommon.Files, BCCommon.Messages,
+  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon, BCCommon.StringUtils,
+  AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.Language;
 
 const
   DEFAULT_FILENAME = 'Sql';
@@ -1129,7 +1129,7 @@ var
 begin
   Files := TStringList.Create;
   { Read section }
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     ReadSectionValues('FileReopenFiles', Files);
   finally
@@ -1145,7 +1145,7 @@ begin
   while Files.Count > 10 do
     Files.Delete(Files.Count - 1);
   { write section }
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     EraseSection('FileReopenFiles');
     for i := 0 to Files.Count - 1 do
@@ -1163,12 +1163,12 @@ var
 begin
   if FileName = '' then
   begin
-    if CommonDialogs.OpenFiles(Handle, '',
+    if BCCommon.Dialogs.OpenFiles(Handle, '',
       Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
     begin
       Application.ProcessMessages; { style fix }
-      for i := 0 to CommonDialogs.Files.Count - 1 do
-        Open(CommonDialogs.Files[i])
+      for i := 0 to BCCommon.Dialogs.Files.Count - 1 do
+        Open(BCCommon.Dialogs.Files[i])
     end;
   end
   else
@@ -1214,7 +1214,7 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) and SynEdit.Modified then
   begin
-    Rslt := Common.SaveChanges(IncludeCancel);
+    Rslt := SaveChanges(IncludeCancel);
     if Rslt = mrYes then
       Save;
   end;
@@ -1301,6 +1301,7 @@ function TSQLEditorFrame.Save(TabSheet: TTabSheet; ShowDialog: Boolean): string;
 var
   OraSynEdit: TBCOraSynEdit;
   AFileName: string;
+  FilterIndex: Cardinal;
 begin
   Result := '';
   OraSynEdit := GetSynEdit(TabSheet);
@@ -1312,13 +1313,13 @@ begin
       if Pos('~', AFileName) = Length(AFileName) then
         AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
 
-      if CommonDialogs.SaveFile(Handle, '',
-        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), AFileName, 'sql') then
+      if BCCommon.Dialogs.SaveFile(Handle, '',
+        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, AFileName, 'sql') then
       begin
         Application.ProcessMessages; { style fix }
-        PageControl.ActivePage.Caption := ExtractFileName(CommonDialogs.Files[0]);
-        OraSynEdit.DocumentName := CommonDialogs.Files[0];
-        Result := CommonDialogs.Files[0];
+        Result := BCCommon.Dialogs.Files[0];
+        PageControl.ActivePage.Caption := ExtractFileName(Result);
+        OraSynEdit.DocumentName := Result;
       end
       else
       begin
@@ -1572,7 +1573,7 @@ procedure TSQLEditorFrame.Print;
 var
   PrintDlgRec: TPrintDlg;
 begin
-  if CommonDialogs.Print(Handle, PrintDlgRec) then
+  if BCCommon.Dialogs.Print(Handle, PrintDlgRec) then
   begin
     Application.ProcessMessages; { style fix }
     SynEditPrint.Copies := PrintDlgRec.nCopies;
@@ -1642,10 +1643,10 @@ begin
   try
     if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
     begin
-      MessageBeep(MB_ICONASTERISK);
+      MessageBeep;
       SynEdit.BlockBegin := SynEdit.BlockEnd;
       SynEdit.CaretXY := SynEdit.BlockBegin;
-      Common.ShowMessage(Format(LanguageDataModule.GetYesOrNo('SearchStringNotFound'), [SearchForEdit.Text]))
+      ShowMessage(Format(LanguageDataModule.GetYesOrNo('SearchStringNotFound'), [SearchForEdit.Text]))
     end;
   except
     { silent }
@@ -1692,10 +1693,10 @@ begin
 
   if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
   begin
-    MessageBeep(MB_ICONASTERISK);
+    MessageBeep;
     SynEdit.BlockBegin := SynEdit.BlockEnd;
     SynEdit.CaretXY := SynEdit.BlockBegin;
-    if Common.AskYesOrNo(Format(LanguageDataModule.GetYesOrNo('SearchMatchNotFound'), [Common.CHR_DOUBLE_ENTER])) then
+    if AskYesOrNo(Format(LanguageDataModule.GetYesOrNo('SearchMatchNotFound'), [CHR_DOUBLE_ENTER])) then
     begin
       SynEdit.CaretX := 0;
       SynEdit.CaretY := 0;
@@ -1715,7 +1716,7 @@ begin
   SynEdit := GetActiveSynEdit;
   if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
   begin
-    MessageBeep(MB_ICONASTERISK);
+    MessageBeep;
     SynEdit.BlockEnd := SynEdit.BlockBegin;
     SynEdit.CaretXY := SynEdit.BlockBegin;
   end;
@@ -2893,7 +2894,7 @@ begin
       History.LoadFromFile(GetHistoryFile);
 
     // date;schema;sql#!ENDSQL!#
-    History.Insert(0, Common.EncryptString(DateTimeToStr(Now) + ';' +
+    History.Insert(0, EncryptString(DateTimeToStr(Now) + ';' +
                 Lib.FormatSchema(OraSession.Schema + '@' + OraSession.Server) + ';' +
                 SQL + END_OF_SQL_STATEMENT));
     History.SaveToFile(GetHistoryFile);

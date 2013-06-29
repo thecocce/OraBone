@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.ImgList, ComCtrls, JvExComCtrls, JvComCtrls, BCPageControl, Vcl.StdCtrls, Vcl.Buttons,
-  JvExButtons, JvBitBtn, Vcl.ExtCtrls, ToolWin, JvExStdCtrls, JvCombobox, BCComboBox, VirtualTrees, DB,
-  MemDS, DBAccess, Ora, JvStatusBar, JvProgressBar, Dlg;
+  Vcl.Dialogs, Vcl.ImgList, ComCtrls, JvExComCtrls, JvComCtrls, BCControls.BCPageControl, Vcl.StdCtrls, Vcl.Buttons,
+  JvExButtons, JvBitBtn, Vcl.ExtCtrls, ToolWin, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, VirtualTrees, DB,
+  MemDS, DBAccess, Ora, JvStatusBar, JvProgressBar, BCDialogs.Dlg;
 
 type
   TSchemaCompareForm = class(TDialog)
@@ -75,7 +75,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Vcl.Themes, StyleHooks;
+  DataModule, Vcl.Themes, BCCommon.StyleHooks;
 
 type
   PCompareRec = ^TCompareRec;
@@ -94,7 +94,7 @@ begin
   if not Assigned(FSchemaCompareForm) then
     Application.CreateForm(TSchemaCompareForm, FSchemaCompareForm);
   Result := FSchemaCompareForm;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TSchemaCompareForm.FormClose(Sender: TObject; var Action: TCloseAction);

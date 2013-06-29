@@ -58,10 +58,12 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Synonym name'
         TabOrder = 0
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object PublicRadioButton: TRadioButton
@@ -88,10 +90,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Object owner'
-        ReadOnly = False
         TabOrder = 3
         EditColor = clInfoBk
         DeniedKeyStrokes = True
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
       object ObjectNameComboBox: TBCComboBox
@@ -100,10 +102,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Object name'
-        ReadOnly = False
         TabOrder = 4
         EditColor = clInfoBk
         DeniedKeyStrokes = True
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
       object DBLinkComboBox: TBCComboBox
@@ -112,10 +114,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Width = 202
         Height = 21
         Hint = 'Database link'
-        ReadOnly = False
         TabOrder = 5
         EditColor = clInfoBk
         DeniedKeyStrokes = True
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
     end
@@ -156,7 +158,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00000210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E001C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

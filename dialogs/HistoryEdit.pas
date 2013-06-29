@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, Dlg, SynEditHighlighter, SynHighlighterSQL,
+  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, BCDialogs.Dlg, SynEditHighlighter, SynHighlighterSQL,
   Vcl.ComCtrls;
 
 type
@@ -53,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Vcl.Themes, StyleHooks;
+  Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';
@@ -66,7 +66,7 @@ begin
   if not Assigned(FHistoryEditDialog) then
     Application.CreateForm(THistoryEditDialog, FHistoryEditDialog);
   Result := FHistoryEditDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure THistoryEditDialog.FormDestroy(Sender: TObject);
@@ -88,7 +88,7 @@ begin
     Result := Format('%s %s', [DateToStr(DatePicker.Date), TimeToStr(TimePicker.Time)]);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
   end;
 end;
 
@@ -99,7 +99,7 @@ begin
     TimePicker.DateTime := StrToDateTime(Value);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
   end;
 end;
 

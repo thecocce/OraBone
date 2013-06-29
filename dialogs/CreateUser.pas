@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCStringGrid, Vcl.StdCtrls, JvExStdCtrls,
-  JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
-  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, DB, MemDS, DBAccess, Ora,
-  BCToolBar, Dlg;
+  Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCControls.BCStringGrid, Vcl.StdCtrls, JvExStdCtrls,
+  JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
+  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, DB, MemDS, DBAccess, Ora,
+  BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)
@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Winapi.UxTheme, Vcl.Themes, System.Math, StyleHooks;
+  Winapi.UxTheme, Vcl.Themes, System.Math, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 const
   CELL_PADDING = 4;
@@ -47,7 +47,7 @@ begin
   if not Assigned(FCreateUserDialog) then
     Application.CreateForm(TCreateUserDialog, FCreateUserDialog);
   Result := FCreateUserDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateUserDialog.FormDestroy(Sender: TObject);
@@ -61,12 +61,12 @@ begin
   Result := False;
   if Trim(UsernameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter user name.');
+    ShowErrorMessage('Enter user name.');
     Exit;
   end;
   if Trim(PasswordEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter password.');
+    ShowErrorMessage('Enter password.');
     Exit;
   end;
   Result := True;

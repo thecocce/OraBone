@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit, BCEdit,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, JvEdit, BCControls.BCEdit,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, Dlg;
+  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TGrantPrivilegesDialog = class(TCreateObjectBaseDialog)
@@ -46,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Ora, StyleHooks;
+  DataModule, Ora, BCCommon.StyleHooks, BCCommon.Messages;
 
 var
   FGrantPrivilegesDialog: TGrantPrivilegesDialog;
@@ -56,7 +56,7 @@ begin
   if not Assigned(FGrantPrivilegesDialog) then
     Application.CreateForm(TGrantPrivilegesDialog, FGrantPrivilegesDialog);
   Result := FGrantPrivilegesDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TGrantPrivilegesDialog.FormDestroy(Sender: TObject);
@@ -76,17 +76,17 @@ begin
      not AlterCheckBox.Checked and
      not DebugCheckBox.Checked then
   begin
-    Common.ShowErrorMessage('Set grant.');
+    ShowErrorMessage('Set grant.');
     Exit;
   end;
   if UserRadioButton.Checked and (UserComboBox.Text = '') then
   begin
-    Common.ShowErrorMessage('Set user.');
+    ShowErrorMessage('Set user.');
     Exit;
   end;
   if RoleRadioButton.Checked and (RoleComboBox.Text = '') then
   begin
-    Common.ShowErrorMessage('Set role.');
+    ShowErrorMessage('Set role.');
     Exit;
   end;
   Result := True;

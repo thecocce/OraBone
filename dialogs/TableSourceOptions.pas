@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Dlg;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, BCDialogs.Dlg, System.Actions;
 
 type
   TTableSourceOptionsDialog = class(TDialog)
@@ -60,7 +60,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BigIni, Common, StyleHooks;
+  BigIni, BCCommon.StyleHooks, BCCommon.Files;
 
 var
   FTableSourceOptionsDialog: TTableSourceOptionsDialog;
@@ -71,7 +71,7 @@ begin
     Application.CreateForm(TTableSourceOptionsDialog, FTableSourceOptionsDialog);
   Result := FTableSourceOptionsDialog;
   FTableSourceOptionsDialog.ReadIniFile;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TTableSourceOptionsDialog.FormDestroy(Sender: TObject);
@@ -94,7 +94,7 @@ procedure TTableSourceOptionsDialog.ReadIniFile;
 var
   s: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     s := ReadString('TableSource', 'Options', 'YYYYYYYNN');
     CreateTableCheckBox.Checked := s[1] = 'Y';
@@ -160,7 +160,7 @@ procedure TTableSourceOptionsDialog.WriteIniFile;
 var
   s: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     s := 'YYYYYYYYY';
     if CreateTableCheckBox.Checked then

@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.Mask, BCDBEdit,
-  DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList, Dlg,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.Mask, BCControls.BCDBEdit,
+  DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCControls.BCEdit, Vcl.ImgList, BCDialogs.Dlg,
   SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, DBGridEhGrouping, GridsEh, DBGridEh,
-  BCDBGrid;
+  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCControls.BCDBGrid, System.Actions,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TCreateViewDialog = class(TCreateObjectBaseDialog)
@@ -56,7 +56,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
+  Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateViewDialog: TCreateViewDialog;
@@ -66,7 +66,7 @@ begin
   if not Assigned(FCreateViewDialog) then
     Application.CreateForm(TCreateViewDialog, FCreateViewDialog);
   Result := FCreateViewDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateViewDialog.FormDestroy(Sender: TObject);
@@ -110,13 +110,13 @@ begin
   Result := False;
   if Trim(ViewNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set table name.');
+    ShowErrorMessage('Set table name.');
     ViewNameEdit.SetFocus;
     Exit;
   end;
   if ColumnsQuery.RecordCount = 0 then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   Result := True;

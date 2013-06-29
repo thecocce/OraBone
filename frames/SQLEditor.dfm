@@ -39,7 +39,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
-      ExplicitLeft = 378
       ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
@@ -50,7 +49,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
-      ExplicitLeft = 488
       ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
@@ -61,7 +59,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
-      ExplicitLeft = 621
       ExplicitHeight = 13
     end
     object SearchPanel2: TPanel
@@ -80,10 +77,9 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 18
+        Height = 13
         Align = alLeft
         Caption = 'Search for'
-        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -109,6 +105,7 @@ object SQLEditorFrame: TSQLEditorFrame
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
     end
@@ -1238,10 +1235,9 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 20
+        Height = 13
         Align = alLeft
         Caption = 'Go to Line'
-        ExplicitHeight = 13
       end
     end
     object LineNumberPanel: TPanel
@@ -1267,6 +1263,7 @@ object SQLEditorFrame: TSQLEditorFrame
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
     end
@@ -1776,7 +1773,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 378
     Top = 106
     Bitmap = {
-      494C010106003800B80410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106003800D80410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2052,7 +2049,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A003800780410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800980410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2573,7 +2570,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102009C049C0514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102009C04BC0514001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000A4676900A4676900A467
@@ -2793,7 +2790,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C01010200BC04A00518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010200BC04C00518001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000A467

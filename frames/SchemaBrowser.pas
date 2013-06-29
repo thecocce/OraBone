@@ -8,7 +8,7 @@ uses
   JvExExtCtrls, JvSplitter, JvExForms, JvScrollBox, JvComCtrls, Vcl.ComCtrls, FuncProcBrowser,
   PackageBrowser, TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser,
   DBLinkBrowser, RecycleBinBrowser, UserBrowser, MemDS, DBAccess, Ora, Vcl.Menus, Vcl.ActnList,
-  BCPopupMenu, VirtualTrees, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
+  BCControls.BCPopupMenu, VirtualTrees, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
 
 type
   TSchemaBrowserFrame = class(TFrame)
@@ -158,11 +158,12 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, ClipBrd, Options, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
+  Vcl.ClipBrd, Options, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
-  CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword,
-  SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, StyleHooks;
+  CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon,
+  SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, BCCommon.StyleHooks,
+  BCCommon.Messages, BCCommon.StringUtils;
 
 const
   CAPTION_PURGE = 'Purge %s';
@@ -272,9 +273,9 @@ begin
       begin
         ObjectTreeFrame.VirtualDrawTree.OnClick(nil);
         if AlterTableRadioButton.Checked then
-          Common.ShowMessage('Table altered.')
+          ShowMessage('Table altered.')
         else
-          Common.ShowMessage('Table recreated.');
+          ShowMessage('Table recreated.');
       end;
   finally
     Release;
@@ -289,7 +290,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.VirtualDrawTree.OnClick(nil);
-        Common.ShowMessage('View altered.');
+        ShowMessage('View altered.');
       end;
   finally
     Release;
@@ -302,11 +303,11 @@ begin
     if AnalyzeTableDialog.Open(ObjectTreeFrame.ObjectName) then
     begin
       ObjectTreeFrame.Session.ExecSQL(AnalyzeTableDialog.GetSQL, []);
-      Common.ShowMessage('Table analyzed.');
+      ShowMessage('Table analyzed.');
     end;
   except
     on E: EOraError do
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
   end;
 end;
 
@@ -316,11 +317,11 @@ begin
     if ChangeUserPasswordDialog.Open(ObjectTreeFrame.ObjectName) then
     begin
       ObjectTreeFrame.Session.ExecSQL(ChangeUserPasswordDialog.GetSQL, []);
-      Common.ShowMessage('Password changed.');
+      ShowMessage('Password changed.');
     end;
   except
     on E: EOraError do
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
   end;
 end;
 
@@ -342,7 +343,7 @@ begin
         ObjectTreeFrame.Session.ExecSQL(Format('ALTER %s COMPILE', [FieldByName('NAME').AsWideString]), []);
       except
         on E: Exception do
-          Common.ShowErrorMessage(E.Message);
+          ShowErrorMessage(E.Message);
       end;
       Next;
     end;
@@ -377,7 +378,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('User created.');
+        ShowMessage('User created.');
       end;
   finally
     Release;
@@ -392,7 +393,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('View created.');
+        ShowMessage('View created.');
       end;
   finally
     Release;
@@ -407,7 +408,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Constraint created.');
+        ShowMessage('Constraint created.');
       end;
   finally
     Release;
@@ -428,7 +429,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Database link created.');
+        ShowMessage('Database link created.');
       end;
     end;
   finally
@@ -505,7 +506,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Function created.');
+        ShowMessage('Function created.');
       end;
   finally
     Release;
@@ -520,7 +521,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Index created.');
+        ShowMessage('Index created.');
       end;
   finally
     Release;
@@ -540,7 +541,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Package created.');
+        ShowMessage('Package created.');
       end;
   finally
     Release;
@@ -555,7 +556,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Procedure created.');
+        ShowMessage('Procedure created.');
       end;
   finally
     Release;
@@ -570,7 +571,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Sequence created.');
+        ShowMessage('Sequence created.');
       end;
   finally
     Release;
@@ -585,7 +586,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Synonym created.');
+        ShowMessage('Synonym created.');
       end;
   finally
     Release;
@@ -605,7 +606,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Table created.');
+        ShowMessage('Table created.');
       end;
   finally
     Release;
@@ -620,7 +621,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.Refresh;
-        Common.ShowMessage('Trigger created.');
+        ShowMessage('Trigger created.');
       end;
   finally
     Release;
@@ -682,7 +683,7 @@ begin
       if ExecuteSQL then
       begin
         ObjectTreeFrame.VirtualDrawTree.OnClick(nil);
-        Common.ShowMessage('Privileges granted.');
+        ShowMessage('Privileges granted.');
       end;
   finally
     Release;
@@ -1392,7 +1393,7 @@ begin
     end;
   end
   else
-  if Common.AskYesOrNo(Format('Drop %s %s, are you sure?', [LowerCase(ObjectTreeFrame.GetSelectedObjectType), ObjectTreeFrame.GetSelectedObjectText])) then
+  if AskYesOrNo(Format('Drop %s %s, are you sure?', [LowerCase(ObjectTreeFrame.GetSelectedObjectType), ObjectTreeFrame.GetSelectedObjectText])) then
     Drop := True;
 
   { constraints need ALTER TABLE }

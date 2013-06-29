@@ -54,10 +54,12 @@ object ConnectDirectDialog: TConnectDirectDialog
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -97,10 +99,12 @@ object ConnectDirectDialog: TConnectDirectDialog
       Align = alRight
       ThemedPassword = True
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -139,10 +143,12 @@ object ConnectDirectDialog: TConnectDirectDialog
       Hint = 'Host'
       Align = alRight
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -180,10 +186,12 @@ object ConnectDirectDialog: TConnectDirectDialog
       Height = 21
       Hint = 'Port'
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -224,11 +232,13 @@ object ConnectDirectDialog: TConnectDirectDialog
       DisabledColor = clBtnFace
       Align = alRight
       TabOrder = 0
+      Text = ''
       OnChange = SIDEditChange
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -270,11 +280,13 @@ object ConnectDirectDialog: TConnectDirectDialog
       DisabledColor = clBtnFace
       Align = alRight
       TabOrder = 0
+      Text = ''
       OnChange = ServiceNameEditChange
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end

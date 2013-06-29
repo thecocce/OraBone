@@ -52,29 +52,20 @@ inherited AlterTableDialog: TAlterTableDialog
           Height = 295
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnGetCellParams = ColumnsDBGridGetCellParams
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -82,6 +73,7 @@ inherited AlterTableDialog: TAlterTableDialog
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DATA_TYPE'
               Footers = <>
@@ -106,6 +98,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_SIZE'
               Footers = <>
@@ -115,6 +108,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_PRECISION'
               Footers = <>
@@ -124,6 +118,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SCALE'
               Footers = <>
@@ -133,6 +128,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRIMARY_KEY'
               Footers = <>
@@ -145,6 +141,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NULLABLE'
               Footers = <>
@@ -156,6 +153,7 @@ inherited AlterTableDialog: TAlterTableDialog
               Width = 49
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_DEFAULT'
               Footers = <>
@@ -164,6 +162,7 @@ inherited AlterTableDialog: TAlterTableDialog
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'UNUSED'
               Footers = <>
@@ -533,30 +532,21 @@ inherited AlterTableDialog: TAlterTableDialog
           Width = 722
           Height = 325
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnGetCellParams = ColumnCommentsDBGridGetCellParams
           Columns = <
             item
               Color = clBtnFace
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -565,6 +555,7 @@ inherited AlterTableDialog: TAlterTableDialog
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_COMMENT'
               Footers = <>
@@ -625,11 +616,13 @@ inherited AlterTableDialog: TAlterTableDialog
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object AlterTableRadioButton: TRadioButton [6]
@@ -660,11 +653,13 @@ inherited AlterTableDialog: TAlterTableDialog
     Hint = 'Comment'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 6
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited ActionList: TActionList
@@ -695,7 +690,7 @@ inherited AlterTableDialog: TAlterTableDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E006C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00880210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

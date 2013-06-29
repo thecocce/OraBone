@@ -4,8 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, Dlg,
-  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, Vcl.ExtCtrls;
+  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, BCDialogs.Dlg,
+  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, Vcl.ExtCtrls,
+  System.Actions;
 
 type
   TCustomizeObjectBrowserDialog = class(TDialog)
@@ -45,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.UxTheme, Math, BigIni, Common, StyleHooks;
+  Winapi.UxTheme, System.Math, BigIni, BCCommon.StyleHooks, BCCommon.Files;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -60,7 +61,7 @@ begin
   if not Assigned(FCustomizeObjectBrowserDialog) then
     Application.CreateForm(TCustomizeObjectBrowserDialog, FCustomizeObjectBrowserDialog);
   Result := FCustomizeObjectBrowserDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeObjectBrowserDialog.FormDestroy(Sender: TObject);
@@ -298,7 +299,7 @@ begin
   { read from ini }
   TreeObjects := TStringList.Create;
   try
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
       ReadSectionValues('CustomizeObjectTree', TreeObjects);
     finally
@@ -322,7 +323,7 @@ var
   i: Integer;
   Section: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     Section := 'CustomizeObjectTree';
     EraseSection(Section);

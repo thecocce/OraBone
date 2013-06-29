@@ -33,12 +33,14 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 5
+    Text = ''
     Visible = False
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited PageControl: TBCPageControl
@@ -147,6 +149,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
         object ReferenceOldEdit: TBCEdit
@@ -162,6 +165,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
       end
@@ -208,6 +212,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
     end
@@ -253,6 +258,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
     end
@@ -304,11 +310,13 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object TableNameComboBox: TBCComboBox [7]
@@ -318,16 +326,16 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Height = 21
     Hint = 'Table or view name'
     Anchors = [akLeft, akTop, akRight]
-    ReadOnly = False
     TabOrder = 4
     OnChange = PageControlChange
     EditColor = clInfoBk
     DeniedKeyStrokes = False
+    ReadOnly = False
     DropDownFixedWidth = 0
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00100210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

@@ -40,11 +40,13 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 7
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited PageControl: TBCPageControl
@@ -289,11 +291,13 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object UniqueRadioButton: TRadioButton [8]
@@ -323,11 +327,11 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Height = 21
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
-    ReadOnly = False
     TabOrder = 6
     OnChange = TableNameComboBoxChange
     EditColor = clInfoBk
     DeniedKeyStrokes = False
+    ReadOnly = False
     DropDownFixedWidth = 0
   end
   inherited ActionList: TActionList
@@ -342,7 +346,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E000C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00300210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

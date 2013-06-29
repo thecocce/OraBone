@@ -100,10 +100,12 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 0
+          Text = ''
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
       end
@@ -146,10 +148,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 22
           Width = 225
           Height = 21
-          ReadOnly = False
           TabOrder = 3
           EditColor = clInfoBk
           DeniedKeyStrokes = False
+          ReadOnly = False
           DropDownFixedWidth = 0
         end
         object RoleComboBox: TBCComboBox
@@ -157,10 +159,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 45
           Width = 225
           Height = 21
-          ReadOnly = False
           TabOrder = 4
           EditColor = clInfoBk
           DeniedKeyStrokes = False
+          ReadOnly = False
           DropDownFixedWidth = 0
         end
       end
@@ -213,7 +215,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00040210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

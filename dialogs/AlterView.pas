@@ -6,9 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter,
   SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, JvComCtrls, BCPageControl, JvEdit, BCEdit, DBAccess, Ora, MemDS, Vcl.Buttons,
-  JvExButtons, JvBitBtn, BCDBEdit, BCToolBar, DBGridEhGrouping, GridsEh, DBGridEh, BCDBGrid,
-  JvExStdCtrls, Vcl.ExtCtrls, Data.DB, Dlg;
+  SynEdit, BCControls.BCPageControl, BCControls.BCEdit, DBAccess, Ora, MemDS, Vcl.Buttons,
+  JvExButtons, JvBitBtn, BCControls.BCDBEdit, BCControls.BCToolBar, BCControls.BCDBGrid,
+  JvExStdCtrls, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, JvEdit,
+  GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)
@@ -69,7 +70,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FAlterViewDialog: TAlterViewDialog;
@@ -79,7 +80,7 @@ begin
   if not Assigned(FAlterViewDialog) then
     Application.CreateForm(TAlterViewDialog, FAlterViewDialog);
   Result := FAlterViewDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TAlterViewDialog.FormDestroy(Sender: TObject);
@@ -176,7 +177,7 @@ begin
   Result := False;
   if ColumnsQuery.RecordCount = 0 then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   Result := True;

@@ -183,12 +183,14 @@ object DataSortDialog: TDataSortDialog
           Height = 21
           Align = alClient
           TabOrder = 0
+          Text = ''
           OnChange = SortNameEditChange
           OnKeyPress = SortNameEditKeyPress
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
       end
@@ -271,7 +273,7 @@ object DataSortDialog: TDataSortDialog
     Left = 60
     Top = 264
     Bitmap = {
-      494C010103000500500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030005006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000033140000451B00005722000057220000471C0000361600000000

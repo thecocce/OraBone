@@ -94,6 +94,7 @@ object StringDataDialog: TStringDataDialog
       Gutter.Gradient = True
       Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
+      FontSmoothing = fsmNone
     end
   end
 end

@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, JvExControls,
   JvLabel, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.StdCtrls, JvSpeedButton, JvExComCtrls,
-  JvComCtrls, Vcl.Menus, Ora, Vcl.Grids, BCSynEdit, BCPageControl, BCPopupMenu, VirtualTrees,
-  PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCDBGrid, DBGridEh, Data.DB, System.Actions;
+  JvComCtrls, Vcl.Menus, Ora, Vcl.Grids, BCControls.BCPageControl, BCControls.BCPopupMenu, VirtualTrees,
+  PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCDBGrid, BCControls.BCSynEdit, Data.DB, System.Actions;
 
 type
   TOutputFrame = class(TFrame)
@@ -83,9 +83,9 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Common, Options, Lib, Vcl.Themes, StyleHooks, ClipBrd, OutputDataGridTabSheet, Math,
+  Main, Options, Lib, Vcl.Themes, BCCommon.StyleHooks, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
-  System.UITypes;
+  System.UITypes, BCCommon;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin

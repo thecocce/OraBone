@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, BCDialogs.Dlg, System.Actions;
 
 const
   WM_AFTER_SHOW = WM_USER + 301; // custom message
@@ -40,7 +40,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks;
 
 var
   FQueryProgressDialog: TQueryProgressDialog;
@@ -50,7 +50,7 @@ begin
   if not Assigned(FQueryProgressDialog) then
     Application.CreateForm(TQueryProgressDialog, FQueryProgressDialog);
   Result := FQueryProgressDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TQueryProgressDialog.CancelActionExecute(Sender: TObject);

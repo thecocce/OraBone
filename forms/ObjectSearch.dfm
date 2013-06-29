@@ -2,12 +2,12 @@ object ObjectSearhForm: TObjectSearhForm
   Left = 0
   Top = 0
   Caption = 'Object Search'
-  ClientHeight = 568
-  ClientWidth = 799
+  ClientHeight = 434
+  ClientWidth = 611
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
@@ -15,43 +15,31 @@ object ObjectSearhForm: TObjectSearhForm
   Visible = True
   OnClose = FormClose
   OnDestroy = FormDestroy
-  PixelsPerInch = 120
-  TextHeight = 17
+  PixelsPerInch = 96
+  TextHeight = 13
   object ButtonPanel: TPanel
     Left = 0
     Top = 0
-    Width = 799
-    Height = 34
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Width = 611
+    Height = 26
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
     object SearchForLabel: TLabel
-      Left = 10
-      Top = 9
-      Width = 63
-      Height = 17
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 8
+      Top = 7
+      Width = 50
+      Height = 13
       Caption = 'Search for'
     end
     object SearchForEdit: TBCEdit
-      Left = 89
-      Top = 5
-      Width = 289
-      Height = 26
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 68
+      Top = 4
+      Width = 221
+      Height = 21
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
+      Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -62,29 +50,22 @@ object ObjectSearhForm: TObjectSearhForm
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
     object CaseSensitiveCheckBox: TCheckBox
-      Left = 480
-      Top = 9
-      Width = 132
-      Height = 22
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 367
+      Top = 7
+      Width = 101
+      Height = 17
       Caption = ' Case sensitive'
       TabOrder = 2
     end
     object SearchBitBtn: TJvBitBtn
-      Left = 381
-      Top = 4
-      Width = 86
-      Height = 30
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 291
+      Top = 3
+      Width = 66
+      Height = 23
       Action = SearchAction
       Caption = '&Search'
       Glyph.Data = {
@@ -133,20 +114,16 @@ object ObjectSearhForm: TObjectSearhForm
       TabOrder = 1
       HotTrackFont.Charset = DEFAULT_CHARSET
       HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -14
+      HotTrackFont.Height = -11
       HotTrackFont.Name = 'Tahoma'
       HotTrackFont.Style = []
     end
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 549
-    Width = 799
+    Top = 415
+    Width = 611
     Height = 19
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
     Panels = <
       item
         Width = 400
@@ -155,35 +132,27 @@ object ObjectSearhForm: TObjectSearhForm
         Width = 100
       end>
     SimplePanel = True
-    ExplicitTop = 543
-    ExplicitWidth = 611
+    ExplicitTop = 420
+    ExplicitWidth = 799
   end
   object TreePanel: TPanel
     Left = 0
-    Top = 34
-    Width = 799
-    Height = 515
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 26
+    Width = 611
+    Height = 389
     Align = alClient
     BevelOuter = bvNone
-    Padding.Left = 5
-    Padding.Top = 3
-    Padding.Right = 5
-    Padding.Bottom = 5
+    Padding.Left = 4
+    Padding.Top = 2
+    Padding.Right = 4
+    Padding.Bottom = 4
     TabOrder = 2
-    ExplicitHeight = 509
+    ExplicitHeight = 394
     object VirtualDrawTree: TVirtualDrawTree
-      Left = 5
-      Top = 3
-      Width = 789
-      Height = 500
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Left = 4
+      Top = 2
+      Width = 603
+      Height = 383
       Align = alClient
       Ctl3D = True
       DragOperations = []
@@ -221,7 +190,7 @@ object ObjectSearhForm: TObjectSearhForm
         item
           Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
           Position = 1
-          Width = 484
+          Width = 298
           WideText = 'Search Result'
         end>
     end
@@ -245,7 +214,7 @@ object ObjectSearhForm: TObjectSearhForm
     Left = 60
     Top = 284
     Bitmap = {
-      494C01011800E000840210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011800E0008C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

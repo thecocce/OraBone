@@ -4,14 +4,14 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls,
-  CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter, Dlg,
-  SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCPageControl,
+  CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter, BCDialogs.Dlg,
+  SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCControls.BCPageControl,
   System.SysUtils, Vcl.ImgList, SynHighlighterWeb, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvxSlider,
-  ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCEdit, JvExStdCtrls, JvEdit, JvCombobox,
-  BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
+  ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.BCEdit, JvExStdCtrls, JvEdit, JvCombobox,
+  BCControls.BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
-  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar;
+  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, System.Actions;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -247,7 +247,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Math, UxTheme, DataModule, StyleHooks, SynEditTypes;
+  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleHooks, SynEditTypes, BCCommon.Messages;
 
 const
   CELL_PADDING = 4;
@@ -444,7 +444,7 @@ begin
   if not Assigned(FOptionsDialog) then
     Application.CreateForm(TOptionsDialog, FOptionsDialog);
   Result := FOptionsDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TOptionsDialog.FormDestroy(Sender: TObject);
@@ -782,7 +782,7 @@ begin
     if FEditorFontFrame.Visible then
     begin
       FOptionsContainer.AssignTo(FEditorFontFrame.SynEdit);
-      StyleHooks.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
+      BCCommon.StyleHooks.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
     end;
     FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);

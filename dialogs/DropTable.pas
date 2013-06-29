@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TDropTableDialog = class(TDialog)
@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Math, StyleHooks;
+  System.Math, BCCommon.StyleHooks;
 
 const
   CAPTION_TEXT = 'Drop table %s, are you sure?';
@@ -50,7 +50,7 @@ begin
   if not Assigned(FDropTableDialog) then
     Application.CreateForm(TDropTableDialog, FDropTableDialog);
   Result := FDropTableDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TDropTableDialog.FormDestroy(Sender: TObject);

@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Dialogs, Winapi.Messages, Vcl.ActnList, OdacVcl,
-  Ora, OraError, JvExStdCtrls, JvCombobox, BCEdit, JvEdit, BCComboBox, Dlg;
+  Ora, OraError, JvExStdCtrls, JvCombobox, BCControls.BCEdit, JvEdit, BCControls.BCComboBox, BCDialogs.Dlg,
+  System.Actions;
 
 type
   TConnectClientDialog = class(TDialog)
@@ -59,7 +60,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, OraServices, OraCall, Lib, StyleHooks;
+  OraServices, OraCall, Lib, BCCommon.StyleHooks, BCCommon.Messages;
 
 var
   FConnectClientDialog: TConnectClientDialog;
@@ -73,7 +74,7 @@ begin
     FConnectClientDialog.FillDatabaseCombo;
   end;
   Result := FConnectClientDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TConnectClientDialog.FillDatabaseCombo;
@@ -180,14 +181,14 @@ procedure TConnectClientDialog.OKActionExecute(Sender: TObject);
 begin
   if UsernameEdit.Text = '' then
   begin
-    Common.ShowMessage(TEXT_USERNAME);
+    ShowMessage(TEXT_USERNAME);
     UsernameEdit.SetFocus;
     Exit;
   end;
 
   if PasswordEdit.Text = '' then
   begin
-    Common.ShowMessage(TEXT_PASSWORD);
+    ShowMessage(TEXT_PASSWORD);
     PasswordEdit.SetFocus;
     Exit;
   end;

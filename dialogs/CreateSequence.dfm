@@ -70,10 +70,12 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 0
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object MinValueEdit: TBCEdit
@@ -90,6 +92,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object MaxValueEdit: TBCEdit
@@ -106,6 +109,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object StartWithEdit: TBCEdit
@@ -122,6 +126,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object IncrementByEdit: TBCEdit
@@ -138,6 +143,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object CacheEdit: TBCEdit
@@ -154,6 +160,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object OrderCheckBox: TCheckBox
@@ -214,7 +221,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00FC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00140210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

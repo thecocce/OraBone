@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ImgList,
   Vcl.Menus, DBAccess, MemData, OdacVcl, DB, Ora, MemDS, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ToolWin,
-  JvToolBar, Vcl.ActnList, JvStringHolder, VirtualTrees, jvComboBox, JvExStdCtrls, BCEdit,
-  BCComboBox, BCToolBar, Vcl.Themes;
+  JvToolBar, Vcl.ActnList, JvStringHolder, VirtualTrees, jvComboBox, JvExStdCtrls, BCControls.BCEdit,
+  BCControls.BCComboBox, BCControls.BCToolBar, Vcl.Themes, System.Actions;
 
 const
   { Tree texts }
@@ -234,8 +234,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, SQLTokenizer, StrUtils, Common,
-  StyleHooks;
+  Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, SQLTokenizer, System.StrUtils,
+  BCCommon.StyleHooks, BCCommon.Files, BCCommon.StringUtils, BCCommon.Messages;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
 begin
@@ -283,15 +283,15 @@ begin
   { Read SchemaFilter from ini - Schema@server=schema;schema;...}
   SchemaFilters := TStringList.Create;
   //Screen.Cursor := crHourglass;
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { read string }
     ReadSectionValues('SchemaFilters', SchemaFilters);
     for i := 0 to SchemaFilters.Count - 1 do
-      if SchemaName = Common.DecryptString(System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1)) then
+      if SchemaName = DecryptString(System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1)) then
       begin
-        //Result := Common.DecryptString(ReadString('SchemaFilters', System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1), ''));
-        Result := Common.DecryptString(System.Copy(SchemaFilters.Strings[i], Pos('=', SchemaFilters.Strings[i]) + 1, Length(SchemaFilters.Strings[i])));
+        //Result := DecryptString(ReadString('SchemaFilters', System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1), ''));
+        Result := DecryptString(System.Copy(SchemaFilters.Strings[i], Pos('=', SchemaFilters.Strings[i]) + 1, Length(SchemaFilters.Strings[i])));
         Break;
       end;
   finally
@@ -1181,7 +1181,7 @@ begin
 
   FTreeObjects.Clear;
   SectionValues := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     ReadSectionValues('CustomizeObjectTree', FTreeObjects);
     if FTreeObjects.Count = 0 then
@@ -1202,10 +1202,10 @@ begin
       FTreeObjects.Add(TEXT_INVALID_OBJECTS + TEXT_IS_TRUE);
       FTreeObjects.Add(TEXT_RECYCLE_BIN + TEXT_IS_TRUE);
     end;
-    ReadSectionValues('DefaultSchemaObjectFilters_' + Common.DecryptString(GetSchemaName), SectionValues);
+    ReadSectionValues('DefaultSchemaObjectFilters_' + DecryptString(GetSchemaName), SectionValues);
     for i := 0 to SectionValues.Count - 1 do
     begin
-      CurrentFilters[i] := Common.EncryptString(System.Copy(SectionValues.Strings[i], Pos('=', SectionValues.Strings[i]) + 1, Length(SectionValues.Strings[i])));
+      CurrentFilters[i] := EncryptString(System.Copy(SectionValues.Strings[i], Pos('=', SectionValues.Strings[i]) + 1, Length(SectionValues.Strings[i])));
       SetObjectFilter(CurrentFilters[i], GetFilterObjectType(i));
     end;
   finally
@@ -1507,12 +1507,12 @@ var
   i: Integer;
   SchemaName: string;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
-    SchemaName := Common.DecryptString(GetSchemaName);
+    SchemaName := DecryptString(GetSchemaName);
     EraseSection('DefaultSchemaObjectFilters_' + SchemaName);
     for i := 0 to Length(CurrentFilters) - 1 do
-      WriteString('DefaultSchemaObjectFilters_' + SchemaName, IntToStr(i), Common.DecryptString(CurrentFilters[i]));
+      WriteString('DefaultSchemaObjectFilters_' + SchemaName, IntToStr(i), DecryptString(CurrentFilters[i]));
   finally
     Free;
   end;
@@ -1604,16 +1604,16 @@ begin
 
     if (Length(S) = 0) or (StrContains('\*?/="<>|:,;+^', S)) then
     begin
-      MessageBeep(MB_ICONHAND);
+      MessageBeep;
       if Length(S) > 0 then
-        Common.ShowErrorMessage(Format('Error - Invalid Name: %s', [S]));
+        ShowErrorMessage(Format('Error - Invalid Name: %s', [S]));
       Exit;
     end;
 
     if Data.NodeText = S then
       Exit;
 
-    if not Common.AskYesOrNo(Format('Do you want to rename %s %s to %s?', [Data.NodeType, Data.NodeText, S])) then
+    if not AskYesOrNo(Format('Do you want to rename %s %s to %s?', [Data.NodeType, Data.NodeText, S])) then
     begin
       S := Data.NodeText;
       Exit;

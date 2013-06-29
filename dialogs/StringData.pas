@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TStringDataDialog = class(TDialog)
@@ -31,7 +31,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Vcl.Themes, StyleHooks;
+  Vcl.Themes, BCCommon.StyleHooks;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';
@@ -44,7 +44,7 @@ begin
   if not Assigned(FStringDataDialog) then
     Application.CreateForm(TStringDataDialog, FStringDataDialog);
   Result := FStringDataDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TStringDataDialog.FormDestroy(Sender: TObject);

@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, BCCheckBox,
-  Vcl.Buttons, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit, BCEdit, Vcl.ActnList;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, BCControls.BCCheckBox,
+  Vcl.Buttons, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, JvEdit, BCControls.BCEdit, Vcl.ActnList, System.Actions;
 
 type
   TMainMenuFrame = class(TFrame)
@@ -35,7 +35,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Vcl.ActnMenus;
+  BCCommon, Vcl.ActnMenus;
 
 constructor TMainMenuFrame.Create(AOwner: TComponent);
 var

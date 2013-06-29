@@ -53,28 +53,19 @@ inherited CreateViewDialog: TCreateViewDialog
           Height = 274
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -389,30 +380,21 @@ inherited CreateViewDialog: TCreateViewDialog
           Width = 429
           Height = 304
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnGetCellParams = ColumnCommentsDBGridGetCellParams
           Columns = <
             item
               Color = clBtnFace
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -421,6 +403,7 @@ inherited CreateViewDialog: TCreateViewDialog
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_COMMENT'
               Footers = <>
@@ -474,6 +457,7 @@ inherited CreateViewDialog: TCreateViewDialog
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
     end
@@ -525,11 +509,13 @@ inherited CreateViewDialog: TCreateViewDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object CommentEdit: TBCEdit [6]
@@ -540,11 +526,13 @@ inherited CreateViewDialog: TCreateViewDialog
     Hint = 'Comment'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited ActionList: TActionList
@@ -567,7 +555,7 @@ inherited CreateViewDialog: TCreateViewDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00100210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

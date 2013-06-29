@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, CheckLst, DB, MemDS, DBAccess, Ora, ActnList, JvStringHolder, Vcl.ExtCtrls, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, CheckLst, DB, MemDS, DBAccess, Ora, ActnList, JvStringHolder, Vcl.ExtCtrls, BCDialogs.Dlg,
+  System.Actions;
 
 type
   TSchemaFilterDialog = class(TDialog)
@@ -44,7 +45,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, BigIni, Lib, StyleHooks;
+  BigIni, Lib, BCCommon.StyleHooks, BCCommon.Files, BCCommon.StringUtils;
 
 var
   FSchemaFilterDialog: TSchemaFilterDialog;
@@ -54,7 +55,7 @@ begin
   if not Assigned(FSchemaFilterDialog) then
     Application.CreateForm(TSchemaFilterDialog, FSchemaFilterDialog);
   Result := FSchemaFilterDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TSchemaFilterDialog.DeselectAllActionExecute(Sender: TObject);
@@ -94,18 +95,18 @@ var
 begin
   Filters := GetSchemaFilters;
   SchemaFilters := TStringList.Create;
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { delete key, string is crypted, so it must be deleted like this }
     ReadSectionValues('SchemaFilters', SchemaFilters);
     for i := 0 to SchemaFilters.Count - 1 do
-      if FKeyValue = Common.DecryptString(System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1)) then
+      if FKeyValue = DecryptString(System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1)) then
       begin
         DeleteKey('SchemaFilters', System.Copy(SchemaFilters.Strings[i], 0, Pos('=', SchemaFilters.Strings[i]) - 1));
         Break;
       end;
     { write ini }
-    WriteString('SchemaFilters', Common.EncryptString(FKeyValue), Common.EncryptString(Filters));
+    WriteString('SchemaFilters', EncryptString(FKeyValue), EncryptString(Filters));
   finally
     Free;
   end;

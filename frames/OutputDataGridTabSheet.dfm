@@ -21,20 +21,17 @@ object OutputDataGridFrame: TOutputDataGridFrame
       Left = 2
       Top = 0
       Width = 72
-      Height = 17
+      Height = 13
       Align = alLeft
       Caption = 'StatsTimeLabel'
-      ExplicitHeight = 13
     end
     object StatsRowsLabel: TLabel
       Left = 242
       Top = 0
       Width = 76
-      Height = 17
+      Height = 13
       Align = alRight
       Caption = 'StatsRowsLabel'
-      ExplicitLeft = 287
-      ExplicitHeight = 13
     end
   end
   object GridPanel: TPanel
@@ -59,26 +56,16 @@ object OutputDataGridFrame: TOutputDataGridFrame
       Height = 219
       Align = alClient
       AllowedSelections = [gstRecordBookmarks, gstAll]
-      DataGrouping.GroupLevels = <>
       DataSource = GridDataSource
       DrawGraphicData = True
       DrawMemoText = True
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      DynProps = <>
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
       IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       object RowDetailData: TRowDetailPanelControlEh
       end
     end

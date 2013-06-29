@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCDBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCPageControl,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.BCDBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
+  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.BCPageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.Menus,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCPopupMenu, Vcl.ToolWin, JvToolBar, BCToolBar,
-  DBGridEhGrouping, GridsEh, DBGridEh, Data.DB;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCPopupMenu, Vcl.ToolWin, JvToolBar, BCControls.BCToolBar,
+  DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
 
 type
   TSynonymBrowserFrame = class(TFrame)
@@ -50,7 +50,7 @@ type
 implementation
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib;
 
 {$R *.dfm}
 

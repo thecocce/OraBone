@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
   DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCPopupMenu, DBGridEhGrouping, GridsEh, DBGridEh;
+  BCControls.BCPageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
+  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.BCToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.BCPopupMenu, DBGridEhGrouping, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TDBLinkBrowserFrame = class(TFrame)
@@ -70,7 +70,7 @@ type
 implementation
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib, Vcl.Themes, StyleHooks;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon;
 
 const
   LINK_NAME = 'Link Name';

@@ -53,29 +53,20 @@ inherited CreateTableDialog: TCreateTableDialog
           Height = 317
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnGetCellParams = ColumnsDBGridGetCellParams
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -83,6 +74,7 @@ inherited CreateTableDialog: TCreateTableDialog
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DATA_TYPE'
               Footers = <>
@@ -107,6 +99,7 @@ inherited CreateTableDialog: TCreateTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_SIZE'
               Footers = <>
@@ -116,6 +109,7 @@ inherited CreateTableDialog: TCreateTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_PRECISION'
               Footers = <>
@@ -125,6 +119,7 @@ inherited CreateTableDialog: TCreateTableDialog
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SCALE'
               Footers = <>
@@ -134,6 +129,7 @@ inherited CreateTableDialog: TCreateTableDialog
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PRIMARY_KEY'
               Footers = <>
@@ -146,6 +142,7 @@ inherited CreateTableDialog: TCreateTableDialog
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NULLABLE'
               Footers = <>
@@ -157,6 +154,7 @@ inherited CreateTableDialog: TCreateTableDialog
               Width = 49
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_DEFAULT'
               Footers = <>
@@ -471,30 +469,21 @@ inherited CreateTableDialog: TCreateTableDialog
           Width = 671
           Height = 347
           Align = alClient
-          DataGrouping.GroupLevels = <>
           DataSource = ColumnsDataSource
           DrawGraphicData = True
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnGetCellParams = ColumnCommentsDBGridGetCellParams
           Columns = <
             item
               Color = clBtnFace
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_NAME'
               Footers = <>
@@ -503,6 +492,7 @@ inherited CreateTableDialog: TCreateTableDialog
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'COLUMN_COMMENT'
               Footers = <>
@@ -562,11 +552,13 @@ inherited CreateTableDialog: TCreateTableDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object CommentEdit: TBCEdit [6]
@@ -577,11 +569,13 @@ inherited CreateTableDialog: TCreateTableDialog
     Hint = 'Comment'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited ActionList: TActionList
@@ -612,7 +606,7 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00080210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

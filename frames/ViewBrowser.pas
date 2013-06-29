@@ -5,11 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS,
-  Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCPageControl, Vcl.ImgList,
+  Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.BCPageControl, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar, Vcl.Menus,
-  BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCImageList, BCToolBar,
-  BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh,
-  DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
+  BCControls.BCPopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCImageList, BCControls.BCToolBar,
+  BCControls.BCDBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
+  DBAxisGridsEh;
 
 type
   TViewBrowserFrame = class(TFrame)
@@ -227,13 +227,13 @@ type
     procedure CopyToClipboard;
     procedure GetViewComments;
     property ObjectFrameAlign: TAlign write SetObjectFrameAlign;
-    //property DataQuery: TOraQuery read FDataQuery;
   end;
 
 implementation
 
 uses
-  Main, DataFilter, Common, DataSort, CustomizePages, Options, Lib, Vcl.Themes, StyleHooks;
+  Main, DataFilter, DataSort, CustomizePages, Options, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.StringUtils,
+  BCCommon;
 
 const
   { ColumnsQuery columns }
@@ -347,8 +347,8 @@ begin
       Break;
     end;
   FilterName := StringReplace(FilterName, '&', '', []);
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterName);
-  CurrentKeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':' + FilterName);
+  CurrentKeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   { Remove from valuelist (also remove current) }
   for i := DataFilterDialog.ValuesList.RowCount - 1 downto 0 do
   begin
@@ -384,8 +384,8 @@ begin
       Break;
     end;
   SortName := StringReplace(SortName, '&', '', []);
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortName);
-  CurrentKeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortName);
+  CurrentKeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   { Remove from valuelist (also remove current) }
   for i := DataSortDialog.ValuesList.RowCount - 1 downto 0 do
   begin
@@ -656,8 +656,8 @@ var
   KeyValue, CurrentValue, s: string;
   Item: TMenuItem;
 begin
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam);
-  CurrentValue := Common.EncryptString(':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam);
+  CurrentValue := EncryptString(':CURRENT');
   for i := 0 to DataFilterDialog.ValuesList.RowCount - 1 do
     if Pos(KeyValue, DataFilterDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataFilterDialog.ValuesList.Keys[i]) = 0 then
@@ -665,7 +665,7 @@ begin
         Item := TMenuItem.Create(PopupMenu);
         Item.Tag := 1;
         Item.GroupIndex := 1;
-        s := Common.DecryptString(DataFilterDialog.ValuesList.Keys[i]);
+        s := DecryptString(DataFilterDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownMenuClick;
         PopupMenu.Items.Add(Item);
@@ -678,8 +678,8 @@ var
   KeyValue, CurrentValue, s: string;
   Item: TMenuItem;
 begin
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam);
-  CurrentValue := Common.EncryptString(':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam);
+  CurrentValue := EncryptString(':CURRENT');
   for i := 0 to DataSortDialog.ValuesList.RowCount - 1 do
     if Pos(KeyValue, DataSortDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataSortDialog.ValuesList.Keys[i]) = 0 then
@@ -688,7 +688,7 @@ begin
         Item.Tag := 1;
         Item.GroupIndex := 1;
         Item.RadioItem := True;
-        s := Common.DecryptString(DataSortDialog.ValuesList.Keys[i]);
+        s := DecryptString(DataSortDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownSortMenuClick;
         PopupMenu.Items.Add(Item);
@@ -702,7 +702,7 @@ begin
   { remove current filter }
   for i := DataFilterDialog.ValuesList.RowCount - 1 downto 0 do
   begin
-     if Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataFilterDialog.ValuesList.Keys[i] then
+     if EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataFilterDialog.ValuesList.Keys[i] then
      begin
        DataFilterDialog.ValuesList.DeleteRow(i);
        Break;
@@ -721,7 +721,7 @@ begin
   { remove current filter }
   for i := DataSortDialog.ValuesList.RowCount - 1 downto 0 do
   begin
-     if Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataSortDialog.ValuesList.Keys[i] then
+     if EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT') = DataSortDialog.ValuesList.Keys[i] then
      begin
        DataSortDialog.ValuesList.DeleteRow(i);
        Break;

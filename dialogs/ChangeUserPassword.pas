@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ExtCtrls,
-  Dlg;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCControls.BCEdit, Vcl.ExtCtrls,
+  BCDialogs.Dlg;
 
 type
   TChangeUserPasswordDialog = class(TDialog)
@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks;
 
 const
   CAPTION_TEXT = 'Change Password of %s';
@@ -46,7 +46,7 @@ begin
   if not Assigned(FChangeUserPasswordDialog) then
     Application.CreateForm(TChangeUserPasswordDialog, FChangeUserPasswordDialog);
   Result := FChangeUserPasswordDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TChangeUserPasswordDialog.FormDestroy(Sender: TObject);

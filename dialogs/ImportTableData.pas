@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora,
-  BCEdit, JvExStdCtrls, JvEdit, JvCombobox, BCComboBox, BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, Dlg;
+  BCControls.BCEdit, JvExStdCtrls, JvEdit, JvCombobox, BCControls.BCComboBox, BCControls.BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, BCDialogs.Dlg,
+  System.Actions;
 
 type
   TImportTableDataDialog = class(TDialog)
@@ -65,8 +66,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, StyleHooks, CommonDialogs,
-  Language;
+  Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, BCCommon.StyleHooks, BCCommon.Dialogs,
+  BCCommon.Language, BCCommon.Files, BCCommon.Messages, BCCommon;
 
 var
   FImportTableDataDialog: TImportTableDataDialog;
@@ -76,7 +77,7 @@ begin
   if not Assigned(FImportTableDataDialog) then
     Application.CreateForm(TImportTableDataDialog, FImportTableDataDialog);
   Result := FImportTableDataDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TImportTableDataDialog.FormDestroy(Sender: TObject);
@@ -107,17 +108,17 @@ end;
 
 procedure TImportTableDataDialog.OpenFileButtonActionExecute(Sender: TObject);
 begin
-  if CommonDialogs.OpenFile(Handle, OpenFilenameEdit.Text, Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
+  if BCCommon.Dialogs.OpenFile(Handle, OpenFilenameEdit.Text, Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
     LanguageDataModule.GetConstant('SelectFile')) then
   begin
     Application.ProcessMessages; { style fix }
-    OpenFilenameEdit.Text := CommonDialogs.Files[0];
+    OpenFilenameEdit.Text := BCCommon.Dialogs.Files[0];
   end;
 end;
 
 procedure TImportTableDataDialog.WriteIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     WriteInteger('ImportSettings', 'CommitInterval', StrToInt(CommitIntervalSpinEdit.Text));
     WriteBool('ImportSettings', 'LaunchAfterCreation', LaunchAfterCreationCheckBox.Checked);
@@ -133,7 +134,7 @@ end;
 
 procedure TImportTableDataDialog.ReadIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     FileRadioButton.Checked := ReadBool('ImportSettings', 'FileOutput', True);
     ClipboardRadioButton.Checked := ReadBool('ImportSettings', 'ClipboardOutput', False);
@@ -148,12 +149,14 @@ begin
 end;
 
 procedure TImportTableDataDialog.SaveFileButtonActionExecute(Sender: TObject);
+var
+  FilterIndex: Cardinal;
 begin
-  if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
-    LanguageDataModule.GetConstant('SaveAs')) then
+  if BCCommon.Dialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0#0, [LanguageDataModule.GetConstant('AllFiles')]),
+    LanguageDataModule.GetConstant('SaveAs'), FilterIndex) then
   begin
     Application.ProcessMessages; { style fix }
-    SaveFilenameEdit.Text := CommonDialogs.Files[0];
+    SaveFilenameEdit.Text := BCCommon.Dialogs.Files[0];
   end;
 end;
 
@@ -163,31 +166,31 @@ begin
 
   if not FileExists(OpenFilenameEdit.Text) then
   begin
-    Common.ShowErrorMessage(Format('File %s does not exist.', [OpenFilenameEdit.Text]));
+    ShowErrorMessage(Format('File %s does not exist.', [OpenFilenameEdit.Text]));
     OpenFilenameEdit.SetFocus;
     Exit;
   end;
   if Trim(OpenFilenameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter Filename.');
+    ShowErrorMessage('Enter Filename.');
     OpenFilenameEdit.SetFocus;
     Exit;
   end;
   if Trim(SchemaEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter Schema.');
+    ShowErrorMessage('Enter Schema.');
     SchemaEdit.SetFocus;
     Exit;
   end;
   if Trim(TableEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Enter Table.');
+    ShowErrorMessage('Enter Table.');
     TableEdit.SetFocus;
     Exit;
   end;
   if FileRadioButton.Checked and (Trim(SaveFilenameEdit.Text) = '') then
   begin
-    Common.ShowErrorMessage('Enter Filename.');
+    ShowErrorMessage('Enter Filename.');
     SaveFilenameEdit.SetFocus;
     Exit;
   end;
@@ -229,7 +232,7 @@ begin
 
       if OraQuery.FieldList.IndexOf(ColumnName) = -1 then
       begin
-        Common.ShowErrorMessage(Format('Header row in the file must have correct field names. Can''t find: %s', [ColumnName]));
+        ShowErrorMessage(Format('Header row in the file must have correct field names. Can''t find: %s', [ColumnName]));
         Result.Clear;
         Exit;
       end
@@ -269,7 +272,7 @@ begin
   except
     on E: Exception do
     begin
-      Common.ShowErrorMessage(E.Message);
+      ShowErrorMessage(E.Message);
       Close;
       Free;
       Exit;
@@ -328,7 +331,7 @@ begin
     ColumnTypeQuery.Free;
   end;
 
-  Common.ShowMessage('Export Done.');
+  ShowMessage('Export Done.');
   Result := True;
 end;
 

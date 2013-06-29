@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter,
   SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls,
-  JvComCtrls, BCPageControl, BCToolBar, Dlg;
+  JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateSequenceDialog = class(TCreateObjectBaseDialog)
@@ -40,7 +40,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateSequenceDialog: TCreateSequenceDialog;
@@ -50,7 +50,7 @@ begin
   if not Assigned(FCreateSequenceDialog) then
     Application.CreateForm(TCreateSequenceDialog, FCreateSequenceDialog);
   Result := FCreateSequenceDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateSequenceDialog.FormDestroy(Sender: TObject);
@@ -70,7 +70,7 @@ begin
   Result := False;
   if Trim(SequenceNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set sequence name.');
+    ShowErrorMessage('Set sequence name.');
     SequenceNameEdit.SetFocus;
     Exit;
   end;

@@ -396,10 +396,12 @@ object DateFormatFrame: TDateFormatFrame
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
     object DateFormatEdit: TBCEdit
@@ -419,6 +421,7 @@ object DateFormatFrame: TDateFormatFrame
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end

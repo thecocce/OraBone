@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, DB, MemDS, DBAccess, Ora, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.StdCtrls,
-  Vcl.DBCtrls, BCDBComboBox, Vcl.Mask, BCDBEdit, JvExStdCtrls, JvEdit, BCEdit, Dlg,
+  Vcl.DBCtrls, Vcl.Mask, BCControls.BCDBEdit, JvExStdCtrls, JvEdit, BCControls.BCEdit, BCDialogs.Dlg,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, DBGridEhGrouping, GridsEh,
-  DBGridEh, BCDBGrid;
+  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCControls.BCDBGrid, System.Actions,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TCreateTableDialog = class(TCreateObjectBaseDialog)
@@ -60,7 +60,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Lib, Vcl.Themes, Winapi.UxTheme, StyleHooks;
+  Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateTableDialog: TCreateTableDialog;
@@ -70,7 +70,7 @@ begin
   if not Assigned(FCreateTableDialog) then
     Application.CreateForm(TCreateTableDialog, FCreateTableDialog);
   Result := FCreateTableDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateTableDialog.AddColumnActionExecute(Sender: TObject);
@@ -180,13 +180,13 @@ begin
   Result := False;
   if Trim(TableNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set table name.');
+    ShowErrorMessage('Set table name.');
     TableNameEdit.SetFocus;
     Exit;
   end;
   if ColumnsQuery.RecordCount = 0 then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   Result := True;

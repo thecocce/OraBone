@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, Vcl.ExtCtrls, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit,
-  BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, JvComCtrls, BCPageControl, BCToolBar, Dlg;
+  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, Vcl.ExtCtrls, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, JvEdit,
+  BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
+  JvToolBar, SynEdit, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateTriggerDialog = class(TCreateObjectBaseDialog)
@@ -50,7 +50,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Ora, DataModule, StyleHooks;
+  Ora, DataModule, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateTriggerDialog: TCreateTriggerDialog;
@@ -60,7 +60,7 @@ begin
   if not Assigned(FCreateTriggerDialog) then
     Application.CreateForm(TCreateTriggerDialog, FCreateTriggerDialog);
   Result := FCreateTriggerDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateTriggerDialog.FormDestroy(Sender: TObject);
@@ -80,13 +80,13 @@ begin
   Result := False;
   if Trim(TriggerNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set trigger name.');
+    ShowErrorMessage('Set trigger name.');
     TriggerNameEdit.SetFocus;
     Exit;
   end;
   if Trim(TableNameComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set table name.');
+    ShowErrorMessage('Set table name.');
     TableNameComboBox.SetFocus;
     Exit;
   end;

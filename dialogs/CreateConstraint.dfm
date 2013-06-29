@@ -39,11 +39,13 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 9
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   inherited PageControl: TBCPageControl
@@ -459,11 +461,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Height = 21
           Hint = 'Table name'
           Anchors = [akLeft, akTop, akRight]
-          ReadOnly = False
           TabOrder = 0
           OnChange = RefTableNameComboBoxChange
           EditColor = clInfoBk
           DeniedKeyStrokes = False
+          ReadOnly = False
           DropDownFixedWidth = 0
         end
       end
@@ -510,6 +512,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          FontSmoothing = fsmNone
         end
       end
     end
@@ -561,11 +564,13 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 0
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object PrimaryKeyRadioButton: TRadioButton [8]
@@ -613,11 +618,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Height = 21
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
-    ReadOnly = False
     TabOrder = 5
     OnChange = TableNameComboBoxChange
     EditColor = clInfoBk
     DeniedKeyStrokes = False
+    ReadOnly = False
     DropDownFixedWidth = 0
   end
   inherited ActionList: TActionList
@@ -640,7 +645,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E00140210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00340210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

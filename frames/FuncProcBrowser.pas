@@ -5,10 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess,
-  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCPageControl,
+  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.BCPageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar,
-  Vcl.Menus, BCImageList, BCToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCPopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh, BCDBGrid;
+  Vcl.Menus, BCControls.BCImageList, BCControls.BCToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCPopupMenu,
+  DBGridEhGrouping, GridsEh, DBGridEh, BCControls.BCDBGrid, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
+  DBAxisGridsEh;
 
 type
   TFuncProcBrowserFrame = class(TFrame)
@@ -118,7 +119,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib, Vcl.Themes, StyleHooks;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks;
 
 const
   { SynonymsQuery columns }

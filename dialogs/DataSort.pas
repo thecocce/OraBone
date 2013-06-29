@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter,
   SynHighlighterSQL, ValEdit, JvStringHolder, Menus, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCEdit, JvEdit, BCImageList, BCToolBar,
-  Vcl.ExtCtrls, Dlg;
+  PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCControls.BCEdit, JvEdit, BCControls.BCImageList, BCControls.BCToolBar,
+  Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
 
 type
   TDataSortDialog = class(TDialog)
@@ -79,7 +79,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks, BCCommon.StringUtils;
 
 var
   FDataSortDialog: TDataSortDialog;
@@ -89,7 +89,7 @@ begin
   if not Assigned(FDataSortDialog) then
     Application.CreateForm(TDataSortDialog, FDataSortDialog);
   Result := FDataSortDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TDataSortDialog.SetFields;
@@ -195,28 +195,28 @@ var
   KeyValue: string;
 begin
   { Get Data Sort }
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':' + Name);
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':' + Name);
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      SortNameEdit.Text := Name; //Copy(ValuesList.Keys[i], Pos(':', ValuesList.Keys[i]) + 1, Length(ValuesList.Keys[i]));
-      SortListBox.Items.Text := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      SortNameEdit.Text := Name;
+      SortListBox.Items.Text := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Break;
     end;
   { Update Current Data Sort }
   Found := False;
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
        Found := True;
        //ValuesList.Keys[i] := ObjectName + '@' + SchemaParam + ':CURRENT' + ':$' + Name;
-       ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(Name);
+       ValuesList.Values[ValuesList.Keys[i]] := EncryptString(Name);
        Break;
     end;
   { insert if not found }
   if not Found then
-    ValuesList.InsertRow(KeyValue, Common.EncryptString(Name), True);
+    ValuesList.InsertRow(KeyValue, EncryptString(Name), True);
 end;
 
 function TDataSortDialog.GetCurrentDataSort(ObjectName: string; SchemaParam: string): string;
@@ -226,11 +226,11 @@ var
 begin
   Result := '';
   SortName := GetCurrentSortName(ObjectName, SchemaParam);
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':' + SortName);
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':' + SortName);
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      Result := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      Result := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Result := StringReplace(Result, 'NULLS FIRST,', 'NULLS FIRST', [rfReplaceAll]);
       Result := StringReplace(Result, 'NULLS FIRST', 'NULLS FIRST, ', [rfReplaceAll]);
       Result := StringReplace(Result, 'NULLS LAST,', 'NULLS LAST', [rfReplaceAll]);
@@ -247,11 +247,11 @@ var
   KeyValue: string;
 begin
   Result := '';
-  KeyValue := Common.EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
+  KeyValue := EncryptString(ObjectName + '@' + SchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
-      Result := Common.DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
+      Result := DecryptString(ValuesList.Values[ValuesList.Keys[i]]);
       Break;
     end;
 end;
@@ -273,24 +273,24 @@ var
 begin
   { Update Current Data Sort }
   Found := False;
-  KeyValue := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
+  KeyValue := EncryptString(FObjectName + '@' + FSchemaParam + ':CURRENT');
   for i := 0 to ValuesList.RowCount - 1 do
     if KeyValue = ValuesList.Keys[i] then
     begin
        Found := True;
        //ValuesList.Keys[i] := FObjectName + '@' + FSchemaParam + ':CURRENT' + ':$' + SortNameEdit.Text;
-       ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(SortNameEdit.Text);
+       ValuesList.Values[ValuesList.Keys[i]] := EncryptString(SortNameEdit.Text);
        Break;
     end;
   { insert if not found }
   if not Found then
-    ValuesList.InsertRow(KeyValue, Common.EncryptString(SortNameEdit.Text), True);
+    ValuesList.InsertRow(KeyValue, EncryptString(SortNameEdit.Text), True);
 
-  SortName := Common.EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortNameEdit.Text);
+  SortName := EncryptString(FObjectName + '@' + FSchemaParam + ':' + SortNameEdit.Text);
   if not ValuesList.FindRow(SortName, i) then
-    ValuesList.InsertRow(SortName,  Common.EncryptString(DataSort), True)
+    ValuesList.InsertRow(SortName,  EncryptString(DataSort), True)
   else
-    ValuesList.Values[ValuesList.Keys[i]] := Common.EncryptString(DataSort);
+    ValuesList.Values[ValuesList.Keys[i]] := EncryptString(DataSort);
 
   ModalResult := mrOk;
 end;

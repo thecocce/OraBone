@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TAnalyzeTableDialog = class(TDialog)
@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks;
 
 const
   CAPTION_TEXT = 'Analyze Table: %s';
@@ -46,7 +46,7 @@ begin
   if not Assigned(FAnalyzeTableDialog) then
     Application.CreateForm(TAnalyzeTableDialog, FAnalyzeTableDialog);
   Result := FAnalyzeTableDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TAnalyzeTableDialog.FormDestroy(Sender: TObject);

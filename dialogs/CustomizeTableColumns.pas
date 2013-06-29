@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls,
   JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, DB, MemDS,
-  DBAccess, Ora, Vcl.ExtCtrls, Dlg;
+  DBAccess, Ora, Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
 
 type
   TCustomizeTableColumnsDialog = class(TDialog)
@@ -50,7 +50,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UxTheme, Math, BigIni, Common, StyleHooks;
+  Winapi.UxTheme, System.Math, BigIni, BCCommon.StyleHooks, BCCommon.Files, BCCommon.StringUtils;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
@@ -65,7 +65,7 @@ begin
   if not Assigned(FCustomizeTableColumnsrDialog) then
     Application.CreateForm(TCustomizeTableColumnsDialog, FCustomizeTableColumnsrDialog);
   Result := FCustomizeTableColumnsrDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TCustomizeTableColumnsDialog.FormDestroy(Sender: TObject);
@@ -304,9 +304,9 @@ begin
   { read from ini }
   TreeObjects := TStringList.Create;
   try
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
-      ReadSectionValues('CustomizeTableColumns_' + Common.EncryptString(SchemaParam + '.' + TableName), TreeObjects);
+      ReadSectionValues('CustomizeTableColumns_' + EncryptString(SchemaParam + '.' + TableName), TreeObjects);
     finally
       Free;
     end;
@@ -315,12 +315,12 @@ begin
     ColumnAdded := False;
     for i := 0 to TreeObjects.Count - 1 do
     begin
-      Value := Common.DecryptString(System.Copy(TreeObjects.Strings[i], Pos('=', TreeObjects.Strings[i]) + 1, Length(TreeObjects.Strings[i])));
+      Value := DecryptString(System.Copy(TreeObjects.Strings[i], Pos('=', TreeObjects.Strings[i]) + 1, Length(TreeObjects.Strings[i])));
       if Value = 'True' then
       begin
         if ColumnAdded then
           Result :=  Result + ', ' ;
-        Result := Result + Common.DecryptString(System.Copy(TreeObjects.Strings[i], 0, Pos('=', TreeObjects.Strings[i]) - 1));
+        Result := Result + DecryptString(System.Copy(TreeObjects.Strings[i], 0, Pos('=', TreeObjects.Strings[i]) - 1));
         ColumnAdded := True;
       end;
     end;
@@ -337,9 +337,9 @@ begin
   { read from ini }
   TreeObjects := TStringList.Create;
   try
-    with TBigIniFile.Create(Common.GetINIFilename) do
+    with TBigIniFile.Create(GetINIFilename) do
     try
-      ReadSectionValues('CustomizeTableColumns_' + Common.EncryptString(FSchemaParam + '.' + FTableName), TreeObjects);
+      ReadSectionValues('CustomizeTableColumns_' + EncryptString(FSchemaParam + '.' + FTableName), TreeObjects);
     finally
       Free;
     end;
@@ -352,8 +352,8 @@ begin
       Open;
       while not Eof do
       begin
-        TreeObjects.Add(Common.EncryptString(FieldByName('COLUMN_NAME').AsString) + '=' +
-          Common.EncryptString('True'));
+        TreeObjects.Add(EncryptString(FieldByName('COLUMN_NAME').AsString) + '=' +
+          EncryptString('True'));
         Next;
       end;
     finally
@@ -363,8 +363,8 @@ begin
     ValueListEditor.Strings.Clear;
     for i := 0 to TreeObjects.Count - 1 do
       ValueListEditor.Strings.Add(//Common.DecryptString(TreeObjects.Strings[i]));
-        Common.DecryptString(System.Copy(TreeObjects.Strings[i], 0, Pos('=', TreeObjects.Strings[i]) - 1)) + '=' +
-        Common.DecryptString(System.Copy(TreeObjects.Strings[i], Pos('=', TreeObjects.Strings[i]) + 1, Length(TreeObjects.Strings[i]))));
+        DecryptString(System.Copy(TreeObjects.Strings[i], 0, Pos('=', TreeObjects.Strings[i]) - 1)) + '=' +
+        DecryptString(System.Copy(TreeObjects.Strings[i], Pos('=', TreeObjects.Strings[i]) + 1, Length(TreeObjects.Strings[i]))));
   finally
     TreeObjects.Free;
   end;
@@ -376,9 +376,9 @@ var
   Section: string;
 //  WriteIni: Boolean;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
-    Section := 'CustomizeTableColumns_' + Common.EncryptString(FSchemaParam + '.' + FTableName);
+    Section := 'CustomizeTableColumns_' + EncryptString(FSchemaParam + '.' + FTableName);
     EraseSection(Section);
     { check if there's need to write ini }
     {WriteIni := False;
@@ -387,7 +387,7 @@ begin
         WriteIni := True;
     if WriteIni then }
       for i := 1 to ValueListEditor.RowCount - 1 do
-        WriteString(Section, Common.EncryptString(ValueListEditor.Keys[i]),  Common.EncryptString(ValueListEditor.Values[ValueListEditor.Keys[i]]));
+        WriteString(Section, EncryptString(ValueListEditor.Keys[i]), EncryptString(ValueListEditor.Values[ValueListEditor.Keys[i]]));
   finally
     Free;
   end;

@@ -57,10 +57,12 @@ object ConnectClientDialog: TConnectClientDialog
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -157,10 +159,12 @@ object ConnectClientDialog: TConnectClientDialog
       Align = alRight
       ThemedPassword = True
       TabOrder = 0
+      Text = ''
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end
@@ -199,10 +203,10 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Align = alRight
       CharCase = ecUpperCase
-      ReadOnly = False
       TabOrder = 0
       EditColor = clInfoBk
       DeniedKeyStrokes = False
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
   end
@@ -241,11 +245,11 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Hint = 'Home'
       Align = alRight
-      ReadOnly = False
       TabOrder = 0
       OnKeyPress = HomeComboBoxKeyPress
       EditColor = clInfoBk
       DeniedKeyStrokes = False
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
   end

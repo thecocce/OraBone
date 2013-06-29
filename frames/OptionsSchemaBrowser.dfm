@@ -41,8 +41,6 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Top = 92
       Width = 64
       Height = 21
-      ItemHeight = 13
-      ReadOnly = False
       TabOrder = 0
       Text = 'Bottom'
       Items.Strings = (
@@ -50,6 +48,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
         'Top')
       EditColor = clInfoBk
       DeniedKeyStrokes = True
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
     object ShowTreeLinesCheckBox: TBCCheckBox
@@ -80,6 +79,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end

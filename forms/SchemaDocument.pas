@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
-  ActnList, Menus, WebBrowserContainer, BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  ActnList, Menus, WebBrowserContainer, BCControls.BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
   JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup,
   System.Actions;
 
@@ -78,8 +78,8 @@ implementation
 {$R *.dfm}
 
 uses
-  ActiveX, StrUtils, Progress, Options, Common, BigINI, Main, CommonDialogs, Language,
-  Data.DB;
+  Winapi.ActiveX, System.StrUtils, Progress, Options, BigINI, Main, BCCommon.Dialogs, BCCommon.Language,
+  Data.DB, BCCommon.Files, BCCommon.Messages;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;
@@ -93,7 +93,7 @@ end;
 
 procedure TSchemaDocumentForm.ReadIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Size }
     Width := ReadInteger('SchemaDocumentSize', 'Width', Round(Screen.Width * 0.5));
@@ -114,7 +114,7 @@ var
 begin
   if not Assigned(WebBrowser.Document) then
   begin
-    Common.ShowMessage('Document not loaded!');
+    ShowMessage('Document not loaded!');
     Exit;
   end;
 
@@ -123,7 +123,7 @@ begin
   try
     Stream := TStreamAdapter.Create(FileStream, soReference) as IStream;
     if Failed(PersistStream.Save(Stream, True)) then
-      Common.ShowErrorMessage('SaveAs HTML fail!');
+      ShowErrorMessage('SaveAs HTML fail!');
   finally
    FileStream.Free;
   end;
@@ -132,20 +132,21 @@ end;
 procedure TSchemaDocumentForm.SaveActionExecute(Sender: TObject);
 var
   Filename: string;
+  FilterIndex: Cardinal;
 begin
   FileName := Format('%s_%s.html', [FSchemaparam, StringReplace(FSession.Server, '.', '_',[rfReplaceAll])]);
-  if CommonDialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
-    'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FileName) then
+  if BCCommon.Dialogs.SaveFile(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
+    'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, FileName) then
   begin
     Application.ProcessMessages; { style fix }
-    SaveAsHTML(WebBrowser, CommonDialogs.Files[0]);
+    SaveAsHTML(WebBrowser, BCCommon.Dialogs.Files[0]);
   end;
 end;
 
 procedure TSchemaDocumentForm.WriteIniFile;
 begin
   if Windowstate = wsNormal then
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Position }
     WriteInteger('SchemaDocumentPosition', 'Left', Left);

@@ -133,10 +133,10 @@ object MainMenuFrame: TMainMenuFrame
       Margins.Right = 4
       Margins.Bottom = 4
       DropDownCount = 9
-      ReadOnly = False
       TabOrder = 3
       EditColor = clInfoBk
       DeniedKeyStrokes = True
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
     object AnimationDurationEdit: TBCEdit
@@ -156,6 +156,7 @@ object MainMenuFrame: TMainMenuFrame
       NumbersWithDots = False
       NumbersWithSpots = False
       EditColor = clInfoBk
+      ErrorColor = 14803198
       NumbersAllowNegative = False
     end
   end

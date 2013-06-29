@@ -267,6 +267,7 @@ object CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog
       item
         DataType = ftUnknown
         Name = 'p_owner'
+        Value = nil
       end>
   end
 end

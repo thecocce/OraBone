@@ -40,17 +40,16 @@ object ExportTableDataDialog: TExportTableDataDialog
       Width = 120
       Height = 21
       Hint = 'Export Format.'
-      ItemHeight = 13
-      ReadOnly = False
+      ItemIndex = 0
       TabOrder = 0
       Text = 'CSV File'
       OnChange = FormatComboBoxChange
       Items.Strings = (
         'CSV File'
         'Insert Statements')
-      ItemIndex = 0
       EditColor = clInfoBk
       DeniedKeyStrokes = True
+      ReadOnly = False
       DropDownFixedWidth = 0
     end
     object SelectedRowsOnlyCheckBox: TCheckBox
@@ -91,6 +90,10 @@ object ExportTableDataDialog: TExportTableDataDialog
       ShowCloseButton = False
       object Options1TabSheet: TTabSheet
         Caption = 'Options'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DelimiterLabel: TLabel
           Left = 12
           Top = 15
@@ -104,8 +107,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 120
           Height = 21
           Hint = 'Delimiter.'
-          ItemHeight = 13
-          ReadOnly = False
+          ItemIndex = 2
           TabOrder = 0
           Text = 'Semicolon'
           Items.Strings = (
@@ -113,9 +115,9 @@ object ExportTableDataDialog: TExportTableDataDialog
             'Pipe'
             'Semicolon'
             'Tab')
-          ItemIndex = 2
           EditColor = clInfoBk
           DeniedKeyStrokes = True
+          ReadOnly = False
           DropDownFixedWidth = 0
         end
         object IncludeColumnHeadersCheckBox: TCheckBox
@@ -181,6 +183,10 @@ object ExportTableDataDialog: TExportTableDataDialog
       object Options2TabSheet: TTabSheet
         Caption = 'Options'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object SchemaLabel: TLabel
           Left = 10
           Top = 15
@@ -217,10 +223,12 @@ object ExportTableDataDialog: TExportTableDataDialog
           Hint = 'Schema.'
           CharCase = ecUpperCase
           TabOrder = 0
+          Text = ''
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
         object TableEdit: TBCEdit
@@ -231,10 +239,12 @@ object ExportTableDataDialog: TExportTableDataDialog
           Hint = 'Table name.'
           CharCase = ecUpperCase
           TabOrder = 1
+          Text = ''
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
         object CommitIntervalSpinEdit: TBCSpinEdit
@@ -261,6 +271,10 @@ object ExportTableDataDialog: TExportTableDataDialog
       object ColumnsTabSheet: TTabSheet
         Caption = 'Columns'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ColumnsPanel: TPanel
           Left = 0
           Top = 0
@@ -344,10 +358,12 @@ object ExportTableDataDialog: TExportTableDataDialog
         Height = 21
         Hint = 'Folder'
         TabOrder = 1
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object FolderBitBtn: TBitBtn

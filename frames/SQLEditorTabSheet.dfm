@@ -38,6 +38,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Gutter.ShowLineNumbers = True
       Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
+      FontSmoothing = fsmNone
     end
   end
 end

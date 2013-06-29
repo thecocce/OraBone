@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCComboBox, JvEdit, BCEdit,
+  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCControls.BCComboBox, JvEdit, BCControls.BCEdit,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCPageControl, BCToolBar, Dlg;
+  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateSynonymDialog = class(TCreateObjectBaseDialog)
@@ -42,7 +42,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Ora, DataModule, StyleHooks;
+  Ora, DataModule, BCCommon.StyleHooks, BCCommon.Messages;
 
 var
   FCreateSynonymDialog: TCreateSynonymDialog;
@@ -52,7 +52,7 @@ begin
   if not Assigned(FCreateSynonymDialog) then
     Application.CreateForm(TCreateSynonymDialog, FCreateSynonymDialog);
   Result := FCreateSynonymDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateSynonymDialog.FormDestroy(Sender: TObject);
@@ -72,13 +72,13 @@ begin
   Result := False;
   if Trim(SynonymNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set synonym name.');
+    ShowErrorMessage('Set synonym name.');
     SynonymNameEdit.SetFocus;
     Exit;
   end;
   if Trim(ObjectNameComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set object name.');
+    ShowErrorMessage('Set object name.');
     ObjectNameComboBox.SetFocus;
     Exit;
   end;

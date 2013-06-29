@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Dialogs, Winapi.Messages, Vcl.ActnList, OdacVcl,
-  Ora, OraError, JvExStdCtrls, JvCombobox, JvEdit, BCEdit, Dlg;
+  Ora, OraError, JvExStdCtrls, JvCombobox, JvEdit, BCControls.BCEdit, BCDialogs.Dlg, System.Actions;
 
 type
   TConnectDirectDialog = class(TDialog)
@@ -69,7 +69,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Common, Lib, StyleHooks;
+  Lib, BCCommon.StyleHooks;
 
 var
   FConnectDirectDialog: TConnectDirectDialog;
@@ -79,7 +79,7 @@ begin
   if not Assigned(FConnectDirectDialog) then
     FConnectDirectDialog := TConnectDirectDialog.Create(AOwner);
   Result := FConnectDirectDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TConnectDirectDialog.FormDestroy(Sender: TObject);
@@ -157,14 +157,14 @@ procedure TConnectDirectDialog.OKActionExecute(Sender: TObject);
 begin
   if UsernameEdit.Text = '' then
   begin
-    Common.ShowMessage(TEXT_USERNAME);
+    ShowMessage(TEXT_USERNAME);
     UsernameEdit.SetFocus;
     Exit;
   end;
 
   if PasswordEdit.Text = '' then
   begin
-    Common.ShowMessage(TEXT_PASSWORD);
+    ShowMessage(TEXT_PASSWORD);
     PasswordEdit.SetFocus;
     Exit;
   end;

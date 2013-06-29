@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Grids, BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
-  DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCPageControl,
+  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Grids, BCControls.BCDBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
+  DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.BCPageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, AppEvnts, Vcl.Menus, Vcl.ToolWin,
-  JvToolBar, BCImageList, BCToolBar, PlatformDefaultStyleActnCtrls, ActnPopup, BCPopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh;
+  JvToolBar, BCControls.BCImageList, BCControls.BCToolBar, PlatformDefaultStyleActnCtrls, ActnPopup, BCControls.BCPopupMenu,
+  DBGridEhGrouping, GridsEh, DBGridEh, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
 
 type
   TConstraintBrowserFrame = class(TFrame)
@@ -66,7 +66,7 @@ type
 implementation
 
 uses
-  Common, Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib;
 
 const
   { ConstraintsQuery columns }

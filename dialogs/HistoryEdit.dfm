@@ -233,6 +233,7 @@ object HistoryEditDialog: THistoryEditDialog
         Highlighter = SynSQLSyn
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         WantTabs = True
+        FontSmoothing = fsmNone
         ExplicitWidth = 510
         ExplicitHeight = 211
       end

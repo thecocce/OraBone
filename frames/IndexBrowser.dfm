@@ -21,9 +21,14 @@ object IndexBrowserFrame: TIndexBrowserFrame
     OnChange = IndexPageControlChange
     TabDragDrop = False
     HoldShiftToDragDrop = False
+    ShowCloseButton = False
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object IndexPanel: TPanel
         Left = 0
         Top = 0
@@ -42,27 +47,17 @@ object IndexBrowserFrame: TIndexBrowserFrame
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
-          DataGrouping.GroupLevels = <>
           DataSource = IndexDataSource
           DrawMemoText = True
-          Flat = False
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          DynProps = <>
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -93,7 +88,6 @@ object IndexBrowserFrame: TIndexBrowserFrame
     end
   end
   object IndexQuery: TOraQuery
-    DataTypeMap = <>
     FetchAll = True
     ReadOnly = True
     AutoCommit = False
@@ -182,7 +176,7 @@ object IndexBrowserFrame: TIndexBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010102000E00A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000E00B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000000000006F6F6F00FFFF
       FF00FBFBFB00FBFBFB00FBFBFB00B9B9B9005353530000000000000000000000

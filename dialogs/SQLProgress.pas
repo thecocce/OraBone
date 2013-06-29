@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ActnList, Ora, BCDialogs.Dlg, System.Actions;
 
 const
   WM_AFTER_SHOW = WM_USER + 302; // custom message
@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks;
 
 var
   FSQLProgressDialog: TSQLProgressDialog;
@@ -49,7 +49,7 @@ begin
   if not Assigned(FSQLProgressDialog) then
     Application.CreateForm(TSQLProgressDialog, FSQLProgressDialog);
   Result := FSQLProgressDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TSQLProgressDialog.CancelActionExecute(Sender: TObject);

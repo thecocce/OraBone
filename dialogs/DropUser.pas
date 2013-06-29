@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Dlg;
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TDropUserDialog = class(TDialog)
@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Math, StyleHooks;
+  System.Math, BCCommon.StyleHooks;
 
 const
   CAPTION_TEXT = 'Drop user %s, are you sure?';
@@ -47,7 +47,7 @@ begin
   if not Assigned(FDropUserDialog) then
     Application.CreateForm(TDropUserDialog, FDropUserDialog);
   Result := FDropUserDialog;
-  StyleHooks.SetStyledFormSize(Result);
+  SetStyledFormSize(Result);
 end;
 
 procedure TDropUserDialog.FormDestroy(Sender: TObject);

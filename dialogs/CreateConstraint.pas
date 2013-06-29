@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn,
-  Vcl.Grids, JvExGrids, JvStringGrid, BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
-  BCComboBox, JvEdit, BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
+  Vcl.Grids, JvExGrids, JvStringGrid, BCControls.BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
+  BCControls.BCComboBox, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCPageControl, Ora, BCToolBar, Dlg;
+  BCControls.BCPageControl, Ora, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateConstraintDialog = class(TCreateObjectBaseDialog)
@@ -71,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, DataModule, Lib, StyleHooks;
+  DataModule, Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
 
 var
   FCreateConstraintDialog: TCreateConstraintDialog;
@@ -81,7 +81,7 @@ begin
   if not Assigned(FCreateConstraintDialog) then
     Application.CreateForm(TCreateConstraintDialog, FCreateConstraintDialog);
   Result := FCreateConstraintDialog;
-  StyleHooks.SetStyledFormSize(TDialog(Result));
+  SetStyledFormSize(TDialog(Result));
 end;
 
 procedure TCreateConstraintDialog.FormDestroy(Sender: TObject);
@@ -143,13 +143,13 @@ begin
   Result := False;
   if Trim(ConstraintNameEdit.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set constraint name.');
+    ShowErrorMessage('Set constraint name.');
     ConstraintNameEdit.SetFocus;
     Exit;
   end;
   if Trim(TableNameComboBox.Text) = '' then
   begin
-    Common.ShowErrorMessage('Set table name.');
+    ShowErrorMessage('Set table name.');
     TableNameComboBox.SetFocus;
     Exit;
   end;
@@ -159,13 +159,13 @@ begin
       Inc(TrueCount);
   if TrueCount = 0 then
   begin
-    Common.ShowErrorMessage('Set columns.');
+    ShowErrorMessage('Set columns.');
     Exit;
   end;
   if (UniqueRadioButton.Checked or CheckRadioButton.Checked) and
     (TrueCount <> 1) then
   begin
-    Common.ShowErrorMessage('Unique and Check type allow only one column.');
+    ShowErrorMessage('Unique and Check type allow only one column.');
     Exit;
   end;
   if ForeignKeyRadioButton.Checked then
@@ -176,7 +176,7 @@ begin
         Inc(TrueCount);
     if TrueCount = 0 then
     begin
-      Common.ShowErrorMessage('Set referenced columns.');
+      ShowErrorMessage('Set referenced columns.');
       Exit;
     end;
   end;

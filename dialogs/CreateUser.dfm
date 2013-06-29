@@ -140,11 +140,13 @@ inherited CreateUserDialog: TCreateUserDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object PasswordEdit: TBCEdit [6]
@@ -155,11 +157,13 @@ inherited CreateUserDialog: TCreateUserDialog
     Hint = 'Password'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
+    Text = ''
     OnChange = PageControlChange
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
     EditColor = clInfoBk
+    ErrorColor = 14803198
     NumbersAllowNegative = False
   end
   object PasswordExpiredCheckBox: TCheckBox [7]
@@ -175,7 +179,7 @@ inherited CreateUserDialog: TCreateUserDialog
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000E000C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

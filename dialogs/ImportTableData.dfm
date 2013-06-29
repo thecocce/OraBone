@@ -85,10 +85,12 @@ object ImportTableDataDialog: TImportTableDataDialog
         Hint = 'Schema.'
         CharCase = ecUpperCase
         TabOrder = 0
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object CommitIntervalSpinEdit: TBCSpinEdit
@@ -108,10 +110,12 @@ object ImportTableDataDialog: TImportTableDataDialog
         Hint = 'Table name.'
         CharCase = ecUpperCase
         TabOrder = 1
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object DelimiterComboBox: TBCComboBox
@@ -120,7 +124,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Width = 120
         Height = 21
         Hint = 'Delimiter.'
-        ReadOnly = False
+        ItemIndex = 2
         TabOrder = 3
         Text = 'Semicolon'
         Items.Strings = (
@@ -128,9 +132,9 @@ object ImportTableDataDialog: TImportTableDataDialog
           'Pipe'
           'Semicolon'
           'Tab')
-        ItemIndex = 2
         EditColor = clInfoBk
         DeniedKeyStrokes = True
+        ReadOnly = False
         DropDownFixedWidth = 0
       end
       object OpenFilenameEdit: TBCEdit
@@ -140,10 +144,12 @@ object ImportTableDataDialog: TImportTableDataDialog
         Height = 21
         Hint = 'Folder'
         TabOrder = 4
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object FolderBitBtn: TBitBtn
@@ -285,10 +291,12 @@ object ImportTableDataDialog: TImportTableDataDialog
         Height = 21
         Hint = 'Folder'
         TabOrder = 4
+        Text = ''
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
         EditColor = clInfoBk
+        ErrorColor = 14803198
         NumbersAllowNegative = False
       end
       object BitBtn1: TBitBtn

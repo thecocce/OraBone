@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.CommDlg, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, SynEdit, Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls,
-  Vcl.ToolWin, BCToolBar, Vcl.ImgList, BCImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
-  JvEdit, BCEdit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
-  SynEditSearch, SynEditMiscClasses, SynEditTypes, BCCheckBox, SynEditRegexSearch;
+  Vcl.ToolWin, BCControls.BCToolBar, Vcl.ImgList, BCControls.BCImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
+  JvEdit, BCControls.BCEdit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
+  SynEditSearch, SynEditMiscClasses, SynEditTypes, BCControls.BCCheckBox, SynEditRegexSearch, System.Actions;
 
 type
   PObjectNodeRec = ^TObjectNodeRec;
@@ -172,8 +172,9 @@ implementation
 {$R *.dfm}
 
 uses
-  System.RegularExpressions, Vcl.Themes, BigIni, StyleHooks, Common, OraServices, OraCall,
-  PrintPreview, SynEditKeyCmds, CommonDialogs, Language, Options;
+  System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleHooks, OraServices, OraCall,
+  BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.Language, Options,
+  BCCommon.Files;
 
 const
   FORM_CAPTION = 'TNSNames Editor - [%s]';
@@ -191,7 +192,7 @@ end;
 
 procedure TTNSNamesEditorForm.ReadIniFile;
 begin
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Size }
     Width := ReadInteger('TNSNamesEditorSize', 'Width', Round(Screen.Width * 0.5));
@@ -225,7 +226,7 @@ end;
 procedure TTNSNamesEditorForm.WriteIniFile;
 begin
   if Windowstate = wsNormal then
-  with TBigIniFile.Create(Common.GetINIFilename) do
+  with TBigIniFile.Create(GetINIFilename) do
   try
     { Position }
     WriteInteger('TNSNamesEditorPosition', 'Left', Left);
@@ -322,11 +323,11 @@ end;
 
 procedure TTNSNamesEditorForm.FileOpenActionExecute(Sender: TObject);
 begin
-  if CommonDialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
+  if BCCommon.Dialogs.OpenFiles(Handle, '', Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
     Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet'), '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('Open')) then
   begin
     Application.ProcessMessages; { style fix }
-    LoadTNSNames(CommonDialogs.Files[0])
+    LoadTNSNames(BCCommon.Dialogs.Files[0])
   end;
 end;
 
@@ -352,7 +353,7 @@ procedure TTNSNamesEditorForm.FilePrintActionExecute(Sender: TObject);
 var
   PrintDlgRec: TPrintDlg;
 begin
-  if CommonDialogs.Print(Handle, PrintDlgRec) then
+  if BCCommon.Dialogs.Print(Handle, PrintDlgRec) then
   begin
     Application.ProcessMessages; { style fix }
     SynEditPrint.Copies := PrintDlgRec.nCopies;
@@ -377,19 +378,20 @@ end;
 procedure TTNSNamesEditorForm.Save(ShowDialog: Boolean);
 var
   AFileName: string;
+  FilterIndex: Cardinal;
 begin
   AFileName := FTNSNamesFileName;
   if Pos('~', FTNSNamesFileName) = Length(FTNSNamesFileName) then
     AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
   if ShowDialog then
   begin
-    if CommonDialogs.SaveFile(Handle, ExtractFilePath(AFileName),
+    if BCCommon.Dialogs.SaveFile(Handle, ExtractFilePath(AFileName),
        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) +
        Trim(StringReplace(LanguageDataModule.GetFileTypes('SQLNet')
-        , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), ExtractFileName(AFileName)) then
+        , '|', #0, [rfReplaceAll])) + #0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, ExtractFileName(AFileName)) then
     begin
       Application.ProcessMessages; { style fix }
-      AFileName := CommonDialogs.Files[0]
+      AFileName := BCCommon.Dialogs.Files[0]
     end
     else
     begin

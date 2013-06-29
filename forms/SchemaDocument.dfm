@@ -2,12 +2,12 @@ object SchemaDocumentForm: TSchemaDocumentForm
   Left = 0
   Top = 0
   Caption = 'Schema Document'
-  ClientHeight = 544
-  ClientWidth = 1054
+  ClientHeight = 416
+  ClientWidth = 806
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
@@ -15,44 +15,32 @@ object SchemaDocumentForm: TSchemaDocumentForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  PixelsPerInch = 120
-  TextHeight = 17
+  PixelsPerInch = 96
+  TextHeight = 13
   object JvStatusBar1: TJvStatusBar
     Left = 0
-    Top = 525
-    Width = 1054
+    Top = 397
+    Width = 806
     Height = 19
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
     Panels = <>
-    ExplicitTop = 519
-    ExplicitWidth = 806
+    ExplicitTop = 401
+    ExplicitWidth = 1054
   end
   object DocumentPanel: TPanel
     Left = 0
-    Top = 35
-    Width = 1054
-    Height = 490
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 27
+    Width = 806
+    Height = 370
     Align = alClient
     BevelOuter = bvLowered
     Caption = 'DocumentPanel'
     TabOrder = 1
-    ExplicitHeight = 484
+    ExplicitHeight = 374
     object WebBrowser: TWebBrowser
       Left = 1
       Top = 1
-      Width = 1052
-      Height = 482
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
+      Width = 804
+      Height = 368
       Align = alClient
       PopupMenu = PopupMenu
       TabOrder = 0
@@ -67,27 +55,24 @@ object SchemaDocumentForm: TSchemaDocumentForm
   object ButtonPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1054
-    Height = 35
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Width = 806
+    Height = 27
     Align = alTop
     BevelOuter = bvNone
-    Padding.Left = 3
-    Padding.Top = 3
-    Padding.Right = 3
-    Padding.Bottom = 3
+    Padding.Left = 2
+    Padding.Top = 2
+    Padding.Right = 2
+    Padding.Bottom = 2
     TabOrder = 2
     object Toolbar1Bevel: TBevel
       AlignWithMargins = True
-      Left = 42
-      Top = 5
-      Width = 5
-      Height = 25
-      Margins.Left = 8
-      Margins.Right = 4
+      Left = 32
+      Top = 4
+      Width = 4
+      Height = 19
+      Margins.Left = 6
+      Margins.Top = 2
+      Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
     end
@@ -945,7 +930,7 @@ object SchemaDocumentForm: TSchemaDocumentForm
     Left = 178
     Top = 122
     Bitmap = {
-      494C010104004C00D40011001100FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104004C00DC0011001100FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000440000002200000001002000000000002024
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

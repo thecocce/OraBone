@@ -415,10 +415,9 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Search for'
-          ExplicitHeight = 13
         end
       end
       object SearchPanel3: TPanel
@@ -438,11 +437,13 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Height = 21
           Align = alTop
           TabOrder = 0
+          Text = ''
           OnChange = SearchForEditChange
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
           EditColor = clInfoBk
+          ErrorColor = 14803198
           NumbersAllowNegative = False
         end
       end
@@ -838,6 +839,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         SearchEngine = SynEditSearch
         WantTabs = True
         OnChange = SynEditChange
+        FontSmoothing = fsmNone
         ExplicitTop = 3
         ExplicitHeight = 407
       end
@@ -847,7 +849,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C010112005802300510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112005802440510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1608,7 +1610,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A003800640410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A003800780410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

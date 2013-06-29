@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, Dlg,
-  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCPageControl,
-  DAScript, BCToolBar;
+  Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, BCDialogs.Dlg,
+  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCControls.BCPageControl,
+  DAScript, BCControls.BCToolBar, System.Actions;
 
 type
   TCreateObjectBaseDialog = class(TDialog)
@@ -58,7 +58,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, Main, OraScript, OraError, Lib, Vcl.Themes, StyleHooks;
+  Main, OraScript, OraError, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages;
 
 procedure TCreateObjectBaseDialog.PageControlChange(Sender: TObject);
 begin
@@ -134,7 +134,7 @@ end;
 procedure TCreateObjectBaseDialog.OraScriptError(Sender: TObject; E: Exception; SQL: string;
   var Action: TErrorAction);
 begin
-  Common.ShowErrorMessage(E.Message);
+  ShowErrorMessage(E.Message);
   Action := eaFail;
 end;
 

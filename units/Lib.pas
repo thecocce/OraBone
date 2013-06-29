@@ -6,8 +6,8 @@ interface
 
 uses
   Vcl.StdCtrls, Winapi.Windows, Winapi.Messages, Ora, System.Classes, DB, Vcl.Forms,
-  SynEdit, Vcl.Controls, Grids, BCComboBox, BCStringGrid, ActnList, ComCtrls,
-  BCDBGrid;
+  SynEdit, Vcl.Controls, Grids, BCControls.BCComboBox, BCControls.BCStringGrid, ActnList, ComCtrls,
+  BCControls.BCDBGrid;
 
 //type
 //  TWordTriple = Array[0..2] of Word;
@@ -120,8 +120,8 @@ function GetSQLFormat(OraSession: TOraSession; DateFormat: string): string;
 implementation
 
 uses
-  System.SysUtils, Vcl.Dialogs, Clipbrd, Main, OraServices, DataModule, BigINI, Common,
-  Math, CommonDialogs, Language;
+  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, Main, OraServices, DataModule, BigINI, BCCommon.Files,
+  Math, BCCommon.Dialogs, BCCommon.Language, BCCommon.Messages, BCCommon, BCCommon.StringUtils;
 
 const
   Codes64 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/';
@@ -138,7 +138,7 @@ const
 
 function AskCommit(Schema: string): Boolean;
 begin
-  Result := Common.MessageDialog(Format('The session ''%s'' has pending transaction. Do you want to commit or rollback?', [Schema]),
+  Result := MessageDialog(Format('The session ''%s'' has pending transaction. Do you want to commit or rollback?', [Schema]),
     mtConfirmation, [mbYes, mbNo], ['Commit', 'Rollback']) = mrYes;
 end;
 
@@ -154,85 +154,6 @@ begin
     s := Copy(s, 1,x - 1) + Copy(s, x + 1,Length(s));
   end;
 end;
-{
-function OldEncryptString(s: string; Key: string): string;
-var
-  i, x: integer;
-  s1, s2, ss: string;
-begin
-  Result := '';
-  if Length(Key) < 16 then
-    Exit;
-  for i := 1 to Length(Key) do
-  begin
-    s1 := Copy(Key, i + 1,Length(Key));
-    if Pos(Key[i], s1) > 0 then
-      Exit;
-    if Pos(Key[i], Codes64) <= 0 then
-      Exit;
-  end;
-  s1 := Codes64;
-  s2 := '';
-  for i := 1 to Length(Key) do
-  begin
-    x := Pos(Key[i], s1);
-    if x > 0 then
-      s1 := Copy(s1, 1,x - 1) + Copy(s1, x + 1,Length(s1));
-  end;
-  ss := Key;
-  for i := 1 to Length(s) do
-  begin
-    s2 := s2 + ss[Ord(s[i]) mod 16 + 1];
-    ss := Copy(ss, Length(ss), 1) + Copy(ss, 1,Length(ss) - 1);
-    s2 := s2 + ss[Ord(s[i]) div 16 + 1];
-    ss := Copy(ss, Length(ss), 1) + Copy(ss, 1,Length(ss) - 1);
-  end;
-  Result := CreateRandomString(s1, Random(5) + 1);
-  for i := 1 to Length(s2) do
-    Result := Result + s2[i] + CreateRandomString(s1, Random(5));
-end;
-
-function OldDecryptString(s: string; Key: string): string;
-var
-  i, x, x2: integer;
-  s1, s2, ss: string;
-begin
-  Result := '';
-  if Length(Key) < 16 then
-    Exit;
-  for i := 1 to Length(Key) do
-  begin
-    s1 := Copy(Key, i + 1,Length(Key));
-    if Pos(Key[i], s1) > 0 then
-      Exit;
-    if Pos(Key[i], Codes64) <= 0 then
-      Exit;
-  end;
-  s1 := Codes64;
-  s2 := '';
-  ss := Key;
-  for i := 1 to Length(s) do
-    if Pos(s[i], ss) > 0 then
-      s2 := s2 + s[i];
-  s := s2;
-  s2   := '';
-  if Length(s) mod 2 <> 0 then
-    Exit;
-  for i := 0 to Length(s) div 2 - 1 do
-  begin
-    x := Pos(s[i * 2 + 1], ss) - 1;
-    if x < 0 then
-      Exit;
-    ss := Copy(ss, Length(ss), 1) + Copy(ss, 1,Length(ss) - 1);
-    x2 := Pos(s[i * 2 + 2], ss) - 1;
-    if x2 < 0 then
-      Exit;
-    x  := x + x2 * 16;
-    s2 := s2 + chr(x);
-    ss := Copy(ss, Length(ss), 1) + Copy(ss, 1,Length(ss) - 1);
-  end;
-  Result := s2;
-end;   }
 
 function OldEncryptString(s: string; Key: string): string;
 var
@@ -482,7 +403,7 @@ begin
     OraSession.ExecSQL(GetAlterConstraintSQL(SchemaParam, TableName, ConstraintName, EnableConstraint), []);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -510,11 +431,11 @@ end;
 procedure DropConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string);
 begin
   try
-    if Common.AskYesOrNo(Format('Drop constraint %s, are you sure?', [ConstraintName])) then
+    if AskYesOrNo(Format('Drop constraint %s, are you sure?', [ConstraintName])) then
       OraSession.ExecSQL(Format('ALTER TABLE %s.%s DROP CONSTRAINT %s', [SchemaParam, TableName, ConstraintName]), []);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -611,7 +532,7 @@ begin
     OraSession.ExecSQL(GetAlterTriggerSQL(SchemaParam, TriggerName, EnableTrigger), []);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -639,11 +560,11 @@ end;
 procedure DropTrigger(OraSession: TOraSession; SchemaParam: string; TriggerName: string);
 begin
   try
-    if Common.AskYesOrNo(Format('Drop trigger %s.%s, are you sure?', [SchemaParam, TriggerName])) then
+    if AskYesOrNo(Format('Drop trigger %s.%s, are you sure?', [SchemaParam, TriggerName])) then
       OraSession.ExecSQL(Format('DROP TRIGGER %s.%s', [SchemaParam, TriggerName]), []);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -671,11 +592,11 @@ end;
 procedure RevokeGrant(OraSession: TOraSession; Privilege: string; SchemaParam: string; ObjectName: string; Grantee: string);
 begin
   try
-    if Common.AskYesOrNo(Format('Revoke privilege %s, are you sure?', [Privilege])) then
+    if AskYesOrNo(Format('Revoke privilege %s, are you sure?', [Privilege])) then
       OraSession.ExecSQL(Format('REVOKE %s ON %s.%s FROM %s', [SchemaParam, Privilege, ObjectName, Grantee]), []);
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -706,7 +627,7 @@ var
   SynonymAvailability: string;
 begin
   try
-    if Common.AskYesOrNo(Format('Drop synonym %s, are you sure?', [SynonymName])) then
+    if AskYesOrNo(Format('Drop synonym %s, are you sure?', [SynonymName])) then
     begin
       if SynonymOwner = 'PUBLIC' then
         SynonymAvailability := 'PUBLIC ';
@@ -714,7 +635,7 @@ begin
     end;
   except
     on E: Exception do
-      Common.ShowErrorMessage(E.message);
+      ShowErrorMessage(E.message);
   end;
 end;
 
@@ -842,11 +763,13 @@ begin
 end;
 
 procedure SaveSQL(Handle: HWND; SynEdit: TSynEdit);
+var
+  FilterIndex: Cardinal;
 begin
-  if CommonDialogs.SaveFile(Handle, '', 'SQL Files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), '', 'sql') then
+  if BCCommon.Dialogs.SaveFile(Handle, '', 'SQL Files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, '', 'sql') then
   begin
     Application.ProcessMessages; { style fix }
-    SynEdit.Lines.SaveToFile(CommonDialogs.Files[0]);
+    SynEdit.Lines.SaveToFile(BCCommon.Dialogs.Files[0]);
   end;
 end;
 
@@ -1076,7 +999,7 @@ begin
     ReadSectionValues('SchemaObjectFilters', Objects);
     for i := 0 to Objects.Count - 1 do
     begin
-      s := Common.DecryptString(System.Copy(Objects.Strings[i], 0, Pos('=', Objects.Strings[i]) - 1));
+      s := DecryptString(System.Copy(Objects.Strings[i], 0, Pos('=', Objects.Strings[i]) - 1));
       ObjectType := Copy(s, 1, Pos(';', s) - 1);
       s := Copy(s, Pos(';', s) + 1, Length(s));
       CustomizeName := Copy(s, 1, Pos(';', s) - 1);
@@ -1112,9 +1035,9 @@ begin
     { read string }
     ReadSectionValues('SchemaObjectFilters', SchemaObjectFilters);
     for i := 0 to SchemaObjectFilters.Count - 1 do
-      if KeyValue = Common.DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
+      if KeyValue = DecryptString(System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1)) then
       begin
-        Result := Common.DecryptString(ReadString('SchemaObjectFilters', System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1), ''));
+        Result := DecryptString(ReadString('SchemaObjectFilters', System.Copy(SchemaObjectFilters.Strings[i], 0, Pos('=', SchemaObjectFilters.Strings[i]) - 1), ''));
         Break;
       end;
   finally

@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList, Dlg,
-  Vcl.Themes;
+  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList, BCDialogs.Dlg,
+  Vcl.Themes, System.Actions;
 
 type
   TProgressDialog = class(TDialog)
@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Common, StyleHooks;
+  BCCommon.StyleHooks;
 
 var
   FProgressDialog: TProgressDialog;
@@ -84,7 +84,7 @@ begin
   else
     Height := 99;
   OrigHeight := Height;
-  StyleHooks.SetStyledFormSize(Self);
+  SetStyledFormSize(Self);
   ProgressBar.Marquee := Marquee;
   Visible := True;
 end;
