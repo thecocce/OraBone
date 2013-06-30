@@ -353,7 +353,6 @@ type
     procedure GetText(Sender: TField; var Text: String; DisplayText: Boolean);
     procedure SetClobAndTimestampFields(OraQuery: TOraQuery);
     function GetActiveDocumentModified: Boolean;
-    procedure PageControlRepaint;
     procedure SetActivePageCaptionModified;
     function GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
   public
@@ -789,29 +788,6 @@ begin
     end;
 end;
 
-procedure TSQLEditorFrame.PageControlRepaint;
-var
-  i: Integer;
-  SynEdit: TBCOraSynEdit;
-  CompareFrame: TCompareFrame;
-begin
-  SynEdit := GetActiveSynEdit;
-  if Assigned(SynEdit) then
-    SynEdit.Repaint;
-  if Assigned(PageControl.ActivePage) then
-  begin
-    CompareFrame := GetCompareFrame(PageControl.ActivePage);
-    if Assigned(CompareFrame) then
-      CompareFrame.RepaintFrame;
-    PageControl.ActivePage.Repaint;
-  end;
-  Application.ProcessMessages;
-  for i := 0 to ComponentCount - 1 do
-    if Components[i] is TBCToolBar then
-      TBCToolBar(Components[i]).Repaint;
-  PageControl.Repaint;
-end;
-
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
 var
   Editor : TSynEdit;
@@ -1062,7 +1038,6 @@ begin
     LineNumbers := OptionsContainer.EnableLineNumbers;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.SelectForCompare;
@@ -1180,7 +1155,6 @@ begin
         SynEdit := CreateNewTabSheet(FileName);
       SynEdit.CaretXY := BufferCoord(Ch, Ln);
       SetBookmarks(SynEdit, Bookmarks);
-      PageControlRepaint;
       if SynEdit.CanFocus then
         SynEdit.SetFocus;
       AddToReopenFiles(FileName);
@@ -1229,7 +1203,6 @@ begin
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.CloseAll(CloseDocuments: Boolean; IncludeCancel: Boolean): Integer;
@@ -1249,7 +1222,6 @@ begin
     FNumberOfNewDocument := 0;
     Result := mrYes;
   end;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.CloseAllOtherPages;
@@ -1341,7 +1313,6 @@ begin
     end;
     UpdateGuttersAndControls(PageControl.DoubleBuffered);
   end;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.Save;
@@ -1379,7 +1350,6 @@ begin
     PageControl.ActivePage.Caption := GetActivePageCaption;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.Redo;
@@ -1390,7 +1360,6 @@ begin
   if Assigned(SynEdit) then
     SynEdit.Redo;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.Cut;
@@ -1400,7 +1369,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.CutToClipboard;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.CopyToClipboard;
@@ -1412,7 +1380,6 @@ begin
     SynEdit.CopyToClipboard
   else
     FOutputFrame.CopyToClipboard;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.PageControlChange(Sender: TObject);
@@ -1426,7 +1393,6 @@ begin
     GotoLinePanel.Visible := False;
   end;
   CheckFileDateTimes; { compare can change file datetime }
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.PageControlCloseButtonClick(Sender: TObject);
@@ -1454,7 +1420,6 @@ begin
   end
   else
     SearchForEdit.PasteFromClipboard;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.PopupMenuExecuteActionExecute(Sender: TObject);
@@ -1763,7 +1728,6 @@ begin
       end;
     end;
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.CanFindNextPrevious: Boolean;
@@ -1797,7 +1761,6 @@ begin
        Result := SynEdit.WordWrap;
     end;
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.SpecialChars: Boolean;
@@ -1836,7 +1799,6 @@ begin
     if PageControl.Pages[i].Components[0] is TCompareFrame then
       Result := TCompareFrame(PageControl.Pages[i].Components[0]).ToggleSpecialChars
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.SelectionMode: Boolean;
@@ -1868,7 +1830,6 @@ begin
       Result := SynEdit.SelectionMode = smColumn;
     end;
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.LineNumbers: Boolean;
@@ -1899,7 +1860,6 @@ begin
     if PageControl.Pages[i].Components[0] is TCompareFrame then
       Result := TCompareFrame(PageControl.Pages[i].Components[0]).ToggleLineNumbers
   end;
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
@@ -1936,7 +1896,6 @@ begin
   begin
     PageControl.ActivePage.Caption := Format('%s~', [Trim(PageControl.ActivePage.Caption)]);
     PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
-    PageControlRepaint;
   end;
 end;
 
@@ -2179,19 +2138,13 @@ begin
           if FileExists(OraSynEdit.DocumentName) then
           begin
             if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [OraSynEdit.DocumentName])) then
-            begin
               Refresh(i);
-              PageControlRepaint;
-            end;
           end
           else
           begin
             OraSynEdit.Modified := True;
             if Pos('~', PageControl.Pages[i].Caption) = 0 then
-            begin
               PageControl.Pages[i].Caption := Format('%s~', [Trim(PageControl.Pages[i].Caption)]);
-              PageControlRepaint;
-            end;
           end;
         end;
       end;
@@ -2928,7 +2881,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecBlockUnindent, 'U', nil);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.IncreaseIndent;
@@ -2938,7 +2890,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecBlockIndent, 'I', nil);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.ToggleCase;
@@ -3004,7 +2955,6 @@ begin
     SynEdit.SelText := TrimRight(Strings.Text);
     Strings.Free;
   end;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.SortDesc;
@@ -3025,7 +2975,6 @@ begin
     SynEdit.SelText := TrimRight(s);
     Strings.Free;
   end;
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.ClearBookmarks;
@@ -3037,7 +2986,6 @@ begin
   if Assigned(SynEdit) then
     for i := 0 to 9 do
       SynEdit.ClearBookMark(i);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.InsertLine;
@@ -3047,7 +2995,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecInsertLine, 'N', nil);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.DeleteWord;
@@ -3057,7 +3004,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecDeleteWord, 'T', nil);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.DeleteLine;
@@ -3067,7 +3013,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecDeleteLine, 'Y', nil);
-  PageControlRepaint;
 end;
 
 procedure TSQLEditorFrame.DeleteEOL;
@@ -3077,7 +3022,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.ExecuteCommand(ecDeleteEOL, 'Y', nil);
-  PageControlRepaint;
 end;
 
 function TSQLEditorFrame.GetActiveDocumentModified: Boolean;
