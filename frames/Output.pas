@@ -19,6 +19,7 @@ type
     OutputCloseAllOtherPagesAction: TAction;
     PageControl: TBCPageControl;
     PopupMenu: TBCPopupMenu;
+    CopyToClipboardAction: TAction;
     procedure ClearDBMSOutputActionExecute(Sender: TObject);
     procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -34,6 +35,7 @@ type
     procedure VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree; HintCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);
     procedure PageControlCloseButtonClick(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
+    procedure CopyToClipboardActionExecute(Sender: TObject);
   private
     { Private declarations }
     FProcessingTabSheet: Boolean;
@@ -50,6 +52,7 @@ type
     procedure SetRows(TabCaption: string);
     procedure SetTime(TabCaption: string; Time: string);
     procedure UpdatePopupMenu;
+    procedure CopyTreeToClipboard;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -138,11 +141,20 @@ begin
   MenuItem := TMenuItem.Create(PopupMenu);
   MenuItem.Caption := '-';
   PopupMenu.Items.Add(MenuItem);
+  if Pos('Search for', PageControl.ActivePage.Caption) = 1 then
+  begin
+    { copy to clipboard }
+
+    { separator }
+    MenuItem := TMenuItem.Create(PopupMenu);
+    MenuItem.Caption := '-';
+    PopupMenu.Items.Add(MenuItem);
+  end;
   { close all other pages }
   MenuItem := TMenuItem.Create(PopupMenu);
   MenuItem.Action := OutputCloseAllOtherPagesAction;
   PopupMenu.Items.Add(MenuItem);
-  if Pos('Data:', PageControl.ActivePage.Caption) <> 0 then
+  if Pos('Data:', PageControl.ActivePage.Caption) = 1 then
   begin
     MenuItem := TMenuItem.Create(PopupMenu);
     MenuItem.Caption := '-';
@@ -152,7 +164,7 @@ begin
     MenuItem.Caption := '&Export Table Data...';
     PopupMenu.Items.Add(MenuItem);
   end;
-  if Pos('DBMS output:', PageControl.ActivePage.Caption) <> 0 then
+  if Pos('DBMS output:', PageControl.ActivePage.Caption) = 1 then
   begin
     MenuItem := TMenuItem.Create(PopupMenu);
     MenuItem.Caption := '-';
@@ -793,6 +805,45 @@ begin
     CopyDataFromDBGridToClipboard(Grid);
 end;
 
+procedure TOutputFrame.CopyTreeToClipboard;
+var
+  OutputTreeView: TVirtualDrawTree;
+  Node, ChildNode: PVirtualNode;
+  Data, ChildData: POutputRec;
+  StringList: TStrings;
+begin
+  OutputTreeView := GetVirtualDrawTree;
+  if Assigned(OutputTreeView) then
+  begin
+    StringList := TStringList.Create;
+    try
+      Node := OutputTreeView.GetFirst;
+      while Assigned(Node) do
+      begin
+        Data := OutputTreeView.GetNodeData(Node);
+        StringList.Add(Data.FileName);
+        ChildNode := Node.FirstChild;
+         while Assigned(ChildNode) do
+         begin
+           ChildData := OutputTreeView.GetNodeData(ChildNode);
+           StringList.Add(System.SysUtils.Format('  %s (%d, %d): %s', [ExtractFilename(String(ChildData.Filename)),
+             ChildData.Ln, ChildData.Ch, ChildData.Text]));
+           ChildNode := ChildNode.NextSibling;
+         end;
+         Node := Node.NextSibling;
+      end;
+    finally
+      Clipboard.AsText := StringList.Text;
+      StringList.Free;
+    end;
+  end;
+end;
+
+procedure TOutputFrame.CopyToClipboardActionExecute(Sender: TObject);
+begin
+  CopyTreeToClipboard;
+end;
+
 procedure TOutputFrame.VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree;
   const PaintInfo: TVTPaintInfo);
 var
@@ -864,6 +915,8 @@ begin
       Format := DT_TOP or DT_LEFT or DT_VCENTER or DT_SINGLELINE;
       if (Data.Level = 0) or (Data.SearchString = '') then
       begin
+        if Data.Level = 0 then
+          S := System.SysUtils.Format('%s [%d]', [S, Node.ChildCount]);
         if Data.Level = 1 then
           S := System.SysUtils.Format('%s (%d, %d): ', [ExtractFilename(String(Data.Filename)), Data.Ln, Data.Ch]) + S;
         DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, Format)
@@ -906,7 +959,7 @@ begin
     case Data.Level of
       0: begin
            Canvas.Font.Style := Canvas.Font.Style + [fsBold];
-           NodeWidth := Canvas.TextWidth(Trim(String(Data.FileName))) + 2 * AMargin;
+           NodeWidth := Canvas.TextWidth(Trim(Format('%s [%d]', [String(Data.FileName), Node.ChildCount]))) + 2 * AMargin;
          end;
       1: begin
            S := System.SysUtils.Format('%s (%d, %d): ', [ExtractFilename(String(Data.Filename)), Data.Ln, Data.Ch]);
