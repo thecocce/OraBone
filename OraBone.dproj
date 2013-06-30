@@ -326,11 +326,11 @@
         <DCCReference Include="..\..\Common\forms\BCForms.PrintPreview.pas">
             <Form>PrintPreviewDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\units\BaseWebBrowserContainer.pas"/>
+        <DCCReference Include="..\..\Common\units\WebBrowser.BaseContainer.pas"/>
         <DCCReference Include="..\..\Common\units\Diff.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.Hash.pas"/>
-        <DCCReference Include="..\..\Common\units\IntfDocHostUIHandler.pas"/>
-        <DCCReference Include="..\..\Common\units\WebBrowserContainer.pas"/>
+        <DCCReference Include="..\..\Common\units\WebBrowser.IntfDocHostUIHandler.pas"/>
+        <DCCReference Include="..\..\Common\units\WebBrowser.Container.pas"/>
         <DCCReference Include="dialogs\ChangeUserPassword.pas">
             <Form>ChangeUserPasswordDialog</Form>
         </DCCReference>

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
-  ActnList, Menus, WebBrowserContainer, BCControls.BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
+  ActnList, Menus, WebBrowser.Container, BCControls.BCPopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
   JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup,
   System.Actions;
 
