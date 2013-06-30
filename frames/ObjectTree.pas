@@ -234,8 +234,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, SQLTokenizer, System.StrUtils,
-  BCCommon.StyleHooks, BCCommon.Files, BCCommon.StringUtils, BCCommon.Messages;
+  Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, BCSQL.Tokenizer, System.StrUtils,
+  BCCommon.StyleHooks, BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
 begin

@@ -306,8 +306,8 @@ uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
   DataFilter, BCControls.BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
-  System.IOUtils, SQLFormatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
-  BCCommon.Language, BCCommon.StringUtils, BCCommon.Messages, BCCommon.Files;
+  System.IOUtils, BCSQL.Formatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
+  BCCommon.Language, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;
 
 {$R *.dfm}
 
@@ -1726,7 +1726,7 @@ begin
     SynEdit.BeginUndoBlock;
     try
       SynEdit.SelectAll;
-      SynEdit.SelText := SQLFormatter.FormatSQL(SynEdit.Text);
+      SynEdit.SelText := BCSQL.Formatter.FormatSQL(SynEdit.Text);
     finally
       SynEdit.EndUndoBlock;
       SynEdit.SetFocus;

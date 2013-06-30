@@ -79,7 +79,7 @@ implementation
 
 uses
   Winapi.ActiveX, System.StrUtils, Progress, Options, BigINI, Main, BCCommon.Dialogs, BCCommon.Language,
-  Data.DB, BCCommon.Files, BCCommon.Messages;
+  Data.DB, BCCommon.FileUtils, BCCommon.Messages;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;

@@ -447,8 +447,8 @@ implementation
 
 uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleHooks, SynUnicode,
-  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, System.Math, BCCommon.Files, BCCommon.Messages,
-  Types, Parameters, SQLTokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon, BCCommon.StringUtils,
+  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, System.Math, BCCommon.FileUtils, BCCommon.Messages,
+  Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon, BCCommon.StringUtils,
   AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.Language;
 
 const

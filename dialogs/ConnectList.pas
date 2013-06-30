@@ -56,7 +56,7 @@ implementation
 {$R *.dfm}
 
 uses
-  OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.Files, BCCommon.Messages, BCCommon.StringUtils;
+  OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils;
 
 const
   GRID_COLUMN_USER = 0;

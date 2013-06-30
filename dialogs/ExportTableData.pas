@@ -81,7 +81,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, BigIni, SQLTokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd, BCCommon.Files, BCCommon,
+  Options, BigIni, BCSQL.Tokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd, BCCommon.FileUtils, BCCommon,
   Vcl.Themes, BCCommon.StyleHooks, BCCommon.Dialogs, BCCommon.Language, BCCommon.Messages;
 
 var

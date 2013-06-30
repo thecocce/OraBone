@@ -174,7 +174,7 @@ implementation
 uses
   System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleHooks, OraServices, OraCall,
   BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.Language, Options,
-  BCCommon.Files;
+  BCCommon.FileUtils;
 
 const
   FORM_CAPTION = 'TNSNames Editor - [%s]';

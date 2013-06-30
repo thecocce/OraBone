@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon, BCCommon.StyleHooks, BCCommon.Files;
+  BCCommon, BCCommon.StyleHooks, BCCommon.FileUtils;
 
 var
   FAboutDialog: TAboutDialog;
@@ -56,7 +56,7 @@ procedure TAboutDialog.Open;
 var
   MemoryStatus: TMemoryStatusEx;
 begin
-  VersionLabel.Caption := Format(VersionLabel.Caption, [BCCommon.Files.GetFileVersion(Application.ExeName),
+  VersionLabel.Caption := Format(VersionLabel.Caption, [BCCommon.FileUtils.GetFileVersion(Application.ExeName),
     {$IFDEF WIN64}64{$ELSE}32{$ENDIF}]);
   { initialize the structure }
   FillChar(MemoryStatus, SizeOf(MemoryStatus), 0);
@@ -88,7 +88,7 @@ end;
 
 function TAboutDialog.GetVersion: string;
 begin
-  Result := BCCommon.Files.GetFileVersion(Application.ExeName);
+  Result := BCCommon.FileUtils.GetFileVersion(Application.ExeName);
 end;
 
 end.

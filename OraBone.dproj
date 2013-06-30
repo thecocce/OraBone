@@ -4,7 +4,7 @@
         <ProjectVersion>14.6</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
@@ -340,7 +340,7 @@
         <DCCReference Include="..\..\Common\units\BCCommon.Language.pas">
             <Form>LanguageDataModule</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\units\SQLTokenizer.pas"/>
+        <DCCReference Include="..\..\Common\units\BCSQL.Tokenizer.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.StyleHooks.pas"/>
         <DCCReference Include="..\..\Common\dialogs\BCDialogs.DownloadURL.pas">
             <Form>DownloadURLDialog</Form>
@@ -362,13 +362,13 @@
         <DCCReference Include="dialogs\HistoryEdit.pas">
             <Form>HistoryEditDialog</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Common\units\SQLFormatter.pas"/>
-        <DCCReference Include="..\..\Common\units\SQLParser.pas"/>
-        <DCCReference Include="..\..\Common\units\SQLParseTree.pas"/>
-        <DCCReference Include="..\..\Common\units\XMLConstants.pas"/>
+        <DCCReference Include="..\..\Common\units\BCSQL.Formatter.pas"/>
+        <DCCReference Include="..\..\Common\units\BCSQL.Parser.pas"/>
+        <DCCReference Include="..\..\Common\units\BCSQL.ParseTree.pas"/>
+        <DCCReference Include="..\..\Common\units\BCSQL.XMLConstants.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.Dialogs.pas"/>
-        <DCCReference Include="..\..\Common\units\BCCommon.Files.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.FileUtils.pas"/>
         <DCCReference Include="frames\SQLEditorTabSheet.pas">
             <Form>SQLEditorTabSheetFrame</Form>
             <FormType>dfm</FormType>

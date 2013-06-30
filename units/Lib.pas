@@ -120,7 +120,7 @@ function GetSQLFormat(OraSession: TOraSession; DateFormat: string): string;
 implementation
 
 uses
-  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, Main, OraServices, DataModule, BigINI, BCCommon.Files,
+  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, Main, OraServices, DataModule, BigINI, BCCommon.FileUtils,
   Math, BCCommon.Dialogs, BCCommon.Language, BCCommon.Messages, BCCommon, BCCommon.StringUtils;
 
 const

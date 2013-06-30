@@ -67,7 +67,7 @@ implementation
 
 uses
   Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, BCCommon.StyleHooks, BCCommon.Dialogs,
-  BCCommon.Language, BCCommon.Files, BCCommon.Messages, BCCommon;
+  BCCommon.Language, BCCommon.FileUtils, BCCommon.Messages, BCCommon;
 
 var
   FImportTableDataDialog: TImportTableDataDialog;

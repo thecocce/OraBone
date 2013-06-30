@@ -46,7 +46,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.UxTheme, System.Math, BigIni, BCCommon.StyleHooks, BCCommon.Files;
+  Winapi.UxTheme, System.Math, BigIni, BCCommon.StyleHooks, BCCommon.FileUtils;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);

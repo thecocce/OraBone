@@ -53,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  UxTheme, Math, BigIni, BCCommon.StyleHooks, BCCommon.Messages, BCCommon.Files;
+  UxTheme, Math, BigIni, BCCommon.StyleHooks, BCCommon.Messages, BCCommon.FileUtils;
 
 const
   TXT_MARG: TPoint = (x: 4; y: 2);
