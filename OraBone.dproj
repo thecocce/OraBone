@@ -4,11 +4,11 @@
         <ProjectVersion>14.6</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -104,12 +104,11 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <VerInfo_Release>4</VerInfo_Release>
-        <VerInfo_MinorVer>3</VerInfo_MinorVer>
+        <VerInfo_MinorVer>4</VerInfo_MinorVer>
         <VerInfo_MajorVer>6</VerInfo_MajorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\UniSynEdit\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\SynWeb\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\VirtualTree\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\RADStudioXE4\Win64\Release;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\OmniXML\src;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\Common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.3.4.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.3.4;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.4.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.4.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -468,6 +467,9 @@
             <Form>EditorToolBarFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\..\Common\units\BCCommon.LanguageUtils.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.Messages.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.StringUtils.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

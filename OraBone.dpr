@@ -117,7 +117,10 @@ uses
   OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame},
   OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
   OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame},
-  OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame};
+  OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame},
+  BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
+  BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
+  BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas';
 
 {$R *.res}
 
