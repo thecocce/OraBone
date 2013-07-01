@@ -512,7 +512,7 @@ var
   SQLTokenizer: TSQLTokenizer;
   s, Token: string;
   i: Integer;
-  InsideComment, InsideSourceType, {InsideBrackets,} Wrapped, PackageSpec: Boolean;
+  InsideComment, InsideSourceType, {InsideBrackets,} Wrapped, PackageSpec, ReturnFound: Boolean;
   NodeText, NodeType: string;
   ImageIndex, StateIndex: Integer;
 begin
@@ -534,7 +534,10 @@ begin
     with OraQuerySpec do
     try
       { Open queries }
-      SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text;
+      if PackageSpec then
+        SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
+      else
+        SQL.Text := DM.StringHolder.StringsByName['PackageBodyLineSQL'].Text;
       ParamByName('P_OBJECT_NAME').AsWideString := ParentData.NodeText; // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;
@@ -544,17 +547,18 @@ begin
         SynEdit.Text := SynEdit.Text + FieldByName('TEXT').AsString;
         Next;
       end;
-      Close;
-      UnPrepare;
+      //Close;
+      //UnPrepare;
       Wrapped := False;
 
       if not PackageSpec then
       begin
-        SQL.Text := DM.StringHolder.StringsByName['PackageBodyLineSQL'].Text;
+        {SQL.Text := DM.StringHolder.StringsByName['PackageBodyLineSQL'].Text;
         ParamByName('P_OBJECT_NAME').AsWideString := FObjectName;
         ParamByName('P_OWNER').AsWideString := FSchemaParam;
         ParamByName('P_LINE').AsInteger := 1;
-        Open;
+        Open;     }
+        First;
         SQLTokenizer.SetText(FieldByName('TEXT').AsString);
         while (not SQLTokenizer.Eof) and not Wrapped do
         begin
@@ -563,6 +567,8 @@ begin
           SQLTokenizer.Next;
         end;
       end;
+      Close;
+      UnPrepare;
       //SynEdit.Text := Trim(UpperCase(SynEdit.Text));
       { check wrapped }
       SQLTokenizer.SetText(SynEdit.Lines[0]);
@@ -585,18 +591,15 @@ begin
       else
       begin
         InsideComment := False;
-//        InsideBrackets := False;
         InsideSourceType := False;
-      //  vaihda whileksi ja kyttaa () sisältö hinttiin, jos löytyy ennen ;
-       // for i := 0 to SynEdit.Lines.Count - 1 do
+
         i := 0;
         while i < SynEdit.Lines.Count do
         begin
           if Trim(SynEdit.Lines[i]) <> '' then
           begin
             s := SynEdit.Lines[i];
-            if (InsideComment and (Pos('*/', s) = 0)) {or
-              (InsideBrackets and (Pos(')', s) = 0))} then
+            if (InsideComment and (Pos('*/', s) = 0)) then
             begin
               Inc(i);
               Continue
@@ -611,11 +614,6 @@ begin
                 s := Copy(s, Pos('*/', s) + 2, Length(s));
                 InsideComment := False;
               end;
-              {if InsideBrackets and (Pos(')', s) <> 0) then
-              begin
-                s := Copy(s, Pos(')', s) + 1, Length(s));
-                InsideBrackets := False;
-              end; }
               if Pos('--', s) <> 0 then
                 s := Copy(s, 1, Pos('--', s) - 1);
               if Pos('/*', s) <> 0 then
@@ -624,12 +622,6 @@ begin
                   InsideComment := True;
                 s := Copy(s, 1, Pos('/*', s) - 1);
               end;
-             { if Pos('(', s) <> 0 then
-              begin
-                if Pos(')', s) = 0 then
-                  InsideBrackets := True;
-                s := Copy(s, 1, Pos('(', s) - 1);
-              end; }
 
               SQLTokenizer.SetText(s);
 
@@ -711,25 +703,25 @@ begin
                 Data.CaretX := Pos(NodeText, SynEdit.Lines[i]);
                 Data.CaretY := i + 1;
 
-                if (NodeType = 'FUNCTION') or (NodeType = 'PROCEDURE') then
+                if (NodeType = 'FUNCTION') or (NodeType = 'PROCEDURE') or (NodeType = 'TYPE') then
                 begin
                   InsideSourceType := False;
                   { read everything until next ;
                     if first word AS or string empty then skip
                     else remove () and make childnodes (items are separated by ,)}
                   s := Copy(s, Pos(NodeText, s) + Length(NodeText) + 1, Length(s));
-                  if Pos(';', SynEdit.Lines[i]) = 0 then
-                  repeat
-                    Inc(i);
-                    s := s + SynEdit.Lines[i];
-                  until Pos(';', SynEdit.Lines[i]) <> 0;
+                  if Pos('IS', SynEdit.Lines[i+1]) <> 1 then
+                    if Pos(';', SynEdit.Lines[i]) = 0 then
+                    repeat
+                      Inc(i);
+                      s := s + SynEdit.Lines[i];
+                    until Pos(';', SynEdit.Lines[i]) <> 0;
                   s := Trim(s);
 
                   if s <> '' then
                   begin
                     SQLTokenizer.SetText(s);
 
-                    //SQLTokenizer.Next;
                     while (not SQLTokenizer.Eof) and ((SQLTokenizer.TokenType = ttWhiteSpace) or
                       (SQLTokenizer.TokenType = ttOpenParens)) do
                       SQLTokenizer.Next;
@@ -737,10 +729,12 @@ begin
                     if not SQLTokenizer.TokenStrIs('AS') then
                     begin
                       Token := '';
+                      ReturnFound := False;
                       while not SQLTokenizer.Eof do
                       begin
-                        if SQLTokenizer.TokenStrIs('RETURN') then
+                        if SQLTokenizer.TokenStrIs('RETURN') and not ReturnFound then
                         begin
+                          ReturnFound := True;
                           SQLTokenizer.Next;
                           while (not SQLTokenizer.Eof) and (SQLTokenizer.TokenType = ttWhiteSpace) do
                             SQLTokenizer.Next;
@@ -768,13 +762,13 @@ begin
                           ChildData.Level := 4;
                           ChildData.NodeType := OBJECT_TYPE_PACKAGE;
                           Token := StringReplace(Token, ' . ', '.', []);
-                          ChildData.NodeText := Token;
+                         // Token := StringReplace(Token, 'IS RECORD (', '', []);
+                          ChildData.NodeText := Trim(Token);
 
                           ChildData.ImageIndex := 81;
                           Token := '';
                           SQLTokenizer.Next;
                         end;
-
                       end;
                     end; { if not SQLLexer.TokenStrIs('AS') then }
                   end; { if s <> '' then }
@@ -1098,12 +1092,15 @@ begin
       ATree.Expanded[Node] := True;
     end;
     { find the child }
-    Node := Node.FirstChild;
-    Data := ATree.GetNodeData(Node);
-    while Assigned(Node) and (AnsiCompareText(AValue, Data.NodeText) <> 0) do
+    if Assigned(Node) then
     begin
-      Node := Node.NextSibling;
+      Node := Node.FirstChild;
       Data := ATree.GetNodeData(Node);
+      while Assigned(Node) and (AnsiCompareText(AValue, Data.NodeText) <> 0) do
+      begin
+        Node := Node.NextSibling;
+        Data := ATree.GetNodeData(Node);
+      end;
     end;
     if Assigned(Node) then
     begin

@@ -1069,7 +1069,7 @@ object DM: TDM
           ' WHERE name = :p_object_name'
           '   AND type = '#39'PACKAGE BODY'#39
           '   AND owner = :p_owner'
-          '   AND line = :p_line')
+          '--   AND line = :p_line')
       end>
     Left = 54
     Top = 18
