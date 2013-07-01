@@ -537,7 +537,7 @@ begin
       if PackageSpec then
         SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
       else
-        SQL.Text := DM.StringHolder.StringsByName['PackageBodyLineSQL'].Text;
+        SQL.Text := DM.StringHolder.StringsByName['PackageBodySQL'].Text;
       ParamByName('P_OBJECT_NAME').AsWideString := ParentData.NodeText; // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;

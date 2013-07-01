@@ -1062,7 +1062,7 @@ object DM: TDM
           'ORDER BY line')
       end
       item
-        Name = 'PackageBodyLineSQL'
+        Name = 'PackageBodySQL'
         Strings.Strings = (
           'SELECT text'
           '  FROM all_source'
