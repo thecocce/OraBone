@@ -121,7 +121,7 @@ implementation
 
 uses
   System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, Main, OraServices, DataModule, BigINI, BCCommon.FileUtils,
-  Math, BCCommon.Dialogs, BCCommon.Language, BCCommon.Messages, BCCommon, BCCommon.StringUtils;
+  Math, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages, BCCommon, BCCommon.StringUtils;
 
 const
   Codes64 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/';

@@ -307,7 +307,7 @@ uses
   DataFilter, BCControls.BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
   SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
   System.IOUtils, BCSQL.Formatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
-  BCCommon.Language, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;
+  BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;
 
 {$R *.dfm}
 
@@ -543,8 +543,7 @@ begin
           FindInFiles(SQLEditorFrame, FindWhatText, FileTypeText, AddSlash(FolderText) + FName, SearchCaseSensitive, LookInSubfolders)
         else
         begin
-          //if SupportedFileExt(UpperCase(ExtractFileExt(FName))) then
-            if (FileTypeText = '*.*') or (Pos(UpperCase(ExtractFileExt(FName)), UpperCase(FileTypeText)) <> 0) then
+            if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
             try
               SynEdit := TBCOraSynEdit.Create(nil);
               SynEdit.Lines.LoadFromFile(AddSlash(FolderText) + FName);

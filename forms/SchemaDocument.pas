@@ -78,7 +78,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.ActiveX, System.StrUtils, Progress, Options, BigINI, Main, BCCommon.Dialogs, BCCommon.Language,
+  Winapi.ActiveX, System.StrUtils, Progress, Options, BigINI, Main, BCCommon.Dialogs, BCCommon.LanguageStrings,
   Data.DB, BCCommon.FileUtils, BCCommon.Messages;
 
 var

@@ -78,7 +78,7 @@ uses
   WebBrowser.Container in '..\..\Common\units\WebBrowser.Container.pas',
   ChangeUserPassword in 'dialogs\ChangeUserPassword.pas' {ChangeUserPasswordDialog},
   CustomizeObjectFilters in 'dialogs\CustomizeObjectFilters.pas' {CustomizeObjectFiltersDialog},
-  BCCommon.Language in '..\..\Common\units\BCCommon.Language.pas' {LanguageDataModule},
+  BCCommon.LanguageStrings in '..\..\Common\units\BCCommon.LanguageStrings.pas' {LanguageDataModule},
   BCSQL.Tokenizer in '..\..\Common\units\BCSQL.Tokenizer.pas',
   BCCommon.StyleHooks in '..\..\Common\units\BCCommon.StyleHooks.pas',
   BCDialogs.DownloadURL in '..\..\Common\dialogs\BCDialogs.DownloadURL.pas' {DownloadURLDialog},
