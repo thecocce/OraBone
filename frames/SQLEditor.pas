@@ -1291,6 +1291,7 @@ begin
         Application.ProcessMessages; { style fix }
         Result := BCCommon.Dialogs.Files[0];
         PageControl.ActivePage.Caption := ExtractFileName(Result);
+        PageControl.Invalidate;
         OraSynEdit.DocumentName := Result;
       end
       else
@@ -1348,6 +1349,7 @@ begin
   begin
     SynEdit.Modified := False;
     PageControl.ActivePage.Caption := GetActivePageCaption;
+    PageControl.Invalidate;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
 end;
@@ -1895,7 +1897,7 @@ begin
   if Pos('~', PageControl.ActivePage.Caption) = 0 then
   begin
     PageControl.ActivePage.Caption := Format('%s~', [Trim(PageControl.ActivePage.Caption)]);
-    PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
+    PageControl.Invalidate;
   end;
 end;
 
