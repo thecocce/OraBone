@@ -1069,10 +1069,10 @@ end;
 
 procedure TViewBrowserFrame.CopyToClipboard;
 begin
-  if ViewPageControl.ActivePage.Caption = 'Source' then
+  if ViewPageControl.ActivePageCaption = 'Source' then
     SourceSynEdit.CopyToClipboard
   else
-  if ViewPageControl.ActivePage.Caption = 'Data' then
+  if ViewPageControl.ActivePageCaption = 'Data' then
     Lib.CopyDataFromDBGridToClipboard(DataDBGrid);
 end;
 

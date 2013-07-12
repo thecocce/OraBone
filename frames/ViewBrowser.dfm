@@ -2,16 +2,17 @@ object ViewBrowserFrame: TViewBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 302
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitHeight = 304
   object ViewPageControl: TBCPageControl
     Left = 0
     Top = 0
     Width = 451
-    Height = 304
+    Height = 302
     ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -22,6 +23,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
+    ExplicitHeight = 304
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
       ExplicitLeft = 0
@@ -854,7 +856,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C0101140000021C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114000002200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

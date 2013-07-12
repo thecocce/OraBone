@@ -141,7 +141,7 @@ begin
   MenuItem := TMenuItem.Create(PopupMenu);
   MenuItem.Caption := '-';
   PopupMenu.Items.Add(MenuItem);
-  if Pos('Search for', PageControl.ActivePage.Caption) = 1 then
+  if Pos('Search for', PageControl.ActivePageCaption) = 1 then
   begin
     { copy to clipboard }
 
@@ -154,7 +154,7 @@ begin
   MenuItem := TMenuItem.Create(PopupMenu);
   MenuItem.Action := OutputCloseAllOtherPagesAction;
   PopupMenu.Items.Add(MenuItem);
-  if Pos('Data:', PageControl.ActivePage.Caption) = 1 then
+  if Pos('Data:', PageControl.ActivePageCaption) = 1 then
   begin
     MenuItem := TMenuItem.Create(PopupMenu);
     MenuItem.Caption := '-';
@@ -164,7 +164,7 @@ begin
     MenuItem.Caption := '&Export Table Data...';
     PopupMenu.Items.Add(MenuItem);
   end;
-  if Pos('DBMS output:', PageControl.ActivePage.Caption) = 1 then
+  if Pos('DBMS output:', PageControl.ActivePageCaption) = 1 then
   begin
     MenuItem := TMenuItem.Create(PopupMenu);
     MenuItem.Caption := '-';
@@ -282,7 +282,7 @@ procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
 var
   RecCount: Integer;
 begin
-  SetRows(Trim(PageControl.ActivePage.Caption));
+  SetRows(PageControl.ActivePageCaption);
 
   if Assigned(PageControl.ActivePage) then
     if PageControl.ActivePage.ComponentCount <> 0 then
@@ -680,7 +680,7 @@ procedure TOutputFrame.ClearDBMSOutputActionExecute(Sender: TObject);
 var
   SynEdit: TBCSynEdit;
 begin
-  SynEdit := GetSynEdit(Trim(PageControl.ActivePage.Caption));
+  SynEdit := GetSynEdit(PageControl.ActivePageCaption);
   SynEdit.Text := ''
 end;
 
@@ -800,7 +800,7 @@ procedure TOutputFrame.CopyToClipboard;
 var
  Grid: TBCDBGrid;
 begin
-  Grid := GetDataGrid(Trim(PageControl.ActivePage.Caption));
+  Grid := GetDataGrid(PageControl.ActivePageCaption);
   if Assigned(Grid) then
     CopyDataFromDBGridToClipboard(Grid);
 end;

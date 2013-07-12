@@ -1165,7 +1165,7 @@ end;
 
 function TSQLEditorFrame.GetActivePageCaption: string;
 begin
-  Result := Trim(PageControl.ActivePage.Caption);
+  Result := PageControl.ActivePageCaption;
   if Pos('~', Result) = Length(Result) then
     Result := System.Copy(Result, 0, Length(Result) - 1);
 end;
@@ -1290,8 +1290,7 @@ begin
       begin
         Application.ProcessMessages; { style fix }
         Result := BCCommon.Dialogs.Files[0];
-        PageControl.ActivePage.Caption := ExtractFileName(Result);
-        PageControl.Invalidate;
+        PageControl.ActivePageCaption := ExtractFileName(Result);
         OraSynEdit.DocumentName := Result;
       end
       else
@@ -1348,8 +1347,7 @@ begin
   if SynEdit.UndoList.ItemCount = 0 then
   begin
     SynEdit.Modified := False;
-    PageControl.ActivePage.Caption := GetActivePageCaption;
-    PageControl.Invalidate;
+    PageControl.ActivePageCaption := GetActivePageCaption;
   end;
   UpdateGuttersAndControls(PageControl.DoubleBuffered);
 end;
@@ -1894,9 +1892,9 @@ end;
 
 procedure TSQLEditorFrame.SetActivePageCaptionModified;
 begin
-  if Pos('~', PageControl.ActivePage.Caption) = 0 then
+  if Pos('~', PageControl.ActivePageCaption) = 0 then
   begin
-    PageControl.ActivePage.Caption := Format('%s~', [Trim(PageControl.ActivePage.Caption)]);
+    PageControl.ActivePageCaption := Format('%s~', [PageControl.ActivePageCaption]);
     PageControl.Invalidate;
   end;
 end;
@@ -1921,7 +1919,7 @@ function TSQLEditorFrame.GetActiveTabSheetCaption: string;
 begin
   Result := '';
   if Assigned(PageControl.ActivePage) then
-    Result := Trim(PageControl.ActivePage.Caption);
+    Result := PageControl.ActivePageCaption;
 end;
 
 function TSQLEditorFrame.GetActiveDocumentFound: Boolean;

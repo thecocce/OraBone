@@ -394,10 +394,10 @@ end;
 
 procedure TPackageBrowserFrame.CopyToClipboard;
 begin
-  if PackagePageControl.ActivePage.Caption = 'Specification' then
+  if PackagePageControl.ActivePageCaption = 'Specification' then
     SpecSynEdit.CopyToClipboard
   else
-  if PackagePageControl.ActivePage.Caption = 'Body' then
+  if PackagePageControl.ActivePageCaption = 'Body' then
     BodySynEdit.CopyToClipboard
 end;
 

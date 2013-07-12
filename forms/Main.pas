@@ -987,9 +987,9 @@ begin
       (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
 
     { Mainform caption }
-    if (PageControl.PageCount > 0) and (Trim(PageControl.ActivePage.Caption) <> '') then
+    if (PageControl.PageCount > 0) and (PageControl.ActivePageCaption <> '') then
     begin
-      CaptionText := Format(MAIN_CAPTION + MAIN_CAPTION_TAB, [Trim(PageControl.ActivePage.Caption)]);
+      CaptionText := Format(MAIN_CAPTION + MAIN_CAPTION_TAB, [PageControl.ActivePageCaption]);
 
       if Assigned(SchemaBrowserFrame) then
       begin
@@ -1850,7 +1850,7 @@ begin
       begin
         if SQLEditorFrame.InTransaction then
         begin
-          if Lib.AskCommit(Trim(PageControl.ActivePage.Caption)) then
+          if Lib.AskCommit(PageControl.ActivePageCaption) then
             SQLEditorFrame.Session.Commit
           else
             SQLEditorFrame.Session.Rollback
@@ -2058,7 +2058,7 @@ begin
     ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
     ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
 
-    SQLEditorFrame := OpenSQLEditor(Trim(PageControl.ActivePage.Caption), True);
+    SQLEditorFrame := OpenSQLEditor(PageControl.ActivePageCaption, True);
     SetFields;
     PageControlChange(Sender);
 
@@ -2164,10 +2164,10 @@ begin
   Result := mrNo;
   try
     if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-      if not Confirm or AskYesOrNo(Format('End connection %s, are you sure?', [Trim(PageControl.ActivePage.Caption)])) then
+      if not Confirm or AskYesOrNo(Format('End connection %s, are you sure?', [PageControl.ActivePageCaption])) then
       begin
         Result := mrYes;
-        s := Trim(PageControl.ActivePage.Caption);
+        s := PageControl.ActivePageCaption;
         SchemaBrowserFrame := GetActiveSchemaBrowser;
         if Assigned(SchemaBrowserFrame) then
         begin
@@ -2429,10 +2429,10 @@ begin
     { table }
     if SchemaBrowserFrame.TableBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.TableBrowserFrame.TablePageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.TableBrowserFrame.TablePageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.TableBrowserFrame.SourceSynEdit.SelectAll
       else
-      if SchemaBrowserFrame.TableBrowserFrame.TablePageControl.ActivePage.Caption = 'Data' then
+      if SchemaBrowserFrame.TableBrowserFrame.TablePageControl.ActivePageCaption = 'Data' then
       begin
         SchemaBrowserFrame.TableBrowserFrame.DataDBGrid.SelectedRows.SelectAll; //Selection.SelectAll;
         SchemaBrowserFrame.TableBrowserFrame.DataQueryAfterScroll(SchemaBrowserFrame.TableBrowserFrame.DataDBGrid.DataSource.DataSet);
@@ -2442,10 +2442,10 @@ begin
     { view }
     if SchemaBrowserFrame.ViewBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.ViewBrowserFrame.ViewPageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.ViewBrowserFrame.ViewPageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.ViewBrowserFrame.SourceSynEdit.SelectAll
       else
-      if SchemaBrowserFrame.ViewBrowserFrame.ViewPageControl.ActivePage.Caption = 'Data' then
+      if SchemaBrowserFrame.ViewBrowserFrame.ViewPageControl.ActivePageCaption = 'Data' then
       begin
         SchemaBrowserFrame.ViewBrowserFrame.DataDBGrid.SelectedRows.SelectAll; //Selection.SelectAll;
         SchemaBrowserFrame.ViewBrowserFrame.DataQueryAfterScroll(SchemaBrowserFrame.ViewBrowserFrame.DataDBGrid.DataSource.DataSet);
@@ -2455,44 +2455,44 @@ begin
     { function & procedure }
     if SchemaBrowserFrame.FuncProcBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.FuncProcBrowserFrame.FuncProcPageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.FuncProcBrowserFrame.FuncProcPageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.FuncProcBrowserFrame.SourceSynEdit.SelectAll
     end
     else
     { package }
     if SchemaBrowserFrame.PackageBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.PackageBrowserFrame.PackagePageControl.ActivePage.Caption = 'Specification' then
+      if SchemaBrowserFrame.PackageBrowserFrame.PackagePageControl.ActivePageCaption = 'Specification' then
         SchemaBrowserFrame.PackageBrowserFrame.SpecSynEdit.SelectAll;
-      if SchemaBrowserFrame.PackageBrowserFrame.PackagePageControl.ActivePage.Caption = 'Body' then
+      if SchemaBrowserFrame.PackageBrowserFrame.PackagePageControl.ActivePageCaption = 'Body' then
         SchemaBrowserFrame.PackageBrowserFrame.BodySynEdit.SelectAll
     end
     else
     { trigger }
     if SchemaBrowserFrame.TriggerBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.TriggerBrowserFrame.TriggerPageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.TriggerBrowserFrame.TriggerPageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.TriggerBrowserFrame.SourceSynEdit.SelectAll
     end
     else
     { sequence }
     if SchemaBrowserFrame.SequenceBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.SequenceBrowserFrame.SequencePageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.SequenceBrowserFrame.SequencePageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.SequenceBrowserFrame.SourceSynEdit.SelectAll
     end
     else
     { db link }
     if SchemaBrowserFrame.DBLinkBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.DBLinkBrowserFrame.DBLinkPageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.DBLinkBrowserFrame.DBLinkPageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.DBLinkBrowserFrame.SourceSynEdit.SelectAll
     end
     else
     { user }
     if SchemaBrowserFrame.UserBrowserFrame.Visible then
     begin
-      if SchemaBrowserFrame.UserBrowserFrame.UserPageControl.ActivePage.Caption = 'Source' then
+      if SchemaBrowserFrame.UserBrowserFrame.UserPageControl.ActivePageCaption = 'Source' then
         SchemaBrowserFrame.UserBrowserFrame.SourceSynEdit.SelectAll
     end
   end

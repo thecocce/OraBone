@@ -2,16 +2,17 @@ object PackageBrowserFrame: TPackageBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 302
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitHeight = 304
   object PackagePageControl: TBCPageControl
     Left = 0
     Top = 0
     Width = 451
-    Height = 304
+    Height = 302
     ActivePage = SpecificationTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -22,6 +23,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
+    ExplicitHeight = 304
     object SpecificationTabSheet: TTabSheet
       Caption = 'Specification'
       ImageIndex = 6
@@ -508,7 +510,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000E00300110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

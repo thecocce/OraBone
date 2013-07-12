@@ -2094,10 +2094,10 @@ end;
 
 procedure TTableBrowserFrame.CopyToClipboard;
 begin
-  if TablePageControl.ActivePage.Caption = 'Source' then
+  if TablePageControl.ActivePageCaption = 'Source' then
     SourceSynEdit.CopyToClipboard
   else
-  if TablePageControl.ActivePage.Caption = 'Data' then
+  if TablePageControl.ActivePageCaption = 'Data' then
     CopyDataFromDBGridToClipboard(DataDBGrid);
 end;
 
