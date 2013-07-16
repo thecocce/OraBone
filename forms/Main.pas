@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory,
+  Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees,
   ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.BCPageControl,
   AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCControls.BCPopupMenu,
   ActnPopup, JvToolBar, BCControls.BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
@@ -274,7 +274,7 @@ type
     function OpenSQLEditor(Schema: string; AddNewDocument: Boolean): TSQLEditorFrame;
     procedure CloseTab(Confirm: Boolean);
     procedure CreateStyleMenu;
-    procedure FindInFiles(SQLEditorFrame: TSQLEditorFrame; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
+    procedure FindInFiles(SQLEditorFrame: TSQLEditorFrame; OutputTreeView: TVirtualDrawTree; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
     procedure NewConnection(ConnectString: string = ''; SchemaParam: string = '');
     procedure NextPage;
     procedure OpenSQLHistory;
@@ -305,7 +305,7 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
   DataFilter, BCControls.BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
-  SchemaDocument, VirtualTrees, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
   System.IOUtils, BCSQL.Formatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;
 
@@ -506,7 +506,7 @@ begin
 end;
 
 { Recursive method to find files. }
-procedure TMainForm.FindInFiles(SQLEditorFrame: TSQLEditorFrame; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
+procedure TMainForm.FindInFiles(SQLEditorFrame: TSQLEditorFrame; OutputTreeView: TVirtualDrawTree; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
 var
   shFindFile: THandle;
   sWin32FD: TWin32FindData;
@@ -540,7 +540,7 @@ begin
       if (FName <> '.') and (FName <> '..') then
       begin
         if LookInSubfolders and IsDirectory(sWin32FD) then
-          FindInFiles(SQLEditorFrame, FindWhatText, FileTypeText, AddSlash(FolderText) + FName, SearchCaseSensitive, LookInSubfolders)
+          FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, AddSlash(FolderText) + FName, SearchCaseSensitive, LookInSubfolders)
         else
         begin
             if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
@@ -566,7 +566,7 @@ begin
                     begin
                       Found := True;
                       ChPos := ChPos + Ch;
-                      SQLEditorFrame.OutputFrame.AddTreeViewLine(Root, AddSlash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
+                      SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, AddSlash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
                       S := Copy(S, Ch + Length(FindWhatText), Length(S));
                       ChPos := ChPos + Length(FindWhatText) - 1;
                     end
@@ -595,6 +595,7 @@ var
   SQLEditorFrame: TSQLEditorFrame;
   Min, Secs: Integer;
   TimeDifference: string;
+  OutputTreeView: TVirtualDrawTree;
 begin
   with FindInFilesDialog do
   begin
@@ -610,11 +611,11 @@ begin
       Screen.Cursor := crHourGlass;
       try
         SQLEditorFrame.OutputPanel.Visible := True;
-        SQLEditorFrame.OutputFrame.AddTreeView(Format('Search for ''%s''', [FindWhatText]));
+        OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format('Search for ''%s''', [FindWhatText]));
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := True;
         Application.ProcessMessages;
         Screen.Cursor := crHourGlass;
-        FindInFiles(SQLEditorFrame, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
+        FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
       finally
         T2 := Now;
         if not SQLEditorFrame.OutputFrame.IsEmpty then

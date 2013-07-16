@@ -63,9 +63,9 @@ type
     procedure AddDataGrid(TabCaption: string; OraQuery: TOraQuery; Time: string);
     procedure AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
     procedure AddStrings(TabCaption: string; Text: string);
-    procedure AddTreeView(TabCaption: string; AutoExpand: Boolean = False);
-    procedure AddTreeViewLine(Text: string); overload;
-    procedure AddTreeViewLine(var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString = ''); overload;
+    function AddTreeView(TabCaption: string; AutoExpand: Boolean = False): TVirtualDrawTree;
+    //procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree;Text: string); overload;
+    procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString = ''); //overload;
     procedure Clear;
     procedure ClearStrings(TabCaption: string);
     procedure CloseAllOtherTabSheets;
@@ -543,7 +543,7 @@ begin
     end;
 end;
 
-procedure TOutputFrame.AddTreeView(TabCaption: string; AutoExpand: Boolean); //(TabCaption: string);
+function TOutputFrame.AddTreeView(TabCaption: string; AutoExpand: Boolean): TVirtualDrawTree;
 var
   TabSheet: TTabSheet;
   OutputTreeViewFrame: TOutputTreeViewFrame;
@@ -552,6 +552,7 @@ begin
   if TabFound(TabCaption) then
   begin
     Self.Clear;
+    Result := GetOutputTabSheetFrame(PageControl.ActivePage).VirtualDrawTree;
     UpdatePopupMenu;
     Exit;
   end;
@@ -579,6 +580,7 @@ begin
       OnDblClick := TabsheetDblClick;
       NodeDataSize := SizeOf(TOutputRec);
     end;
+    Result := VirtualDrawTree;
   end;
   Self.Clear;
   TabSheet.TabVisible := True;
@@ -594,21 +596,19 @@ begin
         Result := TOutputTreeViewFrame(PageControl.ActivePage.Components[0]).VirtualDrawTree;
 end;
 
-procedure TOutputFrame.AddTreeViewLine(Text: string);
+{procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; Text: string);
 var
   Root: PVirtualNode;
 begin
-  AddTreeViewLine(Root, '', 0, 0, Text);
-end;
+  AddTreeViewLine(OutputTreeView, Root, '', 0, 0, Text);
+end; }
 
-procedure TOutputFrame.AddTreeViewLine(var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString);
+procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString);
 var
   Node: PVirtualNode;
   NodeData: POutputRec;
-  OutputTreeView: TVirtualDrawTree;
   S: WideString;
 begin
-  OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
 
