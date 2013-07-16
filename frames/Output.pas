@@ -552,7 +552,7 @@ begin
   if TabFound(TabCaption) then
   begin
     Self.Clear;
-    Result := GetOutputTabSheetFrame(PageControl.ActivePage).VirtualDrawTree;
+    Result := GetVirtualDrawTree;
     UpdatePopupMenu;
     Exit;
   end;
