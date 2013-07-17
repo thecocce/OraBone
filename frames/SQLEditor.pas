@@ -692,7 +692,6 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
-    //UpdateGuttersAndControls(PageControl.DoubleBuffered);
     OptionsContainer.AssignTo(OraSynEdit);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
@@ -735,8 +734,6 @@ var
   i, Right: Integer;
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
   CompareFrame: TCompareFrame;
-  LStyles: TCustomStyleServices;
-  PanelColor: TColor;
 begin
   PageControl.DoubleBuffered := DoubleBuffered;
   PageControl.MultiLine := OptionsContainer.EditorMultiLine;
@@ -747,18 +744,7 @@ begin
     PageControl.Images := nil;
   FOutputFrame.UpdateControls;
   Application.ProcessMessages;
-  LStyles := StyleServices;
-  PanelColor := clNone;
-  if LStyles.Enabled then
-    PanelColor := LStyles.GetStyleColor(scPanel);
-  if TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS then
-    Right := 3
-  else
-  if LStyles.Enabled and
-    (GetRValue(PanelColor) + GetGValue(PanelColor) + GetBValue(PanelColor) > 500) then
-    Right := 2
-  else
-    Right := 1;
+  Right := GetRightPadding;
   for i := 0 to PageControl.PageCount - 1 do
   begin
     SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
@@ -1026,6 +1012,7 @@ begin
   TabSheet.PageControl := PageControl;
   TabSheet.ImageIndex := FCompareImageIndex;
   TabSheet.Caption := LanguageDataModule.GetConstant('CompareFiles');
+  PageControl.UpdatePageCaption(TabSheet);
   PageControl.ActivePage := TabSheet;
   { create a compare frame }
   Frame := TCompareFrame.Create(TabSheet);
@@ -1038,7 +1025,6 @@ begin
     SpecialChars := OptionsContainer.EnableSpecialChars;
     LineNumbers := OptionsContainer.EnableLineNumbers;
   end;
-  UpdateGuttersAndControls(PageControl.DoubleBuffered);
 end;
 
 procedure TSQLEditorFrame.SelectForCompare;
@@ -1311,8 +1297,8 @@ begin
       AFileName := Trim(TabSheet.Caption);
       if Pos('~', AFileName) = Length(AFileName) then
         TabSheet.Caption := System.Copy(AFileName, 0, Length(AFileName) - 1);
+      PageControl.UpdatePageCaption(TabSheet);
     end;
-    UpdateGuttersAndControls(PageControl.DoubleBuffered);
   end;
 end;
 
@@ -1350,7 +1336,6 @@ begin
     SynEdit.Modified := False;
     PageControl.ActivePageCaption := GetActivePageCaption;
   end;
-  UpdateGuttersAndControls(PageControl.DoubleBuffered);
 end;
 
 procedure TSQLEditorFrame.Redo;
@@ -1360,7 +1345,6 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.Redo;
-  UpdateGuttersAndControls(PageControl.DoubleBuffered);
 end;
 
 procedure TSQLEditorFrame.Cut;

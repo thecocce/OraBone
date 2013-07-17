@@ -14,10 +14,20 @@ type
     { Private declarations }
   public
     { Public declarations }
+    constructor Create(AOwner: TComponent); override;
   end;
 
 implementation
 
 {$R *.dfm}
+
+uses
+  BCCommon.StyleHooks;
+
+constructor TSQLEditorTabSheetFrame.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Panel.Padding.Right := GetRightPadding;
+end;
 
 end.
