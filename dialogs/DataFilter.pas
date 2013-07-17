@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter, BCDialogs.Dlg,
-  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCControls.BCEdit, JvEdit, Vcl.ExtCtrls, System.Actions;
+  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCControls.Edit, JvEdit, Vcl.ExtCtrls, System.Actions;
 
 type
   TDataFilterDialog = class(TDialog)

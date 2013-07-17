@@ -56,9 +56,9 @@ uses
   OraError, SynEditMiscClasses, SynEditSearch, SynEditTypes, SynEditPlugins, Vcl.Buttons,
   Vcl.StdCtrls, Vcl.ActnList, JvExControls, JvSpeedButton, JvExExtCtrls, JvSplitter, DAScript,
   OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
-  BCControls.BCPageControl, BCControls.BCPopupMenu, BCControls.BCEdit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCControls.BCToolBar, BCControls.BCImageList, BCControls.BCDBGrid,
-  Vcl.Themes, Data.DB, BCControls.BCCheckBox, SynEditRegexSearch, BCControls.BCOraSynEdit, SQLEditorTabSheet,
+  BCControls.PageControl, BCControls.PopupMenu, BCControls.Edit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCControls.ToolBar, BCControls.ImageList, BCControls.DBGrid,
+  Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit, SQLEditorTabSheet,
   BCFrames.Compare, SynEditWildcardSearch, System.Actions;
 
 type

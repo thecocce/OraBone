@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls,
   CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter, BCDialogs.Dlg,
-  SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCControls.BCPageControl,
+  SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCControls.PageControl,
   System.SysUtils, Vcl.ImgList, SynHighlighterWeb, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvxSlider,
-  ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.BCEdit, JvExStdCtrls, JvEdit, JvCombobox,
-  BCControls.BCComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
+  ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox,
+  BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
   OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, System.Actions;

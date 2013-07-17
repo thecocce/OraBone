@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora,
-  BCControls.BCEdit, JvExStdCtrls, JvEdit, JvCombobox, BCControls.BCComboBox, BCControls.BCSpinEdit, Vcl.Buttons, Vcl.ExtCtrls, BCDialogs.Dlg,
+  BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls, BCDialogs.Dlg,
   System.Actions;
 
 type

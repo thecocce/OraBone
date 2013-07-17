@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.CommDlg, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, SynEdit, Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls,
-  Vcl.ToolWin, BCControls.BCToolBar, Vcl.ImgList, BCControls.BCImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
-  JvEdit, BCControls.BCEdit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
-  SynEditSearch, SynEditMiscClasses, SynEditTypes, BCControls.BCCheckBox, SynEditRegexSearch, System.Actions;
+  Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList, Vcl.ActnList, Vcl.StdCtrls, JvExStdCtrls,
+  JvEdit, BCControls.Edit, JvExControls, JvSpeedButton, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint,
+  SynEditSearch, SynEditMiscClasses, SynEditTypes, BCControls.CheckBox, SynEditRegexSearch, System.Actions;
 
 type
   PObjectNodeRec = ^TObjectNodeRec;

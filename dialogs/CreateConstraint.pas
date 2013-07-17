@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn,
-  Vcl.Grids, JvExGrids, JvStringGrid, BCControls.BCStringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
-  BCControls.BCComboBox, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
+  Vcl.Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
+  BCControls.ComboBox, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCControls.BCPageControl, Ora, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
+  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateConstraintDialog = class(TCreateObjectBaseDialog)

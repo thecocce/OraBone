@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, Vcl.StdCtrls,
-  ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl,
-  JvExStdCtrls, JvEdit, BCControls.BCEdit, BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
+  ComCtrls, ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl,
+  JvExStdCtrls, JvEdit, BCControls.Edit, BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreatePackageDialog = class(TCreateObjectBaseDialog)

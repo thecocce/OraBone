@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess,
-  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.BCPageControl,
+  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar,
-  Vcl.Menus, BCControls.BCImageList, BCControls.BCToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.BCPopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh, BCControls.BCDBGrid, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
+  Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu,
+  DBGridEhGrouping, GridsEh, DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
   DBAxisGridsEh;
 
 type

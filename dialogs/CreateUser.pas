@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCControls.BCStringGrid, Vcl.StdCtrls, JvExStdCtrls,
-  JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
-  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.BCPageControl, DB, MemDS, DBAccess, Ora,
-  BCControls.BCToolBar, BCDialogs.Dlg, System.Actions;
+  Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls,
+  JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
+  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, DB, MemDS, DBAccess, Ora,
+  BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)

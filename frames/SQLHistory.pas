@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.BCStringGrid, Vcl.ComCtrls,
-  Vcl.ToolWin, JvExComCtrls, JvToolBar, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCControls.BCImageList,
-  BCControls.BCToolBar, Vcl.ExtCtrls, System.Actions;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.StringGrid, Vcl.ComCtrls,
+  Vcl.ToolWin, JvExComCtrls, JvToolBar, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCControls.ImageList,
+  BCControls.ToolBar, Vcl.ExtCtrls, System.Actions;
 
 type
   TSQLHistoryFrame = class(TFrame)

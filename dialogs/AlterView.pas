@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter,
   SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, BCControls.BCPageControl, BCControls.BCEdit, DBAccess, Ora, MemDS, Vcl.Buttons,
-  JvExButtons, JvBitBtn, BCControls.BCDBEdit, BCControls.BCToolBar, BCControls.BCDBGrid,
+  SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
+  JvExButtons, JvBitBtn, BCControls.DBEdit, BCControls.ToolBar, BCControls.DBGrid,
   JvExStdCtrls, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, JvEdit,
   GridsEh, DBAxisGridsEh, DBGridEh;
 

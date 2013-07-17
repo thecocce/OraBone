@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Ora, Vcl.StdCtrls,
-  Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, BCControls.BCDBEdit,
-  JvExStdCtrls, JvEdit, BCControls.BCEdit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
-  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCControls.BCPageControl, Vcl.Menus,
-  BCControls.BCToolBar, BCControls.BCDBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
+  Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, BCControls.DBEdit,
+  JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
+  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCControls.PageControl, Vcl.Menus,
+  BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
   DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type

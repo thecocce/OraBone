@@ -5,9 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees,
-  ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.BCPageControl,
-  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCControls.BCPopupMenu,
-  ActnPopup, JvToolBar, BCControls.BCImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
+  ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl,
+  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCControls.PopupMenu,
+  ActnPopup, JvToolBar, BCControls.ImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
   System.Actions;
 
 const
@@ -304,9 +304,9 @@ implementation
 
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
-  DataFilter, BCControls.BCDBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
+  DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
-  System.IOUtils, BCSQL.Formatter, BCControls.BCOraSynEdit, BCControls.BCToolBar, System.Math, SynEditKeyCmds,
+  System.IOUtils, BCSQL.Formatter, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, SynEditKeyCmds,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;
 
 {$R *.dfm}

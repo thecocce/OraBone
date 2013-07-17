@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter,
   SynHighlighterSQL, ValEdit, JvStringHolder, Menus, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCControls.BCEdit, JvEdit, BCControls.BCImageList, BCControls.BCToolBar,
+  PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCControls.Edit, JvEdit, BCControls.ImageList, BCControls.ToolBar,
   Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
 
 type

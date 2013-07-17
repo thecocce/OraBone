@@ -6,8 +6,8 @@ interface
 
 uses
   Vcl.StdCtrls, Winapi.Windows, Winapi.Messages, Ora, System.Classes, DB, Vcl.Forms,
-  SynEdit, Vcl.Controls, Grids, BCControls.BCComboBox, BCControls.BCStringGrid, ActnList, ComCtrls,
-  BCControls.BCDBGrid;
+  SynEdit, Vcl.Controls, Grids, BCControls.ComboBox, BCControls.StringGrid, ActnList, ComCtrls,
+  BCControls.DBGrid;
 
 //type
 //  TWordTriple = Array[0..2] of Word;
