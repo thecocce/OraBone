@@ -664,13 +664,13 @@ begin
     TabSheet.ImageIndex := GetImageIndex(FileName)
   else
     TabSheet.ImageIndex := FNewImageIndex;
+
+  PageControl.ActivePage := TabSheet;
   { set the Caption property }
   if FileName = '' then
-    TabSheet.Caption := DEFAULT_FILENAME + IntToStr(FNumberOfNewDocument)
+    PageControl.ActivePageCaption := DEFAULT_FILENAME + IntToStr(FNumberOfNewDocument)
   else
-    TabSheet.Caption := ExtractFileName(FileName);
-  UpdateGuttersAndControls(PageControl.DoubleBuffered); { prevent flickering }
-  PageControl.ActivePage := TabSheet;
+    PageControl.ActivePageCaption := ExtractFileName(FileName);
 
   { create a SynEdit }
   SQLEditorTabSheetFrame := TSQLEditorTabSheetFrame.Create(TabSheet);
@@ -692,7 +692,7 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
-    UpdateGuttersAndControls(PageControl.DoubleBuffered);
+    //UpdateGuttersAndControls(PageControl.DoubleBuffered);
     OptionsContainer.AssignTo(OraSynEdit);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
@@ -727,6 +727,7 @@ begin
     end;
     Result := OraSynEdit;
   end;
+  UpdateGutter(Result);
 end;
 
 procedure TSQLEditorFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
@@ -1197,7 +1198,7 @@ begin
   begin
     ActivePageIndex := PageControl.ActivePageIndex;
     if PageControl.PageCount > 0 then
-      PageControl.ActivePage.Destroy;
+      PageControl.ActivePage.Free;
     if PageControl.PageCount > 0 then
       PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
     if PageControl.PageCount = 0 then
@@ -1218,7 +1219,7 @@ begin
   if CloseDocuments and (Result <> mrCancel) then
   begin
     while PageControl.PageCount > 0 do
-      PageControl.ActivePage.Destroy;
+      PageControl.ActivePage.Free;
     FNumberOfNewDocument := 0;
     Result := mrYes;
   end;
@@ -1258,7 +1259,7 @@ begin
       if PageControl.ActivePage.Tag = 1 then
         PageControl.ActivePage := PageControl.Pages[PageControl.ActivePageIndex + 1]
       else
-        PageControl.ActivePage.Destroy;
+        PageControl.ActivePage.Free;
 
     PageControl.ActivePage.Tag := 0; { important! }
 
@@ -2722,7 +2723,7 @@ begin
 
     OutputPanel.Visible := True;
   finally
-    SynEdit.OraSQL.Destroy;
+    SynEdit.OraSQL.Free;
   end;
 end;
 

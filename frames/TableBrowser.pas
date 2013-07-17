@@ -1724,7 +1724,7 @@ begin
   { Remove filters }
   for i := FilterDropDownMenu.Items.Count - 1 downto 0 do
     if FilterDropDownMenu.Items[i].Tag = 1 then
-      FilterDropDownMenu.Items[i].Destroy;
+      FilterDropDownMenu.Items[i].Free;
   { Insert filters }
   InsertFiltersToDropDownMenu(FilterDropDownMenu);
   { Check item }
@@ -1744,7 +1744,7 @@ begin
   { Remove filters }
   for i := SortDropDownMenu.Items.Count - 1 downto 0 do
     if SortDropDownMenu.Items[i].Tag = 1 then
-      SortDropDownMenu.Items[i].Destroy;
+      SortDropDownMenu.Items[i].Free;
   { Insert filters }
   InsertSortsToDropDownMenu(SortDropDownMenu);
   { Check item }
@@ -1847,7 +1847,7 @@ begin
     end;
     if Assigned(FDataQuery) then
     begin
-      FDataQuery.Destroy;
+      FDataQuery.Free;
       FDataQuery := nil;
     end;
     FDataQuery := TOraQuery.Create(Self);

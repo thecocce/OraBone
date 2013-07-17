@@ -1354,7 +1354,7 @@ begin
     SQLFilters.Free;
     SQLSorts.Free;
     Free;
-    ProgressDialog(Self).Destroy;
+    ProgressDialog(Self).Free;
     PageControl.Enabled := True;
     Screen.Cursor := crDefault;
     FConnecting := False;
@@ -1740,7 +1740,7 @@ var
 begin
   try
     WriteIniFile;
-    ApplicationEvents.Destroy;
+    ApplicationEvents.Free;
 
     j := PageControl.PageCount - 1;
     for i := j downto 0 do
@@ -1856,14 +1856,14 @@ begin
           else
             SQLEditorFrame.Session.Rollback
         end;
-        PageControl.ActivePage.Destroy;
+        PageControl.ActivePage.Free;
       end;
     end;
   end
   else
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_HISTORY then
   begin
-    PageControl.ActivePage.Destroy;
+    PageControl.ActivePage.Free;
     Rslt := mrYes;
   end;
   if Rslt = mrYes then
@@ -2180,13 +2180,13 @@ begin
               SchemaBrowserFrame.ObjectTreeFrame.Session.Rollback
           end;
           SchemaBrowserFrame.ObjectTreeFrame.Disconnect;
-          PageControl.ActivePage.Destroy;
+          PageControl.ActivePage.Free;
           { destroy editor }
           i := 0;
           while i < PageControl.PageCount do
           begin
             if Trim(PageControl.Pages[i].Caption) = s then
-              PageControl.Pages[i].Destroy;
+              PageControl.Pages[i].Free;
             Inc(i);
           end;
         end;

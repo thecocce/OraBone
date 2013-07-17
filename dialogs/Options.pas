@@ -449,22 +449,22 @@ end;
 
 procedure TOptionsDialog.FormDestroy(Sender: TObject);
 begin
-  FEditorOptionsFrame.Destroy;
-  FEditorFontFrame.Destroy;
-  FEditorGutterFrame.Destroy;
-  FEditorTabsFrame.Destroy;
-  FEditorToolBarFrame.Destroy;
-  FMainMenuFrame.Destroy;
-  FOptionsOutputFrame.Destroy;
-  FOutputTabsFrame.Destroy;
-  FDBMSOutputFrame.Destroy;
-  FOptionsSchemaBrowserFrame.Destroy;
-  FObjectFrameFrame.Destroy;
-  FDateFormatFrame.Destroy;
-  FTimeFormatFrame.Destroy;
-  FConnectionTabsFrame.Destroy;
-  FOptionsCompareFrame.Destroy;
-  FStatusBarFrame.Destroy;
+  FEditorOptionsFrame.Free;
+  FEditorFontFrame.Free;
+  FEditorGutterFrame.Free;
+  FEditorTabsFrame.Free;
+  FEditorToolBarFrame.Free;
+  FMainMenuFrame.Free;
+  FOptionsOutputFrame.Free;
+  FOutputTabsFrame.Free;
+  FDBMSOutputFrame.Free;
+  FOptionsSchemaBrowserFrame.Free;
+  FObjectFrameFrame.Free;
+  FDateFormatFrame.Free;
+  FTimeFormatFrame.Free;
+  FConnectionTabsFrame.Free;
+  FOptionsCompareFrame.Free;
+  FStatusBarFrame.Free;
 
   FOptionsDialog := nil;
 end;

@@ -335,7 +335,7 @@ begin
     //FGrid GotoSelection(0);
     //SynEdit.Free;
     StringList.Free;
-    ProgressDialog(Self).Destroy;
+    ProgressDialog(Self).Free;
   end;
 
   ShowMessage('Export Done.');

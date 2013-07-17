@@ -1144,7 +1144,7 @@ begin
     ProgressDialog(Self).InformationText := 'Adding footer...';
     Result := Result + GetFooter;
   finally
-    ProgressDialog(Self).Destroy;
+    ProgressDialog(Self).Free;
     MainForm.OnProgress := False;
     //Screen.Cursor := crDefault;
   end;

@@ -744,7 +744,7 @@ begin
   begin
     Self.Clear;
     ActivePageIndex := PageControl.ActivePageIndex;
-    PageControl.ActivePage.Destroy;
+    PageControl.ActivePage.Free;
     if PageControl.PageCount > 0 then
       PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
   end;
@@ -755,7 +755,7 @@ begin
   while PageControl.PageCount > 0 do
   begin
     Self.Clear;
-    PageControl.ActivePage.Destroy;
+    PageControl.ActivePage.Free;
     if PageControl.PageCount > 0 then
       PageControl.ActivePageIndex := PageControl.PageCount - 1;
   end;
@@ -783,7 +783,7 @@ begin
     if PageControl.ActivePage.Tag = 0 then
     begin
       Self.Clear;
-      PageControl.ActivePage.Destroy;
+      PageControl.ActivePage.Free;
     end;
   end;
 

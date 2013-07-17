@@ -326,7 +326,7 @@ begin
       Columns.Free;
     OpenSynEdit.Free;
     SaveSynEdit.Free;
-    ProgressDialog(Self).Destroy;
+    ProgressDialog(Self).Free;
     ColumnTypeQuery.Close;
     ColumnTypeQuery.Free;
   end;

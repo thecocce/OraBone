@@ -883,7 +883,7 @@ begin
     end;
     if Assigned(FDataQuery) then
     begin
-      FDataQuery.Destroy;
+      FDataQuery.Free;
       FDataQuery := nil;
     end;
     FDataQuery := TOraQuery.Create(Self);
