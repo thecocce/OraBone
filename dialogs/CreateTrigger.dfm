@@ -1,10 +1,10 @@
 inherited CreateTriggerDialog: TCreateTriggerDialog
   Caption = 'Create Trigger'
-  ClientHeight = 302
+  ClientHeight = 318
   ClientWidth = 357
   OnShow = FormShow
-  ExplicitWidth = 363
-  ExplicitHeight = 330
+  ExplicitWidth = 373
+  ExplicitHeight = 354
   PixelsPerInch = 96
   TextHeight = 13
   object TriggerNameLabel: TLabel [0]
@@ -46,17 +46,19 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   inherited PageControl: TBCPageControl
     Top = 60
     Width = 350
-    Height = 203
+    Height = 204
     ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
     ExplicitTop = 60
     ExplicitWidth = 350
-    ExplicitHeight = 203
+    ExplicitHeight = 210
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitHeight = 175
       DesignSize = (
         342
-        175)
+        176)
       object WhenRadioGroup: TRadioGroup
         Left = 3
         Top = 0
@@ -173,25 +175,23 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     object WhenClauseTabSheet: TTabSheet [1]
       Caption = 'When Clause'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 175
       object WhenClausePanel: TPanel
         Left = 0
         Top = 0
         Width = 342
-        Height = 175
+        Height = 176
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 175
         object WhenClauseSynEdit: TSynEdit
           Left = 0
           Top = 0
           Width = 340
-          Height = 174
+          Height = 175
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -213,31 +213,30 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
           FontSmoothing = fsmNone
+          ExplicitHeight = 174
         end
       end
     end
     object BodyTabSheet: TTabSheet [2]
       Caption = 'Body'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 175
       object BodyPanel: TPanel
         Left = 0
         Top = 0
         Width = 342
-        Height = 175
+        Height = 176
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 175
         object BodySynEdit: TSynEdit
           Left = 0
           Top = 0
           Width = 340
-          Height = 174
+          Height = 175
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -259,6 +258,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
           FontSmoothing = fsmNone
+          ExplicitHeight = 174
         end
       end
     end
@@ -269,21 +269,21 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
       ExplicitHeight = 175
       inherited SourcePanel: TPanel
         Width = 342
-        Height = 150
+        Height = 176
         ExplicitWidth = 342
-        ExplicitHeight = 150
+        ExplicitHeight = 175
         inherited SourceSynEdit: TSynEdit
           Width = 340
-          Height = 149
+          Height = 151
           ExplicitWidth = 340
-          ExplicitHeight = 149
+          ExplicitHeight = 150
         end
         inherited SourceTopPanel: TPanel
+          Width = 340
+          ExplicitWidth = 340
           inherited TopPanel: TPanel
-            inherited SourceToolBar: TBCToolBar
-              Width = 342
-              ExplicitWidth = 342
-            end
+            Width = 342
+            ExplicitWidth = 342
           end
         end
       end
@@ -291,15 +291,15 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   end
   inherited OKButton: TButton
     Left = 193
-    Top = 269
+    Top = 268
     ExplicitLeft = 193
-    ExplicitTop = 269
+    ExplicitTop = 274
   end
   inherited CancelButton: TButton
     Left = 274
-    Top = 269
+    Top = 268
     ExplicitLeft = 274
-    ExplicitTop = 269
+    ExplicitTop = 274
   end
   object TriggerNameEdit: TBCEdit [6]
     Left = 100
@@ -333,9 +333,15 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     ReadOnly = False
     DropDownFixedWidth = 0
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 299
+    Width = 357
+    ExplicitTop = 283
+    ExplicitWidth = 357
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E002C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

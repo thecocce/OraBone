@@ -315,6 +315,7 @@ type
     FDBMSTimer: TTimer;
     FCompareImageIndex, FNewImageIndex: Integer;
     FImages: TImageList;
+    FProcessing: Boolean;
     function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
@@ -417,6 +418,7 @@ type
     property OutputGridHasFocus: Boolean read GetOutputGridHasFocus;
     property InTransaction: Boolean read FInTransaction write FInTransaction;
     property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
+    property Processing: Boolean read FProcessing;
     procedure ExecuteStatement(Current: Boolean = False); overload;
     procedure ExecuteCurrentStatement;
     procedure ExecuteScript(Current: Boolean = False);
@@ -500,6 +502,7 @@ begin
   FCaseCycle := 0;
   FSelectedText := '';
   FInTransaction := False;
+  FProcessing := False;
   FOutputFrame := TOutputFrame.Create(OutputPanel);
   FOutputFrame.Parent := OutputPanel;
   FOutputFrame.OnTabsheetDblClick := OutputDblClickActionExecute;
@@ -1123,6 +1126,7 @@ var
   i: Integer;
   SynEdit: TBCOraSynEdit;
 begin
+  FProcessing := True;
   if FileName = '' then
   begin
     if BCCommon.Dialogs.OpenFiles(Handle, '',
@@ -1148,6 +1152,7 @@ begin
       MainForm.CreateFileReopenList;
     end;
   end;
+  FProcessing := False;
 end;
 
 function TSQLEditorFrame.GetActivePageCaption: string;
@@ -1264,41 +1269,46 @@ var
 begin
   Result := '';
   OraSynEdit := GetSynEdit(TabSheet);
-  if Assigned(OraSynEdit) then
-  begin
-    if (OraSynEdit.DocumentName = '') or ShowDialog then
+  Screen.Cursor := crHourGlass;
+  try
+    if Assigned(OraSynEdit) then
     begin
-      AFileName := Trim(TabSheet.Caption);
-      if Pos('~', AFileName) = Length(AFileName) then
-        AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
+      if (OraSynEdit.DocumentName = '') or ShowDialog then
+      begin
+        AFileName := Trim(TabSheet.Caption);
+        if Pos('~', AFileName) = Length(AFileName) then
+          AFileName := System.Copy(AFileName, 0, Length(AFileName) - 1);
 
-      if BCCommon.Dialogs.SaveFile(Handle, '',
-        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, AFileName, 'sql') then
+        if BCCommon.Dialogs.SaveFile(Handle, '',
+          Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('SaveAs'), FilterIndex, AFileName, 'sql') then
+        begin
+          Application.ProcessMessages; { style fix }
+          Result := BCCommon.Dialogs.Files[0];
+          PageControl.ActivePageCaption := ExtractFileName(Result);
+          OraSynEdit.DocumentName := Result;
+        end
+        else
+        begin
+          if OraSynEdit.CanFocus then
+            OraSynEdit.SetFocus;
+          Exit;
+        end;
+      end;
+      with OraSynEdit do
       begin
-        Application.ProcessMessages; { style fix }
-        Result := BCCommon.Dialogs.Files[0];
-        PageControl.ActivePageCaption := ExtractFileName(Result);
-        OraSynEdit.DocumentName := Result;
-      end
-      else
-      begin
-        if OraSynEdit.CanFocus then
-          OraSynEdit.SetFocus;
-        Exit;
+        Lines.SaveToFile(DocumentName);
+        UndoList.Clear;
+        FileDateTime := GetFileDateTime(DocumentName);
+        TabSheet.ImageIndex := GetImageIndex(DocumentName);
+        Modified := False;
+        AFileName := Trim(TabSheet.Caption);
+        if Pos('~', AFileName) = Length(AFileName) then
+          TabSheet.Caption := System.Copy(AFileName, 0, Length(AFileName) - 1);
+        PageControl.UpdatePageCaption(TabSheet);
       end;
     end;
-    with OraSynEdit do
-    begin
-      Lines.SaveToFile(DocumentName);
-      UndoList.Clear;
-      FileDateTime := GetFileDateTime(DocumentName);
-      TabSheet.ImageIndex := GetImageIndex(DocumentName);
-      Modified := False;
-      AFileName := Trim(TabSheet.Caption);
-      if Pos('~', AFileName) = Length(AFileName) then
-        TabSheet.Caption := System.Copy(AFileName, 0, Length(AFileName) - 1);
-      PageControl.UpdatePageCaption(TabSheet);
-    end;
+  finally
+    Screen.Cursor := crDefault;
   end;
 end;
 
@@ -1676,7 +1686,7 @@ procedure TSQLEditorFrame.Replace;
 var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCOraSynEdit;
-  i, page, MResult: Integer;
+  i, MResult: Integer;
 begin
   with ReplaceDialog do
   begin
@@ -1698,7 +1708,8 @@ begin
       end
       else
       begin
-        page := PageControl.ActivePageIndex;
+        FProcessing := True;
+        Screen.Cursor := crHourGlass;
         for i := 0 to PageControl.PageCount - 1 do
         begin
           PageControl.ActivePageIndex := i;
@@ -1707,9 +1718,13 @@ begin
           begin
             SynEdit.CaretXY := BufferCoord(0, 0);
             SynEdit.SearchReplace(SearchText, ReplaceText, SynSearchOptions);
+
+            PageControl.Pages[i].Caption := FormatFileName(PageControl.Pages[i].Caption, SynEdit.Modified);
+            PageControl.UpdatePageCaption(PageControl.Pages[i]);
           end;
         end;
-        PageControl.ActivePageIndex := page;
+        Screen.Cursor := crDefault;
+        FProcessing := False;
       end;
     end;
   end;
@@ -1885,18 +1900,13 @@ begin
 end;
 
 procedure TSQLEditorFrame.SynEditOnChange(Sender: TObject);
-var
-  SynEdit: TBCOraSynEdit;
 begin
   if OptionsContainer.AutoSave then
     Save
   else
-  begin
-    Application.ProcessMessages;
-    SynEdit := GetActiveSynEdit;
-    SynEdit.Modified := True;
+  if not FProcessing then
     SetActivePageCaptionModified;
-  end;
+
   RepaintToolButtons;
 end;
 

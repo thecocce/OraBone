@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, BCDialogs.Dlg,
   JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCControls.PageControl,
-  DAScript, BCControls.ToolBar, System.Actions;
+  DAScript, BCControls.ToolBar, System.Actions, BCControls.ImageList;
 
 type
   TCreateObjectBaseDialog = class(TDialog)
@@ -14,7 +14,7 @@ type
     CancelButton: TButton;
     CopyToClipboardAction: TAction;
     CopyToClipboardToolButton: TToolButton;
-    ImageList: TImageList;
+    ImageList: TBCImageList;
     OKAction: TAction;
     OKButton: TButton;
     PageControl: TBCPageControl;
@@ -29,6 +29,7 @@ type
     SQLEditorToolButton: TToolButton;
     SynSQLSyn: TSynSQLSyn;
     TopPanel: TPanel;
+    StatusBar1: TStatusBar;
     procedure CopyToClipboardActionExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);

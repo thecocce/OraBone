@@ -1,24 +1,26 @@
 inherited CreateDBLinkDialog: TCreateDBLinkDialog
   Caption = 'Create Database Link'
-  ClientHeight = 220
+  ClientHeight = 233
   ClientWidth = 315
   OnShow = FormShow
-  ExplicitWidth = 321
-  ExplicitHeight = 248
+  ExplicitWidth = 331
+  ExplicitHeight = 269
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 308
-    Height = 177
+    Height = 175
     ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
     ExplicitWidth = 308
-    ExplicitHeight = 177
+    ExplicitHeight = 181
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitHeight = 149
       DesignSize = (
         300
-        149)
+        147)
       object LinkNameLabel: TLabel
         Left = 8
         Top = 9
@@ -139,17 +141,17 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
     end
     inherited SourceTabSheet: TTabSheet
       ExplicitWidth = 300
-      ExplicitHeight = 149
+      ExplicitHeight = 153
       inherited SourcePanel: TPanel
         Width = 300
-        Height = 149
+        Height = 147
         ExplicitWidth = 300
-        ExplicitHeight = 149
+        ExplicitHeight = 153
         inherited SourceSynEdit: TSynEdit
           Width = 298
-          Height = 124
+          Height = 122
           ExplicitWidth = 298
-          ExplicitHeight = 124
+          ExplicitHeight = 128
         end
         inherited SourceTopPanel: TPanel
           Width = 298
@@ -166,20 +168,26 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
     end
   end
   inherited OKButton: TButton
-    Left = 151
-    Top = 187
-    ExplicitLeft = 151
-    ExplicitTop = 187
+    Left = 152
+    Top = 185
+    ExplicitLeft = 152
+    ExplicitTop = 191
   end
   inherited CancelButton: TButton
-    Left = 232
-    Top = 187
-    ExplicitLeft = 232
-    ExplicitTop = 187
+    Left = 233
+    Top = 185
+    ExplicitLeft = 233
+    ExplicitTop = 191
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 214
+    Width = 315
+    ExplicitTop = 201
+    ExplicitWidth = 315
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E002C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00300210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

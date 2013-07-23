@@ -2,8 +2,8 @@ inherited CreateUserDialog: TCreateUserDialog
   Caption = 'Create User'
   ClientHeight = 402
   ClientWidth = 405
-  ExplicitWidth = 411
-  ExplicitHeight = 430
+  ExplicitWidth = 421
+  ExplicitHeight = 438
   PixelsPerInch = 96
   TextHeight = 13
   object UsernameLabel: TLabel [0]
@@ -37,35 +37,36 @@ inherited CreateUserDialog: TCreateUserDialog
     ParentFont = False
   end
   inherited PageControl: TBCPageControl
-    Top = 92
+    Left = 6
+    Top = 91
     Width = 398
-    Height = 271
+    Height = 257
     ActivePage = RolesTabSheet
-    ExplicitTop = 92
+    ActivePageCaption = 'Roles'
+    ExplicitLeft = 6
+    ExplicitTop = 91
     ExplicitWidth = 398
-    ExplicitHeight = 271
+    ExplicitHeight = 257
     object RolesTabSheet: TTabSheet [0]
       Caption = 'Roles'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 243
       object RolesPanel: TPanel
         Left = 0
         Top = 0
         Width = 390
-        Height = 243
+        Height = 229
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 243
         object RolesStringGrid: TBCStringGrid
           Left = 0
           Top = 0
           Width = 388
-          Height = 242
+          Height = 228
           Align = alClient
           ColCount = 3
           DefaultRowHeight = 18
@@ -83,6 +84,7 @@ inherited CreateUserDialog: TCreateUserDialog
           BooleanCols.Strings = (
             '1'
             '2')
+          ExplicitHeight = 242
           ColWidths = (
             235
             64
@@ -94,26 +96,24 @@ inherited CreateUserDialog: TCreateUserDialog
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 390
-      ExplicitHeight = 243
+      ExplicitHeight = 229
       inherited SourcePanel: TPanel
         Width = 390
-        Height = 221
+        Height = 229
         ExplicitWidth = 390
-        ExplicitHeight = 221
+        ExplicitHeight = 229
         inherited SourceSynEdit: TSynEdit
           Width = 388
-          Height = 220
+          Height = 204
           ExplicitWidth = 388
-          ExplicitHeight = 220
+          ExplicitHeight = 204
         end
         inherited SourceTopPanel: TPanel
+          Width = 388
+          ExplicitWidth = 388
           inherited TopPanel: TPanel
             Width = 390
             ExplicitWidth = 390
-            inherited SourceToolBar: TBCToolBar
-              Width = 390
-              ExplicitWidth = 390
-            end
           end
         end
       end
@@ -121,15 +121,15 @@ inherited CreateUserDialog: TCreateUserDialog
   end
   inherited OKButton: TButton
     Left = 241
-    Top = 369
+    Top = 352
     ExplicitLeft = 241
-    ExplicitTop = 369
+    ExplicitTop = 352
   end
   inherited CancelButton: TButton
     Left = 322
-    Top = 369
+    Top = 352
     ExplicitLeft = 322
-    ExplicitTop = 369
+    ExplicitTop = 352
   end
   object UsernameEdit: TBCEdit [5]
     Left = 102
@@ -177,9 +177,15 @@ inherited CreateUserDialog: TCreateUserDialog
     TabOrder = 5
     OnClick = PageControlChange
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 383
+    Width = 405
+    ExplicitTop = 383
+    ExplicitWidth = 405
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E00280210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E002C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

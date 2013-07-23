@@ -7,7 +7,8 @@ uses
   Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Grids, JvExGrids, JvStringGrid,
   BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCControls.ComboBox, BCControls.Edit, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, JvEdit;
+  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, JvEdit,
+  BCControls.ImageList;
 
 type
   TCreateIndexDialog = class(TCreateObjectBaseDialog)
@@ -15,7 +16,6 @@ type
     ColumnsPanel: TPanel;
     ColumnsStringGrid: TBCStringGrid;
     ColumnsTabSheet: TTabSheet;
-    DownBitBtn: TJvBitBtn;
     IndexNameEdit: TBCEdit;
     IndexNameLabel: TLabel;
     MoveDownColumnAction: TAction;
@@ -26,7 +26,9 @@ type
     TableNameEdit: TBCEdit;
     UniquenessLabel: TLabel;
     UniqueRadioButton: TRadioButton;
-    UpBitBtn: TJvBitBtn;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);

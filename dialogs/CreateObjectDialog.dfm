@@ -1,10 +1,9 @@
 object CreateObjectBaseDialog: TCreateObjectBaseDialog
   Left = 0
   Top = 0
-  BorderStyle = bsDialog
   Caption = 'CreateObjectBaseDialog'
   ClientHeight = 348
-  ClientWidth = 518
+  ClientWidth = 508
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,43 +14,44 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
   Position = poMainFormCenter
   OnDestroy = FormDestroy
   DesignSize = (
-    518
+    508
     348)
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl: TBCPageControl
     Left = 4
     Top = 4
-    Width = 511
-    Height = 305
+    Width = 501
+    Height = 288
     ActivePage = SourceTabSheet
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
     OnChange = PageControlChange
+    ActivePageCaption = 'Source'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 503
+      ExplicitHeight = 287
       object SourcePanel: TPanel
         Left = 0
         Top = 0
-        Width = 503
-        Height = 277
+        Width = 493
+        Height = 260
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 503
+        ExplicitHeight = 287
         object SourceSynEdit: TSynEdit
           Left = 0
           Top = 24
-          Width = 501
-          Height = 252
+          Width = 491
+          Height = 235
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -74,15 +74,18 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           ReadOnly = True
           WantTabs = True
           FontSmoothing = fsmNone
+          ExplicitWidth = 501
+          ExplicitHeight = 262
         end
         object SourceTopPanel: TPanel
           Left = 0
           Top = 0
-          Width = 501
+          Width = 491
           Height = 24
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 501
           object TopPanel: TPanel
             Left = 0
             Top = 0
@@ -100,7 +103,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
               Align = alNone
               AutoSize = True
               Caption = 'SourceToolBar'
-              DisabledImages = ImageList
               Images = ImageList
               TabOrder = 0
               object SQLEditorToolButton: TToolButton
@@ -125,8 +127,8 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     end
   end
   object OKButton: TButton
-    Left = 354
-    Top = 315
+    Left = 345
+    Top = 298
     Width = 75
     Height = 25
     Action = OKAction
@@ -135,14 +137,23 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     TabOrder = 1
   end
   object CancelButton: TButton
-    Left = 435
-    Top = 315
+    Left = 426
+    Top = 298
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 2
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 329
+    Width = 508
+    Height = 19
+    Panels = <>
+    ExplicitTop = 339
+    ExplicitWidth = 518
   end
   object ActionList: TActionList
     Images = ImageList
@@ -195,11 +206,11 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Left = 248
     Top = 64
   end
-  object ImageList: TImageList
+  object ImageList: TBCImageList
     Left = 244
     Top = 158
     Bitmap = {
-      494C010103000E00480210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00500210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

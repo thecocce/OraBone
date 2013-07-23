@@ -9,14 +9,12 @@ uses
   JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCControls.PageControl, Vcl.Menus,
   BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)
     AddColumnAction: TAction;
     AlterTableRadioButton: TRadioButton;
-    Bevel1: TBevel;
-    ColumnButtonPanel: TPanel;
     ColumnCommentsDBGrid: TBCDBGrid;
     ColumnCommentsPanel: TPanel;
     ColumnCommentsTabSheet: TTabSheet;
@@ -27,20 +25,25 @@ type
     ColumnsTabSheet: TTabSheet;
     CommentEdit: TBCEdit;
     CommentLabel: TLabel;
-    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    DownBitBtn: TJvBitBtn;
-    DropUnusedColumnsCheckBox: TCheckBox;
-    InsertBitBtn: TJvBitBtn;
     MoveDownAction: TAction;
     MoveUpAction: TAction;
     OriginalColumnsQuery: TOraQuery;
     RecreateTableRadioButton: TRadioButton;
-    ResetBitBtn: TJvBitBtn;
     ResetColumnsAction: TAction;
     TableNameEdit: TBCEdit;
     TableNameLabel: TLabel;
-    UpBitBtn: TJvBitBtn;
+    ColumnButtonPanel: TPanel;
+    Panel2: TPanel;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    AddColumnToolButton: TToolButton;
+    DeleteColumnToolButton: TToolButton;
+    DropUnusedColumnsCheckBox: TCheckBox;
+    DividerBevel: TBevel;
+    ResetToolBar: TBCToolBar;
+    ResetToolButton: TToolButton;
     procedure AddColumnActionExecute(Sender: TObject);
     procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
@@ -356,7 +359,7 @@ procedure TAlterTableDialog.SetButtonActions;
 begin
   MoveUpAction.Enabled := not ColumnsQuery.Bof and RecreateTableRadioButton.Checked and (FRecordCount > 1);
   MoveDownAction.Enabled := not ColumnsQuery.Eof and RecreateTableRadioButton.Checked and (FRecordCount > 1);
-  DeleteColumnAction.Enabled := (FRecordCount <> 0); 
+  DeleteColumnAction.Enabled := (FRecordCount <> 0);
   if FOriginalTableComment = CommentEdit.Text then
     CommentEdit.Font.Color := clWindowText
   else

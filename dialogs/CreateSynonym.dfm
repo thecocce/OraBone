@@ -1,21 +1,23 @@
 inherited CreateSynonymDialog: TCreateSynonymDialog
   Caption = 'Create Synonym'
-  ClientHeight = 219
+  ClientHeight = 233
   ClientWidth = 325
   OnShow = FormShow
-  ExplicitWidth = 331
-  ExplicitHeight = 247
+  ExplicitWidth = 341
+  ExplicitHeight = 269
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 318
-    Height = 176
+    Height = 175
     ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
     ExplicitWidth = 318
-    ExplicitHeight = 176
+    ExplicitHeight = 182
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitHeight = 148
       object Label1: TLabel
         Left = 8
         Top = 10
@@ -122,43 +124,53 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 310
+      ExplicitHeight = 168
       inherited SourcePanel: TPanel
         Width = 310
-        Height = 123
+        Height = 147
         ExplicitWidth = 310
-        ExplicitHeight = 123
+        ExplicitHeight = 168
         inherited SourceSynEdit: TSynEdit
           Width = 308
           Height = 122
           ExplicitWidth = 308
-          ExplicitHeight = 122
+          ExplicitHeight = 143
         end
         inherited SourceTopPanel: TPanel
+          Width = 308
+          ExplicitWidth = 308
           inherited TopPanel: TPanel
-            inherited SourceToolBar: TBCToolBar
-              Width = 310
-              ExplicitWidth = 310
-            end
+            Width = 310
+            ExplicitWidth = 310
           end
         end
       end
     end
   end
   inherited OKButton: TButton
-    Left = 161
-    Top = 186
-    ExplicitLeft = 161
-    ExplicitTop = 186
+    Left = 162
+    Top = 183
+    ExplicitLeft = 162
+    ExplicitTop = 189
   end
   inherited CancelButton: TButton
-    Left = 242
-    Top = 186
-    ExplicitLeft = 242
-    ExplicitTop = 186
+    Left = 243
+    Top = 183
+    ExplicitLeft = 243
+    ExplicitTop = 189
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 214
+    Width = 325
+    ExplicitTop = 200
+    ExplicitWidth = 325
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E001C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

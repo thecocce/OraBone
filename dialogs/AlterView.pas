@@ -9,12 +9,11 @@ uses
   SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
   JvExButtons, JvBitBtn, BCControls.DBEdit, BCControls.ToolBar, BCControls.DBGrid,
   JvExStdCtrls, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, JvEdit,
-  GridsEh, DBAxisGridsEh, DBGridEh;
+  GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)
     AddColumnAction: TAction;
-    Bevel1: TBevel;
     ColumnButtonPanel: TPanel;
     ColumnCommentsDBGrid: TBCDBGrid;
     ColumnCommentsPanel: TPanel;
@@ -26,21 +25,24 @@ type
     ColumnsTabSheet: TTabSheet;
     CommentEdit: TBCEdit;
     CommnetLabel: TLabel;
-    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
     MoveDownAction: TAction;
     MoveUpAction: TAction;
     OriginalColumnsQuery: TOraQuery;
-    ResetBitBtn: TJvBitBtn;
     ResetColumnsAction: TAction;
     SelectStatementTabSheet: TTabSheet;
     SQLPanel: TPanel;
     SQLSynEdit: TSynEdit;
-    UpBitBtn: TJvBitBtn;
     ViewNameEdit: TBCEdit;
     ViewNameLabel: TLabel;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    AddColumnToolButton: TToolButton;
+    DeleteColumnToolButton: TToolButton;
+    DividerBevel: TBevel;
+    ResetToolBar: TBCToolBar;
+    ResetToolButton: TToolButton;
     procedure AddColumnActionExecute(Sender: TObject);
     procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);

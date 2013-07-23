@@ -8,7 +8,7 @@ uses
   Vcl.DBCtrls, Vcl.Mask, BCControls.DBEdit, JvExStdCtrls, JvEdit, BCControls.Edit, BCDialogs.Dlg,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
   JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
 
 type
   TCreateTableDialog = class(TCreateObjectBaseDialog)
@@ -24,15 +24,16 @@ type
     ColumnsTabSheet: TTabSheet;
     CommentEdit: TBCEdit;
     CommentLabel: TLabel;
-    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
     MoveDownAction: TAction;
     MoveUpAction: TAction;
     TableNameEdit: TBCEdit;
     TableNameLabel: TLabel;
-    UpBitBtn: TJvBitBtn;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    AddColumnToolButton: TToolButton;
+    DeleteColumnToolButton: TToolButton;
     procedure AddColumnActionExecute(Sender: TObject);
     procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure ColumnsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);

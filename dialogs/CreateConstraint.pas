@@ -8,7 +8,7 @@ uses
   Vcl.Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
   BCControls.ComboBox, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
+  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
 
 type
   TCreateConstraintDialog = class(TCreateObjectBaseDialog)
@@ -22,10 +22,7 @@ type
     ConditionTabSheet: TTabSheet;
     ConstraintNameEdit: TBCEdit;
     ConstraintNameLabel: TLabel;
-    DownBitBtn: TJvBitBtn;
     ForeignKeyRadioButton: TRadioButton;
-    JvBitBtn1: TJvBitBtn;
-    JvBitBtn2: TJvBitBtn;
     Label1: TLabel;
     MoveDownColumnAction: TAction;
     MoveDownRefColumnAction: TAction;
@@ -43,7 +40,12 @@ type
     TableNameEdit: TBCEdit;
     TypeLabel: TLabel;
     UniqueRadioButton: TRadioButton;
-    UpBitBtn: TJvBitBtn;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    RefColumnsToolBar: TBCToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
     procedure FormDestroy(Sender: TObject);
     procedure MoveDownColumnActionExecute(Sender: TObject);
     procedure MoveDownRefColumnActionExecute(Sender: TObject);

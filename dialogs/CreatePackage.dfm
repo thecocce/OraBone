@@ -3,8 +3,8 @@ inherited CreatePackageDialog: TCreatePackageDialog
   ClientHeight = 387
   ClientWidth = 741
   OnShow = FormShow
-  ExplicitWidth = 747
-  ExplicitHeight = 415
+  ExplicitWidth = 757
+  ExplicitHeight = 423
   PixelsPerInch = 96
   TextHeight = 13
   object PackageNameLabel: TLabel [0]
@@ -17,33 +17,32 @@ inherited CreatePackageDialog: TCreatePackageDialog
   inherited PageControl: TBCPageControl
     Top = 35
     Width = 734
-    Height = 313
+    Height = 298
     ActivePage = SpecificationTabSheet
+    ActivePageCaption = 'Specification'
     ExplicitTop = 35
     ExplicitWidth = 734
-    ExplicitHeight = 313
+    ExplicitHeight = 298
     object SpecificationTabSheet: TTabSheet [0]
       Caption = 'Specification'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 285
       object SepcificationPanel: TPanel
         Left = 0
         Top = 0
         Width = 726
-        Height = 285
+        Height = 270
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 285
         object SpecificationSynEdit: TSynEdit
           Left = 0
           Top = 0
           Width = 724
-          Height = 284
+          Height = 269
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -65,31 +64,30 @@ inherited CreatePackageDialog: TCreatePackageDialog
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
           FontSmoothing = fsmNone
+          ExplicitHeight = 284
         end
       end
     end
     object BodyTabSheet: TTabSheet [1]
       Caption = 'Body'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 285
       object BodyPanel: TPanel
         Left = 0
         Top = 0
         Width = 726
-        Height = 285
+        Height = 270
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 285
         object BodySynEdit: TSynEdit
           Left = 0
           Top = 0
           Width = 724
-          Height = 284
+          Height = 269
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -111,43 +109,48 @@ inherited CreatePackageDialog: TCreatePackageDialog
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
           FontSmoothing = fsmNone
+          ExplicitHeight = 284
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 726
+      ExplicitHeight = 285
       inherited SourcePanel: TPanel
         Width = 726
-        Height = 260
+        Height = 270
         ExplicitWidth = 726
-        ExplicitHeight = 260
+        ExplicitHeight = 285
         inherited SourceSynEdit: TSynEdit
           Width = 724
-          Height = 259
+          Height = 245
           ExplicitWidth = 724
-          ExplicitHeight = 259
+          ExplicitHeight = 260
         end
         inherited SourceTopPanel: TPanel
+          Width = 724
+          ExplicitWidth = 724
           inherited TopPanel: TPanel
-            inherited SourceToolBar: TBCToolBar
-              Width = 726
-              ExplicitWidth = 726
-            end
+            Width = 726
+            ExplicitWidth = 726
           end
         end
       end
     end
   end
   inherited OKButton: TButton
-    Left = 577
-    Top = 354
-    ExplicitLeft = 577
-    ExplicitTop = 354
+    Left = 578
+    Top = 337
+    ExplicitLeft = 578
+    ExplicitTop = 337
   end
   inherited CancelButton: TButton
-    Left = 658
-    Top = 354
-    ExplicitLeft = 658
-    ExplicitTop = 354
+    Left = 659
+    Top = 337
+    ExplicitLeft = 659
+    ExplicitTop = 337
   end
   object PackageNameEdit: TBCEdit [4]
     Left = 100
@@ -167,9 +170,15 @@ inherited CreatePackageDialog: TCreatePackageDialog
     ErrorColor = 14803198
     NumbersAllowNegative = False
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 368
+    Width = 741
+    ExplicitTop = 368
+    ExplicitWidth = 741
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E00140210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00180210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

@@ -8,7 +8,7 @@ uses
   DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ImgList, BCDialogs.Dlg,
   SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
   SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
 
 type
   TCreateViewDialog = class(TCreateObjectBaseDialog)
@@ -24,18 +24,19 @@ type
     ColumnsTabSheet: TTabSheet;
     CommentEdit: TBCEdit;
     CommnetLabel: TLabel;
-    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
     MoveDownAction: TAction;
     MoveUpAction: TAction;
     SelectStatementTabSheet: TTabSheet;
     SQLPanel: TPanel;
     SQLSynEdit: TSynEdit;
-    UpBitBtn: TJvBitBtn;
     ViewNameEdit: TBCEdit;
     ViewNameLabel: TLabel;
+    ColumnsToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    AddColumnToolButton: TToolButton;
+    DeleteColumnToolButton: TToolButton;
     procedure AddColumnActionExecute(Sender: TObject);
     procedure ColumnCommentsDBGridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure DeleteColumnActionExecute(Sender: TObject);

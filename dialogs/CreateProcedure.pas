@@ -9,7 +9,7 @@ uses
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
   JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar,
   BCControls.DBGrid, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
-  DBAxisGridsEh, DBGridEh;
+  DBAxisGridsEh, DBGridEh, BCControls.ImageList;
 
 type
   TCreateProcedureDialog = class(TCreateObjectBaseDialog)
@@ -22,16 +22,17 @@ type
     ColumnsDataSource: TOraDataSource;
     ColumnsPanel: TPanel;
     ColumnsQuery: TOraQuery;
-    DeleteBitBtn: TJvBitBtn;
     DeleteColumnAction: TAction;
-    DownBitBtn: TJvBitBtn;
-    InsertBitBtn: TJvBitBtn;
     MoveDownColumnAction: TAction;
     MoveupColumnAction: TAction;
     ParametersTabSheet: TTabSheet;
     ProcedureNameEdit: TBCEdit;
     ProcedureNameLabel: TLabel;
-    UpBitBtn: TJvBitBtn;
+    ParametersToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
+    AddColumnToolButton: TToolButton;
+    DeleteColumnToolButton: TToolButton;
     procedure AddColumnActionExecute(Sender: TObject);
     procedure DeleteColumnActionExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

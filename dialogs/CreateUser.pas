@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls,
   JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
   JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, DB, MemDS, DBAccess, Ora,
-  BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
+  BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)

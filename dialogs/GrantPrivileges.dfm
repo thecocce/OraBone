@@ -1,23 +1,25 @@
 inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   Caption = 'Grant Privileges'
-  ClientHeight = 326
+  ClientHeight = 340
   ClientWidth = 333
-  ExplicitWidth = 339
-  ExplicitHeight = 354
+  ExplicitWidth = 349
+  ExplicitHeight = 376
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 326
-    Height = 283
+    Height = 282
     ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
     ExplicitWidth = 326
-    ExplicitHeight = 283
+    ExplicitHeight = 280
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitHeight = 255
       DesignSize = (
         318
-        255)
+        254)
       object GrantGroupBox: TGroupBox
         Left = 6
         Top = 0
@@ -85,10 +87,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       end
       object OnGroupBox: TGroupBox
         Left = 6
-        Top = 74
+        Top = 73
         Width = 303
         Height = 52
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akTop, akRight]
         Caption = ' On '
         TabOrder = 1
         object OnEdit: TBCEdit
@@ -111,10 +113,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       end
       object ToGroupBox: TGroupBox
         Left = 6
-        Top = 128
+        Top = 127
         Width = 303
         Height = 96
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akTop, akRight]
         Caption = ' To '
         TabOrder = 2
         object UserRadioButton: TRadioButton
@@ -168,34 +170,37 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       end
       object GrantOptionCheckBox: TCheckBox
         Left = 10
-        Top = 231
+        Top = 230
         Width = 97
         Height = 17
         Anchors = [akLeft, akBottom]
         Caption = ' Grant Option'
         TabOrder = 3
+        ExplicitTop = 231
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 318
-      ExplicitHeight = 235
+      ExplicitHeight = 257
       inherited SourcePanel: TPanel
         Width = 318
-        Height = 230
+        Height = 254
         ExplicitWidth = 318
-        ExplicitHeight = 210
+        ExplicitHeight = 257
         inherited SourceSynEdit: TSynEdit
           Width = 316
           Height = 229
           ExplicitWidth = 316
-          ExplicitHeight = 209
+          ExplicitHeight = 232
         end
         inherited SourceTopPanel: TPanel
+          Width = 316
+          ExplicitWidth = 316
           inherited TopPanel: TPanel
-            inherited SourceToolBar: TBCToolBar
-              Width = 318
-              ExplicitWidth = 318
-            end
+            Width = 318
+            ExplicitWidth = 318
           end
         end
       end
@@ -203,19 +208,25 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   end
   inherited OKButton: TButton
     Left = 169
-    Top = 293
+    Top = 290
     ExplicitLeft = 169
-    ExplicitTop = 293
+    ExplicitTop = 288
   end
   inherited CancelButton: TButton
     Left = 250
-    Top = 293
+    Top = 290
     ExplicitLeft = 250
-    ExplicitTop = 293
+    ExplicitTop = 288
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 321
+    Width = 333
+    ExplicitTop = 307
+    ExplicitWidth = 333
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E00200210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00240210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

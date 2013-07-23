@@ -1,24 +1,26 @@
 inherited CreateSequenceDialog: TCreateSequenceDialog
   Caption = 'Create Sequence'
-  ClientHeight = 267
+  ClientHeight = 280
   ClientWidth = 365
   OnShow = FormShow
-  ExplicitWidth = 371
-  ExplicitHeight = 295
+  ExplicitWidth = 381
+  ExplicitHeight = 316
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 358
-    Height = 224
+    Height = 221
     ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
     ExplicitWidth = 358
-    ExplicitHeight = 224
+    ExplicitHeight = 221
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitHeight = 209
       DesignSize = (
         350
-        196)
+        193)
       object SequenceNameLabel: TLabel
         Left = 8
         Top = 9
@@ -185,43 +187,53 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 350
+      ExplicitHeight = 209
       inherited SourcePanel: TPanel
         Width = 350
-        Height = 171
+        Height = 193
         ExplicitWidth = 350
-        ExplicitHeight = 171
+        ExplicitHeight = 209
         inherited SourceSynEdit: TSynEdit
           Width = 348
-          Height = 170
+          Height = 168
           ExplicitWidth = 348
-          ExplicitHeight = 170
+          ExplicitHeight = 184
         end
         inherited SourceTopPanel: TPanel
+          Width = 348
+          ExplicitWidth = 348
           inherited TopPanel: TPanel
-            inherited SourceToolBar: TBCToolBar
-              Width = 350
-              ExplicitWidth = 350
-            end
+            Width = 350
+            ExplicitWidth = 350
           end
         end
       end
     end
   end
   inherited OKButton: TButton
-    Left = 201
-    Top = 234
-    ExplicitLeft = 201
-    ExplicitTop = 234
+    Left = 202
+    Top = 230
+    ExplicitLeft = 202
+    ExplicitTop = 230
   end
   inherited CancelButton: TButton
-    Left = 282
-    Top = 234
-    ExplicitLeft = 282
-    ExplicitTop = 234
+    Left = 283
+    Top = 230
+    ExplicitLeft = 283
+    ExplicitTop = 230
   end
-  inherited ImageList: TImageList
+  inherited StatusBar1: TStatusBar
+    Top = 261
+    Width = 365
+    ExplicitTop = 248
+    ExplicitWidth = 365
+  end
+  inherited ImageList: TBCImageList
     Bitmap = {
-      494C010103000E00140210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00180210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566

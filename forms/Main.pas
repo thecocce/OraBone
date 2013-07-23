@@ -410,9 +410,15 @@ end;
 
 procedure TMainForm.ApplicationEventsMessage(var Msg: tagMSG;
   var Handled: Boolean);
+var
+  SQLEditorFrame: TSQLEditorFrame;
 begin
   if FProcessingEventHandler then
     Exit;
+  SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+    if SQLEditorFrame.Processing then
+      Exit;
   SetFields;
 end;
 

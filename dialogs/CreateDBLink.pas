@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
   BCControls.ComboBox, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
   Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions;
+  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
 
 type
   TCreateDBLinkDialog = class(TCreateObjectBaseDialog)
