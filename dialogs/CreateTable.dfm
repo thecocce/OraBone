@@ -24,30 +24,32 @@ inherited CreateTableDialog: TCreateTableDialog
   inherited PageControl: TBCPageControl
     Top = 62
     Width = 681
-    Height = 376
+    Height = 360
     ActivePage = ColumnsTabSheet
     ActivePageCaption = 'Columns'
     ExplicitTop = 62
     ExplicitWidth = 681
-    ExplicitHeight = 376
+    ExplicitHeight = 360
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
+      ExplicitHeight = 348
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
         Width = 673
-        Height = 325
+        Height = 309
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 325
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
           Width = 671
-          Height = 324
+          Height = 308
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           DataSource = ColumnsDataSource
@@ -164,13 +166,14 @@ inherited CreateTableDialog: TCreateTableDialog
       end
       object ColumnButtonPanel: TPanel
         Left = 0
-        Top = 325
+        Top = 309
         Width = 673
         Height = 23
         Align = alBottom
         BevelOuter = bvNone
         Padding.Top = 1
         TabOrder = 1
+        ExplicitTop = 325
         object ColumnsToolBar: TBCToolBar
           Left = 0
           Top = 1
@@ -205,21 +208,23 @@ inherited CreateTableDialog: TCreateTableDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitHeight = 323
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
         Width = 673
-        Height = 348
+        Height = 332
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 323
         object ColumnCommentsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
           Width = 671
-          Height = 347
+          Height = 331
           Align = alClient
           DataSource = ColumnsDataSource
           DrawGraphicData = True
@@ -258,20 +263,18 @@ inherited CreateTableDialog: TCreateTableDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 673
-      ExplicitHeight = 348
+      ExplicitHeight = 323
       inherited SourcePanel: TPanel
         Width = 673
-        Height = 348
+        Height = 332
         ExplicitWidth = 673
-        ExplicitHeight = 348
+        ExplicitHeight = 323
         inherited SourceSynEdit: TSynEdit
           Width = 671
-          Height = 323
+          Height = 307
           ExplicitWidth = 671
-          ExplicitHeight = 323
+          ExplicitHeight = 298
         end
         inherited SourceTopPanel: TPanel
           Width = 671
@@ -282,15 +285,15 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   inherited OKButton: TButton
     Left = 524
-    Top = 444
+    Top = 427
     ExplicitLeft = 524
-    ExplicitTop = 444
+    ExplicitTop = 427
   end
   inherited CancelButton: TButton
     Left = 605
-    Top = 444
+    Top = 427
     ExplicitLeft = 605
-    ExplicitTop = 444
+    ExplicitTop = 427
   end
   object TableNameEdit: TBCEdit [5]
     Left = 76
@@ -365,7 +368,7 @@ inherited CreateTableDialog: TCreateTableDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010107000E00340210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000E00380210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

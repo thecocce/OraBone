@@ -33,8 +33,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     ShowCloseButton = False
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
-      ExplicitWidth = 503
-      ExplicitHeight = 287
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -45,8 +43,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitWidth = 503
-        ExplicitHeight = 287
         object SourceSynEdit: TSynEdit
           Left = 0
           Top = 24
@@ -74,8 +70,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           ReadOnly = True
           WantTabs = True
           FontSmoothing = fsmNone
-          ExplicitWidth = 501
-          ExplicitHeight = 262
         end
         object SourceTopPanel: TPanel
           Left = 0
@@ -85,7 +79,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 501
           object TopPanel: TPanel
             Left = 0
             Top = 0
@@ -103,6 +96,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
               Align = alNone
               AutoSize = True
               Caption = 'SourceToolBar'
+              DisabledImages = ImageList
               Images = ImageList
               TabOrder = 0
               object SQLEditorToolButton: TToolButton
@@ -152,8 +146,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Width = 508
     Height = 19
     Panels = <>
-    ExplicitTop = 339
-    ExplicitWidth = 518
   end
   object ActionList: TActionList
     Images = ImageList
@@ -210,7 +202,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     Left = 244
     Top = 158
     Bitmap = {
-      494C010103000E00500210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000E00580210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000056695000566
