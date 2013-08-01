@@ -2038,7 +2038,7 @@ begin
         Action := raCancel;
       end;
     finally
-      ConfirmReplaceDialog.Release;
+      ConfirmReplaceDialog.Free;
     end;
   end;
 end;

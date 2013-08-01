@@ -278,7 +278,7 @@ begin
           ShowMessage('Table recreated.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -293,7 +293,7 @@ begin
         ShowMessage('View altered.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -381,7 +381,7 @@ begin
         ShowMessage('User created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -396,7 +396,7 @@ begin
         ShowMessage('View created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -411,7 +411,7 @@ begin
         ShowMessage('Constraint created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -433,7 +433,7 @@ begin
       end;
     end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -509,7 +509,7 @@ begin
         ShowMessage('Function created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -524,7 +524,7 @@ begin
         ShowMessage('Index created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -544,7 +544,7 @@ begin
         ShowMessage('Package created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -559,7 +559,7 @@ begin
         ShowMessage('Procedure created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -574,7 +574,7 @@ begin
         ShowMessage('Sequence created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -589,7 +589,7 @@ begin
         ShowMessage('Synonym created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -609,7 +609,7 @@ begin
         ShowMessage('Table created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -624,7 +624,7 @@ begin
         ShowMessage('Trigger created.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -645,7 +645,7 @@ begin
         ObjectTreeFrame.Refresh;
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -686,7 +686,7 @@ begin
         ShowMessage('Privileges granted.');
       end;
   finally
-    Release;
+    Free;
   end;
 end;
 
@@ -1374,7 +1374,7 @@ begin
         Drop := True;
       end;
     finally
-      Release;
+      Free;
     end;
   end
   else
@@ -1389,7 +1389,7 @@ begin
         Drop := True;
       end;
     finally
-      Release;
+      Free;
     end;
   end
   else

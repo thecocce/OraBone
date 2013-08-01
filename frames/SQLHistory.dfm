@@ -2,19 +2,20 @@ object SQLHistoryFrame: TSQLHistoryFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 302
   Align = alClient
   Padding.Right = 1
   Padding.Bottom = 1
   TabOrder = 0
   object ButtonPanel: TPanel
     Left = 0
-    Top = 281
+    Top = 279
     Width = 450
     Height = 22
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitTop = 281
     object Bevel1: TBevel
       AlignWithMargins = True
       Left = 29
@@ -96,11 +97,12 @@ object SQLHistoryFrame: TSQLHistoryFrame
     Left = 0
     Top = 0
     Width = 450
-    Height = 281
+    Height = 279
     Align = alClient
     BevelOuter = bvNone
     Padding.Bottom = 2
     TabOrder = 1
+    ExplicitHeight = 281
     object SQLHistoryStringGrid: TBCStringGrid
       Left = 0
       Top = 0
@@ -165,7 +167,7 @@ object SQLHistoryFrame: TSQLHistoryFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010104000E00A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -183,7 +183,7 @@ begin
       end;
     end;
   finally
-    Release;
+    Free;
   end;
 end;
 

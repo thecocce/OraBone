@@ -1398,7 +1398,7 @@ begin
   try
     Open(TablePageControl);
   finally
-    Release
+    Free
   end;
 end;
 
@@ -1409,7 +1409,7 @@ begin
   if Open(FSession, FSchemaParam, FObjectName) then
     RefreshAction.Execute;
   finally
-    Release;
+    Free;
   end;
 end;
 

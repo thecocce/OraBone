@@ -1,8 +1,8 @@
 object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
-  Width = 553
-  Height = 372
+  Width = 451
+  Height = 302
   Align = alClient
   Ctl3D = False
   ParentCtl3D = False
@@ -12,8 +12,8 @@ object TableBrowserFrame: TTableBrowserFrame
   object TablePageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 553
-    Height = 372
+    Width = 451
+    Height = 302
     ActivePage = DataTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -21,6 +21,7 @@ object TableBrowserFrame: TTableBrowserFrame
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = TablePageControlChange
+    ActivePageCaption = 'Data'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -1460,7 +1461,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 22
     Top = 36
     Bitmap = {
-      494C01011D000004700410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000008E5D
       59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D59008E5D
