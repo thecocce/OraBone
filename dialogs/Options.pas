@@ -94,13 +94,16 @@ type
     FAnimationStyle: TAnimationStyle;
     FAutoIndent: Boolean;
     FAutoSave: Boolean;
+    FUndoAfterSave: Boolean;
     FColorBrightness: Integer;
     FConnectionCloseTabByDblClick: Boolean;
+    FConnectionCloseTabByMiddleClick: Boolean;
     FConnectionMultiLine: Boolean;
     FConnectionShowCloseButton: Boolean;
     FConnectionShowImage: Boolean;
     FDateFormat: string;
     FEditorCloseTabByDblClick: Boolean;
+    FEditorCloseTabByMiddleClick: Boolean;
     FEditorMultiLine: Boolean;
     FEditorShowCloseButton: Boolean;
     FEditorShowImage: Boolean;
@@ -127,6 +130,7 @@ type
     FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
     FOutputCloseTabByDblClick: Boolean;
+    FOutputCloseTabByMiddleClick: Boolean;
     FOutputShowTreeLines: Boolean;
     FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
@@ -141,6 +145,8 @@ type
     FScrollPastEol: Boolean;
     FShadows: Boolean;
     FTabsToSpaces: Boolean;
+    FSmartTabs: Boolean;
+    FSmartTabDelete: Boolean;
     FTabWidth: Integer;
     FTimeFormat: string;
     FToolBarExecute: Boolean;
@@ -170,13 +176,16 @@ type
     property AnimationStyle: TAnimationStyle read FAnimationStyle write FAnimationStyle;
     property AutoIndent: Boolean read FAutoIndent write FAutoIndent;
     property AutoSave: Boolean read FAutoSave write FAutoSave;
+    property UndoAfterSave: Boolean read FUndoAfterSave write FUndoAfterSave;
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
     property ConnectionCloseTabByDblClick: Boolean read FConnectionCloseTabByDblClick write FConnectionCloseTabByDblClick;
+    property ConnectionCloseTabByMiddleClick: Boolean read FConnectionCloseTabByMiddleClick write FConnectionCloseTabByMiddleClick;
     property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
     property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
     property DateFormat: string read FDateFormat write FDateFormat;
     property EditorCloseTabByDblClick: Boolean read FEditorCloseTabByDblClick write FEditorCloseTabByDblClick;
+    property EditorCloseTabByMiddleClick: Boolean read FEditorCloseTabByMiddleClick write FEditorCloseTabByMiddleClick;
     property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
     property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
     property EditorShowImage: Boolean read FEditorShowImage write FEditorShowImage;
@@ -203,6 +212,7 @@ type
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
     property OutputCloseTabByDblClick: Boolean read FOutputCloseTabByDblClick write FOutputCloseTabByDblClick;
+    property OutputCloseTabByMiddleClick: Boolean read FOutputCloseTabByMiddleClick write FOutputCloseTabByMiddleClick;
     property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
     property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
@@ -217,6 +227,8 @@ type
     property ScrollPastEol: Boolean read FScrollPastEol write FScrollPastEol;
     property Shadows: Boolean read FShadows write FShadows;
     property TabsToSpaces: Boolean read FTabsToSpaces write FTabsToSpaces;
+    property SmartTabs: Boolean read FSmartTabs write FSmartTabs;
+    property SmartTabDelete: Boolean read FSmartTabDelete write FSmartTabDelete;
     property TabWidth: Integer read FTabWidth write FTabWidth;
     property TimeFormat: string read FTimeFormat write FTimeFormat;
     property ToolBarExecute: Boolean read FToolBarExecute write FToolBarExecute;
@@ -299,6 +311,14 @@ begin
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoTabsToSpaces]
     else
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoTabsToSpaces];
+    if FSmartTabs then
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoSmartTabs]
+    else
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoSmartTabs];
+    if FSmartTabDelete then
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoSmartTabDelete]
+    else
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoSmartTabDelete];
     if FTrimTrailingSpaces then
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoTrimTrailingSpaces]
     else
@@ -374,16 +394,21 @@ begin
   FIgnoreBlanks := True;
   FAutoIndent := True;
   FAutoSave := False;
+  FUndoAfterSave := False;
   FTrimTrailingSpaces := True;
   FScrollPastEof := False;
   FScrollPastEol := True;
   FTabsToSpaces := True;
+  FSmartTabs := False;
+  FSmartTabDelete := False;
   FGutterVisible := True;
   FEditorCloseTabByDblClick := False;
+  FEditorCloseTabByMiddleClick := False;
   FEditorMultiLine := False;
   FEditorShowCloseButton := False;
   FEditorShowImage := True;
   FConnectionCloseTabByDblClick := False;
+  FConnectionCloseTabByMiddleClick := False;
   FConnectionMultiLine := False;
   FConnectionShowCloseButton := False;
   FConnectionShowImage := True;
@@ -414,6 +439,7 @@ begin
   FSchemaBrowserShowTreeLines := False;
   FSchemaBrowserIndent := 16;
   FOutputCloseTabByDblClick := False;
+  FOutputCloseTabByMiddleClick := False;
   FOutputShowTreeLines := False;
   FOutputIndent := 16;
   FToolBarExecute := True;
@@ -623,10 +649,13 @@ begin
   { Options }
   FEditorOptionsFrame.AutoIndentCheckBox.Checked := FOptionsContainer.AutoIndent;
   FEditorOptionsFrame.AutoSaveCheckBox.Checked := FOptionsContainer.AutoSave;
+  FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked := FOptionsContainer.UndoAfterSave;
   FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked := FOptionsContainer.TrimTrailingSpaces;
   FEditorOptionsFrame.ScrollPastEofCheckBox.Checked := FOptionsContainer.ScrollPastEof;
   FEditorOptionsFrame.ScrollPastEolCheckBox.Checked := FOptionsContainer.ScrollPastEol;
   FEditorOptionsFrame.TabsToSpacesCheckBox.Checked := FOptionsContainer.TabsToSpaces;
+  FEditorOptionsFrame.SmartTabsCheckBox.Checked := FOptionsContainer.SmartTabs;
+  FEditorOptionsFrame.SmartTabDeleteCheckBox.Checked := FOptionsContainer.SmartTabDelete;
   FEditorOptionsFrame.ExtraLinesEdit.Text := IntToStr(FOptionsContainer.ExtraLineSpacing);
   FEditorOptionsFrame.TabWidthEdit.Text := IntToStr(FOptionsContainer.TabWidth);
   FEditorOptionsFrame.BrightnessTrackBar.Position := FOptionsContainer.ColorBrightness;
@@ -646,6 +675,7 @@ begin
   FEditorGutterFrame.WidthEdit.Text := IntToStr(FOptionsContainer.GutterWidth);
   { Document tabs }
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
+  FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
   FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
   FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
@@ -665,11 +695,13 @@ begin
   FEditorToolBarFrame.ToolsCheckBox.Checked := FOptionsContainer.ToolBarTools;
   { Connection tabs }
   FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByDblClick;
+  FConnectionTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByMiddleClick;
   FConnectionTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.ConnectionMultiLine;
   FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.ConnectionShowCloseButton;
   FConnectionTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.ConnectionShowImage;
   { Output tabs }
   FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByDblClick;
+  FOutputTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByMiddleClick;
   FOutputTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.OutputMultiLine;
   FOutputTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.OutputShowCloseButton;
   FOutputTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.OutputShowImage;
@@ -811,10 +843,13 @@ begin
   { Options }
   FOptionsContainer.AutoIndent := FEditorOptionsFrame.AutoIndentCheckBox.Checked;
   FOptionsContainer.AutoSave := FEditorOptionsFrame.AutoSaveCheckBox.Checked;
+  FOptionsContainer.UndoAfterSave := FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked;
   FOptionsContainer.TrimTrailingSpaces := FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked;
   FOptionsContainer.ScrollPastEof := FEditorOptionsFrame.ScrollPastEofCheckBox.Checked;
   FOptionsContainer.ScrollPastEol := FEditorOptionsFrame.ScrollPastEolCheckBox.Checked;
   FOptionsContainer.TabsToSpaces := FEditorOptionsFrame.TabsToSpacesCheckBox.Checked;
+  FOptionsContainer.SmartTabs := FEditorOptionsFrame.SmartTabsCheckBox.Checked;
+  FOptionsContainer.SmartTabDelete := FEditorOptionsFrame.SmartTabDeleteCheckBox.Checked;
   FOptionsContainer.ExtraLineSpacing := StrToIntDef(FEditorOptionsFrame.ExtraLinesEdit.Text, 0);
   FOptionsContainer.TabWidth := StrToIntDef(FEditorOptionsFrame.TabWidthEdit.Text, 8);
   FOptionsContainer.ColorBrightness := FEditorOptionsFrame.BrightnessTrackBar.Position;
@@ -832,6 +867,7 @@ begin
   FOptionsContainer.GutterWidth := StrToIntDef(FEditorGutterFrame.WidthEdit.Text, 48);
   { Editor tabs }
   FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
+  FOptionsContainer.EditorCloseTabByMiddleClick := FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.EditorMultiLine := FEditorTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.EditorShowImage := FEditorTabsFrame.ShowImageCheckBox.Checked;
@@ -851,11 +887,13 @@ begin
   FOptionsContainer.ToolBarTools := FEditorToolBarFrame.ToolsCheckBox.Checked;
   { Connection tabs }
   FOptionsContainer.ConnectionCloseTabByDblClick := FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked;
+  FOptionsContainer.ConnectionCloseTabByMiddleClick := FConnectionTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.ConnectionMultiLine := FConnectionTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.ConnectionShowCloseButton := FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.ConnectionShowImage := FConnectionTabsFrame.ShowImageCheckBox.Checked;
   { Output tabs }
   FOptionsContainer.OutputCloseTabByDblClick := FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked;
+  FOptionsContainer.OutputCloseTabByMiddleClick := FOutputTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.OutputMultiLine := FOutputTabsFrame.MultiLineCheckBox.Checked;
   FOptionsContainer.OutputShowCloseButton := FOutputTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.OutputShowImage := FOutputTabsFrame.ShowImageCheckBox.Checked;

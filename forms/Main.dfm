@@ -116,6 +116,7 @@ object MainForm: TMainForm
       ShowHint = False
       TabOrder = 0
       OnChange = PageControlChange
+      OnMouseDown = PageControlMouseDown
       TabDragDrop = True
       HoldShiftToDragDrop = False
       ShowCloseButton = False

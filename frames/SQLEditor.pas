@@ -302,6 +302,7 @@ type
     procedure GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
     procedure PageControlCloseButtonClick(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
+    procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -1297,7 +1298,8 @@ begin
       with OraSynEdit do
       begin
         Lines.SaveToFile(DocumentName);
-        UndoList.Clear;
+        if not OptionsContainer.UndoAfterSave then
+          UndoList.Clear;
         FileDateTime := GetFileDateTime(DocumentName);
         TabSheet.ImageIndex := GetImageIndex(DocumentName);
         Modified := False;
@@ -1399,6 +1401,13 @@ procedure TSQLEditorFrame.PageControlDblClick(Sender: TObject);
 begin
   if OptionsContainer.EditorCloseTabByDblClick then
     Close;
+end;
+
+procedure TSQLEditorFrame.PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  if (Button = mbMiddle) and OptionsContainer.EditorCloseTabByMiddleClick then
+    Close
 end;
 
 procedure TSQLEditorFrame.Paste;
