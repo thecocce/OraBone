@@ -232,7 +232,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, DataSort, CustomizePages, Options, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.StringUtils,
+  Main, DataFilter, DataSort, CustomizePages, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.StringUtils,
   BCCommon;
 
 const

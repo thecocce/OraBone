@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks;
+  BCCommon.StyleUtils;
 
 const
   CAPTION_TEXT = 'Change Password of %s';

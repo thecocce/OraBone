@@ -79,7 +79,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks, BCCommon.StringUtils;
+  BCCommon.StyleUtils, BCCommon.StringUtils;
 
 var
   FDataSortDialog: TDataSortDialog;

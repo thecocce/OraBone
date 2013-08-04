@@ -57,7 +57,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
+  Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
 
 var
   FCreateViewDialog: TCreateViewDialog;

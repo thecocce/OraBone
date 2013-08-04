@@ -82,7 +82,7 @@ implementation
 
 uses
   Options, BigIni, BCSQL.Tokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd, BCCommon.FileUtils, BCCommon,
-  Vcl.Themes, BCCommon.StyleHooks, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages;
+  Vcl.Themes, BCCommon.StyleUtils, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages;
 
 var
   FExportTableDataDialog: TExportTableDataDialog;

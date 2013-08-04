@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.ImgList, ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons,
   JvExButtons, JvBitBtn, Vcl.ExtCtrls, ToolWin, JvExStdCtrls, JvCombobox, BCControls.ComboBox, VirtualTrees, DB,
-  MemDS, DBAccess, Ora, JvStatusBar, JvProgressBar, BCDialogs.Dlg;
+  MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg;
 
 type
   TSchemaCompareForm = class(TDialog)
@@ -40,7 +40,7 @@ type
     TableCommentsCheckBox: TCheckBox;
     ColumnNamesCheckBox: TCheckBox;
     ColumnCommentsCheckBox: TCheckBox;
-    ProgressBar: TJvProgressBar;
+    ProgressBar: TBCProgressBar;
     procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Schema1ComboBoxChange(Sender: TObject);
@@ -75,7 +75,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Vcl.Themes, BCCommon.StyleHooks;
+  DataModule, Vcl.Themes, BCCommon.StyleUtils;
 
 type
   PCompareRec = ^TCompareRec;

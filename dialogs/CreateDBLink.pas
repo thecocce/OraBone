@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
+  Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
 
 var
   FCreateDBLinkDialog: TCreateDBLinkDialog;

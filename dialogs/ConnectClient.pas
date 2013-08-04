@@ -60,7 +60,7 @@ implementation
 {$R *.DFM}
 
 uses
-  OraServices, OraCall, Lib, BCCommon.StyleHooks, BCCommon.Messages;
+  OraServices, OraCall, Lib, BCCommon.StyleUtils, BCCommon.Messages;
 
 var
   FConnectClientDialog: TConnectClientDialog;

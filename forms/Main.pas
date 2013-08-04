@@ -304,7 +304,7 @@ implementation
 
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
-  DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleHooks,
+  DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor,
   System.IOUtils, BCSQL.Formatter, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, SynEditKeyCmds,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils;

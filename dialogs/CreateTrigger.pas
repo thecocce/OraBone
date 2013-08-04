@@ -51,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Ora, DataModule, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
+  Ora, DataModule, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
 
 var
   FCreateTriggerDialog: TCreateTriggerDialog;

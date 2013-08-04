@@ -59,7 +59,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, OraScript, OraError, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages;
+  Main, OraScript, OraError, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Messages;
 
 procedure TCreateObjectBaseDialog.PageControlChange(Sender: TObject);
 begin

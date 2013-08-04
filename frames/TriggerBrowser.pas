@@ -78,7 +78,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils;
 
 const
   TRIGGER_NAME = 'Trigger Name';

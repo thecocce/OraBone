@@ -59,7 +59,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BigIni, Lib, BCCommon.StyleHooks, BCCommon.Messages, BCCommon.FileUtils, BCCommon.StringUtils;
+  BigIni, Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.FileUtils, BCCommon.StringUtils;
 
 const
   CAPTION_TEXT = 'Customize %s Filters';

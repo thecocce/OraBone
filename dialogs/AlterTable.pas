@@ -76,7 +76,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
 
 var
   FAlterTableDialog: TAlterTableDialog;

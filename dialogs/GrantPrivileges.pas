@@ -47,7 +47,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Ora, BCCommon.StyleHooks, BCCommon.Messages;
+  DataModule, Ora, BCCommon.StyleUtils, BCCommon.Messages;
 
 var
   FGrantPrivilegesDialog: TGrantPrivilegesDialog;

@@ -31,7 +31,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, BCCommon.StyleHooks;
+  Vcl.Themes, BCCommon.StyleUtils;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';

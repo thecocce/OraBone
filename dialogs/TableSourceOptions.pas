@@ -60,7 +60,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BigIni, BCCommon.StyleHooks, BCCommon.FileUtils;
+  BigIni, BCCommon.StyleUtils, BCCommon.FileUtils;
 
 var
   FTableSourceOptionsDialog: TTableSourceOptionsDialog;

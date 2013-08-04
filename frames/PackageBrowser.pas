@@ -136,7 +136,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, GrantPrivileges, CreateSynonym, Lib, Vcl.Themes, BCCommon.StyleHooks;
+  Main, DataFilter, CustomizePages, GrantPrivileges, CreateSynonym, Lib, Vcl.Themes, BCCommon.StyleUtils;
 
 const
   { SynonymsQuery columns }

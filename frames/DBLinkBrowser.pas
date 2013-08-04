@@ -70,7 +70,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon;
 
 const
   LINK_NAME = 'Link Name';

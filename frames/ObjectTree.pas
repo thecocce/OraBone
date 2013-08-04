@@ -235,7 +235,7 @@ implementation
 
 uses
   Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, BCSQL.Tokenizer, System.StrUtils,
-  BCCommon.StyleHooks, BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
+  BCCommon.StyleUtils, BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
 begin

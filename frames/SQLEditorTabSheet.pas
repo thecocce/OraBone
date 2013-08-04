@@ -22,7 +22,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks;
+  BCCommon.StyleUtils;
 
 constructor TSQLEditorTabSheetFrame.Create(AOwner: TComponent);
 begin

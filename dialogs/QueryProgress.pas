@@ -40,7 +40,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks;
+  BCCommon.StyleUtils;
 
 var
   FQueryProgressDialog: TQueryProgressDialog;

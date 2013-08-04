@@ -52,7 +52,7 @@ implementation
 {$R *.DFM}
 
 uses
-  DataModule, Vcl.Themes, BCCommon.StyleHooks, System.UITypes;
+  DataModule, Vcl.Themes, BCCommon.StyleUtils, System.UITypes;
 
 type
   PSearchRec = ^TSearchRec;

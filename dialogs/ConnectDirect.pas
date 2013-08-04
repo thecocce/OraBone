@@ -69,7 +69,7 @@ implementation
 {$R *.DFM}
 
 uses
-  Lib, BCCommon.StyleHooks;
+  Lib, BCCommon.StyleUtils;
 
 var
   FConnectDirectDialog: TConnectDirectDialog;

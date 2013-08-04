@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, BCCommon.StyleHooks;
+  System.Math, BCCommon.StyleUtils;
 
 const
   CAPTION_TEXT = 'Drop table %s, are you sure?';

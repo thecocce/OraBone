@@ -51,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Ora, Lib, Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages, BCCommon;
+  DataModule, Ora, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
 
 var
   FCreateIndexDialog: TCreateIndexDialog;

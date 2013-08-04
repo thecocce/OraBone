@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, Vcl.Themes, BCCommon.StyleHooks, SynEditKeyCmds, BCCommon.StringUtils;
+  Options, Vcl.Themes, BCCommon.StyleUtils, SynEditKeyCmds, BCCommon.StringUtils;
 
 var
   FDataFilterDialog: TDataFilterDialog;

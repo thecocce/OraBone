@@ -66,7 +66,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, BCCommon.StyleHooks, BCCommon.Dialogs,
+  Options, BigIni, ShellApi, Progress, SynEdit, Main, DB, BCCommon.StyleUtils, BCCommon.Dialogs,
   BCCommon.LanguageStrings, BCCommon.FileUtils, BCCommon.Messages, BCCommon;
 
 var

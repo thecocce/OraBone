@@ -119,7 +119,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleHooks;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils;
 
 const
   { SynonymsQuery columns }

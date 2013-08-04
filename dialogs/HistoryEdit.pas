@@ -53,7 +53,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, BCCommon.StyleHooks, BCCommon.Messages;
+  Vcl.Themes, BCCommon.StyleUtils, BCCommon.Messages;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';

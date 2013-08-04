@@ -36,7 +36,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Gutter.Font.Name = 'Courier New'
       Gutter.Font.Style = []
       Gutter.ShowLineNumbers = True
-      Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
+      Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
       FontSmoothing = fsmNone
     end

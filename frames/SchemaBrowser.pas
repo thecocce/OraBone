@@ -162,7 +162,7 @@ uses
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
   CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon,
-  SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, BCCommon.StyleHooks,
+  SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, BCCommon.StyleUtils,
   BCCommon.Messages, BCCommon.StringUtils;
 
 const

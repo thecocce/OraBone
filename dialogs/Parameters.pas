@@ -41,7 +41,7 @@ implementation
 {$R *.dfm}
 
 Uses
-  DB, BCCommon.StyleHooks, BCCommon.StringUtils;
+  DB, BCCommon.StyleUtils, BCCommon.StringUtils;
 
 var
   FParametersDialog: TParametersDialog;

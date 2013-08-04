@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, JvProgressBar, Vcl.ExtCtrls, ActnList, BCDialogs.Dlg,
+  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, BCControls.ProgressBar, Vcl.ExtCtrls, ActnList, BCDialogs.Dlg,
   Vcl.Themes, System.Actions;
 
 type
@@ -13,7 +13,7 @@ type
     CancelAction: TAction;
     CancelButton: TButton;
     InformationLabel: TLabel;
-    ProgressBar: TJvProgressBar;
+    ProgressBar: TBCProgressBar;
     ProgressPanel: TPanel;
     TopPanel: TPanel;
     procedure CancelActionExecute(Sender: TObject);
@@ -39,7 +39,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks;
+  BCCommon.StyleUtils;
 
 var
   FProgressDialog: TProgressDialog;
@@ -108,10 +108,5 @@ begin
     Application.ProcessMessages;
   end;
 end;
-
-initialization
-
-  TStyleManager.Engine.RegisterStyleHook(TJvProgressBar, TProgressBarStyleHookMarquee);
-
 
 end.

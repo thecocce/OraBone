@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks;
+  BCCommon.StyleUtils;
 
 const
   CAPTION_TEXT = 'Analyze Table: %s';

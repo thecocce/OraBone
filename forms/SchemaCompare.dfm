@@ -178,7 +178,7 @@ object SchemaCompareForm: TSchemaCompareForm
         Control = ProgressBar
       end>
     ParentDoubleBuffered = False
-    object ProgressBar: TJvProgressBar
+    object ProgressBar: TBCProgressBar
       Left = 0
       Top = 0
       Width = 622

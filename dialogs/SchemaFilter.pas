@@ -45,7 +45,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BigIni, Lib, BCCommon.StyleHooks, BCCommon.FileUtils, BCCommon.StringUtils;
+  BigIni, Lib, BCCommon.StyleUtils, BCCommon.FileUtils, BCCommon.StringUtils;
 
 var
   FSchemaFilterDialog: TSchemaFilterDialog;

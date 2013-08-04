@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, BCCommon.StyleHooks;
+  Vcl.Themes, BCCommon.StyleUtils;
 
 var
   FBlobDialog: TBlobDialog;

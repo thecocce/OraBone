@@ -172,7 +172,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleHooks, OraServices, OraCall,
+  System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleUtils, OraServices, OraCall,
   BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.LanguageStrings, Options,
   BCCommon.FileUtils;
 

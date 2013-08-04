@@ -247,7 +247,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleHooks, SynEditTypes, BCCommon.Messages;
+  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleUtils, SynEditTypes, BCCommon.Messages;
 
 const
   CELL_PADDING = 4;
@@ -782,7 +782,7 @@ begin
     if FEditorFontFrame.Visible then
     begin
       FOptionsContainer.AssignTo(FEditorFontFrame.SynEdit);
-      BCCommon.StyleHooks.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
+      BCCommon.StyleUtils.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
     end;
     FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);

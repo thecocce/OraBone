@@ -80,7 +80,7 @@ object ProgressDialog: TProgressDialog
       Caption = 'InformationLabel'
       ExplicitWidth = 372
     end
-    object ProgressBar: TJvProgressBar
+    object ProgressBar: TBCProgressBar
       Left = 12
       Top = 44
       Width = 341

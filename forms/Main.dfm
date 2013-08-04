@@ -1310,6 +1310,8 @@ object MainForm: TMainForm
       Caption = '&Increase Indent'
       Hint = 'Increase indent'
       ImageIndex = 57
+      SecondaryShortCuts.Strings = (
+        'Tab')
       ShortCut = 24649
       OnExecute = EditIncreaseIndentActionExecute
     end
@@ -1318,6 +1320,8 @@ object MainForm: TMainForm
       Caption = '&Decrease Indent'
       Hint = 'Decrease indent'
       ImageIndex = 56
+      SecondaryShortCuts.Strings = (
+        'Shift+Tab')
       ShortCut = 24661
       OnExecute = EditDecreaseIndentActionExecute
     end
@@ -1643,7 +1647,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 418
     Bitmap = {
-      494C01015B005802180610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01015B005D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6A400C2A6

@@ -80,7 +80,7 @@ uses
   CustomizeObjectFilters in 'dialogs\CustomizeObjectFilters.pas' {CustomizeObjectFiltersDialog},
   BCCommon.LanguageStrings in '..\..\Common\units\BCCommon.LanguageStrings.pas' {LanguageDataModule},
   BCSQL.Tokenizer in '..\..\Common\units\BCSQL.Tokenizer.pas',
-  BCCommon.StyleHooks in '..\..\Common\units\BCCommon.StyleHooks.pas',
+  BCCommon.StyleUtils in '..\..\Common\units\BCCommon.StyleUtils.pas',
   BCDialogs.DownloadURL in '..\..\Common\dialogs\BCDialogs.DownloadURL.pas' {DownloadURLDialog},
   BCFrames.Compare in '..\..\Common\frames\BCFrames.Compare.pas' {CompareFrame: TFrame},
   TNSNamesEditor in 'forms\TNSNamesEditor.pas' {TNSNamesEditorForm},

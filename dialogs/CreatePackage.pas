@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleHooks, BCCommon;
+  BCCommon.StyleUtils, BCCommon;
 
 var
   FCreatePackageDialog: TCreatePackageDialog;

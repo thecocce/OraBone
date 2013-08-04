@@ -341,7 +341,7 @@
             <Form>LanguageDataModule</Form>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCSQL.Tokenizer.pas"/>
-        <DCCReference Include="..\..\Common\units\BCCommon.StyleHooks.pas"/>
+        <DCCReference Include="..\..\Common\units\BCCommon.StyleUtils.pas"/>
         <DCCReference Include="..\..\Common\dialogs\BCDialogs.DownloadURL.pas">
             <Form>DownloadURLDialog</Form>
         </DCCReference>

@@ -43,7 +43,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Ora, DataModule, BCCommon.StyleHooks, BCCommon.Messages;
+  Ora, DataModule, BCCommon.StyleUtils, BCCommon.Messages;
 
 var
   FCreateSynonymDialog: TCreateSynonymDialog;
