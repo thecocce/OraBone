@@ -317,6 +317,7 @@ type
     FCompareImageIndex, FNewImageIndex: Integer;
     FImages: TImageList;
     FProcessing: Boolean;
+    FModifiedDocuments: Boolean;
     function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
@@ -347,6 +348,7 @@ type
     procedure WriteHistory(OraSession: TOraSession; SQL: WideString);
     function GetDataQueryOpened: Boolean;
     function CreateSession(OraSession: TOraSession): TOraSession;
+    procedure CheckModifiedDocuments;
     procedure GetUserErrors;
     function RemoveComments(s: WideString): WideString; //SynEdit: TBCOraSynEdit): WideString;
     function RemoveParenthesisFromBegin(Text: WideString): WideString;
@@ -357,6 +359,7 @@ type
     function GetActiveDocumentModified: Boolean;
     procedure SetActivePageCaptionModified;
     function GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
+    function GetModifiedDocuments(CheckActive: Boolean = True): Boolean;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -400,7 +403,6 @@ type
     function GetCaretInfo: string;
     function GetModifiedInfo: string;
     function GetActiveBookmarkList: TSynEditMarkList;
-    function ModifiedDocuments(CheckActive: Boolean = True): Boolean;
     procedure AssignOptions;
     property ActiveTabSheetCaption: string read GetActiveTabSheetCaption;
     property ActiveDocumentName: string read GetActiveDocumentName;
@@ -420,6 +422,7 @@ type
     property InTransaction: Boolean read FInTransaction write FInTransaction;
     property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
     property Processing: Boolean read FProcessing;
+    property ModifiedDocuments: Boolean Read FModifiedDocuments write FModifiedDocuments;
     procedure ExecuteStatement(Current: Boolean = False); overload;
     procedure ExecuteCurrentStatement;
     procedure ExecuteScript(Current: Boolean = False);
@@ -504,6 +507,7 @@ begin
   FSelectedText := '';
   FInTransaction := False;
   FProcessing := False;
+  FModifiedDocuments := False;
   FOutputFrame := TOutputFrame.Create(OutputPanel);
   FOutputFrame.Parent := OutputPanel;
   FOutputFrame.OnTabsheetDblClick := OutputDblClickActionExecute;
@@ -1196,13 +1200,16 @@ begin
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;
+  CheckModifiedDocuments;
 end;
 
 function TSQLEditorFrame.CloseAll(CloseDocuments: Boolean; IncludeCancel: Boolean): Integer;
+var
+  i, j: Integer;
 begin
   Result := mrNone;
 
-  if ModifiedDocuments then
+  if FModifiedDocuments then
   begin
     Result := SaveChanges(IncludeCancel);
     if Result = mrYes then
@@ -1210,56 +1217,53 @@ begin
   end;
   if CloseDocuments and (Result <> mrCancel) then
   begin
-    while PageControl.PageCount > 0 do
-      PageControl.ActivePage.Free;
+    j := PageControl.PageCount - 1;
+    for i := j downto 0 do
+      PageControl.Pages[i].Free;
     FNumberOfNewDocument := 0;
     Result := mrYes;
   end;
+  CheckModifiedDocuments;
 end;
 
 procedure TSQLEditorFrame.CloseAllOtherPages;
 var
-  i: Integer;
-  Temp: Integer;
+  i, j: Integer;
   Rslt: Integer;
   SynEdit: TBCOraSynEdit;
 begin
-  Temp := PageControl.ActivePageIndex;
-  PageControl.ActivePage.Tag := 1;
-
   Rslt := mrNone;
-
-  if ModifiedDocuments(False) then
+  PageControl.ActivePage.PageIndex := 0; { move the page first }
+  if GetModifiedDocuments(False) then
   begin
     Rslt := SaveChanges(True);
 
     if Rslt = mrYes then
-      for i := 0 to PageControl.PageCount - 1 do
+      for i := 1 to PageControl.PageCount - 1 do
       begin
-        PageControl.ActivePage := PageControl.Pages[i];
-        SynEdit := GetActiveSynEdit;
-        if Assigned(SynEdit) and (SynEdit.Modified) and (i <> Temp) then
+        SynEdit := GetSynEdit(PageControl.Pages[i]);
+        if Assigned(SynEdit) and SynEdit.Modified then
           Save(PageControl.Pages[i]);
       end;
-
   end;
 
   if Rslt <> mrCancel then
   begin
-    PageControl.ActivePageIndex := 0;
-    while PageControl.PageCount > 1 do
-      if PageControl.ActivePage.Tag = 1 then
-        PageControl.ActivePage := PageControl.Pages[PageControl.ActivePageIndex + 1]
-      else
-        PageControl.ActivePage.Free;
-
-    PageControl.ActivePage.Tag := 0; { important! }
+    j := PageControl.PageCount - 1;
+    for i := j downto 1 do
+      PageControl.Pages[i].Free;
 
     if GetActiveSynEdit.DocumentName = '' then
       FNumberOfNewDocument := 1
     else
       FNumberOfNewDocument := 0
   end;
+  CheckModifiedDocuments;
+end;
+
+procedure TSQLEditorFrame.CheckModifiedDocuments;
+begin
+  FModifiedDocuments := GetModifiedDocuments;
 end;
 
 function TSQLEditorFrame.Save(TabSheet: TTabSheet; ShowDialog: Boolean): string;
@@ -1308,6 +1312,7 @@ begin
           TabSheet.Caption := System.Copy(AFileName, 0, Length(AFileName) - 1);
         PageControl.UpdatePageCaption(TabSheet);
       end;
+      CheckModifiedDocuments;
     end;
   finally
     Screen.Cursor := crDefault;
@@ -1910,6 +1915,7 @@ end;
 
 procedure TSQLEditorFrame.SynEditOnChange(Sender: TObject);
 begin
+  FModifiedDocuments := True;
   if OptionsContainer.AutoSave then
     Save
   else
@@ -1963,7 +1969,7 @@ begin
   Result := PageControl.PageCount > 0;
 end;
 
-function TSQLEditorFrame.ModifiedDocuments(CheckActive: Boolean): Boolean;
+function TSQLEditorFrame.GetModifiedDocuments(CheckActive: Boolean): Boolean;
 var
   i: Integer;
   SynEdit: TBCOraSynEdit;
