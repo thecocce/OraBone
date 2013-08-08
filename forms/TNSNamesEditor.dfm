@@ -415,9 +415,10 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Search for'
+          ExplicitHeight = 13
         end
       end
       object SearchPanel3: TPanel
@@ -439,12 +440,15 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           TabOrder = 0
           Text = ''
           OnChange = SearchForEditChange
+          EnterToTab = False
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
-          EditColor = clInfoBk
           ErrorColor = 14803198
           NumbersAllowNegative = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
         end
       end
       object SearchPanel1: TPanel
@@ -840,8 +844,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         WantTabs = True
         OnChange = SynEditChange
         FontSmoothing = fsmNone
-        ExplicitTop = 3
-        ExplicitHeight = 407
       end
     end
   end
@@ -849,7 +851,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C010112005802440510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1610,7 +1612,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A003800780410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

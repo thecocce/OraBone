@@ -272,6 +272,10 @@ inherited AlterTableDialog: TAlterTableDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -373,12 +377,15 @@ inherited AlterTableDialog: TAlterTableDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object AlterTableRadioButton: TRadioButton [6]
     Left = 551
@@ -412,12 +419,15 @@ inherited AlterTableDialog: TAlterTableDialog
     TabOrder = 6
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 434
@@ -458,7 +468,7 @@ inherited AlterTableDialog: TAlterTableDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010108000E00B40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

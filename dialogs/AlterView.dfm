@@ -32,7 +32,6 @@ inherited AlterViewDialog: TAlterViewDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitHeight = 305
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -43,7 +42,6 @@ inherited AlterViewDialog: TAlterViewDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 275
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
@@ -83,7 +81,6 @@ inherited AlterViewDialog: TAlterViewDialog
         BevelOuter = bvNone
         Padding.Top = 1
         TabOrder = 1
-        ExplicitTop = 275
         object DividerBevel: TBevel
           AlignWithMargins = True
           Left = 98
@@ -147,6 +144,9 @@ inherited AlterViewDialog: TAlterViewDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 305
       object ColumnCommentsPanel: TPanel
         Left = 0
@@ -203,6 +203,9 @@ inherited AlterViewDialog: TAlterViewDialog
     object SelectStatementTabSheet: TTabSheet [2]
       Caption = 'Select Statement'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 305
       object SQLPanel: TPanel
         Left = 0
@@ -246,6 +249,7 @@ inherited AlterViewDialog: TAlterViewDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Columns'
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 438
@@ -294,12 +298,15 @@ inherited AlterViewDialog: TAlterViewDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
     Left = 76
@@ -311,12 +318,15 @@ inherited AlterViewDialog: TAlterViewDialog
     TabOrder = 4
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 413
@@ -353,7 +363,7 @@ inherited AlterViewDialog: TAlterViewDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010108000E005C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

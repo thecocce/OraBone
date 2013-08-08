@@ -26,7 +26,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
-      ExplicitHeight = 259
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -37,7 +36,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 229
         object BCDBGrid1: TBCDBGrid
           Left = 0
           Top = 0
@@ -115,7 +113,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
         BevelOuter = bvNone
         Padding.Top = 1
         TabOrder = 1
-        ExplicitTop = 229
         object ParametersToolBar: TBCToolBar
           Left = 0
           Top = 1
@@ -151,6 +148,9 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     object BodyTabSheet: TTabSheet [1]
       Caption = 'Body'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 259
       object BodyPanel: TPanel
         Left = 0
@@ -194,6 +194,7 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Parameters'
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 343
@@ -243,17 +244,20 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 352
     Width = 358
-    ExplicitTop = 341
+    ExplicitTop = 352
     ExplicitWidth = 358
   end
   inherited ActionList: TActionList
@@ -280,7 +284,7 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010107000E00340210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

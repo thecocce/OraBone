@@ -9,7 +9,7 @@ uses
   SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
   JvExButtons, JvBitBtn, BCControls.DBEdit, BCControls.ToolBar, BCControls.DBGrid,
   JvExStdCtrls, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, JvEdit,
-  GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
+  GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList, JvComCtrls;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)

@@ -28,8 +28,6 @@ object HistoryEditDialog: THistoryEditDialog
     Padding.Right = 6
     Padding.Bottom = 6
     TabOrder = 0
-    ExplicitTop = 265
-    ExplicitWidth = 592
     object OKButton: TButton
       Left = 467
       Top = 6
@@ -40,7 +38,6 @@ object HistoryEditDialog: THistoryEditDialog
       Default = True
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 430
     end
     object CancelButton: TButton
       Left = 548
@@ -51,7 +48,6 @@ object HistoryEditDialog: THistoryEditDialog
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 511
     end
     object Separator1Panel: TPanel
       Left = 542
@@ -61,7 +57,6 @@ object HistoryEditDialog: THistoryEditDialog
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 505
     end
   end
   object TopPanel: TPanel
@@ -75,9 +70,6 @@ object HistoryEditDialog: THistoryEditDialog
     Padding.Top = 6
     Padding.Right = 6
     TabOrder = 1
-    ExplicitLeft = 12
-    ExplicitWidth = 592
-    ExplicitHeight = 265
     object Panel3: TPanel
       Left = 6
       Top = 6
@@ -87,7 +79,6 @@ object HistoryEditDialog: THistoryEditDialog
       BevelOuter = bvNone
       Padding.Bottom = 3
       TabOrder = 0
-      ExplicitWidth = 580
       object TimePicker: TDateTimePicker
         Left = 173
         Top = 0
@@ -98,7 +89,6 @@ object HistoryEditDialog: THistoryEditDialog
         Time = 41207.370341851850000000
         Kind = dtkTime
         TabOrder = 1
-        ExplicitLeft = 170
       end
       object Panel7: TPanel
         Left = 0
@@ -114,9 +104,10 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 23
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Date'
+          ExplicitHeight = 13
         end
       end
       object DatePicker: TDateTimePicker
@@ -148,7 +139,6 @@ object HistoryEditDialog: THistoryEditDialog
       BevelOuter = bvNone
       Padding.Bottom = 3
       TabOrder = 1
-      ExplicitWidth = 580
       object Panel8: TPanel
         Left = 0
         Top = 0
@@ -163,19 +153,29 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 37
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Schema'
+          ExplicitHeight = 13
         end
       end
-      object SchemaEdit: TEdit
+      object SchemaEdit: TBCEdit
         Left = 70
         Top = 0
         Width = 547
         Height = 21
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 510
+        Text = ''
+        EnterToTab = False
+        OnlyNumbers = False
+        NumbersWithDots = False
+        NumbersWithSpots = False
+        ErrorColor = 14803455
+        NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
     end
     object Panel5: TPanel
@@ -186,8 +186,6 @@ object HistoryEditDialog: THistoryEditDialog
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 580
-      ExplicitHeight = 211
       object Panel6: TPanel
         Left = 0
         Top = 0
@@ -198,14 +196,14 @@ object HistoryEditDialog: THistoryEditDialog
         Padding.Left = 3
         Padding.Top = 3
         TabOrder = 0
-        ExplicitHeight = 211
         object SQLLabel: TLabel
           Left = 3
           Top = 3
-          Width = 19
+          Width = 67
           Height = 13
           Align = alTop
           Caption = 'SQL'
+          ExplicitWidth = 19
         end
       end
       object SQLSynEdit: TSynEdit
@@ -234,8 +232,6 @@ object HistoryEditDialog: THistoryEditDialog
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         WantTabs = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 510
-        ExplicitHeight = 211
       end
     end
   end

@@ -86,12 +86,15 @@ object ImportTableDataDialog: TImportTableDataDialog
         CharCase = ecUpperCase
         TabOrder = 0
         Text = ''
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object CommitIntervalSpinEdit: TBCSpinEdit
         Left = 65
@@ -111,12 +114,15 @@ object ImportTableDataDialog: TImportTableDataDialog
         CharCase = ecUpperCase
         TabOrder = 1
         Text = ''
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object DelimiterComboBox: TBCComboBox
         Left = 65
@@ -132,9 +138,11 @@ object ImportTableDataDialog: TImportTableDataDialog
           'Pipe'
           'Semicolon'
           'Tab')
-        EditColor = clInfoBk
         DeniedKeyStrokes = True
         ReadOnly = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
         DropDownFixedWidth = 0
       end
       object OpenFilenameEdit: TBCEdit
@@ -145,12 +153,15 @@ object ImportTableDataDialog: TImportTableDataDialog
         Hint = 'Folder'
         TabOrder = 4
         Text = ''
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object FolderBitBtn: TBitBtn
         Left = 287
@@ -292,12 +303,15 @@ object ImportTableDataDialog: TImportTableDataDialog
         Hint = 'Folder'
         TabOrder = 4
         Text = ''
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object BitBtn1: TBitBtn
         Left = 287

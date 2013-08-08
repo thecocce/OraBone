@@ -102,12 +102,15 @@ object SQLEditorFrame: TSQLEditorFrame
         TabOrder = 0
         Text = ''
         OnChange = SearchForEditChange
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
     end
     object SearchPanel1: TPanel
@@ -1262,12 +1265,15 @@ object SQLEditorFrame: TSQLEditorFrame
         TabOrder = 0
         Text = ''
         OnKeyPress = GotoLineNumberEditKeyPress
+        EnterToTab = False
         OnlyNumbers = True
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
     end
     object GotoLineButtonPanel: TPanel

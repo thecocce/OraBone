@@ -33,7 +33,6 @@ inherited CreateViewDialog: TCreateViewDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitHeight = 305
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -44,7 +43,6 @@ inherited CreateViewDialog: TCreateViewDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 282
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
@@ -84,7 +82,6 @@ inherited CreateViewDialog: TCreateViewDialog
         BevelOuter = bvNone
         Padding.Top = 1
         TabOrder = 1
-        ExplicitTop = 282
         object ColumnsToolBar: TBCToolBar
           Left = 0
           Top = 1
@@ -120,6 +117,9 @@ inherited CreateViewDialog: TCreateViewDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 293
       object ColumnCommentsPanel: TPanel
         Left = 0
@@ -176,6 +176,9 @@ inherited CreateViewDialog: TCreateViewDialog
     object SelectStatementTabSheet: TTabSheet [2]
       Caption = 'Select Statement'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 293
       object SQLPanel: TPanel
         Left = 0
@@ -263,12 +266,15 @@ inherited CreateViewDialog: TCreateViewDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
     Left = 76
@@ -280,12 +286,15 @@ inherited CreateViewDialog: TCreateViewDialog
     TabOrder = 4
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 413
@@ -317,7 +326,7 @@ inherited CreateViewDialog: TCreateViewDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010107000E00400210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -31,16 +31,13 @@ object SchemaCompareForm: TSchemaCompareForm
     Images = TreeImageList
     ParentDoubleBuffered = False
     TabOrder = 0
+    ActivePageCaption = '<select schema>'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object Schema1TabSheet: TTabSheet
       Caption = '<select schema>'
       ImageIndex = 24
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Schema1Panel: TPanel
         Left = 0
         Top = 0
@@ -93,7 +90,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 298
+              Width = 294
               WideText = 'Difference'
             end>
         end
@@ -188,8 +185,6 @@ object SchemaCompareForm: TSchemaCompareForm
       Step = 1
       TabOrder = 0
       Visible = False
-      ExplicitLeft = 3
-      ExplicitTop = 3
     end
   end
   object SchemasGroupBox: TGroupBox
@@ -225,9 +220,11 @@ object SchemaCompareForm: TSchemaCompareForm
       TabOrder = 0
       OnChange = Schema1ComboBoxChange
       OnDrawItem = Schema1ComboBoxDrawItem
-      EditColor = clInfoBk
       DeniedKeyStrokes = True
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
     object Schema2ComboBox: TBCComboBox
@@ -240,9 +237,11 @@ object SchemaCompareForm: TSchemaCompareForm
       TabOrder = 1
       OnChange = Schema2ComboBoxChange
       OnDrawItem = Schema2ComboBoxDrawItem
-      EditColor = clInfoBk
       DeniedKeyStrokes = True
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
   end
@@ -418,7 +417,7 @@ object SchemaCompareForm: TSchemaCompareForm
     Left = 140
     Top = 276
     Bitmap = {
-      494C01011900E000940210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010119001D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

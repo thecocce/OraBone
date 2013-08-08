@@ -42,12 +42,15 @@ inherited CreateIndexDialog: TCreateIndexDialog
     TabOrder = 7
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited PageControl: TBCPageControl
     Top = 82
@@ -61,7 +64,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitHeight = 271
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -72,7 +74,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 245
         object ColumnsStringGrid: TBCStringGrid
           Left = 0
           Top = 0
@@ -94,7 +95,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
           FixedFont.Style = []
           BooleanCols.Strings = (
             '1')
-          ExplicitHeight = 244
           ColWidths = (
             204
             59)
@@ -117,7 +117,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
           Caption = 'SourceToolBar'
           Images = ImageList
           TabOrder = 0
-          ExplicitHeight = 26
           object MoveUpToolButton: TToolButton
             Left = 0
             Top = 0
@@ -132,6 +131,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Columns'
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 291
@@ -181,12 +181,15 @@ inherited CreateIndexDialog: TCreateIndexDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object UniqueRadioButton: TRadioButton [8]
     Left = 82
@@ -217,9 +220,11 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 6
     OnChange = TableNameComboBoxChange
-    EditColor = clInfoBk
     DeniedKeyStrokes = False
     ReadOnly = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar
@@ -242,7 +247,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010105000E00400210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

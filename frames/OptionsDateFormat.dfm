@@ -2,7 +2,7 @@ object DateFormatFrame: TDateFormatFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 302
   Align = alClient
   TabOrder = 0
   Visible = False
@@ -10,7 +10,7 @@ object DateFormatFrame: TDateFormatFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 304
+    Height = 302
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -397,12 +397,15 @@ object DateFormatFrame: TDateFormatFrame
       ReadOnly = True
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
     object DateFormatEdit: TBCEdit
       Left = 80
@@ -417,12 +420,15 @@ object DateFormatFrame: TDateFormatFrame
       TabOrder = 1
       Text = 'DD.MM.YYYY'
       OnChange = DateFormatEditChange
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
 end

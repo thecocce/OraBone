@@ -47,9 +47,11 @@ object ExportTableDataDialog: TExportTableDataDialog
       Items.Strings = (
         'CSV File'
         'Insert Statements')
-      EditColor = clInfoBk
       DeniedKeyStrokes = True
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
     object SelectedRowsOnlyCheckBox: TCheckBox
@@ -85,15 +87,12 @@ object ExportTableDataDialog: TExportTableDataDialog
       ActivePage = Options1TabSheet
       Align = alClient
       TabOrder = 0
+      ActivePageCaption = 'Options'
       TabDragDrop = False
       HoldShiftToDragDrop = False
       ShowCloseButton = False
       object Options1TabSheet: TTabSheet
         Caption = 'Options'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DelimiterLabel: TLabel
           Left = 12
           Top = 15
@@ -115,9 +114,11 @@ object ExportTableDataDialog: TExportTableDataDialog
             'Pipe'
             'Semicolon'
             'Tab')
-          EditColor = clInfoBk
           DeniedKeyStrokes = True
           ReadOnly = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
           DropDownFixedWidth = 0
         end
         object IncludeColumnHeadersCheckBox: TCheckBox
@@ -224,12 +225,15 @@ object ExportTableDataDialog: TExportTableDataDialog
           CharCase = ecUpperCase
           TabOrder = 0
           Text = ''
+          EnterToTab = False
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
-          EditColor = clInfoBk
           ErrorColor = 14803198
           NumbersAllowNegative = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
         end
         object TableEdit: TBCEdit
           Left = 62
@@ -240,12 +244,15 @@ object ExportTableDataDialog: TExportTableDataDialog
           CharCase = ecUpperCase
           TabOrder = 1
           Text = ''
+          EnterToTab = False
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
-          EditColor = clInfoBk
           ErrorColor = 14803198
           NumbersAllowNegative = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
         end
         object CommitIntervalSpinEdit: TBCSpinEdit
           Left = 63
@@ -359,12 +366,15 @@ object ExportTableDataDialog: TExportTableDataDialog
         Hint = 'Folder'
         TabOrder = 1
         Text = ''
+        EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
         NumbersWithSpots = False
-        EditColor = clInfoBk
         ErrorColor = 14803198
         NumbersAllowNegative = False
+        FocusOnColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object FolderBitBtn: TBitBtn
         Left = 287

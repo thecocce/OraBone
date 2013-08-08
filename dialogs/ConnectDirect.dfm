@@ -55,12 +55,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       CharCase = ecUpperCase
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel2: TPanel
@@ -100,12 +103,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       ThemedPassword = True
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel3: TPanel
@@ -144,12 +150,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       Align = alRight
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel4: TPanel
@@ -187,12 +196,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       Hint = 'Port'
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel5: TPanel
@@ -234,12 +246,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       TabOrder = 0
       Text = ''
       OnChange = SIDEditChange
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel6: TPanel
@@ -282,12 +297,15 @@ object ConnectDirectDialog: TConnectDirectDialog
       TabOrder = 0
       Text = ''
       OnChange = ServiceNameEditChange
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel7: TPanel

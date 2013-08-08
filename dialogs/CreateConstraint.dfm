@@ -41,12 +41,15 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     TabOrder = 9
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   inherited PageControl: TBCPageControl
     Top = 80
@@ -131,6 +134,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ReferencedColumnsTabSheet: TTabSheet [1]
       Caption = 'Referenced Columns'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RefColumnsPanel: TPanel
         Left = 0
         Top = 31
@@ -224,9 +231,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
           OnChange = RefTableNameComboBoxChange
-          EditColor = clInfoBk
           DeniedKeyStrokes = False
           ReadOnly = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
           DropDownFixedWidth = 0
         end
       end
@@ -234,6 +243,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ConditionTabSheet: TTabSheet [2]
       Caption = 'Condition'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConditionPanel: TPanel
         Left = 0
         Top = 0
@@ -320,12 +333,15 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     TabOrder = 0
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object PrimaryKeyRadioButton: TRadioButton [8]
     Left = 94
@@ -374,9 +390,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
     OnChange = TableNameComboBoxChange
-    EditColor = clInfoBk
     DeniedKeyStrokes = False
     ReadOnly = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar
@@ -409,7 +427,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010105000E00480210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

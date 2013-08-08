@@ -46,12 +46,15 @@ object ObjectSearhForm: TObjectSearhForm
       TabOrder = 0
       Text = ''
       OnKeyPress = SearchForEditKeyPress
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
     object CaseSensitiveCheckBox: TCheckBox
       Left = 367
@@ -132,8 +135,6 @@ object ObjectSearhForm: TObjectSearhForm
         Width = 100
       end>
     SimplePanel = True
-    ExplicitTop = 420
-    ExplicitWidth = 799
   end
   object TreePanel: TPanel
     Left = 0
@@ -147,7 +148,6 @@ object ObjectSearhForm: TObjectSearhForm
     Padding.Right = 4
     Padding.Bottom = 4
     TabOrder = 2
-    ExplicitHeight = 394
     object VirtualDrawTree: TVirtualDrawTree
       Left = 4
       Top = 2
@@ -190,7 +190,7 @@ object ObjectSearhForm: TObjectSearhForm
         item
           Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
           Position = 1
-          Width = 298
+          Width = 294
           WideText = 'Search Result'
         end>
     end
@@ -214,7 +214,7 @@ object ObjectSearhForm: TObjectSearhForm
     Left = 60
     Top = 284
     Bitmap = {
-      494C01011800E0008C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010118001D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

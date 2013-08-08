@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, BCDialogs.Dlg, SynEditHighlighter, SynHighlighterSQL,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, JvExStdCtrls, JvEdit, BCControls.Edit;
 
 type
   THistoryEditDialog = class(TDialog)
@@ -21,7 +21,7 @@ type
     Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
-    SchemaEdit: TEdit;
+    SchemaEdit: TBCEdit;
     SchemaLabel: TLabel;
     Separator1Panel: TPanel;
     SQLLabel: TLabel;

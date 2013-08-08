@@ -254,12 +254,15 @@ object DataFilterDialog: TDataFilterDialog
           Text = ''
           OnChange = FilterNameEditChange
           OnKeyPress = FilterNameEditKeyPress
+          EnterToTab = False
           OnlyNumbers = False
           NumbersWithDots = False
           NumbersWithSpots = False
-          EditColor = clInfoBk
           ErrorColor = 14803198
           NumbersAllowNegative = False
+          FocusOnColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
         end
       end
     end

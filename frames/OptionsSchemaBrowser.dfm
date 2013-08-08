@@ -2,7 +2,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 304
+  Height = 302
   Align = alClient
   TabOrder = 0
   Visible = False
@@ -10,7 +10,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 304
+    Height = 302
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -46,9 +46,11 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Items.Strings = (
         'Bottom'
         'Top')
-      EditColor = clInfoBk
       DeniedKeyStrokes = True
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
     object ShowTreeLinesCheckBox: TBCCheckBox
@@ -75,12 +77,15 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Margins.Bottom = 4
       TabOrder = 2
       Text = '20'
+      EnterToTab = False
       OnlyNumbers = True
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
 end

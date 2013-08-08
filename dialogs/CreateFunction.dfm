@@ -244,12 +244,15 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     TabOrder = 3
     Text = ''
     OnChange = PageControlChange
+    EnterToTab = False
     OnlyNumbers = False
     NumbersWithDots = False
     NumbersWithSpots = False
-    EditColor = clInfoBk
     ErrorColor = 14803198
     NumbersAllowNegative = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
   end
   object ReturnTypeComboBox: TBCComboBox [6]
     Left = 100
@@ -279,9 +282,11 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
       'UROWID'
       'VARCHAR2'
       'XMLTYPE')
-    EditColor = clInfoBk
     DeniedKeyStrokes = False
     ReadOnly = False
+    FocusOnColor = clInfoBk
+    FocusOffColor = clWindow
+    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar
@@ -318,7 +323,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   end
   inherited ImageList: TBCImageList
     Bitmap = {
-      494C010107000E00640210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

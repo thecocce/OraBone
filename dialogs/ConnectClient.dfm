@@ -58,12 +58,15 @@ object ConnectClientDialog: TConnectClientDialog
       CharCase = ecUpperCase
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel2: TPanel
@@ -160,12 +163,15 @@ object ConnectClientDialog: TConnectClientDialog
       ThemedPassword = True
       TabOrder = 0
       Text = ''
+      EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
-      EditColor = clInfoBk
       ErrorColor = 14803198
       NumbersAllowNegative = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
     end
   end
   object Panel4: TPanel
@@ -204,9 +210,11 @@ object ConnectClientDialog: TConnectClientDialog
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
-      EditColor = clInfoBk
       DeniedKeyStrokes = False
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
   end
@@ -247,9 +255,11 @@ object ConnectClientDialog: TConnectClientDialog
       Align = alRight
       TabOrder = 0
       OnKeyPress = HomeComboBoxKeyPress
-      EditColor = clInfoBk
       DeniedKeyStrokes = False
       ReadOnly = False
+      FocusOnColor = clInfoBk
+      FocusOffColor = clWindow
+      UseColoring = True
       DropDownFixedWidth = 0
     end
   end
