@@ -32,13 +32,13 @@ object ObjectFrameFrame: TObjectFrameFrame
       Height = 21
       TabOrder = 0
       Text = 'Bottom'
+      StyleElements = [seFont, seBorder]
       Items.Strings = (
         'Bottom'
         'Top')
       DeniedKeyStrokes = True
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end

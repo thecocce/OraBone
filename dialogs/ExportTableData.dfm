@@ -43,14 +43,14 @@ object ExportTableDataDialog: TExportTableDataDialog
       ItemIndex = 0
       TabOrder = 0
       Text = 'CSV File'
+      StyleElements = [seFont, seBorder]
       OnChange = FormatComboBoxChange
       Items.Strings = (
         'CSV File'
         'Insert Statements')
       DeniedKeyStrokes = True
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end
@@ -109,6 +109,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           ItemIndex = 2
           TabOrder = 0
           Text = 'Semicolon'
+          StyleElements = [seFont, seBorder]
           Items.Strings = (
             'Comma'
             'Pipe'
@@ -116,8 +117,7 @@ object ExportTableDataDialog: TExportTableDataDialog
             'Tab')
           DeniedKeyStrokes = True
           ReadOnly = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
           DropDownFixedWidth = 0
         end
@@ -231,8 +231,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
         end
         object TableEdit: TBCEdit
@@ -250,8 +249,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
         end
         object CommitIntervalSpinEdit: TBCSpinEdit
@@ -262,6 +260,8 @@ object ExportTableDataDialog: TExportTableDataDialog
           Hint = 'Commit Interval. Zero means no COMMIT clauses.'
           TabOrder = 2
           EditColor = clInfoBk
+          FocusOffColor = clWindow
+          UseColoring = True
         end
         object IncludeNullColumns2CheckBox: TCheckBox
           Left = 10
@@ -372,8 +372,7 @@ object ExportTableDataDialog: TExportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object FolderBitBtn: TBitBtn

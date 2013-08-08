@@ -66,8 +66,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object PublicRadioButton: TRadioButton
@@ -95,10 +94,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Object owner'
         TabOrder = 3
+        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
         DropDownFixedWidth = 0
       end
@@ -109,10 +108,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Object name'
         TabOrder = 4
+        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
         DropDownFixedWidth = 0
       end
@@ -123,10 +122,10 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Database link'
         TabOrder = 5
+        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
         DropDownFixedWidth = 0
       end

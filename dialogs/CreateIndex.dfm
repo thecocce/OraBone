@@ -48,8 +48,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   inherited PageControl: TBCPageControl
@@ -187,8 +186,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object UniqueRadioButton: TRadioButton [8]
@@ -219,11 +217,11 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 6
+    StyleElements = [seFont, seBorder]
     OnChange = TableNameComboBoxChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
     DropDownFixedWidth = 0
   end

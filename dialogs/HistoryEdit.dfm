@@ -173,8 +173,7 @@ object HistoryEditDialog: THistoryEditDialog
         NumbersWithSpots = False
         ErrorColor = 14803455
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
     end

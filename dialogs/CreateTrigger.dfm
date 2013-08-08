@@ -42,8 +42,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   inherited PageControl: TBCPageControl
@@ -155,8 +154,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
         end
         object ReferenceOldEdit: TBCEdit
@@ -174,8 +172,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
         end
       end
@@ -333,8 +330,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object TableNameComboBox: TBCComboBox [7]
@@ -345,11 +341,11 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Hint = 'Table or view name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
+    StyleElements = [seFont, seBorder]
     OnChange = PageControlChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
     DropDownFixedWidth = 0
   end

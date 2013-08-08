@@ -403,8 +403,7 @@ object DateFormatFrame: TDateFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
     end
     object DateFormatEdit: TBCEdit
@@ -426,8 +425,7 @@ object DateFormatFrame: TDateFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
     end
   end

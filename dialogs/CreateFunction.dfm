@@ -250,8 +250,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object ReturnTypeComboBox: TBCComboBox [6]
@@ -263,6 +262,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Anchors = [akLeft, akTop, akRight]
     DropDownCount = 17
     TabOrder = 4
+    StyleElements = [seFont, seBorder]
     OnChange = PageControlChange
     Items.Strings = (
       'BFILE'
@@ -284,8 +284,7 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
       'XMLTYPE')
     DeniedKeyStrokes = False
     ReadOnly = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
     DropDownFixedWidth = 0
   end

@@ -108,8 +108,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
         end
       end
@@ -153,10 +152,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Width = 225
           Height = 21
           TabOrder = 3
+          StyleElements = [seFont, seBorder]
           DeniedKeyStrokes = False
           ReadOnly = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
           DropDownFixedWidth = 0
         end
@@ -166,10 +165,10 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Width = 225
           Height = 21
           TabOrder = 4
+          StyleElements = [seFont, seBorder]
           DeniedKeyStrokes = False
           ReadOnly = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
           DropDownFixedWidth = 0
         end

@@ -92,8 +92,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object CommitIntervalSpinEdit: TBCSpinEdit
@@ -104,6 +103,8 @@ object ImportTableDataDialog: TImportTableDataDialog
         Hint = 'Commit Interval. Zero means no COMMIT clauses.'
         TabOrder = 2
         EditColor = clInfoBk
+        FocusOffColor = clWindow
+        UseColoring = True
       end
       object TableEdit: TBCEdit
         Left = 65
@@ -120,8 +121,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object DelimiterComboBox: TBCComboBox
@@ -133,6 +133,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         ItemIndex = 2
         TabOrder = 3
         Text = 'Semicolon'
+        StyleElements = [seFont, seBorder]
         Items.Strings = (
           'Comma'
           'Pipe'
@@ -140,8 +141,7 @@ object ImportTableDataDialog: TImportTableDataDialog
           'Tab')
         DeniedKeyStrokes = True
         ReadOnly = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
         DropDownFixedWidth = 0
       end
@@ -159,8 +159,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object FolderBitBtn: TBitBtn
@@ -309,8 +308,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object BitBtn1: TBitBtn

@@ -87,11 +87,11 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
       Height = 21
       Align = alRight
       TabOrder = 0
+      StyleElements = [seFont, seBorder]
       OnChange = NameComboBoxChange
       DeniedKeyStrokes = False
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end

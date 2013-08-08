@@ -48,10 +48,10 @@ object CustomizePageControlDialog: TCustomizePageControlDialog
       Height = 21
       Align = alRight
       TabOrder = 0
+      StyleElements = [seFont, seBorder]
       DeniedKeyStrokes = True
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end

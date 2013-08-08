@@ -383,8 +383,7 @@ inherited AlterTableDialog: TAlterTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object AlterTableRadioButton: TRadioButton [6]
@@ -425,8 +424,7 @@ inherited AlterTableDialog: TAlterTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   inherited StatusBar1: TStatusBar

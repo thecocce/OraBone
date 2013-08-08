@@ -64,8 +64,7 @@ object ConnectClientDialog: TConnectClientDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
     end
   end
@@ -169,8 +168,7 @@ object ConnectClientDialog: TConnectClientDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
     end
   end
@@ -210,10 +208,10 @@ object ConnectClientDialog: TConnectClientDialog
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
+      StyleElements = [seFont, seBorder]
       DeniedKeyStrokes = False
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end
@@ -254,11 +252,11 @@ object ConnectClientDialog: TConnectClientDialog
       Hint = 'Home'
       Align = alRight
       TabOrder = 0
+      StyleElements = [seFont, seBorder]
       OnKeyPress = HomeComboBoxKeyPress
       DeniedKeyStrokes = False
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end

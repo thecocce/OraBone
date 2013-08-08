@@ -47,8 +47,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   inherited PageControl: TBCPageControl
@@ -230,11 +229,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Hint = 'Table name'
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
+          StyleElements = [seFont, seBorder]
           OnChange = RefTableNameComboBoxChange
           DeniedKeyStrokes = False
           ReadOnly = False
-          FocusOnColor = clInfoBk
-          FocusOffColor = clWindow
+          EditColor = clInfoBk
           UseColoring = True
           DropDownFixedWidth = 0
         end
@@ -339,8 +338,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object PrimaryKeyRadioButton: TRadioButton [8]
@@ -389,11 +387,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
+    StyleElements = [seFont, seBorder]
     OnChange = TableNameComboBoxChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
     DropDownFixedWidth = 0
   end

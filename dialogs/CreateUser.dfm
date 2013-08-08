@@ -146,8 +146,7 @@ inherited CreateUserDialog: TCreateUserDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object PasswordEdit: TBCEdit [6]
@@ -166,8 +165,7 @@ inherited CreateUserDialog: TCreateUserDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object PasswordExpiredCheckBox: TCheckBox [7]

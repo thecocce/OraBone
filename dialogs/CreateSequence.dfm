@@ -78,8 +78,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object MinValueEdit: TBCEdit
@@ -98,8 +97,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object MaxValueEdit: TBCEdit
@@ -118,8 +116,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object StartWithEdit: TBCEdit
@@ -138,8 +135,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object IncrementByEdit: TBCEdit
@@ -158,8 +154,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object CacheEdit: TBCEdit
@@ -178,8 +173,7 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        FocusOnColor = clInfoBk
-        FocusOffColor = clWindow
+        EditColor = clInfoBk
         UseColoring = True
       end
       object OrderCheckBox: TCheckBox

@@ -218,12 +218,12 @@ object SchemaCompareForm: TSchemaCompareForm
       Style = csOwnerDrawFixed
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
+      StyleElements = [seFont, seBorder]
       OnChange = Schema1ComboBoxChange
       OnDrawItem = Schema1ComboBoxDrawItem
       DeniedKeyStrokes = True
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end
@@ -235,12 +235,12 @@ object SchemaCompareForm: TSchemaCompareForm
       Style = csOwnerDrawFixed
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
+      StyleElements = [seFont, seBorder]
       OnChange = Schema2ComboBoxChange
       OnDrawItem = Schema2ComboBoxDrawItem
       DeniedKeyStrokes = True
       ReadOnly = False
-      FocusOnColor = clInfoBk
-      FocusOffColor = clWindow
+      EditColor = clInfoBk
       UseColoring = True
       DropDownFixedWidth = 0
     end

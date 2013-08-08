@@ -272,8 +272,7 @@ inherited CreateViewDialog: TCreateViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
@@ -292,8 +291,7 @@ inherited CreateViewDialog: TCreateViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    FocusOnColor = clInfoBk
-    FocusOffColor = clWindow
+    EditColor = clInfoBk
     UseColoring = True
   end
   inherited StatusBar1: TStatusBar
