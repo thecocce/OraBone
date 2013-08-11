@@ -61,8 +61,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel2: TPanel
@@ -108,8 +106,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel3: TPanel
@@ -154,8 +150,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel4: TPanel
@@ -199,8 +193,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel5: TPanel
@@ -248,8 +240,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel6: TPanel
@@ -298,8 +288,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object Panel7: TPanel

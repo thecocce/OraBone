@@ -32,7 +32,7 @@ object SQLEditorFrame: TSQLEditorFrame
     TabOrder = 0
     Visible = False
     object CaseSensitiveLabel: TLabel
-      Left = 368
+      Left = 337
       Top = 0
       Width = 70
       Height = 21
@@ -42,7 +42,7 @@ object SQLEditorFrame: TSQLEditorFrame
       ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
-      Left = 465
+      Left = 434
       Top = 0
       Width = 89
       Height = 21
@@ -52,7 +52,7 @@ object SQLEditorFrame: TSQLEditorFrame
       ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
-      Left = 581
+      Left = 550
       Top = 0
       Width = 92
       Height = 21
@@ -108,8 +108,6 @@ object SQLEditorFrame: TSQLEditorFrame
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
     end
     object SearchPanel1: TPanel
@@ -186,66 +184,17 @@ object SQLEditorFrame: TSQLEditorFrame
         ExplicitLeft = 24
       end
     end
-    object SearchPanel4: TPanel
+    object SearchPanel5: TPanel
       Left = 266
       Top = 0
-      Width = 23
+      Width = 21
       Height = 21
       Align = alLeft
       AutoSize = True
       BevelOuter = bvNone
-      Padding.Left = 2
-      Padding.Right = 2
       TabOrder = 3
-      object JvSpeedButton2: TSpeedButton
-        Left = 2
-        Top = 0
-        Width = 19
-        Height = 21
-        Action = SearchClearAction
-        Align = alLeft
-        Flat = True
-        Glyph.Data = {
-          C6020000424DC602000000000000C60100002800000010000000100000000100
-          08000000000000010000120B0000120B0000640000006400000000000000FFFF
-          FF00FF00FF000086000000830000007B0000005E0000005C0000005800000054
-          00000182020000650100005D010004880700068C0900048A0B00035A06000796
-          0D0006630900046D0A00068E0F000CA015000C9D150008690E000B891300096D
-          110011AA1D000D8217000E78180001500A001CB62F0013872300179928001890
-          290021C239001C9A31001C982F0036E554002AD149002BCE49002CD44D000E91
-          2D0035E05D0025AC460047F779001DA657000B63440012805B002D919700185F
-          69003EABEE0045B4F70048B7FA00196DA3003DAAF400258BD80039A4F4003BA7
-          F80040ACFE0041ADFA00025291000354950004579A00065B9F00197ACC001F81
-          D4002581CE00319CF700359EF2003CA6FF000458A000065BAA00075CA9000962
-          B4001676CA001E80D500268BE5002687DD002889E3002C8FEB002D95EF0038A1
-          FF0038A3FF000C67C4000B64BB000F69BF002184E300278CEB000F6AC900126E
-          D300116CCF001B6DC4002380E100136FDC001160C0001573E7001574E0001776
-          E6001877EA00166AD40002020202020202626002020202020202020202020202
-          615F5D5958020202020202020202024A4C57565A535449480202020202020237
-          32334D364B5547463E3D020202021D43385B344D3B3941403F3C0202022E311D
-          63425E4E3A44454550020202122B1E1E1E1D1D355C4F525102020219232C251E
-          292F1E1E1D1D020202020224212A22150304142D300202020202020210201A0A
-          050F0C0C02020202020202021F260D070C130202020202020202021C280E0902
-          02020202020202020202172711080202020202020202020202021B1606020202
-          02020202020202020202180B0202020202020202020202020202020202020202
-          02020202020202020202}
-        Margin = 2
-        ExplicitTop = 2
-        ExplicitHeight = 19
-      end
-    end
-    object SearchPanel5: TPanel
-      Left = 289
-      Top = 0
-      Width = 29
-      Height = 21
-      Align = alLeft
-      AutoSize = True
-      BevelOuter = bvNone
-      Padding.Left = 8
-      TabOrder = 4
       object SpeedButton1: TSpeedButton
-        Left = 8
+        Left = 0
         Top = 0
         Width = 21
         Height = 21
@@ -324,7 +273,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel6: TPanel
-      Left = 318
+      Left = 287
       Top = 0
       Width = 23
       Height = 21
@@ -332,7 +281,7 @@ object SQLEditorFrame: TSQLEditorFrame
       AutoSize = True
       BevelOuter = bvNone
       Padding.Left = 2
-      TabOrder = 5
+      TabOrder = 4
       object SpeedButton2: TSpeedButton
         Left = 2
         Top = 0
@@ -413,7 +362,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object SearchPanel7: TPanel
-      Left = 341
+      Left = 310
       Top = 0
       Width = 27
       Height = 21
@@ -422,7 +371,7 @@ object SQLEditorFrame: TSQLEditorFrame
       BevelOuter = bvNone
       Padding.Left = 8
       Padding.Top = 2
-      TabOrder = 6
+      TabOrder = 5
       object CaseSensitiveCheckBox: TBCCheckBox
         Left = 8
         Top = 2
@@ -434,39 +383,39 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object Panel1: TPanel
-      Left = 438
+      Left = 407
       Top = 0
       Width = 8
       Height = 21
       Align = alLeft
       BevelOuter = bvNone
-      TabOrder = 7
+      TabOrder = 6
     end
     object WholeWordsCheckBox: TBCCheckBox
-      Left = 446
+      Left = 415
       Top = 0
       Width = 19
       Height = 21
       Align = alLeft
-      TabOrder = 8
+      TabOrder = 7
       ReadOnly = False
     end
     object Panel2: TPanel
-      Left = 554
+      Left = 523
       Top = 0
       Width = 8
       Height = 21
       Align = alLeft
       BevelOuter = bvNone
-      TabOrder = 9
+      TabOrder = 8
     end
     object RegularExpressionCheckBox: TBCCheckBox
-      Left = 562
+      Left = 531
       Top = 0
       Width = 19
       Height = 21
       Align = alLeft
-      TabOrder = 10
+      TabOrder = 9
       ReadOnly = False
     end
   end
@@ -1270,8 +1219,6 @@ object SQLEditorFrame: TSQLEditorFrame
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
     end
     object GotoLineButtonPanel: TPanel
@@ -1393,9 +1340,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Hint = 'Find the previous matching text'
       ShortCut = 8306
       OnExecute = SearchFindPreviousActionExecute
-    end
-    object SearchClearAction: TAction
-      OnExecute = SearchClearActionExecute
     end
     object GotoLineAction: TAction
       Hint = 'Go to line'

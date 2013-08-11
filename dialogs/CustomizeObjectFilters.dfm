@@ -87,12 +87,9 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
       Height = 21
       Align = alRight
       TabOrder = 0
-      StyleElements = [seFont, seBorder]
       OnChange = NameComboBoxChange
       DeniedKeyStrokes = False
       ReadOnly = False
-      EditColor = clInfoBk
-      UseColoring = True
       DropDownFixedWidth = 0
     end
     object Separator3Panel: TPanel

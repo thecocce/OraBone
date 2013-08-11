@@ -78,8 +78,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object MinValueEdit: TBCEdit
         Left = 94
@@ -97,8 +95,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object MaxValueEdit: TBCEdit
         Left = 94
@@ -116,8 +112,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object StartWithEdit: TBCEdit
         Left = 94
@@ -135,8 +129,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object IncrementByEdit: TBCEdit
         Left = 94
@@ -154,8 +146,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object CacheEdit: TBCEdit
         Left = 94
@@ -173,8 +163,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object OrderCheckBox: TCheckBox
         Left = 119
@@ -199,8 +187,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 350
       ExplicitHeight = 209
       inherited SourcePanel: TPanel

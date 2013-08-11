@@ -92,8 +92,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object CommitIntervalSpinEdit: TBCSpinEdit
         Left = 65
@@ -102,9 +100,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         Height = 21
         Hint = 'Commit Interval. Zero means no COMMIT clauses.'
         TabOrder = 2
-        EditColor = clInfoBk
-        FocusOffColor = clWindow
-        UseColoring = True
       end
       object TableEdit: TBCEdit
         Left = 65
@@ -121,8 +116,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object DelimiterComboBox: TBCComboBox
         Left = 65
@@ -133,7 +126,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         ItemIndex = 2
         TabOrder = 3
         Text = 'Semicolon'
-        StyleElements = [seFont, seBorder]
         Items.Strings = (
           'Comma'
           'Pipe'
@@ -141,8 +133,6 @@ object ImportTableDataDialog: TImportTableDataDialog
           'Tab')
         DeniedKeyStrokes = True
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
       object OpenFilenameEdit: TBCEdit
@@ -159,8 +149,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object FolderBitBtn: TBitBtn
         Left = 287
@@ -308,8 +296,6 @@ object ImportTableDataDialog: TImportTableDataDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object BitBtn1: TBitBtn
         Left = 287

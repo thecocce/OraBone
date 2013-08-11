@@ -66,8 +66,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object PublicRadioButton: TRadioButton
         Left = 96
@@ -94,11 +92,8 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Object owner'
         TabOrder = 3
-        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
       object ObjectNameComboBox: TBCComboBox
@@ -108,11 +103,8 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Object name'
         TabOrder = 4
-        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
       object DBLinkComboBox: TBCComboBox
@@ -122,18 +114,13 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Database link'
         TabOrder = 5
-        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 310
       ExplicitHeight = 168
       inherited SourcePanel: TPanel

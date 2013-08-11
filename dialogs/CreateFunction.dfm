@@ -199,8 +199,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Parameters'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 343
       ExplicitHeight = 231
       inherited SourcePanel: TPanel
@@ -250,8 +248,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object ReturnTypeComboBox: TBCComboBox [6]
     Left = 100
@@ -262,7 +258,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Anchors = [akLeft, akTop, akRight]
     DropDownCount = 17
     TabOrder = 4
-    StyleElements = [seFont, seBorder]
     OnChange = PageControlChange
     Items.Strings = (
       'BFILE'
@@ -284,8 +279,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
       'XMLTYPE')
     DeniedKeyStrokes = False
     ReadOnly = False
-    EditColor = clInfoBk
-    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar

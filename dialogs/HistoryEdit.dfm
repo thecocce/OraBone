@@ -173,8 +173,6 @@ object HistoryEditDialog: THistoryEditDialog
         NumbersWithSpots = False
         ErrorColor = 14803455
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
     end
     object Panel5: TPanel

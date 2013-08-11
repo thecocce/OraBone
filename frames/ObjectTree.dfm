@@ -68,14 +68,11 @@ object ObjectTreeFrame: TObjectTreeFrame
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        StyleElements = [seFont, seBorder]
         OnChange = SchemaComboBoxChange
         OnDrawItem = SchemaComboBoxDrawItem
         OnKeyDown = SchemaComboBoxKeyDown
         DeniedKeyStrokes = False
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
     end

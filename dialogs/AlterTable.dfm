@@ -329,8 +329,6 @@ inherited AlterTableDialog: TAlterTableDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 724
       ExplicitHeight = 309
       inherited SourcePanel: TPanel
@@ -383,8 +381,6 @@ inherited AlterTableDialog: TAlterTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object AlterTableRadioButton: TRadioButton [6]
     Left = 551
@@ -424,8 +420,6 @@ inherited AlterTableDialog: TAlterTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 434

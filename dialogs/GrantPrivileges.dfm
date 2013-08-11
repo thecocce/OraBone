@@ -108,8 +108,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          EditColor = clInfoBk
-          UseColoring = True
         end
       end
       object ToGroupBox: TGroupBox
@@ -152,11 +150,8 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Width = 225
           Height = 21
           TabOrder = 3
-          StyleElements = [seFont, seBorder]
           DeniedKeyStrokes = False
           ReadOnly = False
-          EditColor = clInfoBk
-          UseColoring = True
           DropDownFixedWidth = 0
         end
         object RoleComboBox: TBCComboBox
@@ -165,11 +160,8 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Width = 225
           Height = 21
           TabOrder = 4
-          StyleElements = [seFont, seBorder]
           DeniedKeyStrokes = False
           ReadOnly = False
-          EditColor = clInfoBk
-          UseColoring = True
           DropDownFixedWidth = 0
         end
       end
@@ -185,8 +177,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 318
       ExplicitHeight = 257
       inherited SourcePanel: TPanel

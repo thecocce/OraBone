@@ -52,8 +52,6 @@ object ObjectSearhForm: TObjectSearhForm
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
     object CaseSensitiveCheckBox: TCheckBox
       Left = 367

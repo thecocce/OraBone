@@ -134,11 +134,8 @@ object MainMenuFrame: TMainMenuFrame
       Margins.Bottom = 4
       DropDownCount = 9
       TabOrder = 3
-      StyleElements = [seFont, seBorder]
       DeniedKeyStrokes = True
       ReadOnly = False
-      EditColor = clInfoBk
-      UseColoring = True
       DropDownFixedWidth = 0
     end
     object AnimationDurationEdit: TBCEdit
@@ -160,8 +157,6 @@ object MainMenuFrame: TMainMenuFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
   object FontDialog: TFontDialog

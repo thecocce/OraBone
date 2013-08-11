@@ -71,8 +71,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object PublicRadioButton: TRadioButton
         Left = 96
@@ -108,8 +106,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object PasswordEdit: TBCEdit
         Left = 94
@@ -126,8 +122,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         NumbersWithSpots = False
         ErrorColor = 14803198
         NumbersAllowNegative = False
-        EditColor = clInfoBk
-        UseColoring = True
       end
       object ServiceNameComboBox: TBCComboBox
         Left = 94
@@ -138,11 +132,8 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 5
-        StyleElements = [seFont, seBorder]
         DeniedKeyStrokes = True
         ReadOnly = False
-        EditColor = clInfoBk
-        UseColoring = True
         DropDownFixedWidth = 0
       end
     end

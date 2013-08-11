@@ -250,8 +250,6 @@ inherited AlterViewDialog: TAlterViewDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 438
       ExplicitHeight = 305
       inherited SourcePanel: TPanel
@@ -304,8 +302,6 @@ inherited AlterViewDialog: TAlterViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
     Left = 76
@@ -323,8 +319,6 @@ inherited AlterViewDialog: TAlterViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 413

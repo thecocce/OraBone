@@ -48,8 +48,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited PageControl: TBCPageControl
     Top = 82
@@ -131,8 +129,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 291
       ExplicitHeight = 251
       inherited SourcePanel: TPanel
@@ -186,8 +182,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object UniqueRadioButton: TRadioButton [8]
     Left = 82
@@ -217,12 +211,9 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 6
-    StyleElements = [seFont, seBorder]
     OnChange = TableNameComboBoxChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    EditColor = clInfoBk
-    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar

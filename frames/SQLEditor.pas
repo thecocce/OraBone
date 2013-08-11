@@ -127,7 +127,6 @@ type
     GotoBookmark7MenuItem: TMenuItem;
     GotoBookmark8MenuItem: TMenuItem;
     GotoBookmark9MenuItem: TMenuItem;
-    SearchClearAction: TAction;
     ToolbarPopupMenu: TBCPopupMenu;
     NewOpen1: TMenuItem;
     Print1: TMenuItem;
@@ -233,8 +232,6 @@ type
     SearchForEdit: TBCEdit;
     SearchPanel1: TPanel;
     JvSpeedButton1: TSpeedButton;
-    SearchPanel4: TPanel;
-    JvSpeedButton2: TSpeedButton;
     SearchPanel5: TPanel;
     SpeedButton1: TSpeedButton;
     SearchPanel6: TPanel;
@@ -281,7 +278,6 @@ type
     procedure DBMSOutputTimer(Sender: TObject);
     procedure OraSessionError(Sender: TObject; E: EDAError; var Fail: Boolean);
     procedure SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
-    procedure SearchClearActionExecute(Sender: TObject);
     procedure PopupMenuExecuteActionExecute(Sender: TObject);
     procedure PopupMenuTransactionActionExecute(Sender: TObject);
     procedure PopupMenuDBMSActionExecute(Sender: TObject);
@@ -1625,11 +1621,6 @@ begin
   except
     { silent }
   end;
-end;
-
-procedure TSQLEditorFrame.SearchClearActionExecute(Sender: TObject);
-begin
-  SearchForEdit.Clear;
 end;
 
 procedure TSQLEditorFrame.SearchCloseActionExecute(Sender: TObject);

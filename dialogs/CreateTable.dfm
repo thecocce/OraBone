@@ -263,6 +263,8 @@ inherited CreateTableDialog: TCreateTableDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 673
       ExplicitHeight = 323
       inherited SourcePanel: TPanel
@@ -312,8 +314,6 @@ inherited CreateTableDialog: TCreateTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
     Left = 76
@@ -331,8 +331,6 @@ inherited CreateTableDialog: TCreateTableDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 458

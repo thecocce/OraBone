@@ -216,8 +216,6 @@ object TimeFormatFrame: TTimeFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
     object TimeFormatEdit: TBCEdit
       Left = 80
@@ -238,8 +236,6 @@ object TimeFormatFrame: TTimeFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
 end

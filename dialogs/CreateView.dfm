@@ -223,6 +223,8 @@ inherited CreateViewDialog: TCreateViewDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 431
       ExplicitHeight = 293
       inherited SourcePanel: TPanel
@@ -272,8 +274,6 @@ inherited CreateViewDialog: TCreateViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object CommentEdit: TBCEdit [6]
     Left = 76
@@ -291,8 +291,6 @@ inherited CreateViewDialog: TCreateViewDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 413

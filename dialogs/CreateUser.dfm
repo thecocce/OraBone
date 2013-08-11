@@ -91,8 +91,6 @@ inherited CreateUserDialog: TCreateUserDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Roles'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 390
       ExplicitHeight = 229
       inherited SourcePanel: TPanel
@@ -146,8 +144,6 @@ inherited CreateUserDialog: TCreateUserDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object PasswordEdit: TBCEdit [6]
     Left = 102
@@ -165,8 +161,6 @@ inherited CreateUserDialog: TCreateUserDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object PasswordExpiredCheckBox: TCheckBox [7]
     Left = 12

@@ -47,8 +47,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited PageControl: TBCPageControl
     Top = 80
@@ -229,12 +227,9 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Hint = 'Table name'
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
-          StyleElements = [seFont, seBorder]
           OnChange = RefTableNameComboBoxChange
           DeniedKeyStrokes = False
           ReadOnly = False
-          EditColor = clInfoBk
-          UseColoring = True
           DropDownFixedWidth = 0
         end
       end
@@ -338,8 +333,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object PrimaryKeyRadioButton: TRadioButton [8]
     Left = 94
@@ -387,12 +380,9 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Hint = 'Table name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
-    StyleElements = [seFont, seBorder]
     OnChange = TableNameComboBoxChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    EditColor = clInfoBk
-    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar

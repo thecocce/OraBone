@@ -192,8 +192,6 @@ object DataSortDialog: TDataSortDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          EditColor = clInfoBk
-          UseColoring = True
         end
       end
       object JvToolBar1: TBCToolBar

@@ -115,8 +115,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Specification'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 726
       ExplicitHeight = 285
       inherited SourcePanel: TPanel
@@ -170,8 +168,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 368

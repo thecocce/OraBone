@@ -446,8 +446,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          EditColor = clInfoBk
-          UseColoring = True
         end
       end
       object SearchPanel1: TPanel

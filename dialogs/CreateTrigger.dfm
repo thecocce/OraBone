@@ -42,8 +42,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited PageControl: TBCPageControl
     Top = 60
@@ -154,8 +152,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          EditColor = clInfoBk
-          UseColoring = True
         end
         object ReferenceOldEdit: TBCEdit
           Left = 88
@@ -172,8 +168,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           NumbersWithSpots = False
           ErrorColor = 14803198
           NumbersAllowNegative = False
-          EditColor = clInfoBk
-          UseColoring = True
         end
       end
     end
@@ -275,8 +269,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 342
       ExplicitHeight = 175
       inherited SourcePanel: TPanel
@@ -330,8 +322,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   object TableNameComboBox: TBCComboBox [7]
     Left = 100
@@ -341,12 +331,9 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Hint = 'Table or view name'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
-    StyleElements = [seFont, seBorder]
     OnChange = PageControlChange
     DeniedKeyStrokes = False
     ReadOnly = False
-    EditColor = clInfoBk
-    UseColoring = True
     DropDownFixedWidth = 0
   end
   inherited StatusBar1: TStatusBar

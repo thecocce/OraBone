@@ -403,8 +403,6 @@ object DateFormatFrame: TDateFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
     object DateFormatEdit: TBCEdit
       Left = 80
@@ -425,8 +423,6 @@ object DateFormatFrame: TDateFormatFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
   end
 end

@@ -128,8 +128,6 @@ object EditorOptionsFrame: TEditorOptionsFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
     object TabWidthEdit: TBCEdit
       Left = 9
@@ -148,8 +146,6 @@ object EditorOptionsFrame: TEditorOptionsFrame
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      EditColor = clInfoBk
-      UseColoring = True
     end
     object BrightnessTrackBar: TTrackBar
       Left = 2
@@ -199,11 +195,8 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Margins.Bottom = 4
       DropDownCount = 9
       TabOrder = 9
-      StyleElements = [seFont, seBorder]
       DeniedKeyStrokes = True
       ReadOnly = False
-      EditColor = clInfoBk
-      UseColoring = True
       DropDownFixedWidth = 0
     end
     object UndoAfterSaveCheckBox: TBCCheckBox

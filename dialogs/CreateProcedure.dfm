@@ -195,8 +195,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Parameters'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 343
       ExplicitHeight = 259
       inherited SourcePanel: TPanel
@@ -250,8 +248,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     NumbersWithSpots = False
     ErrorColor = 14803198
     NumbersAllowNegative = False
-    EditColor = clInfoBk
-    UseColoring = True
   end
   inherited StatusBar1: TStatusBar
     Top = 352
