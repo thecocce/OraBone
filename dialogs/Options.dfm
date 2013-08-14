@@ -108,6 +108,7 @@ object OptionsDialog: TOptionsDialog
       OnClick = OptionsVirtualStringTreeClick
       OnFreeNode = OptionsVirtualStringTreeFreeNode
       OnGetText = OptionsVirtualStringTreeGetText
+      OnPaintText = OptionsVirtualStringTreePaintText
       OnGetImageIndex = OptionsVirtualStringTreeGetImageIndex
       Columns = <>
     end
@@ -206,7 +207,7 @@ object OptionsDialog: TOptionsDialog
     Left = 106
     Top = 158
     Bitmap = {
-      494C010110001001700110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010110001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
