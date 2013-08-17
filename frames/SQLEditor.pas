@@ -1616,7 +1616,7 @@ begin
       MessageBeep;
       SynEdit.BlockBegin := SynEdit.BlockEnd;
       SynEdit.CaretXY := SynEdit.BlockBegin;
-      ShowMessage(Format(LanguageDataModule.GetYesOrNo('SearchStringNotFound'), [SearchForEdit.Text]))
+      ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
     end;
   except
     { silent }
@@ -1661,7 +1661,7 @@ begin
     MessageBeep;
     SynEdit.BlockBegin := SynEdit.BlockEnd;
     SynEdit.CaretXY := SynEdit.BlockBegin;
-    if AskYesOrNo(Format(LanguageDataModule.GetYesOrNo('SearchMatchNotFound'), [CHR_DOUBLE_ENTER])) then
+    if AskYesOrNo(Format(LanguageDataModule.GetYesOrNoMessage('SearchMatchNotFound'), [CHR_DOUBLE_ENTER])) then
     begin
       SynEdit.CaretX := 0;
       SynEdit.CaretY := 0;
@@ -1829,9 +1829,15 @@ begin
     if Assigned(SynEdit) then
     begin
       if SynEdit.SelectionMode = smColumn then
-        SynEdit.SelectionMode := smNormal
-      else
-        SynEdit.SelectionMode := smColumn;
+        begin
+          SynEdit.Options := SynEdit.Options + [eoAltSetsColumnMode];
+          SynEdit.SelectionMode := smNormal
+        end
+        else
+        begin
+          SynEdit.Options := SynEdit.Options - [eoAltSetsColumnMode];
+          SynEdit.SelectionMode := smColumn;
+        end;
       Result := SynEdit.SelectionMode = smColumn;
     end;
   end;

@@ -1652,7 +1652,6 @@ begin
   begin
     Visible := False;
     Parent := Tree;
-    Flat := True;
     Text := Data.NodeText;
     OnKeyDown := EditKeyDown;
     CharCase := ecUpperCase;

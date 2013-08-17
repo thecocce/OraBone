@@ -74,6 +74,7 @@ object MainForm: TMainForm
       Width = 857
       Height = 26
       ActionManager = ActionManager
+      Align = alClient
       Color = clMenuBar
       ColorMap.DisabledFontColor = 7171437
       ColorMap.HighlightColor = clWhite
