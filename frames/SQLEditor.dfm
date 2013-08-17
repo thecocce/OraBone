@@ -1,17 +1,19 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 302
+  Width = 847
+  Height = 409
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 302
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 76
-    Width = 451
+    Top = 183
+    Width = 847
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 847
     Height = 21
     Hint = ' '
     Align = alTop
@@ -31,32 +33,36 @@ object SQLEditorFrame: TSQLEditorFrame
     FullRepaint = False
     TabOrder = 0
     Visible = False
+    ExplicitWidth = 451
     object CaseSensitiveLabel: TLabel
       Left = 337
       Top = 0
       Width = 70
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
+      ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
       Left = 434
       Top = 0
       Width = 89
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
+      ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
       Left = 550
       Top = 0
       Width = 92
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
+      ExplicitHeight = 13
     end
     object SearchPanel2: TPanel
       Left = 21
@@ -74,9 +80,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
+        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -417,18 +424,20 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 7
+    Width = 847
+    Height = 114
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
     Padding.Top = 2
     TabOrder = 1
+    ExplicitWidth = 451
+    ExplicitHeight = 7
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 5
+      Width = 847
+      Height = 112
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -447,12 +456,14 @@ object SQLEditorFrame: TSQLEditorFrame
       ShowCloseButton = False
       OnCloseButtonClick = PageControlCloseButtonClick
       OnDblClick = PageControlDblClick
+      ExplicitWidth = 451
+      ExplicitHeight = 5
     end
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 79
-    Width = 451
+    Top = 186
+    Width = 847
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -460,11 +471,13 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 2
     Visible = False
+    ExplicitTop = 79
+    ExplicitWidth = 451
   end
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 847
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -473,6 +486,7 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentDoubleBuffered = False
     PopupMenu = ToolbarPopupMenu
     TabOrder = 3
+    ExplicitWidth = 451
     object ExecuteToolbarPanel: TPanel
       Left = 0
       Top = 0
@@ -484,7 +498,7 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 0
       object Toolbar1Bevel: TBevel
         AlignWithMargins = True
-        Left = 52
+        Left = 86
         Top = 2
         Width = 4
         Height = 19
@@ -500,7 +514,7 @@ object SQLEditorFrame: TSQLEditorFrame
       object ExecuteToolBar: TBCToolBar
         Left = 0
         Top = 0
-        Width = 46
+        Width = 80
         Height = 23
         Align = alLeft
         Caption = 'ExecuteToolBar'
@@ -511,8 +525,13 @@ object SQLEditorFrame: TSQLEditorFrame
           Left = 0
           Top = 0
         end
-        object ExecuteScriptToolButton: TToolButton
+        object ExecuteCurrentToolButton: TToolButton
           Left = 23
+          Top = 0
+          Action = MainForm.ExecuteCurrentStatementAction
+        end
+        object ExecuteScriptToolButton: TToolButton
+          Left = 46
           Top = 0
         end
       end
@@ -537,9 +556,8 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 127
-        ExplicitTop = 25
-        ExplicitHeight = 20
+        ExplicitLeft = 55
+        ExplicitTop = -1
       end
       object CommitRollbackToolBar: TBCToolBar
         Left = 0
@@ -1082,8 +1100,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 51
-    Width = 451
+    Top = 158
+    Width = 847
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1092,6 +1110,8 @@ object SQLEditorFrame: TSQLEditorFrame
     ParentColor = True
     TabOrder = 4
     Visible = False
+    ExplicitTop = 51
+    ExplicitWidth = 451
     object GotoLineClosePanel: TPanel
       Left = 0
       Top = 2
@@ -1183,9 +1203,10 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 13
+        Height = 20
         Align = alLeft
         Caption = 'Go to Line'
+        ExplicitHeight = 13
       end
     end
     object LineNumberPanel: TPanel

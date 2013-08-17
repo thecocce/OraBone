@@ -260,6 +260,7 @@ type
     FileCloseToolButton: TToolButton;
     FileCloseAllToolButton: TToolButton;
     SynEditWildcardSearch: TSynEditWildcardSearch;
+    ExecuteCurrentToolButton: TToolButton;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -538,6 +539,7 @@ begin
   CompareToolBar.Images := MainForm.MenuImageList;
 
   ExecuteToolButton.Action := MainForm.ExecuteStatementAction;
+  ExecuteCurrentToolButton.Action := MainForm.ExecuteCurrentStatementAction;
   ExecuteScriptToolButton.Action := MainForm.ExecuteScriptAction;
   CommitToolButton.Action := MainForm.DatabaseCommitAction;
   RollbackToolButton.Action := MainForm.DatabaseRollbackAction;
@@ -2378,11 +2380,11 @@ begin
 
   s := Trim(UpperCase(RemoveParenthesisFromBegin(RemoveComments(s))));
 
-  if (Pos(WideString('SELECT'), s) = 1) or (Pos(WideString('DESC'), s) = 1) then
-    ExecuteStatement(SynEdit)
-  else
   if s[Length(s)] = ';' then
     ExecuteScript(Current)
+  else
+  if (Pos(WideString('SELECT'), s) = 1) or (Pos(WideString('DESC'), s) = 1) then
+    ExecuteStatement(SynEdit)
   else
     ExecuteNoRowsStatement(SynEdit);
 end;
