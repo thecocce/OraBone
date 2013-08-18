@@ -101,13 +101,17 @@ type
     FConnectionCloseTabByDblClick: Boolean;
     FConnectionCloseTabByMiddleClick: Boolean;
     FConnectionMultiLine: Boolean;
+    FConnectionDoubleBuffered: Boolean;
     FConnectionShowCloseButton: Boolean;
+    FConnectionRightClickSelect: Boolean;
     FConnectionShowImage: Boolean;
     FDateFormat: string;
     FEditorCloseTabByDblClick: Boolean;
     FEditorCloseTabByMiddleClick: Boolean;
     FEditorMultiLine: Boolean;
+    FEditorDoubleBuffered: Boolean;
     FEditorShowCloseButton: Boolean;
+    FEditorRightClickSelect: Boolean;
     FEditorShowImage: Boolean;
     FEnableLineNumbers: Boolean;
     FEnableSelectionMode: Boolean;
@@ -136,7 +140,9 @@ type
     FOutputShowTreeLines: Boolean;
     FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
+    FOutputDoubleBuffered: Boolean;
     FOutputShowCloseButton: Boolean;
+    FOutputRightClickSelect: Boolean;
     FOutputShowImage: Boolean;
     FPersistentHotKeys: Boolean;
     FPollingInterval: Integer;
@@ -183,13 +189,17 @@ type
     property ConnectionCloseTabByDblClick: Boolean read FConnectionCloseTabByDblClick write FConnectionCloseTabByDblClick;
     property ConnectionCloseTabByMiddleClick: Boolean read FConnectionCloseTabByMiddleClick write FConnectionCloseTabByMiddleClick;
     property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
+    property ConnectionDoubleBuffered: Boolean read FConnectionDoubleBuffered write FConnectionDoubleBuffered;
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
+    property ConnectionRightClickSelect: Boolean read FConnectionRightClickSelect write FConnectionRightClickSelect;
     property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
     property DateFormat: string read FDateFormat write FDateFormat;
     property EditorCloseTabByDblClick: Boolean read FEditorCloseTabByDblClick write FEditorCloseTabByDblClick;
     property EditorCloseTabByMiddleClick: Boolean read FEditorCloseTabByMiddleClick write FEditorCloseTabByMiddleClick;
     property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
+    property EditorDoubleBuffered: Boolean read FEditorDoubleBuffered write FEditorDoubleBuffered;
     property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
+    property EditorRightClickSelect: Boolean read FEditorRightClickSelect write FEditorRightClickSelect;
     property EditorShowImage: Boolean read FEditorShowImage write FEditorShowImage;
     property EnableLineNumbers: Boolean read FEnableLineNumbers write FEnableLineNumbers;
     property EnableSelectionMode: Boolean read FEnableSelectionMode write FEnableSelectionMode;
@@ -218,7 +228,9 @@ type
     property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
     property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
+    property OutputDoubleBuffered: Boolean read FOutputDoubleBuffered write FOutputDoubleBuffered;
     property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
+    property OutputRightClickSelect: Boolean read FOutputRightClickSelect write FOutputRightClickSelect;
     property OutputShowImage: Boolean read FOutputShowImage write FOutputShowImage;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
@@ -383,6 +395,7 @@ begin
   FGutterVisibleRightMargin := True;
   FGutterWidth := 48;
   FEditorMultiLine := False;
+  FEditorDoubleBuffered := True;
   FFontName := 'Courier New';
   FFontSize := 10;
   FExtraLineSpacing := 0;
@@ -408,14 +421,19 @@ begin
   FEditorCloseTabByMiddleClick := False;
   FEditorMultiLine := False;
   FEditorShowCloseButton := False;
+  FEditorRightClickSelect := True;
   FEditorShowImage := True;
   FConnectionCloseTabByDblClick := False;
   FConnectionCloseTabByMiddleClick := False;
   FConnectionMultiLine := False;
+  FConnectionDoubleBuffered := True;
   FConnectionShowCloseButton := False;
+  FConnectionRightClickSelect := True;
   FConnectionShowImage := True;
   FOutputMultiLine := False;
+  FOutputDoubleBuffered := True;
   FOutputShowCloseButton := False;
+  FOutputRightClickSelect := True;
   FOutputShowImage := True;
   FIgnoreCase := True;
   FIgnoreBlanks := True;
@@ -679,8 +697,10 @@ begin
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
   FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
   FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
+  FEditorTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.EditorDoubleBuffered;
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
   FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
+  FEditorTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.EditorRightClickSelect;
   { Tool bar }
   FEditorToolBarFrame.ExecuteCheckBox.Checked := FOptionsContainer.ToolBarExecute;
   FEditorToolBarFrame.TransactionCheckBox.Checked := FOptionsContainer.ToolBarTransaction;
@@ -699,14 +719,18 @@ begin
   FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByDblClick;
   FConnectionTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByMiddleClick;
   FConnectionTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.ConnectionMultiLine;
+  FConnectionTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.ConnectionDoubleBuffered;
   FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.ConnectionShowCloseButton;
   FConnectionTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.ConnectionShowImage;
+  FConnectionTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.ConnectionRightClickSelect;
   { Output tabs }
   FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByDblClick;
   FOutputTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByMiddleClick;
   FOutputTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.OutputMultiLine;
+  FOutputTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.OutputDoubleBuffered;
   FOutputTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.OutputShowCloseButton;
   FOutputTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.OutputShowImage;
+  FOutputTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.OutputRightClickSelect;
   { Compare }
   FOptionsCompareFrame.IgnoreCaseCheckBox.Checked := FOptionsContainer.IgnoreCase;
   FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked := FOptionsContainer.IgnoreBlanks;
@@ -886,8 +910,10 @@ begin
   FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.EditorCloseTabByMiddleClick := FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.EditorMultiLine := FEditorTabsFrame.MultiLineCheckBox.Checked;
+  FOptionsContainer.EditorDoubleBuffered := FEditorTabsFrame.DoubleBufferedCheckBox.Checked;
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.EditorShowImage := FEditorTabsFrame.ShowImageCheckBox.Checked;
+  FOptionsContainer.EditorRightClickSelect := FEditorTabsFrame.RightClickSelectCheckBox.Checked;
   { Tool bar }
   FOptionsContainer.ToolBarExecute := FEditorToolBarFrame.ExecuteCheckBox.Checked;
   FOptionsContainer.ToolBarTransaction := FEditorToolBarFrame.TransactionCheckBox.Checked;
@@ -906,14 +932,18 @@ begin
   FOptionsContainer.ConnectionCloseTabByDblClick := FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.ConnectionCloseTabByMiddleClick := FConnectionTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.ConnectionMultiLine := FConnectionTabsFrame.MultiLineCheckBox.Checked;
+  FOptionsContainer.ConnectionDoubleBuffered := FConnectionTabsFrame.DoubleBufferedCheckBox.Checked;
   FOptionsContainer.ConnectionShowCloseButton := FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.ConnectionShowImage := FConnectionTabsFrame.ShowImageCheckBox.Checked;
+  FOptionsContainer.ConnectionRightClickSelect := FConnectionTabsFrame.RightClickSelectCheckBox.Checked;
   { Output tabs }
   FOptionsContainer.OutputCloseTabByDblClick := FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.OutputCloseTabByMiddleClick := FOutputTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
   FOptionsContainer.OutputMultiLine := FOutputTabsFrame.MultiLineCheckBox.Checked;
+  FOptionsContainer.OutputDoubleBuffered := FOutputTabsFrame.DoubleBufferedCheckBox.Checked;
   FOptionsContainer.OutputShowCloseButton := FOutputTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.OutputShowImage := FOutputTabsFrame.ShowImageCheckBox.Checked;
+  FOptionsContainer.OutputRightClickSelect := FOutputTabsFrame.RightClickSelectCheckBox.Checked;
   { Compare }
   FOptionsContainer.IgnoreCase := FOptionsCompareFrame.IgnoreCaseCheckBox.Checked;
   FOptionsContainer.IgnoreBlanks := FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked;

@@ -229,7 +229,7 @@ type
     SearchPanel2: TPanel;
     SearchForLabel: TLabel;
     SearchPanel3: TPanel;
-    SearchForEdit: TBCEdit;
+    SearchForEdit: TButtonedEdit;
     SearchPanel1: TPanel;
     JvSpeedButton1: TSpeedButton;
     SearchPanel5: TPanel;
@@ -252,7 +252,7 @@ type
     GotoLineLabelPanel: TPanel;
     GotoLineLabel: TLabel;
     LineNumberPanel: TPanel;
-    GotoLineNumberEdit: TBCEdit;
+    GotoLineNumberEdit: TButtonedEdit;
     GotoLineButtonPanel: TPanel;
     GotoLineGoSpeedButton: TSpeedButton;
     GotoLineAction: TAction;
@@ -261,6 +261,8 @@ type
     FileCloseAllToolButton: TToolButton;
     SynEditWildcardSearch: TSynEditWildcardSearch;
     ExecuteCurrentToolButton: TToolButton;
+    SearchClearAction: TAction;
+    GotoLineClearAction: TAction;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -300,6 +302,9 @@ type
     procedure PageControlCloseButtonClick(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure SearchClearActionExecute(Sender: TObject);
+    procedure GotoLineClearActionExecute(Sender: TObject);
+    procedure GotoLineNumberEditChange(Sender: TObject);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -743,7 +748,9 @@ var
 begin
   PageControl.DoubleBuffered := DoubleBuffered;
   PageControl.MultiLine := OptionsContainer.EditorMultiLine;
+  PageControl.DoubleBuffered := OptionsContainer.EditorDoubleBuffered;
   PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
+  PageControl.RightClickSelect := OptionsContainer.EditorRightClickSelect;
   if OptionsContainer.EditorShowImage then
     PageControl.Images := FImages
   else
@@ -1625,6 +1632,11 @@ begin
   end;
 end;
 
+procedure TSQLEditorFrame.SearchClearActionExecute(Sender: TObject);
+begin
+  SearchForEdit.Text := '';
+end;
+
 procedure TSQLEditorFrame.SearchCloseActionExecute(Sender: TObject);
 begin
   SearchPanel.Hide;
@@ -1642,6 +1654,7 @@ end;
 
 procedure TSQLEditorFrame.SearchForEditChange(Sender: TObject);
 begin
+  SearchForEdit.RightButton.Visible := Trim(SearchForEdit.Text) <> '';
   GetActiveSynEdit.CaretXY := BufferCoord(0, 0);
   SearchFindNextAction.Enabled := CanFindNextPrevious;
   SearchFindPreviousAction.Enabled := SearchFindNextAction.Enabled;
@@ -3063,9 +3076,19 @@ begin
   end;
 end;
 
+procedure TSQLEditorFrame.GotoLineClearActionExecute(Sender: TObject);
+begin
+  GotoLineNumberEdit.Text := '';
+end;
+
 procedure TSQLEditorFrame.GotoLineCloseActionExecute(Sender: TObject);
 begin
   GotoLinePanel.Hide;
+end;
+
+procedure TSQLEditorFrame.GotoLineNumberEditChange(Sender: TObject);
+begin
+  GotoLineNumberEdit.RightButton.Visible := Trim(GotoLineNumberEdit.Text) <> '';
 end;
 
 procedure TSQLEditorFrame.GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);

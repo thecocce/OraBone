@@ -9,11 +9,13 @@ uses
 type
   TOutputTabsFrame = class(TFrame)
     Panel: TPanel;
+    CloseTabByDblClickCheckBox: TBCCheckBox;
+    CloseTabByMiddleClickCheckBox: TBCCheckBox;
+    DoubleBufferedCheckBox: TBCCheckBox;
     MultilineCheckBox: TBCCheckBox;
     ShowCloseButtonCheckBox: TBCCheckBox;
     ShowImageCheckBox: TBCCheckBox;
-    CloseTabByDblClickCheckBox: TBCCheckBox;
-    CloseTabByMiddleClickCheckBox: TBCCheckBox;
+    RightClickSelectCheckBox: TBCCheckBox;
   private
     { Private declarations }
   public

@@ -341,7 +341,9 @@ procedure TMainForm.SetPageControlOptions;
 begin
   PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = STYLENAME_WINDOWS;
   PageControl.MultiLine := OptionsContainer.ConnectionMultiLine;
+  PageControl.DoubleBuffered := OptionsContainer.ConnectionDoubleBuffered;
   PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
+  PageControl.RightClickSelect := OptionsContainer.ConnectionRightClickSelect;
   if OptionsContainer.ConnectionShowImage then
     PageControl.Images := MenuImageList
   else
@@ -1245,17 +1247,23 @@ begin
     OptionsContainer.ConnectionCloseTabByDblClick := ReadBool('Options', 'ConnectionCloseTabByDblClick', False);
     OptionsContainer.ConnectionCloseTabByMiddleClick := ReadBool('Options', 'ConnectionCloseTabByMiddleClick', False);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
+    OptionsContainer.ConnectionDoubleBuffered := ReadBool('Options', 'ConnectionDoubleBuffered', True);
     OptionsContainer.ConnectionShowCloseButton := ReadBool('Options', 'ConnectionShowCloseButton', False);
+    OptionsContainer.ConnectionRightClickSelect := ReadBool('Options', 'ConnectionRightClickSelect', True);
     OptionsContainer.ConnectionShowImage := ReadBool('Options', 'ConnectionShowImage', True);
     OptionsContainer.EditorCloseTabByDblClick := ReadBool('Options', 'EditorCloseTabByDblClick', False);
     OptionsContainer.EditorCloseTabByMiddleClick := ReadBool('Options', 'EditorCloseTabByMiddleClick', False);
     OptionsContainer.EditorMultiLine := ReadBool('Options', 'EditorMultiLine', False);
+    OptionsContainer.EditorDoubleBuffered := ReadBool('Options', 'EditorDoubleBuffered', True);
     OptionsContainer.EditorShowCloseButton := ReadBool('Options', 'EditorShowCloseButton', False);
+    OptionsContainer.EditorRightClickSelect := ReadBool('Options', 'EditorRightClickSelect', True);
     OptionsContainer.EditorShowImage := ReadBool('Options', 'EditorShowImage', True);
     OptionsContainer.OutputCloseTabByDblClick := ReadBool('Options', 'OutputCloseTabByDblClick', False);
     OptionsContainer.OutputCloseTabByMiddleClick := ReadBool('Options', 'OutputCloseTabByMiddleClick', False);
     OptionsContainer.OutputMultiLine := ReadBool('Options', 'OutputMultiLine', False);
+    OptionsContainer.OutputDoubleBuffered := ReadBool('Options', 'OutputDoubleBuffered', True);
     OptionsContainer.OutputShowCloseButton := ReadBool('Options', 'OutputShowCloseButton', False);
+    OptionsContainer.OutputRightClickSelect := ReadBool('Options', 'OutputRightClickSelect', True);
     OptionsContainer.OutputShowImage := ReadBool('Options', 'OutputShowImage', True);
     OptionsContainer.AutoIndent := ReadBool('Options', 'AutoIndent', True);
     OptionsContainer.AutoSave := ReadBool('Options', 'AutoSave', False);
@@ -1610,17 +1618,23 @@ begin
       WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
       WriteBool('Options', 'EditorCloseTabByMiddleClick', OptionsContainer.EditorCloseTabByMiddleClick);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
+      WriteBool('Options', 'EditorDoubleBuffered', OptionsContainer.EditorDoubleBuffered);
       WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
+      WriteBool('Options', 'EditorRightClickSelect', OptionsContainer.EditorRightClickSelect);
       WriteBool('Options', 'EditorShowImage', OptionsContainer.EditorShowImage);
       WriteBool('Options', 'ConnectionCloseTabByDblClick', OptionsContainer.ConnectionCloseTabByDblClick);
       WriteBool('Options', 'ConnectionCloseTabByMiddleClick', OptionsContainer.ConnectionCloseTabByMiddleClick);
       WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
+      WriteBool('Options', 'ConnectionDoubleBuffered', OptionsContainer.ConnectionDoubleBuffered);
       WriteBool('Options', 'ConnectionShowCloseButton', OptionsContainer.ConnectionShowCloseButton);
+      WriteBool('Options', 'ConnectionRightClickSelect', OptionsContainer.ConnectionRightClickSelect);
       WriteBool('Options', 'ConnectionShowImage', OptionsContainer.ConnectionShowImage);
       WriteBool('Options', 'OutputCloseTabByDblClick', OptionsContainer.OutputCloseTabByDblClick);
       WriteBool('Options', 'OutputCloseTabByMiddleClick', OptionsContainer.OutputCloseTabByMiddleClick);
       WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
+      WriteBool('Options', 'OutputDoubleBuffered', OptionsContainer.OutputDoubleBuffered);
       WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
+      WriteBool('Options', 'OutputRightClickSelect', OptionsContainer.OutputRightClickSelect);
       WriteBool('Options', 'OutputShowImage', OptionsContainer.OutputShowImage);
       WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
       WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
