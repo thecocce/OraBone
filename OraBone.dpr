@@ -14,7 +14,6 @@ uses
   SQLEditor in 'frames\SQLEditor.pas' {SQLEditorFrame: TFrame},
   BCDialogs.Replace in '..\..\Common\dialogs\BCDialogs.Replace.pas' {ReplaceDialog},
   BCDialogs.ConfirmReplace in '..\..\Common\dialogs\BCDialogs.ConfirmReplace.pas' {ConfirmReplaceDialog},
-  Options in 'dialogs\Options.pas' {OptionsDialog},
   SchemaBrowser in 'frames\SchemaBrowser.pas' {SchemaBrowserFrame: TFrame},
   DataFilter in 'dialogs\DataFilter.pas' {DataFilterDialog},
   ViewBrowser in 'frames\ViewBrowser.pas' {ViewBrowserFrame: TFrame},
@@ -120,7 +119,8 @@ uses
   OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame},
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
-  BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas';
+  BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
+  Options in 'forms\Options.pas' {OptionsDialog};
 
 {$R *.res}
 
