@@ -161,6 +161,9 @@ type
     EditIndentAction: TAction;
     EditSortAction: TAction;
     DatabaseCreateAction: TAction;
+    DatabaseExportAction: TAction;
+    DatabaseImportAction: TAction;
+    ViewStyleAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
