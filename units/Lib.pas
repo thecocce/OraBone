@@ -51,11 +51,6 @@ resourcestring
   TEXT_PASSWORD = 'Set Password before login.';
 
 type
-  (*TOutputObject = class
-    Filename: string;
-    Ln, Ch: Integer;
-    Text: string;
-  end;*)
   POutputRec = ^TOutputRec;
   TOutputRec = packed record
     Level: Byte;
@@ -66,8 +61,6 @@ type
     Text: ShortString;
     SearchString: ShortString;
   end;
-
-//  TWordTriple = Array[0..2] of Word;
 
 function AskCommit(Schema: string): Boolean;
 function OldEncryptString(s: string; Key: string): string;
