@@ -131,7 +131,6 @@ type
     ViewToolbarAction: TAction;
     ViewWordWrapAction: TAction;
     SearchGotoLineAction: TAction;
-    GotoBookmarks0Action: TAction;
     GotoBookmarks1Action: TAction;
     GotoBookmarks2Action: TAction;
     GotoBookmarks3Action: TAction;
@@ -141,7 +140,6 @@ type
     GotoBookmarks7Action: TAction;
     GotoBookmarks8Action: TAction;
     GotoBookmarks9Action: TAction;
-    ToggleBookmarks0Action: TAction;
     ToggleBookmarks1Action: TAction;
     ToggleBookmarks2Action: TAction;
     ToggleBookmarks3Action: TAction;
@@ -158,6 +156,11 @@ type
     ExecuteCurrentStatementAction: TAction;
     SearchToggleBookmarksAction: TAction;
     SearchGotoBookmarksAction: TAction;
+    EditInsertAction: TAction;
+    EditDeleteAction: TAction;
+    EditIndentAction: TAction;
+    EditSortAction: TAction;
+    DatabaseCreateAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
