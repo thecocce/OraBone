@@ -54,7 +54,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
@@ -97,9 +96,7 @@ object ConnectDirectDialog: TConnectDirectDialog
       Height = 21
       Hint = 'Password'
       Align = alRight
-      ThemedPassword = True
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
@@ -143,7 +140,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       Hint = 'Host'
       Align = alRight
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
@@ -186,7 +182,6 @@ object ConnectDirectDialog: TConnectDirectDialog
       Height = 21
       Hint = 'Port'
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
@@ -228,11 +223,8 @@ object ConnectDirectDialog: TConnectDirectDialog
       Width = 220
       Height = 21
       Hint = 'SID'
-      DisabledTextColor = clBlack
-      DisabledColor = clBtnFace
       Align = alRight
       TabOrder = 0
-      Text = ''
       OnChange = SIDEditChange
       EnterToTab = False
       OnlyNumbers = False
@@ -276,11 +268,8 @@ object ConnectDirectDialog: TConnectDirectDialog
       Width = 220
       Height = 21
       Hint = 'Service Name'
-      DisabledTextColor = clBlack
-      DisabledColor = clBtnFace
       Align = alRight
       TabOrder = 0
-      Text = ''
       OnChange = ServiceNameEditChange
       EnterToTab = False
       OnlyNumbers = False

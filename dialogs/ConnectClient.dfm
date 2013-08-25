@@ -52,12 +52,9 @@ object ConnectClientDialog: TConnectClientDialog
       Width = 220
       Height = 21
       Hint = 'Username'
-      Flat = False
-      ParentFlat = False
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
@@ -157,9 +154,7 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Hint = 'Password'
       Align = alRight
-      ThemedPassword = True
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
