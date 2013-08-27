@@ -64,7 +64,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 0
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
@@ -99,7 +98,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 3
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
@@ -115,7 +113,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
         Hint = 'Password'
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 4
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
@@ -139,18 +136,20 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 300
-      ExplicitHeight = 153
+      ExplicitHeight = 147
       inherited SourcePanel: TPanel
         Width = 300
         Height = 147
         ExplicitWidth = 300
-        ExplicitHeight = 153
+        ExplicitHeight = 147
         inherited SourceSynEdit: TSynEdit
           Width = 298
           Height = 122
           ExplicitWidth = 298
-          ExplicitHeight = 128
+          ExplicitHeight = 122
         end
         inherited SourceTopPanel: TPanel
           Width = 298

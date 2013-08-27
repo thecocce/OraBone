@@ -6,14 +6,13 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, BCDialogs.Dlg,
   JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, Vcl.ExtCtrls,
-  System.Actions;
+  System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList;
 
 type
   TCustomizeObjectBrowserDialog = class(TDialog)
     ActionList: TActionList;
     BottomPanel: TPanel;
     CancelButton: TButton;
-    DownBitBtn: TJvBitBtn;
     MoveDownAction: TAction;
     MoveUpAction: TAction;
     OKAction: TAction;
@@ -21,8 +20,11 @@ type
     Separator1Panel: TPanel;
     Separator2Panel: TPanel;
     TopPanel: TPanel;
-    UpBitBtn: TJvBitBtn;
     ValueListEditor: TValueListEditor;
+    ImageList: TBCImageList;
+    ToolBar: TBCToolBar;
+    MoveUpToolButton: TToolButton;
+    MoveDownToolButton: TToolButton;
     procedure FormDestroy(Sender: TObject);
     procedure MoveDownActionExecute(Sender: TObject);
     procedure MoveUpActionExecute(Sender: TObject);
