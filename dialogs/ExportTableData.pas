@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, BCControls.PageControl, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess,
   SynEdit, BCControls.Edit, BCDialogs.Dlg, JvExStdCtrls, JvEdit, JvCombobox, BCControls.ComboBox, BCControls.SpinEdit, BCControls.DBGrid,
-  Vcl.Buttons, System.Actions;
+  Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton;
 
 type
   TExportTableDataDialog = class(TDialog)
@@ -26,7 +26,6 @@ type
     ExportButton: TButton;
     FilenameEdit: TBCEdit;
     FileRadioButton: TRadioButton;
-    FolderBitBtn: TBitBtn;
     FormatComboBox: TBCComboBox;
     FormatLabel: TLabel;
     IncludeColumnHeadersCheckBox: TCheckBox;
@@ -53,6 +52,7 @@ type
     SingleQuoteRadioButton: TRadioButton;
     TableEdit: TBCEdit;
     TableLabel: TLabel;
+    BitBtn1: TJvSpeedButton;
     procedure ExportActionExecute(Sender: TObject);
     procedure FormatComboBoxChange(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

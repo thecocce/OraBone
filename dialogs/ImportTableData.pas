@@ -6,12 +6,11 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora,
   BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls, BCDialogs.Dlg,
-  System.Actions;
+  System.Actions, JvExControls, JvSpeedButton;
 
 type
   TImportTableDataDialog = class(TDialog)
     ActionList: TActionList;
-    BitBtn1: TBitBtn;
     CancelButton: TButton;
     ClipboardRadioButton: TRadioButton;
     ComminIntervalLabel: TLabel;
@@ -20,7 +19,6 @@ type
     DelimiterLabel: TLabel;
     FilenameLabel: TLabel;
     FileRadioButton: TRadioButton;
-    FolderBitBtn: TBitBtn;
     ImportAction: TAction;
     ImportButton: TButton;
     Label1: TLabel;
@@ -40,6 +38,8 @@ type
     Separator1Panel: TPanel;
     TableEdit: TBCEdit;
     TableLabel: TLabel;
+    JvSpeedButton1: TJvSpeedButton;
+    JvSpeedButton2: TJvSpeedButton;
     procedure FormDestroy(Sender: TObject);
     procedure ImportActionExecute(Sender: TObject);
     procedure OpenFileButtonActionExecute(Sender: TObject);

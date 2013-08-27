@@ -101,7 +101,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 0
-          Text = ''
           EnterToTab = False
           OnlyNumbers = False
           NumbersWithDots = False
@@ -177,26 +176,24 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Settings'
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 318
-      ExplicitHeight = 257
+      ExplicitHeight = 254
       inherited SourcePanel: TPanel
         Width = 318
         Height = 254
         ExplicitWidth = 318
-        ExplicitHeight = 257
+        ExplicitHeight = 254
         inherited SourceSynEdit: TSynEdit
           Width = 316
           Height = 229
           ExplicitWidth = 316
-          ExplicitHeight = 232
+          ExplicitHeight = 229
         end
         inherited SourceTopPanel: TPanel
           Width = 316
           ExplicitWidth = 316
-          inherited TopPanel: TPanel
-            Width = 318
-            ExplicitWidth = 318
-          end
         end
       end
     end
