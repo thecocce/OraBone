@@ -35,10 +35,11 @@ object ObjectTreeFrame: TObjectTreeFrame
         Caption = 'JvToolBar1'
         Images = TreeImageList
         TabOrder = 0
-        object ToolButton1: TToolButton
+        object FilterToolButton: TToolButton
           Left = 0
           Top = 0
           Action = SchemaFilterAction
+          ImageIndex = 29
         end
       end
     end

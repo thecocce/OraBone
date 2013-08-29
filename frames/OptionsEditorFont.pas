@@ -14,10 +14,10 @@ type
     ActionList: TActionList;
     SelectFontAction: TAction;
     TopPanel: TPanel;
-    SelectFontSpeedButton: TSpeedButton;
     FontLabel: TLabel;
     BottomPanel: TPanel;
     SynEdit: TBCSynEdit;
+    SelectFontSpeedButton: TSpeedButton;
     procedure SelectFontActionExecute(Sender: TObject);
   private
     { Private declarations }

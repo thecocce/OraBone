@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 1043
-  Height = 525
+  Width = 965
+  Height = 441
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -12,8 +12,8 @@ object SQLEditorFrame: TSQLEditorFrame
   ExplicitHeight = 302
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 299
-    Width = 1043
+    Top = 215
+    Width = 965
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -25,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 1043
+    Width = 965
     Height = 21
     Hint = ' '
     Align = alTop
@@ -391,8 +391,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 1043
-    Height = 230
+    Width = 965
+    Height = 146
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -403,8 +403,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 1043
-      Height = 228
+      Width = 965
+      Height = 144
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -429,8 +429,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 302
-    Width = 1043
+    Top = 218
+    Width = 965
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -444,7 +444,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1043
+    Width = 965
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -486,11 +486,13 @@ object SQLEditorFrame: TSQLEditorFrame
         Align = alLeft
         Caption = 'ExecuteToolBar'
         DoubleBuffered = False
+        Images = MainForm.MenuImageList
         ParentDoubleBuffered = False
         TabOrder = 0
         object ExecuteToolButton: TToolButton
           Left = 0
           Top = 0
+          Action = MainForm.ExecuteStatementAction
         end
         object ExecuteCurrentToolButton: TToolButton
           Left = 23
@@ -500,6 +502,7 @@ object SQLEditorFrame: TSQLEditorFrame
         object ExecuteScriptToolButton: TToolButton
           Left = 46
           Top = 0
+          Action = MainForm.ExecuteScriptAction
         end
       end
     end
@@ -1070,8 +1073,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 274
-    Width = 1043
+    Top = 190
+    Width = 965
     Height = 25
     Align = alBottom
     BevelOuter = bvNone

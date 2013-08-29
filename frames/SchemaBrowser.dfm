@@ -55,7 +55,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
           Left = 261
           ExplicitLeft = 261
           inherited JvToolBar1: TBCToolBar
-            inherited ToolButton1: TToolButton
+            inherited FilterToolButton: TToolButton
               ParentShowHint = False
             end
           end
@@ -83,7 +83,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         OnKeyUp = ObjectTreeFrameVirtualDrawTreeKeyUp
         OnMouseDown = ObjectTreeFrameVirtualDrawTreeMouseDown
         ExplicitWidth = 288
-        ExplicitHeight = 276
+        ExplicitHeight = 274
       end
       inherited UsersQuery: TOraQuery
         Left = 234
@@ -103,7 +103,6 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     ParentShowHint = False
     ShowHint = False
     TabOrder = 1
-    ExplicitHeight = 303
   end
   object SchemaActionList: TActionList
     Images = ObjectTreeFrame.TreeImageList

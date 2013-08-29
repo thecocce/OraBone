@@ -10,12 +10,12 @@ uses
 type
   TStatusBarFrame = class(TFrame)
     Panel: TPanel;
-    SelectFontSpeedButton: TSpeedButton;
     FontLabel: TLabel;
     UseSystemFontCheckBox: TBCCheckBox;
     ActionList: TActionList;
     SelectFontAction: TAction;
     FontDialog: TFontDialog;
+    SelectFontSpeedButton: TSpeedButton;
     procedure SelectFontActionExecute(Sender: TObject);
   private
     { Private declarations }

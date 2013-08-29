@@ -14,7 +14,6 @@ type
     RightMarginLabel: TLabel;
     RightMarginEdit: TBCEdit;
     FontDialog: TFontDialog;
-    SelectFontSpeedButton: TSpeedButton;
     FontLabel: TLabel;
     ActionList: TActionList;
     SelectFontAction: TAction;
@@ -22,6 +21,7 @@ type
     WidthLabel: TLabel;
     WidthEdit: TBCEdit;
     VisibleRightMarginCheckBox: TBCCheckBox;
+    SpeedButton1: TSpeedButton;
     procedure SelectFontActionExecute(Sender: TObject);
   private
     { Private declarations }

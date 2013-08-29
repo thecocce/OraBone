@@ -59,7 +59,8 @@ const
   IMG_IDX_RECYCLE_BIN_CHILD = 26;
   IMG_IDX_PRIMARY_KEY = 27;
   IMG_IDX_FOREIGN_KEY = 28;
-
+  IMG_IDX_FILTER_ADD = 29;
+  IMG_IDX_FILTER_EDIT = 30;
   IMG_IDX_ALTER_TABLE = 31;
   IMG_IDX_RENAME = 32;
   IMG_IDX_COMPILE_ALL = 33;
@@ -133,7 +134,7 @@ type
     SchemaFilterAction: TAction;
     ButtonPanel: TPanel;
     JvToolBar1: TBCToolBar;
-    ToolButton1: TToolButton;
+    FilterToolButton: TToolButton;
     ComboPanel: TPanel;
     SchemaComboBox: TBCComboBox;
     UsersQuery: TOraQuery;
@@ -314,11 +315,11 @@ begin
   FilterLength := Length(SchemaFilters);
 
   if SchemaFilters <> '' then
-    SchemaFilterAction.ImageIndex := 31
+    SchemaFilterAction.ImageIndex := IMG_IDX_FILTER_EDIT
   else
   begin
     SchemaFilters := '''''';
-    SchemaFilterAction.ImageIndex := 30;
+    SchemaFilterAction.ImageIndex := IMG_IDX_FILTER_ADD;
   end;
 
   with SchemasQuery do

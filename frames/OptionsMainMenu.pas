@@ -13,7 +13,6 @@ type
     PersistentHotKeysCheckBox: TBCCheckBox;
     ShadowsCheckBox: TBCCheckBox;
     UseSystemFontCheckBox: TBCCheckBox;
-    SelectFontSpeedButton: TSpeedButton;
     FontLabel: TLabel;
     AnimationStyleLabel: TLabel;
     AnimationStyleComboBox: TBCComboBox;
@@ -22,6 +21,7 @@ type
     FontDialog: TFontDialog;
     ActionList: TActionList;
     SelectFontAction: TAction;
+    SelectFontSpeedButton: TSpeedButton;
     procedure SelectFontActionExecute(Sender: TObject);
   private
     { Private declarations }
