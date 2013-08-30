@@ -470,6 +470,11 @@
             <Form>OptionsDialog</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="frames\OptionsEditorCompletionProposal.pas">
+            <Form>EditorCompletionProposalFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

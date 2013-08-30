@@ -11,7 +11,7 @@ uses
   BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
-  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, System.Actions;
+  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal, System.Actions;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -52,6 +52,7 @@ type
     TimeFormatAction: TAction;
     StatusBarAction: TAction;
     EditorToolBarAction: TAction;
+    EditorCompletionProposalAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -71,6 +72,7 @@ type
     FEditorGutterFrame: TEditorGutterFrame;
     FEditorTabsFrame: TEditorTabsFrame;
     FEditorToolBarFrame: TEditorToolBarFrame;
+    FEditorCompletionProposalFrame: TEditorCompletionProposalFrame;
     FMainMenuFrame: TMainMenuFrame;
     FOptionsOutputFrame: TOptionsOutputFrame;
     FOutputTabsFrame: TOutputTabsFrame;
@@ -105,6 +107,9 @@ type
     FConnectionShowCloseButton: Boolean;
     FConnectionRightClickSelect: Boolean;
     FConnectionShowImage: Boolean;
+    FCompletionProposalEnabled: Boolean;
+    FCompletionProposalCaseSensitive: Boolean;
+    FCompletionProposalShortcut: string;
     FDateFormat: string;
     FEditorCloseTabByDblClick: Boolean;
     FEditorCloseTabByMiddleClick: Boolean;
@@ -193,6 +198,9 @@ type
     property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
     property ConnectionRightClickSelect: Boolean read FConnectionRightClickSelect write FConnectionRightClickSelect;
     property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
+    property CompletionProposalEnabled: Boolean read FCompletionProposalEnabled write FCompletionProposalEnabled;
+    property CompletionProposalCaseSensitive: Boolean read FCompletionProposalCaseSensitive write FCompletionProposalCaseSensitive;
+    property CompletionProposalShortcut: string read FCompletionProposalShortcut write FCompletionProposalShortcut;
     property DateFormat: string read FDateFormat write FDateFormat;
     property EditorCloseTabByDblClick: Boolean read FEditorCloseTabByDblClick write FEditorCloseTabByDblClick;
     property EditorCloseTabByMiddleClick: Boolean read FEditorCloseTabByMiddleClick write FEditorCloseTabByMiddleClick;
@@ -273,7 +281,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleUtils, SynEditTypes, BCCommon.Messages;
+  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages;
 
 const
   CELL_PADDING = 4;
@@ -383,12 +391,27 @@ begin
     end;
   end
   else
+  if Assigned(Dest) and (Dest is TSynCompletionProposal) then
+  begin
+    if not FCompletionProposalEnabled then
+      TSynCompletionProposal(Dest).ShortCut := TextToShortCut('')
+    else
+      TSynCompletionProposal(Dest).ShortCut := TextToShortCut(FCompletionProposalShortcut);
+    if FCompletionProposalCaseSensitive then
+      TSynCompletionProposal(Dest).Options := TSynCompletionProposal(Dest).Options + [scoCaseSensitive]
+    else
+      TSynCompletionProposal(Dest).Options := TSynCompletionProposal(Dest).Options - [scoCaseSensitive];
+  end
+  else
     inherited;
 end;
 
 constructor TOptionsContainer.Create(AOwner: TComponent);
 begin
   inherited;
+  FCompletionProposalEnabled := True;
+  FCompletionProposalCaseSensitive := True;
+  FCompletionProposalShortcut := 'Ctrl+Space';
   FGutterVisible := True;
   FGutterRightMargin := 80;
   FGutterAutoSize := True;
@@ -500,6 +523,7 @@ begin
   FEditorGutterFrame.Free;
   FEditorTabsFrame.Free;
   FEditorToolBarFrame.Free;
+  FEditorCompletionProposalFrame.Free;
   FMainMenuFrame.Free;
   FOptionsOutputFrame.Free;
   FOutputTabsFrame.Free;
@@ -554,6 +578,11 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorTabsAction.ImageIndex;
     Data.Caption := EditorTabsAction.Caption;
+    { Completion proposal }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorCompletionProposalAction.ImageIndex;
+    Data.Caption := EditorCompletionProposalAction.Caption;
     { Tool bar }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
@@ -701,6 +730,10 @@ begin
   FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
   FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
   FEditorTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.EditorRightClickSelect;
+  { Completion proposal }
+  FEditorCompletionProposalFrame.EnabledCheckBox.Checked := FOptionsContainer.CompletionProposalEnabled;
+  FEditorCompletionProposalFrame.CaseSensitiveCheckBox.Checked := FOptionsContainer.CompletionProposalCaseSensitive;
+  FEditorCompletionProposalFrame.ShortcutComboBox.Text := FOptionsContainer.CompletionProposalShortcut;
   { Tool bar }
   FEditorToolBarFrame.ExecuteCheckBox.Checked := FOptionsContainer.ToolBarExecute;
   FEditorToolBarFrame.TransactionCheckBox.Checked := FOptionsContainer.ToolBarTransaction;
@@ -914,6 +947,10 @@ begin
   FOptionsContainer.EditorShowCloseButton := FEditorTabsFrame.ShowCloseButtonCheckBox.Checked;
   FOptionsContainer.EditorShowImage := FEditorTabsFrame.ShowImageCheckBox.Checked;
   FOptionsContainer.EditorRightClickSelect := FEditorTabsFrame.RightClickSelectCheckBox.Checked;
+  { Completion proposal }
+  FOptionsContainer.CompletionProposalEnabled := FEditorCompletionProposalFrame.EnabledCheckBox.Checked;
+  FOptionsContainer.CompletionProposalCaseSensitive := FEditorCompletionProposalFrame.CaseSensitiveCheckBox.Checked;
+  FOptionsContainer.CompletionProposalShortcut := FEditorCompletionProposalFrame.ShortcutComboBox.Text;
   { Tool bar }
   FOptionsContainer.ToolBarExecute := FEditorToolBarFrame.ExecuteCheckBox.Checked;
   FOptionsContainer.ToolBarTransaction := FEditorToolBarFrame.TransactionCheckBox.Checked;

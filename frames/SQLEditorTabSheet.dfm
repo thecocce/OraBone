@@ -41,4 +41,32 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       FontSmoothing = fsmNone
     end
   end
+  object SynCompletionProposal: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoUsePrettyText, scoCompleteWithTab, scoCompleteWithEnter]
+    ItemList.Strings = (
+      'Test'
+      'Char'
+      'Character')
+    Width = 160
+    EndOfTokenChr = '()[]. '
+    TriggerChars = '.'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clBtnText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = [fsBold]
+    Columns = <>
+    Resizeable = False
+    Margin = 4
+    OnExecute = SynCompletionProposalExecute
+    ShortCut = 16416
+    Editor = OraSynEdit
+    Left = 64
+    Top = 64
+  end
 end

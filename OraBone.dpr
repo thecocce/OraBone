@@ -120,7 +120,8 @@ uses
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
-  Options in 'forms\Options.pas' {OptionsDialog};
+  Options in 'forms\Options.pas' {OptionsDialog},
+  OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame};
 
 {$R *.res}
 

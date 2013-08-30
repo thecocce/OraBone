@@ -910,7 +910,7 @@ begin
     ExecuteScriptAction.Enabled := ExecuteStatementAction.Enabled;
     ExplainPlanAction.Enabled := ExecuteStatementAction.Enabled;
     { Bookmarks }
-    for i := 0 to 9 do
+    for i := 1 to 9 do
     begin
       GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [i])));
       GotoBookmarksAction.Enabled := False;
@@ -1249,6 +1249,9 @@ begin
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
+    OptionsContainer.CompletionProposalEnabled := ReadBool('Options', 'CompletionProposalEnabled', True);
+    OptionsContainer.CompletionProposalCaseSensitive := ReadBool('Options', 'CompletionProposalCaseSensitive', True);
+    OptionsContainer.CompletionProposalShortcut := ReadString('Options', 'CompletionProposalShortcut', 'Ctrl+Space');
     OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
     OptionsContainer.ConnectionCloseTabByDblClick := ReadBool('Options', 'ConnectionCloseTabByDblClick', False);
     OptionsContainer.ConnectionCloseTabByMiddleClick := ReadBool('Options', 'ConnectionCloseTabByMiddleClick', False);
@@ -1620,6 +1623,9 @@ begin
       WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
+      WriteBool('Options', 'CompletionProposalEnabled', OptionsContainer.CompletionProposalEnabled);
+      WriteBool('Options', 'CompletionProposalCaseSensitive', OptionsContainer.CompletionProposalCaseSensitive);
+      WriteString('Options', 'CompletionProposalShortcut', OptionsContainer.CompletionProposalShortcut);
       WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
       WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
       WriteBool('Options', 'EditorCloseTabByMiddleClick', OptionsContainer.EditorCloseTabByMiddleClick);

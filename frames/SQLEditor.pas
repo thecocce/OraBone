@@ -575,7 +575,6 @@ begin
   ViewSpecialCharsToolButton.Action := MainForm.ViewSpecialCharsAction;
   ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
-  ToggleBookmark0MenuItem.Action := MainForm.ToggleBookmarks0Action;
   ToggleBookmark1MenuItem.Action := MainForm.ToggleBookmarks1Action;
   ToggleBookmark2MenuItem.Action := MainForm.ToggleBookmarks2Action;
   ToggleBookmark3MenuItem.Action := MainForm.ToggleBookmarks3Action;
@@ -585,7 +584,6 @@ begin
   ToggleBookmark7MenuItem.Action := MainForm.ToggleBookmarks7Action;
   ToggleBookmark8MenuItem.Action := MainForm.ToggleBookmarks8Action;
   ToggleBookmark9MenuItem.Action := MainForm.ToggleBookmarks9Action;
-  GotoBookmark0MenuItem.Action := MainForm.GotoBookmarks0Action;
   GotoBookmark1MenuItem.Action := MainForm.GotoBookmarks1Action;
   GotoBookmark2MenuItem.Action := MainForm.GotoBookmarks2Action;
   GotoBookmark3MenuItem.Action := MainForm.GotoBookmarks3Action;
@@ -746,9 +744,8 @@ var
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
   CompareFrame: TCompareFrame;
 begin
-  PageControl.DoubleBuffered := DoubleBuffered;
-  PageControl.MultiLine := OptionsContainer.EditorMultiLine;
   PageControl.DoubleBuffered := OptionsContainer.EditorDoubleBuffered;
+  PageControl.MultiLine := OptionsContainer.EditorMultiLine;
   PageControl.ShowCloseButton := OptionsContainer.EditorShowCloseButton;
   PageControl.RightClickSelect := OptionsContainer.EditorRightClickSelect;
   if OptionsContainer.EditorShowImage then
@@ -764,7 +761,7 @@ begin
     if Assigned(SQLEditorTabSheetFrame) then
     begin
       UpdateGutter(SQLEditorTabSheetFrame.OraSynEdit);
-      SQLEditorTabSheetFrame.Panel.Padding.Right := Right;
+      SQLEditorTabSheetFrame.UpdateOptionsAndStyles(Right);
     end;
     CompareFrame := GetCompareFrame(PageControl.Pages[i]);
     if Assigned(CompareFrame) then
