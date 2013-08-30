@@ -60,6 +60,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -130,6 +134,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ReferencedColumnsTabSheet: TTabSheet [1]
       Caption = 'Referenced Columns'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RefColumnsPanel: TPanel
         Left = 0
         Top = 31
@@ -232,6 +240,10 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ConditionTabSheet: TTabSheet [2]
       Caption = 'Condition'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConditionPanel: TPanel
         Left = 0
         Top = 0

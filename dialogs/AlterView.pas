@@ -72,7 +72,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FAlterViewDialog: TAlterViewDialog;

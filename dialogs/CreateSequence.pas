@@ -40,7 +40,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
+  BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FCreateSequenceDialog: TCreateSequenceDialog;

@@ -89,7 +89,7 @@ implementation
 uses
   Main, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
-  System.UITypes, BCCommon;
+  System.UITypes, BCCommon.Lib;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin

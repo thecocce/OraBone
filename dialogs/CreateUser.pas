@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.UxTheme, Vcl.Themes, System.Math, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
+  Winapi.UxTheme, Vcl.Themes, System.Math, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 const
   CELL_PADDING = 4;

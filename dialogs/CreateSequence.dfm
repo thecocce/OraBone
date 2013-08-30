@@ -17,6 +17,10 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         350
         193)
@@ -71,7 +75,6 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
         TabOrder = 0
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False

@@ -54,7 +54,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
+  Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FCreateFunctionDialog: TCreateFunctionDialog;

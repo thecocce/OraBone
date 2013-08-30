@@ -91,7 +91,6 @@ uses
   BCSQL.Parser in '..\..\Common\units\BCSQL.Parser.pas',
   BCSQL.ParseTree in '..\..\Common\units\BCSQL.ParseTree.pas',
   BCSQL.XMLConstants in '..\..\Common\units\BCSQL.XMLConstants.pas',
-  BCCommon in '..\..\Common\units\BCCommon.pas',
   BCCommon.Dialogs in '..\..\Common\units\BCCommon.Dialogs.pas',
   BCCommon.FileUtils in '..\..\Common\units\BCCommon.FileUtils.pas',
   SQLEditorTabSheet in 'frames\SQLEditorTabSheet.pas' {SQLEditorTabSheetFrame: TFrame},
@@ -121,7 +120,8 @@ uses
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
   Options in 'forms\Options.pas' {OptionsDialog},
-  OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame};
+  OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
+  BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas';
 
 {$R *.res}
 

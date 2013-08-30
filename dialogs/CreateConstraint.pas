@@ -73,7 +73,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon;
+  DataModule, Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FCreateConstraintDialog: TCreateConstraintDialog;

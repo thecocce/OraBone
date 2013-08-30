@@ -161,7 +161,7 @@ uses
   Vcl.ClipBrd, Options, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
-  CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon,
+  CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon.Lib,
   SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, BCCommon.StyleUtils,
   BCCommon.Messages, BCCommon.StringUtils;
 

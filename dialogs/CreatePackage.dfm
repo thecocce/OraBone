@@ -26,6 +26,10 @@ inherited CreatePackageDialog: TCreatePackageDialog
     object SpecificationTabSheet: TTabSheet [0]
       Caption = 'Specification'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SepcificationPanel: TPanel
         Left = 0
         Top = 0
@@ -160,7 +164,6 @@ inherited CreatePackageDialog: TCreatePackageDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
-    Text = ''
     OnExit = PackageNameEditExit
     EnterToTab = False
     OnlyNumbers = False

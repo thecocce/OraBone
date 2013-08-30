@@ -361,7 +361,6 @@
         <DCCReference Include="..\..\Common\units\BCSQL.Parser.pas"/>
         <DCCReference Include="..\..\Common\units\BCSQL.ParseTree.pas"/>
         <DCCReference Include="..\..\Common\units\BCSQL.XMLConstants.pas"/>
-        <DCCReference Include="..\..\Common\units\BCCommon.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.Dialogs.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.FileUtils.pas"/>
         <DCCReference Include="frames\SQLEditorTabSheet.pas">
@@ -475,6 +474,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\..\Common\units\BCCommon.Lib.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

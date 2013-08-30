@@ -233,7 +233,7 @@ implementation
 
 uses
   Main, DataFilter, DataSort, CustomizePages, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.StringUtils,
-  BCCommon;
+  BCCommon.Lib;
 
 const
   { ColumnsQuery columns }

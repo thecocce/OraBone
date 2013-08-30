@@ -50,6 +50,10 @@ inherited CreateUserDialog: TCreateUserDialog
     object RolesTabSheet: TTabSheet [0]
       Caption = 'Roles'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -136,7 +140,6 @@ inherited CreateUserDialog: TCreateUserDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
-    Text = ''
     OnChange = PageControlChange
     EnterToTab = False
     OnlyNumbers = False
@@ -153,7 +156,6 @@ inherited CreateUserDialog: TCreateUserDialog
     Hint = 'Password'
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 4
-    Text = ''
     OnChange = PageControlChange
     EnterToTab = False
     OnlyNumbers = False

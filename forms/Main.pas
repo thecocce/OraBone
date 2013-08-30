@@ -311,7 +311,7 @@ var
 implementation
 
 uses
-  About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon,
+  About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor, Winapi.ShellAPI,
   System.IOUtils, BCSQL.Formatter, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, SynEditKeyCmds,

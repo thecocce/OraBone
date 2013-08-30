@@ -33,7 +33,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 5
-    Text = ''
     Visible = False
     OnChange = PageControlChange
     EnterToTab = False
@@ -55,6 +54,10 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         342
         176)
@@ -314,7 +317,6 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Anchors = [akLeft, akTop, akRight]
     CharCase = ecUpperCase
     TabOrder = 3
-    Text = ''
     OnChange = PageControlChange
     EnterToTab = False
     OnlyNumbers = False
