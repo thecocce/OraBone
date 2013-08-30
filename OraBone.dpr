@@ -121,7 +121,8 @@ uses
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
   Options in 'forms\Options.pas' {OptionsDialog},
   OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
-  BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas';
+  BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
+  OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame};
 
 {$R *.res}
 

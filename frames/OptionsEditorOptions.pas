@@ -27,6 +27,7 @@ type
     UndoAfterSaveCheckBox: TBCCheckBox;
     SmartTabsCheckBox: TBCCheckBox;
     SmartTabDeleteCheckBox: TBCCheckBox;
+    TripleClickRowSelectCheckBox: TBCCheckBox;
   private
     { Private declarations }
   public

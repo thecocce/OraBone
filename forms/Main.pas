@@ -1311,6 +1311,7 @@ begin
     OptionsContainer.AutoSave := ReadBool('Options', 'AutoSave', False);
     OptionsContainer.UndoAfterSave := ReadBool('Options', 'UnfoAfterSave', False);
     OptionsContainer.TrimTrailingSpaces := ReadBool('Options', 'TrimTrailingSpaces', True);
+    OptionsContainer.TripleClickRowSelect := ReadBool('Options', 'TripleClickRowSelect', True);
     OptionsContainer.ScrollPastEof := ReadBool('Options', 'ScrollPastEof', False);
     OptionsContainer.ScrollPastEol := ReadBool('Options', 'ScrollPastEol', True);
     OptionsContainer.SmartTabs := ReadBool('Options', 'SmartTabs', False);
@@ -1324,6 +1325,14 @@ begin
     OptionsContainer.MainMenuUseSystemFont := ReadBool('Options', 'MainMenuUseSystemFont', False);
     OptionsContainer.MainMenuFontName := ReadString('Options', 'MainMenuFontName', 'Tahoma');
     OptionsContainer.MainMenuFontSize := StrToInt(ReadString('Options', 'MainMenuFontSize', '8'));
+    OptionsContainer.PrintDocumentName := StrToInt(ReadString('Options', 'PrintDocumentName', '2'));
+    OptionsContainer.PrintPageNumber := StrToInt(ReadString('Options', 'PrintPageNumber', '3'));
+    OptionsContainer.PrintPrintedBy := StrToInt(ReadString('Options', 'PrintPrintedBy', '0'));
+    OptionsContainer.PrintDateTime :=  StrToInt(ReadString('Options', 'PrintDateTime', '1'));
+    OptionsContainer.PrintShowHeaderLine := ReadBool('Options', 'PrintShowHeaderLine', True);
+    OptionsContainer.PrintShowFooterLine := ReadBool('Options', 'PrintShowFooterLine', True);
+    OptionsContainer.PrintShowLineNumbers := ReadBool('Options', 'PrintShowLineNumbers', False);
+    OptionsContainer.PrintWordWrapLine := ReadBool('Options', 'PrintWordWrapLine', False);
     OptionsContainer.AnimationStyle := TAnimationStyle(StrToInt(ReadString('Options', 'AnimationStyle', '1')));
     OptionsContainer.AnimationDuration := StrToInt(ReadString('Options', 'AnimationDuration', '150'));
     OptionsContainer.PollingInterval := ReadInteger('Options', 'PollingInterval', 1);
@@ -1685,6 +1694,7 @@ begin
       WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
       WriteBool('Options', 'UndoAfterSave', OptionsContainer.UndoAfterSave);
       WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
+      WriteBool('Options', 'TripleClickRowSelect', OptionsContainer.TripleClickRowSelect);
       WriteBool('Options', 'ScrollPastEof', OptionsContainer.ScrollPastEof);
       WriteBool('Options', 'ScrollPastEol', OptionsContainer.ScrollPastEol);
       WriteBool('Options', 'TabsToSpaces', OptionsContainer.TabsToSpaces);
@@ -1697,6 +1707,14 @@ begin
       WriteBool('Options', 'MainMenuUseSystemFont', OptionsContainer.MainMenuUseSystemFont);
       WriteString('Options', 'MainMenuFontName', OptionsContainer.MainMenuFontName);
       WriteString('Options', 'MainMenuFontSize', IntToStr(OptionsContainer.MainMenuFontSize));
+      WriteString('Options', 'PrintDocumentName', IntToStr(OptionsContainer.PrintDocumentName));
+      WriteString('Options', 'PrintPageNumber', IntToStr(OptionsContainer.PrintPageNumber));
+      WriteString('Options', 'PrintPrintedBy', IntToStr(OptionsContainer.PrintPrintedBy));
+      WriteString('Options', 'PrintDateTime', IntToStr(OptionsContainer.PrintDateTime));
+      WriteBool('Options', 'PrintShowHeaderLine', OptionsContainer.PrintShowHeaderLine);
+      WriteBool('Options', 'PrintShowFooterLine', OptionsContainer.PrintShowFooterLine);
+      WriteBool('Options', 'PrintShowLineNumbers', OptionsContainer.PrintShowLineNumbers);
+      WriteBool('Options', 'PrintWordWrapLine', OptionsContainer.PrintWordWrapLine);
       WriteString('Options', 'AnimationStyle', IntToStr(Ord(OptionsContainer.AnimationStyle)));
       WriteString('Options', 'AnimationDuration', IntToStr(OptionsContainer.AnimationDuration));
       WriteString('Options', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));

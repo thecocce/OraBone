@@ -456,7 +456,7 @@ uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleUtils, SynUnicode,
   Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, System.Math, BCCommon.FileUtils, BCCommon.Messages,
   Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon.Lib, BCCommon.StringUtils,
-  AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings;
+  AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes;
 
 const
   DEFAULT_FILENAME = 'Sql';
@@ -1527,22 +1527,56 @@ end;
 procedure TSQLEditorFrame.InitializeSynEditPrint;
 var
   SynEdit: TBCOraSynEdit;
+  Alignment: TAlignment;
+
+  procedure SetHeaderFooter(Option: Integer; Value: string);
+  begin
+    case Option of
+    0, 1:
+      with SynEditPrint.Footer do
+      begin
+        case Option of
+          0: Alignment := taLeftJustify;
+          1: Alignment := taRightJustify;
+        end;
+        Add(Value, nil, Alignment, 1);
+      end;
+    2, 3:
+      with SynEditPrint.Header do
+      begin
+        case Option of
+          2: Alignment := taLeftJustify;
+          3: Alignment := taRightJustify;
+        end;
+        Add(Value, nil, Alignment, 1);
+      end;
+    end;
+  end;
+
 begin
   SynEdit := GetActiveSynEdit;
-  with SynEditPrint.Header do
-  begin
-    Clear;
-    Add(SynEdit.DocumentName, nil, taLeftJustify, 1);
-    Add('Page: $PAGENUM$ of $PAGECOUNT$', nil, taRightJustify, 1);
-  end;
-  with SynEditPrint.Footer do
-  begin
-    Clear;
-    Add('Printed by OraBone', nil, taLeftJustify, 1);
-    Add('$DATE$ $TIME$', nil, taRightJustify, 1);
-  end;
+  SynEditPrint.Header.Clear;
+  SynEditPrint.Footer.Clear;
+
+  SetHeaderFooter(OptionsContainer.PrintDocumentName, SynEdit.DocumentName);
+  SetHeaderFooter(OptionsContainer.PrintPageNumber, LanguageDataModule.GetConstant('PreviewDocumentPage'));
+  SetHeaderFooter(OptionsContainer.PrintPrintedBy, Format(LanguageDataModule.GetConstant('PrintedBy'), [Application.Title]));
+  SetHeaderFooter(OptionsContainer.PrintDateTime, '$DATE$ $TIME$');
+
+  if OptionsContainer.PrintShowHeaderLine then
+    SynEditPrint.Header.FrameTypes := [ftLine]
+  else
+    SynEditPrint.Header.FrameTypes := [];
+
+  if OptionsContainer.PrintShowFooterLine then
+    SynEditPrint.Footer.FrameTypes := [ftLine]
+  else
+    SynEditPrint.Footer.FrameTypes := [];
+  SynEditPrint.LineNumbers := OptionsContainer.PrintShowLineNumbers;
+  SynEditPrint.Wrap := OptionsContainer.PrintWordWrapLine;
+
   SynEditPrint.SynEdit := SynEdit;
-  SynEditPrint.Title := ExtractFileName(SynEdit.DocumentName);
+  SynEditPrint.Title := SynEdit.DocumentName;
 end;
 
 procedure TSQLEditorFrame.Print;

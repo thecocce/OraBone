@@ -10,7 +10,7 @@ uses
   ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox,
   BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
-  OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare,
+  OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare, OptionsPrint,
   OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal, System.Actions;
 
 type
@@ -53,6 +53,7 @@ type
     StatusBarAction: TAction;
     EditorToolBarAction: TAction;
     EditorCompletionProposalAction: TAction;
+    PrintAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -83,6 +84,7 @@ type
     FTimeFormatFrame: TTimeFormatFrame;
     FConnectionTabsFrame: TConnectionTabsFrame;
     FOptionsCompareFrame: TOptionsCompareFrame;
+    FOptionsPrintFrame: TOptionsPrintFrame;
     FStatusBarFrame: TStatusBarFrame;
     procedure CreateTree;
     procedure GetData;
@@ -151,6 +153,14 @@ type
     FOutputShowImage: Boolean;
     FPersistentHotKeys: Boolean;
     FPollingInterval: Integer;
+    FPrintDocumentName: Integer;
+    FPrintPageNumber: Integer;
+    FPrintPrintedBy: Integer;
+    FPrintDateTime: Integer;
+    FPrintShowHeaderLine: Boolean;
+    FPrintShowFooterLine: Boolean;
+    FPrintShowLineNumbers: Boolean;
+    FPrintWordWrapLine: Boolean;
     FSchemaBrowserAlign: string;
     FSchemaBrowserShowTreeLines: Boolean;
     FSchemaBrowserIndent: Integer;
@@ -176,6 +186,7 @@ type
     FToolBarMode: Boolean;
     FToolBarTools: Boolean;
     FTrimTrailingSpaces: Boolean;
+    FTripleClickRowSelect: Boolean;
     FMainMenuUseSystemFont: Boolean;
     FStatusBarUseSystemFont: Boolean;
     FStatusBarFontName: string;
@@ -242,6 +253,14 @@ type
     property OutputShowImage: Boolean read FOutputShowImage write FOutputShowImage;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
+    property PrintDocumentName: Integer read FPrintDocumentName write FPrintDocumentName;
+    property PrintPageNumber: Integer read FPrintPageNumber write FPrintPageNumber;
+    property PrintPrintedBy: Integer read FPrintPrintedBy write FPrintPrintedBy;
+    property PrintDateTime: Integer read FPrintDateTime write FPrintDateTime;
+    property PrintShowHeaderLine: Boolean read FPrintShowHeaderLine write FPrintShowHeaderLine;
+    property PrintShowFooterLine: Boolean read FPrintShowFooterLine write FPrintShowFooterLine;
+    property PrintShowLineNumbers: Boolean read FPrintShowLineNumbers write FPrintShowLineNumbers;
+    property PrintWordWrapLine: Boolean read FPrintWordWrapLine write FPrintWordWrapLine;
     property SchemaBrowserAlign: string read FSchemaBrowserAlign write FSchemaBrowserAlign;
     property SchemaBrowserShowTreeLines: Boolean read FSchemaBrowserShowTreeLines write FSchemaBrowserShowTreeLines;
     property SchemaBrowserIndent: Integer read FSchemaBrowserIndent write FSchemaBrowserIndent;
@@ -267,6 +286,7 @@ type
     property ToolBarMode: Boolean read FToolBarMode write FToolBarMode;
     property ToolBarTools: Boolean read FToolBarTools write FToolBarTools;
     property TrimTrailingSpaces: Boolean read FTrimTrailingSpaces write FTrimTrailingSpaces;
+    property TripleClickRowSelect: Boolean read FTripleClickRowSelect write FTripleClickRowSelect;
     property MainMenuUseSystemFont: Boolean read FMainMenuUseSystemFont write FMainMenuUseSystemFont;
     property StatusBarUseSystemFont: Boolean read FStatusBarUseSystemFont write FStatusBarUseSystemFont;
     property StatusBarFontName: string read FStatusBarFontName write FStatusBarFontName;
@@ -345,7 +365,10 @@ begin
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoTrimTrailingSpaces]
     else
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoTrimTrailingSpaces];
-
+    if FTripleClickRowSelect then
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoTripleClicks]
+    else
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoTripleClicks];
 
     TCustomSynEdit(Dest).WordWrap := FEnableWordWrap;
     TCustomSynEdit(Dest).Gutter.ShowLineNumbers := FEnableLineNumbers;
@@ -424,6 +447,14 @@ begin
   FExtraLineSpacing := 0;
   FTabWidth := 8;
   FPollingInterval := 1;
+  FPrintDocumentName := 2;
+  FPrintPageNumber := 3;
+  FPrintPrintedBy := 0;
+  FPrintDateTime := 1;
+  FPrintShowHeaderLine := True;
+  FPrintShowFooterLine := True;
+  FPrintShowLineNumbers := False;
+  FPrintWordWrapLine := False;
   FDateFormat := 'DD.MM.YYYY';
   FTimeFormat := 'HH24:MI:SS';
   FSchemaBrowserAlign := 'Bottom';
@@ -498,6 +529,7 @@ begin
   FToolBarSearch := True;
   FToolBarMode := True;
   FToolBarTools := True;
+  FTripleClickRowSelect := True;
 end;
 
 destructor TOptionsContainer.Destroy;
@@ -535,6 +567,7 @@ begin
   FConnectionTabsFrame.Free;
   FOptionsCompareFrame.Free;
   FStatusBarFrame.Free;
+  FOptionsPrintFrame.Free;
 
   FOptionsDialog := nil;
 end;
@@ -640,6 +673,11 @@ begin
     Data := GetNodeData(Node);
     Data.ImageIndex := CompareAction.ImageIndex;
     Data.Caption := CompareAction.Caption;
+    { Print }
+    Node := AddChild(nil);
+    Data := GetNodeData(Node);
+    Data.ImageIndex := PrintAction.ImageIndex;
+    Data.Caption := PrintAction.Caption;
     { Main menu }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
@@ -700,6 +738,7 @@ begin
   FEditorOptionsFrame.AutoSaveCheckBox.Checked := FOptionsContainer.AutoSave;
   FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked := FOptionsContainer.UndoAfterSave;
   FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked := FOptionsContainer.TrimTrailingSpaces;
+  FEditorOptionsFrame.TripleClickRowSelectCheckBox.Checked := FOptionsContainer.TripleClickRowSelect;
   FEditorOptionsFrame.ScrollPastEofCheckBox.Checked := FOptionsContainer.ScrollPastEof;
   FEditorOptionsFrame.ScrollPastEolCheckBox.Checked := FOptionsContainer.ScrollPastEol;
   FEditorOptionsFrame.TabsToSpacesCheckBox.Checked := FOptionsContainer.TabsToSpaces;
@@ -767,6 +806,15 @@ begin
   { Compare }
   FOptionsCompareFrame.IgnoreCaseCheckBox.Checked := FOptionsContainer.IgnoreCase;
   FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked := FOptionsContainer.IgnoreBlanks;
+  { Print preview }
+  FOptionsPrintFrame.DocumentNameComboBox.ItemIndex := FOptionsContainer.PrintDocumentName;
+  FOptionsPrintFrame.PageNumberComboBox.ItemIndex := FOptionsContainer.PrintPageNumber;
+  FOptionsPrintFrame.PrintedByComboBox.ItemIndex := FOptionsContainer.PrintPrintedBy;
+  FOptionsPrintFrame.DateTimeComboBox.ItemIndex := FOptionsContainer.PrintDateTime;
+  FOptionsPrintFrame.ShowHeaderLineCheckBox.Checked := FOptionsContainer.PrintShowHeaderLine;
+  FOptionsPrintFrame.ShowFooterLineCheckBox.Checked := FOptionsContainer.PrintShowFooterLine;
+  FOptionsPrintFrame.ShowLineNumbersCheckBox.Checked := FOptionsContainer.PrintShowLineNumbers;
+  FOptionsPrintFrame.WordWrapCheckBox.Checked := FOptionsContainer.PrintWordWrapLine;
   { Main menu }
   FMainMenuFrame.PersistentHotKeysCheckBox.Checked := FOptionsContainer.PersistentHotKeys;
   FMainMenuFrame.ShadowsCheckBox.Checked := FOptionsContainer.Shadows;
@@ -892,7 +940,8 @@ begin
     end;
     FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
-    FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
+    FEditorCompletionProposalFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
+    FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4);
 
     FOptionsSchemaBrowserFrame.Visible := (Level = 0) and (TreeNode.Index = 1);
     FObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
@@ -904,8 +953,9 @@ begin
     FOutputTabsFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 1);
 
     FOptionsCompareFrame.Visible := (Level = 0) and (TreeNode.Index = 4);
-    FMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 5);
-    FStatusBarFrame.Visible := (Level = 0) and (TreeNode.Index = 6);
+    FOptionsPrintFrame.Visible := (Level = 0) and (TreeNode.Index = 5);
+    FMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 6);
+    FStatusBarFrame.Visible := (Level = 0) and (TreeNode.Index = 7);
 
     FDateFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 0);
     FTimeFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 1);
@@ -919,6 +969,7 @@ begin
   FOptionsContainer.AutoSave := FEditorOptionsFrame.AutoSaveCheckBox.Checked;
   FOptionsContainer.UndoAfterSave := FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked;
   FOptionsContainer.TrimTrailingSpaces := FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked;
+  FOptionsContainer.TripleClickRowSelect := FEditorOptionsFrame.TripleClickRowSelectCheckBox.Checked;
   FOptionsContainer.ScrollPastEof := FEditorOptionsFrame.ScrollPastEofCheckBox.Checked;
   FOptionsContainer.ScrollPastEol := FEditorOptionsFrame.ScrollPastEolCheckBox.Checked;
   FOptionsContainer.TabsToSpaces := FEditorOptionsFrame.TabsToSpacesCheckBox.Checked;
@@ -984,6 +1035,15 @@ begin
   { Compare }
   FOptionsContainer.IgnoreCase := FOptionsCompareFrame.IgnoreCaseCheckBox.Checked;
   FOptionsContainer.IgnoreBlanks := FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked;
+  { Print preview }
+  FOptionsContainer.PrintDocumentName := FOptionsPrintFrame.DocumentNameComboBox.ItemIndex;
+  FOptionsContainer.PrintPageNumber := FOptionsPrintFrame.PageNumberComboBox.ItemIndex;
+  FOptionsContainer.PrintPrintedBy := FOptionsPrintFrame.PrintedByComboBox.ItemIndex;
+  FOptionsContainer.PrintDateTime := FOptionsPrintFrame.DateTimeComboBox.ItemIndex;
+  FOptionsContainer.PrintShowHeaderLine := FOptionsPrintFrame.ShowHeaderLineCheckBox.Checked;
+  FOptionsContainer.PrintShowFooterLine := FOptionsPrintFrame.ShowFooterLineCheckBox.Checked;
+  FOptionsContainer.PrintShowLineNumbers := FOptionsPrintFrame.ShowLineNumbersCheckBox.Checked;
+  FOptionsContainer.PrintWordWrapLine := FOptionsPrintFrame.WordWrapCheckBox.Checked;
   { Main menu }
   FOptionsContainer.PersistentHotKeys := FMainMenuFrame.PersistentHotKeysCheckBox.Checked;
   FOptionsContainer.Shadows := FMainMenuFrame.ShadowsCheckBox.Checked;
@@ -1044,6 +1104,8 @@ begin
   FConnectionTabsFrame.Parent := OptionsPanel;
   FOptionsCompareFrame := TOptionsCompareFrame.Create(OptionsPanel);
   FOptionsCompareFrame.Parent := OptionsPanel;
+  FOptionsPrintFrame := TOptionsPrintFrame.Create(OptionsPanel);
+  FOptionsPrintFrame.Parent := OptionsPanel;
   FStatusBarFrame := TStatusBarFrame.Create(OptionsPanel);
   FStatusBarFrame.Parent := OptionsPanel;
 end;
