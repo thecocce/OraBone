@@ -3,6 +3,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
   Top = 0
   Width = 320
   Height = 240
+  Align = alClient
   TabOrder = 0
   object Panel: TPanel
     Left = 0

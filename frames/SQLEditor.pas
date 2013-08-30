@@ -685,8 +685,7 @@ begin
   SQLEditorTabSheetFrame := TSQLEditorTabSheetFrame.Create(TabSheet);
   with SQLEditorTabSheetFrame do
   begin
-    Visible := False;
-    Align := alClient;
+    OraSynEdit.Visible := False;
     Parent := TabSheet;
     with OraSynEdit do
     begin
@@ -727,12 +726,9 @@ begin
       OraSynEdit.Lines.LoadFromFile(FileName);
 
     Application.ProcessMessages;
-    Visible := True;
-    try
+    OraSynEdit.Visible := True;
+    if OraSynEdit.CanFocus then
       OraSynEdit.SetFocus;
-    except
-      { not possible if tab is not visible }
-    end;
     Result := OraSynEdit;
   end;
   UpdateGutter(Result);
@@ -1422,14 +1418,10 @@ var
   SynEdit: TBCOraSynEdit;
 begin
   SynEdit := GetActiveSynEdit;
-  if SynEdit.Focused then
-  begin
-    if SynEdit.SelAvail then
-      SynEdit.ClearSelection;
-    SynEdit.SetFocus;
+  if Assigned(SynEdit) and SynEdit.Focused then
     SynEdit.PasteFromClipboard
-  end
   else
+  if SearchPanel.Visible then
     SearchForEdit.PasteFromClipboard;
 end;
 

@@ -2599,10 +2599,16 @@ begin
   if Assigned(SQLEditorFrame) then
   begin
     Grid := nil;
+    if SQLEditorFrame.SearchForEdit.Focused then
+      SQLEditorFrame.SearchForEdit.SelectAll
+    else
+    if SQLEditorFrame.GotoLineNumberEdit.Focused then
+      SQLEditorFrame.GotoLineNumberEdit.SelectAll
+    else
     if Assigned(SQLEditorFrame.OutputFrame) then
       Grid := SQLEditorFrame.OutputFrame.GetActiveGrid;
     if Assigned(Grid) and Grid.Focused then
-      Grid.SelectedRows.SelectAll //Selection.SelectAll
+      Grid.SelectedRows.SelectAll
     else
       SQLEditorFrame.GetActiveSynEdit.SelectAll
   end
