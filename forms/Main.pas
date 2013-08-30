@@ -627,29 +627,33 @@ begin
       Screen.Cursor := crHourGlass;
       try
         SQLEditorFrame.OutputPanel.Visible := True;
-        OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format('Search for ''%s''', [FindWhatText]));
+        OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format(LanguageDataModule.GetConstant('SearchFor'), [FindWhatText]));
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := True;
         Application.ProcessMessages;
         Screen.Cursor := crHourGlass;
         FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
       finally
         T2 := Now;
-        if not SQLEditorFrame.OutputFrame.IsEmpty then
+        if not SQLEditorFrame.OutputFrame.CancelSearch then
         begin
-          Min := StrToInt(FormatDateTime('n', T2 - T1));
-          Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - T1));
-          if Secs < 60 then
-            TimeDifference := FormatDateTime('s.zzz "s"', T2 - T1)
+          if not SQLEditorFrame.OutputFrame.IsEmpty then
+          begin
+            Min := StrToInt(FormatDateTime('n', T2 - T1));
+            Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - T1));
+            if Secs < 60 then
+              TimeDifference := FormatDateTime('s.zzz "s"', T2 - T1)
+            else
+              TimeDifference := FormatDateTime('n "min" s.zzz "s"', T2 - T1);
+            StatusBar.Panels[3].Text := Format(LanguageDataModule.GetConstant('OccurencesFound'), [SQLEditorFrame.OutputFrame.Count, TimeDifference])
+          end
           else
-            TimeDifference := FormatDateTime('n "min" s.zzz "s"', T2 - T1);
-          StatusBar.Panels[3].Text := Format('%d occurence(s) have been found in %s', [SQLEditorFrame.OutputFrame.Count, TimeDifference])
-        end
-        else
-        begin
-          ShowMessage(Format('Cannot find the string ''%s''', [FindWhatText]));
-          SQLEditorFrame.OutputFrame.CloseTabSheet;
-          StatusBar.Panels[3].Text := '';
+          begin
+            ShowMessage(Format(LanguageDataModule.GetMessage('CannotFindString'), [FindWhatText]));
+            SQLEditorFrame.OutputFrame.CloseTabSheet;
+            StatusBar.Panels[3].Text := '';
+          end;
         end;
+        SQLEditorFrame.OutputFrame.PageControl.EndDrag(False); { if close button pressed and search canceled, dragging will stay... }
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := False;
         Screen.Cursor := crDefault;
       end;
@@ -879,7 +883,7 @@ begin
     SearchReplaceAction.Enabled := ActiveSQLDocumentFound;
     SearchFindNextAction.Enabled := ActiveSQLDocumentFound;
     SearchFindPreviousAction.Enabled := ActiveSQLDocumentFound;
-    SearchFindInFilesAction.Enabled := Assigned(SQLEditorFrame);
+    SearchFindInFilesAction.Enabled := Assigned(SQLEditorFrame) and not SQLEditorFrame.OutputFrame.ProcessingTabSheet;
     SearchToggleBookmarkAction.Enabled := ActiveSQLDocumentFound;
     SearchToggleBookmarksAction.Enabled := ActiveSQLDocumentFound;
     SearchGotoBookmarksAction.Enabled := ActiveSQLDocumentFound;

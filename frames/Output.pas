@@ -39,8 +39,11 @@ type
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
+    FCancelSearch: Boolean;
     FProcessingTabSheet: Boolean;
+    FProcessingPage: TTabSheet;
     FTabsheetDblClick: TNotifyEvent;
+    function CheckCancel: Boolean;
     function GetCount: Integer;
     function GetDataGrid(TabCaption: string): TBCDBGrid;
     function GetIsAnyOutput: Boolean;
@@ -65,7 +68,6 @@ type
     procedure AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
     procedure AddStrings(TabCaption: string; Text: string);
     function AddTreeView(TabCaption: string; AutoExpand: Boolean = False): TVirtualDrawTree;
-    //procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree;Text: string); overload;
     procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString = ''); //overload;
     procedure Clear;
     procedure ClearStrings(TabCaption: string);
@@ -80,6 +82,7 @@ type
     property IsEmpty: Boolean read GetIsEmpty;
     property OnTabsheetDblClick: TNotifyEvent read FTabsheetDblClick write FTabsheetDblClick;
     property ProcessingTabSheet: Boolean read FProcessingTabSheet write SetProcessingTabSheet;
+    property CancelSearch: Boolean read FCancelSearch write FCancelSearch;
   end;
 
 implementation
@@ -89,7 +92,7 @@ implementation
 uses
   Main, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
-  System.UITypes, BCCommon.Lib;
+  System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -603,19 +606,16 @@ begin
         Result := TOutputTreeViewFrame(PageControl.ActivePage.Components[0]).VirtualDrawTree;
 end;
 
-{procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; Text: string);
-var
-  Root: PVirtualNode;
-begin
-  AddTreeViewLine(OutputTreeView, Root, '', 0, 0, Text);
-end; }
-
 procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString);
 var
   Node: PVirtualNode;
   NodeData: POutputRec;
   S: WideString;
 begin
+  if not FProcessingTabSheet then
+    Exit;
+  if FCancelSearch then
+    Exit;
   if not Assigned(OutputTreeView) then
     Exit;
 
@@ -718,7 +718,9 @@ function TOutputFrame.GetIsEmpty: Boolean;
 var
   OutputTreeView: TVirtualDrawTree;
 begin
-  Result := False;
+  Result := True;
+  if FCancelSearch then
+    Exit;
   OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
@@ -730,6 +732,8 @@ var
   OutputTreeView: TVirtualDrawTree;
 begin
   Result := 0;
+  if FCancelSearch then
+    Exit;
   OutputTreeView := GetVirtualDrawTree;
   if not Assigned(OutputTreeView) then
     Exit;
@@ -743,10 +747,26 @@ begin
     Result := PageControl.PageCount <> 0;
 end;
 
+function TOutputFrame.CheckCancel: Boolean;
+begin
+  Result := False;
+  Application.ProcessMessages;
+  if FProcessingTabSheet and not IsEmpty then
+    if FProcessingPage = PageControl.ActivePage then
+    begin
+      if AskYesOrNo(LanguageDataModule.GetYesOrNoMessage('CancelSearch')) then
+        FCancelSearch := True
+      else
+        Result := True;
+    end;
+end;
+
 procedure TOutputFrame.CloseTabSheet;
 var
   ActivePageIndex: Integer;
 begin
+  if CheckCancel then
+    Exit;
   if PageControl.PageCount > 0 then
   begin
     Self.Clear;
@@ -761,6 +781,8 @@ procedure TOutputFrame.CloseAllTabSheets;
 var
   i, j: Integer;
 begin
+  if CheckCancel then
+    Exit;
   j := PageControl.PageCount - 1;
   for i := j downto 0 do
     PageControl.Pages[i].Free;
@@ -780,6 +802,8 @@ procedure TOutputFrame.CloseAllOtherTabSheets;
 var
   i, j: Integer;
 begin
+  if CheckCancel then
+    Exit;
   PageControl.ActivePage.PageIndex := 0;
   j := PageControl.PageCount - 1;
   for i := j downto 1 do
@@ -789,7 +813,8 @@ end;
 procedure TOutputFrame.SetProcessingTabSheet(Value: Boolean);
 begin
   FProcessingTabSheet := Value;
-  OutputCloseAction.Enabled := not Value;
+  FProcessingPage := PageControl.ActivePage;
+  FCancelSearch := False;
 end;
 
 procedure TOutputFrame.CopyToClipboard;

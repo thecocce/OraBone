@@ -1218,9 +1218,9 @@ begin
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + AddColumns + CHR_ENTER + ');' + CHR_ENTER;
     end;
+    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column type' + CHR_ENTER;
     while ModifyColumnType <> '' do
     begin
-      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column type' + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('ALTER TABLE %s.%s MODIFY ',
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
 
@@ -1232,7 +1232,7 @@ begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + ';' + CHR_ENTER;
 
       if Pos(',', ModifyColumnType) <> 0 then
-        ModifyColumnType := Copy(ModifyColumnType, Pos(',', ModifyColumnType) + 1, Length(ModifyColumnType))
+        ModifyColumnType := Trim(Copy(ModifyColumnType, Pos(',', ModifyColumnType) + 1, Length(ModifyColumnType)))
       else
         ModifyColumnType := '';
     end;
