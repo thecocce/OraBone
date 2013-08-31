@@ -309,7 +309,6 @@ type
     { Private declarations }
     FCaseCycle: Byte;
     FSelectedText: UnicodeString;
-    FInTransaction: Boolean;
     FNumberOfNewDocument: Integer;
     FOutputFrame: TOutputFrame;
     FSession: TOraSession;
@@ -362,6 +361,7 @@ type
     procedure SetActivePageCaptionModified;
     function GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
     function GetModifiedDocuments(CheckActive: Boolean = True): Boolean;
+    function GetInTransAction: Boolean;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -421,7 +421,7 @@ type
     property SchemaParam: string read FSchemaParam write FSchemaParam;
     property DataQueryOpened: Boolean read GetDataQueryOpened;
     property OutputGridHasFocus: Boolean read GetOutputGridHasFocus;
-    property InTransaction: Boolean read FInTransaction write FInTransaction;
+    property InTransaction: Boolean read GetInTransaction;
     property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
     property Processing: Boolean read FProcessing;
     property ModifiedDocuments: Boolean Read FModifiedDocuments write FModifiedDocuments;
@@ -507,7 +507,6 @@ begin
   FNumberOfNewDocument := 0;
   FCaseCycle := 0;
   FSelectedText := '';
-  FInTransaction := False;
   FProcessing := False;
   FModifiedDocuments := False;
   FOutputFrame := TOutputFrame.Create(OutputPanel);
@@ -2321,11 +2320,8 @@ begin
       if not ParametersDialog.Open(ScriptQuery) then
         Exit;
     if not CreateStatement then
-      if not FInTransaction then
-      begin
-        FInTransaction := True;
-        Session.StartTransaction;
-      end;
+      if not FSession.InTransaction then
+        FSession.StartTransaction;
     OraScript.Execute;
     if DBMSOutputToolButton.Down then
       GetDBMSOutput;
@@ -2736,11 +2732,8 @@ begin
       if DBMSOutputToolButton.Down then
         EnableDBMSOutput;
       if not CreateNewSession then
-        if not FInTransaction then
-        begin
-          FInTransaction := True;
+        if not FSession.InTransaction then
           FSession.StartTransaction;
-        end;
       SynEdit.InThread := True;
       QuerySuccess := True;
       SynEdit.OraSQL.Prepare;
@@ -3128,6 +3121,11 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     Result := SynEdit.Marks;
+end;
+
+function TSQLEditorFrame.GetInTransAction: Boolean;
+begin
+  Result := FSession.InTransaction;
 end;
 
 end.

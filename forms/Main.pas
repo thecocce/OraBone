@@ -841,6 +841,7 @@ begin
     FileReopenAction.Enabled := ActiveSQLDocumentFound and (ReopenActionClientItem.Items.Count > 0);
     FileCloseAction.Enabled := Assigned(SQLEditorFrame) and SQLEditorFrame.OpenTabSheets;
     FileCloseAllAction.Enabled := FileCloseAction.Enabled;
+    FileCloseAllOtherPagesAction.Enabled := FileCloseAction.Enabled;
     FileSaveAsAction.Enabled := FileCloseAction.Enabled and ActiveSQLDocumentFound;
     if ActiveSQLDocumentFound then
       FileSaveAction.ShortCut :=  Menus.ShortCut(Word('S'), [ssCtrl])
@@ -912,6 +913,7 @@ begin
     //  (Assigned(SchemaBrowserFrame) and SchemaBrowserFrame.DataQueryOpened);
     { SQL Editor }
     ExecuteStatementAction.Enabled := ActiveSQLDocumentFound and (SQLEditorFrame.GetActiveSynEdit.Text <> '');
+    ExecuteCurrentStatementAction.Enabled := ExecuteStatementAction.Enabled;
     ExecuteScriptAction.Enabled := ExecuteStatementAction.Enabled;
     ExplainPlanAction.Enabled := ExecuteStatementAction.Enabled;
     { Bookmarks }
@@ -1975,10 +1977,7 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     if SQLEditorFrame.InTransaction then
-    begin
-      SQLEditorFrame.InTransaction := False;
       SQLEditorFrame.Session.Commit;
-    end;
 end;
 
 procedure TMainForm.DatabaseCreateConstraintActionExecute(Sender: TObject);
@@ -2351,10 +2350,7 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     if SQLEditorFrame.InTransaction then
-    begin
-      SQLEditorFrame.InTransaction := False;
       SQLEditorFrame.Session.Rollback;
-    end;
 end;
 
 procedure TMainForm.DBMSOutputActionExecute(Sender: TObject);
@@ -2748,7 +2744,6 @@ begin
       PageControl.Repaint;
     end;
   except
-    { silent }
     on E: Exception do
       ShowErrorMessage(E.Message);
   end;

@@ -957,8 +957,8 @@ begin
     FMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 6);
     FStatusBarFrame.Visible := (Level = 0) and (TreeNode.Index = 7);
 
-    FDateFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 0);
-    FTimeFormatFrame.Visible := (ParentIndex = 7) and (Level = 1) and (TreeNode.Index = 1);
+    FDateFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
+    FTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
   end;
 end;
 
@@ -1084,6 +1084,8 @@ begin
   FEditorTabsFrame.Parent := OptionsPanel;
   FEditorToolBarFrame := TEditorToolBarFrame.Create(OptionsPanel);
   FEditorToolBarFrame.Parent := OptionsPanel;
+  FEditorCompletionProposalFrame := TEditorCompletionProposalFrame.Create(OptionsPanel);
+  FEditorCompletionProposalFrame.Parent := OptionsPanel;
   FMainMenuFrame := TMainMenuFrame.Create(OptionsPanel);
   FMainMenuFrame.Parent := OptionsPanel;
   FOptionsOutputFrame := TOptionsOutputFrame.Create(OptionsPanel);

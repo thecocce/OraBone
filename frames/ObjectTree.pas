@@ -104,6 +104,17 @@ const
   IMG_IDX_CHANGE_PASSWORD = 71;
   IMG_IDX_SQL_SCRIPT = 72;
 
+  IMG_IDX_FUNCTION = 73;
+  IMG_IDX_PROCEDURE = 74;
+  IMG_IDX_CONSTANT = 75;
+  IMG_IDX_EXCEPTION = 76;
+  IMG_IDX_TYPE = 77;
+  IMG_IDX_CURSOR = 78;
+  IMG_IDX_VARIABLE = 79;
+
+  IMG_IDX_UNIQUE_KEY = 80;
+  IMG_IDX_CHECK = 81;
+
 type
   (*TRootNodeData = class
     RootText: string;
@@ -315,11 +326,11 @@ begin
   FilterLength := Length(SchemaFilters);
 
   if SchemaFilters <> '' then
-    SchemaFilterAction.ImageIndex := IMG_IDX_FILTER_EDIT
+    FilterToolButton.ImageIndex := IMG_IDX_FILTER_EDIT
   else
   begin
     SchemaFilters := '''''';
-    SchemaFilterAction.ImageIndex := IMG_IDX_FILTER_ADD;
+    FilterToolButton.ImageIndex := IMG_IDX_FILTER_ADD;
   end;
 
   with SchemasQuery do
@@ -644,49 +655,49 @@ begin
                 begin
                   NodeText := Token;
                   NodeType := 'CONSTANT';
-                  ImageIndex := 77;
+                  ImageIndex := IMG_IDX_CONSTANT;
                 end
                 else
                 if PackageSpec and SQLTokenizer.TokenStrIs('EXCEPTION') then
                 begin
                   NodeText := Token;
                   NodeType := 'EXCEPTION';
-                  ImageIndex := 78;
+                  ImageIndex := IMG_IDX_EXCEPTION;
                 end
                 else
                 if PackageSpec and (Token = 'TYPE') then
                 begin
                   NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'TYPE';
-                  ImageIndex := 79;
+                  ImageIndex := IMG_IDX_TYPE;
                 end
                 else
                 if Token = 'PROCEDURE' then
                 begin
                   NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'PROCEDURE';
-                  ImageIndex := 76;
+                  ImageIndex := IMG_IDX_PROCEDURE;
                 end
                 else
                 if Token = 'FUNCTION' then
                 begin
                   NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'FUNCTION';
-                  ImageIndex := 75;
+                  ImageIndex := IMG_IDX_FUNCTION;
                 end
                 else
                 if PackageSpec and (Token = 'CURSOR') then
                 begin
                   NodeText := SQLTokenizer.TokenStr;
                   NodeType := 'CURSOR';
-                  ImageIndex := 80;
+                  ImageIndex := IMG_IDX_CURSOR;
                 end
                 else
                 if PackageSpec then
                 begin
                   NodeText := Token;
                   NodeType := NodeText;
-                  ImageIndex := 81;
+                  ImageIndex := IMG_IDX_VARIABLE;
                 end;
               end;
 
@@ -766,7 +777,7 @@ begin
                          // Token := StringReplace(Token, 'IS RECORD (', '', []);
                           ChildData.NodeText := Trim(Token);
 
-                          ChildData.ImageIndex := 81;
+                          ChildData.ImageIndex := IMG_IDX_VARIABLE;
                           Token := '';
                           SQLTokenizer.Next;
                         end;
@@ -968,7 +979,7 @@ begin
         if FTreeObjects.Strings[i] = TEXT_TRIGGERS + TEXT_IS_TRUE then
           AddNode(ObjectsQuery, [IMG_IDX_TRIGGER_ROOT, IMG_IDX_TRIGGER_CHILD],  OBJECT_TYPE_TRIGGER, TEXT_TRIGGERS);
         if FTreeObjects.Strings[i] = TEXT_CONSTRAINTS + TEXT_IS_TRUE then
-          AddNode(ObjectsQuery, [IMG_IDX_CONSTRAINT_ROOT, IMG_IDX_CONSTRAINT_CHILD, IMG_IDX_PRIMARY_KEY, IMG_IDX_FOREIGN_KEY],  OBJECT_TYPE_CONSTRAINT, TEXT_CONSTRAINTS);
+          AddNode(ObjectsQuery, [IMG_IDX_CONSTRAINT_ROOT, IMG_IDX_CONSTRAINT_CHILD, IMG_IDX_PRIMARY_KEY, IMG_IDX_FOREIGN_KEY, IMG_IDX_UNIQUE_KEY, IMG_IDX_CHECK],  OBJECT_TYPE_CONSTRAINT, TEXT_CONSTRAINTS);
         if FTreeObjects.Strings[i] = TEXT_INDEXES + TEXT_IS_TRUE then
           AddNode(ObjectsQuery, [IMG_IDX_INDEX_ROOT, IMG_IDX_INDEX_CHILD],  OBJECT_TYPE_INDEX, TEXT_INDEXES);
         if FTreeObjects.Strings[i] = TEXT_SEQUENCES + TEXT_IS_TRUE then
@@ -1334,6 +1345,10 @@ begin
           Data.ImageIndex := ImageIndexes[2];
         if FieldByName('EXTRATYPE').AsWideString = 'R' then
           Data.ImageIndex := ImageIndexes[3];
+        if FieldByName('EXTRATYPE').AsWideString = 'U' then
+          Data.ImageIndex := ImageIndexes[4];
+        if FieldByName('EXTRATYPE').AsWideString = 'C' then
+          Data.ImageIndex := ImageIndexes[5];
         if FieldByName('STATUS').AsWideString  = 'DISABLED' then
           Data.StateIndex := 1;
       end

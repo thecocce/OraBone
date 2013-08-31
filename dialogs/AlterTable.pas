@@ -1232,7 +1232,7 @@ begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + ';' + CHR_ENTER;
 
       if Pos(',', ModifyColumnType) <> 0 then
-        ModifyColumnType := Trim(Copy(ModifyColumnType, Pos(',', ModifyColumnType) + 1, Length(ModifyColumnType)))
+        ModifyColumnType := '  ' + Trim(Copy(ModifyColumnType, Pos(',', ModifyColumnType) + 1, Length(ModifyColumnType)))
       else
         ModifyColumnType := '';
     end;
@@ -1250,7 +1250,7 @@ begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ModifyColumn + ';' + CHR_ENTER;
 
       if Pos(',', ModifyColumns) <> 0 then
-        ModifyColumns := Copy(ModifyColumns, Pos(',', ModifyColumns) + 1, Length(ModifyColumns))
+        ModifyColumns := '  ' + Trim(Copy(ModifyColumns, Pos(',', ModifyColumns) + 1, Length(ModifyColumns)))
       else
         ModifyColumns := '';
     end;

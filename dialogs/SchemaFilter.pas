@@ -76,8 +76,18 @@ end;
 function TSchemaFilterDialog.GetSchemaFilters: string;
 var
   i: Integer;
+  AllSelected: Boolean;
 begin
   Result := '';
+  { check if all selected }
+  AllSelected := True;
+  for i := 0 to SchemaFilterCheckListBox.Count - 1 do
+    if not SchemaFilterCheckListBox.Checked[i] then
+    begin
+      AllSelected := False;
+      Break;
+    end;
+  if not AllSelected then
   for i := 0 to SchemaFilterCheckListBox.Count - 1 do
     if SchemaFilterCheckListBox.Checked[i] then
     begin
@@ -106,7 +116,8 @@ begin
         Break;
       end;
     { write ini }
-    WriteString('SchemaFilters', EncryptString(FKeyValue), EncryptString(Filters));
+    if Filters <> '' then
+      WriteString('SchemaFilters', EncryptString(FKeyValue), EncryptString(Filters));
   finally
     Free;
   end;
