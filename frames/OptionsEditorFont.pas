@@ -5,20 +5,26 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.ActnList, SynEdit, BCControls.SynEdit, System.Actions;
+  Vcl.ActnList, BCControls.SynEdit, System.Actions, SynEdit;
 
 type
   TEditorFontFrame = class(TFrame)
     Panel: TPanel;
     FontDialog: TFontDialog;
     ActionList: TActionList;
-    SelectFontAction: TAction;
+    SelectEditorFontAction: TAction;
     TopPanel: TPanel;
-    FontLabel: TLabel;
+    SelectEditorFontSpeedButton: TSpeedButton;
+    EditorFontLabel: TLabel;
     BottomPanel: TPanel;
     SynEdit: TBCSynEdit;
-    SelectFontSpeedButton: TSpeedButton;
-    procedure SelectFontActionExecute(Sender: TObject);
+    GutterFontLabel: TLabel;
+    SelectGutterFontSpeedButton: TSpeedButton;
+    EditorLabel: TLabel;
+    GutterLabel: TLabel;
+    SelectGutterFontAction: TAction;
+    procedure SelectEditorFontActionExecute(Sender: TObject);
+    procedure SelectGutterFontActionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,19 +39,31 @@ implementation
 constructor TEditorFontFrame.Create(AOwner: TComponent);
 begin
   inherited;
-  SynEdit.Text := FontLabel.Caption;
+  SynEdit.Text := EditorFontLabel.Caption;
 end;
 
-procedure TEditorFontFrame.SelectFontActionExecute(Sender: TObject);
+procedure TEditorFontFrame.SelectEditorFontActionExecute(Sender: TObject);
 begin
-  FontDialog.Font.Name := FontLabel.Font.Name;
-  FontDialog.Font.Size := FontLabel.Font.Size;
+  FontDialog.Font.Name := EditorFontLabel.Font.Name;
+  FontDialog.Font.Size := EditorFontLabel.Font.Size;
   if FontDialog.Execute then
   begin
-    FontLabel.Font.Assign(FontDialog.Font);
-    FontLabel.Caption := Format('%s %dpt', [FontLabel.Font.Name, FontLabel.Font.Size]);
-    SynEdit.Text := FontLabel.Caption;
+    EditorFontLabel.Font.Assign(FontDialog.Font);
+    EditorFontLabel.Caption := Format('%s %dpt', [EditorFontLabel.Font.Name, EditorFontLabel.Font.Size]);
+    SynEdit.Text := EditorFontLabel.Caption;
     SynEdit.Font.Assign(FontDialog.Font);
+  end;
+end;
+
+procedure TEditorFontFrame.SelectGutterFontActionExecute(Sender: TObject);
+begin
+  FontDialog.Font.Name := GutterFontLabel.Font.Name;
+  FontDialog.Font.Size := GutterFontLabel.Font.Size;
+  if FontDialog.Execute then
+  begin
+    GutterFontLabel.Font.Assign(FontDialog.Font);
+    GutterFontLabel.Caption := Format('%s %dpt', [GutterFontLabel.Font.Name, GutterFontLabel.Font.Size]);
+    SynEdit.Gutter.Font.Assign(FontDialog.Font);
   end;
 end;
 

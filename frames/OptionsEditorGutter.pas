@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, BCControls.CheckBox,
-  JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ActnList, Vcl.Buttons, System.Actions;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.ExtCtrls, Vcl.StdCtrls, BCControls.CheckBox,
+  JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.Buttons;
 
 type
   TEditorGutterFrame = class(TFrame)
@@ -13,16 +13,10 @@ type
     GutterVisibleCheckBox: TBCCheckBox;
     RightMarginLabel: TLabel;
     RightMarginEdit: TBCEdit;
-    FontDialog: TFontDialog;
-    FontLabel: TLabel;
-    ActionList: TActionList;
-    SelectFontAction: TAction;
     AutoSizeCheckBox: TBCCheckBox;
     WidthLabel: TLabel;
     WidthEdit: TBCEdit;
     VisibleRightMarginCheckBox: TBCCheckBox;
-    SpeedButton1: TSpeedButton;
-    procedure SelectFontActionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,16 +26,5 @@ type
 implementation
 
 {$R *.dfm}
-
-procedure TEditorGutterFrame.SelectFontActionExecute(Sender: TObject);
-begin
-  FontDialog.Font.Name := FontLabel.Font.Name;
-  FontDialog.Font.Size := FontLabel.Font.Size;
-  if FontDialog.Execute then
-  begin
-    FontLabel.Font.Assign(FontDialog.Font);
-    FontLabel.Caption := Format('%s %dpt', [FontLabel.Font.Name, FontLabel.Font.Size]);
-  end;
-end;
 
 end.

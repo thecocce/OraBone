@@ -749,17 +749,17 @@ begin
   FEditorOptionsFrame.BrightnessTrackBar.Position := FOptionsContainer.ColorBrightness;
   FEditorOptionsFrame.InsertCaretComboBox.ItemIndex := Ord(FOptionsContainer.InsertCaret);
   { Font }
-  FEditorFontFrame.FontLabel.Font.Name := FOptionsContainer.FontName;
-  FEditorFontFrame.FontLabel.Font.Size := FOptionsContainer.FontSize;
-  FEditorFontFrame.FontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.FontLabel.Font.Name, FEditorFontFrame.FontLabel.Font.Size]);
+  FEditorFontFrame.EditorFontLabel.Font.Name := FOptionsContainer.FontName;
+  FEditorFontFrame.EditorFontLabel.Font.Size := FOptionsContainer.FontSize;
+  FEditorFontFrame.EditorFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.EditorFontLabel.Font.Name, FEditorFontFrame.EditorFontLabel.Font.Size]);
+  FEditorFontFrame.GutterFontLabel.Font.Name := FOptionsContainer.GutterFontName;
+  FEditorFontFrame.GutterFontLabel.Font.Size := FOptionsContainer.GutterFontSize;
+  FEditorFontFrame.GutterFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.GutterFontLabel.Font.Name, FEditorFontFrame.GutterFontLabel.Font.Size]);
   { Gutter }
   FEditorGutterFrame.AutoSizeCheckBox.Checked := FOptionsContainer.GutterAutoSize;
   FEditorGutterFrame.GutterVisibleCheckBox.Checked := FOptionsContainer.GutterVisible;
   FEditorGutterFrame.VisibleRightMarginCheckBox.Checked := FOptionsContainer.GutterVisibleRightMargin;
   FEditorGutterFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.GutterRightMargin);
-  FEditorGutterFrame.FontLabel.Font.Name := FOptionsContainer.GutterFontName;
-  FEditorGutterFrame.FontLabel.Font.Size := FOptionsContainer.GutterFontSize;
-  FEditorGutterFrame.FontLabel.Caption := Format('%s %dpt', [FEditorGutterFrame.FontLabel.Font.Name, FEditorGutterFrame.FontLabel.Font.Size]);
   FEditorGutterFrame.WidthEdit.Text := IntToStr(FOptionsContainer.GutterWidth);
   { Document tabs }
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
@@ -979,14 +979,14 @@ begin
   FOptionsContainer.ColorBrightness := FEditorOptionsFrame.BrightnessTrackBar.Position;
   FOptionsContainer.InsertCaret := TSynEditCaretType(FEditorOptionsFrame.InsertCaretComboBox.ItemIndex);
   { Font }
-  FOptionsContainer.FontName := FEditorFontFrame.FontLabel.Font.Name;
-  FOptionsContainer.FontSize := FEditorFontFrame.FontLabel.Font.Size;
+  FOptionsContainer.FontName := FEditorFontFrame.EditorFontLabel.Font.Name;
+  FOptionsContainer.FontSize := FEditorFontFrame.EditorFontLabel.Font.Size;
+  FOptionsContainer.GutterFontName := FEditorFontFrame.GutterFontLabel.Font.Name;
+  FOptionsContainer.GutterFontSize := FEditorFontFrame.GutterFontLabel.Font.Size;
   { Gutter }
   FOptionsContainer.GutterAutoSize := FEditorGutterFrame.AutoSizeCheckBox.Checked;
   FOptionsContainer.GutterVisible := FEditorGutterFrame.GutterVisibleCheckBox.Checked;
   FOptionsContainer.GutterRightMargin := StrToIntDef(FEditorGutterFrame.RightMarginEdit.Text, 80);
-  FOptionsContainer.GutterFontName := FEditorGutterFrame.FontLabel.Font.Name;
-  FOptionsContainer.GutterFontSize := FEditorGutterFrame.FontLabel.Font.Size;
   FOptionsContainer.GutterVisibleRightMargin := FEditorGutterFrame.VisibleRightMarginCheckBox.Checked;
   FOptionsContainer.GutterWidth := StrToIntDef(FEditorGutterFrame.WidthEdit.Text, 48);
   { Editor tabs }
