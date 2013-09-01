@@ -38,6 +38,10 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema1TabSheet: TTabSheet
       Caption = '<select schema>'
       ImageIndex = 24
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Schema1Panel: TPanel
         Left = 0
         Top = 0
@@ -90,7 +94,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 294
+              Width = 298
               WideText = 'Difference'
             end>
         end
@@ -99,6 +103,10 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema2TabSheet: TTabSheet
       Caption = '<select schema>'
       ImageIndex = 24
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Schema2Panel: TPanel
         Left = 0
         Top = 0
@@ -152,7 +160,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 292
+              Width = 298
               WideText = 'Difference'
             end>
         end
@@ -181,6 +189,8 @@ object SchemaCompareForm: TSchemaCompareForm
       Step = 1
       TabOrder = 0
       Visible = False
+      ExplicitLeft = 3
+      ExplicitTop = 3
     end
   end
   object SchemasGroupBox: TGroupBox

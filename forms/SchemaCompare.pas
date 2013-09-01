@@ -215,12 +215,12 @@ begin
   end;
   
   if ColumnCommentsCheckBox.Checked then
-  begin  
+  begin
     if Result <> '' then
       Result := Result + ' UNION ALL ';
     Result := Result + DM.StringHolder.StringsByName['SchemaCompareColumnCommentsSQL'].Text;
   end;
-  
+
   if Result <> '' then
     Result := Result + ' ORDER BY 1, 2, 3, 4';
 end;
@@ -228,7 +228,7 @@ end;
 procedure TSchemaCompareForm.DoCompare;
 var
   i: Cardinal;
-  Node, ChildNode, Node2, ChildNode2: PVirtualNode;
+  Node, ChildNode, Node2, ChildNode2, PrevNode: PVirtualNode;
   NodeData, NodeData2: PCompareRec;
   CompareSQL: string;
 begin
@@ -290,7 +290,7 @@ begin
       ProgressBar.StepIt;
       i := i + Node.ChildCount + 1;
       ChildNode := Node.FirstChild;
-    
+
       while Assigned(ChildNode) do
       begin
         ProgressBar.StepIt;
@@ -326,25 +326,33 @@ begin
     while Assigned(Node) do
     begin
       if Node.ChildCount = 0 then
-        Schema1VirtualDrawTree.DeleteNode(Node)
+      begin
+        PrevNode := Node;
+        Node := Node.NextSibling;
+        Schema1VirtualDrawTree.DeleteNode(PrevNode)
+      end
       else
       begin
         NodeData := Schema1VirtualDrawTree.GetNodeData(Node);
         NodeData.ObjectName := Format('%s [%d]', [NodeData.ObjectName, Node.ChildCount]);
+        Node := Node.NextSibling;
       end;
-      Node := Node.NextSibling;
     end;
     Node := Schema2VirtualDrawTree.GetFirst;
     while Assigned(Node) do
     begin
       if Node.ChildCount = 0 then
-        Schema2VirtualDrawTree.DeleteNode(Node)
+      begin
+        PrevNode := Node;
+        Node := Node.NextSibling;
+        Schema2VirtualDrawTree.DeleteNode(PrevNode);
+      end
       else
       begin
         NodeData := Schema2VirtualDrawTree.GetNodeData(Node);
         NodeData.ObjectName := Format('%s [%d]', [NodeData.ObjectName, Node.ChildCount]);
+        Node := Node.NextSibling;
       end;
-      Node := Node.NextSibling;
     end;
   finally
     Schema1VirtualDrawTree.EndUpdate;
