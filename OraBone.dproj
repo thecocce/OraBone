@@ -4,7 +4,7 @@
         <ProjectVersion>14.6</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
@@ -97,17 +97,19 @@
         <DCC_DebugInformation>false</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_MinorVer>6</VerInfo_MinorVer>
         <VerInfo_MajorVer>6</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.6.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.6.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.6.1.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.6.1;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_MinorVer>6</VerInfo_MinorVer>
         <VerInfo_MajorVer>6</VerInfo_MajorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;D:\Bonecode XE4\Components\src\UniSynEdit\Source;D:\Bonecode XE4\Components\src\SynWeb\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\VirtualTree\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\RADStudioXE4\Win64\Release;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\OmniXML\src;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\Common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.6.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.6.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.6.1.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=6.6.1;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
