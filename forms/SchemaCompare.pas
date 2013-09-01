@@ -284,9 +284,6 @@ begin
     i := 0;
     while Assigned(Node) do
     begin
-      //NodeData := Schema1VirtualDrawTree.GetNodeData(Node);
-      //SimpleText := 'Comparing ' + LowerCase(NodeData.ObjectName) + ' (%d/' + IntToStr(Node.ChildCount) + ')';
-      //i := 1;
       ProgressBar.StepIt;
       i := i + Node.ChildCount + 1;
       ChildNode := Node.FirstChild;
@@ -294,9 +291,6 @@ begin
       while Assigned(ChildNode) do
       begin
         ProgressBar.StepIt;
-        //ProgressBar1.
-        //StatusBar.Panels[0].Text := Format(SimpleText, [i]);
-        //Application.ProcessMessages;
         NodeData := Schema1VirtualDrawTree.GetNodeData(ChildNode);
         ChildNode2 := Node2.FirstChild;
         while Assigned(ChildNode2) do
@@ -309,9 +303,6 @@ begin
             Schema2VirtualDrawTree.DeleteNode(ChildNode2);
             Break;
           end;
-          //else
-          //if CompareStr(NodeData.ObjectName, NodeData2.ObjectName) < 0 then
-          //  Break;
           ChildNode2 := ChildNode2.NextSibling;
         end;
         ChildNode := ChildNode.NextSibling;
@@ -373,7 +364,6 @@ begin
     DoCompare;
 end;
 
-
 procedure TSchemaCompareForm.Schema1ComboBoxDrawItem(Control: TWinControl; Index: Integer;
   Rect: TRect; State: TOwnerDrawState);
 begin
@@ -385,7 +375,6 @@ end;
 
 procedure TSchemaCompareForm.QueryAfterOpen(VirtualDrawTree: TVirtualDrawTree; SchemaQuery: TOraQuery);
 var
-  //i: Integer;
   ObjectType: string;
   Node, ParentNode: PVirtualNode;
   NodeData: PCompareRec;
@@ -398,7 +387,6 @@ begin
     First;
     ObjectType := '';
     ParentNode := nil;
-    //i := 0;
     while not Eof do
     begin
       if ObjectType <> FieldByName('OBJECT_TYPE').AsString then
@@ -406,9 +394,8 @@ begin
         if Assigned(ParentNode) then
         begin
           NodeData := VirtualDrawTree.GetNodeData(ParentNode);
-          NodeData.ObjectName := NodeData.ObjectName {+ Format(' [%d]', [i])};
+          NodeData.ObjectName := NodeData.ObjectName
         end;
-        //i := 0;
         Node := VirtualDrawTree.AddChild(nil);
         NodeData := VirtualDrawTree.GetNodeData(Node);
         NodeData.Level := 0;
@@ -424,13 +411,7 @@ begin
       NodeData.ImageIndex := FieldByName('LEVEL1_INDEX').AsInteger;
       ObjectType := FieldByName('OBJECT_TYPE').AsString;
       Next;
-      //Inc(i);
     end;
-    (*if Assigned(ParentNode) then
-    begin
-      NodeData := VirtualDrawTree.GetNodeData(ParentNode);
-      NodeData.ObjectName := NodeData.ObjectName {+ Format(' [%d]', [i])};
-    end; *)
   end;
   VirtualDrawTree.EndUpdate;
 end;
@@ -471,13 +452,6 @@ begin
 
     if not Assigned(Data) then
       Exit;
-
-    {Canvas.Font.Color := clWindowText;
-    if (Column = FocusedColumn) and (not Focused) then
-    begin
-      Canvas.Brush.Color := clBtnFace;
-      Canvas.Font.Color := clBlack;
-    end; }
 
     if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
       LColor := LStyles.GetSystemColor(clWindowText);
