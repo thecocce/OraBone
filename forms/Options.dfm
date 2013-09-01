@@ -126,7 +126,6 @@ object OptionsDialog: TOptionsDialog
       Width = 200
       Height = 412
       Align = alLeft
-      BorderWidth = 1
       Header.AutoSizeIndex = 0
       Header.Font.Charset = DEFAULT_CHARSET
       Header.Font.Color = clWindowText
@@ -137,7 +136,7 @@ object OptionsDialog: TOptionsDialog
       Images = ImageList
       TabOrder = 0
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-      TreeOptions.PaintOptions = [toShowBackground, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection, toUseExplorerTheme]
+      TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedImages, toUseExplorerTheme]
       TreeOptions.SelectionOptions = [toFullRowSelect]
       TreeOptions.StringOptions = []
       OnClick = OptionsVirtualStringTreeClick
