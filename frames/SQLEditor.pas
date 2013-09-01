@@ -715,6 +715,7 @@ begin
     with OraSynEdit.ObjectFieldCompletionProposal do
     begin
       Editor := OraSynEdit;
+      ShortCut := TextToShortCut('');
       Options := Options + [scoUseInsertList, scoUseBuiltInTimer, scoCompleteWithTab, scoCompleteWithEnter, scoLimitToMatchedText];
       TimerInterval := 500;
       TriggerChars := '.';

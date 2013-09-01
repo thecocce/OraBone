@@ -1,15 +1,15 @@
 object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
   Left = 0
   Top = 0
-  Width = 320
-  Height = 240
+  Width = 451
+  Height = 302
   Align = alClient
   TabOrder = 0
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 320
-    Height = 240
+    Width = 451
+    Height = 302
     Align = alClient
     BevelOuter = bvNone
     Padding.Left = 1
@@ -20,8 +20,8 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
     object OraSynEdit: TBCOraSynEdit
       Left = 1
       Top = 1
-      Width = 319
-      Height = 237
+      Width = 450
+      Height = 299
       Align = alClient
       ActiveLineColor = clSkyBlue
       Font.Charset = DEFAULT_CHARSET
@@ -67,7 +67,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
     OnExecute = SynCompletionProposalExecute
     ShortCut = 16416
     Editor = OraSynEdit
-    Left = 64
-    Top = 64
+    Left = 112
+    Top = 88
   end
 end
