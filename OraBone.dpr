@@ -122,7 +122,8 @@ uses
   Options in 'forms\Options.pas' {OptionsDialog},
   OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
   BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
-  OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame};
+  OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
+  Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas';
 
 {$R *.res}
 

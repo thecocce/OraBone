@@ -1,8 +1,8 @@
 object SchemaBrowserFrame: TSchemaBrowserFrame
   Left = 0
   Top = 0
-  Width = 831
-  Height = 595
+  Width = 451
+  Height = 302
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -11,12 +11,10 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   Padding.Right = 1
   Padding.Bottom = 1
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 302
   object Splitter: TJvSplitter
     Left = 289
     Top = 0
-    Height = 594
+    Height = 301
     Hint = ' '
     ExplicitLeft = 240
     ExplicitTop = 176
@@ -26,7 +24,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     Left = 0
     Top = 0
     Width = 289
-    Height = 594
+    Height = 301
     Hint = ' '
     Align = alLeft
     BevelOuter = bvNone
@@ -35,12 +33,11 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
-    ExplicitHeight = 301
     inline ObjectTreeFrame: TObjectTreeFrame
       Left = 1
       Top = 0
       Width = 288
-      Height = 593
+      Height = 300
       Align = alClient
       Ctl3D = True
       ParentCtl3D = False
@@ -49,35 +46,30 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       ExplicitWidth = 288
       ExplicitHeight = 300
       inherited BottomPanel: TPanel
-        Top = 567
+        Top = 274
         Width = 288
         ParentShowHint = False
         ExplicitTop = 274
         ExplicitWidth = 288
-        inherited ButtonPanel: TPanel
-          Left = 261
-          ExplicitLeft = 261
-          inherited JvToolBar1: TBCToolBar
-            inherited FilterToolButton: TToolButton
-              ParentShowHint = False
-            end
-          end
-        end
         inherited ComboPanel: TPanel
-          Width = 261
+          Width = 288
           Hint = ' '
           ParentShowHint = False
-          ExplicitWidth = 261
+          ExplicitWidth = 288
           inherited SchemaComboBox: TBCComboBox
-            Width = 260
+            Width = 261
             Hint = 'Schema name'
-            ExplicitWidth = 260
+            ExplicitWidth = 261
+          end
+          inherited FilterToolBar: TBCToolBar
+            Left = 264
+            ExplicitLeft = 264
           end
         end
       end
       inherited VirtualDrawTree: TVirtualDrawTree
         Width = 288
-        Height = 567
+        Height = 274
         Hint = ' '
         ParentShowHint = False
         PopupMenu = PopupMenu
@@ -97,8 +89,8 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   object RightPanel: TPanel
     Left = 292
     Top = 0
-    Width = 538
-    Height = 594
+    Width = 158
+    Height = 301
     Hint = ' '
     Align = alClient
     BevelOuter = bvNone
@@ -106,8 +98,6 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     ParentShowHint = False
     ShowHint = False
     TabOrder = 1
-    ExplicitWidth = 158
-    ExplicitHeight = 301
   end
   object SchemaActionList: TActionList
     Images = ObjectTreeFrame.TreeImageList

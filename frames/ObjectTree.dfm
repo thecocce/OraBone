@@ -15,38 +15,10 @@ object ObjectTreeFrame: TObjectTreeFrame
     BevelOuter = bvNone
     Padding.Bottom = 1
     TabOrder = 0
-    object ButtonPanel: TPanel
-      Left = 260
-      Top = 0
-      Width = 27
-      Height = 25
-      Align = alRight
-      BevelOuter = bvNone
-      Padding.Left = 2
-      Padding.Top = 2
-      Padding.Right = 2
-      TabOrder = 0
-      object JvToolBar1: TBCToolBar
-        Left = 2
-        Top = 2
-        Width = 23
-        Height = 23
-        Align = alNone
-        Caption = 'JvToolBar1'
-        Images = TreeImageList
-        TabOrder = 0
-        object FilterToolButton: TToolButton
-          Left = 0
-          Top = 0
-          Action = SchemaFilterAction
-          ImageIndex = 29
-        end
-      end
-    end
     object ComboPanel: TPanel
       Left = 0
       Top = 0
-      Width = 260
+      Width = 287
       Height = 25
       Align = alClient
       AutoSize = True
@@ -54,11 +26,11 @@ object ObjectTreeFrame: TObjectTreeFrame
       Padding.Top = 3
       Padding.Right = 1
       ParentColor = True
-      TabOrder = 1
+      TabOrder = 0
       object SchemaComboBox: TBCComboBox
         Left = 0
         Top = 3
-        Width = 259
+        Width = 260
         Height = 22
         Align = alClient
         Style = csOwnerDrawFixed
@@ -75,6 +47,27 @@ object ObjectTreeFrame: TObjectTreeFrame
         DeniedKeyStrokes = False
         ReadOnly = False
         DropDownFixedWidth = 0
+        ExplicitWidth = 263
+      end
+      object FilterToolBar: TBCToolBar
+        AlignWithMargins = True
+        Left = 263
+        Top = 3
+        Width = 23
+        Height = 22
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Align = alRight
+        AutoSize = True
+        Caption = 'FilterToolBar'
+        Images = TreeImageList
+        TabOrder = 1
+        object FilterToolButton: TToolButton
+          Left = 0
+          Top = 0
+          Action = SchemaFilterAction
+        end
       end
     end
   end

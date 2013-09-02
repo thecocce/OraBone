@@ -203,10 +203,8 @@ begin
   begin
     BottomPanel.Align := alBottom;
 
-    ComboPanel.Padding.Top := 3;
-    ButtonPanel.Padding.Top := 2;
+    ComboPanel.Padding.Top := 2;
     BottomPanel.Padding.Bottom := 1;
-    ButtonPanel.Height := 25;
     BottomPanel.Height := 26;
   end
   else
@@ -214,9 +212,7 @@ begin
     BottomPanel.Align := alTop;
 
     ComboPanel.Padding.Top := 0;
-    ButtonPanel.Padding.Top := 0;
     BottomPanel.Padding.Bottom := 0;
-    ButtonPanel.Height := 23;
     BottomPanel.Height := 24;
   end;
 

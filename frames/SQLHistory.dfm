@@ -145,7 +145,7 @@ object SQLHistoryFrame: TSQLHistoryFrame
     end
     object CleanUpAction: TAction
       Caption = 'CleanUpAction'
-      Hint = 'Clean SQL history'
+      Hint = 'Delete selected rows'
       ImageIndex = 1
       OnExecute = CleanUpActionExecute
     end

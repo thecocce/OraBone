@@ -6,10 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   OleCtrls, SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder,
   ActnList, Menus, WebBrowser.Container, BCControls.PopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup,
+  JvExButtons, JvBitBtn, PlatformDefaultStyleActnCtrls, ActnPopup, Vcl.Styles.WebBrowser,
   System.Actions;
 
 type
+  TWebBrowser = class(TVclStylesWebBrowser);
+
   TSchemaDocumentForm = class(TForm)
     JvStatusBar1: TJvStatusBar;
     StringHolder: TJvMultiStringHolder;
@@ -613,24 +615,42 @@ begin
     TablesQuery.Close;
     TablesQuery.UnPrepare;
     FreeAndNil(TablesQuery);
-    SynonymsQuery.Close;
-    SynonymsQuery.UnPrepare;
-    FreeAndNil(SynonymsQuery);
-    PrivilegesQuery.Close;
-    PrivilegesQuery.UnPrepare;
-    FreeAndNil(PrivilegesQuery);
-    ColumnsQuery.Close;
-    ColumnsQuery.UnPrepare;
-    FreeAndNil(ColumnsQuery);
-    PrimaryKeysQuery.Close;
-    PrimaryKeysQuery.UnPrepare;
-    FreeAndNil(PrimaryKeysQuery);
-    ForeignKeysQuery.Close;
-    ForeignKeysQuery.UnPrepare;
-    FreeAndNil(ForeignKeysQuery);
-    IndexesQuery.Close;
-    IndexesQuery.UnPrepare;
-    FreeAndNil(IndexesQuery);
+    if Assigned(SynonymsQuery) then
+    begin
+      SynonymsQuery.Close;
+      SynonymsQuery.UnPrepare;
+      FreeAndNil(SynonymsQuery);
+    end;
+    if Assigned(PrivilegesQuery) then
+    begin
+      PrivilegesQuery.Close;
+      PrivilegesQuery.UnPrepare;
+      FreeAndNil(PrivilegesQuery);
+    end;
+    if Assigned(ColumnsQuery) then
+    begin
+      ColumnsQuery.Close;
+      ColumnsQuery.UnPrepare;
+      FreeAndNil(ColumnsQuery);
+    end;
+    if Assigned(PrimaryKeysQuery) then
+    begin
+      PrimaryKeysQuery.Close;
+      PrimaryKeysQuery.UnPrepare;
+      FreeAndNil(PrimaryKeysQuery);
+    end;
+    if Assigned(ForeignKeysQuery) then
+    begin
+      ForeignKeysQuery.Close;
+      ForeignKeysQuery.UnPrepare;
+      FreeAndNil(ForeignKeysQuery);
+    end;
+    if Assigned(IndexesQuery) then
+    begin
+      IndexesQuery.Close;
+      IndexesQuery.UnPrepare;
+      FreeAndNil(IndexesQuery);
+    end;
   end;
 end;
 
@@ -773,15 +793,24 @@ begin
     ViewsQuery.Close;
     ViewsQuery.UnPrepare;
     FreeAndNil(ViewsQuery);
-    SynonymsQuery.Close;
-    SynonymsQuery.UnPrepare;
-    FreeAndNil(SynonymsQuery);
-    PrivilegesQuery.Close;
-    PrivilegesQuery.UnPrepare;
-    FreeAndNil(PrivilegesQuery);
-    ColumnsQuery.Close;
-    ColumnsQuery.UnPrepare;
-    FreeAndNil(ColumnsQuery);
+    if Assigned(SynonymsQuery) then
+    begin
+      SynonymsQuery.Close;
+      SynonymsQuery.UnPrepare;
+      FreeAndNil(SynonymsQuery);
+    end;
+    if Assigned(PrivilegesQuery) then
+    begin
+      PrivilegesQuery.Close;
+      PrivilegesQuery.UnPrepare;
+      FreeAndNil(PrivilegesQuery);
+    end;
+    if Assigned(ColumnsQuery) then
+    begin
+      ColumnsQuery.Close;
+      ColumnsQuery.UnPrepare;
+      FreeAndNil(ColumnsQuery);
+    end;
   end;
 end;
 
@@ -1077,9 +1106,12 @@ begin
     OraQuery.Close;
     OraQuery.UnPrepare;
     FreeAndNil(OraQuery);
-    RolesQuery.Close;
-    RolesQuery.UnPrepare;
-    FreeAndNil(RolesQuery);
+    if Assigned(RolesQuery) then
+    begin
+      RolesQuery.Close;
+      RolesQuery.UnPrepare;
+      FreeAndNil(RolesQuery);
+    end;
   end;
 end;
 

@@ -143,13 +143,12 @@ type
     BottomPanel: TPanel;
     ActionList: TActionList;
     SchemaFilterAction: TAction;
-    ButtonPanel: TPanel;
-    JvToolBar1: TBCToolBar;
-    FilterToolButton: TToolButton;
     ComboPanel: TPanel;
     SchemaComboBox: TBCComboBox;
     UsersQuery: TOraQuery;
     VirtualDrawTree: TVirtualDrawTree;
+    FilterToolBar: TBCToolBar;
+    FilterToolButton: TToolButton;
     procedure SchemaComboBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SchemaFilterActionExecute(Sender: TObject);
     procedure OraSessionConnectionLost(Sender: TObject; Component: TComponent;
