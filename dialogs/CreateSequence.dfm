@@ -10,17 +10,11 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
   inherited PageControl: TBCPageControl
     Width = 358
     Height = 221
-    ActivePage = SettingsTabSheet
-    ActivePageCaption = 'Settings'
     ExplicitWidth = 358
     ExplicitHeight = 221
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         350
         193)
@@ -189,27 +183,22 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Settings'
       ExplicitWidth = 350
-      ExplicitHeight = 209
+      ExplicitHeight = 193
       inherited SourcePanel: TPanel
         Width = 350
         Height = 193
         ExplicitWidth = 350
-        ExplicitHeight = 209
+        ExplicitHeight = 193
         inherited SourceSynEdit: TSynEdit
           Width = 348
           Height = 168
           ExplicitWidth = 348
-          ExplicitHeight = 184
+          ExplicitHeight = 168
         end
         inherited SourceTopPanel: TPanel
           Width = 348
           ExplicitWidth = 348
-          inherited TopPanel: TPanel
-            Width = 350
-            ExplicitWidth = 350
-          end
         end
       end
     end

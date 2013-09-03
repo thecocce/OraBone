@@ -25,18 +25,12 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Top = 62
     Width = 351
     Height = 259
-    ActivePage = ParametersTabSheet
-    ActivePageCaption = 'Parameters'
     ExplicitTop = 62
     ExplicitWidth = 351
     ExplicitHeight = 259
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -202,9 +196,6 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Parameters'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 343
       ExplicitHeight = 231
       inherited SourcePanel: TPanel

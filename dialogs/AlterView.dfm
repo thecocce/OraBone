@@ -24,18 +24,12 @@ inherited AlterViewDialog: TAlterViewDialog
     Top = 60
     Width = 446
     Height = 318
-    ActivePage = ColumnsTabSheet
-    ActivePageCaption = 'Columns'
     ExplicitTop = 60
     ExplicitWidth = 446
     ExplicitHeight = 318
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -148,10 +142,6 @@ inherited AlterViewDialog: TAlterViewDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -206,10 +196,6 @@ inherited AlterViewDialog: TAlterViewDialog
     object SelectStatementTabSheet: TTabSheet [2]
       Caption = 'Select Statement'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SQLPanel: TPanel
         Left = 0
         Top = 0
@@ -250,9 +236,6 @@ inherited AlterViewDialog: TAlterViewDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 438
       ExplicitHeight = 290
       inherited SourcePanel: TPanel
@@ -353,6 +336,10 @@ inherited AlterViewDialog: TAlterViewDialog
       ImageIndex = 7
       OnExecute = ResetColumnsActionExecute
     end
+  end
+  inherited SynSQLSyn: TSynSQLSyn
+    Left = 200
+    Top = 108
   end
   inherited ImageList: TBCImageList
     Bitmap = {

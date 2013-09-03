@@ -145,6 +145,7 @@ begin
     except
       on E: EOraError do
         raise;
+        //ShowErrorMessage(E.Message);
     end;
   end;
 end;

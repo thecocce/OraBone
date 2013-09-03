@@ -18,18 +18,12 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     Top = 34
     Width = 351
     Height = 281
-    ActivePage = ParametersTabSheet
-    ActivePageCaption = 'Parameters'
     ExplicitTop = 34
     ExplicitWidth = 351
     ExplicitHeight = 281
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -196,9 +190,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Parameters'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 343
       ExplicitHeight = 253
       inherited SourcePanel: TPanel

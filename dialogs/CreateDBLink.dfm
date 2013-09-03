@@ -10,17 +10,11 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
   inherited PageControl: TBCPageControl
     Width = 308
     Height = 175
-    ActivePage = SettingsTabSheet
-    ActivePageCaption = 'Settings'
     ExplicitWidth = 308
     ExplicitHeight = 175
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         300
         147)
@@ -139,9 +133,6 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 300
       ExplicitHeight = 147
       inherited SourcePanel: TPanel

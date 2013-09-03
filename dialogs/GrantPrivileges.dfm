@@ -9,8 +9,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   inherited PageControl: TBCPageControl
     Width = 326
     Height = 282
-    ActivePage = SettingsTabSheet
-    ActivePageCaption = 'Settings'
     ExplicitWidth = 326
     ExplicitHeight = 282
     object SettingsTabSheet: TTabSheet [0]
@@ -175,9 +173,6 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Settings'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 318
       ExplicitHeight = 254
       inherited SourcePanel: TPanel

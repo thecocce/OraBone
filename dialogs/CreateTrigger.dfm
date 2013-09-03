@@ -46,18 +46,12 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Top = 60
     Width = 350
     Height = 204
-    ActivePage = SettingsTabSheet
-    ActivePageCaption = 'Settings'
     ExplicitTop = 60
     ExplicitWidth = 350
     ExplicitHeight = 204
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         342
         176)
@@ -271,27 +265,22 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Settings'
       ExplicitWidth = 342
-      ExplicitHeight = 175
+      ExplicitHeight = 176
       inherited SourcePanel: TPanel
         Width = 342
         Height = 176
         ExplicitWidth = 342
-        ExplicitHeight = 175
+        ExplicitHeight = 176
         inherited SourceSynEdit: TSynEdit
           Width = 340
           Height = 151
           ExplicitWidth = 340
-          ExplicitHeight = 150
+          ExplicitHeight = 151
         end
         inherited SourceTopPanel: TPanel
           Width = 340
           ExplicitWidth = 340
-          inherited TopPanel: TPanel
-            Width = 342
-            ExplicitWidth = 342
-          end
         end
       end
     end

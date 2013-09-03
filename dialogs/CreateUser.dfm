@@ -41,8 +41,6 @@ inherited CreateUserDialog: TCreateUserDialog
     Top = 91
     Width = 398
     Height = 257
-    ActivePage = RolesTabSheet
-    ActivePageCaption = 'Roles'
     ExplicitLeft = 6
     ExplicitTop = 91
     ExplicitWidth = 398
@@ -50,10 +48,6 @@ inherited CreateUserDialog: TCreateUserDialog
     object RolesTabSheet: TTabSheet [0]
       Caption = 'Roles'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -94,7 +88,6 @@ inherited CreateUserDialog: TCreateUserDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Roles'
       ExplicitWidth = 390
       ExplicitHeight = 229
       inherited SourcePanel: TPanel
@@ -111,10 +104,6 @@ inherited CreateUserDialog: TCreateUserDialog
         inherited SourceTopPanel: TPanel
           Width = 388
           ExplicitWidth = 388
-          inherited TopPanel: TPanel
-            Width = 390
-            ExplicitWidth = 390
-          end
         end
       end
     end

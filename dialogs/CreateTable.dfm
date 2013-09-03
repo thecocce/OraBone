@@ -25,18 +25,12 @@ inherited CreateTableDialog: TCreateTableDialog
     Top = 62
     Width = 681
     Height = 360
-    ActivePage = ColumnsTabSheet
-    ActivePageCaption = 'Columns'
     ExplicitTop = 62
     ExplicitWidth = 681
     ExplicitHeight = 360
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -265,9 +259,6 @@ inherited CreateTableDialog: TCreateTableDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 673
       ExplicitHeight = 332
       inherited SourcePanel: TPanel

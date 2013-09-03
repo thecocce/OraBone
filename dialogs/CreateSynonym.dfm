@@ -10,8 +10,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   inherited PageControl: TBCPageControl
     Width = 318
     Height = 175
-    ActivePage = SettingsTabSheet
-    ActivePageCaption = 'Settings'
     ExplicitWidth = 318
     ExplicitHeight = 175
     object SettingsTabSheet: TTabSheet [0]
@@ -59,7 +57,6 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Height = 21
         Hint = 'Synonym name'
         TabOrder = 0
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
@@ -120,27 +117,22 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Settings'
       ExplicitWidth = 310
-      ExplicitHeight = 168
+      ExplicitHeight = 147
       inherited SourcePanel: TPanel
         Width = 310
         Height = 147
         ExplicitWidth = 310
-        ExplicitHeight = 168
+        ExplicitHeight = 147
         inherited SourceSynEdit: TSynEdit
           Width = 308
           Height = 122
           ExplicitWidth = 308
-          ExplicitHeight = 143
+          ExplicitHeight = 122
         end
         inherited SourceTopPanel: TPanel
           Width = 308
           ExplicitWidth = 308
-          inherited TopPanel: TPanel
-            Width = 310
-            ExplicitWidth = 310
-          end
         end
       end
     end

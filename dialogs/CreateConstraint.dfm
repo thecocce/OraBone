@@ -51,19 +51,13 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 80
     Width = 371
     Height = 284
-    ActivePage = ColumnsTabSheet
     TabOrder = 6
-    ActivePageCaption = 'Columns'
     ExplicitTop = 80
     ExplicitWidth = 371
     ExplicitHeight = 284
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -284,9 +278,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 363
       ExplicitHeight = 256
       inherited SourcePanel: TPanel

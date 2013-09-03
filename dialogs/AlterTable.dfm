@@ -24,8 +24,6 @@ inherited AlterTableDialog: TAlterTableDialog
     Top = 60
     Width = 732
     Height = 337
-    ActivePage = ColumnsTabSheet
-    ActivePageCaption = 'Columns'
     ExplicitTop = 60
     ExplicitWidth = 732
     ExplicitHeight = 337
@@ -273,6 +271,10 @@ inherited AlterTableDialog: TAlterTableDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -325,9 +327,6 @@ inherited AlterTableDialog: TAlterTableDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 724
       ExplicitHeight = 309
       inherited SourcePanel: TPanel

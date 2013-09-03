@@ -52,18 +52,12 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Top = 82
     Width = 299
     Height = 282
-    ActivePage = ColumnsTabSheet
-    ActivePageCaption = 'Columns'
     ExplicitTop = 82
     ExplicitWidth = 299
     ExplicitHeight = 282
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
@@ -131,9 +125,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Columns'
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 291
       ExplicitHeight = 254
       inherited SourcePanel: TPanel

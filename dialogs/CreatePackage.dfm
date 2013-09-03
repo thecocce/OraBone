@@ -18,18 +18,12 @@ inherited CreatePackageDialog: TCreatePackageDialog
     Top = 35
     Width = 734
     Height = 298
-    ActivePage = SpecificationTabSheet
-    ActivePageCaption = 'Specification'
     ExplicitTop = 35
     ExplicitWidth = 734
     ExplicitHeight = 298
     object SpecificationTabSheet: TTabSheet [0]
       Caption = 'Specification'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SepcificationPanel: TPanel
         Left = 0
         Top = 0
@@ -118,27 +112,22 @@ inherited CreatePackageDialog: TCreatePackageDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      Caption = 'Specification'
       ExplicitWidth = 726
-      ExplicitHeight = 285
+      ExplicitHeight = 270
       inherited SourcePanel: TPanel
         Width = 726
         Height = 270
         ExplicitWidth = 726
-        ExplicitHeight = 285
+        ExplicitHeight = 270
         inherited SourceSynEdit: TSynEdit
           Width = 724
           Height = 245
           ExplicitWidth = 724
-          ExplicitHeight = 260
+          ExplicitHeight = 245
         end
         inherited SourceTopPanel: TPanel
           Width = 724
           ExplicitWidth = 724
-          inherited TopPanel: TPanel
-            Width = 726
-            ExplicitWidth = 726
-          end
         end
       end
     end

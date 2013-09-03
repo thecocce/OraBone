@@ -81,19 +81,15 @@ object ExportTableDataDialog: TExportTableDataDialog
       Top = 3
       Width = 321
       Height = 193
-      ActivePage = Options1TabSheet
+      ActivePage = ColumnsTabSheet
       Align = alClient
       TabOrder = 0
-      ActivePageCaption = 'Options'
+      ActivePageCaption = 'Source'
       TabDragDrop = False
       HoldShiftToDragDrop = False
       ShowCloseButton = False
       object Options1TabSheet: TTabSheet
         Caption = 'Options'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DelimiterLabel: TLabel
           Left = 12
           Top = 15
@@ -265,12 +261,8 @@ object ExportTableDataDialog: TExportTableDataDialog
         end
       end
       object ColumnsTabSheet: TTabSheet
-        Caption = 'Columns'
+        Caption = 'Source'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ColumnsPanel: TPanel
           Left = 0
           Top = 0
