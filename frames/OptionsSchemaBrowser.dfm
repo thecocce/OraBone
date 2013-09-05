@@ -15,7 +15,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     BevelOuter = bvNone
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
-      Left = 8
+      Left = 11
       Top = 74
       Width = 87
       Height = 13
@@ -26,7 +26,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Caption = 'Button Panel Align'
     end
     object IndentLabel: TLabel
-      Left = 8
+      Left = 11
       Top = 31
       Width = 32
       Height = 13
@@ -37,7 +37,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Caption = 'Indent'
     end
     object ButtonPanelAlignComboBox: TBCComboBox
-      Left = 8
+      Left = 9
       Top = 92
       Width = 64
       Height = 21
@@ -51,7 +51,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       DropDownFixedWidth = 0
     end
     object ShowTreeLinesCheckBox: TBCCheckBox
-      Left = 8
+      Left = 9
       Top = 6
       Width = 201
       Height = 21
@@ -64,7 +64,7 @@ object OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       ReadOnly = False
     end
     object IndentEdit: TBCEdit
-      Left = 8
+      Left = 9
       Top = 48
       Width = 64
       Height = 21

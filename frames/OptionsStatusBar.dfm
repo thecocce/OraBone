@@ -14,7 +14,7 @@ object StatusBarFrame: TStatusBarFrame
     TabOrder = 0
     object FontLabel: TLabel
       Left = 36
-      Top = 40
+      Top = 35
       Width = 57
       Height = 13
       Margins.Left = 4

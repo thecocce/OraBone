@@ -15,7 +15,7 @@ object ObjectFrameFrame: TObjectFrameFrame
     BevelOuter = bvNone
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
-      Left = 8
+      Left = 11
       Top = 8
       Width = 87
       Height = 13
@@ -26,7 +26,7 @@ object ObjectFrameFrame: TObjectFrameFrame
       Caption = 'Button Panel Align'
     end
     object ButtonPanelAlignComboBox: TBCComboBox
-      Left = 8
+      Left = 9
       Top = 26
       Width = 64
       Height = 21

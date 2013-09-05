@@ -16,7 +16,7 @@ object MainMenuFrame: TMainMenuFrame
     TabOrder = 0
     object FontLabel: TLabel
       Left = 36
-      Top = 82
+      Top = 78
       Width = 57
       Height = 13
       Margins.Left = 4
