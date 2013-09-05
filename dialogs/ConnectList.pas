@@ -144,8 +144,7 @@ begin
       ModalResult := mrOk;
     except
       on E: EOraError do
-        raise;
-        //ShowErrorMessage(E.Message);
+        Raise;
     end;
   end;
 end;

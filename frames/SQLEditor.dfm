@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 689
-  Height = 440
+  Width = 451
+  Height = 302
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -10,8 +10,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 214
-    Width = 689
+    Top = 76
+    Width = 451
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +23,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 689
+    Width = 451
     Height = 21
     Hint = ' '
     Align = alTop
@@ -388,8 +388,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 689
-    Height = 145
+    Width = 451
+    Height = 7
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -398,8 +398,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 689
-      Height = 143
+      Width = 451
+      Height = 5
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -422,8 +422,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 217
-    Width = 689
+    Top = 79
+    Width = 451
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -435,7 +435,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 689
+    Width = 451
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1056,8 +1056,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 189
-    Width = 689
+    Top = 51
+    Width = 451
     Height = 25
     Align = alBottom
     BevelOuter = bvNone

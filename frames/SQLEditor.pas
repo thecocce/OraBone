@@ -1153,7 +1153,9 @@ begin
         SynEdit.SetFocus;
       AddToReopenFiles(FileName);
       MainForm.CreateFileReopenList;
-    end;
+    end
+    else
+      ShowErrorMessage(Format(LanguageDataModule.GetErrorMessage('FileNotFound'), [Filename]))
   end;
   FProcessing := False;
 end;
