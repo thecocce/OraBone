@@ -2,8 +2,8 @@ object SchemaCompareForm: TSchemaCompareForm
   Left = 0
   Top = 0
   Caption = 'Compare Schemas'
-  ClientHeight = 516
-  ClientWidth = 622
+  ClientHeight = 440
+  ClientWidth = 658
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,15 +16,15 @@ object SchemaCompareForm: TSchemaCompareForm
   OnClose = FormClose
   OnDestroy = FormDestroy
   DesignSize = (
-    622
-    516)
+    658
+    440)
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl: TBCPageControl
-    Left = 4
-    Top = 124
-    Width = 616
-    Height = 370
+    Left = 149
+    Top = 56
+    Width = 504
+    Height = 359
     ActivePage = Schema1TabSheet
     Anchors = [akLeft, akTop, akRight, akBottom]
     DoubleBuffered = False
@@ -41,8 +41,8 @@ object SchemaCompareForm: TSchemaCompareForm
       object Schema1Panel: TPanel
         Left = 0
         Top = 0
-        Width = 608
-        Height = 341
+        Width = 496
+        Height = 330
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 2
@@ -53,8 +53,8 @@ object SchemaCompareForm: TSchemaCompareForm
         object Schema1VirtualDrawTree: TVirtualDrawTree
           Left = 2
           Top = 1
-          Width = 603
-          Height = 338
+          Width = 491
+          Height = 327
           Align = alClient
           Ctl3D = True
           DragOperations = []
@@ -90,7 +90,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 294
+              Width = 182
               WideText = 'Difference'
             end>
         end
@@ -102,8 +102,8 @@ object SchemaCompareForm: TSchemaCompareForm
       object Schema2Panel: TPanel
         Left = 0
         Top = 0
-        Width = 608
-        Height = 341
+        Width = 496
+        Height = 330
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 2
@@ -114,8 +114,8 @@ object SchemaCompareForm: TSchemaCompareForm
         object Schema2VirtualDrawTree: TVirtualDrawTree
           Left = 2
           Top = 1
-          Width = 603
-          Height = 338
+          Width = 491
+          Height = 327
           Align = alClient
           BorderWidth = 1
           Ctl3D = True
@@ -152,7 +152,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 292
+              Width = 180
               WideText = 'Difference'
             end>
         end
@@ -161,8 +161,8 @@ object SchemaCompareForm: TSchemaCompareForm
   end
   object StatusBar: TJvStatusBar
     Left = 0
-    Top = 497
-    Width = 622
+    Top = 421
+    Width = 658
     Height = 19
     DoubleBuffered = False
     Panels = <
@@ -174,7 +174,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ProgressBar: TBCProgressBar
       Left = 0
       Top = 0
-      Width = 622
+      Width = 658
       Height = 19
       Align = alClient
       Smooth = True
@@ -184,9 +184,9 @@ object SchemaCompareForm: TSchemaCompareForm
     end
   end
   object SchemasGroupBox: TGroupBox
-    Left = 4
-    Top = 70
-    Width = 614
+    Left = 6
+    Top = 2
+    Width = 647
     Height = 47
     Margins.Left = 4
     Margins.Top = 4
@@ -196,10 +196,10 @@ object SchemaCompareForm: TSchemaCompareForm
     Caption = ' Schemas '
     TabOrder = 2
     DesignSize = (
-      614
+      647
       47)
     object Schema1Label: TLabel
-      Left = 303
+      Left = 320
       Top = 19
       Width = 11
       Height = 13
@@ -209,7 +209,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema1ComboBox: TBCComboBox
       Left = 12
       Top = 16
-      Width = 281
+      Width = 290
       Height = 22
       Style = csOwnerDrawFixed
       Anchors = [akLeft, akTop, akRight]
@@ -221,9 +221,9 @@ object SchemaCompareForm: TSchemaCompareForm
       DropDownFixedWidth = 0
     end
     object Schema2ComboBox: TBCComboBox
-      Left = 324
+      Left = 348
       Top = 16
-      Width = 281
+      Width = 290
       Height = 22
       Style = csOwnerDrawFixed
       Anchors = [akLeft, akTop, akRight]
@@ -236,168 +236,153 @@ object SchemaCompareForm: TSchemaCompareForm
     end
   end
   object ComparedObjectsGroupBox: TGroupBox
-    Left = 4
-    Top = 1
-    Width = 614
-    Height = 66
+    Left = 6
+    Top = 53
+    Width = 136
+    Height = 362
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    Anchors = [akLeft, akTop, akRight]
+    Anchors = [akLeft, akTop, akBottom]
     Caption = ' Compared Objects '
     TabOrder = 3
-    DesignSize = (
-      614
-      66)
     object TablesCheckBox: TCheckBox
       Left = 12
       Top = 18
       Width = 49
       Height = 22
-      Caption = 'Tables'
+      Caption = ' Tables'
       Checked = True
       State = cbChecked
       TabOrder = 0
     end
     object ViewsCheckBox: TCheckBox
-      Left = 75
-      Top = 18
+      Left = 12
+      Top = 42
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Views'
+      Caption = ' Views'
       Checked = True
       State = cbChecked
       TabOrder = 1
     end
     object FunctionsCheckBox: TCheckBox
-      Left = 149
-      Top = 18
+      Left = 12
+      Top = 66
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Functions'
+      Caption = ' Functions'
       Checked = True
       State = cbChecked
       TabOrder = 2
     end
     object ProceduresCheckBox: TCheckBox
-      Left = 222
-      Top = 18
+      Left = 12
+      Top = 90
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Procedures'
+      Caption = ' Procedures'
       Checked = True
       State = cbChecked
       TabOrder = 3
     end
     object PackagesCheckBox: TCheckBox
-      Left = 301
-      Top = 18
+      Left = 12
+      Top = 114
       Width = 100
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Packages'
+      Caption = ' Packages'
       Checked = True
       State = cbChecked
       TabOrder = 4
     end
     object TriggersCheckBox: TCheckBox
-      Left = 402
-      Top = 18
+      Left = 12
+      Top = 137
       Width = 90
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Triggers'
+      Caption = ' Triggers'
       Checked = True
       State = cbChecked
       TabOrder = 5
     end
     object ConstraintsCheckBox: TCheckBox
-      Left = 499
-      Top = 18
+      Left = 12
+      Top = 161
       Width = 76
       Height = 22
-      Anchors = [akTop, akRight]
-      Caption = 'Constraints'
+      Caption = ' Constraints'
       Checked = True
       State = cbChecked
       TabOrder = 6
     end
     object IndexesCheckBox: TCheckBox
       Left = 12
-      Top = 37
+      Top = 185
       Width = 57
       Height = 22
-      Caption = 'Indexes'
+      Caption = ' Indexes'
       Checked = True
       State = cbChecked
       TabOrder = 7
     end
     object SequencesCheckBox: TCheckBox
-      Left = 75
-      Top = 37
+      Left = 12
+      Top = 209
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Sequences'
+      Caption = ' Sequences'
       Checked = True
       State = cbChecked
       TabOrder = 8
     end
     object SynonymsCheckBox: TCheckBox
-      Left = 149
-      Top = 37
+      Left = 12
+      Top = 233
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Synonyms'
+      Caption = ' Synonyms'
       Checked = True
       State = cbChecked
       TabOrder = 9
     end
     object DBLinksCheckBox: TCheckBox
-      Left = 222
-      Top = 37
+      Left = 12
+      Top = 257
       Width = 72
       Height = 22
-      Anchors = [akTop]
-      Caption = 'DB Links'
+      Caption = ' DB Links'
       Checked = True
       State = cbChecked
       TabOrder = 10
     end
     object TableCommentsCheckBox: TCheckBox
-      Left = 301
-      Top = 37
+      Left = 12
+      Top = 281
       Width = 100
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Table Comments'
+      Caption = ' Table Comments'
       Checked = True
       State = cbChecked
       TabOrder = 11
     end
     object ColumnNamesCheckBox: TCheckBox
-      Left = 402
-      Top = 37
+      Left = 12
+      Top = 305
       Width = 90
       Height = 22
-      Anchors = [akTop]
-      Caption = 'Column Names'
+      Caption = ' Column Names'
       Checked = True
       State = cbChecked
       TabOrder = 12
     end
     object ColumnCommentsCheckBox: TCheckBox
-      Left = 499
-      Top = 37
+      Left = 12
+      Top = 328
       Width = 106
       Height = 22
-      Anchors = [akTop, akRight]
-      Caption = 'Column Comments'
+      Caption = ' Column Comments'
       Checked = True
       State = cbChecked
       TabOrder = 13
@@ -1347,7 +1332,7 @@ object SchemaCompareForm: TSchemaCompareForm
       '  FROM dual'
       ' WHERE 1 = 0')
     FetchAll = True
-    Left = 180
+    Left = 208
     Top = 120
   end
   object Schema2Query: TOraQuery
