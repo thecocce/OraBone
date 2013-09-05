@@ -42,8 +42,6 @@ object ConnectListDialog: TConnectListDialog
       Font.Style = []
       ParentColor = False
       ParentFont = False
-      ExplicitLeft = 288
-      ExplicitHeight = 12
     end
     object ClientModeRadioButton: TRadioButton
       Left = 319

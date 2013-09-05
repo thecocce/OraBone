@@ -2,8 +2,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   Caption = 'Create Constraint'
   ClientHeight = 420
   ClientWidth = 378
-  ExplicitWidth = 394
-  ExplicitHeight = 456
   PixelsPerInch = 96
   TextHeight = 13
   object ConstraintNameLabel: TLabel [0]
@@ -51,10 +49,9 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 80
     Width = 371
     Height = 284
+    ActivePage = ColumnsTabSheet
     TabOrder = 6
-    ExplicitTop = 80
-    ExplicitWidth = 371
-    ExplicitHeight = 284
+    ActivePageCaption = 'Columns'
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -128,10 +125,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ReferencedColumnsTabSheet: TTabSheet [1]
       Caption = 'Referenced Columns'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RefColumnsPanel: TPanel
         Left = 0
         Top = 31
@@ -234,10 +227,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     object ConditionTabSheet: TTabSheet [2]
       Caption = 'Condition'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ConditionPanel: TPanel
         Left = 0
         Top = 0
@@ -278,22 +267,15 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 363
-      ExplicitHeight = 256
       inherited SourcePanel: TPanel
         Width = 363
         Height = 256
-        ExplicitWidth = 363
-        ExplicitHeight = 256
         inherited SourceSynEdit: TSynEdit
           Width = 361
           Height = 231
-          ExplicitWidth = 361
-          ExplicitHeight = 231
         end
         inherited SourceTopPanel: TPanel
           Width = 361
-          ExplicitWidth = 361
         end
       end
     end
@@ -302,15 +284,11 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Left = 215
     Top = 370
     TabOrder = 7
-    ExplicitLeft = 215
-    ExplicitTop = 370
   end
   inherited CancelButton: TButton
     Left = 296
     Top = 370
     TabOrder = 8
-    ExplicitLeft = 296
-    ExplicitTop = 370
   end
   object ConstraintNameEdit: TBCEdit [7]
     Left = 94
@@ -383,8 +361,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   inherited StatusBar1: TStatusBar
     Top = 401
     Width = 378
-    ExplicitTop = 401
-    ExplicitWidth = 378
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

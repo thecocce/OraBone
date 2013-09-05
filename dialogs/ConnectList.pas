@@ -137,6 +137,7 @@ begin
     if Pos('^', ConnectString) <> 0 then
       s := Copy(s, 0, Pos('^', s) - 1);
     FConnectDialog.Session.ConnectString := s;
+    FConnectDialog.Session.Schema := FConnectDialog.Session.Username; { What the fuck, Devart?!?!? }
     FConnectDialog.Session.Options.Direct := DirectModeRadioButton.Checked;
     FConnectDialog.Session.HomeName := StringGrid.Cells[GRID_COLUMN_HOMENAME, StringGrid.Row];
     try
