@@ -9,7 +9,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, BCControls.PopupMenu, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls,
-  System.Actions, DBAxisGridsEh;
+  System.Actions, DBAxisGridsEh, Vcl.StdCtrls;
 
 type
   TSequenceBrowserFrame = class(TFrame)
@@ -79,6 +79,7 @@ type
     Bevel3: TBevel;
     BCToolBar1: TBCToolBar;
     ToolButton6: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure SequencePageControlChange(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure SequenceQueryAfterOpen(DataSet: TDataSet);
@@ -125,7 +126,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib, Options;
 
 const
   { SynonymsQuery columns }
@@ -278,7 +279,12 @@ function TSequenceBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if SequencePageControl.ActivePage = InfoTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := SequenceQuery
+  end
   else
   if SequencePageControl.ActivePage = SourceTabSheet then
     Result := SequenceQuery

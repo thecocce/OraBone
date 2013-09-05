@@ -26,10 +26,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SequencePanel: TPanel
         Left = 0
         Top = 0
@@ -71,6 +67,14 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        object CreationAndModificationTimestampLabel: TLabel
+          AlignWithMargins = True
+          Left = 437
+          Top = 3
+          Width = 3
+          Height = 19
+          Align = alRight
+        end
         object InfoToolBar: TBCToolBar
           Left = 0
           Top = 0
@@ -90,10 +94,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -152,7 +152,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object SourceToolBar: TBCToolBar
           Left = 0
@@ -198,10 +197,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -255,7 +250,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object GrantsToolBar: TBCToolBar
           Left = 0
@@ -296,10 +290,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -353,7 +343,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object SynonymsToolBar: TBCToolBar
           Left = 0
@@ -394,10 +383,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0

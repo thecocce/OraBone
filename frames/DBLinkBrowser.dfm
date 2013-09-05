@@ -26,10 +26,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DBLinkPanel: TPanel
         Left = 0
         Top = 0
@@ -71,6 +67,14 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        object CreationAndModificationTimestampLabel: TLabel
+          AlignWithMargins = True
+          Left = 437
+          Top = 3
+          Width = 3
+          Height = 19
+          Align = alRight
+        end
         object InfoToolBar: TBCToolBar
           Left = 0
           Top = 0
@@ -90,10 +94,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -152,7 +152,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object SourceToolBar: TBCToolBar
           Left = 0

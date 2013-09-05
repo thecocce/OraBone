@@ -8,7 +8,7 @@ uses
   DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.PageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, AppEvnts, Vcl.Menus, Vcl.ToolWin,
   JvToolBar, BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, ActnPopup, BCControls.PopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
+  DBGridEhGrouping, GridsEh, DBGridEh, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh, Vcl.StdCtrls;
 
 type
   TConstraintBrowserFrame = class(TFrame)
@@ -38,6 +38,7 @@ type
     Bevel2: TBevel;
     RefreshToolbar: TBCToolBar;
     ToolButton46: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure ConstraintPageControlChange(Sender: TObject);
     procedure CustomizeActionExecute(Sender: TObject);
     procedure ConstraintsQueryAfterScroll(DataSet: TDataSet);
@@ -48,7 +49,7 @@ type
     { Private declarations }
     FObjectName: string;
     FSchemaParam: string;
-    FOraSession: TOraSession;
+    FSession: TOraSession;
     procedure SetSession(OraSession: TOraSession);
     function GetActivePageQuery: TOraQuery;
     procedure SetColumnWidths;
@@ -66,7 +67,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib, Options;
 
 const
   { ConstraintsQuery columns }
@@ -100,7 +101,7 @@ procedure TConstraintBrowserFrame.SetSession(OraSession: TOraSession);
 var
   i: Integer;
 begin
-  FOraSession := OraSession;
+  FSession := OraSession;
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TOraQuery then
       TOraQuery(Components[i]).Session := OraSession;
@@ -136,14 +137,14 @@ end;
 
 procedure TConstraintBrowserFrame.DisableConstraintActionExecute(Sender: TObject);
 begin
-  AlterConstraint(FOraSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
+  AlterConstraint(FSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
     ConstraintsQuery.FieldByName(CONSTRAINT_NAME).AsString, False);
   ConstraintsQuery.Refresh;
 end;
 
 procedure TConstraintBrowserFrame.EnableConstraintActionExecute(Sender: TObject);
 begin
-  AlterConstraint(FOraSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
+  AlterConstraint(FSession, FSchemaParam, ConstraintsQuery.FieldByName(CONSTRAINT_TABLE_NAME).AsString,
     ConstraintsQuery.FieldByName(CONSTRAINT_NAME).AsString, True);
   ConstraintsQuery.Refresh;
 end;
@@ -152,7 +153,12 @@ function TConstraintBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if ConstraintPageControl.ActivePage = InfoTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := ConstraintsQuery
+  end;
 end;
 
 procedure TConstraintBrowserFrame.SetColumnWidths;

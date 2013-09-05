@@ -67,6 +67,14 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        object CreationAndModificationTimestampLabel: TLabel
+          AlignWithMargins = True
+          Left = 437
+          Top = 3
+          Width = 3
+          Height = 19
+          Align = alRight
+        end
         object InfoToolBar: TBCToolBar
           Left = 0
           Top = 0

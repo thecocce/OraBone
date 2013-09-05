@@ -8,7 +8,8 @@ uses
   DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.PageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.Menus,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Vcl.ToolWin, JvToolBar, BCControls.ToolBar,
-  DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh;
+  DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh,
+  Vcl.StdCtrls;
 
 type
   TSynonymBrowserFrame = class(TFrame)
@@ -27,6 +28,7 @@ type
     InfoToolBar: TBCToolBar;
     ToolButton41: TToolButton;
     RefreshAction: TAction;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure SynonymPageControlChange(Sender: TObject);
     procedure CustomizeActionExecute(Sender: TObject);
     procedure RefreshActionExecute(Sender: TObject);
@@ -34,6 +36,7 @@ type
     { Private declarations }
     FObjectName: string;
     FSchemaParam: string;
+    FSession: TOraSession;
     procedure SetSession(OraSession: TOraSession);
     function GetActivePageQuery: TOraQuery;
     procedure SetObjectFrameAlign(Value: TAlign);
@@ -50,7 +53,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib, Options;
 
 {$R *.dfm}
 
@@ -75,6 +78,7 @@ procedure TSynonymBrowserFrame.SetSession(OraSession: TOraSession);
 var
   i: Integer;
 begin
+  FSession := OraSession;
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TOraQuery then
       TOraQuery(Components[i]).Session := OraSession;
@@ -89,7 +93,12 @@ function TSynonymBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if SynonymPageControl.ActivePage = InfoTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := SynonymQuery
+  end;
 end;
 
 procedure TSynonymBrowserFrame.OpenQuery(RefreshQuery: Boolean);

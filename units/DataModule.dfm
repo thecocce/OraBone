@@ -1070,6 +1070,14 @@ object DM: TDM
           '   AND type = '#39'PACKAGE BODY'#39
           '   AND owner = :p_owner'
           '--   AND line = :p_line')
+      end
+      item
+        Name = 'CreationAndModificationTimestampSQL'
+        Strings.Strings = (
+          'SELECT created, last_ddl_time'
+          '  FROM all_objects'
+          ' WHERE owner = :owner'
+          '   AND object_name = :object')
       end>
     Left = 54
     Top = 18

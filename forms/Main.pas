@@ -1346,6 +1346,7 @@ begin
     OptionsContainer.OutputShowTreeLines:= ReadBool('Options', 'OutputShowTreeLines', False);
     OptionsContainer.OutputIndent := StrToInt(ReadString('Options', 'OutputIndent', '16'));
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
+    OptionsContainer.ObjectCreationAndModificationTimestamp := ReadBool('Options', 'ObjectCreationAndModificationTimestamp', False);
     OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
     OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
     OptionsContainer.EnableSpecialChars := ReadBool('Options', 'EnableSpecialChars', False);
@@ -1728,6 +1729,7 @@ begin
       WriteBool('Options', 'OutputShowTreeLines', OptionsContainer.OutputShowTreeLines);
       WriteString('Options', 'OutputIndent', IntToStr(OptionsContainer.OutputIndent));
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
+      WriteBool('Options', 'ObjectCreationAndModificationTimestamp', OptionsContainer.ObjectCreationAndModificationTimestamp);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
       WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);

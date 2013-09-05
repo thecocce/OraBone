@@ -8,7 +8,8 @@ uses
   DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCControls.PopupMenu, DBGridEhGrouping, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  BCControls.PopupMenu, DBGridEhGrouping, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh,
+  Vcl.StdCtrls;
 
 type
   TDBLinkBrowserFrame = class(TFrame)
@@ -42,6 +43,7 @@ type
     Bevel2: TBevel;
     RefreshToolbar: TBCToolBar;
     ToolButton46: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure DBLinkPageControlChange(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure DBLinkQueryAfterOpen(DataSet: TDataSet);
@@ -53,6 +55,7 @@ type
     { Private declarations }
     FObjectName: string;
     FSchemaParam: string;
+    FSession: TOraSession;
     procedure SetSession(OraSession: TOraSession);
     function GetActivePageQuery: TOraQuery;
     procedure SetObjectFrameAlign(Value: TAlign);
@@ -70,7 +73,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib, Options;
 
 const
   LINK_NAME = 'Link Name';
@@ -115,6 +118,7 @@ procedure TDBLinkBrowserFrame.SetSession(OraSession: TOraSession);
 var
   i: Integer;
 begin
+  FSession := OraSession;
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TOraQuery then
       TOraQuery(Components[i]).Session := OraSession;
@@ -144,7 +148,12 @@ function TDBLinkBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if DBLinkPageControl.ActivePage = InfoTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := DBLinkQuery
+  end
   else
   if DBLinkPageControl.ActivePage = SourceTabSheet then
     Result := DBLinkQuery

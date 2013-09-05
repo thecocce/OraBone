@@ -9,7 +9,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Vcl.ToolWin, JvToolBar,
   BCControls.ToolBar, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh,
-  DBGridEh;
+  DBGridEh, Vcl.StdCtrls;
 
 type
   TIndexBrowserFrame = class(TFrame)
@@ -29,6 +29,7 @@ type
     InfoToolBar: TBCToolBar;
     ToolButton41: TToolButton;
     RefreshAction: TAction;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure IndexPageControlChange(Sender: TObject);
     procedure CustomizeActionExecute(Sender: TObject);
     procedure RefreshActionExecute(Sender: TObject);
@@ -53,7 +54,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib;
+  Main, DataFilter, CustomizePages, Lib, Options;
 
 {$R *.dfm}
 
@@ -97,6 +98,9 @@ begin
   Result := nil;
   if IndexPageControl.ActivePage = InfoTabSheet then
   begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     s := SQLStringHolder.StringsByName['IndexesDescendSQL'].Text;
     OraQuery := TOraQuery.Create(Self);
     OraQuery.Session := FSession;

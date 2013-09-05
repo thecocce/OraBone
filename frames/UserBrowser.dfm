@@ -12,24 +12,20 @@ object UserBrowserFrame: TUserBrowserFrame
     Top = 0
     Width = 451
     Height = 302
-    ActivePage = RolesTabSheet
+    ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = UserPageControlChange
-    ActivePageCaption = 'Roles && Privileges'
+    ActivePageCaption = 'Info'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object UserPanel: TPanel
         Left = 0
         Top = 0
@@ -90,10 +86,6 @@ object UserBrowserFrame: TUserBrowserFrame
     object RolesTabSheet: TTabSheet
       Caption = 'Roles && Privileges'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -202,10 +194,6 @@ object UserBrowserFrame: TUserBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SourcePanel: TPanel
         Left = 0
         Top = 0

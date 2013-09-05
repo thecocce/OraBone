@@ -9,7 +9,7 @@ uses
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar,
   Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu,
   DBGridEhGrouping, GridsEh, DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
-  DBAxisGridsEh;
+  DBAxisGridsEh, Vcl.StdCtrls;
 
 type
   TFuncProcBrowserFrame = class(TFrame)
@@ -73,6 +73,7 @@ type
     Bevel3: TBevel;
     Refresh3ToolBar: TBCToolBar;
     ToolButton4: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure FuncProcPageControlChange(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure SourceQueryAfterOpen(DataSet: TDataSet);
@@ -119,7 +120,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, Options;
 
 const
   { SynonymsQuery columns }
@@ -216,7 +217,12 @@ function TFuncProcBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if FuncProcPageControl.ActivePage = SourceTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := SourceQuery
+  end
   else
   if FuncProcPageControl.ActivePage = GrantsTabSheet then
     Result := GrantsQuery

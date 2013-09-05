@@ -84,7 +84,14 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
+        end
+        object CreationAndModificationTimestampLabel: TLabel
+          AlignWithMargins = True
+          Left = 437
+          Top = 3
+          Width = 3
+          Height = 19
+          Align = alRight
         end
         object SourceToolBar: TBCToolBar
           Left = 0
@@ -183,7 +190,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object JvToolBar3: TBCToolBar
           Left = 0
@@ -277,7 +283,6 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitLeft = 141
         end
         object JvToolBar4: TBCToolBar
           Left = 0

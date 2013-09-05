@@ -16,9 +16,6 @@ object SQLEditorFrame: TSQLEditorFrame
     Cursor = crVSplit
     Hint = ' '
     Align = alBottom
-    ExplicitLeft = -125
-    ExplicitTop = 313
-    ExplicitWidth = 779
   end
   object SearchPanel: TPanel
     Left = 0
@@ -39,7 +36,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
       Left = 434
@@ -49,7 +45,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
       Left = 550
@@ -59,7 +54,6 @@ object SQLEditorFrame: TSQLEditorFrame
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object SearchPanel2: TPanel
       Left = 21
@@ -80,7 +74,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Height = 18
         Align = alLeft
         Caption = 'Search for'
-        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -179,7 +172,6 @@ object SQLEditorFrame: TSQLEditorFrame
           00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         Margin = 2
         NumGlyphs = 2
-        ExplicitLeft = 24
       end
     end
     object SearchPanel5: TPanel
@@ -251,7 +243,6 @@ object SQLEditorFrame: TSQLEditorFrame
           64FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
           00FFFF00FFFF00FFFF00FF7474748E8E8EFF00FFFF00FFFF00FF}
         NumGlyphs = 2
-        ExplicitLeft = 164
       end
     end
     object SearchPanel6: TPanel
@@ -324,7 +315,6 @@ object SQLEditorFrame: TSQLEditorFrame
           FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF8E8E8E737373FF00FFFF00FFFF
           00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         NumGlyphs = 2
-        ExplicitLeft = 164
       end
     end
     object SearchPanel7: TPanel
@@ -464,9 +454,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 65
-        ExplicitTop = 4
-        ExplicitHeight = 35
       end
       object ExecuteToolBar: TBCToolBar
         Left = 0
@@ -512,8 +499,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 55
-        ExplicitTop = -1
       end
       object CommitRollbackToolBar: TBCToolBar
         Left = 0
@@ -558,7 +543,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 28
       end
       object DBMSToolBar: TBCToolBar
         Left = 0
@@ -596,9 +580,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 197
-        ExplicitTop = 25
-        ExplicitHeight = 20
       end
       object PlanToolBar: TBCToolBar
         Left = 0
@@ -633,7 +614,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 93
       end
       object Bevel6: TBevel
         AlignWithMargins = True
@@ -646,9 +626,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 386
-        ExplicitTop = 27
-        ExplicitHeight = 20
       end
       object StandardToolBar: TBCToolBar
         Left = 0
@@ -726,9 +703,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 440
-        ExplicitTop = 27
-        ExplicitHeight = 20
       end
       object PrintToolBar: TBCToolBar
         Left = 0
@@ -770,9 +744,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 498
-        ExplicitTop = 31
-        ExplicitHeight = 20
       end
       object IncreaseToolBar: TBCToolBar
         Left = 0
@@ -815,9 +786,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 556
-        ExplicitTop = 27
-        ExplicitHeight = 20
       end
       object SortToolBar: TBCToolBar
         Left = 0
@@ -859,8 +827,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 23
-        ExplicitTop = 4
       end
       object CaseToolBar: TBCToolBar
         Left = 0
@@ -899,9 +865,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 645
-        ExplicitTop = 25
-        ExplicitHeight = 20
       end
       object CommandToolBar: TBCToolBar
         Left = 0
@@ -943,9 +906,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 763
-        ExplicitTop = 25
-        ExplicitHeight = 20
       end
       object SearchToolBar: TBCToolBar
         Left = 0
@@ -992,8 +952,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Margins.Bottom = 2
         Align = alLeft
         Shape = bsLeftLine
-        ExplicitLeft = 94
-        ExplicitTop = 4
       end
       object ViewToolBar: TBCToolBar
         Left = 0
@@ -1138,7 +1096,6 @@ object SQLEditorFrame: TSQLEditorFrame
           00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         Margin = 2
         NumGlyphs = 2
-        ExplicitHeight = 25
       end
     end
     object GotoLineLabelPanel: TPanel
@@ -1160,7 +1117,6 @@ object SQLEditorFrame: TSQLEditorFrame
         Height = 20
         Align = alLeft
         Caption = 'Go to Line'
-        ExplicitHeight = 13
       end
     end
     object LineNumberPanel: TPanel
@@ -1237,8 +1193,6 @@ object SQLEditorFrame: TSQLEditorFrame
           FFFF00FFFF00FFFF00FFB8B8B6B0B0ADAEAEACAEAEABAEAEABADAEABAEAEABAF
           AFAEBCBEBEFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         Margin = 2
-        ExplicitTop = 2
-        ExplicitHeight = 19
       end
     end
   end

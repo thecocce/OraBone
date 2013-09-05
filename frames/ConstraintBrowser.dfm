@@ -33,7 +33,6 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
         Height = 2
         Cursor = crVSplit
         Align = alBottom
-        ExplicitTop = 82
       end
       object InfoPanel: TPanel
         Left = 0
@@ -86,8 +85,14 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
             Margins.Bottom = 2
             Align = alLeft
             Shape = bsLeftLine
-            ExplicitLeft = 141
-            ExplicitTop = 2
+          end
+          object CreationAndModificationTimestampLabel: TLabel
+            AlignWithMargins = True
+            Left = 435
+            Top = 5
+            Width = 3
+            Height = 19
+            Align = alRight
           end
           object ConstraintToolBar: TBCToolBar
             Left = 0

@@ -117,8 +117,6 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
             Margins.Bottom = 2
             Align = alLeft
             Shape = bsLeftLine
-            ExplicitLeft = 82
-            ExplicitTop = 2
           end
           object Bevel1: TBevel
             AlignWithMargins = True
@@ -131,8 +129,14 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
             Margins.Bottom = 2
             Align = alLeft
             Shape = bsLeftLine
-            ExplicitLeft = 150
-            ExplicitTop = 3
+          end
+          object CreationAndModificationTimestampLabel: TLabel
+            AlignWithMargins = True
+            Left = 435
+            Top = 5
+            Width = 3
+            Height = 19
+            Align = alRight
           end
           object SourceToolBar: TBCToolBar
             Left = 0

@@ -116,9 +116,6 @@ object OptionsDialog: TOptionsDialog
       Left = 206
       Top = 6
       Height = 412
-      ExplicitLeft = 262
-      ExplicitTop = 106
-      ExplicitHeight = 100
     end
     object OptionsVirtualStringTree: TVirtualStringTree
       Left = 6
@@ -173,7 +170,7 @@ object OptionsDialog: TOptionsDialog
       ImageIndex = 3
     end
     object EditorGutterAction: TAction
-      Caption = 'Gutter'
+      Caption = 'Margins'
       ImageIndex = 4
     end
     object EditorTabsAction: TAction

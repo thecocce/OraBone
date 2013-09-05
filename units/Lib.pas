@@ -109,6 +109,7 @@ function GetFilterObjectsFromIni(KeyValue: string): string;
 function GetFilterObjectType(Index: Integer): string;
 function GetFilterObjectIndex(ObjectType: string): Integer;
 function GetSQLFormat(OraSession: TOraSession; DateFormat: string): string;
+function GetCreationAndModificationTimestamp(OraSession: TOraSession; SchemaParam: string; ObjectName: string): WideString;
 
 implementation
 
@@ -452,8 +453,6 @@ begin
      end;
   end;
 end;
-
-
 
 procedure AlterAllConstraints(OraSession: TOraSession; SchemaParam: string; EnableConstraint: Boolean);
 var
@@ -1134,6 +1133,27 @@ begin
     Close;
   end;
   FreeAndNil(OraQuery);
+end;
+
+function GetCreationAndModificationTimestamp(OraSession: TOraSession; SchemaParam: string; ObjectName: string): WideString;
+var
+  OraQuery: TOraQuery;
+begin
+  OraQuery := TOraQuery.Create(nil);
+  OraQuery.Session := OraSession;
+  OraQuery.SQL.Add(DM.StringHolder.StringsByName['CreationAndModificationTimestampSQL'].Text);
+  with OraQuery do
+  try
+    ParamByName('OWNER').AsWideString := SchemaParam;
+    ParamByName('OBJECT').AsWideString := ObjectName;
+    Prepare;
+    Open;
+    Result := Format('Created: %s - Modified: %s', [FieldByName('CREATED').AsWideString, FieldByName('LAST_DDL_TIME').AsWideString]);
+  finally
+    Close;
+    UnPrepare;
+    FreeAndNil(OraQuery);
+  end;
 end;
 
 end.

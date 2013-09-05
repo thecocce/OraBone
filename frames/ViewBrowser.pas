@@ -9,7 +9,7 @@ uses
   SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar, Vcl.Menus,
   BCControls.PopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.ImageList, BCControls.ToolBar,
   BCControls.DBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
-  DBAxisGridsEh;
+  DBAxisGridsEh, Vcl.StdCtrls;
 
 type
   TViewBrowserFrame = class(TFrame)
@@ -144,6 +144,7 @@ type
     Bevel6: TBevel;
     BCToolBar7: TBCToolBar;
     ToolButton11: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure ViewPageControlChange(Sender: TObject);
     procedure FilterActionExecute(Sender: TObject);
     procedure TriggersQueryAfterScroll(DataSet: TDataSet);
@@ -872,7 +873,12 @@ function TViewBrowserFrame.GetActivePageQuery(Refresh: Boolean): TOraQuery;
 begin
   Result := nil;
   if ViewPageControl.ActivePage = ColumnsTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := ColumnsQuery
+  end
   else
   if ViewPageControl.ActivePage = DataTabSheet then
   begin

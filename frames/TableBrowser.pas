@@ -225,6 +225,7 @@ type
     BCToolBar10: TBCToolBar;
     ToolButton28: TToolButton;
     SourceOptionsAction: TAction;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure TablePageControlChange(Sender: TObject);
     procedure FilterActionExecute(Sender: TObject);
     procedure TriggersQueryAfterScroll(DataSet: TDataSet);
@@ -1833,7 +1834,12 @@ var
 begin
   Result := nil;
   if TablePageControl.ActivePage = ColumnsTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := ColumnsQuery
+  end
   else
   if TablePageControl.ActivePage = SourceTabSheet then
     Result := SourceQuery

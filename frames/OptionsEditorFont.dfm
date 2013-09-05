@@ -138,13 +138,13 @@ object EditorFontFrame: TEditorFontFrame
       object GutterLabel: TLabel
         Left = 11
         Top = 52
-        Width = 31
+        Width = 32
         Height = 13
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Caption = 'Gutter'
+        Caption = 'Margin'
       end
     end
     object BottomPanel: TPanel

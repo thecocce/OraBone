@@ -9,7 +9,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, JvToolBar, Vcl.Menus, SynEditMiscClasses, SynEditSearch, BCControls.ImageList, BCControls.ToolBar,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls;
 
 type
   TPackageBrowserFrame = class(TFrame)
@@ -87,6 +87,7 @@ type
     Bevel4: TBevel;
     Refresh4ToolBar: TBCToolBar;
     ToolButton8: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure PackagePageControlChange(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure SpecQueryAfterOpen(DataSet: TDataSet);
@@ -136,7 +137,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, GrantPrivileges, CreateSynonym, Lib, Vcl.Themes, BCCommon.StyleUtils;
+  Main, DataFilter, CustomizePages, GrantPrivileges, CreateSynonym, Lib, Vcl.Themes, BCCommon.StyleUtils, Options;
 
 const
   { SynonymsQuery columns }
@@ -303,7 +304,12 @@ function TPackageBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if PackagePageControl.ActivePage = SpecificationTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := SpecQuery
+  end
   else
   if PackagePageControl.ActivePage = BodyTabSheet then
     Result := BodyQuery

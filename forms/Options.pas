@@ -142,6 +142,7 @@ type
     FMainMenuSystemFontName: string;
     FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
+    FObjectCreationAndModificationTimestamp: Boolean;
     FOutputCloseTabByDblClick: Boolean;
     FOutputCloseTabByMiddleClick: Boolean;
     FOutputShowTreeLines: Boolean;
@@ -242,6 +243,7 @@ type
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
+    property ObjectCreationAndModificationTimestamp: Boolean read FObjectCreationAndModificationTimestamp write FObjectCreationAndModificationTimestamp;
     property OutputCloseTabByDblClick: Boolean read FOutputCloseTabByDblClick write FOutputCloseTabByDblClick;
     property OutputCloseTabByMiddleClick: Boolean read FOutputCloseTabByMiddleClick write FOutputCloseTabByMiddleClick;
     property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
@@ -459,6 +461,7 @@ begin
   FTimeFormat := 'HH24:MI:SS';
   FSchemaBrowserAlign := 'Bottom';
   FObjectFrameAlign := 'Bottom';
+  FObjectCreationAndModificationTimestamp := False;
   FIgnoreCase := True;
   FIgnoreBlanks := True;
   FAutoIndent := True;
@@ -834,9 +837,11 @@ begin
   FTimeFormatFrame.TimeFormatEdit.Text := FOptionsContainer.TimeFormat;
   { SchemaBrowser }
   FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.SchemaBrowserAlign;
-  FObjectFrameFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.ObjectFrameAlign;
   FOptionsSchemaBrowserFrame.ShowTreeLinesCheckBox.Checked := FOptionsContainer.SchemaBrowserShowTreeLines;
   FOptionsSchemaBrowserFrame.IndentEdit.Text := IntToStr(FOptionsContainer.SchemaBrowserIndent);
+  { Object frame }
+  FObjectFrameFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.ObjectFrameAlign;
+  FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked := FOptionsContainer.ObjectCreationAndModificationTimestamp;
   { Status bar }
   FStatusBarFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.StatusBarUseSystemFont;
   FStatusBarFrame.FontLabel.Font.Name := FOptionsContainer.StatusBarFontName;
@@ -1061,9 +1066,11 @@ begin
   FOptionsContainer.TimeFormat := FTimeFormatFrame.TimeFormatEdit.Text;
   { Schema browser }
   FOptionsContainer.SchemaBrowserAlign := FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text;
-  FOptionsContainer.ObjectFrameAlign := FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text;
   FOptionsContainer.SchemaBrowserShowTreeLines := FOptionsSchemaBrowserFrame.ShowTreeLinesCheckBox.Checked;
   FOptionsContainer.SchemaBrowserIndent := StrToIntDef(FOptionsSchemaBrowserFrame.IndentEdit.Text, 16);
+  { Object frame }
+  FOptionsContainer.ObjectFrameAlign := FObjectFrameFrame.ButtonPanelAlignComboBox.Text;
+  FOptionsContainer.ObjectCreationAndModificationTimestamp := FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked;
   { Status bar }
   FOptionsContainer.StatusBarUseSystemFont := FStatusBarFrame.UseSystemFontCheckBox.Checked;
   FOptionsContainer.StatusBarFontName := FStatusBarFrame.FontLabel.Font.Name;

@@ -9,7 +9,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
-  DBAxisGridsEh, DBGridEh;
+  DBAxisGridsEh, DBGridEh, Vcl.StdCtrls;
 
 type
   TTriggerBrowserFrame = class(TFrame)
@@ -45,6 +45,7 @@ type
     Bevel1: TBevel;
     BCToolBar2: TBCToolBar;
     ToolButton2: TToolButton;
+    CreationAndModificationTimestampLabel: TLabel;
     procedure TriggerPageControlChange(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
     procedure CustomizeActionExecute(Sender: TObject);
@@ -78,7 +79,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils;
+  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, Options;
 
 const
   TRIGGER_NAME = 'Trigger Name';
@@ -162,7 +163,12 @@ function TTriggerBrowserFrame.GetActivePageQuery: TOraQuery;
 begin
   Result := nil;
   if TriggerPageControl.ActivePage = SourceTabSheet then
+  begin
+    CreationAndModificationTimestampLabel.Caption := '';
+    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+      CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := SourceQuery
+  end;
 end;
 
 procedure TTriggerBrowserFrame.OpenQuery(RefreshQuery: Boolean);
