@@ -966,6 +966,7 @@ begin
       begin
         MenuItem := TMenuItem.Create(PopupMenu);
         MenuItem.Caption := 'Constraints of ' + ObjectText;
+        MenuItem.ImageIndex := IMG_IDX_CONSTRAINT_CHILD;
         PopupMenu.Items.Add(MenuItem);
         { Enable }
         SubMenuItem := TMenuItem.Create(PopupMenu);
@@ -995,6 +996,7 @@ begin
     begin
       MenuItem := TMenuItem.Create(PopupMenu);
       MenuItem.Caption := 'Create';
+      MenuItem.ImageIndex := IMG_IDX_ADD;
       PopupMenu.Items.Add(MenuItem);
 
       { Create a constraint for an object }
@@ -1258,6 +1260,7 @@ begin
       begin
         MenuItem := TMenuItem.Create(PopupMenu);
         MenuItem.Caption := 'Triggers of ' + ObjectText;
+        MenuItem.ImageIndex := IMG_IDX_TRIGGER_CHILD;
         PopupMenu.Items.Add(MenuItem);
         { Enable }
         SubMenuItem := TMenuItem.Create(PopupMenu);

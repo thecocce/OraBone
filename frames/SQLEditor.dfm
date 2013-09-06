@@ -1331,11 +1331,6 @@ object SQLEditorFrame: TSQLEditorFrame
     object ToggleBookmarksMenuItem: TMenuItem
       Caption = 'Toggle Boo&kmarks'
       SubMenuImages = BookmarkImagesList
-      object ToggleBookmark0MenuItem: TMenuItem
-        Caption = 'Bookmark &0'
-        ImageIndex = 61
-        ShortCut = 24624
-      end
       object ToggleBookmark1MenuItem: TMenuItem
         Tag = 1
         Caption = 'Bookmark &1'
@@ -1394,11 +1389,6 @@ object SQLEditorFrame: TSQLEditorFrame
     object GotoBookmarksMenuItem: TMenuItem
       Caption = '&Goto Bookmarks'
       SubMenuImages = BookmarkImagesList
-      object GotoBookmark0MenuItem: TMenuItem
-        Caption = 'Bookmark &0'
-        ImageIndex = 61
-        ShortCut = 16432
-      end
       object GotoBookmark1MenuItem: TMenuItem
         Tag = 1
         Caption = 'Bookmark &1'

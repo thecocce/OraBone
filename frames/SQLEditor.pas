@@ -107,7 +107,6 @@ type
     GotoBookmarksMenuItem: TMenuItem;
     Separator3MenuItem: TMenuItem;
     ClearBookmarksMenuItem: TMenuItem;
-    ToggleBookmark0MenuItem: TMenuItem;
     ToggleBookmark1MenuItem: TMenuItem;
     ToggleBookmark2MenuItem: TMenuItem;
     ToggleBookmark3MenuItem: TMenuItem;
@@ -117,7 +116,6 @@ type
     ToggleBookmark7MenuItem: TMenuItem;
     ToggleBookmark8MenuItem: TMenuItem;
     ToggleBookmark9MenuItem: TMenuItem;
-    GotoBookmark0MenuItem: TMenuItem;
     GotoBookmark1MenuItem: TMenuItem;
     GotoBookmark2MenuItem: TMenuItem;
     GotoBookmark3MenuItem: TMenuItem;
@@ -574,6 +572,7 @@ begin
   ViewSpecialCharsToolButton.Action := MainForm.ViewSpecialCharsAction;
   ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
+  ToggleBookmarksMenuItem.Action := MainForm.SearchToggleBookmarksAction;
   ToggleBookmark1MenuItem.Action := MainForm.ToggleBookmarks1Action;
   ToggleBookmark2MenuItem.Action := MainForm.ToggleBookmarks2Action;
   ToggleBookmark3MenuItem.Action := MainForm.ToggleBookmarks3Action;
@@ -583,6 +582,7 @@ begin
   ToggleBookmark7MenuItem.Action := MainForm.ToggleBookmarks7Action;
   ToggleBookmark8MenuItem.Action := MainForm.ToggleBookmarks8Action;
   ToggleBookmark9MenuItem.Action := MainForm.ToggleBookmarks9Action;
+  GotoBookmarksMenuItem.Action := MainForm.SearchGotoBookmarksAction;
   GotoBookmark1MenuItem.Action := MainForm.GotoBookmarks1Action;
   GotoBookmark2MenuItem.Action := MainForm.GotoBookmarks2Action;
   GotoBookmark3MenuItem.Action := MainForm.GotoBookmarks3Action;

@@ -2,7 +2,7 @@ object SchemaCompareForm: TSchemaCompareForm
   Left = 0
   Top = 0
   Caption = 'Compare Schemas'
-  ClientHeight = 440
+  ClientHeight = 434
   ClientWidth = 658
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,14 +17,14 @@ object SchemaCompareForm: TSchemaCompareForm
   OnDestroy = FormDestroy
   DesignSize = (
     658
-    440)
+    434)
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl: TBCPageControl
     Left = 149
     Top = 56
     Width = 504
-    Height = 359
+    Height = 353
     ActivePage = Schema1TabSheet
     Anchors = [akLeft, akTop, akRight, akBottom]
     DoubleBuffered = False
@@ -42,7 +42,7 @@ object SchemaCompareForm: TSchemaCompareForm
         Left = 0
         Top = 0
         Width = 496
-        Height = 330
+        Height = 324
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 2
@@ -54,7 +54,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Left = 2
           Top = 1
           Width = 491
-          Height = 327
+          Height = 321
           Align = alClient
           Ctl3D = True
           DragOperations = []
@@ -103,7 +103,7 @@ object SchemaCompareForm: TSchemaCompareForm
         Left = 0
         Top = 0
         Width = 496
-        Height = 330
+        Height = 324
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 2
@@ -115,7 +115,7 @@ object SchemaCompareForm: TSchemaCompareForm
           Left = 2
           Top = 1
           Width = 491
-          Height = 327
+          Height = 321
           Align = alClient
           BorderWidth = 1
           Ctl3D = True
@@ -161,7 +161,7 @@ object SchemaCompareForm: TSchemaCompareForm
   end
   object StatusBar: TJvStatusBar
     Left = 0
-    Top = 421
+    Top = 415
     Width = 658
     Height = 19
     DoubleBuffered = False
@@ -237,9 +237,9 @@ object SchemaCompareForm: TSchemaCompareForm
   end
   object ComparedObjectsGroupBox: TGroupBox
     Left = 6
-    Top = 53
+    Top = 50
     Width = 136
-    Height = 362
+    Height = 359
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4

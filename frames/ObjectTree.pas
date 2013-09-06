@@ -115,6 +115,8 @@ const
   IMG_IDX_UNIQUE_KEY = 80;
   IMG_IDX_CHECK = 81;
 
+  IMG_IDX_ADD = 83;
+
 type
   (*TRootNodeData = class
     RootText: string;
