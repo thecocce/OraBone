@@ -542,13 +542,14 @@ begin
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + TrimToMaxLength(FieldByName(DATA_TYPE).AsWideString, MaxDataTypeLength)
         else
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Trim(FieldByName(DATA_TYPE).AsWideString);
-        if UpperCase(FieldByName(NULLABLE).AsWideString) = NOT_NULL then
-          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + NOT_NULL;
+
         if not FieldByName('DEFAULT').IsNull then
+          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'DEFAULT ' +  Trim(FieldByName('DEFAULT').AsString);
+        if UpperCase(FieldByName(NULLABLE).AsWideString) = NOT_NULL then
         begin
-          if UpperCase(FieldByName(NULLABLE).AsWideString) = NOT_NULL then
-             SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' ';
-          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'DEFAULT ' +  FieldByName('DEFAULT').AsString;
+          if not FieldByName('DEFAULT').IsNull then
+            SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' ';
+          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + NOT_NULL;
         end;
 
         ColumnComments := ColumnComments + Format('COMMENT ON COLUMN %s.%s.%s IS %s;', [FSchemaParam,
@@ -809,7 +810,7 @@ begin
       while not Eof do
       begin
         SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'CREATE OR REPLACE TRIGGER ' + FieldByName('DESCRIPTION').AsWideString +
-          FieldByName('TRIGGER_BODY').AsWideString + CHR_ENTER + '/' + CHR_ENTER + 'SHOW ERRORS;' + CHR_ENTER;
+          FieldByName('TRIGGER_BODY').AsWideString + CHR_ENTER + '/' + CHR_ENTER;
         Next;
       end;
     finally

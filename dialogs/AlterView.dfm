@@ -2,8 +2,6 @@ inherited AlterViewDialog: TAlterViewDialog
   Caption = 'Alter View'
   ClientHeight = 432
   ClientWidth = 453
-  ExplicitWidth = 469
-  ExplicitHeight = 468
   PixelsPerInch = 96
   TextHeight = 13
   object ViewNameLabel: TLabel [0]
@@ -24,9 +22,8 @@ inherited AlterViewDialog: TAlterViewDialog
     Top = 60
     Width = 446
     Height = 318
-    ExplicitTop = 60
-    ExplicitWidth = 446
-    ExplicitHeight = 318
+    ActivePage = ColumnsTabSheet
+    ActivePageCaption = 'Columns'
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -57,6 +54,7 @@ inherited AlterViewDialog: TAlterViewDialog
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           OnGetCellParams = ColumnsDBGridGetCellParams
+          OnKeyPress = ColumnsDBGridKeyPress
           Columns = <
             item
               DynProps = <>
@@ -90,8 +88,6 @@ inherited AlterViewDialog: TAlterViewDialog
           Margins.Bottom = 2
           Align = alLeft
           Shape = bsLeftLine
-          ExplicitTop = 2
-          ExplicitHeight = 24
         end
         object ColumnsToolBar: TBCToolBar
           Left = 0
@@ -236,22 +232,15 @@ inherited AlterViewDialog: TAlterViewDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 438
-      ExplicitHeight = 290
       inherited SourcePanel: TPanel
         Width = 438
         Height = 290
-        ExplicitWidth = 438
-        ExplicitHeight = 290
         inherited SourceSynEdit: TSynEdit
           Width = 436
           Height = 265
-          ExplicitWidth = 436
-          ExplicitHeight = 265
         end
         inherited SourceTopPanel: TPanel
           Width = 436
-          ExplicitWidth = 436
         end
       end
     end
@@ -259,14 +248,10 @@ inherited AlterViewDialog: TAlterViewDialog
   inherited OKButton: TButton
     Left = 288
     Top = 383
-    ExplicitLeft = 288
-    ExplicitTop = 383
   end
   inherited CancelButton: TButton
     Left = 369
     Top = 383
-    ExplicitLeft = 369
-    ExplicitTop = 383
   end
   object ViewNameEdit: TBCEdit [5]
     Left = 76
@@ -307,8 +292,6 @@ inherited AlterViewDialog: TAlterViewDialog
   inherited StatusBar1: TStatusBar
     Top = 413
     Width = 453
-    ExplicitTop = 413
-    ExplicitWidth = 453
   end
   inherited ActionList: TActionList
     object MoveUpAction: TAction

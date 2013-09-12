@@ -13,6 +13,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
   OldCreateOrder = False
   Position = poMainFormCenter
   OnDestroy = FormDestroy
+  OnShow = FormShow
   DesignSize = (
     508
     348)

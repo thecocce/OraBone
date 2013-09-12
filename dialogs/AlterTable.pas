@@ -55,7 +55,8 @@ type
     procedure MoveUpActionExecute(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure ResetColumnsActionExecute(Sender: TObject);
-   procedure FormDestroy(Sender: TObject);  private
+   procedure FormDestroy(Sender: TObject);
+    procedure ColumnsDBGridKeyPress(Sender: TObject; var Key: Char);  private
     { Private declarations }
     FOriginalTableComment: string;
     FRecordCount: Integer;
@@ -76,7 +77,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib, System.AnsiStrings;
 
 var
   FAlterTableDialog: TAlterTableDialog;
@@ -179,6 +180,13 @@ begin
       else
         Background := clBtnFace;
     end;
+end;
+
+procedure TAlterTableDialog.ColumnsDBGridKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if ColumnsDBGrid.Col in [0, 1] then
+    Key := Char(System.AnsiStrings.StrUpper(@Key)^); { Maybe there's a better way to do this... }
 end;
 
 procedure TAlterTableDialog.DeleteColumnActionExecute(Sender: TObject);
@@ -592,7 +600,7 @@ var
         Next;
       end;
       if Result <> '' then
-        Result := Result + CHR_ENTER + '/' + CHR_ENTER + 'SHOW ERRORS;' + CHR_ENTER;
+        Result := Result + CHR_ENTER + '/' + CHR_ENTER;
     finally
       Close;
       UnPrepare;

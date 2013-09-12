@@ -117,6 +117,18 @@ const
 
   IMG_IDX_ADD = 83;
 
+  IMG_IDX_TABLE_INVALID = 84;
+  IMG_IDX_VIEW_INVALID = 85;
+  IMG_IDX_FUNCTION_INVALID = 86;
+  IMG_IDX_PROCEDURE_INVALID = 87;
+  IMG_IDX_PACKAGE_INVALID = 88;
+  IMG_IDX_TRIGGER_INVALID = 89;
+  IMG_IDX_CONSTRAINT_INVALID = 90;
+  IMG_IDX_INDEX_INVALID = 91;
+  IMG_IDX_SEQUENCE_INVALID = 92;
+  IMG_IDX_SYNONYM_INVALID = 93;
+  IMG_IDX_DBLINK_INVALID = 94;
+
 type
   (*TRootNodeData = class
     RootText: string;
@@ -490,7 +502,23 @@ begin
     ImageIndex := Data.ImageIndex;
 
     if Data.StateIndex = 2 then // invalid objects
-      ImageIndex := IMG_IDX_INVALID_OBJECT_CHILD;
+    begin
+      case Data.ImageIndex of
+        IMG_IDX_TABLE_CHILD: ImageIndex := IMG_IDX_TABLE_INVALID;
+        IMG_IDX_VIEW_CHILD: ImageIndex := IMG_IDX_VIEW_INVALID;
+        IMG_IDX_FUNCTION_CHILD: ImageIndex := IMG_IDX_FUNCTION_INVALID;
+        IMG_IDX_PROCEDURE_CHILD: ImageIndex := IMG_IDX_PROCEDURE_INVALID;
+        IMG_IDX_PACKAGE_CHILD: ImageIndex := IMG_IDX_PACKAGE_INVALID;
+        IMG_IDX_TRIGGER_CHILD: ImageIndex := IMG_IDX_TRIGGER_INVALID;
+        IMG_IDX_CONSTRAINT_CHILD: ImageIndex := IMG_IDX_CONSTRAINT_INVALID;
+        IMG_IDX_INDEX_CHILD: ImageIndex := IMG_IDX_INDEX_INVALID;
+        IMG_IDX_SEQUENCE_CHILD: ImageIndex := IMG_IDX_SEQUENCE_INVALID;
+        IMG_IDX_SYNONYM_CHILD: ImageIndex := IMG_IDX_SYNONYM_INVALID;
+        IMG_IDX_DBLINK_CHILD: ImageIndex := IMG_IDX_DBLINK_INVALID;
+      else
+        ImageIndex := IMG_IDX_INVALID_OBJECT_CHILD;
+      end;
+    end;
     if Data.StateIndex = 3 then // locked users
       ImageIndex := IMG_IDX_LOCKED;
     if Data.StateIndex = 4 then // expired & locked users

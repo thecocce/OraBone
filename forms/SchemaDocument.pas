@@ -166,10 +166,12 @@ begin
   WriteIniFile;
   WebBrowser.Navigate('about:blank');
   Action := caFree;
+  inherited;
 end;
 
 procedure TSchemaDocumentForm.FormCreate(Sender: TObject);
 begin
+  inherited;
   FWBContainer := TWBContainer.Create(WebBrowser);
   FWBContainer.UseCustomCtxMenu := True;
   FWBContainer.Show3DBorder := False;

@@ -14,6 +14,7 @@ object SchemaCompareForm: TSchemaCompareForm
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
     658
@@ -152,7 +153,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 180
+              Width = 186
               WideText = 'Difference'
             end>
         end

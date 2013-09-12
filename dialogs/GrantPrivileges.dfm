@@ -2,15 +2,11 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   Caption = 'Grant Privileges'
   ClientHeight = 340
   ClientWidth = 333
-  ExplicitWidth = 349
-  ExplicitHeight = 376
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 326
     Height = 282
-    ExplicitWidth = 326
-    ExplicitHeight = 282
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -173,22 +169,15 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 318
-      ExplicitHeight = 254
       inherited SourcePanel: TPanel
         Width = 318
         Height = 254
-        ExplicitWidth = 318
-        ExplicitHeight = 254
         inherited SourceSynEdit: TSynEdit
           Width = 316
           Height = 229
-          ExplicitWidth = 316
-          ExplicitHeight = 229
         end
         inherited SourceTopPanel: TPanel
           Width = 316
-          ExplicitWidth = 316
         end
       end
     end
@@ -196,19 +185,13 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   inherited OKButton: TButton
     Left = 169
     Top = 290
-    ExplicitLeft = 169
-    ExplicitTop = 290
   end
   inherited CancelButton: TButton
     Left = 250
     Top = 290
-    ExplicitLeft = 250
-    ExplicitTop = 290
   end
   inherited StatusBar1: TStatusBar
     Top = 321
     Width = 333
-    ExplicitTop = 321
-    ExplicitWidth = 333
   end
 end

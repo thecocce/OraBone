@@ -41,7 +41,6 @@ type
     ColumnNamesCheckBox: TCheckBox;
     ColumnCommentsCheckBox: TCheckBox;
     ProgressBar: TBCProgressBar;
-    procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Schema1ComboBoxChange(Sender: TObject);
     procedure Schema2ComboBoxChange(Sender: TObject);
@@ -55,6 +54,8 @@ type
       State: TOwnerDrawState);
     procedure Schema2ComboBoxDrawItem(Control: TWinControl; Index: Integer; Rect: TRect;
       State: TOwnerDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FUsername1, FUsername2: string;
@@ -62,9 +63,10 @@ type
     procedure DoCompare;
     procedure QueryAfterOpen(VirtualDrawTree: TVirtualDrawTree; SchemaQuery: TOraQuery);
     function GetCompareSQL: string;
+    procedure ReadIniFile;
+    procedure WriteIniFile;
   public
     { Public declarations }
-
     procedure Open(const SessionList: TList);
   end;
 
@@ -75,7 +77,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Vcl.Themes, BCCommon.StyleUtils;
+  DataModule, Vcl.Themes, BCCommon.StyleUtils, BigIni, BCCommon.FileUtils;
 
 type
   PCompareRec = ^TCompareRec;
@@ -99,14 +101,23 @@ end;
 
 procedure TSchemaCompareForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  WriteIniFile;
   Schema1Query.Close;
   Schema2Query.Close;
   Action := caFree;
+  inherited;
+end;
+
+procedure TSchemaCompareForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ReadIniFile;
 end;
 
 procedure TSchemaCompareForm.FormDestroy(Sender: TObject);
 begin
   FSchemaCompareForm := nil;
+  inherited;
 end;
 
 procedure TSchemaCompareForm.Open(const SessionList: TList);
@@ -542,6 +553,37 @@ begin
       0: NodeWidth := Canvas.TextWidth(Trim(Data.ObjectName)) + 2 * TextMargin;
       1: NodeWidth := Canvas.TextWidth(Trim(Data.CompareResult)) + 2 * TextMargin;
     end;
+  end;
+end;
+
+procedure TSchemaCompareForm.ReadIniFile;
+begin
+  with TBigIniFile.Create(GetINIFilename) do
+  try
+    { Size }
+    Width := ReadInteger('SchemaCompareSize', 'Width', Round(Screen.Width * 0.5));
+    Height := ReadInteger('SchemaCompareSize', 'Height', Round(Screen.Height * 0.5));
+    { Position }
+    Left := ReadInteger('SchemaComparePosition', 'Left', (Screen.Width - Width) div 2);
+    Top := ReadInteger('SchemaComparePosition', 'Top', (Screen.Height - Height) div 2);
+  finally
+    Free;
+  end;
+end;
+
+procedure TSchemaCompareForm.WriteIniFile;
+begin
+  if Windowstate = wsNormal then
+  with TBigIniFile.Create(GetINIFilename) do
+  try
+    { Position }
+    WriteInteger('SchemaComparePosition', 'Left', Left);
+    WriteInteger('SchemaComparePosition', 'Top', Top);
+    { Size }
+    WriteInteger('SchemaCompareSize', 'Width', Width);
+    WriteInteger('SchemaCompareSize', 'Height', Height);
+  finally
+    Free;
   end;
 end;
 

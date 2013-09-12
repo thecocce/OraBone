@@ -52,6 +52,7 @@ type
     procedure MoveUpActionExecute(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure ResetColumnsActionExecute(Sender: TObject);
+    procedure ColumnsDBGridKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FMaterialized: Boolean;
@@ -72,7 +73,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
+  DataModule, Lib, Vcl.Themes, Winapi.UxTheme, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib, System.AnsiStrings;
 
 var
   FAlterViewDialog: TAlterViewDialog;
@@ -219,6 +220,12 @@ begin
     AFont.Color := clWhite;
     Background := clRed;
   end;
+end;
+
+procedure TAlterViewDialog.ColumnsDBGridKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := Char(System.AnsiStrings.StrUpper(@Key)^); { Maybe there's a better way to do this... }
 end;
 
 procedure TAlterViewDialog.GetViewData;

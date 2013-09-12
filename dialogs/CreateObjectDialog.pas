@@ -37,6 +37,7 @@ type
     procedure PageControlChange(Sender: TObject);
     procedure SaveToFileActionExecute(Sender: TObject);
     procedure SQLEditorActionExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     function GetSQL: string;
@@ -97,7 +98,6 @@ end;
 procedure TCreateObjectBaseDialog.Initialize;
 begin
   SourceSynEdit.Text := '';
-  PageControl.ActivePageIndex := 0;
   UpdateGutter(SourceSynEdit);
   UpdateSQLSynColors(SynSQLSyn);
   if Assigned(TStyleManager.ActiveStyle) then
@@ -167,6 +167,12 @@ begin
     if (Components[i] is TOraQuery) then
       if TOraQuery(Components[i]).Active then
         TOraQuery(Components[i]).Close;
+end;
+
+procedure TCreateObjectBaseDialog.FormShow(Sender: TObject);
+begin
+  inherited;
+  PageControl.ActivePageIndex := 0;
 end;
 
 end.
