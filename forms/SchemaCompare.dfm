@@ -11,7 +11,6 @@ object SchemaCompareForm: TSchemaCompareForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
