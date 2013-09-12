@@ -391,7 +391,7 @@ type
     procedure DeleteWord;
     procedure DeleteLine;
     procedure DeleteEOL;
-    procedure UpdateGuttersAndControls(DoubleBuffered: Boolean);
+    procedure UpdateMarginsAndControls(DoubleBuffered: Boolean);
     procedure RepaintToolButtons;
     function IsCompareFilesActivePage: Boolean;
     procedure GotoBookmarks(ItemIndex: Integer);
@@ -684,10 +684,10 @@ begin
       OraSynEdit.SetFocus;
     Result := OraSynEdit;
   end;
-  UpdateGutter(Result);
+  UpdateMargin(Result);
 end;
 
-procedure TSQLEditorFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
+procedure TSQLEditorFrame.UpdateMarginsAndControls(DoubleBuffered: Boolean);
 var
   i, Right: Integer;
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
@@ -709,7 +709,7 @@ begin
     SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
     if Assigned(SQLEditorTabSheetFrame) then
     begin
-      UpdateGutter(SQLEditorTabSheetFrame.OraSynEdit);
+      UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
       SQLEditorTabSheetFrame.UpdateOptionsAndStyles(Right);
     end;
     CompareFrame := GetCompareFrame(PageControl.Pages[i]);

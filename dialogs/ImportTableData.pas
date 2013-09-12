@@ -341,7 +341,7 @@ var
   s, FieldValue: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.GutterRightMargin;
+  RightMargin := OptionsContainer.MarginRightMargin;
   Result := 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
   s := '            (';
   i := 0;

@@ -1,4 +1,4 @@
-unit OptionsEditorGutter;
+unit OptionsEditorMargin;
 
 interface
 
@@ -8,9 +8,9 @@ uses
   JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.Buttons;
 
 type
-  TEditorGutterFrame = class(TFrame)
+  TEditorMarginFrame = class(TFrame)
     Panel: TPanel;
-    GutterVisibleCheckBox: TBCCheckBox;
+    MarginVisibleCheckBox: TBCCheckBox;
     RightMarginLabel: TLabel;
     RightMarginEdit: TBCEdit;
     AutoSizeCheckBox: TBCCheckBox;

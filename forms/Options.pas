@@ -8,7 +8,7 @@ uses
   SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCControls.PageControl,
   System.SysUtils, Vcl.ImgList, SynHighlighterWeb, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvxSlider,
   ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox,
-  BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorGutter,
+  BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorMargin,
   OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare, OptionsPrint,
   OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal, System.Actions;
@@ -36,7 +36,7 @@ type
     Splitter: TSplitter;
     EditorAction: TAction;
     EditorFontAction: TAction;
-    EditorGutterAction: TAction;
+    EditorMarginAction: TAction;
     EditorTabsAction: TAction;
     OutputAction: TAction;
     DBMSOutputAction: TAction;
@@ -70,7 +70,7 @@ type
     FOptionsContainer: TOptionsContainer;
     FEditorOptionsFrame: TEditorOptionsFrame;
     FEditorFontFrame: TEditorFontFrame;
-    FEditorGutterFrame: TEditorGutterFrame;
+    FEditorMarginFrame: TEditorMarginFrame;
     FEditorTabsFrame: TEditorTabsFrame;
     FEditorToolBarFrame: TEditorToolBarFrame;
     FEditorCompletionProposalFrame: TEditorCompletionProposalFrame;
@@ -127,13 +127,13 @@ type
     FExtraLineSpacing: Integer;
     FFontName: string;
     FFontSize: Integer;
-    FGutterAutoSize: Boolean;
-    FGutterFontName: string;
-    FGutterFontSize: Integer;
-    FGutterRightMargin: Integer;
-    FGutterVisible: Boolean;
-    FGutterVisibleRightMargin: Boolean;
-    FGutterWidth: Integer;
+    FMarginAutoSize: Boolean;
+    FMarginFontName: string;
+    FMarginFontSize: Integer;
+    FMarginRightMargin: Integer;
+    FMarginVisible: Boolean;
+    FMarginVisibleRightMargin: Boolean;
+    FMarginWidth: Integer;
     FIgnoreBlanks: Boolean;
     FIgnoreCase: Boolean;
     FInsertCaret: TSynEditCaretType;
@@ -228,13 +228,13 @@ type
     property ExtraLineSpacing: Integer read FExtraLineSpacing write FExtraLineSpacing;
     property FontName: string read FFontName write FFontName;
     property FontSize: Integer read FFontSize write FFontSize;
-    property GutterAutoSize: Boolean read FGutterAutoSize write FGutterAutoSize;
-    property GutterFontName: string read FGutterFontName write FGutterFontName;
-    property GutterFontSize: Integer read FGutterFontSize write FGutterFontSize;
-    property GutterRightMargin: Integer read FGutterRightMargin write FGutterRightMargin;
-    property GutterVisible: Boolean read FGutterVisible write FGutterVisible;
-    property GutterVisibleRightMargin: Boolean read FGutterVisibleRightMargin write FGutterVisibleRightMargin;
-    property GutterWidth: Integer read FGutterWidth write FGutterWidth;
+    property MarginAutoSize: Boolean read FMarginAutoSize write FMarginAutoSize;
+    property MarginFontName: string read FMarginFontName write FMarginFontName;
+    property MarginFontSize: Integer read FMarginFontSize write FMarginFontSize;
+    property MarginRightMargin: Integer read FMarginRightMargin write FMarginRightMargin;
+    property MarginVisible: Boolean read FMarginVisible write FMarginVisible;
+    property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin;
+    property MarginWidth: Integer read FMarginWidth write FMarginWidth;
     property IgnoreBlanks: Boolean read FIgnoreBlanks write FIgnoreBlanks;
     property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
     property InsertCaret: TSynEditCaretType read FInsertCaret write FInsertCaret;
@@ -327,16 +327,16 @@ begin
   begin
     TCustomSynEdit(Dest).Font.Name := FFontName;
     TCustomSynEdit(Dest).Font.Size := FFontSize;
-    TCustomSynEdit(Dest).Gutter.Visible := FGutterVisible;
-    TCustomSynEdit(Dest).Gutter.Font.Name := FGutterFontName;
-    TCustomSynEdit(Dest).Gutter.Font.Size := FGutterFontSize;
+    TCustomSynEdit(Dest).Gutter.Visible := FMarginVisible;
+    TCustomSynEdit(Dest).Gutter.Font.Name := FMarginFontName;
+    TCustomSynEdit(Dest).Gutter.Font.Size := FMarginFontSize;
     TCustomSynEdit(Dest).ExtraLineSpacing := FExtraLineSpacing;
-    if FGutterVisibleRightMargin then
-      TCustomSynEdit(Dest).RightEdge := FGutterRightMargin
+    if FMarginVisibleRightMargin then
+      TCustomSynEdit(Dest).RightEdge := FMarginRightMargin
     else
       TCustomSynEdit(Dest).RightEdge := 0;
-    TCustomSynEdit(Dest).Gutter.AutoSize := FGutterAutoSize;
-    TCustomSynEdit(Dest).Gutter.Width := FGutterWidth;
+    TCustomSynEdit(Dest).Gutter.AutoSize := FMarginAutoSize;
+    TCustomSynEdit(Dest).Gutter.Width := FMarginWidth;
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
     TCustomSynEdit(Dest).InsertCaret := FInsertCaret;
     if FAutoIndent then
@@ -437,11 +437,11 @@ begin
   FCompletionProposalEnabled := True;
   FCompletionProposalCaseSensitive := True;
   FCompletionProposalShortcut := 'Ctrl+Space';
-  FGutterVisible := True;
-  FGutterRightMargin := 80;
-  FGutterAutoSize := True;
-  FGutterVisibleRightMargin := True;
-  FGutterWidth := 48;
+  FMarginVisible := True;
+  FMarginRightMargin := 80;
+  FMarginAutoSize := True;
+  FMarginVisibleRightMargin := True;
+  FMarginWidth := 48;
   FEditorMultiLine := False;
   FEditorDoubleBuffered := True;
   FFontName := 'Courier New';
@@ -473,7 +473,7 @@ begin
   FTabsToSpaces := True;
   FSmartTabs := False;
   FSmartTabDelete := False;
-  FGutterVisible := True;
+  FMarginVisible := True;
   FEditorCloseTabByDblClick := False;
   FEditorCloseTabByMiddleClick := False;
   FEditorMultiLine := False;
@@ -497,8 +497,8 @@ begin
   FInsertCaret := ctVerticalLine;
   FFontName := 'Courier New';
   FFontSize := 10;
-  FGutterFontName := 'Courier New';
-  FGutterFontSize := 8;
+  FMarginFontName := 'Courier New';
+  FMarginFontSize := 8;
   FExtraLineSpacing := 0;
   FTabWidth := 8;
   FPersistentHotKeys := False;
@@ -555,7 +555,7 @@ procedure TOptionsDialog.FormDestroy(Sender: TObject);
 begin
   FEditorOptionsFrame.Free;
   FEditorFontFrame.Free;
-  FEditorGutterFrame.Free;
+  FEditorMarginFrame.Free;
   FEditorTabsFrame.Free;
   FEditorToolBarFrame.Free;
   FEditorCompletionProposalFrame.Free;
@@ -604,11 +604,11 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorFontAction.ImageIndex;
     Data.Caption := EditorFontAction.Caption;
-    { Gutter }
+    { Margin }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
-    Data.ImageIndex := EditorGutterAction.ImageIndex;
-    Data.Caption := EditorGutterAction.Caption;
+    Data.ImageIndex := EditorMarginAction.ImageIndex;
+    Data.Caption := EditorMarginAction.Caption;
     { Tabs }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
@@ -755,15 +755,15 @@ begin
   FEditorFontFrame.EditorFontLabel.Font.Name := FOptionsContainer.FontName;
   FEditorFontFrame.EditorFontLabel.Font.Size := FOptionsContainer.FontSize;
   FEditorFontFrame.EditorFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.EditorFontLabel.Font.Name, FEditorFontFrame.EditorFontLabel.Font.Size]);
-  FEditorFontFrame.GutterFontLabel.Font.Name := FOptionsContainer.GutterFontName;
-  FEditorFontFrame.GutterFontLabel.Font.Size := FOptionsContainer.GutterFontSize;
-  FEditorFontFrame.GutterFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.GutterFontLabel.Font.Name, FEditorFontFrame.GutterFontLabel.Font.Size]);
-  { Gutter }
-  FEditorGutterFrame.AutoSizeCheckBox.Checked := FOptionsContainer.GutterAutoSize;
-  FEditorGutterFrame.GutterVisibleCheckBox.Checked := FOptionsContainer.GutterVisible;
-  FEditorGutterFrame.VisibleRightMarginCheckBox.Checked := FOptionsContainer.GutterVisibleRightMargin;
-  FEditorGutterFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.GutterRightMargin);
-  FEditorGutterFrame.WidthEdit.Text := IntToStr(FOptionsContainer.GutterWidth);
+  FEditorFontFrame.MarginFontLabel.Font.Name := FOptionsContainer.MarginFontName;
+  FEditorFontFrame.MarginFontLabel.Font.Size := FOptionsContainer.MarginFontSize;
+  FEditorFontFrame.MarginFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.MarginFontLabel.Font.Name, FEditorFontFrame.MarginFontLabel.Font.Size]);
+  { Margin }
+  FEditorMarginFrame.AutoSizeCheckBox.Checked := FOptionsContainer.MarginAutoSize;
+  FEditorMarginFrame.MarginVisibleCheckBox.Checked := FOptionsContainer.MarginVisible;
+  FEditorMarginFrame.VisibleRightMarginCheckBox.Checked := FOptionsContainer.MarginVisibleRightMargin;
+  FEditorMarginFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.MarginRightMargin);
+  FEditorMarginFrame.WidthEdit.Text := IntToStr(FOptionsContainer.MarginWidth);
   { Document tabs }
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
   FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
@@ -940,9 +940,9 @@ begin
     if FEditorFontFrame.Visible then
     begin
       FOptionsContainer.AssignTo(FEditorFontFrame.SynEdit);
-      BCCommon.StyleUtils.UpdateGutterAndColors(FEditorFontFrame.SynEdit);
+      BCCommon.StyleUtils.UpdateMarginAndColors(FEditorFontFrame.SynEdit);
     end;
-    FEditorGutterFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
+    FEditorMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
     FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
     FEditorCompletionProposalFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
     FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4);
@@ -986,14 +986,14 @@ begin
   { Font }
   FOptionsContainer.FontName := FEditorFontFrame.EditorFontLabel.Font.Name;
   FOptionsContainer.FontSize := FEditorFontFrame.EditorFontLabel.Font.Size;
-  FOptionsContainer.GutterFontName := FEditorFontFrame.GutterFontLabel.Font.Name;
-  FOptionsContainer.GutterFontSize := FEditorFontFrame.GutterFontLabel.Font.Size;
-  { Gutter }
-  FOptionsContainer.GutterAutoSize := FEditorGutterFrame.AutoSizeCheckBox.Checked;
-  FOptionsContainer.GutterVisible := FEditorGutterFrame.GutterVisibleCheckBox.Checked;
-  FOptionsContainer.GutterRightMargin := StrToIntDef(FEditorGutterFrame.RightMarginEdit.Text, 80);
-  FOptionsContainer.GutterVisibleRightMargin := FEditorGutterFrame.VisibleRightMarginCheckBox.Checked;
-  FOptionsContainer.GutterWidth := StrToIntDef(FEditorGutterFrame.WidthEdit.Text, 48);
+  FOptionsContainer.MarginFontName := FEditorFontFrame.MarginFontLabel.Font.Name;
+  FOptionsContainer.MarginFontSize := FEditorFontFrame.MarginFontLabel.Font.Size;
+  { Margin }
+  FOptionsContainer.MarginAutoSize := FEditorMarginFrame.AutoSizeCheckBox.Checked;
+  FOptionsContainer.MarginVisible := FEditorMarginFrame.MarginVisibleCheckBox.Checked;
+  FOptionsContainer.MarginRightMargin := StrToIntDef(FEditorMarginFrame.RightMarginEdit.Text, 80);
+  FOptionsContainer.MarginVisibleRightMargin := FEditorMarginFrame.VisibleRightMarginCheckBox.Checked;
+  FOptionsContainer.MarginWidth := StrToIntDef(FEditorMarginFrame.WidthEdit.Text, 48);
   { Editor tabs }
   FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.EditorCloseTabByMiddleClick := FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
@@ -1084,8 +1084,8 @@ begin
   FEditorOptionsFrame.Parent := OptionsPanel;
   FEditorFontFrame := TEditorFontFrame.Create(OptionsPanel);
   FEditorFontFrame.Parent := OptionsPanel;
-  FEditorGutterFrame := TEditorGutterFrame.Create(OptionsPanel);
-  FEditorGutterFrame.Parent := OptionsPanel;
+  FEditorMarginFrame := TEditorMarginFrame.Create(OptionsPanel);
+  FEditorMarginFrame.Parent := OptionsPanel;
   FEditorTabsFrame := TEditorTabsFrame.Create(OptionsPanel);
   FEditorTabsFrame.Parent := OptionsPanel;
   FEditorToolBarFrame := TEditorToolBarFrame.Create(OptionsPanel);

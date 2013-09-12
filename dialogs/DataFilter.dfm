@@ -251,7 +251,6 @@ object DataFilterDialog: TDataFilterDialog
           Height = 21
           Align = alClient
           TabOrder = 0
-          Text = ''
           OnChange = FilterNameEditChange
           OnKeyPress = FilterNameEditKeyPress
           EnterToTab = False

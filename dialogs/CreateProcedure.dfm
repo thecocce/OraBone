@@ -2,9 +2,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   Caption = 'Create Procedure'
   ClientHeight = 371
   ClientWidth = 358
-  OnShow = FormShow
-  ExplicitWidth = 374
-  ExplicitHeight = 407
   PixelsPerInch = 96
   TextHeight = 13
   object ProcedureNameLabel: TLabel [0]
@@ -18,9 +15,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     Top = 34
     Width = 351
     Height = 281
-    ExplicitTop = 34
-    ExplicitWidth = 351
-    ExplicitHeight = 281
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
@@ -146,10 +140,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     object BodyTabSheet: TTabSheet [1]
       Caption = 'Body'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object BodyPanel: TPanel
         Left = 0
         Top = 0
@@ -190,22 +180,15 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 343
-      ExplicitHeight = 253
       inherited SourcePanel: TPanel
         Width = 343
         Height = 253
-        ExplicitWidth = 343
-        ExplicitHeight = 253
         inherited SourceSynEdit: TSynEdit
           Width = 341
           Height = 228
-          ExplicitWidth = 341
-          ExplicitHeight = 228
         end
         inherited SourceTopPanel: TPanel
           Width = 341
-          ExplicitWidth = 341
         end
       end
     end
@@ -213,14 +196,10 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   inherited OKButton: TButton
     Left = 194
     Top = 321
-    ExplicitLeft = 194
-    ExplicitTop = 321
   end
   inherited CancelButton: TButton
     Left = 275
     Top = 321
-    ExplicitLeft = 275
-    ExplicitTop = 321
   end
   object ProcedureNameEdit: TBCEdit [4]
     Left = 100
@@ -242,8 +221,6 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   inherited StatusBar1: TStatusBar
     Top = 352
     Width = 358
-    ExplicitTop = 352
-    ExplicitWidth = 358
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

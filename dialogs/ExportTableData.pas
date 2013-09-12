@@ -412,7 +412,7 @@ begin
         StringList.Add(SchemaFilterCheckListBox.Items[i]);
     end;
 
-    RightMargin := OptionsContainer.GutterRightMargin;
+    RightMargin := OptionsContainer.MarginRightMargin;
     //SynEdit.Text := SynEdit.Text + 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
     row := 'INSERT INTO ' + LowerCase(SchemaEdit.Text) + '.' + LowerCase(TableEdit.Text) + CHR_ENTER;
     s := '            (';

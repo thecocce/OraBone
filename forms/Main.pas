@@ -295,7 +295,7 @@ type
     procedure SetPageControlOptions;
     procedure UpdateMainMenuBar;
     procedure UpdateStatusBar;
-    procedure UpdateGuttersAndControls;
+    procedure UpdateMarginsAndControls;
     procedure WriteIniFile;
   public
     { Public declarations }
@@ -357,7 +357,7 @@ begin
     PageControl.Images := nil;
 end;
 
-procedure TMainForm.UpdateGuttersAndControls;
+procedure TMainForm.UpdateMarginsAndControls;
 var
   i: Integer;
   SQLEditorFrame: TSQLEditorFrame;
@@ -370,14 +370,14 @@ begin
     begin
       SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
       if Assigned(SchemaBrowserFrame) then
-        SchemaBrowserFrame.UpdateGuttersAndControls(PageControl.DoubleBuffered);
+        SchemaBrowserFrame.UpdateMarginsAndControls(PageControl.DoubleBuffered);
     end
     else
     if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
     begin
       SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
       if Assigned(SQLEditorFrame) then
-        SQLEditorFrame.UpdateGuttersAndControls(PageControl.DoubleBuffered);
+        SQLEditorFrame.UpdateMarginsAndControls(PageControl.DoubleBuffered);
     end
   end;
 end;
@@ -742,7 +742,7 @@ begin
     for j := 0 to ActionClientItem.Items[i].Items.Count - 1 do
       TAction(ActionClientItem.Items[i].Items[j].Action).Checked := False;
   Action.Checked := True;
-  UpdateGuttersAndControls;
+  UpdateMarginsAndControls;
   UpdateStatusBar;
   RecreateDragDrop;
 end;
@@ -1274,20 +1274,20 @@ begin
     { Options }
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
     OptionsContainer.FontSize := StrToInt(ReadString('Options', 'FontSize', '10'));
-    OptionsContainer.GutterFontName := ReadString('Options', 'GutterFontName', 'Courier New');
-    OptionsContainer.GutterFontSize := StrToInt(ReadString('Options', 'GutterFontSize', '8'));
+    OptionsContainer.MarginFontName := ReadString('Options', 'MarginFontName', 'Courier New');
+    OptionsContainer.MarginFontSize := StrToInt(ReadString('Options', 'MarginFontSize', '8'));
     OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));
-    OptionsContainer.GutterAutoSize := ReadBool('Options', 'GutterAutoSize', True);
-    OptionsContainer.GutterVisibleRightMargin := ReadBool('Options', 'GutterVisibleRightMargin', True);
-    OptionsContainer.GutterRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
-    OptionsContainer.GutterWidth := StrToInt(ReadString('Options', 'GutterWidth', '48'));
+    OptionsContainer.MarginAutoSize := ReadBool('Options', 'MarginAutoSize', True);
+    OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
+    OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
+    OptionsContainer.MarginWidth := StrToInt(ReadString('Options', 'MarginWidth', '48'));
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
     OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.CompletionProposalEnabled := ReadBool('Options', 'CompletionProposalEnabled', True);
     OptionsContainer.CompletionProposalCaseSensitive := ReadBool('Options', 'CompletionProposalCaseSensitive', True);
     OptionsContainer.CompletionProposalShortcut := ReadString('Options', 'CompletionProposalShortcut', 'Ctrl+Space');
-    OptionsContainer.GutterVisible := ReadBool('Options', 'GutterVisible', True);
+    OptionsContainer.MarginVisible := ReadBool('Options', 'MarginVisible', True);
     OptionsContainer.ConnectionCloseTabByDblClick := ReadBool('Options', 'ConnectionCloseTabByDblClick', False);
     OptionsContainer.ConnectionCloseTabByMiddleClick := ReadBool('Options', 'ConnectionCloseTabByMiddleClick', False);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
@@ -1658,12 +1658,12 @@ begin
       { Options }
       WriteString('Options', 'FontName', OptionsContainer.FontName);
       WriteString('Options', 'FontSize', IntToStr(OptionsContainer.FontSize));
-      WriteString('Options', 'GutterFontName', OptionsContainer.GutterFontName);
-      WriteString('Options', 'GutterFontSize', IntToStr(OptionsContainer.GutterFontSize));
-      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.GutterRightMargin));
-      WriteBool('Options', 'GutterAutoSize', OptionsContainer.GutterAutoSize);
-      WriteString('Options', 'GutterWidth', IntToStr(OptionsContainer.GutterWidth));
-      WriteBool('Options', 'GutterVisibleRightMargin', OptionsContainer.GutterVisibleRightMargin);
+      WriteString('Options', 'MarginFontName', OptionsContainer.MarginFontName);
+      WriteString('Options', 'MarginFontSize', IntToStr(OptionsContainer.MarginFontSize));
+      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.MarginRightMargin));
+      WriteBool('Options', 'MarginAutoSize', OptionsContainer.MarginAutoSize);
+      WriteString('Options', 'MarginWidth', IntToStr(OptionsContainer.MarginWidth));
+      WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
       WriteString('Options', 'InsertCaret', IntToStr(Ord(OptionsContainer.InsertCaret)));
       WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
@@ -1671,7 +1671,7 @@ begin
       WriteBool('Options', 'CompletionProposalEnabled', OptionsContainer.CompletionProposalEnabled);
       WriteBool('Options', 'CompletionProposalCaseSensitive', OptionsContainer.CompletionProposalCaseSensitive);
       WriteString('Options', 'CompletionProposalShortcut', OptionsContainer.CompletionProposalShortcut);
-      WriteBool('Options', 'GutterVisible', OptionsContainer.GutterVisible);
+      WriteBool('Options', 'MarginVisible', OptionsContainer.MarginVisible);
       WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
       WriteBool('Options', 'EditorCloseTabByMiddleClick', OptionsContainer.EditorCloseTabByMiddleClick);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
@@ -1738,7 +1738,7 @@ begin
       WriteString('Options', 'MainMenuSystemFontName', OptionsContainer.MainMenuSystemFontName);
       WriteString('Options', 'MainMenuSystemFontSize', IntToStr(OptionsContainer.MainMenuSystemFontSize));
 
-      DeleteKey('Options', 'GutterLineNumbers'); { depricated }
+      DeleteKey('Options', 'MarginLineNumbers'); { depricated }
 
       WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
       WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
@@ -1883,7 +1883,7 @@ begin
     ReadIniFile;
     CreateStyleMenu;
     CreateFileReopenList;
-    UpdateGuttersAndControls;
+    UpdateMarginsAndControls;
     UpdateStatusBar;
     FOnStartUp := False;
     ReadWindowState; { because of styles this cannot be done before... }
@@ -2241,7 +2241,7 @@ begin
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam, True);
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;
     Result.SchemaParam := SchemaBrowserFrame.ObjectTreeFrame.SchemaParam;
-    Result.UpdateGuttersAndControls(PageControl.DoubleBuffered);
+    Result.UpdateMarginsAndControls(PageControl.DoubleBuffered);
     SetPageControlOptions;
     PageControl.ActivePage := TabSheet;
     if AddNewDocument then
@@ -2332,7 +2332,7 @@ end;
 procedure TMainForm.DatabaseNewConnectionMenuActionExecute(Sender: TObject);
 begin
   NewConnection;
-  UpdateGuttersAndControls;
+  UpdateMarginsAndControls;
   PageControl.Repaint;
 end;
 

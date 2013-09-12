@@ -517,7 +517,7 @@ procedure TTNSNamesEditorForm.Open;
 begin
   ReadIniFile;
   OptionsContainer.AssignTo(SynEdit);
-  UpdateGutter(SynEdit);
+  UpdateMargin(SynEdit);
   LoadTNSNames(GetTNSFileName);
   Show;
 end;

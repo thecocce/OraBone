@@ -150,7 +150,7 @@ type
     property UserBrowserFrame: TUserBrowserFrame read FUserBrowserFrame;
     procedure AssignOptions;
     function SelectionFound: Boolean;
-    procedure UpdateGuttersAndControls(DoubleBuffered: Boolean);
+    procedure UpdateMarginsAndControls(DoubleBuffered: Boolean);
   end;
 
 implementation
@@ -229,7 +229,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.GutterRightMargin;
+  RightMargin := OptionsContainer.MarginRightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   ViewBrowserFrame.OpenQuery(FViewBrowserFrame.ColumnsQuery);
@@ -1505,7 +1505,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.GutterRightMargin;
+  RightMargin := OptionsContainer.MarginRightMargin;
   Clipboard.Clear;
   Clipboard.AsText := Clipboard.AsText + 'INSERT INTO ' + LowerCase(ObjectTreeFrame.SchemaParam) + '.' + LowerCase(ObjectTreeFrame.ObjectName) + CHR_ENTER;
   s := '            (';
@@ -1564,7 +1564,7 @@ var
   s: string;
   RightMargin: Integer;
 begin
-  RightMargin := OptionsContainer.GutterRightMargin;
+  RightMargin := OptionsContainer.MarginRightMargin;
   s := 'SELECT ';
   Clipboard.Clear;
   TableBrowserFrame.OpenQuery(FTableBrowserFrame.ColumnsQuery);
@@ -1969,7 +1969,7 @@ begin
     Result := FDBLinkBrowserFrame.SourceSynEdit.SelAvail
 end;
 
-procedure TSchemaBrowserFrame.UpdateGuttersAndControls(DoubleBuffered: Boolean);
+procedure TSchemaBrowserFrame.UpdateMarginsAndControls(DoubleBuffered: Boolean);
 begin
   AssignOptions;
   FTableBrowserFrame.TablePageControl.DoubleBuffered := DoubleBuffered;
@@ -1984,24 +1984,24 @@ begin
   FDBLinkBrowserFrame.DBLinkPageControl.DoubleBuffered := DoubleBuffered;
   FRecycleBinBrowserFrame.RecycleBinPageControl.DoubleBuffered := DoubleBuffered;
   FUserBrowserFrame.UserPageControl.DoubleBuffered := DoubleBuffered;
-  UpdateGutter(FTableBrowserFrame.TriggerSynEdit);
-  UpdateGutter(FTableBrowserFrame.SourceSynEdit);
+  UpdateMargin(FTableBrowserFrame.TriggerSynEdit);
+  UpdateMargin(FTableBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FTableBrowserFrame.SynSQLSyn);
-  UpdateGutter(FViewBrowserFrame.TriggerSynEdit);
-  UpdateGutter(FViewBrowserFrame.SourceSynEdit);
+  UpdateMargin(FViewBrowserFrame.TriggerSynEdit);
+  UpdateMargin(FViewBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FViewBrowserFrame.SynSQLSyn);
-  UpdateGutter(FFuncProcBrowserFrame.SourceSynEdit);
+  UpdateMargin(FFuncProcBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FFuncProcBrowserFrame.SynSQLSyn);
-  UpdateGutter(FPackageBrowserFrame.SpecSynEdit);
-  UpdateGutter(FPackageBrowserFrame.BodySynEdit);
+  UpdateMargin(FPackageBrowserFrame.SpecSynEdit);
+  UpdateMargin(FPackageBrowserFrame.BodySynEdit);
   UpdateSQLSynColors(FPackageBrowserFrame.SynSQLSyn);
-  UpdateGutter(FTriggerBrowserFrame.SourceSynEdit);
+  UpdateMargin(FTriggerBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FTriggerBrowserFrame.SynSQLSyn);
-  UpdateGutter(FSequenceBrowserFrame.SourceSynEdit);
+  UpdateMargin(FSequenceBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FSequenceBrowserFrame.SynSQLSyn);
-  UpdateGutter(FDBLinkBrowserFrame.SourceSynEdit);
+  UpdateMargin(FDBLinkBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FDBLinkBrowserFrame.SynSQLSyn);
-  UpdateGutter(FUserBrowserFrame.SourceSynEdit);
+  UpdateMargin(FUserBrowserFrame.SourceSynEdit);
   UpdateSQLSynColors(FUserBrowserFrame.SynSQLSyn);
 end;
 

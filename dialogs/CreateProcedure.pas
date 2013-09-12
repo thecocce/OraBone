@@ -116,7 +116,7 @@ end;
 procedure TCreateProcedureDialog.Initialize;
 begin
   inherited;
-  UpdateGutter(BodySynEdit);
+  UpdateMargin(BodySynEdit);
   with ColumnsQuery do
   begin
     Session := FOraSession;

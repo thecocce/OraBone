@@ -56,7 +56,7 @@ function TStringDataDialog.Open(FieldName: string; StringData: WideString): Bool
 var
   Rslt: Integer;
 begin
-  UpdateGutter(StringDataEdit);
+  UpdateMargin(StringDataEdit);
   Caption := Format(CAPTION_TEXT, [FieldName]);
   StringDataEdit.Text := StringData;
 

@@ -23,8 +23,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     AutoSnap = False
     MinSize = 100
     ResizeStyle = rsUpdate
-    ExplicitTop = -36
-    ExplicitHeight = 336
   end
   object ButtonPanel: TPanel
     Left = 0
@@ -49,9 +47,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 127
-      ExplicitTop = 5
-      ExplicitHeight = 18
     end
     object Bevel1: TBevel
       AlignWithMargins = True
@@ -64,8 +59,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 84
-      ExplicitTop = 5
     end
     object Bevel2: TBevel
       AlignWithMargins = True
@@ -78,8 +71,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 209
-      ExplicitTop = 3
     end
     object Bevel3: TBevel
       AlignWithMargins = True
@@ -92,8 +83,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 283
-      ExplicitTop = 3
     end
     object Bevel4: TBevel
       AlignWithMargins = True
@@ -106,8 +95,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 355
-      ExplicitTop = 3
     end
     object Bevel5: TBevel
       AlignWithMargins = True
@@ -120,8 +107,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 378
-      ExplicitTop = 12
     end
     object OpenToolBar: TBCToolBar
       Left = 2
@@ -373,31 +358,28 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 368
         Top = 0
         Width = 70
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Case Sensitive'
         Layout = tlCenter
-        ExplicitHeight = 13
       end
       object WholeWordsOnlyLabel: TLabel
         Left = 465
         Top = 0
         Width = 89
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Whole Words Only'
         Layout = tlCenter
-        ExplicitHeight = 13
       end
       object RegularExpressionLabel: TLabel
         Left = 581
         Top = 0
         Width = 92
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Regular Expression'
         Layout = tlCenter
-        ExplicitHeight = 13
       end
       object SearchPanel2: TPanel
         Left = 21
@@ -415,10 +397,9 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Search for'
-          ExplicitHeight = 13
         end
       end
       object SearchPanel3: TPanel
@@ -518,7 +499,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
             00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
           Margin = 2
           NumGlyphs = 2
-          ExplicitLeft = 24
         end
       end
       object SearchPanel4: TPanel
@@ -565,8 +545,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
             02020202020202020202180B0202020202020202020202020202020202020202
             02020202020202020202}
           Margin = 2
-          ExplicitTop = 2
-          ExplicitHeight = 19
         end
       end
       object SearchPanel5: TPanel
@@ -655,7 +633,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF009D9D9D00B0B0B000AFAF
             AF009D9D9D00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
           NumGlyphs = 2
-          ExplicitLeft = 164
         end
       end
       object SearchPanel6: TPanel
@@ -744,7 +721,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF009D9D9D00B0B0B000AFAF
             AF009D9D9D00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
           NumGlyphs = 2
-          ExplicitLeft = 164
         end
       end
       object SearchPanel7: TPanel

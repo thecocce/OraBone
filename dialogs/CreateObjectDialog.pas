@@ -98,7 +98,7 @@ end;
 procedure TCreateObjectBaseDialog.Initialize;
 begin
   SourceSynEdit.Text := '';
-  UpdateGutter(SourceSynEdit);
+  UpdateMargin(SourceSynEdit);
   UpdateSQLSynColors(SynSQLSyn);
   if Assigned(TStyleManager.ActiveStyle) then
     PageControl.DoubleBuffered := TStyleManager.ActiveStyle.Name = 'Windows';

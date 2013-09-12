@@ -171,7 +171,7 @@ procedure TDataFilterDialog.FormCreate(Sender: TObject);
 begin
   ValuesList := TValueListEditor.Create(nil);
   ValuesList.Strings.Clear;
-  UpdateGutter(FilterSynEdit);
+  UpdateMargin(FilterSynEdit);
   UpdateSQLSynColors(SynSQLSyn);
 end;
 

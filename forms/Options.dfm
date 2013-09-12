@@ -169,7 +169,7 @@ object OptionsDialog: TOptionsDialog
       Caption = 'Font'
       ImageIndex = 3
     end
-    object EditorGutterAction: TAction
+    object EditorMarginAction: TAction
       Caption = 'Margins'
       ImageIndex = 4
     end

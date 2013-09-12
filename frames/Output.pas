@@ -494,7 +494,7 @@ begin
   begin
     Parent := TabSheet;
     Align := alClient;
-    UpdateGutter(SynEdit);
+    UpdateMargin(SynEdit);
     UpdateSQLSynColors(SynSQLSyn);
     Application.ProcessMessages;
     SynEdit.Text := Text + CHR_ENTER;

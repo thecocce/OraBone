@@ -104,10 +104,9 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 23
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Date'
-          ExplicitHeight = 13
         end
       end
       object DatePicker: TDateTimePicker
@@ -153,10 +152,9 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 37
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Schema'
-          ExplicitHeight = 13
         end
       end
       object SchemaEdit: TBCEdit
@@ -166,7 +164,6 @@ object HistoryEditDialog: THistoryEditDialog
         Height = 21
         Align = alClient
         TabOrder = 1
-        Text = ''
         EnterToTab = False
         OnlyNumbers = False
         NumbersWithDots = False
@@ -196,11 +193,10 @@ object HistoryEditDialog: THistoryEditDialog
         object SQLLabel: TLabel
           Left = 3
           Top = 3
-          Width = 67
+          Width = 19
           Height = 13
           Align = alTop
           Caption = 'SQL'
-          ExplicitWidth = 19
         end
       end
       object SQLSynEdit: TSynEdit

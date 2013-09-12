@@ -101,7 +101,7 @@ uses
   OutputSynEditTabSheet in 'frames\OutputSynEditTabSheet.pas' {OutputSynEditFrame: TFrame},
   OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {OutputTreeViewFrame: TFrame},
   OptionsEditorFont in 'frames\OptionsEditorFont.pas' {EditorFontFrame: TFrame},
-  OptionsEditorGutter in 'frames\OptionsEditorGutter.pas' {EditorGutterFrame: TFrame},
+  OptionsEditorMargin in 'frames\OptionsEditorMargin.pas' {EditorMarginFrame: TFrame},
   OptionsEditorOptions in 'frames\OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
   OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
   OptionsMainMenu in 'frames\OptionsMainMenu.pas' {MainMenuFrame: TFrame},

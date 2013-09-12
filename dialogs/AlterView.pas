@@ -296,7 +296,7 @@ end;
 procedure TAlterViewDialog.Initialize;
 begin
   inherited;
-  UpdateGutter(SQLSynEdit);
+  UpdateMargin(SQLSynEdit);
   GetViewData;
 end;
 
