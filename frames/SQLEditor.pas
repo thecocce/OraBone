@@ -1146,10 +1146,14 @@ begin
   if Rslt <> mrCancel then
   begin
     ActivePageIndex := PageControl.ActivePageIndex;
+    { Fixed Delphi Bug: http://qc.embarcadero.com/wc/qcmain.aspx?d=5473 }
+    if (ActivePageIndex = PageControl.PageCount - 1) and (PageControl.PageCount > 1) then
+    begin
+      Dec(ActivePageIndex);
+      PageControl.ActivePage.PageIndex := ActivePageIndex;
+    end;
     if PageControl.PageCount > 0 then
-      PageControl.ActivePage.Free;
-    if PageControl.PageCount > 0 then
-      PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
+      PageControl.Pages[ActivePageIndex].Free;
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;

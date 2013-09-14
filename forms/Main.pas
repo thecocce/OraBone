@@ -1957,18 +1957,30 @@ begin
           else
             SQLEditorFrame.Session.Rollback
         end;
-        PageControl.ActivePage.Free;
+        { Fixed Delphi Bug: http://qc.embarcadero.com/wc/qcmain.aspx?d=5473 }
+        if (ActivePageIndex = PageControl.PageCount - 1) and (PageControl.PageCount > 1) then
+        begin
+          Dec(ActivePageIndex);
+          PageControl.ActivePage.PageIndex := ActivePageIndex;
+        end;
+        if PageControl.PageCount > 0 then
+          PageControl.Pages[ActivePageIndex].Free;
       end;
     end;
   end
   else
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_HISTORY then
   begin
-    PageControl.ActivePage.Free;
+    { Fixed Delphi Bug: http://qc.embarcadero.com/wc/qcmain.aspx?d=5473 }
+    if (ActivePageIndex = PageControl.PageCount - 1) and (PageControl.PageCount > 1) then
+    begin
+      Dec(ActivePageIndex);
+      PageControl.ActivePage.PageIndex := ActivePageIndex;
+    end;
+    if PageControl.PageCount > 0 then
+      PageControl.Pages[ActivePageIndex].Free;
     Rslt := mrYes;
   end;
-  if Rslt = mrYes then
-    PageControl.ActivePageIndex := Max(ActivePageIndex - 1, 0);
   PageControl.Repaint;
 end;
 

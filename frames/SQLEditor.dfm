@@ -388,8 +388,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 693
-      Height = 276
+      Width = 451
+      Height = 5
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
