@@ -32,7 +32,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 337
       Top = 0
       Width = 70
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
@@ -41,7 +41,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 434
       Top = 0
       Width = 89
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
@@ -50,7 +50,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 550
       Top = 0
       Width = 92
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
@@ -71,7 +71,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
       end
@@ -92,7 +92,9 @@ object SQLEditorFrame: TSQLEditorFrame
         Width = 181
         Height = 21
         Align = alTop
+        DoubleBuffered = True
         Images = ImageList16
+        ParentDoubleBuffered = False
         RightButton.HotImageIndex = 3
         RightButton.ImageIndex = 2
         RightButton.PressedImageIndex = 4
@@ -1114,7 +1116,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 13
+        Height = 20
         Align = alLeft
         Caption = 'Go to Line'
       end

@@ -1273,7 +1273,7 @@ begin
   try
     { Options }
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
-    OptionsContainer.FontSize := StrToInt(ReadString('Options', 'FontSize', '10'));
+    OptionsContainer.FontSize := StrToInt(ReadString('Options', 'FontSize', '9'));
     OptionsContainer.MarginFontName := ReadString('Options', 'MarginFontName', 'Courier New');
     OptionsContainer.MarginFontSize := StrToInt(ReadString('Options', 'MarginFontSize', '8'));
     OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));

@@ -290,7 +290,6 @@ type
     procedure SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
     procedure DoSearch;
     procedure AddToReopenFiles(FileName: string);
-    function GetFileDateTime(FileName: string): TDateTime;
     procedure SetHighlighterTableNames(Value: TStrings);
     procedure ExecuteStatement(SynEdit: TBCOraSynEdit); overload;
     procedure ExecuteNoRowsStatement(SynEdit: TBCOraSynEdit);
@@ -558,8 +557,7 @@ begin
   { compare and new image index }
   Icon := TIcon.Create;
   try
-    { windows font size causing problems here!
-      Icon size will be smaller than PageControl.Images size }
+    { Windows font size causing a problem: Icon size will be smaller than PageControl.Images size }
     case PageControl.Images.Height of
       16:
       begin
@@ -598,21 +596,6 @@ begin
   inherited Destroy;
 end;
 
-function GetIconIndex(Name: string; Flags: Cardinal): Integer;
-var
-  SFI: TSHFileInfo;
-begin
-  if SHGetFileInfo(PChar(Name), 0, SFI, SizeOf(TSHFileInfo), Flags) = 0 then
-    Result := -1
-  else
-    Result := SFI.iIcon;
-end;
-
-function GetImageIndex(Path: string): integer;
-begin
-  Result := GetIconIndex(Path, SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
-end;
-
 function TSQLEditorFrame.CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
 var
   TabSheet: TTabSheet;
@@ -622,7 +605,7 @@ begin
   TabSheet := TTabSheet.Create(PageControl);
   TabSheet.PageControl := PageControl;
   if FileName <> '' then
-    TabSheet.ImageIndex := GetImageIndex(FileName)
+    TabSheet.ImageIndex := GetIconIndex(FileName)
   else
     TabSheet.ImageIndex := FNewImageIndex;
 
@@ -1108,6 +1091,7 @@ begin
       MainForm.CreateFileReopenList;
     end
     else
+    if ExtractFileName(FileName) <> '' then
       ShowErrorMessage(Format(LanguageDataModule.GetErrorMessage('FileNotFound'), [Filename]))
   end;
   FProcessing := False;
@@ -1262,7 +1246,7 @@ begin
         if not OptionsContainer.UndoAfterSave then
           UndoList.Clear;
         FileDateTime := GetFileDateTime(DocumentName);
-        TabSheet.ImageIndex := GetImageIndex(DocumentName);
+        TabSheet.ImageIndex := GetIconIndex(DocumentName);
         Modified := False;
         AFileName := Trim(TabSheet.Caption);
         if Pos('~', AFileName) = Length(AFileName) then
@@ -2130,40 +2114,43 @@ end;
 procedure TSQLEditorFrame.CheckFileDateTimes;
 var
   i: Integer;
-  OraSynEdit: TBCOraSynEdit;
+  SynEdit: TBCOraSynEdit;
   FileDateTime: TDateTime;
+  DialogResult: Integer;
 begin
+  DialogResult := mrNo;
+  if FProcessing then
+    Exit;
   for i := 0 to PageControl.PageCount - 1 do
   begin
-    OraSynEdit := GetSynEdit(PageControl.Pages[i]);
-    if Assigned(OraSynEdit) then
-      if OraSynEdit.DocumentName <> '' then
+    SynEdit := GetSynEdit(PageControl.Pages[i]);
+    if Assigned(SynEdit) then
+      if SynEdit.DocumentName <> '' then
       begin
-        FileDateTime := GetFileDateTime(OraSynEdit.DocumentName);
-        if (FileDateTime <> 0) and (FileDateTime <> OraSynEdit.FileDateTime) then
+        FileDateTime := GetFileDateTime(SynEdit.DocumentName);
+        if (FileDateTime <> 0) and (FileDateTime <> SynEdit.FileDateTime) then
         begin
-          if FileExists(OraSynEdit.DocumentName) then
+          if FileExists(SynEdit.DocumentName) then
           begin
-            if AskYesOrNo(Format('Document %s''s time/date changed. Reload?', [OraSynEdit.DocumentName])) then
+            if not (DialogResult in [mrYesToAll, mrNoToAll]) then
+              DialogResult := AskYesOrNoAll(Format(LanguageDataModule.GetYesOrNoMessage('DocumentTimeChanged'), [SynEdit.DocumentName]));
+            if DialogResult in [mrYes, mrYesToAll] then
               Refresh(i);
           end
           else
           begin
-            OraSynEdit.Modified := True;
-            if Pos('~', PageControl.Pages[i].Caption) = 0 then
-              PageControl.Pages[i].Caption := Format('%s~', [Trim(PageControl.Pages[i].Caption)]);
+            if OptionsContainer.AutoSave then
+              Save
+            else
+            begin
+              SynEdit.Modified := True;
+              PageControl.Pages[i].Caption := FormatFileName(PageControl.Pages[i].Caption, SynEdit.Modified);
+              PageControl.Invalidate;
+            end;
           end;
         end;
       end;
   end;
-end;
-
-function TSQLEditorFrame.GetFileDateTime(FileName: string): TDateTime;
-var
-  SearchRec: TSearchRec;
-begin
-  FindFirst(FileName, faAnyFile, SearchRec);
-  Result := SearchRec.TimeStamp;
 end;
 
 procedure TSQLEditorFrame.Refresh(Page: Integer);
