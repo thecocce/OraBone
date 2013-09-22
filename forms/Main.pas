@@ -465,7 +465,7 @@ begin
     if Assigned(PageControl.ActivePage) then
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
         if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
-          TSQLEditorFrame(PageControl.ActivePage.Components[0]).GotoBookmarks(Action.Tag);
+          (PageControl.ActivePage.Components[0] as TSQLEditorFrame).GotoBookmarks(Action.Tag);
 end;
 
 procedure TMainForm.ToolsCompareSchemasActionExecute(Sender: TObject);
@@ -480,7 +480,7 @@ begin
     if Assigned(PageControl.ActivePage) then
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
         if PageControl.ActivePage.Components[0] is TSQLEditorFrame then
-          Result := TSQLEditorFrame(PageControl.ActivePage.Components[0]);
+          Result := PageControl.ActivePage.Components[0] as TSQLEditorFrame;
 end;
 
 function TMainForm.GetActiveSQLHistory: TSQLHistoryFrame;
@@ -490,7 +490,7 @@ begin
     if Assigned(PageControl.ActivePage) then
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_HISTORY then
         if PageControl.ActivePage.Components[0] is TSQLHistoryFrame then
-          Result := TSQLHistoryFrame(PageControl.ActivePage.Components[0]);
+          Result := PageControl.ActivePage.Components[0] as TSQLHistoryFrame;
 end;
 
 function TMainForm.GetActiveSchemaBrowser: TSchemaBrowserFrame;
@@ -500,7 +500,7 @@ begin
     if Assigned(PageControl.ActivePage) then
       if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
         if PageControl.ActivePage.Components[0] is TSchemaBrowserFrame then
-          Result := TSchemaBrowserFrame(PageControl.ActivePage.Components[0]);
+          Result := PageControl.ActivePage.Components[0] as TSchemaBrowserFrame;
 end;
 
 procedure TMainForm.SchemaDocumentActionExecute(Sender: TObject);

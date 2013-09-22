@@ -2054,7 +2054,7 @@ begin
     end;
   CaretX := SynEdit.CaretX;
   CaretY := SynEdit.CaretY;
-  for i := 0 to 9 do
+  for i := 1 to 9 do
     if not SynEdit.GetBookMark(i, CaretX, CaretY) then
     begin
       SynEdit.SetBookMark(i, SynEdit.CaretX, SynEdit.CaretY);
