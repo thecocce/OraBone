@@ -78,7 +78,6 @@ object ProgressDialog: TProgressDialog
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
       Caption = 'InformationLabel'
-      ExplicitWidth = 372
     end
     object ProgressBar: TBCProgressBar
       Left = 12

@@ -262,6 +262,7 @@ begin
     Prepare;
     Open;
     ProgressBar.Max := RecordCount;
+    ProgressBar.Invalidate;
   end;
   QueryAfterOpen(Schema1VirtualDrawTree, Schema1Query);
 
