@@ -545,7 +545,9 @@ var
     end;
   end;
 begin
-  shFindFile := FindFirstFile(PChar(AddSlash(FolderText) + '*.*'), sWin32FD);
+  {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+  shFindFile := FindFirstFile(PChar(IncludeTrailingBackslash(FolderText) + '*.*'), sWin32FD);
+  {$WARNINGS ON}
   if shFindFile <> INVALID_HANDLE_VALUE then
   try
     repeat
@@ -556,13 +558,17 @@ begin
       if (FName <> '.') and (FName <> '..') then
       begin
         if LookInSubfolders and IsDirectory(sWin32FD) then
-          FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, AddSlash(FolderText) + FName, SearchCaseSensitive, LookInSubfolders)
+          {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+          FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, IncludeTrailingBackslash(FolderText) + FName, SearchCaseSensitive, LookInSubfolders)
+          {$WARNINGS ON}
         else
         begin
             if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
             try
               SynEdit := TBCOraSynEdit.Create(nil);
-              SynEdit.Lines.LoadFromFile(AddSlash(FolderText) + FName);
+              {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+              SynEdit.Lines.LoadFromFile(IncludeTrailingBackslash(FolderText) + FName);
+              {$WARNINGS ON}
               try
                 Root := nil;
                 if Trim(SynEdit.Text) <> '' then
@@ -582,7 +588,9 @@ begin
                     begin
                       Found := True;
                       ChPos := ChPos + Ch;
-                      SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, AddSlash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
+                      {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+                      SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, IncludeTrailingBackslash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
+                      {$WARNINGS ON}
                       S := Copy(S, Ch + Length(FindWhatText), Length(S));
                       ChPos := ChPos + Length(FindWhatText) - 1;
                     end
@@ -594,7 +602,9 @@ begin
                 SynEdit.Free;
               end;
             except
-              ShowWarningMessage(Format('File %s access error.', [AddSlash(FolderText) + FName]));
+              {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+              ShowWarningMessage(Format('File %s access error.', [IncludeTrailingBackslash(FolderText) + FName]));
+              {$WARNINGS ON}
             end;
         end;
       end;
