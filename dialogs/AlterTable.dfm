@@ -319,6 +319,7 @@ inherited AlterTableDialog: TAlterTableDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Columns'
       inherited SourcePanel: TPanel
         Width = 724
         Height = 309

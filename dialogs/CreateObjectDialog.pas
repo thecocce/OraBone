@@ -173,6 +173,7 @@ procedure TCreateObjectBaseDialog.FormShow(Sender: TObject);
 begin
   inherited;
   PageControl.ActivePageIndex := 0;
+  SourceTabSheet.Caption := 'Source'; { page control inheritance bug fix }
 end;
 
 end.
