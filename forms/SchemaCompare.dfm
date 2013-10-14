@@ -3,7 +3,7 @@ object SchemaCompareForm: TSchemaCompareForm
   Top = 0
   Caption = 'Compare Schemas'
   ClientHeight = 434
-  ClientWidth = 658
+  ClientWidth = 672
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,14 +16,14 @@ object SchemaCompareForm: TSchemaCompareForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    658
+    672
     434)
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl: TBCPageControl
-    Left = 149
+    Left = 164
     Top = 56
-    Width = 504
+    Width = 503
     Height = 353
     ActivePage = Schema1TabSheet
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -41,7 +41,7 @@ object SchemaCompareForm: TSchemaCompareForm
       object Schema1Panel: TPanel
         Left = 0
         Top = 0
-        Width = 496
+        Width = 495
         Height = 324
         Align = alClient
         BevelOuter = bvNone
@@ -53,7 +53,7 @@ object SchemaCompareForm: TSchemaCompareForm
         object Schema1VirtualDrawTree: TVirtualDrawTree
           Left = 2
           Top = 1
-          Width = 491
+          Width = 490
           Height = 321
           Align = alClient
           Ctl3D = True
@@ -90,7 +90,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 182
+              Width = 181
               WideText = 'Difference'
             end>
         end
@@ -102,7 +102,7 @@ object SchemaCompareForm: TSchemaCompareForm
       object Schema2Panel: TPanel
         Left = 0
         Top = 0
-        Width = 496
+        Width = 495
         Height = 324
         Align = alClient
         BevelOuter = bvNone
@@ -114,7 +114,7 @@ object SchemaCompareForm: TSchemaCompareForm
         object Schema2VirtualDrawTree: TVirtualDrawTree
           Left = 2
           Top = 1
-          Width = 491
+          Width = 490
           Height = 321
           Align = alClient
           BorderWidth = 1
@@ -152,7 +152,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 186
+              Width = 179
               WideText = 'Difference'
             end>
         end
@@ -162,7 +162,7 @@ object SchemaCompareForm: TSchemaCompareForm
   object StatusBar: TJvStatusBar
     Left = 0
     Top = 415
-    Width = 658
+    Width = 672
     Height = 19
     DoubleBuffered = False
     Panels = <
@@ -174,7 +174,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ProgressBar: TBCProgressBar
       Left = 0
       Top = 0
-      Width = 658
+      Width = 672
       Height = 19
       Align = alClient
       Smooth = True
@@ -186,7 +186,7 @@ object SchemaCompareForm: TSchemaCompareForm
   object SchemasGroupBox: TGroupBox
     Left = 6
     Top = 2
-    Width = 647
+    Width = 661
     Height = 47
     Margins.Left = 4
     Margins.Top = 4
@@ -196,10 +196,10 @@ object SchemaCompareForm: TSchemaCompareForm
     Caption = ' Schemas '
     TabOrder = 2
     DesignSize = (
-      647
+      661
       47)
     object Schema1Label: TLabel
-      Left = 320
+      Left = 325
       Top = 19
       Width = 11
       Height = 13
@@ -209,10 +209,9 @@ object SchemaCompareForm: TSchemaCompareForm
     object Schema1ComboBox: TBCComboBox
       Left = 12
       Top = 16
-      Width = 290
+      Width = 304
       Height = 22
       Style = csOwnerDrawFixed
-      Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
       OnChange = Schema1ComboBoxChange
       OnDrawItem = Schema1ComboBoxDrawItem
@@ -221,12 +220,12 @@ object SchemaCompareForm: TSchemaCompareForm
       DropDownFixedWidth = 0
     end
     object Schema2ComboBox: TBCComboBox
-      Left = 348
+      Left = 346
       Top = 16
-      Width = 290
+      Width = 304
       Height = 22
       Style = csOwnerDrawFixed
-      Anchors = [akLeft, akTop, akRight]
+      Anchors = [akTop, akRight]
       TabOrder = 1
       OnChange = Schema2ComboBoxChange
       OnDrawItem = Schema2ComboBoxDrawItem
@@ -238,7 +237,7 @@ object SchemaCompareForm: TSchemaCompareForm
   object ComparedObjectsGroupBox: TGroupBox
     Left = 6
     Top = 50
-    Width = 136
+    Width = 151
     Height = 359
     Margins.Left = 4
     Margins.Top = 4
@@ -250,7 +249,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object TablesCheckBox: TCheckBox
       Left = 12
       Top = 18
-      Width = 49
+      Width = 129
       Height = 22
       Caption = ' Tables'
       Checked = True
@@ -260,7 +259,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ViewsCheckBox: TCheckBox
       Left = 12
       Top = 42
-      Width = 72
+      Width = 129
       Height = 22
       Caption = ' Views'
       Checked = True
@@ -270,7 +269,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object FunctionsCheckBox: TCheckBox
       Left = 12
       Top = 66
-      Width = 72
+      Width = 129
       Height = 22
       Caption = ' Functions'
       Checked = True
@@ -280,7 +279,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ProceduresCheckBox: TCheckBox
       Left = 12
       Top = 90
-      Width = 72
+      Width = 123
       Height = 22
       Caption = ' Procedures'
       Checked = True
@@ -290,7 +289,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object PackagesCheckBox: TCheckBox
       Left = 12
       Top = 114
-      Width = 100
+      Width = 115
       Height = 22
       Caption = ' Packages'
       Checked = True
@@ -310,7 +309,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ConstraintsCheckBox: TCheckBox
       Left = 12
       Top = 161
-      Width = 76
+      Width = 127
       Height = 22
       Caption = ' Constraints'
       Checked = True
@@ -320,7 +319,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object IndexesCheckBox: TCheckBox
       Left = 12
       Top = 185
-      Width = 57
+      Width = 123
       Height = 22
       Caption = ' Indexes'
       Checked = True
@@ -330,7 +329,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object SequencesCheckBox: TCheckBox
       Left = 12
       Top = 209
-      Width = 72
+      Width = 127
       Height = 22
       Caption = ' Sequences'
       Checked = True
@@ -340,7 +339,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object SynonymsCheckBox: TCheckBox
       Left = 12
       Top = 233
-      Width = 72
+      Width = 113
       Height = 22
       Caption = ' Synonyms'
       Checked = True
@@ -350,7 +349,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object DBLinksCheckBox: TCheckBox
       Left = 12
       Top = 257
-      Width = 72
+      Width = 90
       Height = 22
       Caption = ' DB Links'
       Checked = True
@@ -360,7 +359,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object TableCommentsCheckBox: TCheckBox
       Left = 12
       Top = 281
-      Width = 100
+      Width = 123
       Height = 22
       Caption = ' Table Comments'
       Checked = True
@@ -370,7 +369,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ColumnNamesCheckBox: TCheckBox
       Left = 12
       Top = 305
-      Width = 90
+      Width = 123
       Height = 22
       Caption = ' Column Names'
       Checked = True
@@ -380,7 +379,7 @@ object SchemaCompareForm: TSchemaCompareForm
     object ColumnCommentsCheckBox: TCheckBox
       Left = 12
       Top = 328
-      Width = 106
+      Width = 129
       Height = 22
       Caption = ' Column Comments'
       Checked = True
