@@ -319,10 +319,11 @@ begin
       if Pos('(', DataType) <> 0 then
         DataType := Copy(DataType, 1, Pos('(', DataType) - 1);
       ColumnsQuery.FieldByName('DATA_TYPE').AsString := DataType;
-      if (DataType = 'NCHAR') or (DataType = 'NVARCHAR2') or (DataType = 'RAW') or (DataType = 'VARCHAR2') then
+      if (Pos('NCHAR', DataType) = 1) or (Pos('NVARCHAR2', DataType) = 1) or (Pos('RAW', DataType) = 1) or
+        (Pos('VARCHAR2', DataType) = 1) then
         ColumnsQuery.FieldByName('COLUMN_SIZE').AsString := FieldByName('COLUMN_SIZE').AsString;
       ColumnsQuery.FieldByName('COLUMN_PRECISION').AsString := FieldByName('COLUMN_PRECISION').AsString;
-      if (FieldByName('SCALE').AsInteger <> 0) and (DataType <> 'TIMESTAMP') then
+      if (FieldByName('SCALE').AsInteger <> 0) and (Pos('TIMESTAMP', DataType) = 0) then
         ColumnsQuery.FieldByName('SCALE').AsString := FieldByName('SCALE').AsString;
       ColumnsQuery.FieldByName('PRIMARY_KEY').AsString := FieldByName('PRIMARY_KEY').AsString;
       ColumnsQuery.FieldByName('NULLABLE').AsString := FieldByName('NULLABLE').AsString;
@@ -332,10 +333,11 @@ begin
       OriginalColumnsQuery.FieldByName('COLUMN_ID').AsInteger := FieldByName('COLUMN_ID').AsInteger;
       OriginalColumnsQuery.FieldByName('COLUMN_NAME').AsString := FieldByName('COLUMN_NAME').AsString;
       OriginalColumnsQuery.FieldByName('DATA_TYPE').AsString := DataType;
-      if (DataType = 'NCHAR') or (DataType = 'NVARCHAR2') or (DataType = 'RAW') or (DataType = 'VARCHAR2') then
+      if (Pos('NCHAR', DataType) = 1) or (Pos('NVARCHAR2', DataType) = 1) or (Pos('RAW', DataType) = 1) or
+        (Pos('VARCHAR2', DataType) = 1) then
         OriginalColumnsQuery.FieldByName('COLUMN_SIZE').AsString := FieldByName('COLUMN_SIZE').AsString;
       OriginalColumnsQuery.FieldByName('COLUMN_PRECISION').AsString := FieldByName('COLUMN_PRECISION').AsString;
-      if (FieldByName('SCALE').AsInteger <> 0) and (DataType <> 'TIMESTAMP') then
+      if (FieldByName('SCALE').AsInteger <> 0) and (Pos('TIMESTAMP', DataType) = 0) then
         OriginalColumnsQuery.FieldByName('SCALE').AsString := FieldByName('SCALE').AsString;
       OriginalColumnsQuery.FieldByName('PRIMARY_KEY').AsString := FieldByName('PRIMARY_KEY').AsString;
       OriginalColumnsQuery.FieldByName('NULLABLE').AsString := FieldByName('NULLABLE').AsString;
@@ -971,9 +973,13 @@ begin
           SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'NOT NULL';
         if not FieldByName('COLUMN_DEFAULT').IsNull then
         begin
-          if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
-             SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' ';
-          SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + 'DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
+          //if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
+          //   SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' ';
+          if (Pos('NCHAR', DataType) = 1) or (Pos('NVARCHAR2', DataType) = 1) or (Pos('RAW', DataType) = 1) or
+            (Pos('VARCHAR2', DataType) = 1) then
+            SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' DEFAULT ' + QuotedStr(FieldByName('COLUMN_DEFAULT').AsString)
+          else
+            SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + ' DEFAULT ' + FieldByName('COLUMN_DEFAULT').AsString;
         end;
 
         if not FieldByName('COLUMN_COMMENT').IsNull then
@@ -1085,9 +1091,13 @@ begin
           if not FieldByName('COLUMN_DEFAULT').IsNull then
           begin
             DefaultChange := True;
-            if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
-               AddColumns := AddColumns + ' ';
-            AddColumns := AddColumns + 'DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
+            //if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
+            //   AddColumns := AddColumns + ' ';
+            if (Pos('NCHAR', DataType) = 1) or (Pos('NVARCHAR2', DataType) = 1) or (Pos('RAW', DataType) = 1) or
+             (Pos('VARCHAR2', DataType) = 1) then
+              AddColumns := AddColumns + ' DEFAULT ' +  QuotedStr(FieldByName('COLUMN_DEFAULT').AsString)
+            else
+              AddColumns := AddColumns + ' DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
           end;
         end;
         Next;
@@ -1155,9 +1165,14 @@ begin
               (FieldByName('COLUMN_DEFAULT').AsWideString <> OriginalColumnsQuery.FieldByName('COLUMN_DEFAULT').AsWideString)  then
             begin
               DefaultChange := True;
-              if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
-                 ModifyColumns := ModifyColumns + ' ';
-              ModifyColumns := ModifyColumns + 'DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
+              //if UpperCase(FieldByName('NULLABLE').AsWideString) = 'TRUE' then
+              //   ModifyColumns := ModifyColumns + ' ';
+
+              if (Pos('NCHAR', DataType) = 1) or (Pos('NVARCHAR2', DataType) = 1) or (Pos('RAW', DataType) = 1) or
+                (Pos('VARCHAR2', DataType) = 1) then
+                ModifyColumns := ModifyColumns + ' DEFAULT ' +  QuotedStr(FieldByName('COLUMN_DEFAULT').AsString)
+              else
+                ModifyColumns := ModifyColumns + ' DEFAULT ' +  FieldByName('COLUMN_DEFAULT').AsString;
             end;
           end;
 
@@ -1226,7 +1241,8 @@ begin
         [FSchemaParam, TableNameEdit.Text]) + CHR_ENTER;
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + AddColumns + CHR_ENTER + ');' + CHR_ENTER;
     end;
-    SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column type' + CHR_ENTER;
+    if ModifyColumnType <> '' then
+      SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + '-- modify column type' + CHR_ENTER;
     while ModifyColumnType <> '' do
     begin
       SourceSynEdit.Lines.Text := SourceSynEdit.Lines.Text + Format('ALTER TABLE %s.%s MODIFY ',
