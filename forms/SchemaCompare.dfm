@@ -15,6 +15,7 @@ object SchemaCompareForm: TSchemaCompareForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnResize = FormResize
   DesignSize = (
     672
     434)
@@ -207,10 +208,14 @@ object SchemaCompareForm: TSchemaCompareForm
       Caption = 'vs'
     end
     object Schema1ComboBox: TBCComboBox
-      Left = 12
+      AlignWithMargins = True
+      Left = 8
       Top = 16
       Width = 304
       Height = 22
+      Margins.Left = 6
+      Margins.Top = 1
+      Align = alLeft
       Style = csOwnerDrawFixed
       TabOrder = 0
       OnChange = Schema1ComboBoxChange
@@ -220,12 +225,15 @@ object SchemaCompareForm: TSchemaCompareForm
       DropDownFixedWidth = 0
     end
     object Schema2ComboBox: TBCComboBox
-      Left = 346
+      AlignWithMargins = True
+      Left = 349
       Top = 16
       Width = 304
       Height = 22
+      Margins.Top = 1
+      Margins.Right = 6
+      Align = alRight
       Style = csOwnerDrawFixed
-      Anchors = [akTop, akRight]
       TabOrder = 1
       OnChange = Schema2ComboBoxChange
       OnDrawItem = Schema2ComboBoxDrawItem

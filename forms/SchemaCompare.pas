@@ -56,6 +56,7 @@ type
       State: TOwnerDrawState);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
     FUsername1, FUsername2: string;
@@ -118,6 +119,13 @@ procedure TSchemaCompareForm.FormDestroy(Sender: TObject);
 begin
   FSchemaCompareForm := nil;
   inherited;
+end;
+
+procedure TSchemaCompareForm.FormResize(Sender: TObject);
+begin
+  inherited;
+  Schema1ComboBox.Width := SchemasGroupBox.Width div 2 - 26;
+  Schema2ComboBox.Width := Schema1ComboBox.Width;
 end;
 
 procedure TSchemaCompareForm.Open(const SessionList: TList);
