@@ -99,7 +99,7 @@ begin
   if IndexPageControl.ActivePage = InfoTabSheet then
   begin
     CreationAndModificationTimestampLabel.Caption := '';
-    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+    if OptionsContainer.ShowObjectCreationAndModificationTimestamp then
       CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     s := SQLStringHolder.StringsByName['IndexesDescendSQL'].Text;
     OraQuery := TOraQuery.Create(Self);

@@ -155,7 +155,7 @@ begin
   if ConstraintPageControl.ActivePage = InfoTabSheet then
   begin
     CreationAndModificationTimestampLabel.Caption := '';
-    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+    if OptionsContainer.ShowObjectCreationAndModificationTimestamp then
       CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := ConstraintsQuery
   end;

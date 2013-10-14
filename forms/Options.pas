@@ -142,7 +142,8 @@ type
     FMainMenuSystemFontName: string;
     FMainMenuSystemFontSize: Integer;
     FObjectFrameAlign: string;
-    FObjectCreationAndModificationTimestamp: Boolean;
+    FShowObjectCreationAndModificationTimestamp: Boolean;
+    FShowDataSearchPanel: Boolean;
     FOutputCloseTabByDblClick: Boolean;
     FOutputCloseTabByMiddleClick: Boolean;
     FOutputShowTreeLines: Boolean;
@@ -243,7 +244,8 @@ type
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
-    property ObjectCreationAndModificationTimestamp: Boolean read FObjectCreationAndModificationTimestamp write FObjectCreationAndModificationTimestamp;
+    property ShowObjectCreationAndModificationTimestamp: Boolean read FShowObjectCreationAndModificationTimestamp write FShowObjectCreationAndModificationTimestamp;
+    property ShowDataSearchPanel: Boolean read FShowDataSearchPanel write FShowDataSearchPanel;
     property OutputCloseTabByDblClick: Boolean read FOutputCloseTabByDblClick write FOutputCloseTabByDblClick;
     property OutputCloseTabByMiddleClick: Boolean read FOutputCloseTabByMiddleClick write FOutputCloseTabByMiddleClick;
     property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
@@ -474,7 +476,8 @@ begin
   FMarginWidth := 48;
   FMarginVisible := True;
   FMarginVisibleRightMargin := True;
-  FObjectCreationAndModificationTimestamp := False;
+  FShowObjectCreationAndModificationTimestamp := False;
+  FShowDataSearchPanel := True;
   FObjectFrameAlign := 'Bottom';
   FOutputCloseTabByDblClick := False;
   FOutputCloseTabByMiddleClick := False;
@@ -834,7 +837,8 @@ begin
   FOptionsSchemaBrowserFrame.IndentEdit.Text := IntToStr(FOptionsContainer.SchemaBrowserIndent);
   { Object frame }
   FObjectFrameFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.ObjectFrameAlign;
-  FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked := FOptionsContainer.ObjectCreationAndModificationTimestamp;
+  FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked := FOptionsContainer.ShowObjectCreationAndModificationTimestamp;
+  FObjectFrameFrame.ShowDataSearchPanelCheckBox.Checked := FOptionsContainer.ShowDataSearchPanel;
   { Status bar }
   FStatusBarFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.StatusBarUseSystemFont;
   FStatusBarFrame.FontLabel.Font.Name := FOptionsContainer.StatusBarFontName;
@@ -1063,7 +1067,8 @@ begin
   FOptionsContainer.SchemaBrowserIndent := StrToIntDef(FOptionsSchemaBrowserFrame.IndentEdit.Text, 16);
   { Object frame }
   FOptionsContainer.ObjectFrameAlign := FObjectFrameFrame.ButtonPanelAlignComboBox.Text;
-  FOptionsContainer.ObjectCreationAndModificationTimestamp := FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked;
+  FOptionsContainer.ShowObjectCreationAndModificationTimestamp := FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked;
+  FOptionsContainer.ShowDataSearchPanel := FObjectFrameFrame.ShowDataSearchPanelCheckBox.Checked;
   { Status bar }
   FOptionsContainer.StatusBarUseSystemFont := FStatusBarFrame.UseSystemFontCheckBox.Checked;
   FOptionsContainer.StatusBarFontName := FStatusBarFrame.FontLabel.Font.Name;

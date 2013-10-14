@@ -213,6 +213,7 @@ type
     procedure SetClobAndTimestampFields(OraQuery: TOraQuery);
     procedure SetObjectFrameAlign(Value: TAlign);
     procedure SetSortMarkers(OrderSQL: string);
+    procedure SetShowDataSearchPanel(Value: Boolean);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; ParentPanel: TPanel;
@@ -228,6 +229,7 @@ type
     procedure CopyToClipboard;
     procedure GetViewComments;
     property ObjectFrameAlign: TAlign write SetObjectFrameAlign;
+    property ShowDataSearchPanel: Boolean write SetShowDataSearchPanel;
   end;
 
 implementation
@@ -254,6 +256,11 @@ const
 procedure TViewBrowserFrame.CopyToClipboardActionExecute(Sender: TObject);
 begin
   Lib.CopyAllToClipboard(SourceSynEdit);
+end;
+
+procedure TViewBrowserFrame.SetShowDataSearchPanel(Value: Boolean);
+begin
+  DataDBGrid.SearchPanel.Enabled := Value;
 end;
 
 constructor TViewBrowserFrame.Create(AOwner: TComponent; ParentPanel: TPanel;
@@ -875,7 +882,7 @@ begin
   if ViewPageControl.ActivePage = ColumnsTabSheet then
   begin
     CreationAndModificationTimestampLabel.Caption := '';
-    if OptionsContainer.ObjectCreationAndModificationTimestamp then
+    if OptionsContainer.ShowObjectCreationAndModificationTimestamp then
       CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
     Result := ColumnsQuery
   end

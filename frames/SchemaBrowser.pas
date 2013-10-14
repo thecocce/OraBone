@@ -1680,6 +1680,7 @@ begin
     FTableBrowserFrame.UpdateFilterDropDownMenu;
     FTableBrowserFrame.UpdateSortDropDownMenu;
     FTableBrowserFrame.ObjectFrameAlign := FObjectFrameAlign;
+    FTableBrowserFrame.ShowDataSearchPanel := OptionsContainer.ShowDataSearchPanel;
     FTableBrowserFrame.OpenQuery(nil, Refresh);
     CustomizePageControlDialog.CustomizePageControl(FTableBrowserFrame.TablePageControl);
     FTableBrowserFrame.Visible := True;

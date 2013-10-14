@@ -16,7 +16,7 @@ object ObjectFrameFrame: TObjectFrameFrame
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
       Left = 11
-      Top = 32
+      Top = 50
       Width = 87
       Height = 13
       Margins.Left = 4
@@ -27,10 +27,10 @@ object ObjectFrameFrame: TObjectFrameFrame
     end
     object ButtonPanelAlignComboBox: TBCComboBox
       Left = 9
-      Top = 50
+      Top = 68
       Width = 64
       Height = 21
-      TabOrder = 0
+      TabOrder = 2
       Text = 'Bottom'
       Items.Strings = (
         'Bottom'
@@ -49,6 +49,19 @@ object ObjectFrameFrame: TObjectFrameFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Creation and Modification Timestamp'
+      TabOrder = 0
+      ReadOnly = False
+    end
+    object ShowDataSearchPanelCheckBox: TBCCheckBox
+      Left = 9
+      Top = 26
+      Width = 312
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = ' Show Data Search Panel'
       TabOrder = 1
       ReadOnly = False
     end

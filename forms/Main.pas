@@ -553,7 +553,6 @@ begin
     repeat
       StatusBar.Panels[3].Text := 'Search in progress...';
       Application.ProcessMessages;
-      Screen.Cursor := crHourGlass;
       FName := StrPas(sWin32FD.cFileName);
       if (FName <> '.') and (FName <> '..') then
       begin
@@ -1333,7 +1332,7 @@ begin
     OptionsContainer.IgnoreBlanks := ReadBool('Options', 'IgnoreBlanks', True);
     OptionsContainer.PersistentHotKeys := ReadBool('Options', 'PersistentHotKeys', False);
     OptionsContainer.Shadows := ReadBool('Options', 'Shadows', True);
-    DeleteKey('Options', 'UseSystemFont'); { Depricated }
+    DeleteKey('Options', 'UseSystemFont'); { deprecated }
     OptionsContainer.MainMenuUseSystemFont := ReadBool('Options', 'MainMenuUseSystemFont', False);
     OptionsContainer.MainMenuFontName := ReadString('Options', 'MainMenuFontName', 'Tahoma');
     OptionsContainer.MainMenuFontSize := StrToInt(ReadString('Options', 'MainMenuFontSize', '8'));
@@ -1356,7 +1355,10 @@ begin
     OptionsContainer.OutputShowTreeLines:= ReadBool('Options', 'OutputShowTreeLines', False);
     OptionsContainer.OutputIndent := StrToInt(ReadString('Options', 'OutputIndent', '16'));
     OptionsContainer.ObjectFrameAlign := ReadString('Options', 'ObjectFrameAlign', 'Bottom');
-    OptionsContainer.ObjectCreationAndModificationTimestamp := ReadBool('Options', 'ObjectCreationAndModificationTimestamp', False);
+    OptionsContainer.ShowObjectCreationAndModificationTimestamp := ReadBool('Options', 'ShowObjectCreationAndModificationTimestamp',
+      ReadBool('Options', 'ObjectCreationAndModificationTimestamp', False));
+    DeleteKey('Options', 'ObjectCreationAndModificationTimestamp'); { deprecated }
+    OptionsContainer.ShowDataSearchPanel := ReadBool('Options', 'ShowDataSearchPanel', True);
     OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
     OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
     OptionsContainer.EnableSpecialChars := ReadBool('Options', 'EnableSpecialChars', False);
@@ -1739,7 +1741,8 @@ begin
       WriteBool('Options', 'OutputShowTreeLines', OptionsContainer.OutputShowTreeLines);
       WriteString('Options', 'OutputIndent', IntToStr(OptionsContainer.OutputIndent));
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
-      WriteBool('Options', 'ObjectCreationAndModificationTimestamp', OptionsContainer.ObjectCreationAndModificationTimestamp);
+      WriteBool('Options', 'ShowObjectCreationAndModificationTimestamp', OptionsContainer.ShowObjectCreationAndModificationTimestamp);
+      WriteBool('Options', 'ShowDataSearchPanel', OptionsContainer.ShowDataSearchPanel);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
       WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);
@@ -1748,7 +1751,7 @@ begin
       WriteString('Options', 'MainMenuSystemFontName', OptionsContainer.MainMenuSystemFontName);
       WriteString('Options', 'MainMenuSystemFontSize', IntToStr(OptionsContainer.MainMenuSystemFontSize));
 
-      DeleteKey('Options', 'MarginLineNumbers'); { depricated }
+      DeleteKey('Options', 'MarginLineNumbers'); { deprecated }
 
       WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
       WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
@@ -1938,10 +1941,9 @@ var
   i, Rslt: Integer;
   SQLEditorFrame: TSQLEditorFrame;
 begin
-  Rslt := mrNone;
   ActivePageIndex := PageControl.ActivePageIndex;
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-    Rslt := EndConnection(Confirm)
+    EndConnection(Confirm)
   else
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_EDITOR then
   begin
@@ -1989,7 +1991,6 @@ begin
     end;
     if PageControl.PageCount > 0 then
       PageControl.Pages[ActivePageIndex].Free;
-    Rslt := mrYes;
   end;
   PageControl.Repaint;
 end;

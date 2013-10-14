@@ -12,14 +12,14 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 0
     Width = 451
     Height = 302
-    ActivePage = ColumnsTabSheet
+    ActivePage = DataTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = ViewPageControlChange
-    ActivePageCaption = 'Columns'
+    ActivePageCaption = 'Data'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -250,6 +250,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
           ParentCtl3D = False
+          SearchPanel.Enabled = True
           EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
           TabOrder = 0
           OnDrawDataCell = DataDBGridDrawDataCell

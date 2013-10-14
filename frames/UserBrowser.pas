@@ -227,6 +227,7 @@ begin
   begin
     AMargin := TextMargin;
     Data := Sender.GetNodeData(Node);
+    if Assigned(Data) then
     case Column of
       0: NodeWidth := Canvas.TextWidth(Data.GrantedRole) + 2 * AMargin;
       1: NodeWidth := Canvas.TextWidth(Data.AdminOption) + 2 * AMargin;

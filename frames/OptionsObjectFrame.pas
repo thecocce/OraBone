@@ -13,6 +13,7 @@ type
     ButtonPanelAlignLabel: TLabel;
     ButtonPanelAlignComboBox: TBCComboBox;
     ShowCreationAndModificationTimestampCheckBox: TBCCheckBox;
+    ShowDataSearchPanelCheckBox: TBCCheckBox;
   private
     { Private declarations }
   public

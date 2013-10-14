@@ -328,20 +328,22 @@ begin
   with Sender as TVirtualDrawTree do
   begin
     Data := Sender.GetNodeData(Node);
-
-    BoldWidth := 0;
-    if (Pos(SearchForEdit.Text, Data.ObjectName) <> 0) or
-      (Pos(SearchForEdit.Text, Data.SearchResult) <> 0) then
+    if Assigned(Data) then
     begin
-      Canvas.Font.Style := Canvas.Font.Style + [fsBold];
-      BoldWidth := Canvas.TextWidth(SearchForEdit.Text);
-      Canvas.Font.Style := Canvas.Font.Style - [fsBold];
-      BoldWidth := BoldWidth - Canvas.TextWidth(string(SearchForEdit.Text));
-    end;
+      BoldWidth := 0;
+      if (Pos(SearchForEdit.Text, Data.ObjectName) <> 0) or
+        (Pos(SearchForEdit.Text, Data.SearchResult) <> 0) then
+      begin
+        Canvas.Font.Style := Canvas.Font.Style + [fsBold];
+        BoldWidth := Canvas.TextWidth(SearchForEdit.Text);
+        Canvas.Font.Style := Canvas.Font.Style - [fsBold];
+        BoldWidth := BoldWidth - Canvas.TextWidth(string(SearchForEdit.Text));
+      end;
 
-    case Column of
-      0: NodeWidth := Canvas.TextWidth(Trim(Data.ObjectName)) + 2 * TextMargin + BoldWidth;
-      1: NodeWidth := Canvas.TextWidth(Trim(Data.SearchResult)) + 2 * TextMargin + BoldWidth;
+      case Column of
+        0: NodeWidth := Canvas.TextWidth(Trim(Data.ObjectName)) + 2 * TextMargin + BoldWidth;
+        1: NodeWidth := Canvas.TextWidth(Trim(Data.SearchResult)) + 2 * TextMargin + BoldWidth;
+      end;
     end;
   end;
 end;

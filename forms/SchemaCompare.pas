@@ -549,7 +549,7 @@ begin
   with Sender as TVirtualDrawTree do
   begin
     Data := Sender.GetNodeData(Node);
-
+    if Assigned(Data) then
     case Column of
       0: NodeWidth := Canvas.TextWidth(Trim(Data.ObjectName)) + 2 * TextMargin;
       1: NodeWidth := Canvas.TextWidth(Trim(Data.CompareResult)) + 2 * TextMargin;

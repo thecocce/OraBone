@@ -981,7 +981,7 @@ begin
   begin
     AMargin := TextMargin;
     Data := Sender.GetNodeData(Node);
-
+    if Assigned(Data) then
     case Data.Level of
       0: begin
            Canvas.Font.Style := Canvas.Font.Style + [fsBold];
