@@ -551,6 +551,8 @@ begin
   if shFindFile <> INVALID_HANDLE_VALUE then
   try
     repeat
+      if SQLEditorFrame.OutputFrame.CancelSearch then
+        Exit;
       StatusBar.Panels[3].Text := 'Search in progress...';
       Application.ProcessMessages;
       FName := StrPas(sWin32FD.cFileName);
@@ -587,6 +589,8 @@ begin
                     begin
                       Found := True;
                       ChPos := ChPos + Ch;
+                      if SQLEditorFrame.OutputFrame.CancelSearch then
+                        Break;
                       {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
                       SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, IncludeTrailingBackslash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
                       {$WARNINGS ON}
@@ -658,6 +662,7 @@ begin
           else
           begin
             ShowMessage(Format(LanguageDataModule.GetMessage('CannotFindString'), [FindWhatText]));
+            SQLEditorFrame.OutputFrame.ProcessingTabSheet := False;
             SQLEditorFrame.OutputFrame.CloseTabSheet;
             StatusBar.Panels[3].Text := '';
           end;
