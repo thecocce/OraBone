@@ -65,7 +65,6 @@ object CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 31
     end
     object ToolBar: TBCToolBar
       Left = 6
@@ -76,8 +75,6 @@ object CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog
       AutoSize = True
       Images = ImageList
       TabOrder = 4
-      ExplicitLeft = 10
-      ExplicitTop = 10
       object MoveUpToolButton: TToolButton
         Left = 0
         Top = 0

@@ -3,13 +3,11 @@ unit AlterView;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.ImgList, SynEditHighlighter,
-  SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
-  JvExButtons, JvBitBtn, BCControls.DBEdit, BCControls.ToolBar, BCControls.DBGrid,
-  JvExStdCtrls, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, JvEdit,
-  GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList, JvComCtrls;
+  System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  CreateObjectDialog, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.ToolWin, JvExComCtrls, SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
+  BCControls.ToolBar, BCControls.DBGrid, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, GridsEh, DBAxisGridsEh,
+  DBGridEh, BCControls.ImageList, JvComCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)

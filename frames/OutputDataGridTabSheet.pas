@@ -3,9 +3,8 @@ unit OutputDataGridTabSheet;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BCControls.DBGrid,
-  Data.DB, DBAccess, Ora, Vcl.StdCtrls, Vcl.ExtCtrls;
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BCControls.DBGrid, Data.DB, DBAccess, Ora,
+  Vcl.StdCtrls, Vcl.ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
 
 type
   TOutputDataGridFrame = class(TFrame)

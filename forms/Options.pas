@@ -3,13 +3,10 @@ unit Options;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls,
-  CommCtrl, Registry, Vcl.ExtCtrls, Vcl.Buttons, Menus, SynEdit, SynEditHighlighter, BCDialogs.Dlg,
-  SynEditMiscClasses, SynHighlighterWebData, SynEditKeyCmds, System.Classes, BCControls.PageControl,
-  System.SysUtils, Vcl.ImgList, SynHighlighterWeb, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvxSlider,
-  ActnList, JvExButtons, JvBitBtn, ValEdit, Vcl.Themes, Ora, BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox,
-  BCControls.ComboBox, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont, OptionsEditorMargin,
-  OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
+  Vcl.Buttons, Menus, SynEdit, BCDialogs.Dlg, SynEditMiscClasses, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
+  ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont,
+  OptionsEditorMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
   OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare, OptionsPrint,
   OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal, System.Actions;
 
@@ -305,7 +302,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, Winapi.UxTheme, DataModule, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages;
+  System.Math, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages;
 
 const
   CELL_PADDING = 4;

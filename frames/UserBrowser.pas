@@ -3,13 +3,12 @@ unit UserBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.Menus, Vcl.StdCtrls, VirtualTrees, Vcl.ToolWin, JvToolBar, BCControls.ToolBar,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh;
+  Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora,
+  Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls,
+  Vcl.Buttons, Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit,
+  Vcl.AppEvnts, Vcl.Menus, VirtualTrees, Vcl.ToolWin, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhToolCtrls,
+  DBGridEhGrouping, ToolCtrlsEh;
 
 type
   TUserBrowserFrame = class(TFrame)
@@ -87,7 +86,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib;
+  Main, CustomizePages, Lib, Vcl.Themes, BCCommon.Lib;
 
 type
   PRoleRec = ^TRoleRec;

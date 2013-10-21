@@ -329,7 +329,6 @@ object AboutDialog: TAboutDialog
         454E44AE426082}
       Stretch = True
       IsControl = True
-      ExplicitLeft = 281
     end
     object ProgramNameiLabel: TLabel
       Left = 20

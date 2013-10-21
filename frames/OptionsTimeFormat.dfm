@@ -209,7 +209,6 @@ object TimeFormatFrame: TTimeFormatFrame
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False

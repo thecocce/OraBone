@@ -3,14 +3,12 @@ unit TableBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess,
-  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl,
-  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
-  Vcl.StdCtrls, JvMenus, BCControls.PopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  Vcl.StdStyleActnCtrls, BCControls.ImageList, BCControls.ToolBar, BCControls.DBGrid,
-  Data.DB, Vcl.Mask, JvExMask, JvToolEdit, JvCombobox, DBGridEhToolCtrls,
-  System.Actions, DBGridEhGrouping, ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh;
+  Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora,
+  Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons,
+  Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
+  Vcl.ToolWin, Vcl.Menus, Vcl.StdCtrls, BCControls.PopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  Vcl.StdStyleActnCtrls, BCControls.ImageList, BCControls.ToolBar, BCControls.DBGrid, Data.DB, System.Actions,
+  ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhGrouping, DBGridEhToolCtrls;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -345,8 +343,8 @@ type
 implementation
 
 uses
-  DataFilter, DataSort, Main, StringData, CustomizePages, UxTheme, Vcl.Themes, Blob, BCCommon.Lib, BCCommon.StringUtils,
-  CustomizeTableColumns, Options, Lib, BCCommon.StyleUtils, TableSourceOptions, DataModule, BCCommon.Dialogs,
+  DataFilter, DataSort, Main, StringData, CustomizePages, UxTheme, Blob, BCCommon.Lib, BCCommon.StringUtils,
+  CustomizeTableColumns, Options, Lib, TableSourceOptions, DataModule, BCCommon.Dialogs,
   BCCommon.LanguageStrings, BCCommon.Messages;
 
 const

@@ -3,10 +3,9 @@ unit ImportTableData;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, JvSpin, Ora,
-  BCControls.Edit, JvExStdCtrls, JvEdit, JvCombobox, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls, BCDialogs.Dlg,
-  System.Actions, JvExControls, JvSpeedButton;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls,
+  Vcl.Mask, JvExMask, JvSpin, Ora, BCControls.Edit, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls,
+  BCDialogs.Dlg, System.Actions, JvExControls, JvSpeedButton;
 
 type
   TImportTableDataDialog = class(TDialog)

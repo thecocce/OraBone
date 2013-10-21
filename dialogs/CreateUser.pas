@@ -3,11 +3,11 @@ unit CreateUser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls,
-  JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
-  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, DB, MemDS, DBAccess, Ora,
-  BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Grids,
+  JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, BCControls.Edit, Vcl.ImgList, SynEditHighlighter,
+  SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls,
+  BCControls.PageControl, DB, MemDS, DBAccess, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions,
+  BCControls.ImageList;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)
@@ -34,7 +34,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Winapi.UxTheme, Vcl.Themes, System.Math, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
+  System.Math, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 const
   CELL_PADDING = 4;

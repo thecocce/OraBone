@@ -3,9 +3,9 @@ unit CustomizeObjectFilters;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, CheckLst, ActnList, DB, MemDS, DBAccess, Ora, JvStringHolder, JvExStdCtrls,
-  JvCombobox, BCControls.ComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, CheckLst, ActnList,
+  DB, MemDS, DBAccess, Ora, JvStringHolder, BCControls.ComboBox, JvExControls, JvSpeedButton, Vcl.ExtCtrls,
+  BCDialogs.Dlg, System.Actions;
 
 type
   TCustomizeObjectFiltersDialog = class(TDialog)

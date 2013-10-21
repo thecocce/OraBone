@@ -2,16 +2,11 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
   Caption = 'Create Database Link'
   ClientHeight = 233
   ClientWidth = 315
-  OnShow = FormShow
-  ExplicitWidth = 331
-  ExplicitHeight = 269
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 308
     Height = 175
-    ExplicitWidth = 308
-    ExplicitHeight = 175
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -133,27 +128,19 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 300
-      ExplicitHeight = 147
       inherited SourcePanel: TPanel
         Width = 300
         Height = 147
-        ExplicitWidth = 300
-        ExplicitHeight = 147
         inherited SourceSynEdit: TSynEdit
           Width = 298
           Height = 122
-          ExplicitWidth = 298
-          ExplicitHeight = 122
         end
         inherited SourceTopPanel: TPanel
           Width = 298
-          ExplicitWidth = 298
           inherited TopPanel: TPanel
             inherited SourceToolBar: TBCToolBar
               Height = 24
               Align = alLeft
-              ExplicitHeight = 24
             end
           end
         end
@@ -163,19 +150,13 @@ inherited CreateDBLinkDialog: TCreateDBLinkDialog
   inherited OKButton: TButton
     Left = 152
     Top = 185
-    ExplicitLeft = 152
-    ExplicitTop = 185
   end
   inherited CancelButton: TButton
     Left = 233
     Top = 185
-    ExplicitLeft = 233
-    ExplicitTop = 185
   end
   inherited StatusBar1: TStatusBar
     Top = 214
     Width = 315
-    ExplicitTop = 214
-    ExplicitWidth = 315
   end
 end

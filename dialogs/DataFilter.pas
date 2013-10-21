@@ -3,9 +3,9 @@ unit DataFilter;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter, BCDialogs.Dlg,
-  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, BCControls.Edit, JvEdit, Vcl.ExtCtrls, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList,
+  JvExStdCtrls, JvListBox, SynEditHighlighter, BCDialogs.Dlg, SynHighlighterSQL, ValEdit, JvStringHolder, Menus,
+  BCControls.Edit, Vcl.ExtCtrls, System.Actions;
 
 type
   TDataFilterDialog = class(TDialog)
@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, Vcl.Themes, BCCommon.StyleUtils, SynEditKeyCmds, BCCommon.StringUtils;
+  Options, BCCommon.StyleUtils, SynEditKeyCmds, BCCommon.StringUtils;
 
 var
   FDataFilterDialog: TDataFilterDialog;

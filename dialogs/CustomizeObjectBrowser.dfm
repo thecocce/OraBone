@@ -110,7 +110,6 @@ object CustomizeObjectBrowserDialog: TCustomizeObjectBrowserDialog
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 31
     end
     object ToolBar: TBCToolBar
       Left = 6

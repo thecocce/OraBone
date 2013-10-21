@@ -267,6 +267,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Columns'
       inherited SourcePanel: TPanel
         Width = 363
         Height = 256

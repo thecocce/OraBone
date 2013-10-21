@@ -32,7 +32,6 @@ object QueryProgressDialog: TQueryProgressDialog
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'Execution time: %s'
-    ExplicitWidth = 304
   end
   object CancelButton: TButton
     Left = 111

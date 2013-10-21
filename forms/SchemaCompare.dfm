@@ -153,7 +153,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 179
+              Width = 185
               WideText = 'Difference'
             end>
         end

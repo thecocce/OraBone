@@ -3,7 +3,7 @@ unit DataModule;
 interface
 
 uses
-  System.SysUtils, System.Classes, JvStringHolder;
+  System.Classes, JvStringHolder;
 
 type
   TDM = class(TDataModule)

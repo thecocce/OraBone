@@ -3,8 +3,8 @@ unit Parameters;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls, JvListBox, SynEdit, Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls, BCDialogs.Dlg;
+  System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Ora, Grids, ValEdit, ActnList, Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TValueListEditor = class(ValEdit.TValueListEditor)

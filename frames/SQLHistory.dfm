@@ -26,7 +26,6 @@ object SQLHistoryFrame: TSQLHistoryFrame
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 82
     end
     object Bevel2: TBevel
       AlignWithMargins = True
@@ -39,7 +38,6 @@ object SQLHistoryFrame: TSQLHistoryFrame
       Margins.Bottom = 2
       Align = alLeft
       Shape = bsLeftLine
-      ExplicitLeft = 82
     end
     object ToolBar: TBCToolBar
       Left = 0

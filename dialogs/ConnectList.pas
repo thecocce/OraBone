@@ -3,11 +3,9 @@ unit ConnectList;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.StringGrid, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, JvExComCtrls, JvStatusBar, JvStringGrid,
-  BCControls.ImageList, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids,
+  BCControls.StringGrid, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, JvStringGrid, BCControls.ImageList, System.Actions;
 
 type
   TConnectListDialog = class(TForm)

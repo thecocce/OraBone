@@ -2,9 +2,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
   Caption = 'Create Index'
   ClientHeight = 420
   ClientWidth = 306
-  OnShow = FormShow
-  ExplicitWidth = 322
-  ExplicitHeight = 456
   PixelsPerInch = 96
   TextHeight = 13
   object IndexNameLabel: TLabel [0]
@@ -52,9 +49,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Top = 82
     Width = 299
     Height = 282
-    ExplicitTop = 82
-    ExplicitWidth = 299
-    ExplicitHeight = 282
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -125,22 +119,15 @@ inherited CreateIndexDialog: TCreateIndexDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 291
-      ExplicitHeight = 254
       inherited SourcePanel: TPanel
         Width = 291
         Height = 254
-        ExplicitWidth = 291
-        ExplicitHeight = 254
         inherited SourceSynEdit: TSynEdit
           Width = 289
           Height = 229
-          ExplicitWidth = 289
-          ExplicitHeight = 229
         end
         inherited SourceTopPanel: TPanel
           Width = 289
-          ExplicitWidth = 289
         end
       end
     end
@@ -148,14 +135,10 @@ inherited CreateIndexDialog: TCreateIndexDialog
   inherited OKButton: TButton
     Left = 142
     Top = 370
-    ExplicitLeft = 142
-    ExplicitTop = 370
   end
   inherited CancelButton: TButton
     Left = 223
     Top = 370
-    ExplicitLeft = 223
-    ExplicitTop = 370
   end
   object IndexNameEdit: TBCEdit [7]
     Left = 78
@@ -210,8 +193,6 @@ inherited CreateIndexDialog: TCreateIndexDialog
   inherited StatusBar1: TStatusBar
     Top = 401
     Width = 306
-    ExplicitTop = 401
-    ExplicitWidth = 306
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

@@ -2,9 +2,6 @@ inherited CreateViewDialog: TCreateViewDialog
   Caption = 'Create View'
   ClientHeight = 432
   ClientWidth = 446
-  OnShow = FormShow
-  ExplicitWidth = 462
-  ExplicitHeight = 468
   PixelsPerInch = 96
   TextHeight = 13
   object ViewNameLabel: TLabel [0]
@@ -25,9 +22,6 @@ inherited CreateViewDialog: TCreateViewDialog
     Top = 60
     Width = 439
     Height = 316
-    ExplicitTop = 60
-    ExplicitWidth = 439
-    ExplicitHeight = 316
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -115,10 +109,6 @@ inherited CreateViewDialog: TCreateViewDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -173,10 +163,6 @@ inherited CreateViewDialog: TCreateViewDialog
     object SelectStatementTabSheet: TTabSheet [2]
       Caption = 'Select Statement'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SQLPanel: TPanel
         Left = 0
         Top = 0
@@ -217,22 +203,15 @@ inherited CreateViewDialog: TCreateViewDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 431
-      ExplicitHeight = 288
       inherited SourcePanel: TPanel
         Width = 431
         Height = 288
-        ExplicitWidth = 431
-        ExplicitHeight = 288
         inherited SourceSynEdit: TSynEdit
           Width = 429
           Height = 263
-          ExplicitWidth = 429
-          ExplicitHeight = 263
         end
         inherited SourceTopPanel: TPanel
           Width = 429
-          ExplicitWidth = 429
         end
       end
     end
@@ -240,14 +219,10 @@ inherited CreateViewDialog: TCreateViewDialog
   inherited OKButton: TButton
     Left = 283
     Top = 382
-    ExplicitLeft = 283
-    ExplicitTop = 382
   end
   inherited CancelButton: TButton
     Left = 364
     Top = 382
-    ExplicitLeft = 364
-    ExplicitTop = 382
   end
   object ViewNameEdit: TBCEdit [5]
     Left = 76
@@ -285,8 +260,6 @@ inherited CreateViewDialog: TCreateViewDialog
   inherited StatusBar1: TStatusBar
     Top = 413
     Width = 446
-    ExplicitTop = 413
-    ExplicitWidth = 446
   end
   inherited ActionList: TActionList
     object MoveUpAction: TAction

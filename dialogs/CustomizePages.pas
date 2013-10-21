@@ -3,10 +3,10 @@ unit CustomizePages;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.PageControl,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, BCDialogs.Dlg,
-  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, BCControls.ComboBox, Vcl.ExtCtrls,
-  System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.PageControl,
+  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExControls, JvLabel, BCDialogs.Dlg, Vcl.Buttons, ActnList, ValEdit, Vcl.Themes,
+  BCControls.ComboBox, Vcl.ExtCtrls, System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList,
+  BCControls.ImageList;
 
 type
   TCustomizePageControlDialog = class(TDialog)

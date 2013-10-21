@@ -3,10 +3,9 @@ unit ObjectSearch;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, JvExStdCtrls, JvEdit, BCControls.Edit, BCDialogs.Dlg,
-  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, JvExComCtrls, JvHeaderControl,
-  System.Actions;
+  Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
+  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, BCControls.Edit, BCDialogs.Dlg,
+  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, System.Actions;
 
 type
   TObjectSearhForm = class(TDialog)

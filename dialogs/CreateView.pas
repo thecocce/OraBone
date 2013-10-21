@@ -3,12 +3,11 @@ unit CreateView;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.Mask, BCControls.DBEdit,
-  DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ImgList, BCDialogs.Dlg,
-  SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons,
+  DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, BCControls.Edit, Vcl.ImgList, BCDialogs.Dlg, SynEditHighlighter,
+  SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls,
+  BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh,
+  BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TCreateViewDialog = class(TCreateObjectBaseDialog)

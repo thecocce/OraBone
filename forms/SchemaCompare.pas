@@ -3,10 +3,10 @@ unit SchemaCompare;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.ImgList, ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons,
-  JvExButtons, JvBitBtn, Vcl.ExtCtrls, ToolWin, JvExStdCtrls, JvCombobox, BCControls.ComboBox, VirtualTrees, DB,
-  MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg, JvProgressBar;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList,
+  ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, ToolWin,
+  BCControls.ComboBox, VirtualTrees, DB, MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg,
+  JvProgressBar;
 
 type
   TSchemaCompareForm = class(TDialog)

@@ -3,11 +3,10 @@ unit Output;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls, JvExControls,
-  JvLabel, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.StdCtrls, JvSpeedButton, JvExComCtrls,
-  JvComCtrls, Vcl.Menus, Ora, Vcl.Grids, BCControls.PageControl, BCControls.PopupMenu, VirtualTrees,
-  PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons,
+  Vcl.ComCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.StdCtrls, JvExComCtrls, JvComCtrls, Vcl.Menus, Ora, Vcl.Grids,
+  BCControls.PageControl, BCControls.PopupMenu, VirtualTrees, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions;
 
 type
   TOutputFrame = class(TFrame)

@@ -3,10 +3,10 @@ unit CreateObjectDialog;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Ora, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, BCDialogs.Dlg,
-  JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCControls.PageControl,
-  DAScript, BCControls.ToolBar, System.Actions, BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Ora, Vcl.ImgList,
+  SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, BCDialogs.Dlg, JvExComCtrls, SynEdit,
+  Vcl.ExtCtrls, Vcl.StdCtrls, JvComCtrls, BCControls.PageControl, DAScript, BCControls.ToolBar, System.Actions,
+  BCControls.ImageList;
 
 type
   TCreateObjectBaseDialog = class(TDialog)

@@ -2,9 +2,6 @@ inherited CreateTableDialog: TCreateTableDialog
   Caption = 'Create Table'
   ClientHeight = 477
   ClientWidth = 688
-  OnShow = FormShow
-  ExplicitWidth = 704
-  ExplicitHeight = 513
   PixelsPerInch = 96
   TextHeight = 13
   object TableNameLabel: TLabel [0]
@@ -25,9 +22,6 @@ inherited CreateTableDialog: TCreateTableDialog
     Top = 62
     Width = 681
     Height = 360
-    ExplicitTop = 62
-    ExplicitWidth = 681
-    ExplicitHeight = 360
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -203,10 +197,6 @@ inherited CreateTableDialog: TCreateTableDialog
     object ColumnCommentsTabSheet: TTabSheet [1]
       Caption = 'Column Comments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ColumnCommentsPanel: TPanel
         Left = 0
         Top = 0
@@ -259,22 +249,15 @@ inherited CreateTableDialog: TCreateTableDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 673
-      ExplicitHeight = 332
       inherited SourcePanel: TPanel
         Width = 673
         Height = 332
-        ExplicitWidth = 673
-        ExplicitHeight = 332
         inherited SourceSynEdit: TSynEdit
           Width = 671
           Height = 307
-          ExplicitWidth = 671
-          ExplicitHeight = 307
         end
         inherited SourceTopPanel: TPanel
           Width = 671
-          ExplicitWidth = 671
         end
       end
     end
@@ -282,14 +265,10 @@ inherited CreateTableDialog: TCreateTableDialog
   inherited OKButton: TButton
     Left = 524
     Top = 427
-    ExplicitLeft = 524
-    ExplicitTop = 427
   end
   inherited CancelButton: TButton
     Left = 605
     Top = 427
-    ExplicitLeft = 605
-    ExplicitTop = 427
   end
   object TableNameEdit: TBCEdit [5]
     Left = 76
@@ -327,8 +306,6 @@ inherited CreateTableDialog: TCreateTableDialog
   inherited StatusBar1: TStatusBar
     Top = 458
     Width = 688
-    ExplicitTop = 458
-    ExplicitWidth = 688
   end
   inherited ActionList: TActionList
     Left = 283

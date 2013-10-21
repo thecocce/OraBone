@@ -3,12 +3,11 @@ unit Main;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees,
-  ActnMenus, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl,
-  AppEvnts, JvExExtCtrls, JvSplitter, Menus, SQLEditor, SchemaBrowser, BCControls.PopupMenu,
-  ActnPopup, JvToolBar, BCControls.ImageList, Vcl.Themes, JvComponentBase, JvDragDrop,
-  System.Actions;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ActnList,
+  PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees, ActnMenus, ComCtrls,
+  JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl, AppEvnts, Menus,
+  SQLEditor, SchemaBrowser, BCControls.PopupMenu, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
+  JvDragDrop, System.Actions;
 
 const
   { Main menu item indexes }
@@ -313,8 +312,8 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
-  SchemaDocument, Ora, ObjectSearch, SchemaCompare, BCDialogs.DownloadURL, TNSNamesEditor, Winapi.ShellAPI,
-  System.IOUtils, BCSQL.Formatter, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, SynEditKeyCmds,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI,
+  System.IOUtils, BCSQL.Formatter, BCControls.OraSynEdit, BCControls.ToolBar, System.Math,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
 
 {$R *.dfm}

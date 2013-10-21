@@ -5,9 +5,8 @@ unit Lib;
 interface
 
 uses
-  Vcl.StdCtrls, Winapi.Windows, Winapi.Messages, Ora, System.Classes, DB, Vcl.Forms,
-  SynEdit, Vcl.Controls, Grids, BCControls.ComboBox, BCControls.StringGrid, ActnList, ComCtrls,
-  BCControls.DBGrid;
+  Winapi.Windows, Ora, System.Classes, DB, Vcl.Forms, SynEdit, Vcl.Controls, Grids, BCControls.StringGrid, ActnList,
+  ComCtrls, BCControls.DBGrid;
 
 //type
 //  TWordTriple = Array[0..2] of Word;
@@ -114,7 +113,7 @@ function GetCreationAndModificationTimestamp(OraSession: TOraSession; SchemaPara
 implementation
 
 uses
-  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, Main, OraServices, DataModule, BigINI, BCCommon.FileUtils,
+  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, OraServices, DataModule, BigINI, BCCommon.FileUtils,
   Math, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages, BCCommon.Lib, BCCommon.StringUtils;
 
 const

@@ -3,11 +3,10 @@ unit CreateDBLink;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, JvExStdCtrls, JvCombobox,
-  BCControls.ComboBox, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
-  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls,
-  BCControls.PageControl, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls,
+  BCControls.ComboBox, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.ComCtrls,
+  Vcl.ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar,
+  BCDialogs.Dlg, System.Actions, BCControls.ImageList;
 
 type
   TCreateDBLinkDialog = class(TCreateObjectBaseDialog)

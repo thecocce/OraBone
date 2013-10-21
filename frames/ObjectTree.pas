@@ -3,11 +3,10 @@ unit ObjectTree;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ImgList,
-  Vcl.Menus, DBAccess, MemData, OdacVcl, DB, Ora, MemDS, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ToolWin,
-  JvToolBar, Vcl.ActnList, JvStringHolder, VirtualTrees, jvComboBox, JvExStdCtrls, BCControls.Edit,
-  BCControls.ComboBox, BCControls.ToolBar, Vcl.Themes, System.Actions;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
+  Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ImgList, DBAccess, MemData, OdacVcl, DB, Ora, MemDS, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.ToolWin, Vcl.ActnList, JvStringHolder, VirtualTrees, BCControls.Edit, BCControls.ComboBox,
+  BCControls.ToolBar, Vcl.Themes, System.Actions;
 
 const
   { Tree texts }
@@ -260,7 +259,7 @@ implementation
 
 uses
   Options, Lib, BigIni, SchemaFilter, DataModule, SynEdit, BCSQL.Tokenizer, System.StrUtils,
-  BCCommon.StyleUtils, BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
+  BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
 begin

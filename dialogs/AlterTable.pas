@@ -3,13 +3,12 @@ unit AlterTable;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Ora, Vcl.StdCtrls,
-  Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, BCControls.DBEdit,
-  JvExStdCtrls, JvEdit, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList,
-  Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, JvToolBar, SynEdit, JvComCtrls, BCControls.PageControl, Vcl.Menus,
-  BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg, System.Actions, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
+  System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  CreateObjectDialog, Ora, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.DBCtrls, BCControls.Edit, Vcl.ImgList,
+  SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, SynEdit, JvComCtrls,
+  BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg,
+  System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)

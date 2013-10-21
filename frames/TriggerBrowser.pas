@@ -3,13 +3,12 @@ unit TriggerBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh,
-  DBAxisGridsEh, DBGridEh, Vcl.StdCtrls;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid,
+  Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
+  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
+  Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.PopupMenu, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhToolCtrls,
+  DBGridEhGrouping, ToolCtrlsEh;
 
 type
   TTriggerBrowserFrame = class(TFrame)
@@ -79,7 +78,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, Options;
+  Main, CustomizePages, Lib, Options;
 
 const
   TRIGGER_NAME = 'Trigger Name';

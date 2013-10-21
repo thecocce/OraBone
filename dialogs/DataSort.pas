@@ -3,11 +3,9 @@ unit DataSort;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, ActnList, JvExStdCtrls, JvListBox, SynEditHighlighter,
-  SynHighlighterSQL, ValEdit, JvStringHolder, Menus, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  PlatformDefaultStyleActnCtrls, ActnMan, Vcl.ImgList, BCControls.Edit, JvEdit, BCControls.ImageList, BCControls.ToolBar,
-  Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ActnList,
+  JvExStdCtrls, JvListBox, ValEdit, JvStringHolder, Menus, ComCtrls, ToolWin, PlatformDefaultStyleActnCtrls, ActnMan,
+  Vcl.ImgList, BCControls.Edit, BCControls.ImageList, BCControls.ToolBar, Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions;
 
 type
   TDataSortDialog = class(TDialog)

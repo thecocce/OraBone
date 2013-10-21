@@ -3,13 +3,12 @@ unit FuncProcBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess,
-  MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl,
-  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar,
-  Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
-  DBAxisGridsEh, Vcl.StdCtrls;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls,
+  JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl,
+  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
+  BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, GridsEh,
+  DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBAxisGridsEh, Vcl.StdCtrls, DBGridEhGrouping,
+  DBGridEhToolCtrls;
 
 type
   TFuncProcBrowserFrame = class(TFrame)
@@ -120,7 +119,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, Options;
+  Main, CustomizePages, Lib, Options;
 
 const
   { SynonymsQuery columns }

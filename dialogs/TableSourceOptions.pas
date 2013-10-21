@@ -3,8 +3,8 @@ unit TableSourceOptions;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, BCDialogs.Dlg, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ActnList, BCDialogs.Dlg, System.Actions;
 
 type
   TTableSourceOptionsDialog = class(TDialog)

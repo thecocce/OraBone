@@ -3,9 +3,8 @@ unit SQLHistory;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids, BCControls.StringGrid, Vcl.ComCtrls,
-  Vcl.ToolWin, JvExComCtrls, JvToolBar, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCControls.ImageList,
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, JvExGrids,
+  BCControls.StringGrid, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ImgList, Vcl.ActnList, JvStringGrid, BCControls.ImageList,
   BCControls.ToolBar, Vcl.ExtCtrls, System.Actions;
 
 type

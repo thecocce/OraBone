@@ -3,9 +3,8 @@ unit OptionsSchemaBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, JvExStdCtrls,
-  BCControls.ComboBox, Vcl.ExtCtrls, JvEdit, BCControls.Edit, BCControls.CheckBox;
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, BCControls.ComboBox, Vcl.ExtCtrls,
+  BCControls.Edit, BCControls.CheckBox;
 
 type
   TOptionsSchemaBrowserFrame = class(TFrame)

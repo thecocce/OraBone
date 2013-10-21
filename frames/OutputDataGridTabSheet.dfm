@@ -16,12 +16,11 @@ object OutputDataGridFrame: TOutputDataGridFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitTop = 158
     object StatsTimeLabel: TLabel
       Left = 2
       Top = 0
       Width = 72
-      Height = 13
+      Height = 17
       Align = alLeft
       Caption = 'StatsTimeLabel'
     end
@@ -29,7 +28,7 @@ object OutputDataGridFrame: TOutputDataGridFrame
       Left = 242
       Top = 0
       Width = 76
-      Height = 13
+      Height = 17
       Align = alRight
       Caption = 'StatsRowsLabel'
     end
@@ -45,10 +44,6 @@ object OutputDataGridFrame: TOutputDataGridFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 1
-    ExplicitLeft = -131
-    ExplicitTop = -64
-    ExplicitWidth = 451
-    ExplicitHeight = 304
     object Grid: TBCDBGrid
       Left = 0
       Top = 0

@@ -3,16 +3,14 @@ unit SQLEditor;
 interface
 
 uses
-  Winapi.Windows, Winapi.CommDlg, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, SynEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ImgList,
-  JvExComCtrls, JvComCtrls, Vcl.Menus, SynHighlighterSQL, Output, SynEditHighlighter, SynEditPrint,
-  OraError, SynEditMiscClasses, SynEditSearch, SynEditTypes, SynEditPlugins, Vcl.Buttons,
-  Vcl.StdCtrls, Vcl.ActnList, JvExControls, JvSpeedButton, JvExExtCtrls, JvSplitter, DAScript,
-  OraScript, MemDS, DBAccess, Ora, ToolWin, JvToolBar, SynCompletionProposal, JvStringHolder,
-  BCControls.PageControl, BCControls.PopupMenu, BCControls.Edit, JvExStdCtrls, JvEdit, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, Vcl.ActnMan, Vcl.ActnCtrls, BCControls.ToolBar, BCControls.ImageList, BCControls.DBGrid,
-  Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit, SQLEditorTabSheet,
-  BCFrames.Compare, SynEditWildcardSearch, System.Actions;
+  Winapi.Windows, Winapi.CommDlg, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
+  Vcl.Forms, Vcl.Dialogs, SynEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ImgList, JvExComCtrls, JvComCtrls, Vcl.Menus,
+  SynHighlighterSQL, Output, SynEditHighlighter, SynEditPrint, OraError, SynEditMiscClasses, SynEditSearch,
+  SynEditTypes, Vcl.Buttons, Vcl.StdCtrls, Vcl.ActnList, JvExExtCtrls, JvSplitter, DAScript, OraScript, MemDS, DBAccess,
+  Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl, BCControls.PopupMenu,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
+  BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
+  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -404,7 +402,7 @@ implementation
 
 uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleUtils, SynUnicode,
-  Options, SynTokenMatch, SynHighlighterWebMisc, SynHighlighterWebData, System.Math, BCCommon.FileUtils, BCCommon.Messages,
+  Options, System.Math, BCCommon.FileUtils, BCCommon.Messages,
   Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon.Lib, BCCommon.StringUtils,
   AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes;
 

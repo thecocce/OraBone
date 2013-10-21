@@ -3,9 +3,8 @@ unit Progress;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, JvExComCtrls, BCControls.ProgressBar, Vcl.ExtCtrls, ActnList, BCDialogs.Dlg,
-  Vcl.Themes, System.Actions, JvProgressBar;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls,
+  JvExComCtrls, BCControls.ProgressBar, Vcl.ExtCtrls, ActnList, BCDialogs.Dlg, System.Actions, JvProgressBar;
 
 type
   TProgressDialog = class(TDialog)

@@ -15,7 +15,6 @@ object OutputPlanGridFrame: TOutputPlanGridFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitHeight = 221
     object Grid: TBCDBGrid
       Left = 0
       Top = 0

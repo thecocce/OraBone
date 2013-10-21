@@ -3,13 +3,11 @@ unit SynonymBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.PageControl,
-  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.Menus,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Vcl.ToolWin, JvToolBar, BCControls.ToolBar,
-  DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh,
-  Vcl.StdCtrls;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid,
+  Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, ActnList,
+  BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.PopupMenu, Vcl.ToolWin, BCControls.ToolBar, GridsEh, DBGridEh, Data.DB, System.Actions, DBAxisGridsEh,
+  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TSynonymBrowserFrame = class(TFrame)
@@ -53,7 +51,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Options;
+  CustomizePages, Lib, Options;
 
 {$R *.dfm}
 

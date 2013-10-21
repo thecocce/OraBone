@@ -3,8 +3,8 @@ unit Blob;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.ExtCtrls, BCDialogs.Dlg;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB,
+  Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TBlobDialog = class(TDialog)
@@ -32,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, BCCommon.StyleUtils;
+  BCCommon.StyleUtils;
 
 var
   FBlobDialog: TBlobDialog;

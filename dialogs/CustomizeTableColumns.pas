@@ -3,11 +3,9 @@ unit CustomizeTableColumns;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls,
-  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, DB, MemDS,
-  DBAccess, Ora, Vcl.ExtCtrls, BCDialogs.Dlg, System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar,
-  Vcl.ImgList, BCControls.ImageList;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Grids, Vcl.Buttons, ActnList, ValEdit, Vcl.Themes, DB, MemDS, DBAccess, Ora, Vcl.ExtCtrls, BCDialogs.Dlg,
+  System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList;
 
 type
   TCustomizeTableColumnsDialog = class(TDialog)

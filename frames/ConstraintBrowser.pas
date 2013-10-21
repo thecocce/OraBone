@@ -3,12 +3,11 @@ unit ConstraintBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Grids, BCControls.DBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
-  DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, ActnList, BCControls.PageControl,
-  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, AppEvnts, Vcl.Menus, Vcl.ToolWin,
-  JvToolBar, BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, ActnPopup, BCControls.PopupMenu,
-  DBGridEhGrouping, GridsEh, DBGridEh, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions, DBAxisGridsEh, Vcl.StdCtrls;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Grids, BCControls.DBGrid,
+  ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, ActnList,
+  BCControls.PageControl, Vcl.ImgList, AppEvnts, Vcl.Menus, Vcl.ToolWin, BCControls.ImageList, BCControls.ToolBar,
+  PlatformDefaultStyleActnCtrls, ActnPopup, BCControls.PopupMenu, GridsEh, DBGridEh, System.Actions, DBAxisGridsEh,
+  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TConstraintBrowserFrame = class(TFrame)
@@ -67,7 +66,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Options;
+  CustomizePages, Lib, Options;
 
 const
   { ConstraintsQuery columns }

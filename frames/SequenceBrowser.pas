@@ -3,13 +3,12 @@ unit SequenceBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.ToolWin, JvToolBar, Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, BCControls.PopupMenu, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls,
-  System.Actions, DBAxisGridsEh, Vcl.StdCtrls;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, ComCtrls,
+  JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
+  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
+  Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.PopupMenu, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, System.Actions, DBAxisGridsEh, Vcl.StdCtrls,
+  DBGridEhGrouping, DBGridEhToolCtrls;
 
 type
   TSequenceBrowserFrame = class(TFrame)
@@ -126,7 +125,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, DataFilter, CustomizePages, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Lib, Options;
+  Main, CustomizePages, Lib, BCCommon.Lib, Options;
 
 const
   { SynonymsQuery columns }

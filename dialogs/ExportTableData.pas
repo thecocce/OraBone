@@ -3,10 +3,9 @@ unit ExportTableData;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, BCControls.PageControl, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit, ComCtrls,
-  JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora, DB, MemDS, DBAccess,
-  SynEdit, BCControls.Edit, BCDialogs.Dlg, JvExStdCtrls, JvEdit, JvCombobox, BCControls.ComboBox, BCControls.SpinEdit, BCControls.DBGrid,
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.PageControl,
+  Vcl.StdCtrls, Vcl.Mask, JvExMask, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora,
+  DB, DBAccess, BCControls.Edit, BCDialogs.Dlg, BCControls.ComboBox, BCControls.SpinEdit, BCControls.DBGrid,
   Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton;
 
 type

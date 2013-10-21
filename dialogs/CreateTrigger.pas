@@ -3,11 +3,10 @@ unit CreateTrigger;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls, Vcl.ExtCtrls, JvExStdCtrls, JvCombobox, BCControls.ComboBox, JvEdit,
-  BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions,
-  BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls,
+  Vcl.ExtCtrls, BCControls.ComboBox, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList,
+  ComCtrls, ToolWin, JvExComCtrls, SynEdit, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg,
+  System.Actions, BCControls.ImageList;
 
 type
   TCreateTriggerDialog = class(TCreateObjectBaseDialog)

@@ -51,14 +51,12 @@ object ChangeUserPasswordDialog: TChangeUserPasswordDialog
       Hint = 'Password'
       Align = alRight
       TabOrder = 0
-      Text = ''
       EnterToTab = False
       OnlyNumbers = False
       NumbersWithDots = False
       NumbersWithSpots = False
       ErrorColor = 14803198
       NumbersAllowNegative = False
-      ExplicitHeight = 21
     end
   end
   object BottomPanel: TPanel

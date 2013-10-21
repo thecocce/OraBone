@@ -3,13 +3,11 @@ unit RecycleBinBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
-  DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
-  BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
-  Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, Vcl.ToolWin, JvToolBar,
-  BCControls.ToolBar, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, DBGridEhToolCtrls, System.Actions,
-  DBAxisGridsEh;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid,
+  Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
+  BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.PopupMenu, Vcl.ToolWin, BCControls.ToolBar, GridsEh, DBGridEh, Data.DB, System.Actions, DBAxisGridsEh,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TRecycleBinBrowserFrame = class(TFrame)
@@ -50,7 +48,7 @@ type
 implementation
 
 uses
-  Main, DataFilter, CustomizePages, Lib;
+  CustomizePages, Lib;
 
 const
   OBJECT_TYPE = 'Object Type';

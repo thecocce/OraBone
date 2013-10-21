@@ -39,10 +39,6 @@ object OutputTreeViewFrame: TOutputTreeViewFrame
       TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
       TreeOptions.PaintOptions = [toShowButtons, toShowRoot, toThemeAware, toUseBlendedSelection]
-      ExplicitLeft = 116
-      ExplicitTop = 54
-      ExplicitWidth = 200
-      ExplicitHeight = 100
       Columns = <>
     end
   end

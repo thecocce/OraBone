@@ -15,10 +15,6 @@ object OutputListBoxFrame: TOutputListBoxFrame
     Padding.Bottom = 2
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = 174
-    ExplicitTop = 68
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object ListBox: TListBox
       Left = 0
       Top = 0

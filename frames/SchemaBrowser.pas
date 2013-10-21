@@ -3,12 +3,11 @@ unit SchemaBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, TableBrowser, ViewBrowser, Vcl.Dialogs, ObjectTree, Vcl.ExtCtrls,
-  JvExExtCtrls, JvSplitter, JvExForms, JvScrollBox, JvComCtrls, Vcl.ComCtrls, FuncProcBrowser,
-  PackageBrowser, TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser,
-  DBLinkBrowser, RecycleBinBrowser, UserBrowser, MemDS, DBAccess, Ora, Vcl.Menus, Vcl.ActnList,
-  BCControls.PopupMenu, VirtualTrees, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
+  System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, TableBrowser, ViewBrowser,
+  Vcl.Dialogs, ObjectTree, Vcl.ExtCtrls, JvExExtCtrls, JvSplitter, Vcl.ComCtrls, FuncProcBrowser, PackageBrowser,
+  TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser, DBLinkBrowser, RecycleBinBrowser,
+  UserBrowser, DBAccess, Ora, Vcl.Menus, Vcl.ActnList, BCControls.PopupMenu, VirtualTrees,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
 
 type
   TSchemaBrowserFrame = class(TFrame)
@@ -162,7 +161,7 @@ uses
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
   CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon.Lib,
-  SynEditSearch, SynEditTypes, SynEdit, CustomizeObjectFilters, BigINI, Lib, BCCommon.StyleUtils,
+  SynEdit, CustomizeObjectFilters, Lib, BCCommon.StyleUtils,
   BCCommon.Messages, BCCommon.StringUtils;
 
 const

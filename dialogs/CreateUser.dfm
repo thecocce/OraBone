@@ -2,8 +2,6 @@ inherited CreateUserDialog: TCreateUserDialog
   Caption = 'Create User'
   ClientHeight = 402
   ClientWidth = 405
-  ExplicitWidth = 421
-  ExplicitHeight = 438
   PixelsPerInch = 96
   TextHeight = 13
   object UsernameLabel: TLabel [0]
@@ -41,10 +39,6 @@ inherited CreateUserDialog: TCreateUserDialog
     Top = 91
     Width = 398
     Height = 257
-    ExplicitLeft = 6
-    ExplicitTop = 91
-    ExplicitWidth = 398
-    ExplicitHeight = 257
     object RolesTabSheet: TTabSheet [0]
       Caption = 'Roles'
       ImageIndex = 1
@@ -88,22 +82,15 @@ inherited CreateUserDialog: TCreateUserDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
-      ExplicitWidth = 390
-      ExplicitHeight = 229
       inherited SourcePanel: TPanel
         Width = 390
         Height = 229
-        ExplicitWidth = 390
-        ExplicitHeight = 229
         inherited SourceSynEdit: TSynEdit
           Width = 388
           Height = 204
-          ExplicitWidth = 388
-          ExplicitHeight = 204
         end
         inherited SourceTopPanel: TPanel
           Width = 388
-          ExplicitWidth = 388
         end
       end
     end
@@ -111,14 +98,10 @@ inherited CreateUserDialog: TCreateUserDialog
   inherited OKButton: TButton
     Left = 241
     Top = 352
-    ExplicitLeft = 241
-    ExplicitTop = 352
   end
   inherited CancelButton: TButton
     Left = 322
     Top = 352
-    ExplicitLeft = 322
-    ExplicitTop = 352
   end
   object UsernameEdit: TBCEdit [5]
     Left = 102
@@ -167,8 +150,6 @@ inherited CreateUserDialog: TCreateUserDialog
   inherited StatusBar1: TStatusBar
     Top = 383
     Width = 405
-    ExplicitTop = 383
-    ExplicitWidth = 405
   end
   object RolesQuery: TOraQuery
     LocalUpdate = True

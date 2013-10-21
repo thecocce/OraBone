@@ -3,12 +3,11 @@ unit CreateTable;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, DB, MemDS, DBAccess, Ora, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.StdCtrls,
-  Vcl.DBCtrls, Vcl.Mask, BCControls.DBEdit, JvExStdCtrls, JvEdit, BCControls.Edit, BCDialogs.Dlg,
-  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
-  JvToolBar, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, DB, MemDS,
+  DBAccess, Ora, Vcl.Buttons, Vcl.StdCtrls, Vcl.DBCtrls, BCControls.Edit, BCDialogs.Dlg, Vcl.ImgList,
+  SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls,
+  BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh,
+  BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
   TCreateTableDialog = class(TCreateObjectBaseDialog)

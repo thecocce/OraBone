@@ -77,8 +77,6 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
       HotTrackFont.Style = []
       MarkDropDown = False
       Spacing = 0
-      ExplicitLeft = 318
-      ExplicitTop = 8
     end
     object NameComboBox: TBCComboBox
       Left = 55

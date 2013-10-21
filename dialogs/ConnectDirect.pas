@@ -3,9 +3,8 @@ unit ConnectDirect;
 interface
 
 uses
-  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
-  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Dialogs, Winapi.Messages, Vcl.ActnList, OdacVcl,
-  Ora, OraError, JvExStdCtrls, JvCombobox, JvEdit, BCControls.Edit, BCDialogs.Dlg, System.Actions;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.Dialogs, Vcl.ActnList, BCControls.Edit, BCDialogs.Dlg, System.Actions;
 
 type
   TConnectDirectDialog = class(TDialog)

@@ -3,10 +3,9 @@ unit CustomizeObjectBrowser;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, Grids, JvExComCtrls, JvComCtrls, JvExControls, JvLabel, JvExStdCtrls, BCDialogs.Dlg,
-  JvCombobox, Vcl.Buttons, JvExButtons, JvBitBtn, ActnList, ValEdit, Vcl.Themes, ObjectTree, Vcl.ExtCtrls,
-  System.Actions, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList;
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Grids, BCDialogs.Dlg, Vcl.Buttons, ActnList, ValEdit, Vcl.Themes, Vcl.ExtCtrls, System.Actions, Vcl.ComCtrls,
+  Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList;
 
 type
   TCustomizeObjectBrowserDialog = class(TDialog)

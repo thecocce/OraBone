@@ -3,8 +3,8 @@ unit StringData;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, Vcl.StdCtrls, SynEdit, Vcl.ExtCtrls, BCDialogs.Dlg;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, SynEdit,
+  Vcl.ExtCtrls, BCDialogs.Dlg;
 
 type
   TStringDataDialog = class(TDialog)
@@ -31,7 +31,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, BCCommon.StyleUtils;
+  BCCommon.StyleUtils;
 
 const
   CAPTION_TEXT = 'Edit Field: %s';

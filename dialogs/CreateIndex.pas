@@ -3,12 +3,10 @@ unit CreateIndex;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
-  Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons, JvExButtons, JvBitBtn, Grids, JvExGrids, JvStringGrid,
-  BCControls.StringGrid, Vcl.StdCtrls, JvExStdCtrls, JvCombobox, BCControls.ComboBox, BCControls.Edit, Vcl.ImgList,
-  SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, JvToolBar,
-  SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, JvEdit,
-  BCControls.ImageList;
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.Buttons,
+  Grids, JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, BCControls.ComboBox, BCControls.Edit,
+  Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls,
+  JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions, BCControls.ImageList;
 
 type
   TCreateIndexDialog = class(TCreateObjectBaseDialog)
@@ -51,7 +49,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Ora, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
+  DataModule, Ora, Lib, BCCommon.StyleUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FCreateIndexDialog: TCreateIndexDialog;
