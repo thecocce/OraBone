@@ -4,17 +4,17 @@ interface
 
 uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.ExtCtrls, Vcl.StdCtrls, BCControls.CheckBox,
-  BCControls.Edit, Vcl.Buttons;
+  BCControls.Edit, Vcl.Buttons, JvEdit;
 
 type
   TEditorMarginFrame = class(TFrame)
     Panel: TPanel;
-    MarginVisibleCheckBox: TBCCheckBox;
+    VisibleLeftMarginCheckBox: TBCCheckBox;
     RightMarginLabel: TLabel;
     RightMarginEdit: TBCEdit;
-    AutoSizeCheckBox: TBCCheckBox;
-    WidthLabel: TLabel;
-    WidthEdit: TBCEdit;
+    LeftMarginAutoSizeCheckBox: TBCCheckBox;
+    LeftMarginWidthLabel: TLabel;
+    LeftMarginWidthEdit: TBCEdit;
     VisibleRightMarginCheckBox: TBCCheckBox;
   private
     { Private declarations }
