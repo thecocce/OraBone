@@ -224,7 +224,8 @@ type
     procedure OutputDblClickActionExecute(Sender: TObject);
     procedure OraScriptError(Sender: TObject; E: Exception; SQL: string; var Action: TErrorAction);
     procedure OraSQLAfterExecuteEvent(Sender: TObject; Result: Boolean);
-    procedure OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
+    //procedure OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
+    procedure OraScriptQueryAfterExecuteEvent(Sender: TObject; Result: Boolean);
     procedure ObjectFieldCompletionProposalExecute(Kind: SynCompletionType; Sender: TObject;
       var CurrentInput: UnicodeString; var x, y: Integer; var CanExecute: Boolean);
     procedure DBMSOutputTimer(Sender: TObject);
@@ -2230,7 +2231,7 @@ var
   i, Row, Col: Integer;
   SynEdit: TBCOraSynEdit;
   CreateStatement: Boolean;
-  s: WideString;
+  s, Temp: WideString;
 begin
   SynEdit := GetActiveSynEdit;
 
@@ -2254,11 +2255,26 @@ begin
       Break;
     end;
   end;
+  {else
+  begin
+    s := '';
+    for i := 0 to OraScript.Statements.Count - 1 do
+    begin
+      Temp := OraScript.Statements.Items[i].SQL;
+      if System.Pos('EXECUTE', UpperCase(Temp)) = 1 then
+        Temp := 'BEGIN ' + System.Copy(Temp, 8, Length(Temp)) + '; END;';
+      if System.Pos('EXEC', UpperCase(Temp)) = 1 then
+        Temp := 'BEGIN ' + System.Copy(Temp, 5, Length(Temp)) + '; END;';
+      s := s + Temp + CHR_ENTER;
+    end;
+    OraScript.SQL.Text := s;
+  end;}
   ScriptQuery.SQL.Text := s;
   try
     OraScript.Session := FSession;
+    //OraScript.AfterExecute := OraScriptAfterExecuteEvent;
     ScriptQuery.Session := FSession;
-    OraScript.AfterExecute := OraScriptAfterExecuteEvent;
+    ScriptQuery.AfterExecute := OraScriptQueryAfterExecuteEvent;
     FOutputFrame.ClearStrings('Output: ' + GetActivePageCaption);
     SynEdit.StartTime := Now;
     if DBMSOutputToolButton.Down then
@@ -2270,7 +2286,25 @@ begin
     if not CreateStatement then
       if not FSession.InTransaction then
         FSession.StartTransaction;
-    OraScript.Execute;
+    for i := 0 to OraScript.Statements.Count - 1 do
+    begin
+      Temp := OraScript.Statements.Items[i].SQL;
+      if System.Pos('EXECUTE', UpperCase(Temp)) = 1 then
+      begin
+        Temp := 'BEGIN ' + System.Copy(Temp, 8, Length(Temp)) + '; END;';
+        ScriptQuery.SQL.Text := Temp;
+        ScriptQuery.Execute;
+      end
+      else
+      if System.Pos('EXEC', UpperCase(Temp)) = 1 then
+      begin
+        Temp := 'BEGIN ' + System.Copy(Temp, 5, Length(Temp)) + '; END;';
+        ScriptQuery.SQL.Text := Temp;
+        ScriptQuery.Execute;
+      end
+      else
+        OraScript.Statements.Items[i].Execute;
+    end;
     if DBMSOutputToolButton.Down then
       GetDBMSOutput;
     OutputPanel.Visible := True;
@@ -2658,7 +2692,6 @@ begin
   SynEdit.OraSQL.AutoCommit := False;
   SynEdit.OraSQL.AfterExecute := OraSQLAfterExecuteEvent;
   SynEdit.OraSQL.NonBlocking := CreateNewSession;
-  //end;
   try
     SynEdit.OraSQL.SQL.Clear;
     if SynEdit.SelAvail then
@@ -2666,9 +2699,9 @@ begin
     else
       s := Trim(SynEdit.Text);
     if System.Pos('EXECUTE', UpperCase(s)) = 1 then
-      s := 'BEGIN ' + System.Copy(s, 8, Length(s)) + ' END;';
+      s := 'BEGIN ' + System.Copy(s, 8, Length(s)) + '; END;';
     if System.Pos('EXEC', UpperCase(s)) = 1 then
-      s := 'BEGIN ' + System.Copy(s, 5, Length(s)) + ' END;';
+      s := 'BEGIN ' + System.Copy(s, 5, Length(s)) + '; END;';
     SynEdit.OraSQL.SQL.Add(s);
     { parameters }
     if SynEdit.OraSQL.ParamCount > 0 then
@@ -2712,7 +2745,7 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
+{procedure TSQLEditorFrame.OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
 var
   i: Integer;
   StringList: TStringList;
@@ -2724,31 +2757,28 @@ begin
   StringList := TStringList.Create;
   StringList.Clear;
   try
-    for i := 0 to OraScript.Params.Count-1 do
-      StringList.Add(OraScript.Params[i].Name + ' = ' +
-       OraScript.Params[i].AsWideString);
+    for i := 0 to OraScript.Params.Count - 1 do
+      StringList.Add(Format('%s = %s', [OraScript.Params[i].Name, OraScript.Params[i].AsWideString]));
 
     if OraScript.DataSet.RowsProcessed <> 0 then
-      s := IntToStr(OraScript.DataSet.RowsProcessed) + ' row(s) processed.'
+      s := Format('%d row(s) processed.', [OraScript.DataSet.RowsProcessed])
     else
       s := 'Success.';
-    StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
+    StringList.Add(Format('%s Time Elapsed: %s', [s, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
-    FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, StringList.Text);
+    FOutputFrame.AddStrings(Format('Output: %s', [GetActivePageCaption]), StringList.Text);
   finally
     WriteHistory(OraScript.Session, SynEdit.Text);
     StringList.Free;
   end;
-end;
+end; }
 
 procedure TSQLEditorFrame.OraSQLAfterExecuteEvent(Sender: TObject; Result: Boolean);
 var
   i:integer;
   SynEdit: TBCOraSynEdit;
   StringList: TStringList;
-//  T2: TTime;
   s: string;
-  //Min, Secs: Integer;
 begin
   SynEdit := GetActiveSynEdit;
   if Result then
@@ -2756,19 +2786,48 @@ begin
     StringList := TStringList.Create;
     try
       for i := 0 to SynEdit.OraSQL.Params.Count-1 do
-        StringList.Add(SynEdit.OraSQL.Params[i].Name + ' = ' +
-         SynEdit.OraSQL.Params[i].AsWideString);
+        StringList.Add(Format('%s = %s', [SynEdit.OraSQL.Params[i].Name, SynEdit.OraSQL.Params[i].AsWideString]));
 
       if SynEdit.OraSQL.RowsProcessed <> 0 then
-        s := IntToStr(SynEdit.OraSQL.RowsProcessed) + ' row(s) processed in '
+        s := Format('%d row(s) processed.', [SynEdit.OraSQL.RowsProcessed])
       else
         s := 'Success.';
 
-      StringList.Add(s + ' ' + Format('Time Elapsed: %s', [System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
+      StringList.Add(Format('%s Time Elapsed: %s', [s, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
 
-      FOutputFrame.AddStrings('Output: ' + GetActivePageCaption, StringList.Text);
+      FOutputFrame.AddStrings(Format('Output: %s', [GetActivePageCaption]), StringList.Text);
     finally
       WriteHistory(SynEdit.OraSQL.Session, SynEdit.Text);
+      StringList.Free;
+    end;
+  end
+end;
+
+procedure TSQLEditorFrame.OraScriptQueryAfterExecuteEvent(Sender: TObject; Result: Boolean);
+var
+  i:integer;
+  SynEdit: TBCOraSynEdit;
+  StringList: TStringList;
+  s: string;
+begin
+  SynEdit := GetActiveSynEdit;
+  if Result then
+  begin
+    StringList := TStringList.Create;
+    try
+      for i := 0 to ScriptQuery.Params.Count-1 do
+        StringList.Add(Format('%s = %s', [ScriptQuery.Params[i].Name, ScriptQuery.Params[i].AsWideString]));
+
+      if ScriptQuery.RowsProcessed <> 0 then
+        s := Format('%d row(s) processed.', [ScriptQuery.RowsProcessed])
+      else
+        s := 'Success.';
+
+      StringList.Add(Format('%s Time Elapsed: %s', [s, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
+
+      FOutputFrame.AddStrings(Format('Output: %s', [GetActivePageCaption]), StringList.Text);
+    finally
+      WriteHistory(ScriptQuery.Session, SynEdit.Text);
       StringList.Free;
     end;
   end
