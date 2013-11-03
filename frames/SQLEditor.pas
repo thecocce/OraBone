@@ -290,7 +290,7 @@ type
     procedure DoSearch;
     procedure AddToReopenFiles(FileName: string);
     procedure SetHighlighterTableNames(Value: TStrings);
-    procedure ExecuteStatement(SynEdit: TBCOraSynEdit); overload;
+    procedure ExecuteStatement(SynEdit: TBCOraSynEdit; SQL: string = ''); overload;
     procedure ExecuteNoRowsStatement(SynEdit: TBCOraSynEdit);
     procedure SetSession(Value: TOraSession);
     procedure EnableDBMSOutput;
@@ -2255,68 +2255,58 @@ begin
       Break;
     end;
   end;
-  {else
+  if (Pos(WideString('SELECT'), s) = 1) or (Pos(WideString('DESC'), s) = 1) then
+    ExecuteStatement(GetActiveSynEdit, s)
+  else
   begin
-    s := '';
-    for i := 0 to OraScript.Statements.Count - 1 do
-    begin
-      Temp := OraScript.Statements.Items[i].SQL;
-      if System.Pos('EXECUTE', UpperCase(Temp)) = 1 then
-        Temp := 'BEGIN ' + System.Copy(Temp, 8, Length(Temp)) + '; END;';
-      if System.Pos('EXEC', UpperCase(Temp)) = 1 then
-        Temp := 'BEGIN ' + System.Copy(Temp, 5, Length(Temp)) + '; END;';
-      s := s + Temp + CHR_ENTER;
-    end;
-    OraScript.SQL.Text := s;
-  end;}
-  ScriptQuery.SQL.Text := s;
-  try
-    OraScript.Session := FSession;
-    //OraScript.AfterExecute := OraScriptAfterExecuteEvent;
-    ScriptQuery.Session := FSession;
-    ScriptQuery.AfterExecute := OraScriptQueryAfterExecuteEvent;
-    FOutputFrame.ClearStrings('Output: ' + GetActivePageCaption);
-    SynEdit.StartTime := Now;
-    if DBMSOutputToolButton.Down then
-      EnableDBMSOutput;
-    { parameters }
-    if ScriptQuery.ParamCount > 0 then
-      if not ParametersDialog.Open(ScriptQuery) then
-        Exit;
-    if not CreateStatement then
-      if not FSession.InTransaction then
-        FSession.StartTransaction;
-    for i := 0 to OraScript.Statements.Count - 1 do
-    begin
-      Temp := OraScript.Statements.Items[i].SQL;
-      if System.Pos('EXECUTE', UpperCase(Temp)) = 1 then
+    ScriptQuery.SQL.Text := s;
+    try
+      OraScript.Session := FSession;
+      ScriptQuery.Session := FSession;
+      ScriptQuery.AfterExecute := OraScriptQueryAfterExecuteEvent;
+      FOutputFrame.ClearStrings('Output: ' + GetActivePageCaption);
+      SynEdit.StartTime := Now;
+      if DBMSOutputToolButton.Down then
+        EnableDBMSOutput;
+      { parameters }
+      if ScriptQuery.ParamCount > 0 then
+        if not ParametersDialog.Open(ScriptQuery) then
+          Exit;
+      if not CreateStatement then
+        if not FSession.InTransaction then
+          FSession.StartTransaction;
+      for i := 0 to OraScript.Statements.Count - 1 do
       begin
-        Temp := 'BEGIN ' + System.Copy(Temp, 8, Length(Temp)) + '; END;';
-        ScriptQuery.SQL.Text := Temp;
-        ScriptQuery.Execute;
-      end
-      else
-      if System.Pos('EXEC', UpperCase(Temp)) = 1 then
-      begin
-        Temp := 'BEGIN ' + System.Copy(Temp, 5, Length(Temp)) + '; END;';
-        ScriptQuery.SQL.Text := Temp;
-        ScriptQuery.Execute;
-      end
-      else
-        OraScript.Statements.Items[i].Execute;
-    end;
-    if DBMSOutputToolButton.Down then
-      GetDBMSOutput;
-    OutputPanel.Visible := True;
-  except
-    on E: EOraError do
-    begin
-      if not GetOraScriptErrorPos(E.Message, Row, Col) then
-        OraScript.DataSet.GetErrorPos(Row, Col);
+        Temp := OraScript.Statements.Items[i].SQL;
+        if System.Pos('EXECUTE', UpperCase(Temp)) = 1 then
+        begin
+          Temp := 'BEGIN ' + System.Copy(Temp, 8, Length(Temp)) + '; END;';
+          ScriptQuery.SQL.Text := Temp;
+          ScriptQuery.Execute;
+        end
+        else
+        if System.Pos('EXEC', UpperCase(Temp)) = 1 then
+        begin
+          Temp := 'BEGIN ' + System.Copy(Temp, 5, Length(Temp)) + '; END;';
+          ScriptQuery.SQL.Text := Temp;
+          ScriptQuery.Execute;
+        end
+        else
+          OraScript.Statements.Items[i].Execute;
+      end;
+      if DBMSOutputToolButton.Down then
+        GetDBMSOutput;
       OutputPanel.Visible := True;
-      SynEdit.SetFocus;
-      SynEdit.CaretY := Row;
-      SynEdit.CaretX := Col;
+    except
+      on E: EOraError do
+      begin
+        if not GetOraScriptErrorPos(E.Message, Row, Col) then
+          OraScript.DataSet.GetErrorPos(Row, Col);
+        OutputPanel.Visible := True;
+        SynEdit.SetFocus;
+        SynEdit.CaretY := Row;
+        SynEdit.CaretX := Col;
+      end;
     end;
   end;
 end;
@@ -2566,7 +2556,7 @@ begin
   end
 end;
 
-procedure TSQLEditorFrame.ExecuteStatement(SynEdit: TBCOraSynEdit);
+procedure TSQLEditorFrame.ExecuteStatement(SynEdit: TBCOraSynEdit; SQL: string = '');
 var
   s, Owner, TableName: string;
   T1, T2: TTime;
@@ -2591,6 +2581,9 @@ begin
 
   SynEdit.OraQuery.SQL.Clear;
 
+  if SQL <> '' then
+    s := SQL
+  else
   if SynEdit.SelAvail then
     s := SynEdit.SelText
   else
