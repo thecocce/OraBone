@@ -2247,15 +2247,16 @@ begin
   begin
     { find current script }
     for i := 0 to OraScript.Statements.Count - 1 do
-    if (OraScript.Statements.Items[i].StartLine <= SynEdit.CaretXY.Line) and
-     (OraScript.Statements.Items[i].EndLine >= SynEdit.CaretXY.Line) then
+    if (OraScript.Statements.Items[i].StartLine <= SynEdit.CaretXY.Line - 1) and
+     (OraScript.Statements.Items[i].EndLine >= SynEdit.CaretXY.Line - 1) then
     begin
       s := OraScript.Statements.Items[i].SQL;
       OraScript.SQL.Text := s;
       Break;
     end;
   end;
-  if (Pos(WideString('SELECT'), s) = 1) or (Pos(WideString('DESC'), s) = 1) then
+  if (System.Pos(WideString('SELECT'), WideString(Trim(UpperCase(s)))) = 1) or
+    (System.Pos(WideString('DESC'), WideString(Trim(UpperCase(s)))) = 1) then
     ExecuteStatement(GetActiveSynEdit, s)
   else
   begin
@@ -2387,7 +2388,7 @@ begin
   if s[Length(s)] = ';' then
     ExecuteScript(Current)
   else
-  if (Pos(WideString('SELECT'), s) = 1) or (Pos(WideString('DESC'), s) = 1) then
+  if (System.Pos(WideString('SELECT'), s) = 1) or (System.Pos(WideString('DESC'), s) = 1) then
     ExecuteStatement(SynEdit)
   else
     ExecuteNoRowsStatement(SynEdit);
