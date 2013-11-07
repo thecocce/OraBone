@@ -57,8 +57,8 @@ object OutputDataGridFrame: TOutputDataGridFrame
       DynProps = <>
       FooterParams.Color = clWindow
       GridLineParams.VertEmptySpaceStyle = dessNonEh
-      IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
-      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      IndicatorOptions = [gioShowRowselCheckboxesEh]
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
       TabOrder = 0
       object RowDetailData: TRowDetailPanelControlEh

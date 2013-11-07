@@ -1065,11 +1065,11 @@ begin
 
     GetKeyboardState(KeyState);
     if KeyState[VK_INSERT] = 0 then
-      if StatusBar.Panels[1].Text <> 'Insert' then
-        StatusBar.Panels[1].Text := 'Insert';
+      if StatusBar.Panels[1].Text <> LanguageDataModule.GetConstant('Insert') then
+        StatusBar.Panels[1].Text := LanguageDataModule.GetConstant('Insert');
     if KeyState[VK_INSERT] = 1 then
-      if StatusBar.Panels[1].Text <> 'Overwrite' then
-        StatusBar.Panels[1].Text := 'Overwrite'
+      if StatusBar.Panels[1].Text <> LanguageDataModule.GetConstant('Overwrite') then
+        StatusBar.Panels[1].Text := LanguageDataModule.GetConstant('Overwrite');
   except
     // silent
   end;

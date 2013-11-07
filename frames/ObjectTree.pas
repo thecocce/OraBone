@@ -286,7 +286,7 @@ begin
   Result.ConnectString := s;
   if ConnectString <> '' then
     Result.ConnectPrompt := False;
-  Result.Options.Direct := Pos(':', ConnectString) <> 0;
+  Result.Options.Direct := Pos('Direct=True', ConnectString) <> 0;
   if Pos('^', ConnectString) <> 0 then
     Result.HomeName := Copy(ConnectString, Pos('^', ConnectString) + 1, Length(ConnectString));
   Result.Options.DateFormat := OptionsContainer.DateFormat; // 'DD.MM.YYYY';
