@@ -1966,6 +1966,7 @@ begin
       Rslt := SQLEditorFrame.CloseAll(True, Confirm);
       if Rslt <> mrCancel then
       begin
+        PageControl.TabClosed := True;
         if SQLEditorFrame.InTransaction then
         begin
           if Lib.AskCommit(PageControl.ActivePageCaption) then
@@ -1987,6 +1988,7 @@ begin
   else
   if PageControl.ActivePage.ImageIndex = IMAGE_INDEX_SQL_HISTORY then
   begin
+    PageControl.TabClosed := True;
     { Fixed Delphi Bug: http://qc.embarcadero.com/wc/qcmain.aspx?d=5473 }
     if (ActivePageIndex = PageControl.PageCount - 1) and (PageControl.PageCount > 1) then
     begin

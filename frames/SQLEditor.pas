@@ -1128,6 +1128,7 @@ begin
 
   if Rslt <> mrCancel then
   begin
+    PageControl.TabClosed := True;
     ActivePageIndex := PageControl.ActivePageIndex;
     { Fixed Delphi Bug: http://qc.embarcadero.com/wc/qcmain.aspx?d=5473 }
     if (ActivePageIndex = PageControl.PageCount - 1) and (PageControl.PageCount > 1) then
@@ -2433,9 +2434,8 @@ begin
   Result := TOraSession.Create(Self);
   Result.ConnectString := OraSession.ConnectString;
   Result.Options.Direct := OraSession.Options.Direct;
-  Result.Options.DateFormat := OptionsContainer.DateFormat; // 'DD.MM.YYYY';
+  Result.Options.DateFormat := OptionsContainer.DateFormat;
   Result.Options.UseUnicode := True;
-  //
   Result.AutoCommit := False;
   Result.ThreadSafety := True;
   Result.ConnectPrompt := False;
