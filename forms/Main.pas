@@ -1294,6 +1294,15 @@ begin
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '48'));
+
+    OptionsContainer.MarginInTens := ReadBool('Options', 'MarginInTens', True);
+    OptionsContainer.MarginZeroStart := ReadBool('Options', 'MarginZeroStart', False);
+    OptionsContainer.MarginLineModified := ReadBool('Options', 'MarginLineModified', True);
+    OptionsContainer.MarginModifiedColor := ReadString('Options', 'MarginModifiedColor', 'clYellow');
+    OptionsContainer.MarginNormalColor := ReadString('Options', 'MarginNormalColor', 'clGreen');
+
+    OptionsContainer.ShowSearchStringNotFound := ReadBool('Options', 'ShowSearchStringNotFound', True);
+    OptionsContainer.BeepIfSearchStringNotFound := ReadBool('Options', 'BeepIfSearchStringNotFound', True);
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
     OptionsContainer.NonblinkingCaretColor := ReadString('Options', 'NonblinkingCaretColor', 'clBlack');
     OptionsContainer.LineSpacing := StrToInt(ReadString('Options', 'LineSpacing', '0'));
@@ -1301,7 +1310,6 @@ begin
     OptionsContainer.CompletionProposalEnabled := ReadBool('Options', 'CompletionProposalEnabled', True);
     OptionsContainer.CompletionProposalCaseSensitive := ReadBool('Options', 'CompletionProposalCaseSensitive', True);
     OptionsContainer.CompletionProposalShortcut := ReadString('Options', 'CompletionProposalShortcut', 'Ctrl+Space');
-    OptionsContainer.MarginLeftMarginVisible := ReadBool('Options', 'MarginLeftMarginVisible', True);
     OptionsContainer.ConnectionCloseTabByDblClick := ReadBool('Options', 'ConnectionCloseTabByDblClick', False);
     OptionsContainer.ConnectionCloseTabByMiddleClick := ReadBool('Options', 'ConnectionCloseTabByMiddleClick', False);
     OptionsContainer.ConnectionMultiLine := ReadBool('Options', 'ConnectionMultiLine', False);
@@ -1682,6 +1690,16 @@ begin
       WriteBool('Options', 'MarginLeftMarginAutoSize', OptionsContainer.MarginLeftMarginAutoSize);
       WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
       WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
+
+      WriteBool('Options', 'MarginInTens', OptionsContainer.MarginInTens);
+      WriteBool('Options', 'MarginZeroStart', OptionsContainer.MarginZeroStart);
+      WriteBool('Options', 'MarginLineModified', OptionsContainer.MarginLineModified);
+      WriteString('Options', 'MarginModifiedColor', OptionsContainer.MarginModifiedColor);
+      WriteString('Options', 'MarginNormalColor', OptionsContainer.MarginNormalColor);
+
+      WriteBool('Options', 'ShowSearchStringNotFound', OptionsContainer.ShowSearchStringNotFound);
+      WriteBool('Options', 'BeepIfSearchStringNotFound', OptionsContainer.BeepIfSearchStringNotFound);
+
       WriteString('Options', 'InsertCaret', IntToStr(Ord(OptionsContainer.InsertCaret)));
       WriteString('Options', 'NonblinkingCaretColor', OptionsContainer.NonblinkingCaretColor);
 

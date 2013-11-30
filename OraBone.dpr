@@ -124,7 +124,8 @@ uses
   OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
   OptionsEditorLeftMargin in 'frames\OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
-  OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame};
+  OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
+  OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame};
 
 {$R *.res}
 

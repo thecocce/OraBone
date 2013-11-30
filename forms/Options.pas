@@ -6,9 +6,10 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
   Vcl.Buttons, Menus, SynEdit, BCDialogs.Dlg, SynEditMiscClasses, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
   ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont,
-  OptionsEditorMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput,
-  OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat, OptionsCompare, OptionsPrint,
-  OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal, System.Actions;
+  OptionsEditorLeftMargin, OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu,
+  OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat,
+  OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal,
+  System.Actions, OptionsEditorSearch;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -22,35 +23,36 @@ type
   TOptionsDialog = class(TDialog)
     ActionList: TActionList;
     CancelButton: TButton;
+    CompareAction: TAction;
+    ConnectionAction: TAction;
+    ConnectionTabsAction: TAction;
+    DateFormatAction: TAction;
+    DBMSOutputAction: TAction;
+    DBSettingsAction: TAction;
+    EditorAction: TAction;
+    EditorCompletionProposalAction: TAction;
+    EditorFontAction: TAction;
+    EditorLeftMarginAction: TAction;
+    EditorRightMarginAction: TAction;
+    EditorTabsAction: TAction;
+    EditorToolBarAction: TAction;
     ImageList: TImageList;
+    MainMenuAction: TAction;
+    ObjectFrameAction: TAction;
     OKButton: TButton;
     OKButtonAction: TAction;
     OptionsPanel: TPanel;
     OptionsVirtualStringTree: TVirtualStringTree;
+    OutputAction: TAction;
+    OutputTabsAction: TAction;
     Panel1: TPanel;
     Panel2: TPanel;
+    PrintAction: TAction;
+    SchemaBrowserAction: TAction;
     Separator1Panel: TPanel;
     Splitter: TSplitter;
-    EditorAction: TAction;
-    EditorFontAction: TAction;
-    EditorMarginAction: TAction;
-    EditorTabsAction: TAction;
-    OutputAction: TAction;
-    DBMSOutputAction: TAction;
-    SchemaBrowserAction: TAction;
-    ObjectFrameAction: TAction;
-    ConnectionAction: TAction;
-    ConnectionTabsAction: TAction;
-    OutputTabsAction: TAction;
-    CompareAction: TAction;
-    MainMenuAction: TAction;
-    DBSettingsAction: TAction;
-    DateFormatAction: TAction;
-    TimeFormatAction: TAction;
     StatusBarAction: TAction;
-    EditorToolBarAction: TAction;
-    EditorCompletionProposalAction: TAction;
-    PrintAction: TAction;
+    TimeFormatAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -63,30 +65,35 @@ type
     procedure FormShow(Sender: TObject);
     procedure OptionsVirtualStringTreePaintText(Sender: TBaseVirtualTree; const TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    FOptionsContainer: TOptionsContainer;
-    FEditorOptionsFrame: TEditorOptionsFrame;
+    FConnectionTabsFrame: TConnectionTabsFrame;
+    FDateFormatFrame: TDateFormatFrame;
+    FDBMSOutputFrame: TDBMSOutputFrame;
+    FEditorCompletionProposalFrame: TEditorCompletionProposalFrame;
     FEditorFontFrame: TEditorFontFrame;
-    FEditorMarginFrame: TEditorMarginFrame;
+    FEditorLeftMarginFrame: TEditorLeftMarginFrame;
+    FEditorOptionsFrame: TEditorOptionsFrame;
+    FEditorRightMarginFrame: TEditorRightMarginFrame;
+    FEditorSearchFrame: TEditorSearchFrame;
     FEditorTabsFrame: TEditorTabsFrame;
     FEditorToolBarFrame: TEditorToolBarFrame;
-    FEditorCompletionProposalFrame: TEditorCompletionProposalFrame;
     FMainMenuFrame: TMainMenuFrame;
-    FOptionsOutputFrame: TOptionsOutputFrame;
-    FOutputTabsFrame: TOutputTabsFrame;
-    FDBMSOutputFrame: TDBMSOutputFrame;
-    FOptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame;
     FObjectFrameFrame: TObjectFrameFrame;
-    FDateFormatFrame: TDateFormatFrame;
-    FTimeFormatFrame: TTimeFormatFrame;
-    FConnectionTabsFrame: TConnectionTabsFrame;
     FOptionsCompareFrame: TOptionsCompareFrame;
+    FOptionsContainer: TOptionsContainer;
+    FOptionsOutputFrame: TOptionsOutputFrame;
     FOptionsPrintFrame: TOptionsPrintFrame;
+    FOptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame;
+    FOutputTabsFrame: TOutputTabsFrame;
     FStatusBarFrame: TStatusBarFrame;
+    FTimeFormatFrame: TTimeFormatFrame;
     procedure CreateTree;
     procedure GetData;
     procedure PutData;
+    procedure ReadIniFile;
     procedure SetVisibleFrame;
+    procedure WriteIniFile;
   public
     function Execute(OraSession: TOraSession; EditOptions: TOptionsContainer): Boolean;
   end;
@@ -97,101 +104,109 @@ type
     FAnimationStyle: TAnimationStyle;
     FAutoIndent: Boolean;
     FAutoSave: Boolean;
-    FNonblinkingCaret: Boolean;
-    FUndoAfterSave: Boolean;
+    FBeepIfSearchStringNotFound: Boolean;
     FColorBrightness: Integer;
+    FCompletionProposalCaseSensitive: Boolean;
+    FCompletionProposalEnabled: Boolean;
+    FCompletionProposalShortcut: string;
     FConnectionCloseTabByDblClick: Boolean;
     FConnectionCloseTabByMiddleClick: Boolean;
-    FConnectionMultiLine: Boolean;
     FConnectionDoubleBuffered: Boolean;
-    FConnectionShowCloseButton: Boolean;
+    FConnectionMultiLine: Boolean;
     FConnectionRightClickSelect: Boolean;
+    FConnectionShowCloseButton: Boolean;
     FConnectionShowImage: Boolean;
-    FCompletionProposalEnabled: Boolean;
-    FCompletionProposalCaseSensitive: Boolean;
-    FCompletionProposalShortcut: string;
     FDateFormat: string;
     FEditorCloseTabByDblClick: Boolean;
     FEditorCloseTabByMiddleClick: Boolean;
-    FEditorMultiLine: Boolean;
     FEditorDoubleBuffered: Boolean;
-    FEditorShowCloseButton: Boolean;
+    FEditorMultiLine: Boolean;
     FEditorRightClickSelect: Boolean;
+    FEditorShowCloseButton: Boolean;
     FEditorShowImage: Boolean;
     FEnableLineNumbers: Boolean;
     FEnableSelectionMode: Boolean;
     FEnableSpecialChars: Boolean;
     FEnableWordWrap: Boolean;
-    FLineSpacing: Integer;
     FFontName: string;
     FFontSize: Integer;
-    FMarginLeftMarginAutoSize: Boolean;
-    FMarginFontName: string;
-    FMarginFontSize: Integer;
-    FMarginRightMargin: Integer;
-    FMarginLeftMarginVisible: Boolean;
-    FMarginVisibleRightMargin: Boolean;
-    FMarginLeftMarginWidth: Integer;
     FIgnoreBlanks: Boolean;
     FIgnoreCase: Boolean;
     FInsertCaret: TSynEditCaretType;
-    FNonblinkingCaretColor: string;
+    FLineSpacing: Integer;
     FMainMenuFontName: string;
     FMainMenuFontSize: Integer;
     FMainMenuSystemFontName: string;
     FMainMenuSystemFontSize: Integer;
+    FMainMenuUseSystemFont: Boolean;
+    FMarginFontName: string;
+    FMarginFontSize: Integer;
+    FMarginInTens: Boolean;
+    FMarginLeftMarginAutoSize: Boolean;
+    FMarginLeftMarginWidth: Integer;
+    FMarginLineModified: Boolean;
+    FMarginModifiedColor: string;
+    FMarginNormalColor: string;
+    FMarginRightMargin: Integer;
+    FMarginVisibleLeftMargin: Boolean;
+    FMarginVisibleRightMargin: Boolean;
+    FMarginZeroStart: Boolean;
+    FMinimapFontSize: Integer;
+    FNonblinkingCaret: Boolean;
+    FNonblinkingCaretColor: string;
     FObjectFrameAlign: string;
-    FShowObjectCreationAndModificationTimestamp: Boolean;
-    FShowDataSearchPanel: Boolean;
     FOutputCloseTabByDblClick: Boolean;
     FOutputCloseTabByMiddleClick: Boolean;
-    FOutputShowTreeLines: Boolean;
+    FOutputDoubleBuffered: Boolean;
     FOutputIndent: Integer;
     FOutputMultiLine: Boolean;
-    FOutputDoubleBuffered: Boolean;
-    FOutputShowCloseButton: Boolean;
     FOutputRightClickSelect: Boolean;
+    FOutputShowCloseButton: Boolean;
     FOutputShowImage: Boolean;
+    FOutputShowTreeLines: Boolean;
     FPersistentHotKeys: Boolean;
     FPollingInterval: Integer;
+    FPrintDateTime: Integer;
     FPrintDocumentName: Integer;
     FPrintPageNumber: Integer;
     FPrintPrintedBy: Integer;
-    FPrintDateTime: Integer;
-    FPrintShowHeaderLine: Boolean;
     FPrintShowFooterLine: Boolean;
+    FPrintShowHeaderLine: Boolean;
     FPrintShowLineNumbers: Boolean;
     FPrintWordWrapLine: Boolean;
     FSchemaBrowserAlign: string;
-    FSchemaBrowserShowTreeLines: Boolean;
     FSchemaBrowserIndent: Integer;
+    FSchemaBrowserShowTreeLines: Boolean;
     FScrollPastEof: Boolean;
     FScrollPastEol: Boolean;
     FShadows: Boolean;
-    FTabsToSpaces: Boolean;
-    FSmartTabs: Boolean;
+    FShowSearchStringNotFound: Boolean;
+    FShowDataSearchPanel: Boolean;
+    FShowObjectCreationAndModificationTimestamp: Boolean;
     FSmartTabDelete: Boolean;
-    FTabWidth: Integer;
-    FTimeFormat: string;
-    FToolBarExecute: Boolean;
-    FToolBarTransaction: Boolean;
-    FToolBarDBMS: Boolean;
-    FToolBarExplainPlan: Boolean;
-    FToolBarStandard: Boolean;
-    FToolBarPrint: Boolean;
-    FToolBarIndent: Boolean;
-    FToolBarSort: Boolean;
-    FToolBarCase: Boolean;
-    FToolBarCommand: Boolean;
-    FToolBarSearch: Boolean;
-    FToolBarMode: Boolean;
-    FToolBarTools: Boolean;
-    FTrimTrailingSpaces: Boolean;
-    FTripleClickRowSelect: Boolean;
-    FMainMenuUseSystemFont: Boolean;
-    FStatusBarUseSystemFont: Boolean;
+    FSmartTabs: Boolean;
     FStatusBarFontName: string;
     FStatusBarFontSize: Integer;
+    FStatusBarUseSystemFont: Boolean;
+    FTabsToSpaces: Boolean;
+    FTabWidth: Integer;
+    FTimeFormat: string;
+    FToolBarCase: Boolean;
+    FToolBarCommand: Boolean;
+    FToolBarDBMS: Boolean;
+    FToolBarExecute: Boolean;
+    FToolBarExplainPlan: Boolean;
+    FToolBarIndent: Boolean;
+    FToolBarMode: Boolean;
+    FToolBarPrint: Boolean;
+    FToolBarSearch: Boolean;
+    FToolBarSort: Boolean;
+    FToolBarStandard: Boolean;
+    FToolBarTools: Boolean;
+    FToolBarTransaction: Boolean;
+    FTrimTrailingSpaces: Boolean;
+    FTripleClickRowSelect: Boolean;
+    FUndoAfterSave: Boolean;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -201,101 +216,108 @@ type
     property AnimationStyle: TAnimationStyle read FAnimationStyle write FAnimationStyle;
     property AutoIndent: Boolean read FAutoIndent write FAutoIndent;
     property AutoSave: Boolean read FAutoSave write FAutoSave;
-    property NonblinkingCaret: Boolean read FNonblinkingCaret write FNonblinkingCaret;
-    property UndoAfterSave: Boolean read FUndoAfterSave write FUndoAfterSave;
+    property BeepIfSearchStringNotFound: Boolean read FBeepIfSearchStringNotFound write FBeepIfSearchStringNotFound;
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
+    property CompletionProposalCaseSensitive: Boolean read FCompletionProposalCaseSensitive write FCompletionProposalCaseSensitive;
+    property CompletionProposalEnabled: Boolean read FCompletionProposalEnabled write FCompletionProposalEnabled;
+    property CompletionProposalShortcut: string read FCompletionProposalShortcut write FCompletionProposalShortcut;
     property ConnectionCloseTabByDblClick: Boolean read FConnectionCloseTabByDblClick write FConnectionCloseTabByDblClick;
     property ConnectionCloseTabByMiddleClick: Boolean read FConnectionCloseTabByMiddleClick write FConnectionCloseTabByMiddleClick;
-    property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionDoubleBuffered: Boolean read FConnectionDoubleBuffered write FConnectionDoubleBuffered;
-    property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
+    property ConnectionMultiLine: Boolean read FConnectionMultiLine write FConnectionMultiLine;
     property ConnectionRightClickSelect: Boolean read FConnectionRightClickSelect write FConnectionRightClickSelect;
+    property ConnectionShowCloseButton: Boolean read FConnectionShowCloseButton write FConnectionShowCloseButton;
     property ConnectionShowImage: Boolean read FConnectionShowImage write FConnectionShowImage;
-    property CompletionProposalEnabled: Boolean read FCompletionProposalEnabled write FCompletionProposalEnabled;
-    property CompletionProposalCaseSensitive: Boolean read FCompletionProposalCaseSensitive write FCompletionProposalCaseSensitive;
-    property CompletionProposalShortcut: string read FCompletionProposalShortcut write FCompletionProposalShortcut;
     property DateFormat: string read FDateFormat write FDateFormat;
     property EditorCloseTabByDblClick: Boolean read FEditorCloseTabByDblClick write FEditorCloseTabByDblClick;
     property EditorCloseTabByMiddleClick: Boolean read FEditorCloseTabByMiddleClick write FEditorCloseTabByMiddleClick;
-    property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
     property EditorDoubleBuffered: Boolean read FEditorDoubleBuffered write FEditorDoubleBuffered;
-    property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
+    property EditorMultiLine: Boolean read FEditorMultiLine write FEditorMultiLine;
     property EditorRightClickSelect: Boolean read FEditorRightClickSelect write FEditorRightClickSelect;
+    property EditorShowCloseButton: Boolean read FEditorShowCloseButton write FEditorShowCloseButton;
     property EditorShowImage: Boolean read FEditorShowImage write FEditorShowImage;
     property EnableLineNumbers: Boolean read FEnableLineNumbers write FEnableLineNumbers;
     property EnableSelectionMode: Boolean read FEnableSelectionMode write FEnableSelectionMode;
     property EnableSpecialChars: Boolean read FEnableSpecialChars write FEnableSpecialChars;
     property EnableWordWrap: Boolean read FEnableWordWrap write FEnableWordWrap;
-    property LineSpacing: Integer read FLineSpacing write FLineSpacing;
     property FontName: string read FFontName write FFontName;
     property FontSize: Integer read FFontSize write FFontSize;
-    property MarginLeftMarginAutoSize: Boolean read FMarginLeftMarginAutoSize write FMarginLeftMarginAutoSize;
-    property MarginFontName: string read FMarginFontName write FMarginFontName;
-    property MarginFontSize: Integer read FMarginFontSize write FMarginFontSize;
-    property MarginRightMargin: Integer read FMarginRightMargin write FMarginRightMargin;
-    property MarginLeftMarginVisible: Boolean read FMarginLeftMarginVisible write FMarginLeftMarginVisible;
-    property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin;
-    property MarginLeftMarginWidth: Integer read FMarginLeftMarginWidth write FMarginLeftMarginWidth;
     property IgnoreBlanks: Boolean read FIgnoreBlanks write FIgnoreBlanks;
     property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
     property InsertCaret: TSynEditCaretType read FInsertCaret write FInsertCaret;
-    property NonblinkingCaretColor: string read FNonblinkingCaretColor write FNonblinkingCaretColor;
+    property LineSpacing: Integer read FLineSpacing write FLineSpacing;
     property MainMenuFontName: string read FMainMenuFontName write FMainMenuFontName;
     property MainMenuFontSize: Integer read FMainMenuFontSize write FMainMenuFontSize;
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
     property MainMenuSystemFontSize: Integer read FMainMenuSystemFontSize write FMainMenuSystemFontSize;
+    property MainMenuUseSystemFont: Boolean read FMainMenuUseSystemFont write FMainMenuUseSystemFont;
+    property MarginFontName: string read FMarginFontName write FMarginFontName;
+    property MarginFontSize: Integer read FMarginFontSize write FMarginFontSize;
+    property MarginInTens: Boolean read FMarginInTens write FMarginInTens;
+    property MarginLeftMarginAutoSize: Boolean read FMarginLeftMarginAutoSize write FMarginLeftMarginAutoSize;
+    property MarginLeftMarginWidth: Integer read FMarginLeftMarginWidth write FMarginLeftMarginWidth;
+    property MarginLineModified: Boolean read FMarginLineModified write FMarginLineModified;
+    property MarginModifiedColor: string read FMarginModifiedColor write FMarginModifiedColor;
+    property MarginNormalColor: string read FMarginNormalColor write FMarginNormalColor;
+    property MarginRightMargin: Integer read FMarginRightMargin write FMarginRightMargin;
+    property MarginVisibleLeftMargin: Boolean read FMarginVisibleLeftMargin write FMarginVisibleLeftMargin;
+    property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin;
+    property MarginZeroStart: Boolean read FMarginZeroStart write FMarginZeroStart;
+    property NonblinkingCaret: Boolean read FNonblinkingCaret write FNonblinkingCaret;
+    property NonblinkingCaretColor: string read FNonblinkingCaretColor write FNonblinkingCaretColor;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
-    property ShowObjectCreationAndModificationTimestamp: Boolean read FShowObjectCreationAndModificationTimestamp write FShowObjectCreationAndModificationTimestamp;
-    property ShowDataSearchPanel: Boolean read FShowDataSearchPanel write FShowDataSearchPanel;
     property OutputCloseTabByDblClick: Boolean read FOutputCloseTabByDblClick write FOutputCloseTabByDblClick;
     property OutputCloseTabByMiddleClick: Boolean read FOutputCloseTabByMiddleClick write FOutputCloseTabByMiddleClick;
-    property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
+    property OutputDoubleBuffered: Boolean read FOutputDoubleBuffered write FOutputDoubleBuffered;
     property OutputIndent: Integer read FOutputIndent write FOutputIndent;
     property OutputMultiLine: Boolean read FOutputMultiLine write FOutputMultiLine;
-    property OutputDoubleBuffered: Boolean read FOutputDoubleBuffered write FOutputDoubleBuffered;
-    property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
     property OutputRightClickSelect: Boolean read FOutputRightClickSelect write FOutputRightClickSelect;
+    property OutputShowCloseButton: Boolean read FOutputShowCloseButton write FOutputShowCloseButton;
     property OutputShowImage: Boolean read FOutputShowImage write FOutputShowImage;
+    property OutputShowTreeLines: Boolean read FOutputShowTreeLines write FOutputShowTreeLines;
     property PersistentHotKeys: Boolean read FPersistentHotKeys write FPersistentHotKeys;
     property PollingInterval: Integer read FPollingInterval write FPollingInterval;
+    property PrintDateTime: Integer read FPrintDateTime write FPrintDateTime;
     property PrintDocumentName: Integer read FPrintDocumentName write FPrintDocumentName;
     property PrintPageNumber: Integer read FPrintPageNumber write FPrintPageNumber;
     property PrintPrintedBy: Integer read FPrintPrintedBy write FPrintPrintedBy;
-    property PrintDateTime: Integer read FPrintDateTime write FPrintDateTime;
-    property PrintShowHeaderLine: Boolean read FPrintShowHeaderLine write FPrintShowHeaderLine;
     property PrintShowFooterLine: Boolean read FPrintShowFooterLine write FPrintShowFooterLine;
+    property PrintShowHeaderLine: Boolean read FPrintShowHeaderLine write FPrintShowHeaderLine;
     property PrintShowLineNumbers: Boolean read FPrintShowLineNumbers write FPrintShowLineNumbers;
     property PrintWordWrapLine: Boolean read FPrintWordWrapLine write FPrintWordWrapLine;
     property SchemaBrowserAlign: string read FSchemaBrowserAlign write FSchemaBrowserAlign;
-    property SchemaBrowserShowTreeLines: Boolean read FSchemaBrowserShowTreeLines write FSchemaBrowserShowTreeLines;
     property SchemaBrowserIndent: Integer read FSchemaBrowserIndent write FSchemaBrowserIndent;
+    property SchemaBrowserShowTreeLines: Boolean read FSchemaBrowserShowTreeLines write FSchemaBrowserShowTreeLines;
     property ScrollPastEof: Boolean read FScrollPastEof write FScrollPastEof;
     property ScrollPastEol: Boolean read FScrollPastEol write FScrollPastEol;
     property Shadows: Boolean read FShadows write FShadows;
-    property TabsToSpaces: Boolean read FTabsToSpaces write FTabsToSpaces;
-    property SmartTabs: Boolean read FSmartTabs write FSmartTabs;
+    property ShowSearchStringNotFound: Boolean read FShowSearchStringNotFound write FShowSearchStringNotFound;
+    property ShowDataSearchPanel: Boolean read FShowDataSearchPanel write FShowDataSearchPanel;
+    property ShowObjectCreationAndModificationTimestamp: Boolean read FShowObjectCreationAndModificationTimestamp write FShowObjectCreationAndModificationTimestamp;
     property SmartTabDelete: Boolean read FSmartTabDelete write FSmartTabDelete;
-    property TabWidth: Integer read FTabWidth write FTabWidth;
-    property TimeFormat: string read FTimeFormat write FTimeFormat;
-    property ToolBarExecute: Boolean read FToolBarExecute write FToolBarExecute;
-    property ToolBarTransaction: Boolean read FToolBarTransaction write FToolBarTransaction;
-    property ToolBarDBMS: Boolean read FToolBarDBMS write FToolBarDBMS;
-    property ToolBarExplainPlan: Boolean read FToolBarExplainPlan write FToolBarExplainPlan;
-    property ToolBarStandard: Boolean read FToolBarStandard write FToolBarStandard;
-    property ToolBarPrint: Boolean read FToolBarPrint write FToolBarPrint;
-    property ToolBarIndent: Boolean read FToolBarIndent write FToolBarIndent;
-    property ToolBarSort: Boolean read FToolBarSort write FToolBarSort;
-    property ToolBarCase: Boolean read FToolBarCase write FToolBarCase;
-    property ToolBarCommand: Boolean read FToolBarCommand write FToolBarCommand;
-    property ToolBarSearch: Boolean read FToolBarSearch write FToolBarSearch;
-    property ToolBarMode: Boolean read FToolBarMode write FToolBarMode;
-    property ToolBarTools: Boolean read FToolBarTools write FToolBarTools;
-    property TrimTrailingSpaces: Boolean read FTrimTrailingSpaces write FTrimTrailingSpaces;
-    property TripleClickRowSelect: Boolean read FTripleClickRowSelect write FTripleClickRowSelect;
-    property MainMenuUseSystemFont: Boolean read FMainMenuUseSystemFont write FMainMenuUseSystemFont;
-    property StatusBarUseSystemFont: Boolean read FStatusBarUseSystemFont write FStatusBarUseSystemFont;
+    property SmartTabs: Boolean read FSmartTabs write FSmartTabs;
     property StatusBarFontName: string read FStatusBarFontName write FStatusBarFontName;
     property StatusBarFontSize: Integer read FStatusBarFontSize write FStatusBarFontSize;
+    property StatusBarUseSystemFont: Boolean read FStatusBarUseSystemFont write FStatusBarUseSystemFont;
+    property TabsToSpaces: Boolean read FTabsToSpaces write FTabsToSpaces;
+    property TabWidth: Integer read FTabWidth write FTabWidth;
+    property TimeFormat: string read FTimeFormat write FTimeFormat;
+    property ToolBarCase: Boolean read FToolBarCase write FToolBarCase;
+    property ToolBarCommand: Boolean read FToolBarCommand write FToolBarCommand;
+    property ToolBarDBMS: Boolean read FToolBarDBMS write FToolBarDBMS;
+    property ToolBarExecute: Boolean read FToolBarExecute write FToolBarExecute;
+    property ToolBarExplainPlan: Boolean read FToolBarExplainPlan write FToolBarExplainPlan;
+    property ToolBarIndent: Boolean read FToolBarIndent write FToolBarIndent;
+    property ToolBarMode: Boolean read FToolBarMode write FToolBarMode;
+    property ToolBarPrint: Boolean read FToolBarPrint write FToolBarPrint;
+    property ToolBarSearch: Boolean read FToolBarSearch write FToolBarSearch;
+    property ToolBarSort: Boolean read FToolBarSort write FToolBarSort;
+    property ToolBarStandard: Boolean read FToolBarStandard write FToolBarStandard;
+    property ToolBarTools: Boolean read FToolBarTools write FToolBarTools;
+    property ToolBarTransaction: Boolean read FToolBarTransaction write FToolBarTransaction;
+    property TrimTrailingSpaces: Boolean read FTrimTrailingSpaces write FTrimTrailingSpaces;
+    property TripleClickRowSelect: Boolean read FTripleClickRowSelect write FTripleClickRowSelect;
+    property UndoAfterSave: Boolean read FUndoAfterSave write FUndoAfterSave;
   end;
 
 function OptionsDialog: TOptionsDialog;
@@ -306,7 +328,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages;
+  System.Math, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages, System.IniFiles;
 
 const
   CELL_PADDING = 4;
@@ -330,16 +352,18 @@ begin
   begin
     TCustomSynEdit(Dest).Font.Name := FFontName;
     TCustomSynEdit(Dest).Font.Size := FFontSize;
-    TCustomSynEdit(Dest).Gutter.Visible := FMarginLeftMarginVisible;
+    TCustomSynEdit(Dest).Gutter.Visible := FMarginVisibleLeftMargin;
     TCustomSynEdit(Dest).Gutter.Font.Name := FMarginFontName;
     TCustomSynEdit(Dest).Gutter.Font.Size := FMarginFontSize;
     TCustomSynEdit(Dest).LineSpacing := FLineSpacing;
-    if FMarginVisibleRightMargin then
-      TCustomSynEdit(Dest).RightEdge := FMarginRightMargin
-    else
-      TCustomSynEdit(Dest).RightEdge := 0;
+    TCustomSynEdit(Dest).RightEdge.Visible := FMarginVisibleRightMargin;
     TCustomSynEdit(Dest).Gutter.AutoSize := FMarginLeftMarginAutoSize;
     TCustomSynEdit(Dest).Gutter.Width := FMarginLeftMarginWidth;
+    TCustomSynEdit(Dest).Gutter.Intens := FMarginInTens;
+    TCustomSynEdit(Dest).Gutter.ZeroStart := FMarginZeroStart;
+    TCustomSynEdit(Dest).Gutter.ShowLineModified := FMarginLineModified;
+    TCustomSynEdit(Dest).Gutter.LineModifiedColor := StringToColor(FMarginModifiedColor);
+    TCustomSynEdit(Dest).Gutter.LineNormalColor := StringToColor(FMarginNormalColor);
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
     TCustomSynEdit(Dest).InsertCaret := FInsertCaret;
     TCustomSynEdit(Dest).NonBlinkingCaretColor := StringToColor(FNonblinkingCaretColor);
@@ -379,7 +403,8 @@ begin
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoNonblinkingCaret]
     else
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoNonblinkingCaret];
-    TCustomSynEdit(Dest).WordWrap := FEnableWordWrap;
+
+    TCustomSynEdit(Dest).WordWrap.Enabled := FEnableWordWrap;
     TCustomSynEdit(Dest).Gutter.ShowLineNumbers := FEnableLineNumbers;
 
     if FEnableSpecialChars then
@@ -446,6 +471,7 @@ begin
   FAutoIndent := True;
   FAutoSave := False;
   FNonblinkingCaret := False;
+  FBeepIfSearchStringNotFound := True;
   FCompletionProposalCaseSensitive := True;
   FCompletionProposalEnabled := True;
   FCompletionProposalShortcut := 'Ctrl+Space';
@@ -481,7 +507,6 @@ begin
   FMarginFontSize := 9;
   FMarginRightMargin := 80;
   FMarginLeftMarginWidth := 48;
-  FMarginLeftMarginVisible := True;
   FMarginVisibleRightMargin := True;
   FShowObjectCreationAndModificationTimestamp := False;
   FShowDataSearchPanel := True;
@@ -511,6 +536,7 @@ begin
   FScrollPastEof := False;
   FScrollPastEol := True;
   FShadows := True;
+  FShowSearchStringNotFound := True;
   FSmartTabDelete := False;
   FSmartTabs := False;
   FStatusBarFontName := 'Tahoma';
@@ -557,8 +583,10 @@ procedure TOptionsDialog.FormDestroy(Sender: TObject);
 begin
   FEditorOptionsFrame.Free;
   FEditorFontFrame.Free;
-  FEditorMarginFrame.Free;
+  FEditorLeftMarginFrame.Free;
+  FEditorRightMarginFrame.Free;
   FEditorTabsFrame.Free;
+  FEditorSearchFrame.Free;
   FEditorToolBarFrame.Free;
   FEditorCompletionProposalFrame.Free;
   FMainMenuFrame.Free;
@@ -606,16 +634,26 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorFontAction.ImageIndex;
     Data.Caption := EditorFontAction.Caption;
-    { Margin }
+    { Left Margin }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
-    Data.ImageIndex := EditorMarginAction.ImageIndex;
-    Data.Caption := EditorMarginAction.Caption;
+    Data.ImageIndex := EditorLeftMarginAction.ImageIndex;
+    Data.Caption := EditorLeftMarginAction.Caption;
+    { Right Margin }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorRightMarginAction.ImageIndex;
+    Data.Caption := EditorRightMarginAction.Caption;
     { Tabs }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorTabsAction.ImageIndex;
     Data.Caption := EditorTabsAction.Caption;
+    { Search }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := EditorSearchAction.ImageIndex;
+    Data.Caption := EditorSearchAction.Caption;
     { Completion proposal }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
@@ -626,7 +664,7 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := EditorToolBarAction.ImageIndex;
     Data.Caption := EditorToolBarAction.Caption;
-    Node.ChildCount := 4;
+    Node.ChildCount := 7;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     { Schema Browser }
@@ -720,6 +758,7 @@ function TOptionsDialog.Execute(OraSession: TOraSession; EditOptions: TOptionsCo
 begin
   FDateFormatFrame.Session := OraSession;
   FTimeFormatFrame.Session := OraSession;
+  ReadIniFile;
   if not Assigned(EditOptions) then
   begin
     Result:= False;
@@ -776,6 +815,9 @@ begin
   { Right Margin }
   FEditorRightMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleRightMargin;
   FEditorRightMarginFrame.PositionEdit.Text := IntToStr(FOptionsContainer.MarginRightMargin);
+  { Search }
+  FEditorSearchFrame.ShowSearchStringNotFoundCheckBox.Checked := FOptionsContainer.ShowSearchStringNotFound;
+  FEditorSearchFrame.BeepIfSearchStringNotFoundCheckBox.Checked := FOptionsContainer.BeepIfSearchStringNotFound;
   { Document tabs }
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
   FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
@@ -955,10 +997,12 @@ begin
       FOptionsContainer.AssignTo(FEditorFontFrame.SynEdit);
       BCCommon.StyleUtils.UpdateMarginAndColors(FEditorFontFrame.SynEdit);
     end;
-    FEditorMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
-    FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
-    FEditorCompletionProposalFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
-    FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4);
+    FEditorLeftMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
+    FEditorRightMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
+    FEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
+    FEditorSearchFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4);
+    FEditorCompletionProposalFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 5);
+    FEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 6);
 
     FOptionsSchemaBrowserFrame.Visible := (Level = 0) and (TreeNode.Index = 1);
     FObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
@@ -1016,6 +1060,9 @@ begin
   { Right Margin }
   FOptionsContainer.MarginVisibleRightMargin := FEditorRightMarginFrame.VisibleCheckBox.Checked;
   FOptionsContainer.MarginRightMargin := StrToIntDef(FEditorRightMarginFrame.PositionEdit.Text, 80);
+  { Search }
+  FOptionsContainer.ShowSearchStringNotFound := FEditorSearchFrame.ShowSearchStringNotFoundCheckBox.Checked;
+  FOptionsContainer.BeepIfSearchStringNotFound := FEditorSearchFrame.BeepIfSearchStringNotFoundCheckBox.Checked;
   { Editor tabs }
   FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.EditorCloseTabByMiddleClick := FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
@@ -1100,6 +1147,48 @@ begin
   FOptionsContainer.StatusBarFontSize := FStatusBarFrame.FontLabel.Font.Size;
 end;
 
+procedure TOptionsDialog.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  WriteIniFile;
+end;
+
+procedure TOptionsDialog.ReadIniFile;
+begin
+  with TMemIniFile.Create(GetIniFilename) do
+  try
+    { Size }
+    Width := ReadInteger('OptionsSize', 'Width', Width);
+    Height := ReadInteger('OptionsSize', 'Height', Height);
+    { Position }
+    Left := ReadInteger('OptionsPosition', 'Left', (Screen.Width - Width) div 2);
+    Top := ReadInteger('OptionsPosition', 'Top', (Screen.Height - Height) div 2);
+    { Tree width }
+    OptionsVirtualStringTree.Width := ReadInteger('OptionsSize', 'TreeWidth', OptionsVirtualStringTree.Width);
+  finally
+    Free;
+  end;
+end;
+
+procedure TOptionsDialog.WriteIniFile;
+begin
+  if Windowstate = wsNormal then
+  with TMemIniFile.Create(GetIniFilename) do
+  try
+    { Size }
+    WriteInteger('OptionsSize', 'Width', Width);
+    WriteInteger('OptionsSize', 'Height', Height);
+    { Position }
+    WriteInteger('OptionsPosition', 'Left', Left);
+    WriteInteger('OptionsPosition', 'Top', Top);
+    { Tree width }
+    WriteInteger('OptionsSize', 'TreeWidth', OptionsVirtualStringTree.Width);
+  finally
+    UpdateFile;
+    Free;
+  end;
+end;
+
 procedure TOptionsDialog.FormCreate(Sender: TObject);
 begin
   OptionsVirtualStringTree.NodeDataSize := SizeOf(TOptionsRec);
@@ -1107,8 +1196,12 @@ begin
   FEditorOptionsFrame.Parent := OptionsPanel;
   FEditorFontFrame := TEditorFontFrame.Create(OptionsPanel);
   FEditorFontFrame.Parent := OptionsPanel;
-  FEditorMarginFrame := TEditorMarginFrame.Create(OptionsPanel);
-  FEditorMarginFrame.Parent := OptionsPanel;
+  FEditorLeftMarginFrame := TEditorLeftMarginFrame.Create(OptionsPanel);
+  FEditorLeftMarginFrame.Parent := OptionsPanel;
+  FEditorRightMarginFrame := TEditorRightMarginFrame.Create(OptionsPanel);
+  FEditorRightMarginFrame.Parent := OptionsPanel;
+  FEditorSearchFrame := TEditorSearchFrame.Create(OptionsPanel);
+  FEditorSearchFrame.Parent := OptionsPanel;
   FEditorTabsFrame := TEditorTabsFrame.Create(OptionsPanel);
   FEditorTabsFrame.Parent := OptionsPanel;
   FEditorToolBarFrame := TEditorToolBarFrame.Create(OptionsPanel);

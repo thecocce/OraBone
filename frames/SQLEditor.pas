@@ -1590,7 +1590,8 @@ begin
       MessageBeep;
       SynEdit.BlockBegin := SynEdit.BlockEnd;
       SynEdit.CaretXY := SynEdit.BlockBegin;
-      ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
+      if OptionsContainer.ShowSearchStringNotFound then
+        ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
     end;
   except
     { silent }
@@ -1642,7 +1643,10 @@ begin
     SynEdit.BlockBegin := SynEdit.BlockEnd;
     SynEdit.CaretXY := SynEdit.BlockBegin;
     if (SynEdit.CaretX = 1) and (SynEdit.CaretY = 1) then
-      ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
+    begin
+      if OptionsContainer.ShowSearchStringNotFound then
+        ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
+    end
     else
     if AskYesOrNo(Format(LanguageDataModule.GetYesOrNoMessage('SearchMatchNotFound'), [CHR_DOUBLE_ENTER])) then
     begin
