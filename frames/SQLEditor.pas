@@ -1734,7 +1734,7 @@ begin
   Result := False;
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
-    Result := SynEdit.WordWrap;
+    Result := SynEdit.WordWrap.Enabled;
 end;
 
 function TSQLEditorFrame.ToggleWordWrap: Boolean;
@@ -1749,8 +1749,8 @@ begin
     SynEdit := GetSynEdit(PageControl.Pages[i]);
     if Assigned(SynEdit) then
     begin
-      SynEdit.WordWrap := not SynEdit.WordWrap;
-       Result := SynEdit.WordWrap;
+      SynEdit.WordWrap.Enabled := not SynEdit.WordWrap.Enabled;
+      Result := SynEdit.WordWrap.Enabled;
     end;
   end;
 end;

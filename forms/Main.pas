@@ -1292,6 +1292,7 @@ begin
     OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));
     OptionsContainer.MarginLeftMarginAutoSize := ReadBool('Options', 'MarginLeftMarginAutoSize', True);
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
+    OptionsContainer.MarginVisibleLeftMargin := ReadBool('Options', 'MarginVisibleLeftMargin', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '48'));
 
@@ -1689,6 +1690,7 @@ begin
       WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.MarginRightMargin));
       WriteBool('Options', 'MarginLeftMarginAutoSize', OptionsContainer.MarginLeftMarginAutoSize);
       WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
+      WriteBool('Options', 'MarginVisibleLeftMargin', OptionsContainer.MarginVisibleLeftMargin);
       WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
 
       WriteBool('Options', 'MarginInTens', OptionsContainer.MarginInTens);
@@ -1711,7 +1713,7 @@ begin
       WriteBool('Options', 'CompletionProposalEnabled', OptionsContainer.CompletionProposalEnabled);
       WriteBool('Options', 'CompletionProposalCaseSensitive', OptionsContainer.CompletionProposalCaseSensitive);
       WriteString('Options', 'CompletionProposalShortcut', OptionsContainer.CompletionProposalShortcut);
-      WriteBool('Options', 'MarginLeftMarginVisible', OptionsContainer.MarginLeftMarginVisible);
+
       WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
       WriteBool('Options', 'EditorCloseTabByMiddleClick', OptionsContainer.EditorCloseTabByMiddleClick);
       WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);

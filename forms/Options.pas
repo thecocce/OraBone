@@ -53,6 +53,7 @@ type
     Splitter: TSplitter;
     StatusBarAction: TAction;
     TimeFormatAction: TAction;
+    EditorSearchAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -263,6 +264,7 @@ type
     property MarginVisibleLeftMargin: Boolean read FMarginVisibleLeftMargin write FMarginVisibleLeftMargin;
     property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin;
     property MarginZeroStart: Boolean read FMarginZeroStart write FMarginZeroStart;
+    property MinimapFontSize: Integer read FMinimapFontSize write FMinimapFontSize;
     property NonblinkingCaret: Boolean read FNonblinkingCaret write FNonblinkingCaret;
     property NonblinkingCaretColor: string read FNonblinkingCaretColor write FNonblinkingCaretColor;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
@@ -328,7 +330,8 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages, System.IniFiles;
+  System.Math, BCCommon.StyleUtils, SynEditTypes, SynCompletionProposal, BCCommon.Messages, System.IniFiles,
+  BCCommon.FileUtils;
 
 const
   CELL_PADDING = 4;
@@ -507,7 +510,14 @@ begin
   FMarginFontSize := 9;
   FMarginRightMargin := 80;
   FMarginLeftMarginWidth := 48;
+  FMarginVisibleLeftMargin := True;
   FMarginVisibleRightMargin := True;
+  FMarginInTens := True;
+  FMarginZeroStart := False;
+  FMarginLineModified := True;
+  FMarginModifiedColor := 'clYellow';
+  FMarginNormalColor := 'clGreen';
+  FMinimapFontSize := 3;
   FShowObjectCreationAndModificationTimestamp := False;
   FShowDataSearchPanel := True;
   FObjectFrameAlign := 'Bottom';

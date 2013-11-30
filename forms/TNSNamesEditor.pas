@@ -544,7 +544,7 @@ end;
 
 procedure TTNSNamesEditorForm.ViewWordWrapActionExecute(Sender: TObject);
 begin
-  SynEdit.WordWrap := not SynEdit.WordWrap;
+  SynEdit.WordWrap.Enabled := not SynEdit.WordWrap.Enabled;
 end;
 
 procedure TTNSNamesEditorForm.VirtualDrawTreeClick(Sender: TObject);
