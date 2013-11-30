@@ -9,24 +9,27 @@ uses
 type
   TEditorOptionsFrame = class(TFrame)
     Panel: TPanel;
+    LineSpacingLabel: TLabel;
+    TabWidthLabel: TLabel;
+    ActiveLineColorBrightnessLabel: TLabel;
+    InsertCaretLabel: TLabel;
+    NonblinkingCaretColorLabel: TLabel;
     AutoIndentCheckBox: TBCCheckBox;
     TrimTrailingSpacesCheckBox: TBCCheckBox;
     ScrollPastEofCheckBox: TBCCheckBox;
     ScrollPastEolCheckBox: TBCCheckBox;
-    ExtraLinesLabel: TLabel;
-    ExtraLinesEdit: TBCEdit;
-    TabWidthLabel: TLabel;
+    LineSpacingEdit: TBCEdit;
     TabWidthEdit: TBCEdit;
     BrightnessTrackBar: TTrackBar;
-    ActiveLineColorBrightnessLabel: TLabel;
     TabsToSpacesCheckBox: TBCCheckBox;
     AutoSaveCheckBox: TBCCheckBox;
     InsertCaretComboBox: TBCComboBox;
-    InsertCaretLabel: TLabel;
     UndoAfterSaveCheckBox: TBCCheckBox;
     SmartTabsCheckBox: TBCCheckBox;
     SmartTabDeleteCheckBox: TBCCheckBox;
     TripleClickRowSelectCheckBox: TBCCheckBox;
+    NonblinkingCaretCheckBox: TBCCheckBox;
+    NonblinkingCaretColorBox: TColorBox;
   private
     { Private declarations }
   public

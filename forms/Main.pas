@@ -1288,14 +1288,15 @@ begin
     OptionsContainer.FontName := ReadString('Options', 'FontName', 'Courier New');
     OptionsContainer.FontSize := StrToInt(ReadString('Options', 'FontSize', '9'));
     OptionsContainer.MarginFontName := ReadString('Options', 'MarginFontName', 'Courier New');
-    OptionsContainer.MarginFontSize := StrToInt(ReadString('Options', 'MarginFontSize', '8'));
+    OptionsContainer.MarginFontSize := StrToInt(ReadString('Options', 'MarginFontSize', '9'));
     OptionsContainer.ColorBrightness := StrToInt(ReadString('Options', 'ActiveLineColorBrightness', '2'));
     OptionsContainer.MarginLeftMarginAutoSize := ReadBool('Options', 'MarginLeftMarginAutoSize', True);
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '48'));
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
-    OptionsContainer.ExtraLineSpacing := StrToInt(ReadString('Options', 'ExtraLineSpacing', '0'));
+    OptionsContainer.NonblinkingCaretColor := ReadString('Options', 'NonblinkingCaretColor', 'clBlack');
+    OptionsContainer.LineSpacing := StrToInt(ReadString('Options', 'LineSpacing', '0'));
     OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
     OptionsContainer.CompletionProposalEnabled := ReadBool('Options', 'CompletionProposalEnabled', True);
     OptionsContainer.CompletionProposalCaseSensitive := ReadBool('Options', 'CompletionProposalCaseSensitive', True);
@@ -1324,6 +1325,7 @@ begin
     OptionsContainer.OutputShowImage := ReadBool('Options', 'OutputShowImage', True);
     OptionsContainer.AutoIndent := ReadBool('Options', 'AutoIndent', True);
     OptionsContainer.AutoSave := ReadBool('Options', 'AutoSave', False);
+    OptionsContainer.NonblinkingCaret := ReadBool('Options', 'NonblinkingCaret', False);
     OptionsContainer.UndoAfterSave := ReadBool('Options', 'UnfoAfterSave', False);
     OptionsContainer.TrimTrailingSpaces := ReadBool('Options', 'TrimTrailingSpaces', True);
     OptionsContainer.TripleClickRowSelect := ReadBool('Options', 'TripleClickRowSelect', True);
@@ -1681,7 +1683,11 @@ begin
       WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
       WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
       WriteString('Options', 'InsertCaret', IntToStr(Ord(OptionsContainer.InsertCaret)));
-      WriteString('Options', 'ExtraLineSpacing', IntToStr(OptionsContainer.ExtraLineSpacing));
+      WriteString('Options', 'NonblinkingCaretColor', OptionsContainer.NonblinkingCaretColor);
+
+      DeleteKey('Options', 'ExtraLineSpacing'); { deprecated }
+
+      WriteString('Options', 'LineSpacing', IntToStr(OptionsContainer.LineSpacing));
       WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
       WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
       WriteBool('Options', 'CompletionProposalEnabled', OptionsContainer.CompletionProposalEnabled);
@@ -1711,6 +1717,7 @@ begin
       WriteBool('Options', 'OutputShowImage', OptionsContainer.OutputShowImage);
       WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
       WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
+      WriteBool('Options', 'NonblinkingCaret', OptionsContainer.NonblinkingCaret);
       WriteBool('Options', 'UndoAfterSave', OptionsContainer.UndoAfterSave);
       WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
       WriteBool('Options', 'TripleClickRowSelect', OptionsContainer.TripleClickRowSelect);

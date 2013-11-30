@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons,
-  Vcl.StdCtrls, Vcl.ActnList, BCControls.SynEdit, System.Actions, SynEdit;
+  Vcl.StdCtrls, Vcl.ActnList, BCControls.SynEdit, System.Actions, SynEdit, Vcl.ComCtrls;
 
 type
   TEditorFontFrame = class(TFrame)
@@ -12,16 +12,18 @@ type
     FontDialog: TFontDialog;
     ActionList: TActionList;
     SelectEditorFontAction: TAction;
+    BottomPanel: TPanel;
+    SynEdit: TBCSynEdit;
+    SelectMarginFontAction: TAction;
     TopPanel: TPanel;
     SelectEditorFontSpeedButton: TSpeedButton;
     EditorFontLabel: TLabel;
-    BottomPanel: TPanel;
-    SynEdit: TBCSynEdit;
     MarginFontLabel: TLabel;
-    SelectMarginFontSpeedButton: TSpeedButton;
+    SelecMarginFontSpeedButton: TSpeedButton;
     EditorLabel: TLabel;
     MarginLabel: TLabel;
-    SelectMarginFontAction: TAction;
+    MinimapFontSizeLabel: TLabel;
+    MinimapFontSizeTrackBar: TTrackBar;
     procedure SelectEditorFontActionExecute(Sender: TObject);
     procedure SelectMarginFontActionExecute(Sender: TObject);
   private

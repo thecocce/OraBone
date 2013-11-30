@@ -2,31 +2,31 @@ object EditorOptionsFrame: TEditorOptionsFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 465
   Align = alClient
   TabOrder = 0
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 465
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object ExtraLinesLabel: TLabel
+    object LineSpacingLabel: TLabel
       Left = 11
-      Top = 211
-      Width = 53
+      Top = 229
+      Width = 59
       Height = 13
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = 'Extra Lines'
+      Caption = 'Line Spacing'
     end
     object TabWidthLabel: TLabel
-      Left = 9
-      Top = 255
+      Left = 11
+      Top = 269
       Width = 49
       Height = 13
       Margins.Left = 4
@@ -37,7 +37,7 @@ object EditorOptionsFrame: TEditorOptionsFrame
     end
     object ActiveLineColorBrightnessLabel: TLabel
       Left = 11
-      Top = 299
+      Top = 309
       Width = 133
       Height = 13
       Margins.Left = 4
@@ -48,10 +48,21 @@ object EditorOptionsFrame: TEditorOptionsFrame
     end
     object InsertCaretLabel: TLabel
       Left = 11
-      Top = 349
+      Top = 357
       Width = 59
       Height = 13
       Caption = 'Insert Caret'
+    end
+    object NonblinkingCaretColorLabel: TLabel
+      Left = 11
+      Top = 400
+      Width = 116
+      Height = 13
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = 'Non-blinking Caret Color'
     end
     object AutoIndentCheckBox: TBCCheckBox
       Left = 9
@@ -70,7 +81,7 @@ object EditorOptionsFrame: TEditorOptionsFrame
     end
     object TrimTrailingSpacesCheckBox: TBCCheckBox
       Left = 9
-      Top = 146
+      Top = 166
       Width = 201
       Height = 21
       Margins.Left = 4
@@ -80,12 +91,12 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Caption = ' Trim Trailing Spaces'
       Checked = True
       State = cbChecked
-      TabOrder = 7
+      TabOrder = 8
       ReadOnly = False
     end
     object ScrollPastEofCheckBox: TBCCheckBox
       Left = 9
-      Top = 46
+      Top = 66
       Width = 201
       Height = 21
       Margins.Left = 4
@@ -93,12 +104,12 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Scroll Past End of File'
-      TabOrder = 2
+      TabOrder = 3
       ReadOnly = False
     end
     object ScrollPastEolCheckBox: TBCCheckBox
       Left = 9
-      Top = 66
+      Top = 86
       Width = 198
       Height = 21
       Margins.Left = 4
@@ -108,19 +119,19 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Caption = ' Scroll Past End of Line'
       Checked = True
       State = cbChecked
-      TabOrder = 3
+      TabOrder = 4
       ReadOnly = False
     end
-    object ExtraLinesEdit: TBCEdit
+    object LineSpacingEdit: TBCEdit
       Left = 9
-      Top = 226
+      Top = 244
       Width = 64
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      TabOrder = 10
+      TabOrder = 11
       Text = '0'
       EnterToTab = False
       OnlyNumbers = True
@@ -131,34 +142,34 @@ object EditorOptionsFrame: TEditorOptionsFrame
     end
     object TabWidthEdit: TBCEdit
       Left = 9
-      Top = 270
+      Top = 284
       Width = 64
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      TabOrder = 11
-      Text = '8'
+      TabOrder = 12
+      Text = '2'
       EnterToTab = False
       OnlyNumbers = True
       NumbersWithDots = False
       NumbersWithSpots = False
-      ErrorColor = 14803198
+      ErrorColor = clBlack
       NumbersAllowNegative = False
     end
     object BrightnessTrackBar: TTrackBar
-      Left = 2
-      Top = 314
+      Left = 4
+      Top = 324
       Width = 150
       Height = 27
       Min = 1
       Position = 2
-      TabOrder = 12
+      TabOrder = 13
     end
     object TabsToSpacesCheckBox: TBCCheckBox
       Left = 9
-      Top = 126
+      Top = 146
       Width = 198
       Height = 21
       Margins.Left = 4
@@ -168,7 +179,7 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Caption = ' Tabs to Spaces'
       Checked = True
       State = cbChecked
-      TabOrder = 6
+      TabOrder = 7
       ReadOnly = False
     end
     object AutoSaveCheckBox: TBCCheckBox
@@ -186,22 +197,23 @@ object EditorOptionsFrame: TEditorOptionsFrame
     end
     object InsertCaretComboBox: TBCComboBox
       Left = 9
-      Top = 365
+      Top = 373
       Width = 133
       Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      Style = csDropDownList
       DropDownCount = 9
-      TabOrder = 13
+      TabOrder = 14
       DeniedKeyStrokes = True
       ReadOnly = False
       DropDownFixedWidth = 0
     end
     object UndoAfterSaveCheckBox: TBCCheckBox
       Left = 9
-      Top = 186
+      Top = 206
       Width = 201
       Height = 21
       Margins.Left = 4
@@ -209,23 +221,10 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Undo After Save'
-      TabOrder = 9
+      TabOrder = 10
       ReadOnly = False
     end
     object SmartTabsCheckBox: TBCCheckBox
-      Left = 9
-      Top = 86
-      Width = 201
-      Height = 21
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      Caption = ' Smart Tabs'
-      TabOrder = 4
-      ReadOnly = False
-    end
-    object SmartTabDeleteCheckBox: TBCCheckBox
       Left = 9
       Top = 106
       Width = 201
@@ -234,13 +233,26 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Smart Tab Delete'
+      Caption = ' Smart Tabs'
       TabOrder = 5
+      ReadOnly = False
+    end
+    object SmartTabDeleteCheckBox: TBCCheckBox
+      Left = 9
+      Top = 126
+      Width = 201
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = ' Smart Tab Delete'
+      TabOrder = 6
       ReadOnly = False
     end
     object TripleClickRowSelectCheckBox: TBCCheckBox
       Left = 9
-      Top = 166
+      Top = 186
       Width = 201
       Height = 21
       Margins.Left = 4
@@ -250,8 +262,29 @@ object EditorOptionsFrame: TEditorOptionsFrame
       Caption = ' Triple-Click Row Select'
       Checked = True
       State = cbChecked
-      TabOrder = 8
+      TabOrder = 9
       ReadOnly = False
+    end
+    object NonblinkingCaretCheckBox: TBCCheckBox
+      Left = 9
+      Top = 46
+      Width = 198
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = ' Non-blinking Caret'
+      TabOrder = 2
+      ReadOnly = False
+    end
+    object NonblinkingCaretColorBox: TColorBox
+      Left = 9
+      Top = 416
+      Width = 145
+      Height = 22
+      Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+      TabOrder = 15
     end
   end
 end

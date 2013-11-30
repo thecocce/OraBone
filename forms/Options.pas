@@ -97,6 +97,7 @@ type
     FAnimationStyle: TAnimationStyle;
     FAutoIndent: Boolean;
     FAutoSave: Boolean;
+    FNonblinkingCaret: Boolean;
     FUndoAfterSave: Boolean;
     FColorBrightness: Integer;
     FConnectionCloseTabByDblClick: Boolean;
@@ -121,7 +122,7 @@ type
     FEnableSelectionMode: Boolean;
     FEnableSpecialChars: Boolean;
     FEnableWordWrap: Boolean;
-    FExtraLineSpacing: Integer;
+    FLineSpacing: Integer;
     FFontName: string;
     FFontSize: Integer;
     FMarginLeftMarginAutoSize: Boolean;
@@ -134,6 +135,7 @@ type
     FIgnoreBlanks: Boolean;
     FIgnoreCase: Boolean;
     FInsertCaret: TSynEditCaretType;
+    FNonblinkingCaretColor: string;
     FMainMenuFontName: string;
     FMainMenuFontSize: Integer;
     FMainMenuSystemFontName: string;
@@ -199,6 +201,7 @@ type
     property AnimationStyle: TAnimationStyle read FAnimationStyle write FAnimationStyle;
     property AutoIndent: Boolean read FAutoIndent write FAutoIndent;
     property AutoSave: Boolean read FAutoSave write FAutoSave;
+    property NonblinkingCaret: Boolean read FNonblinkingCaret write FNonblinkingCaret;
     property UndoAfterSave: Boolean read FUndoAfterSave write FUndoAfterSave;
     property ColorBrightness: Integer read FColorBrightness write FColorBrightness;
     property ConnectionCloseTabByDblClick: Boolean read FConnectionCloseTabByDblClick write FConnectionCloseTabByDblClick;
@@ -223,7 +226,7 @@ type
     property EnableSelectionMode: Boolean read FEnableSelectionMode write FEnableSelectionMode;
     property EnableSpecialChars: Boolean read FEnableSpecialChars write FEnableSpecialChars;
     property EnableWordWrap: Boolean read FEnableWordWrap write FEnableWordWrap;
-    property ExtraLineSpacing: Integer read FExtraLineSpacing write FExtraLineSpacing;
+    property LineSpacing: Integer read FLineSpacing write FLineSpacing;
     property FontName: string read FFontName write FFontName;
     property FontSize: Integer read FFontSize write FFontSize;
     property MarginLeftMarginAutoSize: Boolean read FMarginLeftMarginAutoSize write FMarginLeftMarginAutoSize;
@@ -236,6 +239,7 @@ type
     property IgnoreBlanks: Boolean read FIgnoreBlanks write FIgnoreBlanks;
     property IgnoreCase: Boolean read FIgnoreCase write FIgnoreCase;
     property InsertCaret: TSynEditCaretType read FInsertCaret write FInsertCaret;
+    property NonblinkingCaretColor: string read FNonblinkingCaretColor write FNonblinkingCaretColor;
     property MainMenuFontName: string read FMainMenuFontName write FMainMenuFontName;
     property MainMenuFontSize: Integer read FMainMenuFontSize write FMainMenuFontSize;
     property MainMenuSystemFontName: string read FMainMenuSystemFontName write FMainMenuSystemFontName;
@@ -329,7 +333,7 @@ begin
     TCustomSynEdit(Dest).Gutter.Visible := FMarginLeftMarginVisible;
     TCustomSynEdit(Dest).Gutter.Font.Name := FMarginFontName;
     TCustomSynEdit(Dest).Gutter.Font.Size := FMarginFontSize;
-    TCustomSynEdit(Dest).ExtraLineSpacing := FExtraLineSpacing;
+    TCustomSynEdit(Dest).LineSpacing := FLineSpacing;
     if FMarginVisibleRightMargin then
       TCustomSynEdit(Dest).RightEdge := FMarginRightMargin
     else
@@ -338,6 +342,7 @@ begin
     TCustomSynEdit(Dest).Gutter.Width := FMarginLeftMarginWidth;
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
     TCustomSynEdit(Dest).InsertCaret := FInsertCaret;
+    TCustomSynEdit(Dest).NonBlinkingCaretColor := StringToColor(FNonblinkingCaretColor);
     if FAutoIndent then
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoAutoIndent]
     else
@@ -370,7 +375,10 @@ begin
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoTripleClicks]
     else
       TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoTripleClicks];
-
+    if FNonblinkingCaret then
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options + [eoNonblinkingCaret]
+    else
+      TCustomSynEdit(Dest).Options := TCustomSynEdit(Dest).Options - [eoNonblinkingCaret];
     TCustomSynEdit(Dest).WordWrap := FEnableWordWrap;
     TCustomSynEdit(Dest).Gutter.ShowLineNumbers := FEnableLineNumbers;
 
@@ -437,6 +445,7 @@ begin
   FAnimationStyle := asDefault;
   FAutoIndent := True;
   FAutoSave := False;
+  FNonblinkingCaret := False;
   FCompletionProposalCaseSensitive := True;
   FCompletionProposalEnabled := True;
   FCompletionProposalShortcut := 'Ctrl+Space';
@@ -455,12 +464,13 @@ begin
   FEditorRightClickSelect := True;
   FEditorShowCloseButton := False;
   FEditorShowImage := True;
-  FExtraLineSpacing := 0;
+  FLineSpacing := 0;
   FFontName := 'Courier New';
   FFontSize := 9;
   FIgnoreBlanks := True;
   FIgnoreCase := True;
   FInsertCaret := ctVerticalLine;
+  FNonblinkingCaretColor := 'clBlack';
   FMainMenuFontName := 'Tahoma';
   FMainMenuFontSize := 8;
   FMainMenuSystemFontName := Screen.MenuFont.Name;
@@ -468,7 +478,7 @@ begin
   FMainMenuUseSystemFont := False;
   FMarginLeftMarginAutoSize := True;
   FMarginFontName := 'Courier New';
-  FMarginFontSize := 8;
+  FMarginFontSize := 9;
   FMarginRightMargin := 80;
   FMarginLeftMarginWidth := 48;
   FMarginLeftMarginVisible := True;
@@ -731,6 +741,7 @@ begin
   { Options }
   FEditorOptionsFrame.AutoIndentCheckBox.Checked := FOptionsContainer.AutoIndent;
   FEditorOptionsFrame.AutoSaveCheckBox.Checked := FOptionsContainer.AutoSave;
+  FEditorOptionsFrame.NonblinkingCaretCheckBox.Checked := FOptionsContainer.NonblinkingCaret;
   FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked := FOptionsContainer.UndoAfterSave;
   FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked := FOptionsContainer.TrimTrailingSpaces;
   FEditorOptionsFrame.TripleClickRowSelectCheckBox.Checked := FOptionsContainer.TripleClickRowSelect;
@@ -739,10 +750,11 @@ begin
   FEditorOptionsFrame.TabsToSpacesCheckBox.Checked := FOptionsContainer.TabsToSpaces;
   FEditorOptionsFrame.SmartTabsCheckBox.Checked := FOptionsContainer.SmartTabs;
   FEditorOptionsFrame.SmartTabDeleteCheckBox.Checked := FOptionsContainer.SmartTabDelete;
-  FEditorOptionsFrame.ExtraLinesEdit.Text := IntToStr(FOptionsContainer.ExtraLineSpacing);
+  FEditorOptionsFrame.LineSpacingEdit.Text := IntToStr(FOptionsContainer.LineSpacing);
   FEditorOptionsFrame.TabWidthEdit.Text := IntToStr(FOptionsContainer.TabWidth);
   FEditorOptionsFrame.BrightnessTrackBar.Position := FOptionsContainer.ColorBrightness;
   FEditorOptionsFrame.InsertCaretComboBox.ItemIndex := Ord(FOptionsContainer.InsertCaret);
+  FEditorOptionsFrame.NonblinkingCaretColorBox.Selected := StringToColor(FOptionsContainer.NonblinkingCaretColor);
   { Font }
   FEditorFontFrame.EditorFontLabel.Font.Name := FOptionsContainer.FontName;
   FEditorFontFrame.EditorFontLabel.Font.Size := FOptionsContainer.FontSize;
@@ -751,12 +763,19 @@ begin
   FEditorFontFrame.MarginFontLabel.Font.Name := FOptionsContainer.MarginFontName;
   FEditorFontFrame.MarginFontLabel.Font.Size := FOptionsContainer.MarginFontSize;
   FEditorFontFrame.MarginFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.MarginFontLabel.Font.Name, FEditorFontFrame.MarginFontLabel.Font.Size]);
-  { Margin }
-  FEditorMarginFrame.LeftMarginAutoSizeCheckBox.Checked := FOptionsContainer.MarginLeftMarginAutoSize;
-  FEditorMarginFrame.VisibleLeftMarginCheckBox.Checked := FOptionsContainer.MarginLeftMarginVisible;
-  FEditorMarginFrame.VisibleRightMarginCheckBox.Checked := FOptionsContainer.MarginVisibleRightMargin;
-  FEditorMarginFrame.RightMarginEdit.Text := IntToStr(FOptionsContainer.MarginRightMargin);
-  FEditorMarginFrame.LeftMarginWidthEdit.Text := IntToStr(FOptionsContainer.MarginLeftMarginWidth);
+  FEditorFontFrame.MinimapFontSizeTrackBar.Position := FOptionsContainer.MinimapFontSize;
+  { Left Margin }
+  FEditorLeftMarginFrame.AutoSizeCheckBox.Checked := FOptionsContainer.MarginLeftMarginAutoSize;
+  FEditorLeftMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleLeftMargin;
+  FEditorLeftMarginFrame.InTensCheckBox.Checked := FOptionsContainer.MarginInTens;
+  FEditorLeftMarginFrame.ZeroStartCheckBox.Checked := FOptionsContainer.MarginZeroStart;
+  FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked := FOptionsContainer.MarginLineModified;
+  FEditorLeftMarginFrame.LineModifiedColorBox.Selected := StringToColor(FOptionsContainer.MarginModifiedColor);
+  FEditorLeftMarginFrame.LineNormalColorBox.Selected := StringToColor(FOptionsContainer.MarginNormalColor);
+  FEditorLeftMarginFrame.LeftMarginWidthEdit.Text := IntToStr(FOptionsContainer.MarginLeftMarginWidth);
+  { Right Margin }
+  FEditorRightMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleRightMargin;
+  FEditorRightMarginFrame.PositionEdit.Text := IntToStr(FOptionsContainer.MarginRightMargin);
   { Document tabs }
   FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
   FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
@@ -965,6 +984,7 @@ begin
   { Options }
   FOptionsContainer.AutoIndent := FEditorOptionsFrame.AutoIndentCheckBox.Checked;
   FOptionsContainer.AutoSave := FEditorOptionsFrame.AutoSaveCheckBox.Checked;
+  FOptionsContainer.NonblinkingCaret := FEditorOptionsFrame.NonblinkingCaretCheckBox.Checked;
   FOptionsContainer.UndoAfterSave := FEditorOptionsFrame.UndoAfterSaveCheckBox.Checked;
   FOptionsContainer.TrimTrailingSpaces := FEditorOptionsFrame.TrimTrailingSpacesCheckBox.Checked;
   FOptionsContainer.TripleClickRowSelect := FEditorOptionsFrame.TripleClickRowSelectCheckBox.Checked;
@@ -973,21 +993,29 @@ begin
   FOptionsContainer.TabsToSpaces := FEditorOptionsFrame.TabsToSpacesCheckBox.Checked;
   FOptionsContainer.SmartTabs := FEditorOptionsFrame.SmartTabsCheckBox.Checked;
   FOptionsContainer.SmartTabDelete := FEditorOptionsFrame.SmartTabDeleteCheckBox.Checked;
-  FOptionsContainer.ExtraLineSpacing := StrToIntDef(FEditorOptionsFrame.ExtraLinesEdit.Text, 0);
+  FOptionsContainer.LineSpacing := StrToIntDef(FEditorOptionsFrame.LineSpacingEdit.Text, 0);
   FOptionsContainer.TabWidth := StrToIntDef(FEditorOptionsFrame.TabWidthEdit.Text, 8);
   FOptionsContainer.ColorBrightness := FEditorOptionsFrame.BrightnessTrackBar.Position;
   FOptionsContainer.InsertCaret := TSynEditCaretType(FEditorOptionsFrame.InsertCaretComboBox.ItemIndex);
+  FOptionsContainer.NonblinkingCaretColor := ColorToString(FEditorOptionsFrame.NonblinkingCaretColorBox.Selected);
   { Font }
   FOptionsContainer.FontName := FEditorFontFrame.EditorFontLabel.Font.Name;
   FOptionsContainer.FontSize := FEditorFontFrame.EditorFontLabel.Font.Size;
   FOptionsContainer.MarginFontName := FEditorFontFrame.MarginFontLabel.Font.Name;
   FOptionsContainer.MarginFontSize := FEditorFontFrame.MarginFontLabel.Font.Size;
-  { Margin }
-  FOptionsContainer.MarginLeftMarginAutoSize := FEditorMarginFrame.LeftMarginAutoSizeCheckBox.Checked;
-  FOptionsContainer.MarginLeftMarginVisible := FEditorMarginFrame.VisibleLeftMarginCheckBox.Checked;
-  FOptionsContainer.MarginRightMargin := StrToIntDef(FEditorMarginFrame.RightMarginEdit.Text, 80);
-  FOptionsContainer.MarginVisibleRightMargin := FEditorMarginFrame.VisibleRightMarginCheckBox.Checked;
-  FOptionsContainer.MarginLeftMarginWidth := StrToIntDef(FEditorMarginFrame.LeftMarginWidthEdit.Text, 48);
+  FOptionsContainer.MinimapFontSize := FEditorFontFrame.MinimapFontSizeTrackBar.Position;
+  { Left Margin }
+  FOptionsContainer.MarginVisibleLeftMargin := FEditorLeftMarginFrame.VisibleCheckBox.Checked;
+  FOptionsContainer.MarginLeftMarginAutoSize := FEditorLeftMarginFrame.AutoSizeCheckBox.Checked;
+  FOptionsContainer.MarginInTens := FEditorLeftMarginFrame.InTensCheckBox.Checked;
+  FOptionsContainer.MarginZeroStart := FEditorLeftMarginFrame.ZeroStartCheckBox.Checked;
+  FOptionsContainer.MarginLineModified := FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked;
+  FOptionsContainer.MarginModifiedColor := ColorToString(FEditorLeftMarginFrame.LineModifiedColorBox.Selected);
+  FOptionsContainer.MarginNormalColor := ColorToString(FEditorLeftMarginFrame.LineNormalColorBox.Selected);
+  FOptionsContainer.MarginLeftMarginWidth := StrToIntDef(FEditorLeftMarginFrame.LeftMarginWidthEdit.Text, 48);
+  { Right Margin }
+  FOptionsContainer.MarginVisibleRightMargin := FEditorRightMarginFrame.VisibleCheckBox.Checked;
+  FOptionsContainer.MarginRightMargin := StrToIntDef(FEditorRightMarginFrame.PositionEdit.Text, 80);
   { Editor tabs }
   FOptionsContainer.EditorCloseTabByDblClick := FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked;
   FOptionsContainer.EditorCloseTabByMiddleClick := FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked;
