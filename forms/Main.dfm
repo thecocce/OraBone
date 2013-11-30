@@ -1306,7 +1306,7 @@ object MainForm: TMainForm
       Category = 'SQLEditor'
       Caption = 'Format SQL'
       Enabled = False
-      Hint = 'Format SQL (upcoming feature)'
+      Hint = 'Format SQL'
       ImageIndex = 94
       OnExecute = FormatSQLActionExecute
     end

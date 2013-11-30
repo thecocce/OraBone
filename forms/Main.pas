@@ -316,8 +316,8 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
-  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode,
-  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, LZBaseType,
+  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, GSQLParser,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
 
 {$R *.dfm}
@@ -917,9 +917,7 @@ begin
     EditDeleteWordAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteLineAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteEOLAction.Enabled := ActiveSQLDocumentFound;
-    {$IFDEF DEBUG}
     FormatSQLAction.Enabled := ActiveSQLDocumentFound;
-    {$ENDIF}
     try
       EditPasteAction.Enabled := Clipboard.HasFormat(CF_TEXT) and ActiveSQLDocumentFound and not OutputGridHasFocus; //ClipBoard.AsText <> '';
     except
@@ -1907,20 +1905,30 @@ end;
 
 procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
+  Result: Integer;
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
+  SQLParser: TGSQLParser;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     SynEdit.BeginUndoBlock;
+    SQLParser := TGSQLParser.Create(DBVOracle);
     try
       SynEdit.SelectAll;
-      //SynEdit.SelText := BCSQL.Formatter.FormatSQL(SynEdit.Text);
+      SQLParser.SQLText.Assign(SynEdit.Lines);
+      gFmtOpt.Select_keywords_alignOption := aloRight;
+      Result := SQLParser.PrettyPrint;
+      if Result > 0 then
+        ShowErrorMessage('Invalid SQL')
+      else
+        SynEdit.SelText := SQLParser.FormattedSQLText.Text;
     finally
       SynEdit.EndUndoBlock;
       SynEdit.SetFocus;
+      SQLParser.Free;
     end;
   end;
 end;
