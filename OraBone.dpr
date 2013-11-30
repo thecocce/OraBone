@@ -101,7 +101,6 @@ uses
   OutputSynEditTabSheet in 'frames\OutputSynEditTabSheet.pas' {OutputSynEditFrame: TFrame},
   OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {OutputTreeViewFrame: TFrame},
   OptionsEditorFont in 'frames\OptionsEditorFont.pas' {EditorFontFrame: TFrame},
-  OptionsEditorMargin in 'frames\OptionsEditorMargin.pas' {EditorMarginFrame: TFrame},
   OptionsEditorOptions in 'frames\OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
   OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
   OptionsMainMenu in 'frames\OptionsMainMenu.pas' {MainMenuFrame: TFrame},
@@ -123,7 +122,9 @@ uses
   OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
   BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
   OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
-  Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas';
+  Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
+  OptionsEditorLeftMargin in 'frames\OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
+  OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame};
 
 {$R *.res}
 

@@ -1290,10 +1290,8 @@ begin
   SynEdit := GetActiveSynEdit;
   SynEdit.Undo;
   if SynEdit.UndoList.ItemCount = 0 then
-  begin
-    SynEdit.Modified := False;
     PageControl.ActivePageCaption := GetActivePageCaption;
-  end;
+  CheckModifiedDocuments;
 end;
 
 procedure TSQLEditorFrame.Redo;
@@ -1303,6 +1301,7 @@ begin
   SynEdit := GetActiveSynEdit;
   if Assigned(SynEdit) then
     SynEdit.Redo;
+  CheckModifiedDocuments;
 end;
 
 procedure TSQLEditorFrame.Cut;
