@@ -163,6 +163,7 @@ type
     DatabaseExportAction: TAction;
     DatabaseImportAction: TAction;
     ViewStyleAction: TAction;
+    ViewMiniMapAction: TAction;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -265,6 +266,7 @@ type
     procedure ExecuteCurrentStatementActionExecute(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ViewMiniMapActionExecute(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -272,12 +274,14 @@ type
     FOnStartUp: Boolean;
     FProcessingEventHandler: Boolean;
     FImageListCount: Integer;
+    FEncoding: TEncoding;
     function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
     function GetActiveSQLEditor: TSQLEditorFrame;
     function GetActiveSQLHistory: TSQLHistoryFrame;
     function GetSessionList: TList;
+    function GetStringList(Filename: string): TStringList;
     function OpenSQLEditor(Schema: string; AddNewDocument: Boolean): TSQLEditorFrame;
     procedure CloseTab(Confirm: Boolean);
     procedure CreateStyleMenu;
@@ -312,8 +316,8 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
-  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI,
-  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode,
+  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
 
 {$R *.dfm}
@@ -520,16 +524,47 @@ begin
     SQLEditorFrame.Search;
 end;
 
+function TMainForm.GetStringList(Filename: string): TStringList;
+var
+  LFileStream: TFileStream;
+  LBuffer: TBytes;
+  WithBom: Boolean;
+begin
+  Result := TStringList.Create;
+  FEncoding := nil;
+  LFileStream := TFileStream.Create(FileName, fmOpenRead);
+  try
+    // Identify encoding
+    if SynUnicode.IsUTF8(LFileStream, WithBom) then
+    begin
+      if WithBom then
+        FEncoding := TEncoding.UTF8
+      else
+        FEncoding := TEncoding.UTF8WithoutBOM;
+    end
+    else
+    begin
+      // Read file into buffer
+      SetLength(LBuffer, LFileStream.Size);
+      LFileStream.ReadBuffer(Pointer(LBuffer)^, Length(LBuffer));
+      TEncoding.GetBufferEncoding(LBuffer, FEncoding);
+    end;
+  finally
+    LFileStream.Free;
+  end;
+  Result.LoadFromFile(FileName, FEncoding);
+end;
+
 { Recursive method to find files. }
 procedure TMainForm.FindInFiles(SQLEditorFrame: TSQLEditorFrame; OutputTreeView: TVirtualDrawTree; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
 var
   shFindFile: THandle;
   sWin32FD: TWin32FindData;
-  S, Line: string;
+  S, Line: WideString;
   FName: string;
-  Ln, Ch, ChPos: Integer;
+  Ln, Ch, ChPos: LongWord;
   Found: Boolean;
-  SynEdit: TSynEdit;
+  StringList: TStringList;
   Root: PVirtualNode;
 
   function IsDirectory(dWin32FD: TWin32FindData): Boolean;
@@ -552,7 +587,7 @@ begin
     repeat
       if SQLEditorFrame.OutputFrame.CancelSearch then
         Exit;
-      StatusBar.Panels[3].Text := 'Search in progress...';
+      StatusBar.Panels[3].Text := LanguageDataModule.GetConstant('SearchInProgress');
       Application.ProcessMessages;
       FName := StrPas(sWin32FD.cFileName);
       if (FName <> '.') and (FName <> '..') then
@@ -565,25 +600,24 @@ begin
         begin
             if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
             try
-              SynEdit := TBCOraSynEdit.Create(nil);
               {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
-              SynEdit.Lines.LoadFromFile(IncludeTrailingBackslash(FolderText) + FName);
+              StringList := GetStringList(IncludeTrailingBackslash(String(FolderText)) + FName);
               {$WARNINGS ON}
               try
                 Root := nil;
-                if Trim(SynEdit.Text) <> '' then
-                for Ln := 0 to SynEdit.Lines.Count - 1 do
+                if Trim(StringList.Text) <> '' then
+                for Ln := 0 to StringList.Count - 1 do
                 begin
                   Found := True;
-                  Line := SynEdit.Lines[Ln];
+                  Line := StringList.Strings[Ln];
                   S := Line;
                   ChPos := 0;
                   while Found do
                   begin
                     if SearchCaseSensitive then
-                      Ch := Pos(FindWhatText, S)
+                      Ch := Pos(WideString(FindWhatText), S)
                     else
-                      Ch := Pos(UpperCase(FindWhatText), UpperCase(S));
+                      Ch := Pos(WideUpperCase(WideString(FindWhatText)), WideUpperCase(S));
                     if Ch <> 0 then
                     begin
                       Found := True;
@@ -593,19 +627,20 @@ begin
                       {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
                       SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, IncludeTrailingBackslash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
                       {$WARNINGS ON}
-                      S := Copy(S, Ch + Length(FindWhatText), Length(S));
-                      ChPos := ChPos + Length(FindWhatText) - 1;
+                      S := Copy(S, Ch + LongWord(Length(FindWhatText)), Length(S));
+                      ChPos := ChPos + LongWord(Length(FindWhatText)) - 1;
                     end
                     else
                       Found := False;
                   end;
                 end
               finally
-                SynEdit.Free;
+                StringList.Free;
               end;
             except
               {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
-              ShowWarningMessage(Format('File %s access error.', [IncludeTrailingBackslash(FolderText) + FName]));
+              SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, '', -1, 0,
+                Format(LanguageDataModule.GetWarningMessage('FileAccessError'), [IncludeTrailingBackslash(FolderText) + FName]), '');
               {$WARNINGS ON}
             end;
         end;
@@ -624,6 +659,7 @@ var
   Min, Secs: Integer;
   TimeDifference: string;
   OutputTreeView: TVirtualDrawTree;
+  Root: PVirtualNode;
 begin
   with FindInFilesDialog do
   begin
@@ -648,23 +684,20 @@ begin
         T2 := Now;
         if not SQLEditorFrame.OutputFrame.CancelSearch then
         begin
-          if not SQLEditorFrame.OutputFrame.IsEmpty then
+          if SQLEditorFrame.OutputFrame.IsEmpty then
           begin
-            Min := StrToInt(FormatDateTime('n', T2 - T1));
-            Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - T1));
-            if Secs < 60 then
-              TimeDifference := FormatDateTime('s.zzz "s"', T2 - T1)
-            else
-              TimeDifference := FormatDateTime('n "min" s.zzz "s"', T2 - T1);
-            StatusBar.Panels[3].Text := Format(LanguageDataModule.GetConstant('OccurencesFound'), [SQLEditorFrame.OutputFrame.Count, TimeDifference])
-          end
-          else
-          begin
-            ShowMessage(Format(LanguageDataModule.GetMessage('CannotFindString'), [FindWhatText]));
-            SQLEditorFrame.OutputFrame.ProcessingTabSheet := False;
-            SQLEditorFrame.OutputFrame.CloseTabSheet;
+            Root := nil;
+            SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, '', -1, 0,
+              Format(LanguageDataModule.GetMessage('CannotFindString'), [FindWhatText]));
             StatusBar.Panels[3].Text := '';
           end;
+          Min := StrToInt(FormatDateTime('n', T2 - T1));
+          Secs := Min * 60 + StrToInt(FormatDateTime('s', T2 - T1));
+          if Secs < 60 then
+            TimeDifference := FormatDateTime(Format('s.zzz "%s"', [LanguageDataModule.GetConstant('Second')]), T2 - T1)
+          else
+            TimeDifference := FormatDateTime(Format('n "%s" s.zzz "%s"', [LanguageDataModule.GetConstant('Minute'), LanguageDataModule.GetConstant('Second')]), T2 - T1);
+          StatusBar.Panels[3].Text := Format(LanguageDataModule.GetConstant('OccurencesFound'), [SQLEditorFrame.OutputFrame.Count, TimeDifference])
         end;
         SQLEditorFrame.OutputFrame.PageControl.EndDrag(False); { if close button pressed and search canceled, dragging will stay... }
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := False;
@@ -704,10 +737,15 @@ end;
 procedure TMainForm.SearchToggleBookmarkActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
+  OraSynEdit: TBCOraSynEdit;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
-    SQLEditorFrame.ToggleBookMark;
+  begin
+    OraSynEdit := SQLEditorFrame.GetActiveSynEdit;
+    if Assigned(OraSynEdit) then
+      OraSynEdit.ToggleBookMark
+  end;
 end;
 
 procedure TMainForm.SelectReopenFileActionExecute(Sender: TObject);
@@ -1583,6 +1621,15 @@ begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
     ViewLineNumbersAction.Checked := SQLEditorFrame.ToggleLineNumbers;
+end;
+
+procedure TMainForm.ViewMiniMapActionExecute(Sender: TObject);
+var
+  SQLEditorFrame: TSQLEditorFrame;
+begin
+  SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+    SQLEditorFrame.ToggleMiniMap;
 end;
 
 procedure TMainForm.ViewNextPageActionExecute(Sender: TObject);

@@ -335,7 +335,6 @@ type
     procedure FindNext;
     procedure FindPrevious;
     procedure Replace;
-    procedure ToggleBookMark;
     procedure NextPage;
     procedure PreviousPage;
     procedure CheckFileDateTimes;
@@ -384,6 +383,7 @@ type
     procedure ToggleCase;
     procedure SortAsc;
     procedure SortDesc;
+    procedure ToggleMiniMap;
     procedure ClearBookmarks;
     procedure InsertLine;
     procedure DeleteWord;
@@ -2042,29 +2042,6 @@ begin
   end;
 end;
 
-procedure TSQLEditorFrame.ToggleBookMark;
-var
-  i: Integer;
-  SynEdit: TBCOraSynEdit;
-  CaretX, CaretY: Integer;
-begin
-  SynEdit := GetActiveSynEdit;
-  for i := 0 to SynEdit.Marks.Count - 1 do
-    if SynEdit.CaretY = SynEdit.Marks[i].Line then
-    begin
-      SynEdit.ClearBookmark(SynEdit.Marks[i].BookmarkNumber);
-      Exit;
-    end;
-  CaretX := SynEdit.CaretX;
-  CaretY := SynEdit.CaretY;
-  for i := 1 to 9 do
-    if not SynEdit.GetBookMark(i, CaretX, CaretY) then
-    begin
-      SynEdit.SetBookMark(i, SynEdit.CaretX, SynEdit.CaretY);
-      Exit;
-    end;
-end;
-
 procedure TSQLEditorFrame.ToggleBookmarks(ItemIndex: Integer);
 var
   SynEdit: TBCOraSynEdit;
@@ -3130,6 +3107,15 @@ end;
 function TSQLEditorFrame.GetInTransAction: Boolean;
 begin
   Result := FSession.InTransaction;
+end;
+
+procedure TSQLEditorFrame.ToggleMiniMap;
+var
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+begin
+  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.ActivePage);
+  if Assigned(SQLEditorTabSheetFrame) then
+    SQLEditorTabSheetFrame.MinimapVisible := not SQLEditorTabSheetFrame.MinimapVisible;
 end;
 
 end.

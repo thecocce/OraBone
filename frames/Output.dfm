@@ -19,6 +19,7 @@ object OutputFrame: TOutputFrame
     OnChange = PageControlChange
     OnMouseDown = PageControlMouseDown
     TabDragDrop = False
+    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     OnCloseButtonClick = PageControlCloseButtonClick

@@ -67,7 +67,7 @@ type
     procedure AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);
     procedure AddStrings(TabCaption: string; Text: string);
     function AddTreeView(TabCaption: string; AutoExpand: Boolean = False): TVirtualDrawTree;
-    procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString = ''); //overload;
+    procedure AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongInt; Text: WideString; SearchString: ShortString = ''); //overload;
     procedure Clear;
     procedure ClearStrings(TabCaption: string);
     procedure CloseAllOtherTabSheets;
@@ -605,7 +605,7 @@ begin
         Result := TOutputTreeViewFrame(PageControl.ActivePage.Components[0]).VirtualDrawTree;
 end;
 
-procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongWord; Text: WideString; SearchString: ShortString);
+procedure TOutputFrame.AddTreeViewLine(OutputTreeView: TVirtualDrawTree; var Root: PVirtualNode; Filename: WideString; Ln, Ch: LongInt; Text: WideString; SearchString: ShortString);
 var
   Node: PVirtualNode;
   NodeData: POutputRec;

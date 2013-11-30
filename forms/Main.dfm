@@ -630,6 +630,9 @@ object MainForm: TMainForm
                 Action = StatusBarAction
               end
               item
+                Action = ViewMiniMapAction
+              end
+              item
                 Action = ViewOutputAction
               end
               item
@@ -1109,6 +1112,12 @@ object MainForm: TMainForm
       Checked = True
       Hint = 'Show or hide the status bar'
       OnExecute = StatusBarActionExecute
+    end
+    object ViewMiniMapAction: TAction
+      Category = '&View'
+      Caption = 'Minimap'
+      Hint = 'Show or hide the minimap'
+      OnExecute = ViewMiniMapActionExecute
     end
     object ViewOutputAction: TAction
       Category = '&View'
