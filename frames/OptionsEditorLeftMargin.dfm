@@ -105,8 +105,6 @@ object EditorLeftMarginFrame: TEditorLeftMarginFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Line Modified'
-      Checked = True
-      State = cbChecked
       TabOrder = 4
       ReadOnly = False
     end

@@ -16,7 +16,7 @@ object ObjectFrameFrame: TObjectFrameFrame
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
       Left = 11
-      Top = 50
+      Top = 72
       Width = 87
       Height = 13
       Margins.Left = 4
@@ -27,10 +27,10 @@ object ObjectFrameFrame: TObjectFrameFrame
     end
     object ButtonPanelAlignComboBox: TBCComboBox
       Left = 9
-      Top = 68
+      Top = 90
       Width = 64
       Height = 21
-      TabOrder = 2
+      TabOrder = 3
       Text = 'Bottom'
       Items.Strings = (
         'Bottom'
@@ -62,7 +62,24 @@ object ObjectFrameFrame: TObjectFrameFrame
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Data Search Panel'
+      Checked = True
+      State = cbChecked
       TabOrder = 1
+      ReadOnly = False
+    end
+    object FilterOnTypingCheckBox: TBCCheckBox
+      Left = 9
+      Top = 46
+      Width = 312
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Caption = ' Filter On Typing'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
       ReadOnly = False
     end
   end

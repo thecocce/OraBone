@@ -13,8 +13,8 @@ const
   { Main menu item indexes }
   FILE_MENU_ITEMINDEX = 0;
   FILE_REOPEN_MENU_ITEMINDEX = 2;
-  VIEW_MENU_ITEMINDEX = 4;
-  VIEW_STYLE_MENU_ITEMINDEX = 11;
+  VIEW_MENU_ITEMINDEX = 3;
+  VIEW_STYLE_MENU_ITEMINDEX = 12;
 
 type
   TMainForm = class(TForm)
@@ -661,6 +661,7 @@ var
   OutputTreeView: TVirtualDrawTree;
   Root: PVirtualNode;
 begin
+  OutputTreeView := nil;
   with FindInFilesDialog do
   begin
     Extensions := '*.*|*.sql|';
@@ -956,6 +957,8 @@ begin
     ViewSpecialCharsAction.Enabled := ViewLineNumbersAction.Enabled;
     ViewSelectionModeAction.Enabled := ActiveSQLDocumentFound;
     ViewSelectionModeAction.Checked := ActiveSQLDocumentFound and SQLEditorFrame.SelectionMode;
+    ViewMinimapAction.Enabled := ActiveSQLDocumentFound;
+    ViewMinimapAction.Checked := ActiveSQLDocumentFound and SQLEditorFrame.MinimapChecked;
     { Database Export }
     //DatabaseExportTableDataAction.Enabled :=
     //  (ActiveSQLDocumentFound and SQLEditorFrame.DataQueryOpened) or ActiveSQLDocumentFound or
@@ -1330,14 +1333,14 @@ begin
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
     OptionsContainer.MarginVisibleLeftMargin := ReadBool('Options', 'MarginVisibleLeftMargin', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
-    OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '48'));
+    OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '30'));
 
     OptionsContainer.MarginInTens := ReadBool('Options', 'MarginInTens', True);
     OptionsContainer.MarginZeroStart := ReadBool('Options', 'MarginZeroStart', False);
-    OptionsContainer.MarginLineModified := ReadBool('Options', 'MarginLineModified', True);
+    OptionsContainer.MarginLineModified := ReadBool('Options', 'MarginLineModified', False);
     OptionsContainer.MarginModifiedColor := ReadString('Options', 'MarginModifiedColor', 'clYellow');
     OptionsContainer.MarginNormalColor := ReadString('Options', 'MarginNormalColor', 'clGreen');
-
+    OptionsContainer.MinimapFontSize :=  StrToInt(ReadString('Options', 'MinimapFontSize', '3'));
     OptionsContainer.ShowSearchStringNotFound := ReadBool('Options', 'ShowSearchStringNotFound', True);
     OptionsContainer.BeepIfSearchStringNotFound := ReadBool('Options', 'BeepIfSearchStringNotFound', True);
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
@@ -1410,6 +1413,7 @@ begin
       ReadBool('Options', 'ObjectCreationAndModificationTimestamp', False));
     DeleteKey('Options', 'ObjectCreationAndModificationTimestamp'); { deprecated }
     OptionsContainer.ShowDataSearchPanel := ReadBool('Options', 'ShowDataSearchPanel', True);
+    OptionsContainer.FilterOnTyping := ReadBool('Options', 'FilterOnTyping', True);
     OptionsContainer.EnableWordWrap := ReadBool('Options', 'EnableWordWrap', False);
     OptionsContainer.EnableLineNumbers := ReadBool('Options', 'EnableLineNumbers', True);
     OptionsContainer.EnableSpecialChars := ReadBool('Options', 'EnableSpecialChars', False);
@@ -1743,7 +1747,7 @@ begin
       WriteBool('Options', 'MarginLineModified', OptionsContainer.MarginLineModified);
       WriteString('Options', 'MarginModifiedColor', OptionsContainer.MarginModifiedColor);
       WriteString('Options', 'MarginNormalColor', OptionsContainer.MarginNormalColor);
-
+      WriteString('Options', 'MinimapFontSize', IntToStr(OptionsContainer.MinimapFontSize));
       WriteBool('Options', 'ShowSearchStringNotFound', OptionsContainer.ShowSearchStringNotFound);
       WriteBool('Options', 'BeepIfSearchStringNotFound', OptionsContainer.BeepIfSearchStringNotFound);
 
@@ -1819,6 +1823,7 @@ begin
       WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
       WriteBool('Options', 'ShowObjectCreationAndModificationTimestamp', OptionsContainer.ShowObjectCreationAndModificationTimestamp);
       WriteBool('Options', 'ShowDataSearchPanel', OptionsContainer.ShowDataSearchPanel);
+      WriteBool('Options', 'FilterOnTyping', OptionsContainer.FilterOnTyping);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
       WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);
@@ -1965,7 +1970,6 @@ begin
   FConnecting := True;
   OraCall.OCIUnicode := True;
   FImageListCount := MenuImageList.Count; { System images are inserted after }
-  //RecreateStatusBar;
   ReadIniOptions;
 end;
 

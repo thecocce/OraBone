@@ -513,6 +513,71 @@ object MainForm: TMainForm
           item
             Items = <
               item
+                Action = ViewToolbarAction
+              end
+              item
+                Action = StatusBarAction
+              end
+              item
+                Action = ViewMiniMapAction
+                Caption = '&Minimap'
+              end
+              item
+                Action = ViewOutputAction
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = SQLHistoryAction
+                Caption = 'S&QL History'
+                ImageIndex = 69
+                ShortCut = 122
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = ViewWordWrapAction
+              end
+              item
+                Action = ViewLineNumbersAction
+              end
+              item
+                Action = ViewSpecialCharsAction
+                Caption = 'S&pecial Chars'
+              end
+              item
+                Action = ViewSelectionModeAction
+                Caption = 'S&election Mode'
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = ViewStyleAction
+                ImageIndex = 74
+                UsageCount = 1
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = ViewNextPageAction
+                ImageIndex = 75
+                ShortCut = 16393
+              end
+              item
+                Action = ViewPreviousPageAction
+                Caption = 'P&revious Page'
+                ImageIndex = 76
+                ShortCut = 24585
+              end>
+            Caption = '&View'
+          end
+          item
+            Items = <
+              item
                 Action = DatabaseNewConnectionMenuAction
                 ImageIndex = 50
               end
@@ -620,70 +685,6 @@ object MainForm: TMainForm
                 ShortCut = 116
               end>
             Caption = '&Database'
-          end
-          item
-            Items = <
-              item
-                Action = ViewToolbarAction
-              end
-              item
-                Action = StatusBarAction
-              end
-              item
-                Action = ViewMiniMapAction
-              end
-              item
-                Action = ViewOutputAction
-              end
-              item
-                Caption = '-'
-              end
-              item
-                Action = SQLHistoryAction
-                Caption = 'S&QL History'
-                ImageIndex = 69
-                ShortCut = 122
-              end
-              item
-                Caption = '-'
-              end
-              item
-                Action = ViewWordWrapAction
-              end
-              item
-                Action = ViewLineNumbersAction
-              end
-              item
-                Action = ViewSpecialCharsAction
-                Caption = 'S&pecial Chars'
-              end
-              item
-                Action = ViewSelectionModeAction
-                Caption = 'S&election Mode'
-              end
-              item
-                Caption = '-'
-              end
-              item
-                Action = ViewStyleAction
-                ImageIndex = 74
-                UsageCount = 1
-              end
-              item
-                Caption = '-'
-              end
-              item
-                Action = ViewNextPageAction
-                ImageIndex = 75
-                ShortCut = 16393
-              end
-              item
-                Action = ViewPreviousPageAction
-                Caption = 'P&revious Page'
-                ImageIndex = 76
-                ShortCut = 24585
-              end>
-            Caption = '&View'
           end
           item
             Items = <

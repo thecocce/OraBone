@@ -358,7 +358,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 368
         Top = 0
         Width = 70
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Case Sensitive'
         Layout = tlCenter
@@ -367,7 +367,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 465
         Top = 0
         Width = 89
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Whole Words Only'
         Layout = tlCenter
@@ -376,7 +376,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 581
         Top = 0
         Width = 92
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Regular Expression'
         Layout = tlCenter
@@ -397,7 +397,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Search for'
         end
@@ -825,11 +825,13 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Gutter.LineModifiedColor = clYellow
         Gutter.LineNormalColor = clLime
         Gutter.AutoSize = True
+        Gutter.BorderStyle = gbsNone
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
+        Gutter.LeftOffset = 20
         Gutter.LeftOffsetColor = clNone
         Gutter.RightOffsetColor = clNone
         Gutter.ShowLineNumbers = True

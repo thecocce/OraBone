@@ -311,6 +311,7 @@ type
     function GetCompareFrame(TabSheet: TTabSheet): TCompareFrame;
     function GetModifiedDocuments(CheckActive: Boolean = True): Boolean;
     function GetInTransAction: Boolean;
+    function GetMinimapChecked: Boolean;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -373,6 +374,7 @@ type
     property OpenTabSheetCount: Integer read GetOpenTabSheetCount;
     property Processing: Boolean read FProcessing;
     property ModifiedDocuments: Boolean Read FModifiedDocuments write FModifiedDocuments;
+    property MinimapChecked: Boolean read GetMinimapChecked;
     procedure ExecuteStatement(Current: Boolean = False); overload;
     procedure ExecuteCurrentStatement;
     procedure ExecuteScript(Current: Boolean = False);
@@ -634,6 +636,9 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
+    { SynEditMinimap }
+    OraSynEditMinimap.OnSpecialLineColors := SynEditSpecialLineColors;
+
     OptionsContainer.AssignTo(OraSynEdit);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
@@ -3116,6 +3121,16 @@ begin
   SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.ActivePage);
   if Assigned(SQLEditorTabSheetFrame) then
     SQLEditorTabSheetFrame.MinimapVisible := not SQLEditorTabSheetFrame.MinimapVisible;
+end;
+
+function TSQLEditorFrame.GetMinimapChecked: Boolean;
+var
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+begin
+  Result := False;
+  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.ActivePage);
+  if Assigned(SQLEditorTabSheetFrame) then
+    Result := SQLEditorTabSheetFrame.MinimapVisible;
 end;
 
 end.
