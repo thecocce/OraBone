@@ -1332,6 +1332,7 @@ begin
     OptionsContainer.MarginLeftMarginAutoSize := ReadBool('Options', 'MarginLeftMarginAutoSize', True);
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
     OptionsContainer.MarginVisibleLeftMargin := ReadBool('Options', 'MarginVisibleLeftMargin', True);
+    OptionsContainer.MarginShowBookmarks := ReadBool('Options', 'MarginShowBookmarks', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '30'));
 
@@ -1739,6 +1740,7 @@ begin
       WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.MarginRightMargin));
       WriteBool('Options', 'MarginLeftMarginAutoSize', OptionsContainer.MarginLeftMarginAutoSize);
       WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
+      WriteBool('Options', 'MarginShowBookmarks', OptionsContainer.MarginShowBookmarks);
       WriteBool('Options', 'MarginVisibleLeftMargin', OptionsContainer.MarginVisibleLeftMargin);
       WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
 

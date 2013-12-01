@@ -150,6 +150,7 @@ type
     FMarginModifiedColor: string;
     FMarginNormalColor: string;
     FMarginRightMargin: Integer;
+    FMarginShowBookmarks: Boolean;
     FMarginVisibleLeftMargin: Boolean;
     FMarginVisibleRightMargin: Boolean;
     FMarginZeroStart: Boolean;
@@ -263,6 +264,7 @@ type
     property MarginModifiedColor: string read FMarginModifiedColor write FMarginModifiedColor;
     property MarginNormalColor: string read FMarginNormalColor write FMarginNormalColor;
     property MarginRightMargin: Integer read FMarginRightMargin write FMarginRightMargin default 80;
+    property MarginShowBookmarks: Boolean read FMarginShowBookmarks write FMarginShowBookmarks default True;
     property MarginVisibleLeftMargin: Boolean read FMarginVisibleLeftMargin write FMarginVisibleLeftMargin default True;
     property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin default True;
     property MarginZeroStart: Boolean read FMarginZeroStart write FMarginZeroStart default False;
@@ -367,6 +369,10 @@ begin
     TCustomSynEdit(Dest).Gutter.Intens := FMarginInTens;
     TCustomSynEdit(Dest).Gutter.ZeroStart := FMarginZeroStart;
     TCustomSynEdit(Dest).Gutter.ShowLineModified := FMarginLineModified;
+    if FMarginShowBookmarks then
+      TCustomSynEdit(Dest).Gutter.LeftOffset := 20
+    else
+      TCustomSynEdit(Dest).Gutter.LeftOffset := 0;
     TCustomSynEdit(Dest).Gutter.LineModifiedColor := StringToColor(FMarginModifiedColor);
     TCustomSynEdit(Dest).Gutter.LineNormalColor := StringToColor(FMarginNormalColor);
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
@@ -732,6 +738,7 @@ begin
   FEditorLeftMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleLeftMargin;
   FEditorLeftMarginFrame.InTensCheckBox.Checked := FOptionsContainer.MarginInTens;
   FEditorLeftMarginFrame.ZeroStartCheckBox.Checked := FOptionsContainer.MarginZeroStart;
+  FEditorLeftMarginFrame.ShowBookmarksCheckBox.Checked := FOptionsContainer.MarginShowBookmarks;
   FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked := FOptionsContainer.MarginLineModified;
   FEditorLeftMarginFrame.LineModifiedColorBox.Selected := StringToColor(FOptionsContainer.MarginModifiedColor);
   FEditorLeftMarginFrame.LineNormalColorBox.Selected := StringToColor(FOptionsContainer.MarginNormalColor);
@@ -978,6 +985,7 @@ begin
   FOptionsContainer.MarginLeftMarginAutoSize := FEditorLeftMarginFrame.AutoSizeCheckBox.Checked;
   FOptionsContainer.MarginInTens := FEditorLeftMarginFrame.InTensCheckBox.Checked;
   FOptionsContainer.MarginZeroStart := FEditorLeftMarginFrame.ZeroStartCheckBox.Checked;
+  FOptionsContainer.MarginShowBookmarks := FEditorLeftMarginFrame.ShowBookmarksCheckBox.Checked;
   FOptionsContainer.MarginLineModified := FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked;
   FOptionsContainer.MarginModifiedColor := ColorToString(FEditorLeftMarginFrame.LineModifiedColorBox.Selected);
   FOptionsContainer.MarginNormalColor := ColorToString(FEditorLeftMarginFrame.LineNormalColorBox.Selected);
