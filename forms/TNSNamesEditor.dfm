@@ -831,8 +831,6 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
-        Gutter.LeftOffset = 20
-        Gutter.LeftOffsetColor = clNone
         Gutter.RightOffsetColor = clNone
         Gutter.ShowLineNumbers = True
         Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]

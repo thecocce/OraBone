@@ -32,7 +32,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 337
       Top = 0
       Width = 70
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
@@ -41,7 +41,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 434
       Top = 0
       Width = 89
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
@@ -50,7 +50,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 550
       Top = 0
       Width = 92
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
@@ -71,7 +71,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 18
+        Height = 13
         Align = alLeft
         Caption = 'Search for'
       end
@@ -1117,7 +1117,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 20
+        Height = 13
         Align = alLeft
         Caption = 'Go to Line'
       end
@@ -1448,7 +1448,6 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object ClearBookmarksMenuItem: TMenuItem
-      Action = MainForm.ClearBookmarksAction
     end
     object Separator3MenuItem: TMenuItem
       Caption = '-'

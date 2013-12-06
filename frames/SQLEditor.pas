@@ -636,9 +636,6 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
-    { SynEditMinimap }
-    OraSynEditMinimap.OnSpecialLineColors := SynEditSpecialLineColors;
-
     OptionsContainer.AssignTo(OraSynEdit);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);

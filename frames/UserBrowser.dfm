@@ -245,9 +245,6 @@ object UserBrowserFrame: TUserBrowserFrame
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
-          Gutter.LeftOffset = 0
-          Gutter.LeftOffsetColor = clNone
-          Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.Gradient = True
           Highlighter = SynSQLSyn

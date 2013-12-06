@@ -373,10 +373,8 @@ begin
     TCustomSynEdit(Dest).Gutter.Intens := FMarginInTens;
     TCustomSynEdit(Dest).Gutter.ZeroStart := FMarginZeroStart;
     TCustomSynEdit(Dest).Gutter.ShowLineModified := FMarginLineModified;
-    if FMarginShowBookmarkPanel then
-      TCustomSynEdit(Dest).Gutter.LeftOffset := 20
-    else
-      TCustomSynEdit(Dest).Gutter.LeftOffset := 0;
+    TCustomSynEdit(Dest).Gutter.ShowBookmarks := FMarginShowBookmarks;
+    TCustomSynEdit(Dest).Gutter.ShowBookmarkPanel := FMarginShowBookmarkPanel;
     TCustomSynEdit(Dest).Gutter.LineModifiedColor := StringToColor(FMarginModifiedColor);
     TCustomSynEdit(Dest).Gutter.LineNormalColor := StringToColor(FMarginNormalColor);
     TCustomSynEdit(Dest).TabWidth := FTabWidth;
@@ -435,8 +433,6 @@ begin
     TCustomSynEdit(Dest).RightEdge.Visible := FMarginVisibleRightMargin;
     TCustomSynEdit(Dest).RightEdge.MouseMove := FMarginLeftMarginMouseMove;
     TCustomSynEdit(Dest).RightEdge.Position := FMarginRightMargin;
-
-    TCustomSynEdit(Dest).BookMarkOptions.Enabled := FMarginShowBookmarks;
   end
   else
   if Assigned(Dest) and (Dest is TActionMainMenuBar) then
