@@ -20,6 +20,7 @@ type
     LineNormalColorBox: TColorBox;
     InTensCheckBox: TBCCheckBox;
     ZeroStartCheckBox: TBCCheckBox;
+    ShowBookmarkPanelCheckBox: TBCCheckBox;
     ShowBookmarksCheckBox: TBCCheckBox;
   private
     { Private declarations }

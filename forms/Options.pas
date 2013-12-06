@@ -146,11 +146,13 @@ type
     FMarginInTens: Boolean;
     FMarginLeftMarginAutoSize: Boolean;
     FMarginLeftMarginWidth: Integer;
+    FMarginLeftMarginMouseMove: Boolean;
     FMarginLineModified: Boolean;
     FMarginModifiedColor: string;
     FMarginNormalColor: string;
     FMarginRightMargin: Integer;
     FMarginShowBookmarks: Boolean;
+    FMarginShowBookmarkPanel: Boolean;
     FMarginVisibleLeftMargin: Boolean;
     FMarginVisibleRightMargin: Boolean;
     FMarginZeroStart: Boolean;
@@ -260,11 +262,13 @@ type
     property MarginInTens: Boolean read FMarginInTens write FMarginInTens default True;
     property MarginLeftMarginAutoSize: Boolean read FMarginLeftMarginAutoSize write FMarginLeftMarginAutoSize default True;
     property MarginLeftMarginWidth: Integer read FMarginLeftMarginWidth write FMarginLeftMarginWidth default 30;
+    property MarginLeftMarginMouseMove: Boolean read FMarginLeftMarginMouseMove write FMarginLeftMarginMouseMove default True;
     property MarginLineModified: Boolean read FMarginLineModified write FMarginLineModified default False;
     property MarginModifiedColor: string read FMarginModifiedColor write FMarginModifiedColor;
     property MarginNormalColor: string read FMarginNormalColor write FMarginNormalColor;
     property MarginRightMargin: Integer read FMarginRightMargin write FMarginRightMargin default 80;
     property MarginShowBookmarks: Boolean read FMarginShowBookmarks write FMarginShowBookmarks default True;
+    property MarginShowBookmarkPanel: Boolean read FMarginShowBookmarkPanel write FMarginShowBookmarkPanel default True;
     property MarginVisibleLeftMargin: Boolean read FMarginVisibleLeftMargin write FMarginVisibleLeftMargin default True;
     property MarginVisibleRightMargin: Boolean read FMarginVisibleRightMargin write FMarginVisibleRightMargin default True;
     property MarginZeroStart: Boolean read FMarginZeroStart write FMarginZeroStart default False;
@@ -369,7 +373,7 @@ begin
     TCustomSynEdit(Dest).Gutter.Intens := FMarginInTens;
     TCustomSynEdit(Dest).Gutter.ZeroStart := FMarginZeroStart;
     TCustomSynEdit(Dest).Gutter.ShowLineModified := FMarginLineModified;
-    if FMarginShowBookmarks then
+    if FMarginShowBookmarkPanel then
       TCustomSynEdit(Dest).Gutter.LeftOffset := 20
     else
       TCustomSynEdit(Dest).Gutter.LeftOffset := 0;
@@ -427,6 +431,12 @@ begin
       TCustomSynEdit(Dest).SelectionMode := smColumn
     else
       TCustomSynEdit(Dest).SelectionMode := smNormal;
+
+    TCustomSynEdit(Dest).RightEdge.Visible := FMarginVisibleRightMargin;
+    TCustomSynEdit(Dest).RightEdge.MouseMove := FMarginLeftMarginMouseMove;
+    TCustomSynEdit(Dest).RightEdge.Position := FMarginRightMargin;
+
+    TCustomSynEdit(Dest).BookMarkOptions.Enabled := FMarginShowBookmarks;
   end
   else
   if Assigned(Dest) and (Dest is TActionMainMenuBar) then
@@ -739,6 +749,7 @@ begin
   FEditorLeftMarginFrame.InTensCheckBox.Checked := FOptionsContainer.MarginInTens;
   FEditorLeftMarginFrame.ZeroStartCheckBox.Checked := FOptionsContainer.MarginZeroStart;
   FEditorLeftMarginFrame.ShowBookmarksCheckBox.Checked := FOptionsContainer.MarginShowBookmarks;
+  FEditorLeftMarginFrame.ShowBookmarkPanelCheckBox.Checked := FOptionsContainer.MarginShowBookmarkPanel;
   FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked := FOptionsContainer.MarginLineModified;
   FEditorLeftMarginFrame.LineModifiedColorBox.Selected := StringToColor(FOptionsContainer.MarginModifiedColor);
   FEditorLeftMarginFrame.LineNormalColorBox.Selected := StringToColor(FOptionsContainer.MarginNormalColor);
@@ -746,6 +757,7 @@ begin
   { Right Margin }
   FEditorRightMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleRightMargin;
   FEditorRightMarginFrame.PositionEdit.Text := IntToStr(FOptionsContainer.MarginRightMargin);
+  FEditorRightMarginFrame.MouseMoveCheckBox.Checked := FOptionsContainer.MarginLeftMarginMouseMove;
   { Search }
   FEditorSearchFrame.ShowSearchStringNotFoundCheckBox.Checked := FOptionsContainer.ShowSearchStringNotFound;
   FEditorSearchFrame.BeepIfSearchStringNotFoundCheckBox.Checked := FOptionsContainer.BeepIfSearchStringNotFound;
@@ -986,6 +998,7 @@ begin
   FOptionsContainer.MarginInTens := FEditorLeftMarginFrame.InTensCheckBox.Checked;
   FOptionsContainer.MarginZeroStart := FEditorLeftMarginFrame.ZeroStartCheckBox.Checked;
   FOptionsContainer.MarginShowBookmarks := FEditorLeftMarginFrame.ShowBookmarksCheckBox.Checked;
+  FOptionsContainer.MarginShowBookmarkPanel := FEditorLeftMarginFrame.ShowBookmarkPanelCheckBox.Checked;
   FOptionsContainer.MarginLineModified := FEditorLeftMarginFrame.ShowLineModifiedCheckBox.Checked;
   FOptionsContainer.MarginModifiedColor := ColorToString(FEditorLeftMarginFrame.LineModifiedColorBox.Selected);
   FOptionsContainer.MarginNormalColor := ColorToString(FEditorLeftMarginFrame.LineNormalColorBox.Selected);
@@ -993,6 +1006,7 @@ begin
   { Right Margin }
   FOptionsContainer.MarginVisibleRightMargin := FEditorRightMarginFrame.VisibleCheckBox.Checked;
   FOptionsContainer.MarginRightMargin := StrToIntDef(FEditorRightMarginFrame.PositionEdit.Text, 80);
+  FOptionsContainer.MarginLeftMarginMouseMove := FEditorRightMarginFrame.MouseMoveCheckBox.Checked;
   { Search }
   FOptionsContainer.ShowSearchStringNotFound := FEditorSearchFrame.ShowSearchStringNotFoundCheckBox.Checked;
   FOptionsContainer.BeepIfSearchStringNotFound := FEditorSearchFrame.BeepIfSearchStringNotFoundCheckBox.Checked;

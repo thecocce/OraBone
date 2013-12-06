@@ -22,7 +22,7 @@ type
     ActionManager: TActionManager;
     ActionToolBar: TActionToolBar;
     ApplicationEvents: TApplicationEvents;
-    ClearBookmarksAction: TAction;
+    SearchClearBookmarksAction: TAction;
     CloseAllOtherPages1: TMenuItem;
     DatabaseCloseAllOtherTabsAction: TAction;
     DatabaseCloseAllTabAction: TAction;
@@ -167,7 +167,7 @@ type
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
-    procedure ClearBookmarksActionExecute(Sender: TObject);
+    procedure SearchClearBookmarksActionExecute(Sender: TObject);
     procedure DatabaseCloseAllOtherTabsActionExecute(Sender: TObject);
     procedure DatabaseCloseAllTabActionExecute(Sender: TObject);
     procedure DatabaseCloseTabActionExecute(Sender: TObject);
@@ -435,7 +435,7 @@ begin
   SetFields;
 end;
 
-procedure TMainForm.ClearBookmarksActionExecute(Sender: TObject);
+procedure TMainForm.SearchClearBookmarksActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
 begin
@@ -935,10 +935,10 @@ begin
     SearchFindNextAction.Enabled := ActiveSQLDocumentFound;
     SearchFindPreviousAction.Enabled := ActiveSQLDocumentFound;
     SearchFindInFilesAction.Enabled := Assigned(SQLEditorFrame) and not SQLEditorFrame.OutputFrame.ProcessingTabSheet;
-    SearchToggleBookmarkAction.Enabled := ActiveSQLDocumentFound;
-    SearchToggleBookmarksAction.Enabled := ActiveSQLDocumentFound;
-    SearchGotoBookmarksAction.Enabled := ActiveSQLDocumentFound;
-    ClearBookmarksAction.Enabled := ActiveSQLDocumentFound;
+    SearchToggleBookmarkAction.Enabled := OptionsContainer.MarginShowBookmarks and ActiveSQLDocumentFound;
+    SearchToggleBookmarksAction.Enabled := SearchToggleBookmarkAction.Enabled;
+    SearchGotoBookmarksAction.Enabled := SearchToggleBookmarkAction.Enabled;
+    SearchClearBookmarksAction.Enabled := SearchToggleBookmarkAction.Enabled;
     { database }
     DatabaseNewConnectionMenuAction.Enabled := not FConnecting;
     DatabaseCommitAction.Enabled := ActiveSQLDocumentFound and SQLEditorFrame.InTransaction;
@@ -968,25 +968,28 @@ begin
     ExecuteCurrentStatementAction.Enabled := ExecuteStatementAction.Enabled;
     ExecuteScriptAction.Enabled := ExecuteStatementAction.Enabled;
     ExplainPlanAction.Enabled := ExecuteStatementAction.Enabled;
-    { Bookmarks }
-    for i := 1 to 9 do
+    if OptionsContainer.MarginShowBookmarks then
     begin
-      GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [i])));
-      GotoBookmarksAction.Enabled := False;
-      GotoBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
-      ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [i])));
-      ToggleBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
-    end;
-    if Assigned(BookmarkList) then
-    for i := 0 to BookmarkList.Count - 1 do
-    begin
-      GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
-      GotoBookmarksAction.Enabled := True;
-      GotoBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
-        BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
-      ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
-      ToggleBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
-        BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
+      { Bookmarks }
+      for i := 1 to 9 do
+      begin
+        GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [i])));
+        GotoBookmarksAction.Enabled := False;
+        GotoBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
+        ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [i])));
+        ToggleBookmarksAction.Caption := Format('%s &%d', [LanguageDataModule.GetConstant('Bookmark'), i]);
+      end;
+      if Assigned(BookmarkList) then
+      for i := 0 to BookmarkList.Count - 1 do
+      begin
+        GotoBookmarksAction := TAction(FindComponent(Format('GotoBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
+        GotoBookmarksAction.Enabled := True;
+        GotoBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
+          BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
+        ToggleBookmarksAction := TAction(FindComponent(Format('ToggleBookmarks%dAction', [BookmarkList.Items[i].BookmarkNumber])));
+        ToggleBookmarksAction.Caption := Format('%s &%d: %s %d', [LanguageDataModule.GetConstant('Bookmark'),
+          BookmarkList.Items[i].BookmarkNumber, LanguageDataModule.GetConstant('Line'), BookmarkList.Items[i].Line]);
+      end;
     end;
     { Edit }
     if ActiveSQLDocumentFound then
@@ -1333,8 +1336,10 @@ begin
     OptionsContainer.MarginVisibleRightMargin := ReadBool('Options', 'MarginVisibleRightMargin', True);
     OptionsContainer.MarginVisibleLeftMargin := ReadBool('Options', 'MarginVisibleLeftMargin', True);
     OptionsContainer.MarginShowBookmarks := ReadBool('Options', 'MarginShowBookmarks', True);
+    OptionsContainer.MarginShowBookmarkPanel := ReadBool('Options', 'MarginShowBookmarkPanel', True);
     OptionsContainer.MarginRightMargin := StrToInt(ReadString('Options', 'RightMargin', '80'));
     OptionsContainer.MarginLeftMarginWidth := StrToInt(ReadString('Options', 'MarginLeftMarginWidth', '30'));
+    OptionsContainer.MarginLeftMarginMouseMove := ReadBool('Options', 'MarginLeftMarginMouseMove', True);
 
     OptionsContainer.MarginInTens := ReadBool('Options', 'MarginInTens', True);
     OptionsContainer.MarginZeroStart := ReadBool('Options', 'MarginZeroStart', False);
@@ -1740,7 +1745,9 @@ begin
       WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.MarginRightMargin));
       WriteBool('Options', 'MarginLeftMarginAutoSize', OptionsContainer.MarginLeftMarginAutoSize);
       WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
+      WriteBool('Options', 'MarginLeftMarginMouseMove', OptionsContainer.MarginLeftMarginMouseMove);
       WriteBool('Options', 'MarginShowBookmarks', OptionsContainer.MarginShowBookmarks);
+      WriteBool('Options', 'MarginShowBookmarkPanel', OptionsContainer.MarginShowBookmarkPanel);
       WriteBool('Options', 'MarginVisibleLeftMargin', OptionsContainer.MarginVisibleLeftMargin);
       WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
 
