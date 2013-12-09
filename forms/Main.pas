@@ -1346,13 +1346,14 @@ begin
     OptionsContainer.MarginLineModified := ReadBool('Options', 'MarginLineModified', False);
     OptionsContainer.MarginModifiedColor := ReadString('Options', 'MarginModifiedColor', 'clYellow');
     OptionsContainer.MarginNormalColor := ReadString('Options', 'MarginNormalColor', 'clGreen');
-    OptionsContainer.MinimapFontSize :=  StrToInt(ReadString('Options', 'MinimapFontSize', '3'));
+    OptionsContainer.MinimapFontName := ReadString('Options', 'MinimapFontName', 'Courier New');
+    OptionsContainer.MinimapFontSize := StrToInt(ReadString('Options', 'MinimapFontSize', '1'));
     OptionsContainer.ShowSearchStringNotFound := ReadBool('Options', 'ShowSearchStringNotFound', True);
     OptionsContainer.BeepIfSearchStringNotFound := ReadBool('Options', 'BeepIfSearchStringNotFound', True);
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
     OptionsContainer.NonblinkingCaretColor := ReadString('Options', 'NonblinkingCaretColor', 'clBlack');
     OptionsContainer.LineSpacing := StrToInt(ReadString('Options', 'LineSpacing', '0'));
-    OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '8'));
+    OptionsContainer.TabWidth := StrToInt(ReadString('Options', 'TabWidth', '4'));
     OptionsContainer.CompletionProposalEnabled := ReadBool('Options', 'CompletionProposalEnabled', True);
     OptionsContainer.CompletionProposalCaseSensitive := ReadBool('Options', 'CompletionProposalCaseSensitive', True);
     OptionsContainer.CompletionProposalShortcut := ReadString('Options', 'CompletionProposalShortcut', 'Ctrl+Space');
@@ -1756,6 +1757,7 @@ begin
       WriteBool('Options', 'MarginLineModified', OptionsContainer.MarginLineModified);
       WriteString('Options', 'MarginModifiedColor', OptionsContainer.MarginModifiedColor);
       WriteString('Options', 'MarginNormalColor', OptionsContainer.MarginNormalColor);
+      WriteString('Options', 'MinimapFontName', OptionsContainer.MinimapFontName);
       WriteString('Options', 'MinimapFontSize', IntToStr(OptionsContainer.MinimapFontSize));
       WriteBool('Options', 'ShowSearchStringNotFound', OptionsContainer.ShowSearchStringNotFound);
       WriteBool('Options', 'BeepIfSearchStringNotFound', OptionsContainer.BeepIfSearchStringNotFound);
@@ -1928,19 +1930,19 @@ begin
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
-    SynEdit.BeginUndoBlock;
+    //SynEdit.BeginUndoBlock;
     SQLParser := TGSQLParser.Create(DBVOracle);
     try
-      SynEdit.SelectAll;
+      //SynEdit.SelectAll;
       SQLParser.SQLText.Assign(SynEdit.Lines);
       gFmtOpt.Select_keywords_alignOption := aloRight;
       Result := SQLParser.PrettyPrint;
       if Result > 0 then
         ShowErrorMessage('Invalid SQL')
       else
-        SynEdit.SelText := SQLParser.FormattedSQLText.Text;
+        SynEdit.Text := SQLParser.FormattedSQLText.Text;
     finally
-      SynEdit.EndUndoBlock;
+      //SynEdit.EndUndoBlock;
       SynEdit.SetFocus;
       SQLParser.Free;
     end;

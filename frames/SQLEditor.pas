@@ -244,8 +244,6 @@ type
     procedure PopupMenuSearchActionExecute(Sender: TObject);
     procedure PopupMenuModeActionExecute(Sender: TObject);
     procedure PopupMenuToolsActionExecute(Sender: TObject);
-    procedure SynEditSpecialLineColors(Sender: TObject; Line: Integer; var Special: Boolean;
-      var FG, BG: TColor);
     procedure GotoLineActionExecute(Sender: TObject);
     procedure GotoLineCloseActionExecute(Sender: TObject);
     procedure GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
@@ -629,7 +627,6 @@ begin
       FileDateTime := GetFileDateTime(FileName);
       OnChange := SynEditOnChange;
       OnReplaceText := SynEditorReplaceText;
-      OnSpecialLineColors := SynEditSpecialLineColors;
       SearchEngine := SynEditSearch;
       Highlighter := SynSQLSyn;
       PopupMenu := EditorPopupMenu;
@@ -701,21 +698,6 @@ begin
       CompareFrame.Panel.Padding.Right := Right
   end;
   UpdateSQLSynColors(SynSQLSyn);
-end;
-
-procedure TSQLEditorFrame.SynEditSpecialLineColors(Sender: TObject; Line: Integer;
-  var Special: Boolean; var FG, BG: TColor);
-var
-  LStyles: TCustomStyleServices;
-begin
-  if not TBCOraSynEdit(Sender).SelAvail then
-    if TBCOraSynEdit(Sender).CaretY = Line then
-    begin
-      Special := True;
-      LStyles := StyleServices;
-      if LStyles.Enabled then
-        BG := LightenColor(TBCOraSynEdit(Sender).Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
-    end;
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
