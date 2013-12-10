@@ -18,7 +18,7 @@ object EditorFontFrame: TEditorFontFrame
       Left = 0
       Top = 0
       Width = 451
-      Height = 147
+      Height = 181
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
@@ -148,7 +148,7 @@ object EditorFontFrame: TEditorFontFrame
       end
       object MinimapLabel: TLabel
         Left = 11
-        Top = 98
+        Top = 95
         Width = 38
         Height = 13
         Margins.Left = 4
@@ -159,7 +159,7 @@ object EditorFontFrame: TEditorFontFrame
       end
       object SelecMinimapFontSpeedButton: TSpeedButton
         Left = 9
-        Top = 113
+        Top = 110
         Width = 24
         Height = 24
         Action = SelectMinimapFontAction
@@ -193,7 +193,7 @@ object EditorFontFrame: TEditorFontFrame
       end
       object MinimapFontLabel: TLabel
         Left = 40
-        Top = 119
+        Top = 116
         Width = 30
         Height = 3
         Margins.Left = 4
@@ -208,12 +208,42 @@ object EditorFontFrame: TEditorFontFrame
         Font.Style = []
         ParentFont = False
       end
+      object MinimapWidthLabel: TLabel
+        Left = 11
+        Top = 138
+        Width = 69
+        Height = 13
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        Caption = 'Minimap Width'
+      end
+      object MinimapWidthEdit: TBCEdit
+        Left = 9
+        Top = 153
+        Width = 64
+        Height = 21
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
+        TabOrder = 0
+        Text = '100'
+        OnChange = MinimapWidthEditChange
+        EnterToTab = False
+        OnlyNumbers = True
+        NumbersWithDots = False
+        NumbersWithSpots = False
+        ErrorColor = 14803198
+        NumbersAllowNegative = False
+      end
     end
     object BottomPanel: TPanel
       Left = 0
-      Top = 147
+      Top = 181
       Width = 451
-      Height = 155
+      Height = 121
       Align = alClient
       BevelOuter = bvNone
       Padding.Left = 4
@@ -222,8 +252,9 @@ object EditorFontFrame: TEditorFontFrame
         Left = 4
         Top = 0
         Width = 447
-        Height = 155
+        Height = 121
         Align = alClient
+        ActiveLineColor = clBtnFace
         CodeFolding.CaseSensitive = False
         CodeFolding.FolderBarLinesColor = 12434877
         ActiveLine.Background = clYellow
@@ -271,7 +302,8 @@ object EditorFontFrame: TEditorFontFrame
         Minimap.Visible = True
         Minimap.CharWidth = 2
         Minimap.CharHeight = 4
-        Minimap.LinesInWindow = 33
+        Minimap.LinesInWindow = 25
+        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoHalfPageScroll, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         WordWrap.Enabled = False
         WordWrap.Position = 80
         WordWrap.Style = wwsClientWidth
@@ -307,8 +339,8 @@ object EditorFontFrame: TEditorFontFrame
   end
   object BookmarkImagesList: TBCImageList
     ShareImages = True
-    Left = 246
-    Top = 90
+    Left = 260
+    Top = 170
     Bitmap = {
       494C01010A000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
@@ -716,14 +748,14 @@ object EditorFontFrame: TEditorFontFrame
   object SynURIOpener: TSynURIOpener
     Editor = SynEdit
     URIHighlighter = SynURISyn
-    Left = 364
-    Top = 130
+    Left = 372
+    Top = 238
   end
   object SynURISyn: TSynURISyn
     Tag = 52
     URIAttri.Style = []
     VisitedURIAttri.Style = []
-    Left = 360
-    Top = 70
+    Left = 368
+    Top = 178
   end
 end

@@ -1348,6 +1348,7 @@ begin
     OptionsContainer.MarginNormalColor := ReadString('Options', 'MarginNormalColor', 'clGreen');
     OptionsContainer.MinimapFontName := ReadString('Options', 'MinimapFontName', 'Courier New');
     OptionsContainer.MinimapFontSize := StrToInt(ReadString('Options', 'MinimapFontSize', '1'));
+    OptionsContainer.MinimapWidth := StrToInt(ReadString('Options', 'MinimapWidth', '100'));
     OptionsContainer.ShowSearchStringNotFound := ReadBool('Options', 'ShowSearchStringNotFound', True);
     OptionsContainer.BeepIfSearchStringNotFound := ReadBool('Options', 'BeepIfSearchStringNotFound', True);
     OptionsContainer.InsertCaret := TSynEditCaretType(StrToInt(ReadString('Options', 'InsertCaret', '0')));
@@ -1759,6 +1760,7 @@ begin
       WriteString('Options', 'MarginNormalColor', OptionsContainer.MarginNormalColor);
       WriteString('Options', 'MinimapFontName', OptionsContainer.MinimapFontName);
       WriteString('Options', 'MinimapFontSize', IntToStr(OptionsContainer.MinimapFontSize));
+      WriteString('Options', 'MinimapWidth', IntToStr(OptionsContainer.MinimapWidth));
       WriteBool('Options', 'ShowSearchStringNotFound', OptionsContainer.ShowSearchStringNotFound);
       WriteBool('Options', 'BeepIfSearchStringNotFound', OptionsContainer.BeepIfSearchStringNotFound);
 

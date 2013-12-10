@@ -158,6 +158,7 @@ type
     FMarginZeroStart: Boolean;
     FMinimapFontName: string;
     FMinimapFontSize: Integer;
+    FMinimapWidth: Integer;
     FNonblinkingCaret: Boolean;
     FNonblinkingCaretColor: string;
     FObjectFrameAlign: string;
@@ -275,6 +276,7 @@ type
     property MarginZeroStart: Boolean read FMarginZeroStart write FMarginZeroStart default False;
     property MinimapFontName: string read FMinimapFontName write FMinimapFontName;
     property MinimapFontSize: Integer read FMinimapFontSize write FMinimapFontSize default 2;
+    property MinimapWidth: Integer read FMinimapWidth write FMinimapWidth default 100;
     property NonblinkingCaret: Boolean read FNonblinkingCaret write FNonblinkingCaret default False;
     property NonblinkingCaretColor: string read FNonblinkingCaretColor write FNonblinkingCaretColor;
     property ObjectFrameAlign: string read FObjectFrameAlign write FObjectFrameAlign;
@@ -435,6 +437,11 @@ begin
     TCustomSynEdit(Dest).RightEdge.Visible := FMarginVisibleRightMargin;
     TCustomSynEdit(Dest).RightEdge.MouseMove := FMarginLeftMarginMouseMove;
     TCustomSynEdit(Dest).RightEdge.Position := FMarginRightMargin;
+
+    TCustomSynEdit(Dest).Gutter.ShowBookmarks := FMarginShowBookmarks;
+    TCustomSynEdit(Dest).Minimap.Font.Size := FMinimapFontSize;
+    TCustomSynEdit(Dest).Minimap.Font.Name := FMinimapFontName;
+    TCustomSynEdit(Dest).Minimap.Width := FMinimapWidth;
   end
   else
   if Assigned(Dest) and (Dest is TActionMainMenuBar) then
@@ -743,6 +750,7 @@ begin
   FEditorFontFrame.MinimapFontLabel.Font.Name := FOptionsContainer.MinimapFontName;
   FEditorFontFrame.MinimapFontLabel.Font.Size := FOptionsContainer.MinimapFontSize;
   FEditorFontFrame.MinimapFontLabel.Caption := Format('%s %dpt', [FEditorFontFrame.MinimapFontLabel.Font.Name, FEditorFontFrame.MinimapFontLabel.Font.Size]);
+  FEditorFontFrame.MinimapWidthEdit.Text := IntToStr(FOptionsContainer.MinimapWidth);
   { Left Margin }
   FEditorLeftMarginFrame.AutoSizeCheckBox.Checked := FOptionsContainer.MarginLeftMarginAutoSize;
   FEditorLeftMarginFrame.VisibleCheckBox.Checked := FOptionsContainer.MarginVisibleLeftMargin;
@@ -994,6 +1002,7 @@ begin
   FOptionsContainer.MarginFontSize := FEditorFontFrame.MarginFontLabel.Font.Size;
   FOptionsContainer.MinimapFontName := FEditorFontFrame.MinimapFontLabel.Font.Name;
   FOptionsContainer.MinimapFontSize := FEditorFontFrame.MinimapFontLabel.Font.Size;
+  FOptionsContainer.MinimapWidth := StrToIntDef(FEditorFontFrame.MinimapWidthEdit.Text, 100);
   { Left Margin }
   FOptionsContainer.MarginVisibleLeftMargin := FEditorLeftMarginFrame.VisibleCheckBox.Checked;
   FOptionsContainer.MarginLeftMarginAutoSize := FEditorLeftMarginFrame.AutoSizeCheckBox.Checked;
