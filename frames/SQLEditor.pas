@@ -389,7 +389,8 @@ type
     procedure DeleteWord;
     procedure DeleteLine;
     procedure DeleteEOL;
-    procedure UpdateMarginsAndControls(DoubleBuffered: Boolean);
+    procedure UpdateMarginsAndControls;
+    procedure UpdateMarginAndColors(SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame);
     procedure RepaintToolButtons;
     function IsCompareFilesActivePage: Boolean;
     procedure GotoBookmarks(ItemIndex: Integer);
@@ -634,6 +635,7 @@ begin
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
     OptionsContainer.AssignTo(OraSynEdit);
+    UpdateMarginAndColors(SQLEditorTabSheetFrame);
 
     OraSynEdit.ObjectCompletionProposal := TSynCompletionProposal.Create(nil);
     with OraSynEdit.ObjectCompletionProposal do
@@ -668,7 +670,7 @@ begin
   UpdateMargin(Result);
 end;
 
-procedure TSQLEditorFrame.UpdateMarginsAndControls(DoubleBuffered: Boolean);
+procedure TSQLEditorFrame.UpdateMarginsAndControls;
 var
   i, Right: Integer;
   SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
@@ -690,7 +692,7 @@ begin
     SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.Pages[i]);
     if Assigned(SQLEditorTabSheetFrame) then
     begin
-      UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
+      UpdateMarginAndColors(SQLEditorTabSheetFrame);
       SQLEditorTabSheetFrame.UpdateOptionsAndStyles(Right);
     end;
     CompareFrame := GetCompareFrame(PageControl.Pages[i]);
@@ -698,6 +700,12 @@ begin
       CompareFrame.Panel.Padding.Right := Right
   end;
   UpdateSQLSynColors(SynSQLSyn);
+end;
+
+procedure TSQLEditorFrame.UpdateMarginAndColors(SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame);
+begin
+  SQLEditorTabSheetFrame.OraSynEdit.ActiveLineColor := LightenColor(SQLEditorTabSheetFrame.OraSynEdit.Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
+  BCCommon.StyleUtils.UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
@@ -1067,6 +1075,7 @@ begin
       if not Assigned(SynEdit) then
         SynEdit := CreateNewTabSheet(FileName);
       SynEdit.CaretXY := BufferCoord(Ch, Ln);
+      SynEdit.GotoLineAndCenter(Ln);
       SetBookmarks(SynEdit, Bookmarks);
       if SynEdit.CanFocus then
         SynEdit.SetFocus;

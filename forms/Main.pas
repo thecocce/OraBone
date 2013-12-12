@@ -385,7 +385,7 @@ begin
     begin
       SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
       if Assigned(SQLEditorFrame) then
-        SQLEditorFrame.UpdateMarginsAndControls(PageControl.DoubleBuffered);
+        SQLEditorFrame.UpdateMarginsAndControls;
     end
   end;
 end;
@@ -2400,7 +2400,7 @@ begin
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam, True);
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;
     Result.SchemaParam := SchemaBrowserFrame.ObjectTreeFrame.SchemaParam;
-    Result.UpdateMarginsAndControls(PageControl.DoubleBuffered);
+    Result.UpdateMarginsAndControls;
     SetPageControlOptions;
     PageControl.ActivePage := TabSheet;
     if AddNewDocument then
