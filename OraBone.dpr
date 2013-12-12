@@ -121,7 +121,8 @@ uses
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
   OptionsEditorLeftMargin in 'frames\OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
   OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
-  OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame};
+  OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
+  BCSQL.Formatter in '..\..\Common\units\BCSQL.Formatter.pas';
 
 {$R *.res}
 

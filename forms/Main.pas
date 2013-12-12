@@ -7,7 +7,7 @@ uses
   PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees, ActnMenus, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl, AppEvnts, Menus,
   SQLEditor, SchemaBrowser, BCControls.PopupMenu, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
-  JvDragDrop, System.Actions;
+  JvDragDrop, System.Actions, BCControls.ProgressBar;
 
 const
   { Main menu item indexes }
@@ -267,6 +267,7 @@ type
     procedure PageControlDblClick(Sender: TObject);
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ViewMiniMapActionExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FConnecting: Boolean;
@@ -275,6 +276,7 @@ type
     FProcessingEventHandler: Boolean;
     FImageListCount: Integer;
     FEncoding: TEncoding;
+    FProgressBar: TBCProgressBar;
     function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
@@ -283,6 +285,7 @@ type
     function GetSessionList: TList;
     function GetStringList(Filename: string): TStringList;
     function OpenSQLEditor(Schema: string; AddNewDocument: Boolean): TSQLEditorFrame;
+    procedure CreateProgressBar;
     procedure CloseTab(Confirm: Boolean);
     procedure CreateStyleMenu;
     procedure FindInFiles(SQLEditorFrame: TSQLEditorFrame; OutputTreeView: TVirtualDrawTree; FindWhatText, FileTypeText, FolderText: string; SearchCaseSensitive, LookInSubfolders: Boolean);
@@ -294,6 +297,7 @@ type
     procedure ReadIniOptions;
     procedure ReadWindowState;
     procedure RecreateDragDrop;
+    procedure ResizeProgressBar;
     procedure SetFields;
     procedure SetPageControlOptions;
     procedure UpdateMainMenuBar;
@@ -306,6 +310,7 @@ type
     procedure LoadSQLIntoEditor(Schema: string; SQLText: WideString);
     procedure SetSQLEditorFields;
     property OnProgress: Boolean write FOnProgress;
+    property ProgressBar: TBCProgressBar read FProgressBar write FProgressBar;
   end;
 
 var
@@ -316,8 +321,8 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
-  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, LZBaseType,
-  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, GSQLParser,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode,
+  System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, BCSQL.Formatter,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
 
 {$R *.dfm}
@@ -598,51 +603,53 @@ begin
           {$WARNINGS ON}
         else
         begin
-            if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
+          ProgressBar.StepIt;
+          Application.ProcessMessages;
+          if (FileTypeText = '*.*') or IsExtInFileType(ExtractFileExt(FName), FileTypeText) then
+          try
+            {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+            StringList := GetStringList(IncludeTrailingBackslash(String(FolderText)) + FName);
+            {$WARNINGS ON}
             try
-              {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
-              StringList := GetStringList(IncludeTrailingBackslash(String(FolderText)) + FName);
-              {$WARNINGS ON}
-              try
-                Root := nil;
-                if Trim(StringList.Text) <> '' then
-                for Ln := 0 to StringList.Count - 1 do
+              Root := nil;
+              if Trim(StringList.Text) <> '' then
+              for Ln := 0 to StringList.Count - 1 do
+              begin
+                Found := True;
+                Line := StringList.Strings[Ln];
+                S := Line;
+                ChPos := 0;
+                while Found do
                 begin
-                  Found := True;
-                  Line := StringList.Strings[Ln];
-                  S := Line;
-                  ChPos := 0;
-                  while Found do
+                  if SearchCaseSensitive then
+                    Ch := Pos(WideString(FindWhatText), S)
+                  else
+                    Ch := Pos(WideUpperCase(WideString(FindWhatText)), WideUpperCase(S));
+                  if Ch <> 0 then
                   begin
-                    if SearchCaseSensitive then
-                      Ch := Pos(WideString(FindWhatText), S)
-                    else
-                      Ch := Pos(WideUpperCase(WideString(FindWhatText)), WideUpperCase(S));
-                    if Ch <> 0 then
-                    begin
-                      Found := True;
-                      ChPos := ChPos + Ch;
-                      if SQLEditorFrame.OutputFrame.CancelSearch then
-                        Break;
-                      {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
-                      SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, IncludeTrailingBackslash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
-                      {$WARNINGS ON}
-                      S := Copy(S, Ch + LongWord(Length(FindWhatText)), Length(S));
-                      ChPos := ChPos + LongWord(Length(FindWhatText)) - 1;
-                    end
-                    else
-                      Found := False;
-                  end;
-                end
-              finally
-                StringList.Free;
-              end;
-            except
-              {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
-              SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, '', -1, 0,
-                Format(LanguageDataModule.GetWarningMessage('FileAccessError'), [IncludeTrailingBackslash(FolderText) + FName]), '');
-              {$WARNINGS ON}
+                    Found := True;
+                    ChPos := ChPos + Ch;
+                    if SQLEditorFrame.OutputFrame.CancelSearch then
+                      Break;
+                    {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+                    SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, IncludeTrailingBackslash(FolderText) + FName, Ln + 1, ChPos, Line, ShortString(FindWhatText));
+                    {$WARNINGS ON}
+                    S := Copy(S, Ch + LongWord(Length(FindWhatText)), Length(S));
+                    ChPos := ChPos + LongWord(Length(FindWhatText)) - 1;
+                  end
+                  else
+                    Found := False;
+                end;
+              end
+            finally
+              StringList.Free;
             end;
+          except
+            {$WARNINGS OFF} { IncludeTrailingBackslash is specific to a platform }
+            SQLEditorFrame.OutputFrame.AddTreeViewLine(OutputTreeView, Root, '', -1, 0,
+              Format(LanguageDataModule.GetWarningMessage('FileAccessError'), [IncludeTrailingBackslash(FolderText) + FName]), '');
+            {$WARNINGS ON}
+          end;
         end;
       end;
     until not FindNextFile(shFindFile, sWin32FD);
@@ -672,6 +679,8 @@ begin
         FindWhatComboBox.Text := SynEdit.SelText;
     if ShowModal = mrOk then
     begin
+      ProgressBar.Count := CountFilesInFolder(FolderText);
+      ProgressBar.Show;
       T1 := Now;
       Screen.Cursor := crHourGlass;
       try
@@ -682,6 +691,7 @@ begin
         Screen.Cursor := crHourGlass;
         FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
       finally
+        ProgressBar.Hide;
         T2 := Now;
         if not SQLEditorFrame.OutputFrame.CancelSearch then
         begin
@@ -1923,30 +1933,20 @@ end;
 
 procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
-  Result: Integer;
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
-  SQLParser: TGSQLParser;
+  SQLFormatter: TSQLFormatter;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
-    //SynEdit.BeginUndoBlock;
-    SQLParser := TGSQLParser.Create(DBVOracle);
+    SQLFormatter := TSQLFormatter.Create(SynEdit.Lines);
     try
-      //SynEdit.SelectAll;
-      SQLParser.SQLText.Assign(SynEdit.Lines);
-      gFmtOpt.Select_keywords_alignOption := aloRight;
-      Result := SQLParser.PrettyPrint;
-      if Result > 0 then
-        ShowErrorMessage('Invalid SQL')
-      else
-        SynEdit.Text := SQLParser.FormattedSQLText.Text;
+      SynEdit.Text := SQLFormatter.GetFormattedSQL;
     finally
-      //SynEdit.EndUndoBlock;
       SynEdit.SetFocus;
-      SQLParser.Free;
+      SQLFormatter.Free;
     end;
   end;
 end;
@@ -1983,12 +1983,19 @@ begin
   FConnecting := True;
   OraCall.OCIUnicode := True;
   FImageListCount := MenuImageList.Count; { System images are inserted after }
-  ReadIniOptions;
+  CreateProgressBar;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  FProgressBar.Free;
 end;
 
 procedure TMainForm.FormResize(Sender: TObject);
 begin
+  ResizeProgressBar;
   ActionMainMenuBar.Width := Width;
+  ActionMainMenuBar.Refresh;
   Repaint;
 end;
 
@@ -1996,14 +2003,38 @@ procedure TMainForm.Formshow(Sender: TObject);
 begin
   if FOnStartUp then
   begin
+    ReadIniOptions;
     ReadIniFile;
     CreateStyleMenu;
     CreateFileReopenList;
+    CreateProgressBar;
     UpdateMarginsAndControls;
     UpdateStatusBar;
     FOnStartUp := False;
     ReadWindowState; { because of styles this cannot be done before... }
   end;
+end;
+
+procedure TMainForm.ResizeProgressBar;
+var
+  R: TRect;
+begin
+  if Assigned(FProgressBar) then
+  begin
+    Statusbar.Perform(SB_GETRECT, 3, Integer(@R));
+    FProgressBar.Top    := R.Top;
+    FProgressBar.Left   := R.Left;
+    FProgressBar.Width  := R.Right - R.Left;
+    FProgressBar.Height := R.Bottom - R.Top;
+  end;
+end;
+
+procedure TMainForm.CreateProgressBar;
+begin
+  FProgressBar := TBCProgressBar.Create(StatusBar);
+  FProgressBar.Hide;
+  ResizeProgressBar;
+  FProgressBar.Parent := Statusbar;
 end;
 
 procedure TMainForm.DatabaseCloseAllOtherTabsActionExecute(Sender: TObject);
