@@ -106,7 +106,6 @@ uses
   OptionsTimeFormat in 'frames\OptionsTimeFormat.pas' {TimeFormatFrame: TFrame},
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
-  OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
   BCFrames.OptionsOutput in '..\..\Common\frames\BCFrames.OptionsOutput.pas' {OptionsOutputFrame: TFrame},
   OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame},
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
@@ -114,7 +113,7 @@ uses
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
   Options in 'forms\Options.pas' {OptionsDialog},
   BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
-  OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
+  BCFrames.OptionsPrint in '..\..\Common\frames\BCFrames.OptionsPrint.pas' {OptionsPrintFrame: TFrame},
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
   BCFrames.OptionsEditorLeftMargin in '..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
   BCFrames.OptionsEditorSearch in '..\..\Common\frames\BCFrames.OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
@@ -122,7 +121,8 @@ uses
   BCFrames.OptionsEditorFont in '..\..\Common\frames\BCFrames.OptionsEditorFont.pas' {EditorFontFrame: TFrame},
   BCFrames.OptionsCompare in '..\..\Common\frames\BCFrames.OptionsCompare.pas' {OptionsCompareFrame: TFrame},
   BCFrames.OptionsEditorCompletionProposal in '..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
-  BCFrames.OptionsEditorRightMargin in '..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame};
+  BCFrames.OptionsEditorRightMargin in '..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
+  BCFrames.OptionsStatusBar in '..\..\Common\frames\BCFrames.OptionsStatusBar.pas' {StatusBarFrame: TFrame};
 
 {$R *.res}
 

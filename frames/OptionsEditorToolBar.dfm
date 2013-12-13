@@ -2,13 +2,13 @@ object EditorToolBarFrame: TEditorToolBarFrame
   Left = 0
   Top = 0
   Width = 343
-  Height = 298
+  Height = 322
   TabOrder = 0
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 343
-    Height = 298
+    Height = 322
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
