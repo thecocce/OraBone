@@ -96,7 +96,6 @@ uses
   OutputListBoxTabSheet in 'frames\OutputListBoxTabSheet.pas' {OutputListBoxFrame: TFrame},
   OutputSynEditTabSheet in 'frames\OutputSynEditTabSheet.pas' {OutputSynEditFrame: TFrame},
   OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {OutputTreeViewFrame: TFrame},
-  OptionsEditorFont in 'frames\OptionsEditorFont.pas' {EditorFontFrame: TFrame},
   OptionsEditorOptions in 'frames\OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
   OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
   OptionsMainMenu in 'frames\OptionsMainMenu.pas' {MainMenuFrame: TFrame},
@@ -107,7 +106,6 @@ uses
   OptionsTimeFormat in 'frames\OptionsTimeFormat.pas' {TimeFormatFrame: TFrame},
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
-  OptionsCompare in 'frames\OptionsCompare.pas' {OptionsCompareFrame: TFrame},
   OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
   OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame},
   OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame},
@@ -122,7 +120,9 @@ uses
   OptionsEditorLeftMargin in 'frames\OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
   OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
   OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
-  BCSQL.Formatter in '..\..\Common\units\BCSQL.Formatter.pas';
+  BCSQL.Formatter in '..\..\Common\units\BCSQL.Formatter.pas',
+  BCFrames.OptionsEditorFont in '..\..\Common\frames\BCFrames.OptionsEditorFont.pas' {EditorFontFrame: TFrame},
+  BCFrames.OptionsCompare in '..\..\Common\frames\BCFrames.OptionsCompare.pas' {OptionsCompareFrame: TFrame};
 
 {$R *.res}
 

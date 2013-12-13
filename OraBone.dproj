@@ -402,10 +402,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsEditorFont.pas">
-            <Form>EditorFontFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="frames\OptionsEditorOptions.pas">
             <Form>EditorOptionsFrame</Form>
             <DesignClass>TFrame</DesignClass>
@@ -449,10 +445,6 @@
         </DCCReference>
         <DCCReference Include="frames\OptionsConnectionTabs.pas">
             <Form>ConnectionTabsFrame</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="frames\OptionsCompare.pas">
-            <Form>OptionsCompareFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsStatusBar.pas">
@@ -502,6 +494,16 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCSQL.Formatter.pas"/>
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorFont.pas">
+            <Form>EditorFontFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsCompare.pas">
+            <Form>OptionsCompareFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -5,10 +5,10 @@ interface
 uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
   Vcl.Buttons, Menus, SynEdit, BCDialogs.Dlg, SynEditMiscClasses, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
-  ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, OptionsEditorFont,
+  ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, BCFrames.OptionsEditorFont,
   OptionsEditorLeftMargin, OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu,
   OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat,
-  OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal,
+  BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal,
   System.Actions, OptionsEditorSearch;
 
 type
