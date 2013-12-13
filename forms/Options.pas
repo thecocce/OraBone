@@ -8,7 +8,7 @@ uses
   ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, BCFrames.OptionsEditorOptions, BCFrames.OptionsEditorFont,
   BCFrames.OptionsEditorLeftMargin, BCFrames.OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs,
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
-  OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput,
+  OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, BCFrames.OptionsOutput,
   OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions, BCFrames.OptionsEditorSearch;
 
 type

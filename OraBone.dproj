@@ -451,7 +451,7 @@
             <Form>StatusBarFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsOutput.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsOutput.pas">
             <Form>OptionsOutputFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

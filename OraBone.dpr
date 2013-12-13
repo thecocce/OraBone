@@ -107,7 +107,7 @@ uses
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {DateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {ConnectionTabsFrame: TFrame},
   OptionsStatusBar in 'frames\OptionsStatusBar.pas' {StatusBarFrame: TFrame},
-  OptionsOutput in 'frames\OptionsOutput.pas' {OptionsOutputFrame: TFrame},
+  BCFrames.OptionsOutput in '..\..\Common\frames\BCFrames.OptionsOutput.pas' {OptionsOutputFrame: TFrame},
   OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {EditorToolBarFrame: TFrame},
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
