@@ -466,11 +466,6 @@
             <Form>OptionsDialog</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="frames\OptionsEditorCompletionProposal.pas">
-            <Form>EditorCompletionProposalFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.Lib.pas"/>
         <DCCReference Include="frames\OptionsPrint.pas">
             <Form>OptionsPrintFrame</Form>
@@ -478,7 +473,7 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\Vcl.Styles.WebBrowser.pas"/>
-        <DCCReference Include="frames\OptionsEditorLeftMargin.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas">
             <Form>EditorLeftMarginFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
@@ -501,6 +496,11 @@
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsCompare.pas">
             <Form>OptionsCompareFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas">
+            <Form>EditorCompletionProposalFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

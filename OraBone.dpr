@@ -113,16 +113,16 @@ uses
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
   Options in 'forms\Options.pas' {OptionsDialog},
-  OptionsEditorCompletionProposal in 'frames\OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
   BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
   OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
-  OptionsEditorLeftMargin in 'frames\OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
+  BCFrames.OptionsEditorLeftMargin in '..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
   OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
   OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
   BCSQL.Formatter in '..\..\Common\units\BCSQL.Formatter.pas',
   BCFrames.OptionsEditorFont in '..\..\Common\frames\BCFrames.OptionsEditorFont.pas' {EditorFontFrame: TFrame},
-  BCFrames.OptionsCompare in '..\..\Common\frames\BCFrames.OptionsCompare.pas' {OptionsCompareFrame: TFrame};
+  BCFrames.OptionsCompare in '..\..\Common\frames\BCFrames.OptionsCompare.pas' {OptionsCompareFrame: TFrame},
+  BCFrames.OptionsEditorCompletionProposal in '..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame};
 
 {$R *.res}
 

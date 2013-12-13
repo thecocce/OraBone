@@ -6,10 +6,10 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
   Vcl.Buttons, Menus, SynEdit, BCDialogs.Dlg, SynEditMiscClasses, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
   ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, BCFrames.OptionsEditorFont,
-  OptionsEditorLeftMargin, OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu,
+  BCFrames.OptionsEditorLeftMargin, OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu,
   OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat,
-  BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar, OptionsEditorCompletionProposal,
-  System.Actions, OptionsEditorSearch;
+  BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar,
+  BCFrames.OptionsEditorCompletionProposal, System.Actions, OptionsEditorSearch;
 
 type
   POptionsRec = ^TOptionsRec;
