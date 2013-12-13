@@ -288,28 +288,8 @@ begin
 end;
 
 procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
-var
-  RecCount: Integer;
 begin
   SetRows(PageControl.ActivePageCaption);
-
- { if Assigned(PageControl.ActivePage) then
-    if PageControl.ActivePage.ComponentCount <> 0 then
-      if PageControl.ActivePage.Components[0] is TOutputDataGridFrame then
-      with TOutputDataGridFrame(PageControl.ActivePage.Components[0]) do
-      begin
-        RecCount := DataSet.RecordCount;
-        if RecCount = 0 then
-          StatisticsPanel.Caption := 'No rows'
-        else
-        begin
-          StatisticsPanel.Caption := 'Row ' + IntToStr(DataSet.RecNo) + ' of ' + IntToStr(RecCount);
-          if TOraQuery(DataSet).Fetched then
-            StatisticsPanel.Caption := StatisticsPanel.Caption + ' total'
-          else
-            StatisticsPanel.Caption := StatisticsPanel.Caption + ' fetched';
-        end;
-      end;  }
 end;
 
 procedure TOutputFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
