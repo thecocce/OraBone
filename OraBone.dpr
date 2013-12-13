@@ -96,9 +96,9 @@ uses
   OutputListBoxTabSheet in 'frames\OutputListBoxTabSheet.pas' {OutputListBoxFrame: TFrame},
   OutputSynEditTabSheet in 'frames\OutputSynEditTabSheet.pas' {OutputSynEditFrame: TFrame},
   OutputTreeViewTabSheet in 'frames\OutputTreeViewTabSheet.pas' {OutputTreeViewFrame: TFrame},
-  OptionsEditorOptions in 'frames\OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
-  OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
-  OptionsMainMenu in 'frames\OptionsMainMenu.pas' {MainMenuFrame: TFrame},
+  BCFrames.OptionsEditorOptions in '..\..\Common\frames\BCFrames.OptionsEditorOptions.pas' {EditorOptionsFrame: TFrame},
+  OptionsEditorTabs in '..\..\EditBone\src\frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
+  BCFrames.OptionsMainMenu in '..\..\Common\frames\BCFrames.OptionsMainMenu.pas' {MainMenuFrame: TFrame},
   OptionsOutputTabs in 'frames\OptionsOutputTabs.pas' {OutputTabsFrame: TFrame},
   OptionsDBMSOutput in 'frames\OptionsDBMSOutput.pas' {DBMSOutputFrame: TFrame},
   OptionsSchemaBrowser in 'frames\OptionsSchemaBrowser.pas' {OptionsSchemaBrowserFrame: TFrame},
@@ -117,12 +117,12 @@ uses
   OptionsPrint in 'frames\OptionsPrint.pas' {OptionsPrintFrame: TFrame},
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',
   BCFrames.OptionsEditorLeftMargin in '..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas' {EditorLeftMarginFrame: TFrame},
-  OptionsEditorRightMargin in 'frames\OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
-  OptionsEditorSearch in 'frames\OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
+  BCFrames.OptionsEditorSearch in '..\..\Common\frames\BCFrames.OptionsEditorSearch.pas' {EditorSearchFrame: TFrame},
   BCSQL.Formatter in '..\..\Common\units\BCSQL.Formatter.pas',
   BCFrames.OptionsEditorFont in '..\..\Common\frames\BCFrames.OptionsEditorFont.pas' {EditorFontFrame: TFrame},
   BCFrames.OptionsCompare in '..\..\Common\frames\BCFrames.OptionsCompare.pas' {OptionsCompareFrame: TFrame},
-  BCFrames.OptionsEditorCompletionProposal in '..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame};
+  BCFrames.OptionsEditorCompletionProposal in '..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
+  BCFrames.OptionsEditorRightMargin in '..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame};
 
 {$R *.res}
 

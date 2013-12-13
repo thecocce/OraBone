@@ -5,11 +5,11 @@ interface
 uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
   Vcl.Buttons, Menus, SynEdit, BCDialogs.Dlg, SynEditMiscClasses, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
-  ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, OptionsEditorOptions, BCFrames.OptionsEditorFont,
-  BCFrames.OptionsEditorLeftMargin, OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs, OptionsMainMenu,
-  OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame, OptionsDateFormat, OptionsTimeFormat,
-  BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput, OptionsEditorToolBar,
-  BCFrames.OptionsEditorCompletionProposal, System.Actions, OptionsEditorSearch;
+  ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, Vcl.ActnMenus, BCFrames.OptionsEditorOptions, BCFrames.OptionsEditorFont,
+  BCFrames.OptionsEditorLeftMargin, BCFrames.OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs,
+  BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
+  OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, OptionsPrint, OptionsStatusBar, OptionsOutput,
+  OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions, BCFrames.OptionsEditorSearch;
 
 type
   POptionsRec = ^TOptionsRec;

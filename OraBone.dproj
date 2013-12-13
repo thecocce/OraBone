@@ -402,15 +402,15 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsEditorOptions.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorOptions.pas">
             <Form>EditorOptionsFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsEditorTabs.pas">
+        <DCCReference Include="..\..\EditBone\src\frames\OptionsEditorTabs.pas">
             <Form>EditorTabsFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsMainMenu.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsMainMenu.pas">
             <Form>MainMenuFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -478,12 +478,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="frames\OptionsEditorRightMargin.pas">
-            <Form>EditorRightMarginFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="frames\OptionsEditorSearch.pas">
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorSearch.pas">
             <Form>EditorSearchFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
@@ -501,6 +496,11 @@
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas">
             <Form>EditorCompletionProposalFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas">
+            <Form>EditorRightMarginFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
