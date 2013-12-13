@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 302
+  Width = 720
+  Height = 495
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -10,8 +10,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 76
-    Width = 451
+    Top = 269
+    Width = 720
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -20,7 +20,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 720
     Height = 21
     Hint = ' '
     Align = alTop
@@ -32,7 +32,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 337
       Top = 0
       Width = 70
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
@@ -41,7 +41,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 434
       Top = 0
       Width = 89
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
@@ -50,7 +50,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 550
       Top = 0
       Width = 92
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
@@ -71,7 +71,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
       end
@@ -380,8 +380,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 7
+    Width = 720
+    Height = 200
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -390,8 +390,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 451
-      Height = 5
+      Width = 720
+      Height = 198
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -415,8 +415,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 79
-    Width = 451
+    Top = 272
+    Width = 720
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -428,7 +428,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 720
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1017,8 +1017,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 51
-    Width = 451
+    Top = 244
+    Width = 720
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1117,7 +1117,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 13
+        Height = 20
         Align = alLeft
         Caption = 'Go to Line'
       end

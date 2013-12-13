@@ -293,7 +293,7 @@ var
 begin
   SetRows(PageControl.ActivePageCaption);
 
-  if Assigned(PageControl.ActivePage) then
+ { if Assigned(PageControl.ActivePage) then
     if PageControl.ActivePage.ComponentCount <> 0 then
       if PageControl.ActivePage.Components[0] is TOutputDataGridFrame then
       with TOutputDataGridFrame(PageControl.ActivePage.Components[0]) do
@@ -309,7 +309,7 @@ begin
           else
             StatisticsPanel.Caption := StatisticsPanel.Caption + ' fetched';
         end;
-      end;
+      end;  }
 end;
 
 procedure TOutputFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;

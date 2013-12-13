@@ -667,7 +667,7 @@ begin
       OraSynEdit.SetFocus;
     Result := OraSynEdit;
   end;
-  UpdateMargin(Result);
+  //UpdateMargin(Result);
 end;
 
 procedure TSQLEditorFrame.UpdateMarginsAndControls;
@@ -704,8 +704,8 @@ end;
 
 procedure TSQLEditorFrame.UpdateMarginAndColors(SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame);
 begin
-  SQLEditorTabSheetFrame.OraSynEdit.ActiveLineColor := LightenColor(SQLEditorTabSheetFrame.OraSynEdit.Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
   BCCommon.StyleUtils.UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
+  SQLEditorTabSheetFrame.OraSynEdit.ActiveLineColor := LightenColor(SQLEditorTabSheetFrame.OraSynEdit.Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
 end;
 
 procedure TSQLEditorFrame.SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
