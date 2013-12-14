@@ -352,108 +352,21 @@ begin
   FEditorLeftMarginFrame.GetData(FOptionsContainer);
   FEditorRightMarginFrame.GetData(FOptionsContainer);
   FEditorSearchFrame.GetData(FOptionsContainer);
-  { Document tabs }
   FEditorTabsFrame.GetData(FOptionsContainer);
-  FEditorTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByDblClick;
-  FEditorTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.EditorCloseTabByMiddleClick;
-  FEditorTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.EditorMultiLine;
-  FEditorTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.EditorDoubleBuffered;
-  FEditorTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.EditorShowCloseButton;
-  FEditorTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.EditorShowImage;
-  FEditorTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.EditorRightClickSelect;
-  { Completion proposal }
   FEditorCompletionProposalFrame.GetData(FOptionsContainer);
-  FEditorCompletionProposalFrame.EnabledCheckBox.Checked := FOptionsContainer.CompletionProposalEnabled;
-  FEditorCompletionProposalFrame.CaseSensitiveCheckBox.Checked := FOptionsContainer.CompletionProposalCaseSensitive;
-  FEditorCompletionProposalFrame.ShortcutComboBox.Text := FOptionsContainer.CompletionProposalShortcut;
-  { Tool bar }
   FEditorToolBarFrame.GetData(FOptionsContainer);
-  FEditorToolBarFrame.ExecuteCheckBox.Checked := FOptionsContainer.ToolBarExecute;
-  FEditorToolBarFrame.TransactionCheckBox.Checked := FOptionsContainer.ToolBarTransaction;
-  FEditorToolBarFrame.DBMSCheckBox.Checked := FOptionsContainer.ToolBarDBMS;
-  FEditorToolBarFrame.ExplainPlanCheckBox.Checked := FOptionsContainer.ToolBarExplainPlan;
-  FEditorToolBarFrame.StandardCheckBox.Checked := FOptionsContainer.ToolBarStandard;
-  FEditorToolBarFrame.PrintCheckBox.Checked := FOptionsContainer.ToolBarPrint;
-  FEditorToolBarFrame.IndentCheckBox.Checked := FOptionsContainer.ToolBarIndent;
-  FEditorToolBarFrame.SortCheckBox.Checked := FOptionsContainer.ToolBarSort;
-  FEditorToolBarFrame.CaseCheckBox.Checked := FOptionsContainer.ToolBarCase;
-  FEditorToolBarFrame.CommandCheckBox.Checked := FOptionsContainer.ToolBarCommand;
-  FEditorToolBarFrame.SearchCheckBox.Checked := FOptionsContainer.ToolBarSearch;
-  FEditorToolBarFrame.ModeCheckBox.Checked := FOptionsContainer.ToolBarMode;
-  FEditorToolBarFrame.ToolsCheckBox.Checked := FOptionsContainer.ToolBarTools;
-  { Connection tabs }
   FConnectionTabsFrame.GetData(FOptionsContainer);
-  FConnectionTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByDblClick;
-  FConnectionTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.ConnectionCloseTabByMiddleClick;
-  FConnectionTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.ConnectionMultiLine;
-  FConnectionTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.ConnectionDoubleBuffered;
-  FConnectionTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.ConnectionShowCloseButton;
-  FConnectionTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.ConnectionShowImage;
-  FConnectionTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.ConnectionRightClickSelect;
-  { Output tabs }
   FOutputTabsFrame.GetData(FOptionsContainer);
-  FOutputTabsFrame.CloseTabByDblClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByDblClick;
-  FOutputTabsFrame.CloseTabByMiddleClickCheckBox.Checked := FOptionsContainer.OutputCloseTabByMiddleClick;
-  FOutputTabsFrame.MultiLineCheckBox.Checked := FOptionsContainer.OutputMultiLine;
-  FOutputTabsFrame.DoubleBufferedCheckBox.Checked := FOptionsContainer.OutputDoubleBuffered;
-  FOutputTabsFrame.ShowCloseButtonCheckBox.Checked := FOptionsContainer.OutputShowCloseButton;
-  FOutputTabsFrame.ShowImageCheckBox.Checked := FOptionsContainer.OutputShowImage;
-  FOutputTabsFrame.RightClickSelectCheckBox.Checked := FOptionsContainer.OutputRightClickSelect;
-  { Compare }
   FOptionsCompareFrame.GetData(FOptionsContainer);
-  FOptionsCompareFrame.IgnoreCaseCheckBox.Checked := FOptionsContainer.IgnoreCase;
-  FOptionsCompareFrame.IgnoreBlanksCheckBox.Checked := FOptionsContainer.IgnoreBlanks;
-  { Print preview }
   FOptionsPrintFrame.GetData(FOptionsContainer);
-  FOptionsPrintFrame.DocumentNameComboBox.ItemIndex := FOptionsContainer.PrintDocumentName;
-  FOptionsPrintFrame.PageNumberComboBox.ItemIndex := FOptionsContainer.PrintPageNumber;
-  FOptionsPrintFrame.PrintedByComboBox.ItemIndex := FOptionsContainer.PrintPrintedBy;
-  FOptionsPrintFrame.DateTimeComboBox.ItemIndex := FOptionsContainer.PrintDateTime;
-  FOptionsPrintFrame.ShowHeaderLineCheckBox.Checked := FOptionsContainer.PrintShowHeaderLine;
-  FOptionsPrintFrame.ShowFooterLineCheckBox.Checked := FOptionsContainer.PrintShowFooterLine;
-  FOptionsPrintFrame.ShowLineNumbersCheckBox.Checked := FOptionsContainer.PrintShowLineNumbers;
-  FOptionsPrintFrame.WordWrapCheckBox.Checked := FOptionsContainer.PrintWordWrapLine;
-  { Main menu }
   FMainMenuFrame.GetData(FOptionsContainer);
-  FMainMenuFrame.PersistentHotKeysCheckBox.Checked := FOptionsContainer.PersistentHotKeys;
-  FMainMenuFrame.ShadowsCheckBox.Checked := FOptionsContainer.Shadows;
-  FMainMenuFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.MainMenuUseSystemFont;
-  FMainMenuFrame.FontLabel.Font.Name := FOptionsContainer.MainMenuFontName;
-  FMainMenuFrame.FontLabel.Font.Size := FOptionsContainer.MainMenuFontSize;
-  FMainMenuFrame.FontLabel.Caption := Format('%s %dpt', [FMainMenuFrame.FontLabel.Font.Name, FMainMenuFrame.FontLabel.Font.Size]);
-  FMainMenuFrame.AnimationStyleComboBox.ItemIndex := Ord(FOptionsContainer.AnimationStyle);
-  FMainMenuFrame.AnimationDurationEdit.Text := IntToStr(FOptionsContainer.AnimationDuration);
-  { Output }
   FOptionsOutputFrame.GetData(FOptionsContainer);
-  FOptionsOutputFrame.ShowTreeLinesCheckBox.Checked := FOptionsContainer.OutputShowTreeLines;
-  FOptionsOutputFrame.IndentEdit.Text := IntToStr(FOptionsContainer.OutputIndent);
-  { DBMS Output }
   FDBMSOutputFrame.GetData(FOptionsContainer);
-  FDBMSOutputFrame.PollingIntervalTrackBar.Position := FOptionsContainer.PollingInterval;
-  { Format }
   FDateFormatFrame.GetData(FOptionsContainer);
-  FDateFormatFrame.DateFormatEdit.Text := FOptionsContainer.DateFormat;
   FTimeFormatFrame.GetData(FOptionsContainer);
-  FTimeFormatFrame.TimeFormatEdit.Text := FOptionsContainer.TimeFormat;
-  { SchemaBrowser }
   FOptionsSchemaBrowserFrame.GetData(FOptionsContainer);
-  FOptionsSchemaBrowserFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.SchemaBrowserAlign;
-  FOptionsSchemaBrowserFrame.ShowTreeLinesCheckBox.Checked := FOptionsContainer.SchemaBrowserShowTreeLines;
-  FOptionsSchemaBrowserFrame.IndentEdit.Text := IntToStr(FOptionsContainer.SchemaBrowserIndent);
-  { Object frame }
   FObjectFrameFrame.GetData(FOptionsContainer);
-  FObjectFrameFrame.ButtonPanelAlignComboBox.Text := FOptionsContainer.ObjectFrameAlign;
-  FObjectFrameFrame.ShowCreationAndModificationTimestampCheckBox.Checked := FOptionsContainer.ShowObjectCreationAndModificationTimestamp;
-  FObjectFrameFrame.ShowDataSearchPanelCheckBox.Checked := FOptionsContainer.ShowDataSearchPanel;
-  FObjectFrameFrame.FilterOnTypingCheckBox.Checked := FOptionsContainer.FilterOnTyping;
-  { Status bar }
   FStatusBarFrame.GetData(FOptionsContainer);
-  FStatusBarFrame.UseSystemFontCheckBox.Checked := FOptionsContainer.StatusBarUseSystemFont;
-  FStatusBarFrame.FontLabel.Font.Name := FOptionsContainer.StatusBarFontName;
-  FStatusBarFrame.FontLabel.Font.Size := FOptionsContainer.StatusBarFontSize;
-  FStatusBarFrame.FontLabel.Caption := Format('%s %dpt', [FStatusBarFrame.FontLabel.Font.Name, FStatusBarFrame.FontLabel.Font.Size]);
-  { SQL Formatter }
-  { Select }
   FOptionsSQLSelectColumnListFrame.GetData(FSQLFormatterOptionsWrapper);
 end;
 
@@ -575,7 +488,7 @@ begin
     FDateFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
     FTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
 
-    FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
+    FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0);
   end;
 end;
 

@@ -20,6 +20,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
@@ -36,6 +37,17 @@ begin
   OptionsContainer.ConnectionShowCloseButton := ShowCloseButtonCheckBox.Checked;
   OptionsContainer.ConnectionShowImage := ShowImageCheckBox.Checked;
   OptionsContainer.ConnectionRightClickSelect := RightClickSelectCheckBox.Checked;
+end;
+
+procedure TConnectionTabsFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  CloseTabByDblClickCheckBox.Checked := OptionsContainer.ConnectionCloseTabByDblClick;
+  CloseTabByMiddleClickCheckBox.Checked := OptionsContainer.ConnectionCloseTabByMiddleClick;
+  MultiLineCheckBox.Checked := OptionsContainer.ConnectionMultiLine;
+  DoubleBufferedCheckBox.Checked := OptionsContainer.ConnectionDoubleBuffered;
+  ShowCloseButtonCheckBox.Checked := OptionsContainer.ConnectionShowCloseButton;
+  ShowImageCheckBox.Checked := OptionsContainer.ConnectionShowImage;
+  RightClickSelectCheckBox.Checked := OptionsContainer.ConnectionRightClickSelect;
 end;
 
 end.

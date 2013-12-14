@@ -18,6 +18,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
@@ -33,6 +34,13 @@ begin
   OptionsContainer.SchemaBrowserAlign := ButtonPanelAlignComboBox.Text;
   OptionsContainer.SchemaBrowserShowTreeLines := ShowTreeLinesCheckBox.Checked;
   OptionsContainer.SchemaBrowserIndent := StrToIntDef(IndentEdit.Text, 16);
+end;
+
+procedure TOptionsSchemaBrowserFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  ButtonPanelAlignComboBox.Text := OptionsContainer.SchemaBrowserAlign;
+  ShowTreeLinesCheckBox.Checked := OptionsContainer.SchemaBrowserShowTreeLines;
+  IndentEdit.Text := IntToStr(OptionsContainer.SchemaBrowserIndent);
 end;
 
 end.

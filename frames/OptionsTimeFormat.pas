@@ -29,6 +29,7 @@ type
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
     property Session: TOraSession write FSession;
   end;
@@ -63,6 +64,11 @@ end;
 procedure TTimeFormatFrame.PutData(OptionsContainer: TOptionsContainer);
 begin
   OptionsContainer.TimeFormat := TimeFormatEdit.Text;
+end;
+
+procedure TTimeFormatFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  TimeFormatEdit.Text := OptionsContainer.TimeFormat;
 end;
 
 end.

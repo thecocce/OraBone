@@ -16,6 +16,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
@@ -32,6 +33,11 @@ end;
 procedure TDBMSOutputFrame.PutData(OptionsContainer: TOptionsContainer);
 begin
   OptionsContainer.PollingInterval := PollingIntervalTrackBar.Position;
+end;
+
+procedure TDBMSOutputFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  PollingIntervalTrackBar.Position := OptionsContainer.PollingInterval;
 end;
 
 end.

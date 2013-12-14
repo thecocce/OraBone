@@ -26,6 +26,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
@@ -48,6 +49,23 @@ begin
   OptionsContainer.ToolBarSearch := SearchCheckBox.Checked;
   OptionsContainer.ToolBarMode := ModeCheckBox.Checked;
   OptionsContainer.ToolBarTools := ToolsCheckBox.Checked;
+end;
+
+procedure TEditorToolBarFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  ExecuteCheckBox.Checked := OptionsContainer.ToolBarExecute;
+  TransactionCheckBox.Checked := OptionsContainer.ToolBarTransaction;
+  DBMSCheckBox.Checked := OptionsContainer.ToolBarDBMS;
+  ExplainPlanCheckBox.Checked := OptionsContainer.ToolBarExplainPlan;
+  StandardCheckBox.Checked := OptionsContainer.ToolBarStandard;
+  PrintCheckBox.Checked := OptionsContainer.ToolBarPrint;
+  IndentCheckBox.Checked := OptionsContainer.ToolBarIndent;
+  SortCheckBox.Checked := OptionsContainer.ToolBarSort;
+  CaseCheckBox.Checked := OptionsContainer.ToolBarCase;
+  CommandCheckBox.Checked := OptionsContainer.ToolBarCommand;
+  SearchCheckBox.Checked := OptionsContainer.ToolBarSearch;
+  ModeCheckBox.Checked := OptionsContainer.ToolBarMode;
+  ToolsCheckBox.Checked := OptionsContainer.ToolBarTools;
 end;
 
 end.

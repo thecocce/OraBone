@@ -18,6 +18,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
@@ -31,6 +32,14 @@ begin
   OptionsContainer.ShowObjectCreationAndModificationTimestamp := ShowCreationAndModificationTimestampCheckBox.Checked;
   OptionsContainer.ShowDataSearchPanel := ShowDataSearchPanelCheckBox.Checked;
   OptionsContainer.FilterOnTyping := FilterOnTypingCheckBox.Checked;
+end;
+
+procedure TObjectFrameFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  ButtonPanelAlignComboBox.Text := OptionsContainer.ObjectFrameAlign;
+  ShowCreationAndModificationTimestampCheckBox.Checked := OptionsContainer.ShowObjectCreationAndModificationTimestamp;
+  ShowDataSearchPanelCheckBox.Checked := OptionsContainer.ShowDataSearchPanel;
+  FilterOnTypingCheckBox.Checked := OptionsContainer.FilterOnTyping;
 end;
 
 end.

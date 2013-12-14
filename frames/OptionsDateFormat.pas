@@ -39,6 +39,7 @@ type
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
+    procedure GetData(OptionsContainer: TOptionsContainer);
     procedure PutData(OptionsContainer: TOptionsContainer);
     property Session: TOraSession write FSession;
   end;
@@ -73,6 +74,11 @@ end;
 procedure TDateFormatFrame.PutData(OptionsContainer: TOptionsContainer);
 begin
   OptionsContainer.DateFormat := DateFormatEdit.Text;
+end;
+
+procedure TDateFormatFrame.GetData(OptionsContainer: TOptionsContainer);
+begin
+  DateFormatEdit.Text := OptionsContainer.DateFormat;
 end;
 
 end.
