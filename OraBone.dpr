@@ -122,7 +122,15 @@ uses
   BCFrames.OptionsEditorCompletionProposal in '..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas' {EditorCompletionProposalFrame: TFrame},
   BCFrames.OptionsEditorRightMargin in '..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas' {EditorRightMarginFrame: TFrame},
   BCFrames.OptionsStatusBar in '..\..\Common\frames\BCFrames.OptionsStatusBar.pas' {StatusBarFrame: TFrame},
-  OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame};
+  OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {EditorTabsFrame: TFrame},
+  BCFrames.OptionsSQLSelectOrderByClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectOrderByClause.pas' {OptionsSQLSelectOrderByClauseFrame: TFrame},
+  BCFrames.OptionsSQLSelectAndOrKeyword in '..\..\Common\frames\BCFrames.OptionsSQLSelectAndOrKeyword.pas' {OptionsSQLSelectAndOrKeywordFrame: TFrame},
+  BCFrames.OptionsSQLSelectColumnList in '..\..\Common\frames\BCFrames.OptionsSQLSelectColumnList.pas' {OptionsSQLSelectColumnListFrame: TFrame},
+  BCFrames.OptionsSQLSelectFromJoinClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectFromJoinClause.pas' {OptionsSQLSelectFromJoinClauseFrame: TFrame},
+  BCFrames.OptionsSQLSelectGroupByClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectGroupByClause.pas' {OptionsSQLSelectGroupByClauseFrame: TFrame},
+  BCFrames.OptionsSQLSelectHavingClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectHavingClause.pas' {OptionsSQLSelectHavingClauseFrame: TFrame},
+  BCFrames.OptionsSQLSelectIntoClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectIntoClause.pas' {OptionsSQLSelectIntoClauseFrame: TFrame},
+  BCFrames.OptionsSQLSelectSubquery in '..\..\Common\frames\BCFrames.OptionsSQLSelectSubquery.pas' {OptionsSQLSelectSubqueryFrame: TFrame};
 
 {$R *.res}
 

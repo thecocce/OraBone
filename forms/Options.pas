@@ -10,7 +10,7 @@ uses
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
-  BCFrames.OptionsEditorSearch;
+  BCFrames.OptionsEditorSearch, BCSQL.Formatter;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -55,6 +55,16 @@ type
     StatusBarAction: TAction;
     TimeFormatAction: TAction;
     EditorSearchAction: TAction;
+    SQLFormatterAction: TAction;
+    SQLSelectAction: TAction;
+    SQLSelectColumnListAction: TAction;
+    SQLSelectSubqueryAction: TAction;
+    SQLSelectIntoClauseAction: TAction;
+    SQLSelectFromJoinClauseAction: TAction;
+    SQLSelectAndOrKeywordAction: TAction;
+    SQLSelectGroupByClauseAction: TAction;
+    SQLSelectHavingClauseAction: TAction;
+    SQLSelectOrderByAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -89,6 +99,7 @@ type
     FOptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame;
     FOutputTabsFrame: TOutputTabsFrame;
     FStatusBarFrame: TStatusBarFrame;
+    FSQLFormatterOptionsWrapper: TSQLFormatterOptionsWrapper;
     FTimeFormatFrame: TTimeFormatFrame;
     procedure CreateTree;
     procedure GetData;
@@ -547,6 +558,8 @@ begin
   FOptionsCompareFrame.Free;
   FStatusBarFrame.Free;
   FOptionsPrintFrame.Free;
+
+  FSQLFormatterOptionsWrapper.Free;
 
   FOptionsDialog := nil;
 end;
@@ -1192,6 +1205,8 @@ begin
   FOptionsPrintFrame.Parent := OptionsPanel;
   FStatusBarFrame := TStatusBarFrame.Create(OptionsPanel);
   FStatusBarFrame.Parent := OptionsPanel;
+
+  FSQLFormatterOptionsWrapper := TSQLFormatterOptionsWrapper.Create;
 end;
 
 end.
