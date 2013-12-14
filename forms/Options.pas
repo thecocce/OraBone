@@ -10,7 +10,8 @@ uses
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
-  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelectColumnList, BCCommon.OptionsContainer;
+  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelectColumnList, BCCommon.OptionsContainer,
+  BCFrames.OptionsSQLSelectSubquery;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -99,6 +100,7 @@ type
     FOptionsStatusBarFrame: TOptionsStatusBarFrame;
     FSQLFormatterOptionsWrapper: TSQLFormatterOptionsWrapper;
     FOptionsSQLSelectColumnListFrame: TOptionsSQLSelectColumnListFrame;
+    FOptionsSQLSelectSubqueryFrame: TOptionsSQLSelectSubqueryFrame;
     FOptionsTimeFormatFrame: TOptionsTimeFormatFrame;
     procedure CreateTree;
     procedure GetData;
@@ -158,6 +160,7 @@ begin
   FOptionsStatusBarFrame.Free;
   FOptionsPrintFrame.Free;
   FOptionsSQLSelectColumnListFrame.Free;
+  FOptionsSQLSelectSubqueryFrame.Free;
 
   FSQLFormatterOptionsWrapper.Free;
 
@@ -323,8 +326,15 @@ begin
     Data := GetNodeData(ChildChildNode);
     Data.ImageIndex := SQLSelectColumnListAction.ImageIndex;
     Data.Caption := SQLSelectColumnListAction.Caption;
+    { Select Subquery }
+    ChildChildNode := AddChild(ChildNode);
+    Data := GetNodeData(ChildChildNode);
+    Data.ImageIndex := SQLSelectSubqueryAction.ImageIndex;
+    Data.Caption := SQLSelectSubqueryAction.Caption;
+
+
     Node.ChildCount := 1;
-    ChildNode.ChildCount := 1;
+    ChildNode.ChildCount := 2;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
@@ -375,6 +385,7 @@ begin
   FOptionsObjectFrameFrame.GetData(FOptionsContainer);
   FOptionsStatusBarFrame.GetData(FOptionsContainer);
   FOptionsSQLSelectColumnListFrame.GetData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLSelectSubqueryFrame.GetData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.OKButtonActionExecute(Sender: TObject);
@@ -498,6 +509,7 @@ begin
     FOptionsTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
 
     FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 0);
+    FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
   end;
 end;
 
@@ -524,6 +536,7 @@ begin
   FOptionsObjectFrameFrame.PutData(FOptionsContainer);
   FOptionsStatusBarFrame.PutData(FOptionsContainer);
   FOptionsSQLSelectColumnListFrame.PutData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLSelectSubqueryFrame.PutData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -613,6 +626,8 @@ begin
   FOptionsStatusBarFrame.Parent := OptionsPanel;
   FOptionsSQLSelectColumnListFrame := TOptionsSQLSelectColumnListFrame.Create(OptionsPanel);
   FOptionsSQLSelectColumnListFrame.Parent := OptionsPanel;
+  FOptionsSQLSelectSubqueryFrame := TOptionsSQLSelectSubqueryFrame.Create(OptionsPanel);
+  FOptionsSQLSelectSubqueryFrame.Parent := OptionsPanel;
 
   FSQLFormatterOptionsWrapper := TSQLFormatterOptionsWrapper.Create;
 end;
