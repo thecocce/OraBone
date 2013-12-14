@@ -178,7 +178,7 @@ end;
 procedure TOptionsForm.CreateTree;
 var
   Data: POptionsRec;
-  Node, ChildNode: PVirtualNode;
+  Node, ChildNode, ChildChildNode: PVirtualNode;
 begin
   with OptionsVirtualStringTree do
   begin
@@ -313,13 +313,20 @@ begin
     Data := GetNodeData(Node);
     Data.ImageIndex := SQLFormatterAction.ImageIndex;
     Data.Caption := SQLFormatterAction.Caption;
-    { Select Column List }
+    { Select }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.ImageIndex := SQLSelectAction.ImageIndex;
+    Data.Caption := SQLSelectAction.Caption;
+    { Select Column List }
+    ChildChildNode := AddChild(ChildNode);
+    Data := GetNodeData(ChildChildNode);
     Data.ImageIndex := SQLSelectColumnListAction.ImageIndex;
     Data.Caption := SQLSelectColumnListAction.Caption;
     Node.ChildCount := 1;
-
+    ChildNode.ChildCount := 1;
+    OptionsVirtualStringTree.Selected[Node] := True;
+    OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
   end;
 end;
@@ -456,6 +463,8 @@ begin
     ParentIndex := -1;
     if Level = 1 then
       ParentIndex := TreeNode.Parent.Index;
+    if Level = 2 then
+      ParentIndex := TreeNode.Parent.Parent.Index;
     FEditorOptionsFrame.Visible := (Level = 0) and (TreeNode.Index = 0);
     FEditorFontFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 0);
     if FEditorFontFrame.Visible then
@@ -488,7 +497,7 @@ begin
     FDateFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
     FTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
 
-    FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0);
+    FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 0);
   end;
 end;
 
