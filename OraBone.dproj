@@ -407,19 +407,19 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorOptions.pas">
-            <Form>EditorOptionsFrame</Form>
+            <Form>OptionsEditorOptionsFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsMainMenu.pas">
-            <Form>MainMenuFrame</Form>
+            <Form>OptionsMainMenuFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsOutputTabs.pas">
-            <Form>OutputTabsFrame</Form>
+            <Form>OptionsOutputTabsFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsDBMSOutput.pas">
-            <Form>DBMSOutputFrame</Form>
+            <Form>OptionsDBMSOutputFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -429,22 +429,22 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsObjectFrame.pas">
-            <Form>ObjectFrameFrame</Form>
+            <Form>OptionsObjectFrameFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsTimeFormat.pas">
-            <Form>TimeFormatFrame</Form>
+            <Form>OptionsTimeFormatFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsDateFormat.pas">
-            <Form>DateFormatFrame</Form>
+            <Form>OptionsDateFormatFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsConnectionTabs.pas">
-            <Form>ConnectionTabsFrame</Form>
+            <Form>OptionsConnectionTabsFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsOutput.pas">
@@ -452,7 +452,7 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsEditorToolBar.pas">
-            <Form>EditorToolBarFrame</Form>
+            <Form>OptionsEditorToolBarFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.LanguageUtils.pas"/>
@@ -470,18 +470,18 @@
         </DCCReference>
         <DCCReference Include="..\..\Common\units\Vcl.Styles.WebBrowser.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas">
-            <Form>EditorLeftMarginFrame</Form>
+            <Form>OptionsEditorLeftMarginFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorSearch.pas">
-            <Form>EditorSearchFrame</Form>
+            <Form>OptionsEditorSearchFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCSQL.Formatter.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorFont.pas">
-            <Form>EditorFontFrame</Form>
+            <Form>OptionsEditorFontFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -491,22 +491,22 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas">
-            <Form>EditorCompletionProposalFrame</Form>
+            <Form>OptionsEditorCompletionProposalFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas">
-            <Form>EditorRightMarginFrame</Form>
+            <Form>OptionsEditorRightMarginFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsStatusBar.pas">
-            <Form>StatusBarFrame</Form>
+            <Form>OptionsStatusBarFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsEditorTabs.pas">
-            <Form>EditorTabsFrame</Form>
+            <Form>OptionsEditorTabsFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

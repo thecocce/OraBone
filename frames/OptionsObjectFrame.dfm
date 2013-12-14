@@ -1,4 +1,4 @@
-object ObjectFrameFrame: TObjectFrameFrame
+object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
   Left = 0
   Top = 0
   Width = 451

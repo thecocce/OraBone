@@ -7,7 +7,7 @@ uses
   Vcl.ExtCtrls, Ora, BCCommon.OptionsContainer;
 
 type
-  TTimeFormatFrame = class(TFrame)
+  TOptionsTimeFormatFrame = class(TFrame)
     Panel: TPanel;
     TimeFormatLabel: TLabel;
     ExampleLabel: TLabel;
@@ -29,8 +29,8 @@ type
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
     property Session: TOraSession write FSession;
   end;
 
@@ -41,13 +41,13 @@ implementation
 uses
   Lib;
 
-constructor TTimeFormatFrame.Create(AOwner: TComponent);
+constructor TOptionsTimeFormatFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   TimeFormatEditChange(nil);
 end;
 
-procedure TTimeFormatFrame.TimeFormatEditChange(Sender: TObject);
+procedure TOptionsTimeFormatFrame.TimeFormatEditChange(Sender: TObject);
 begin
   if Trim(TimeFormatEdit.Text) <> '' then
   begin
@@ -61,12 +61,12 @@ begin
   end
 end;
 
-procedure TTimeFormatFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsTimeFormatFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.TimeFormat := TimeFormatEdit.Text;
 end;
 
-procedure TTimeFormatFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsTimeFormatFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   TimeFormatEdit.Text := OptionsContainer.TimeFormat;
 end;

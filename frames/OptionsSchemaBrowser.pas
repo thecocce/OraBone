@@ -18,8 +18,8 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
   end;
 
 implementation
@@ -29,14 +29,14 @@ implementation
 uses
   System.SysUtils;
 
-procedure TOptionsSchemaBrowserFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsSchemaBrowserFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.SchemaBrowserAlign := ButtonPanelAlignComboBox.Text;
   OptionsContainer.SchemaBrowserShowTreeLines := ShowTreeLinesCheckBox.Checked;
   OptionsContainer.SchemaBrowserIndent := StrToIntDef(IndentEdit.Text, 16);
 end;
 
-procedure TOptionsSchemaBrowserFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsSchemaBrowserFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   ButtonPanelAlignComboBox.Text := OptionsContainer.SchemaBrowserAlign;
   ShowTreeLinesCheckBox.Checked := OptionsContainer.SchemaBrowserShowTreeLines;

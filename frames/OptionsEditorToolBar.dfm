@@ -1,4 +1,4 @@
-object EditorToolBarFrame: TEditorToolBarFrame
+object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
   Left = 0
   Top = 0
   Width = 343

@@ -1,4 +1,4 @@
-object DBMSOutputFrame: TDBMSOutputFrame
+object OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
   Left = 0
   Top = 0
   Width = 451

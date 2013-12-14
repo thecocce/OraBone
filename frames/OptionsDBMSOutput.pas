@@ -7,7 +7,7 @@ uses
   Vcl.ComCtrls, BCCommon.OptionsContainer;
 
 type
-  TDBMSOutputFrame = class(TFrame)
+  TOptionsDBMSOutputFrame = class(TFrame)
     Panel: TPanel;
     PollingIntervalLabel: TLabel;
     PollingIntervalTrackBar: TTrackBar;
@@ -16,26 +16,26 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
   end;
 
 implementation
 
 {$R *.dfm}
 
-procedure TDBMSOutputFrame.PollingIntervalTrackBarChange(Sender: TObject);
+procedure TOptionsDBMSOutputFrame.PollingIntervalTrackBarChange(Sender: TObject);
 begin
   PollingIntervalLabel.Caption := Format('Polling interval: %d second ', [
     PollingIntervalTrackBar.Position]);
 end;
 
-procedure TDBMSOutputFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsDBMSOutputFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.PollingInterval := PollingIntervalTrackBar.Position;
 end;
 
-procedure TDBMSOutputFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsDBMSOutputFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   PollingIntervalTrackBar.Position := OptionsContainer.PollingInterval;
 end;

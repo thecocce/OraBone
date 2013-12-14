@@ -7,7 +7,7 @@ uses
   Vcl.ExtCtrls, Ora, BCCommon.OptionsContainer;
 
 type
-  TDateFormatFrame = class(TFrame)
+  TOptionsDateFormatFrame = class(TFrame)
     Panel: TPanel;
     DateFormatLabel: TLabel;
     ExampleLabel: TLabel;
@@ -39,8 +39,8 @@ type
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
     property Session: TOraSession write FSession;
   end;
 
@@ -51,13 +51,13 @@ implementation
 uses
   Lib;
 
-constructor TDateFormatFrame.Create(AOwner: TComponent);
+constructor TOptionsDateFormatFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   DateFormatEditChange(nil);
 end;
 
-procedure TDateFormatFrame.DateFormatEditChange(Sender: TObject);
+procedure TOptionsDateFormatFrame.DateFormatEditChange(Sender: TObject);
 begin
   if Trim(DateFormatEdit.Text) <> '' then
   begin
@@ -71,12 +71,12 @@ begin
   end;
 end;
 
-procedure TDateFormatFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsDateFormatFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.DateFormat := DateFormatEdit.Text;
 end;
 
-procedure TDateFormatFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsDateFormatFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   DateFormatEdit.Text := OptionsContainer.DateFormat;
 end;

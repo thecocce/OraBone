@@ -1,4 +1,4 @@
-object EditorTabsFrame: TEditorTabsFrame
+object OptionsEditorTabsFrame: TOptionsEditorTabsFrame
   Left = 0
   Top = 0
   Width = 451

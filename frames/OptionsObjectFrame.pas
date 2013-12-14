@@ -7,7 +7,7 @@ uses
   BCControls.CheckBox, BCCommon.OptionsContainer;
 
 type
-  TObjectFrameFrame = class(TFrame)
+  TOptionsObjectFrameFrame = class(TFrame)
     Panel: TPanel;
     ButtonPanelAlignLabel: TLabel;
     ButtonPanelAlignComboBox: TBCComboBox;
@@ -18,15 +18,15 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
   end;
 
 implementation
 
 {$R *.dfm}
 
-procedure TObjectFrameFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsObjectFrameFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.ObjectFrameAlign := ButtonPanelAlignComboBox.Text;
   OptionsContainer.ShowObjectCreationAndModificationTimestamp := ShowCreationAndModificationTimestampCheckBox.Checked;
@@ -34,7 +34,7 @@ begin
   OptionsContainer.FilterOnTyping := FilterOnTypingCheckBox.Checked;
 end;
 
-procedure TObjectFrameFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsObjectFrameFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   ButtonPanelAlignComboBox.Text := OptionsContainer.ObjectFrameAlign;
   ShowCreationAndModificationTimestampCheckBox.Checked := OptionsContainer.ShowObjectCreationAndModificationTimestamp;

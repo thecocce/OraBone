@@ -7,7 +7,7 @@ uses
   BCCommon.OptionsContainer;
 
 type
-  TEditorTabsFrame = class(TFrame)
+  TOptionsEditorTabsFrame = class(TFrame)
     Panel: TPanel;
     CloseTabByDblClickCheckBox: TBCCheckBox;
     CloseTabByMiddleClickCheckBox: TBCCheckBox;
@@ -20,15 +20,15 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
   end;
 
 implementation
 
 {$R *.dfm}
 
-procedure TEditorTabsFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsEditorTabsFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.EditorCloseTabByDblClick := CloseTabByDblClickCheckBox.Checked;
   OptionsContainer.EditorCloseTabByMiddleClick := CloseTabByMiddleClickCheckBox.Checked;
@@ -39,7 +39,7 @@ begin
   OptionsContainer.EditorRightClickSelect := RightClickSelectCheckBox.Checked;
 end;
 
-procedure TEditorTabsFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsEditorTabsFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   CloseTabByDblClickCheckBox.Checked := OptionsContainer.EditorCloseTabByDblClick;
   CloseTabByMiddleClickCheckBox.Checked := OptionsContainer.EditorCloseTabByMiddleClick;

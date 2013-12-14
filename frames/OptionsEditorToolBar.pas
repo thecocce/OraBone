@@ -7,7 +7,7 @@ uses
   BCCommon.OptionsContainer;
 
 type
-  TEditorToolBarFrame = class(TFrame)
+  TOptionsEditorToolBarFrame = class(TFrame)
     Panel: TPanel;
     StandardCheckBox: TBCCheckBox;
     PrintCheckBox: TBCCheckBox;
@@ -26,15 +26,15 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOptionsContainer);
-    procedure PutData(OptionsContainer: TOptionsContainer);
+    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
+    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
   end;
 
 implementation
 
 {$R *.dfm}
 
-procedure TEditorToolBarFrame.PutData(OptionsContainer: TOptionsContainer);
+procedure TOptionsEditorToolBarFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   OptionsContainer.ToolBarExecute := ExecuteCheckBox.Checked;
   OptionsContainer.ToolBarTransaction := TransactionCheckBox.Checked;
@@ -51,7 +51,7 @@ begin
   OptionsContainer.ToolBarTools := ToolsCheckBox.Checked;
 end;
 
-procedure TEditorToolBarFrame.GetData(OptionsContainer: TOptionsContainer);
+procedure TOptionsEditorToolBarFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
 begin
   ExecuteCheckBox.Checked := OptionsContainer.ToolBarExecute;
   TransactionCheckBox.Checked := OptionsContainer.ToolBarTransaction;

@@ -1,4 +1,4 @@
-object TimeFormatFrame: TTimeFormatFrame
+object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
   Left = 0
   Top = 0
   Width = 451
