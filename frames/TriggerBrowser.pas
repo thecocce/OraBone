@@ -78,7 +78,7 @@ type
 implementation
 
 uses
-  Main, CustomizePages, Lib, Options;
+  Main, CustomizePages, Lib, BCCommon.OptionsContainer;
 
 const
   TRIGGER_NAME = 'Trigger Name';

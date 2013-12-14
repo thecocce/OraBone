@@ -321,7 +321,7 @@ implementation
 uses
   About, Lib, Options, BigIni, BCDialogs.FindInFiles, Vcl.Clipbrd, Parameters, SynEdit, OraCall, BCCommon.Lib,
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
-  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode,
+  SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, BCCommon.OptionsContainer,
   System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, BCSQL.Formatter,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
 
@@ -1574,7 +1574,7 @@ begin
   end;
   if Assigned(OraSession) then
     { open Options }
-    if OptionsDialog.Execute(OraSession, OptionsContainer) then
+    if OptionsForm.Execute(OraSession, OptionsContainer) then
     begin
       UpdateMainMenuBar;
       UpdateStatusBar;

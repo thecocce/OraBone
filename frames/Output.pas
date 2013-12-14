@@ -89,7 +89,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
+  Main, BCCommon.OptionsContainer, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
   System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages;
 

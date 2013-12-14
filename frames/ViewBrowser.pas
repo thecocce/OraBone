@@ -235,8 +235,8 @@ type
 implementation
 
 uses
-  Main, DataFilter, DataSort, CustomizePages, Options, Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.StringUtils,
-  BCCommon.Lib;
+  Main, DataFilter, DataSort, CustomizePages, BCCommon.OptionsContainer, Lib, Vcl.Themes, BCCommon.StyleUtils,
+  BCCommon.StringUtils, BCCommon.Lib;
 
 const
   { ColumnsQuery columns }

@@ -92,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, BCCommon.StyleUtils, SynEditKeyCmds, BCCommon.StringUtils;
+  BCCommon.OptionsContainer, BCCommon.StyleUtils, SynEditKeyCmds, BCCommon.StringUtils;
 
 var
   FDataFilterDialog: TDataFilterDialog;

@@ -110,7 +110,7 @@ uses
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
-  Options in 'forms\Options.pas' {OptionsDialog},
+  Options in 'forms\Options.pas' {OptionsForm},
   BCCommon.Lib in '..\..\Common\units\BCCommon.Lib.pas',
   BCFrames.OptionsPrint in '..\..\Common\frames\BCFrames.OptionsPrint.pas' {OptionsPrintFrame: TFrame},
   Vcl.Styles.WebBrowser in '..\..\Common\units\Vcl.Styles.WebBrowser.pas',

@@ -344,7 +344,7 @@ implementation
 
 uses
   DataFilter, DataSort, Main, StringData, CustomizePages, UxTheme, Blob, BCCommon.Lib, BCCommon.StringUtils,
-  CustomizeTableColumns, Options, Lib, TableSourceOptions, DataModule, BCCommon.Dialogs,
+  CustomizeTableColumns, BCCommon.OptionsContainer, Lib, TableSourceOptions, DataModule, BCCommon.Dialogs,
   BCCommon.LanguageStrings, BCCommon.Messages;
 
 const

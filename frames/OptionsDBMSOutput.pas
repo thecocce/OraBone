@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, BCCommon.OptionsContainer;
 
 type
   TDBMSOutputFrame = class(TFrame)
@@ -16,6 +16,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure PutData(OptionsContainer: TOptionsContainer);
   end;
 
 implementation
@@ -26,6 +27,11 @@ procedure TDBMSOutputFrame.PollingIntervalTrackBarChange(Sender: TObject);
 begin
   PollingIntervalLabel.Caption := Format('Polling interval: %d second ', [
     PollingIntervalTrackBar.Position]);
+end;
+
+procedure TDBMSOutputFrame.PutData(OptionsContainer: TOptionsContainer);
+begin
+  OptionsContainer.PollingInterval := PollingIntervalTrackBar.Position;
 end;
 
 end.

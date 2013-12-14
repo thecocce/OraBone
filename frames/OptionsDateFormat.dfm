@@ -25,7 +25,7 @@ object DateFormatFrame: TDateFormatFrame
       Margins.Bottom = 4
       Caption = 'Date Format'
     end
-    object Label15: TLabel
+    object ExampleLabel: TLabel
       Left = 7
       Top = 35
       Width = 40
@@ -36,7 +36,7 @@ object DateFormatFrame: TDateFormatFrame
       Margins.Bottom = 4
       Caption = 'Example'
     end
-    object DateFormat1Label: TLabel
+    object DescriptionLabel: TLabel
       Left = 7
       Top = 56
       Width = 294
@@ -52,7 +52,7 @@ object DateFormatFrame: TDateFormatFrame
         'values and vice versa.'
       WordWrap = True
     end
-    object DateFormat2Label: TLabel
+    object DateFormatDLabel: TLabel
       Left = 7
       Top = 101
       Width = 7
@@ -70,7 +70,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label5: TLabel
+    object DateFormatDDLabel: TLabel
       Left = 7
       Top = 117
       Width = 14
@@ -88,7 +88,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label7: TLabel
+    object DateFormatDDDLabel: TLabel
       Left = 7
       Top = 133
       Width = 21
@@ -106,7 +106,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label11: TLabel
+    object DateFormatDAYLabel: TLabel
       Left = 7
       Top = 149
       Width = 20
@@ -124,7 +124,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object DateFormat3Label: TLabel
+    object DateFormatDTextLabel: TLabel
       Left = 49
       Top = 101
       Width = 91
@@ -142,7 +142,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label4: TLabel
+    object DateFormatDDTextLabel: TLabel
       Left = 49
       Top = 117
       Width = 102
@@ -160,7 +160,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label6: TLabel
+    object DateFormatDDDTextLabel: TLabel
       Left = 49
       Top = 133
       Width = 100
@@ -178,7 +178,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label12: TLabel
+    object DateFormatDAYTextLabel: TLabel
       Left = 49
       Top = 149
       Width = 252
@@ -199,7 +199,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label17: TLabel
+    object DateFormatMMLabel: TLabel
       Left = 7
       Top = 191
       Width = 16
@@ -217,7 +217,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label19: TLabel
+    object DateFormatMONLabel: TLabel
       Left = 7
       Top = 207
       Width = 23
@@ -235,7 +235,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label21: TLabel
+    object DateFormatMONTHLabel: TLabel
       Left = 7
       Top = 223
       Width = 36
@@ -253,7 +253,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label23: TLabel
+    object DateFormatYYLabel: TLabel
       Left = 7
       Top = 265
       Width = 12
@@ -271,7 +271,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label27: TLabel
+    object DateFormatYYYYLabel: TLabel
       Left = 7
       Top = 281
       Width = 24
@@ -289,7 +289,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label28: TLabel
+    object DateFormatYYYYTextLabel: TLabel
       Left = 49
       Top = 281
       Width = 73
@@ -307,7 +307,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label24: TLabel
+    object DateFormatYYTextLabel: TLabel
       Left = 49
       Top = 265
       Width = 79
@@ -325,7 +325,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label22: TLabel
+    object DateFormatMONTHTextLabel: TLabel
       Left = 49
       Top = 223
       Width = 252
@@ -346,7 +346,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label18: TLabel
+    object DateFormatMMTextLabel: TLabel
       Left = 49
       Top = 191
       Width = 145
@@ -364,7 +364,7 @@ object DateFormatFrame: TDateFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label20: TLabel
+    object DateFormatMONTextLabel: TLabel
       Left = 49
       Top = 207
       Width = 138

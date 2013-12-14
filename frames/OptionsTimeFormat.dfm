@@ -24,7 +24,7 @@ object TimeFormatFrame: TTimeFormatFrame
       Margins.Bottom = 4
       Caption = 'Time Format'
     end
-    object Label25: TLabel
+    object ExampleLabel: TLabel
       Left = 7
       Top = 35
       Width = 40
@@ -35,7 +35,7 @@ object TimeFormatFrame: TTimeFormatFrame
       Margins.Bottom = 4
       Caption = 'Example'
     end
-    object Label26: TLabel
+    object DescriptionLabel: TLabel
       Left = 7
       Top = 61
       Width = 294
@@ -51,7 +51,7 @@ object TimeFormatFrame: TTimeFormatFrame
         'o string values and vice versa.'
       WordWrap = True
     end
-    object Label29: TLabel
+    object TimeFormatHHLabel: TLabel
       Left = 7
       Top = 108
       Width = 14
@@ -69,7 +69,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label32: TLabel
+    object TimeFormatHH24Label: TLabel
       Left = 7
       Top = 124
       Width = 26
@@ -87,7 +87,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label33: TLabel
+    object TimeFormatMILabel: TLabel
       Left = 7
       Top = 140
       Width = 12
@@ -105,7 +105,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label34: TLabel
+    object TimeFormatSSLabel: TLabel
       Left = 7
       Top = 156
       Width = 12
@@ -123,7 +123,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label47: TLabel
+    object TimeFormatSSTextLabel: TLabel
       Left = 49
       Top = 156
       Width = 72
@@ -141,8 +141,8 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label48: TLabel
-      Left = 48
+    object TimeFormatMITextLabel: TLabel
+      Left = 49
       Top = 140
       Width = 69
       Height = 13
@@ -159,7 +159,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label31: TLabel
+    object TimeFormatHH24TextLabel: TLabel
       Left = 49
       Top = 124
       Width = 94
@@ -177,7 +177,7 @@ object TimeFormatFrame: TTimeFormatFrame
       ParentFont = False
       WordWrap = True
     end
-    object Label30: TLabel
+    object TimeFormatHHTextLabel: TLabel
       Left = 49
       Top = 108
       Width = 94

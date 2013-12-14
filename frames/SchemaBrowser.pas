@@ -157,7 +157,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.ClipBrd, Options, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
+  Vcl.ClipBrd, BCCommon.OptionsContainer, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
   CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon.Lib,

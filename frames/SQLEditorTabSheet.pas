@@ -29,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.SysUtils, Vcl.Themes, BCCommon.StringUtils, Options, BCCommon.StyleUtils, Math;
+  System.SysUtils, Vcl.Themes, BCCommon.StringUtils, BCCommon.OptionsContainer, BCCommon.StyleUtils, Math;
 
 const
   TAG_ZERO = 0;

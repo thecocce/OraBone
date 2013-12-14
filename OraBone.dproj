@@ -91,12 +91,14 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <DCC_UnitSearchPath>D:\Bonecode XE4\Components\src\SQLParser\dxe4;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;D:\Bonecode XE4\Components\src\UniSynEdit\Source;D:\Bonecode XE4\Components\src\SynWeb\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\VirtualTree\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\RADStudioXE4\Win64\Release;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\OmniXML\src;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\Common;D:\Bonecode XE4\Components\src\SQLParser\dxe4_64_bit;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -109,6 +111,7 @@
         <DCC_DebugInformation>false</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <DCC_UnitSearchPath>D:\Bonecode XE4\Components\src\SQLParser\dxe4;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
@@ -116,6 +119,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;D:\Bonecode XE4\Components\src\UniSynEdit\Source;D:\Bonecode XE4\Components\src\SynWeb\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\VirtualTree\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\RADStudioXE4\Win64\Release;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\OmniXML\src;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\Common;D:\Bonecode XE4\Components\src\SQLParser\dxe4_64_bit;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
@@ -455,7 +459,7 @@
         <DCCReference Include="..\..\Common\units\BCCommon.Messages.pas"/>
         <DCCReference Include="..\..\Common\units\BCCommon.StringUtils.pas"/>
         <DCCReference Include="forms\Options.pas">
-            <Form>OptionsDialog</Form>
+            <Form>OptionsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.Lib.pas"/>

@@ -404,7 +404,7 @@ implementation
 
 uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleUtils, SynUnicode,
-  Options, System.Math, BCCommon.FileUtils, BCCommon.Messages,
+  BCCommon.OptionsContainer, System.Math, BCCommon.FileUtils, BCCommon.Messages,
   Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon.Lib, BCCommon.StringUtils,
   AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes;
 

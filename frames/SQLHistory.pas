@@ -51,7 +51,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, Lib, Options, HistoryEdit, BCCommon.Messages, BCCommon.StringUtils, BCCommon.Lib;
+  Main, Lib, BCCommon.OptionsContainer, HistoryEdit, BCCommon.Messages, BCCommon.StringUtils, BCCommon.Lib;
 
 const
   GRID_COLUMN_BOOLEAN = 0;

@@ -68,7 +68,10 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Minimap.Font.Height = -4
       Minimap.Font.Name = 'Courier New'
       Minimap.Font.Style = []
-      Minimap.TopLine = 1
+      Minimap.Width = 0
+      Minimap.CharWidth = 2
+      Minimap.CharHeight = 4
+      Minimap.LinesInWindow = 0
       Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
       WordWrap.Enabled = False

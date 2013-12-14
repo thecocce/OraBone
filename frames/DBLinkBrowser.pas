@@ -71,7 +71,7 @@ type
 implementation
 
 uses
-  Main, CustomizePages, Lib, BCCommon.Lib, Options;
+  Main, CustomizePages, Lib, BCCommon.Lib, BCCommon.OptionsContainer;
 
 const
   LINK_NAME = 'Link Name';

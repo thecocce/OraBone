@@ -119,7 +119,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, CustomizePages, Lib, Options;
+  Main, CustomizePages, Lib, BCCommon.OptionsContainer;
 
 const
   { SynonymsQuery columns }

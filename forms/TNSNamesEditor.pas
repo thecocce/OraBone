@@ -172,7 +172,7 @@ implementation
 
 uses
   System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleUtils, OraServices, OraCall,
-  BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.LanguageStrings, Options,
+  BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.OptionsContainer,
   BCCommon.FileUtils;
 
 const

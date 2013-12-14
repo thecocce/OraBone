@@ -72,16 +72,30 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
+          Gutter.Intens = False
           Gutter.AutoSize = True
           Gutter.Font.Charset = DEFAULT_CHARSET
           Gutter.Font.Color = clWindowText
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.BookmarkPanelColor = clNone
+          Gutter.RightOffset = 2
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
+          Gutter.ShowBookmarks = False
+          Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
+          Minimap.Font.Charset = DEFAULT_CHARSET
+          Minimap.Font.Color = clWindowText
+          Minimap.Font.Height = -4
+          Minimap.Font.Name = 'Courier New'
+          Minimap.Font.Style = []
+          Minimap.Width = 0
+          Minimap.CharWidth = 2
+          Minimap.CharHeight = 4
+          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -160,7 +174,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 19
+            Height = 13
             Align = alRight
           end
           object SourceToolBar: TBCToolBar

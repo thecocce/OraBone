@@ -358,7 +358,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 368
         Top = 0
         Width = 70
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Case Sensitive'
         Layout = tlCenter
@@ -367,7 +367,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 465
         Top = 0
         Width = 89
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Whole Words Only'
         Layout = tlCenter
@@ -376,7 +376,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 581
         Top = 0
         Width = 92
-        Height = 21
+        Height = 13
         Align = alLeft
         Caption = 'Regular Expression'
         Layout = tlCenter
@@ -397,7 +397,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
           Left = 4
           Top = 3
           Width = 50
-          Height = 18
+          Height = 13
           Align = alLeft
           Caption = 'Search for'
         end
@@ -824,15 +824,28 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Gutter.ShowLineModified = False
         Gutter.LineModifiedColor = clYellow
         Gutter.LineNormalColor = clLime
+        Gutter.Intens = False
         Gutter.AutoSize = True
-        Gutter.BorderStyle = gbsNone
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
+        Gutter.BookmarkPanelColor = clNone
+        Gutter.RightOffset = 2
         Gutter.RightOffsetColor = clNone
         Gutter.ShowLineNumbers = True
+        Gutter.ShowBookmarks = False
+        Gutter.Width = 54
+        Minimap.Font.Charset = DEFAULT_CHARSET
+        Minimap.Font.Color = clWindowText
+        Minimap.Font.Height = -4
+        Minimap.Font.Name = 'Courier New'
+        Minimap.Font.Style = []
+        Minimap.Width = 0
+        Minimap.CharWidth = 2
+        Minimap.CharHeight = 4
+        Minimap.LinesInWindow = 0
         Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         SearchEngine = SynEditSearch
         WantTabs = True

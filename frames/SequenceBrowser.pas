@@ -125,7 +125,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, CustomizePages, Lib, BCCommon.Lib, Options;
+  Main, CustomizePages, Lib, BCCommon.Lib, BCCommon.OptionsContainer;
 
 const
   { SynonymsQuery columns }

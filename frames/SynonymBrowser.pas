@@ -51,7 +51,7 @@ type
 implementation
 
 uses
-  CustomizePages, Lib, Options;
+  CustomizePages, Lib, BCCommon.OptionsContainer;
 
 {$R *.dfm}
 

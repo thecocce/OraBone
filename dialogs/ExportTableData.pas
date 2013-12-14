@@ -80,8 +80,9 @@ implementation
 {$R *.dfm}
 
 uses
-  Options, BigIni, BCSQL.Tokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd, BCCommon.FileUtils, BCCommon.Lib,
-  Vcl.Themes, BCCommon.StyleUtils, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages;
+  BCCommon.OptionsContainer, BigIni, BCSQL.Tokenizer, ShellApi, DBGrids, Progress, Main, Vcl.Clipbrd,
+  BCCommon.FileUtils, BCCommon.Lib, Vcl.Themes, BCCommon.StyleUtils, BCCommon.Dialogs, BCCommon.LanguageStrings,
+  BCCommon.Messages;
 
 var
   FExportTableDataDialog: TExportTableDataDialog;
