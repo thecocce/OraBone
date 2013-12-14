@@ -1623,113 +1623,9 @@ begin
   try
     try
       WriteString('OraBone', 'Version', AboutDialog.Version);
-      { Options }
-      WriteString('Options', 'FontName', OptionsContainer.FontName);
-      WriteString('Options', 'FontSize', IntToStr(OptionsContainer.FontSize));
-      WriteString('Options', 'MarginFontName', OptionsContainer.MarginFontName);
-      WriteString('Options', 'MarginFontSize', IntToStr(OptionsContainer.MarginFontSize));
-      WriteString('Options', 'RightMargin', IntToStr(OptionsContainer.MarginRightMargin));
-      WriteBool('Options', 'MarginLeftMarginAutoSize', OptionsContainer.MarginLeftMarginAutoSize);
-      WriteString('Options', 'MarginLeftMarginWidth', IntToStr(OptionsContainer.MarginLeftMarginWidth));
-      WriteBool('Options', 'MarginLeftMarginMouseMove', OptionsContainer.MarginLeftMarginMouseMove);
-      WriteBool('Options', 'MarginShowBookmarks', OptionsContainer.MarginShowBookmarks);
-      WriteBool('Options', 'MarginShowBookmarkPanel', OptionsContainer.MarginShowBookmarkPanel);
-      WriteBool('Options', 'MarginVisibleLeftMargin', OptionsContainer.MarginVisibleLeftMargin);
-      WriteBool('Options', 'MarginVisibleRightMargin', OptionsContainer.MarginVisibleRightMargin);
 
-      WriteBool('Options', 'MarginInTens', OptionsContainer.MarginInTens);
-      WriteBool('Options', 'MarginZeroStart', OptionsContainer.MarginZeroStart);
-      WriteBool('Options', 'MarginLineModified', OptionsContainer.MarginLineModified);
-      WriteString('Options', 'MarginModifiedColor', OptionsContainer.MarginModifiedColor);
-      WriteString('Options', 'MarginNormalColor', OptionsContainer.MarginNormalColor);
-      WriteString('Options', 'MinimapFontName', OptionsContainer.MinimapFontName);
-      WriteString('Options', 'MinimapFontSize', IntToStr(OptionsContainer.MinimapFontSize));
-      WriteString('Options', 'MinimapWidth', IntToStr(OptionsContainer.MinimapWidth));
-      WriteBool('Options', 'ShowSearchStringNotFound', OptionsContainer.ShowSearchStringNotFound);
-      WriteBool('Options', 'BeepIfSearchStringNotFound', OptionsContainer.BeepIfSearchStringNotFound);
-
-      WriteString('Options', 'InsertCaret', IntToStr(Ord(OptionsContainer.InsertCaret)));
-      WriteString('Options', 'NonblinkingCaretColor', OptionsContainer.NonblinkingCaretColor);
-
-      DeleteKey('Options', 'ExtraLineSpacing'); { deprecated }
-
-      WriteString('Options', 'LineSpacing', IntToStr(OptionsContainer.LineSpacing));
-      WriteString('Options', 'TabWidth', IntToStr(OptionsContainer.TabWidth));
-      WriteString('Options', 'ActiveLineColorBrightness', IntToStr(OptionsContainer.ColorBrightness));
-      WriteBool('Options', 'CompletionProposalEnabled', OptionsContainer.CompletionProposalEnabled);
-      WriteBool('Options', 'CompletionProposalCaseSensitive', OptionsContainer.CompletionProposalCaseSensitive);
-      WriteString('Options', 'CompletionProposalShortcut', OptionsContainer.CompletionProposalShortcut);
-
-      WriteBool('Options', 'EditorCloseTabByDblClick', OptionsContainer.EditorCloseTabByDblClick);
-      WriteBool('Options', 'EditorCloseTabByMiddleClick', OptionsContainer.EditorCloseTabByMiddleClick);
-      WriteBool('Options', 'EditorMultiLine', OptionsContainer.EditorMultiLine);
-      WriteBool('Options', 'EditorDoubleBuffered', OptionsContainer.EditorDoubleBuffered);
-      WriteBool('Options', 'EditorShowCloseButton', OptionsContainer.EditorShowCloseButton);
-      WriteBool('Options', 'EditorRightClickSelect', OptionsContainer.EditorRightClickSelect);
-      WriteBool('Options', 'EditorShowImage', OptionsContainer.EditorShowImage);
-      WriteBool('Options', 'ConnectionCloseTabByDblClick', OptionsContainer.ConnectionCloseTabByDblClick);
-      WriteBool('Options', 'ConnectionCloseTabByMiddleClick', OptionsContainer.ConnectionCloseTabByMiddleClick);
-      WriteBool('Options', 'ConnectionMultiLine', OptionsContainer.ConnectionMultiLine);
-      WriteBool('Options', 'ConnectionDoubleBuffered', OptionsContainer.ConnectionDoubleBuffered);
-      WriteBool('Options', 'ConnectionShowCloseButton', OptionsContainer.ConnectionShowCloseButton);
-      WriteBool('Options', 'ConnectionRightClickSelect', OptionsContainer.ConnectionRightClickSelect);
-      WriteBool('Options', 'ConnectionShowImage', OptionsContainer.ConnectionShowImage);
-      WriteBool('Options', 'OutputCloseTabByDblClick', OptionsContainer.OutputCloseTabByDblClick);
-      WriteBool('Options', 'OutputCloseTabByMiddleClick', OptionsContainer.OutputCloseTabByMiddleClick);
-      WriteBool('Options', 'OutputMultiLine', OptionsContainer.OutputMultiLine);
-      WriteBool('Options', 'OutputDoubleBuffered', OptionsContainer.OutputDoubleBuffered);
-      WriteBool('Options', 'OutputShowCloseButton', OptionsContainer.OutputShowCloseButton);
-      WriteBool('Options', 'OutputRightClickSelect', OptionsContainer.OutputRightClickSelect);
-      WriteBool('Options', 'OutputShowImage', OptionsContainer.OutputShowImage);
-      WriteBool('Options', 'AutoIndent', OptionsContainer.AutoIndent);
-      WriteBool('Options', 'AutoSave', OptionsContainer.AutoSave);
-      WriteBool('Options', 'NonblinkingCaret', OptionsContainer.NonblinkingCaret);
-      WriteBool('Options', 'UndoAfterSave', OptionsContainer.UndoAfterSave);
-      WriteBool('Options', 'TrimTrailingSpaces', OptionsContainer.TrimTrailingSpaces);
-      WriteBool('Options', 'TripleClickRowSelect', OptionsContainer.TripleClickRowSelect);
-      WriteBool('Options', 'ScrollPastEof', OptionsContainer.ScrollPastEof);
-      WriteBool('Options', 'ScrollPastEol', OptionsContainer.ScrollPastEol);
-      WriteBool('Options', 'TabsToSpaces', OptionsContainer.TabsToSpaces);
-      WriteBool('Options', 'SmartTabs', OptionsContainer.SmartTabs);
-      WriteBool('Options', 'TabsToSpaces', OptionsContainer.TabsToSpaces);
-      WriteBool('Options', 'IgnoreCase', OptionsContainer.IgnoreCase);
-      WriteBool('Options', 'IgnoreBlanks', OptionsContainer.IgnoreBlanks);
-      WriteBool('Options', 'PersistentHotKeys', OptionsContainer.PersistentHotKeys);
-      WriteBool('Options', 'Shadows', OptionsContainer.Shadows);
-      WriteBool('Options', 'MainMenuUseSystemFont', OptionsContainer.MainMenuUseSystemFont);
-      WriteString('Options', 'MainMenuFontName', OptionsContainer.MainMenuFontName);
-      WriteString('Options', 'MainMenuFontSize', IntToStr(OptionsContainer.MainMenuFontSize));
-      WriteString('Options', 'PrintDocumentName', IntToStr(OptionsContainer.PrintDocumentName));
-      WriteString('Options', 'PrintPageNumber', IntToStr(OptionsContainer.PrintPageNumber));
-      WriteString('Options', 'PrintPrintedBy', IntToStr(OptionsContainer.PrintPrintedBy));
-      WriteString('Options', 'PrintDateTime', IntToStr(OptionsContainer.PrintDateTime));
-      WriteBool('Options', 'PrintShowHeaderLine', OptionsContainer.PrintShowHeaderLine);
-      WriteBool('Options', 'PrintShowFooterLine', OptionsContainer.PrintShowFooterLine);
-      WriteBool('Options', 'PrintShowLineNumbers', OptionsContainer.PrintShowLineNumbers);
-      WriteBool('Options', 'PrintWordWrapLine', OptionsContainer.PrintWordWrapLine);
-      WriteString('Options', 'AnimationStyle', IntToStr(Ord(OptionsContainer.AnimationStyle)));
-      WriteString('Options', 'AnimationDuration', IntToStr(OptionsContainer.AnimationDuration));
-      WriteString('Options', 'PollingInterval', IntToStr(OptionsContainer.PollingInterval));
-      WriteString('Options', 'DateFormat', OptionsContainer.DateFormat);
-      WriteString('Options', 'TimeFormat', OptionsContainer.TimeFormat);
-      WriteString('Options', 'SchemaBrowserAlign', OptionsContainer.SchemaBrowserAlign);
-      WriteBool('Options', 'SchemaBrowserShowTreeLines', OptionsContainer.SchemaBrowserShowTreeLines);
-      WriteString('Options', 'SchemaBrowserIndent', IntToStr(OptionsContainer.SchemaBrowserIndent));
-      WriteBool('Options', 'OutputShowTreeLines', OptionsContainer.OutputShowTreeLines);
-      WriteString('Options', 'OutputIndent', IntToStr(OptionsContainer.OutputIndent));
-      WriteString('Options', 'ObjectFrameAlign', OptionsContainer.ObjectFrameAlign);
-      WriteBool('Options', 'ShowObjectCreationAndModificationTimestamp', OptionsContainer.ShowObjectCreationAndModificationTimestamp);
-      WriteBool('Options', 'ShowDataSearchPanel', OptionsContainer.ShowDataSearchPanel);
-      WriteBool('Options', 'FilterOnTyping', OptionsContainer.FilterOnTyping);
       WriteBool('Options', 'ShowToolBar', ActionToolBar.Visible);
       WriteBool('Options', 'ShowStatusBar', StatusBar.Visible);
-      WriteBool('Options', 'StatusBarUseSystemFont', OptionsContainer.StatusBarUseSystemFont);
-      WriteString('Options', 'StatusBarFontName', OptionsContainer.StatusBarFontName);
-      WriteString('Options', 'StatusBarFontSize', IntToStr(OptionsContainer.StatusBarFontSize));
-      WriteString('Options', 'MainMenuSystemFontName', OptionsContainer.MainMenuSystemFontName);
-      WriteString('Options', 'MainMenuSystemFontSize', IntToStr(OptionsContainer.MainMenuSystemFontSize));
-
-      DeleteKey('Options', 'MarginLineNumbers'); { deprecated }
 
       WriteBool('Options', 'EnableWordWrap', ViewWordWrapAction.Checked);
       WriteBool('Options', 'EnableLineNumbers', ViewLineNumbersAction.Checked);
@@ -1813,6 +1709,7 @@ var
   i, j: Integer;
 begin
   try
+    OptionsContainer.WriteIniFile;
     WriteIniFile;
     ApplicationEvents.Free;
 
