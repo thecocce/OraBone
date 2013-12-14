@@ -12,14 +12,14 @@ object ViewBrowserFrame: TViewBrowserFrame
     Top = 0
     Width = 451
     Height = 302
-    ActivePage = TriggersTabSheet
+    ActivePage = SourceTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = ViewPageControlChange
-    ActivePageCaption = 'Triggers'
+    ActivePageCaption = 'Source'
     TabDragDrop = False
     TabClosed = False
     HoldShiftToDragDrop = False
@@ -85,7 +85,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 13
+          Height = 19
           Align = alRight
         end
         object JvToolBar5: TBCToolBar
@@ -178,8 +178,8 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
-          Gutter.Width = 54
-          Gutter.Gradient = True
+          Gutter.ShowBookmarkPanel = False
+          Gutter.Width = 34
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText
@@ -555,10 +555,9 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.BookmarkPanelColor = clNone
           Gutter.RightOffset = 2
           Gutter.RightOffsetColor = clNone
-          Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
+          Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
-          Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText

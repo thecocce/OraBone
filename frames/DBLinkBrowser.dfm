@@ -73,7 +73,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 13
+          Height = 19
           Align = alRight
         end
         object InfoToolBar: TBCToolBar
@@ -151,8 +151,8 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
+          Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
-          Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText

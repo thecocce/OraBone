@@ -81,10 +81,10 @@ object ExportTableDataDialog: TExportTableDataDialog
       Top = 3
       Width = 321
       Height = 193
-      ActivePage = ColumnsTabSheet
+      ActivePage = Options1TabSheet
       Align = alClient
       TabOrder = 0
-      ActivePageCaption = 'Source'
+      ActivePageCaption = 'Options'
       TabDragDrop = False
       TabClosed = False
       HoldShiftToDragDrop = False

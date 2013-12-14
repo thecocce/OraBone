@@ -83,8 +83,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
+          Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
-          Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText
@@ -129,7 +129,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 13
+          Height = 19
           Align = alRight
         end
         object SourceToolBar: TBCToolBar

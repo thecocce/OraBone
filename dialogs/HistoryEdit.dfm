@@ -104,7 +104,7 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 23
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Date'
         end
@@ -152,7 +152,7 @@ object HistoryEditDialog: THistoryEditDialog
           Left = 3
           Top = 3
           Width = 37
-          Height = 13
+          Height = 18
           Align = alLeft
           Caption = 'Schema'
         end
@@ -193,7 +193,7 @@ object HistoryEditDialog: THistoryEditDialog
         object SQLLabel: TLabel
           Left = 3
           Top = 3
-          Width = 19
+          Width = 67
           Height = 13
           Align = alTop
           Caption = 'SQL'
@@ -207,23 +207,61 @@ object HistoryEditDialog: THistoryEditDialog
         Align = alClient
         Ctl3D = True
         ParentCtl3D = False
+        CodeFolding.CaseSensitive = False
+        CodeFolding.FolderBarLinesColor = 12434877
+        ActiveLine.Background = clYellow
+        ActiveLine.Foreground = clNavy
+        ActiveLine.Visible = True
+        LineDivider.Visible = False
+        LineDivider.Color = clRed
+        LineDivider.Style = psSolid
+        RightEdge.MouseMove = False
+        RightEdge.Visible = True
+        RightEdge.Position = 80
+        RightEdge.Color = clSilver
+        RightEdge.Style = psSolid
+        LineSpacing = 0
+        LineSpacingRule = lsSpecified
+        Background.Visible = False
+        Background.RepeatMode = brmNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Courier New'
         Font.Style = []
         TabOrder = 1
+        Gutter.ShowLineModified = False
+        Gutter.LineModifiedColor = clYellow
+        Gutter.LineNormalColor = clLime
+        Gutter.Intens = False
         Gutter.AutoSize = True
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
+        Gutter.BookmarkPanelColor = clNone
+        Gutter.RightOffset = 2
+        Gutter.RightOffsetColor = clNone
         Gutter.ShowLineNumbers = True
-        Gutter.Gradient = True
+        Gutter.ShowBookmarks = False
+        Gutter.ShowBookmarkPanel = False
+        Gutter.Width = 54
         Highlighter = SynSQLSyn
+        Minimap.Font.Charset = DEFAULT_CHARSET
+        Minimap.Font.Color = clWindowText
+        Minimap.Font.Height = -4
+        Minimap.Font.Name = 'Courier New'
+        Minimap.Font.Style = []
+        Minimap.Width = 0
+        Minimap.CharWidth = 2
+        Minimap.CharHeight = 4
+        Minimap.LinesInWindow = 0
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         WantTabs = True
+        WordWrap.Enabled = False
+        WordWrap.Position = 80
+        WordWrap.Style = wwsClientWidth
         FontSmoothing = fsmNone
       end
     end

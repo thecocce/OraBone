@@ -252,8 +252,8 @@ object DataFilterDialog: TDataFilterDialog
         Gutter.RightOffsetColor = clNone
         Gutter.ShowLineNumbers = True
         Gutter.ShowBookmarks = False
-        Gutter.Width = 54
-        Gutter.Gradient = True
+        Gutter.ShowBookmarkPanel = False
+        Gutter.Width = 34
         Highlighter = SynSQLSyn
         Minimap.Font.Charset = DEFAULT_CHARSET
         Minimap.Font.Color = clWindowText

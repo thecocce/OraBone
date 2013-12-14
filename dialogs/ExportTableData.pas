@@ -276,10 +276,6 @@ begin
   StringList := TStringList.Create;
   // jos SelectedRowsOnlyCheckBox.Checked, niin muodostetaan rivit gridiltä
   // muuten OraQuery (fetch all)
-  {SynEdit := TSynEdit.Create(nil);
-  SynEdit.Visible := False;
-  SynEdit.Parent := Self;}
-  //k := 0;
 
   TOraQuery(FGrid.DataSource.DataSet).DisableControls;
   try

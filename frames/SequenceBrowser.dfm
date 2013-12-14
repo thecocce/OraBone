@@ -12,14 +12,14 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Top = 0
     Width = 451
     Height = 302
-    ActivePage = SourceTabSheet
+    ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = SequencePageControlChange
-    ActivePageCaption = 'Source'
+    ActivePageCaption = 'Info'
     TabDragDrop = False
     TabClosed = False
     HoldShiftToDragDrop = False
@@ -73,7 +73,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 13
+          Height = 19
           Align = alRight
         end
         object InfoToolBar: TBCToolBar
@@ -151,8 +151,8 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
+          Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
-          Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText

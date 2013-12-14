@@ -84,8 +84,8 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
           Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
+          Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
-          Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText
@@ -174,7 +174,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 13
+            Height = 19
             Align = alRight
           end
           object SourceToolBar: TBCToolBar

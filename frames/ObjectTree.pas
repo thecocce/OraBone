@@ -258,7 +258,7 @@ implementation
 {$R *.dfm}
 
 uses
-  BCCommon.OptionsContainer, Lib, BigIni, SchemaFilter, DataModule, SynEdit, BCSQL.Tokenizer, System.StrUtils,
+  BCCommon.OptionsContainer, Lib, BigIni, SchemaFilter, DataModule, BCSQL.Tokenizer, System.StrUtils,
   BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
@@ -548,7 +548,7 @@ var
   PackageNode, PackageChildNode: PVirtualNode;
   Data, ParentData, ChildData: PObjectNodeRec;
   OraQuerySpec: TOraQuery;
-  SynEdit: TSynEdit;
+  StringList: TStringList;
   SQLTokenizer: TSQLTokenizer;
   s, Token: string;
   i: Integer;
@@ -566,7 +566,7 @@ begin
   if Data.Level = 2 then
   begin
     ParentData := VirtualDrawTree.GetNodeData(Node.Parent);
-    SynEdit := TSynEdit.Create(nil);
+    StringList := TStringList.Create;
 
     OraQuerySpec := TOraQuery.Create(nil);
     OraQuerySpec.Session := FOraSession;
@@ -575,16 +575,16 @@ begin
     try
       { Open queries }
       if PackageSpec then
-        SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
+        StringList.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
       else
-        SQL.Text := DM.StringHolder.StringsByName['PackageBodySQL'].Text;
+        StringList.Text := DM.StringHolder.StringsByName['PackageBodySQL'].Text;
       ParamByName('P_OBJECT_NAME').AsWideString := ParentData.NodeText; // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;
       { read SQL to editor }
       while not Eof do
       begin
-        SynEdit.Text := SynEdit.Text + FieldByName('TEXT').AsString;
+        StringList.Text := StringList.Text + FieldByName('TEXT').AsString;
         Next;
       end;
       //Close;
@@ -611,7 +611,7 @@ begin
       UnPrepare;
       //SynEdit.Text := Trim(UpperCase(SynEdit.Text));
       { check wrapped }
-      SQLTokenizer.SetText(SynEdit.Lines[0]);
+      SQLTokenizer.SetText(StringList.Strings[0]);
       while (not SQLTokenizer.Eof) and not Wrapped do
       begin
         if SQLTokenizer.TokenStrIs('WRAPPED') then
@@ -634,11 +634,11 @@ begin
         InsideSourceType := False;
 
         i := 0;
-        while i < SynEdit.Lines.Count do
+        while i < StringList.Count do
         begin
-          if Trim(SynEdit.Lines[i]) <> '' then
+          if Trim(StringList.Strings[i]) <> '' then
           begin
-            s := SynEdit.Lines[i];
+            s := StringList.Strings[i];
             if (InsideComment and (Pos('*/', s) = 0)) then
             begin
               Inc(i);
@@ -731,7 +731,7 @@ begin
 
               if not InsideSourceType and (NodeText <> '') then
               begin
-                InsideSourceType := Pos(';', SynEdit.Lines[i]) = 0;
+                InsideSourceType := Pos(';', StringList.Strings[i]) = 0;
                 PackageNode := VirtualDrawTree.AddChild(Node);
                 Data := VirtualDrawTree.GetNodeData(PackageNode);
                 Data.Level := 3;
@@ -740,7 +740,7 @@ begin
                 Data.SourceType := NodeType;
                 Data.ImageIndex := ImageIndex;
                 Data.StateIndex := StateIndex;
-                Data.CaretX := Pos(NodeText, SynEdit.Lines[i]);
+                Data.CaretX := Pos(NodeText, StringList.Strings[i]);
                 Data.CaretY := i + 1;
 
                 if (NodeType = 'FUNCTION') or (NodeType = 'PROCEDURE') or (NodeType = 'TYPE') then
@@ -750,12 +750,12 @@ begin
                     if first word AS or string empty then skip
                     else remove () and make childnodes (items are separated by ,)}
                   s := Copy(s, Pos(NodeText, s) + Length(NodeText) + 1, Length(s));
-                  if Pos('IS', SynEdit.Lines[i+1]) <> 1 then
-                    if Pos(';', SynEdit.Lines[i]) = 0 then
+                  if Pos('IS', StringList.Strings[i+1]) <> 1 then
+                    if Pos(';', StringList.Strings[i]) = 0 then
                     repeat
                       Inc(i);
-                      s := s + SynEdit.Lines[i];
-                    until Pos(';', SynEdit.Lines[i]) <> 0;
+                      s := s + StringList.Strings[i];
+                    until Pos(';', StringList.Strings[i]) <> 0;
                   s := Trim(s);
 
                   if s <> '' then
@@ -820,8 +820,8 @@ begin
         end;
       end;
     finally
-      if Assigned(SynEdit) then
-        SynEdit.Free;
+      if Assigned(StringList) then
+        StringList.Free;
       if Assigned(SQLTokenizer) then
         SQLTokenizer.Free;
       if OraQuerySpec.Active then

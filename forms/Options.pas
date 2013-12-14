@@ -351,13 +351,11 @@ begin
     Result:= False;
     Exit;
   end;
-  //Assign the Containers
   FOptionsContainer := EditOptions;
-  //Get Data
   GetData;
-  //Show the form
+
   Result:= Showmodal = mrOk;
-  //PutData
+
   if Result then
     PutData;
 end;
