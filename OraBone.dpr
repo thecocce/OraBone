@@ -130,7 +130,8 @@ uses
   BCFrames.OptionsSQLSelectGroupByClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectGroupByClause.pas' {OptionsSQLSelectGroupByClauseFrame: TFrame},
   BCFrames.OptionsSQLSelectHavingClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectHavingClause.pas' {OptionsSQLSelectHavingClauseFrame: TFrame},
   BCFrames.OptionsSQLSelectIntoClause in '..\..\Common\frames\BCFrames.OptionsSQLSelectIntoClause.pas' {OptionsSQLSelectIntoClauseFrame: TFrame},
-  BCFrames.OptionsSQLSelectSubquery in '..\..\Common\frames\BCFrames.OptionsSQLSelectSubquery.pas' {OptionsSQLSelectSubqueryFrame: TFrame};
+  BCFrames.OptionsSQLSelectSubquery in '..\..\Common\frames\BCFrames.OptionsSQLSelectSubquery.pas' {OptionsSQLSelectSubqueryFrame: TFrame},
+  BCCommon.OptionsContainer in '..\..\Common\units\BCCommon.OptionsContainer.pas';
 
 {$R *.res}
 
