@@ -319,7 +319,6 @@ begin
     Data.ImageIndex := SQLSelectAction.ImageIndex;
     Data.Caption := SQLSelectAction.Caption;
     Node.ChildCount := 1;
-
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
