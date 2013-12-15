@@ -47,7 +47,6 @@ object OptionsForm: TOptionsForm
     15FFB68115FFB68115FFB78115FFB88217FFBF8E2DFF0000000000000000}
   OldCreateOrder = True
   Position = poMainFormCenter
-  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow

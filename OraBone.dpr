@@ -125,7 +125,8 @@ uses
   OptionsEditorTabs in 'frames\OptionsEditorTabs.pas' {OptionsEditorTabsFrame: TFrame},
   BCFrames.OptionsSQLSelect in '..\..\Common\frames\BCFrames.OptionsSQLSelect.pas' {OptionsSQLSelectFrame: TFrame},
   BCCommon.OptionsContainer in '..\..\Common\units\BCCommon.OptionsContainer.pas',
-  BCFrames.OptionsSQLAlignments in '..\..\Common\frames\BCFrames.OptionsSQLAlignments.pas' {OptionsSQLAlignmentsFrame: TFrame};
+  BCFrames.OptionsSQLAlignments in '..\..\Common\frames\BCFrames.OptionsSQLAlignments.pas' {OptionsSQLAlignmentsFrame: TFrame},
+  IniPersist in '..\..\Common\units\IniPersist.pas';
 
 {$R *.res}
 

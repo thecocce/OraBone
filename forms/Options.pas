@@ -69,7 +69,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure OptionsVirtualStringTreePaintText(Sender: TBaseVirtualTree; const TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FOptionsConnectionTabsFrame: TOptionsConnectionTabsFrame;
     FOptionsDateFormatFrame: TOptionsDateFormatFrame;
@@ -331,6 +330,7 @@ begin
   FOptionsDateFormatFrame.Session := OraSession;
   FOptionsTimeFormatFrame.Session := OraSession;
   ReadIniFile;
+  FSQLFormatterOptionsWrapper.ReadIniFile;
   if not Assigned(EditOptions) then
   begin
     Result:= False;
@@ -342,7 +342,11 @@ begin
   Result:= Showmodal = mrOk;
 
   if Result then
+  begin
     PutData;
+    WriteIniFile;
+    FSQLFormatterOptionsWrapper.WriteIniFile;
+  end;
 end;
 
 procedure TOptionsForm.GetData;
@@ -521,12 +525,6 @@ begin
   FOptionsStatusBarFrame.PutData(FOptionsContainer);
   FOptionsSQLSelectFrame.PutData(FSQLFormatterOptionsWrapper);
   FOptionsSQLAlignmentsFrame.PutData(FSQLFormatterOptionsWrapper);
-end;
-
-procedure TOptionsForm.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  inherited;
-  WriteIniFile;
 end;
 
 procedure TOptionsForm.ReadIniFile;
