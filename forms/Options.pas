@@ -10,8 +10,7 @@ uses
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
-  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelectColumnList, BCCommon.OptionsContainer,
-  BCFrames.OptionsSQLSelectSubquery;
+  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -99,8 +98,7 @@ type
     FOptionsOutputTabsFrame: TOptionsOutputTabsFrame;
     FOptionsStatusBarFrame: TOptionsStatusBarFrame;
     FSQLFormatterOptionsWrapper: TSQLFormatterOptionsWrapper;
-    FOptionsSQLSelectColumnListFrame: TOptionsSQLSelectColumnListFrame;
-    FOptionsSQLSelectSubqueryFrame: TOptionsSQLSelectSubqueryFrame;
+    FOptionsSQLSelectFrame: TOptionsSQLSelectFrame;
     FOptionsTimeFormatFrame: TOptionsTimeFormatFrame;
     procedure CreateTree;
     procedure GetData;
@@ -159,8 +157,7 @@ begin
   FOptionsCompareFrame.Free;
   FOptionsStatusBarFrame.Free;
   FOptionsPrintFrame.Free;
-  FOptionsSQLSelectColumnListFrame.Free;
-  FOptionsSQLSelectSubqueryFrame.Free;
+  FOptionsSQLSelectFrame.Free;
 
   FSQLFormatterOptionsWrapper.Free;
 
@@ -181,7 +178,7 @@ end;
 procedure TOptionsForm.CreateTree;
 var
   Data: POptionsRec;
-  Node, ChildNode, ChildChildNode: PVirtualNode;
+  Node, ChildNode: PVirtualNode;
 begin
   with OptionsVirtualStringTree do
   begin
@@ -321,20 +318,8 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := SQLSelectAction.ImageIndex;
     Data.Caption := SQLSelectAction.Caption;
-    { Select Column List }
-    ChildChildNode := AddChild(ChildNode);
-    Data := GetNodeData(ChildChildNode);
-    Data.ImageIndex := SQLSelectColumnListAction.ImageIndex;
-    Data.Caption := SQLSelectColumnListAction.Caption;
-    { Select Subquery }
-    ChildChildNode := AddChild(ChildNode);
-    Data := GetNodeData(ChildChildNode);
-    Data.ImageIndex := SQLSelectSubqueryAction.ImageIndex;
-    Data.Caption := SQLSelectSubqueryAction.Caption;
-
-
     Node.ChildCount := 1;
-    ChildNode.ChildCount := 2;
+
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
@@ -382,8 +367,7 @@ begin
   FOptionsSchemaBrowserFrame.GetData(FOptionsContainer);
   FOptionsObjectFrameFrame.GetData(FOptionsContainer);
   FOptionsStatusBarFrame.GetData(FOptionsContainer);
-  FOptionsSQLSelectColumnListFrame.GetData(FSQLFormatterOptionsWrapper);
-  FOptionsSQLSelectSubqueryFrame.GetData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLSelectFrame.GetData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.OKButtonActionExecute(Sender: TObject);
@@ -506,8 +490,8 @@ begin
     FOptionsDateFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
     FOptionsTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
 
-    FOptionsSQLSelectColumnListFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 0);
-    FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
+    FOptionsSQLSelectFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0);
+    //FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
   end;
 end;
 
@@ -533,8 +517,7 @@ begin
   FOptionsSchemaBrowserFrame.PutData(FOptionsContainer);
   FOptionsObjectFrameFrame.PutData(FOptionsContainer);
   FOptionsStatusBarFrame.PutData(FOptionsContainer);
-  FOptionsSQLSelectColumnListFrame.PutData(FSQLFormatterOptionsWrapper);
-  FOptionsSQLSelectSubqueryFrame.PutData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLSelectFrame.PutData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -622,10 +605,8 @@ begin
   FOptionsPrintFrame.Parent := OptionsPanel;
   FOptionsStatusBarFrame := TOptionsStatusBarFrame.Create(OptionsPanel);
   FOptionsStatusBarFrame.Parent := OptionsPanel;
-  FOptionsSQLSelectColumnListFrame := TOptionsSQLSelectColumnListFrame.Create(OptionsPanel);
-  FOptionsSQLSelectColumnListFrame.Parent := OptionsPanel;
-  FOptionsSQLSelectSubqueryFrame := TOptionsSQLSelectSubqueryFrame.Create(OptionsPanel);
-  FOptionsSQLSelectSubqueryFrame.Parent := OptionsPanel;
+  FOptionsSQLSelectFrame := TOptionsSQLSelectFrame.Create(OptionsPanel);
+  FOptionsSQLSelectFrame.Parent := OptionsPanel;
 
   FSQLFormatterOptionsWrapper := TSQLFormatterOptionsWrapper.Create;
 end;
