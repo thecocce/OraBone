@@ -322,7 +322,8 @@ uses
   DataFilter, BCControls.DBGrid, ExportTableData, Progress, DataSort, ImportTableData, BCCommon.StyleUtils,
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, BCCommon.OptionsContainer,
   System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, BCSQL.Formatter,
-  BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl;
+  BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl,
+  SynEditTextBuffer;
 
 {$R *.dfm}
 
@@ -2070,6 +2071,7 @@ end;
 
 procedure TMainForm.LoadSQLIntoEditor(Schema: string; SQLText: WideString);
 var
+  i: Integer;
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
 begin
@@ -2081,6 +2083,8 @@ begin
     SynEdit.Lines.BeginUpdate;
     SynEdit.Lines.Text := SQLText;
     SynEdit.Lines.EndUpdate;
+    for i := 0 to SynEdit.ExpandLines.Count - 1 do
+      SynEdit.ExpandLines.Attributes[i].aLineState := lsNone;
     SQLEditorFrame.SynEditOnChange(nil);
 
     PageControlChange(nil);

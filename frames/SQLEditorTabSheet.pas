@@ -13,6 +13,7 @@ type
     SynCompletionProposal: TSynCompletionProposal;
     procedure SynCompletionProposalExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: string; var x,
       y: Integer; var CanExecute: Boolean);
+    procedure OraSynEditRightEdgeMouseUp(Sender: TObject);
   private
     { Private declarations }
     function GetMinimapVisible: Boolean;
@@ -57,6 +58,11 @@ end;
 function TSQLEditorTabSheetFrame.GetMinimapVisible: Boolean;
 begin
   Result := OraSynEdit.Minimap.Visible;
+end;
+
+procedure TSQLEditorTabSheetFrame.OraSynEditRightEdgeMouseUp(Sender: TObject);
+begin
+  OptionsContainer.MarginRightMargin := OraSynEdit.RightEdge.Position;
 end;
 
 procedure TSQLEditorTabSheetFrame.SetMinimapVisible(Value: Boolean);

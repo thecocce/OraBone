@@ -77,6 +77,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       WordWrap.Enabled = False
       WordWrap.Position = 80
       WordWrap.Style = wwsClientWidth
+      OnRightEdgeMouseUp = OraSynEditRightEdgeMouseUp
       FontSmoothing = fsmNone
     end
   end
