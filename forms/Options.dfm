@@ -257,29 +257,8 @@ object OptionsForm: TOptionsForm
     object SQLSelectAction: TAction
       Caption = 'Select'
     end
-    object SQLSelectColumnListAction: TAction
-      Caption = 'Column List'
-    end
-    object SQLSelectSubqueryAction: TAction
-      Caption = 'Subquery'
-    end
-    object SQLSelectIntoClauseAction: TAction
-      Caption = 'Into Clause'
-    end
-    object SQLSelectFromJoinClauseAction: TAction
-      Caption = 'From/Join Clause'
-    end
-    object SQLSelectAndOrKeywordAction: TAction
-      Caption = 'And/Or Keyword'
-    end
-    object SQLSelectGroupByClauseAction: TAction
-      Caption = 'Group By Clause'
-    end
-    object SQLSelectHavingClauseAction: TAction
-      Caption = 'Having Clause'
-    end
-    object SQLSelectOrderByAction: TAction
-      Caption = 'Order By'
+    object SQLAlignmentsAction: TAction
+      Caption = 'Alignments'
     end
   end
   object ImageList: TImageList

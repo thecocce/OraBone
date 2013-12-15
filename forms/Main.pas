@@ -2095,10 +2095,10 @@ var
 begin
   with TBigIniFile.Create(GetINIFilename) do
   try
-    ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
+    {ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
     ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
     ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
-    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
+    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;}
 
     SQLEditorFrame := OpenSQLEditor(PageControl.ActivePageCaption, True);
     SetFields;

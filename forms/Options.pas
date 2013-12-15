@@ -10,7 +10,8 @@ uses
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
-  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer;
+  BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
+  BCFrames.OptionsSQLAlignments;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -55,14 +56,7 @@ type
     EditorSearchAction: TAction;
     SQLFormatterAction: TAction;
     SQLSelectAction: TAction;
-    SQLSelectColumnListAction: TAction;
-    SQLSelectSubqueryAction: TAction;
-    SQLSelectIntoClauseAction: TAction;
-    SQLSelectFromJoinClauseAction: TAction;
-    SQLSelectAndOrKeywordAction: TAction;
-    SQLSelectGroupByClauseAction: TAction;
-    SQLSelectHavingClauseAction: TAction;
-    SQLSelectOrderByAction: TAction;
+    SQLAlignmentsAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OKButtonActionExecute(Sender: TObject);
@@ -98,8 +92,9 @@ type
     FOptionsOutputTabsFrame: TOptionsOutputTabsFrame;
     FOptionsStatusBarFrame: TOptionsStatusBarFrame;
     FSQLFormatterOptionsWrapper: TSQLFormatterOptionsWrapper;
-    FOptionsSQLSelectFrame: TOptionsSQLSelectFrame;
     FOptionsTimeFormatFrame: TOptionsTimeFormatFrame;
+    FOptionsSQLSelectFrame: TOptionsSQLSelectFrame;
+    FOptionsSQLAlignmentsFrame: TOptionsSQLAlignmentsFrame;
     procedure CreateTree;
     procedure GetData;
     procedure PutData;
@@ -158,6 +153,7 @@ begin
   FOptionsStatusBarFrame.Free;
   FOptionsPrintFrame.Free;
   FOptionsSQLSelectFrame.Free;
+  FOptionsSQLAlignmentsFrame.Free;
 
   FSQLFormatterOptionsWrapper.Free;
 
@@ -318,7 +314,12 @@ begin
     Data := GetNodeData(ChildNode);
     Data.ImageIndex := SQLSelectAction.ImageIndex;
     Data.Caption := SQLSelectAction.Caption;
-    Node.ChildCount := 1;
+    { Alignments }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
+    Data.Caption := SQLAlignmentsAction.Caption;
+    Node.ChildCount := 2;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
@@ -367,6 +368,7 @@ begin
   FOptionsObjectFrameFrame.GetData(FOptionsContainer);
   FOptionsStatusBarFrame.GetData(FOptionsContainer);
   FOptionsSQLSelectFrame.GetData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLAlignmentsFrame.GetData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.OKButtonActionExecute(Sender: TObject);
@@ -490,6 +492,7 @@ begin
     FOptionsTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
 
     FOptionsSQLSelectFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0);
+    FOptionsSQLAlignmentsFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1);
     //FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
   end;
 end;
@@ -517,6 +520,7 @@ begin
   FOptionsObjectFrameFrame.PutData(FOptionsContainer);
   FOptionsStatusBarFrame.PutData(FOptionsContainer);
   FOptionsSQLSelectFrame.PutData(FSQLFormatterOptionsWrapper);
+  FOptionsSQLAlignmentsFrame.PutData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -606,6 +610,8 @@ begin
   FOptionsStatusBarFrame.Parent := OptionsPanel;
   FOptionsSQLSelectFrame := TOptionsSQLSelectFrame.Create(OptionsPanel);
   FOptionsSQLSelectFrame.Parent := OptionsPanel;
+  FOptionsSQLAlignmentsFrame := TOptionsSQLAlignmentsFrame.Create(OptionsPanel);
+  FOptionsSQLAlignmentsFrame.Parent := OptionsPanel;
 
   FSQLFormatterOptionsWrapper := TSQLFormatterOptionsWrapper.Create;
 end;
