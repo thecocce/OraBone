@@ -80,7 +80,7 @@ implementation
 
 uses
   Winapi.ActiveX, System.StrUtils, Progress, BigINI, Main, BCCommon.Dialogs, BCCommon.LanguageStrings,
-  Data.DB, BCCommon.FileUtils, BCCommon.Messages;
+  Data.DB, BCCommon.FileUtils, BCCommon.Messages, BCCommon.Lib;
 
 var
   FSchemaDocumentForm: TSchemaDocumentForm;
@@ -102,6 +102,8 @@ begin
     { Position }
     Left := ReadInteger('SchemaDocumentPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('SchemaDocumentPosition', 'Top', (Screen.Height - Height) div 2);
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
   finally
     Free;
   end;

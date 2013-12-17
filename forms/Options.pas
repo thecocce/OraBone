@@ -111,7 +111,7 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, BCCommon.StyleUtils, BCCommon.Messages, System.IniFiles, BCCommon.FileUtils;
+  System.Math, BCCommon.StyleUtils, BCCommon.Messages, System.IniFiles, BCCommon.FileUtils, BCCommon.Lib;
 
 const
   CELL_PADDING = 4;
@@ -537,6 +537,8 @@ begin
     { Position }
     Left := ReadInteger('OptionsPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('OptionsPosition', 'Top', (Screen.Height - Height) div 2);
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
     { Tree width }
     OptionsVirtualStringTree.Width := ReadInteger('OptionsSize', 'TreeWidth', OptionsVirtualStringTree.Width);
   finally

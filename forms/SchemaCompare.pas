@@ -78,7 +78,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, Vcl.Themes, BCCommon.StyleUtils, BigIni, BCCommon.FileUtils;
+  DataModule, Vcl.Themes, BCCommon.StyleUtils, BigIni, BCCommon.FileUtils, BCCommon.Lib;
 
 type
   PCompareRec = ^TCompareRec;
@@ -156,7 +156,7 @@ begin
       Result := Result + ' UNION ALL ';
     Result := Result + DM.StringHolder.StringsByName['SchemaCompareViewsSQL'].Text;
   end;
-  
+
   if FunctionsCheckBox.Checked then
   begin
     if Result <> '' then
@@ -575,6 +575,8 @@ begin
     { Position }
     Left := ReadInteger('SchemaComparePosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('SchemaComparePosition', 'Top', (Screen.Height - Height) div 2);
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
   finally
     Free;
   end;

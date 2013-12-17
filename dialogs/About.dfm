@@ -407,7 +407,8 @@ object AboutDialog: TAboutDialog
     Caption = 
       '<a href="http://angusj.com/delphi/">Angus Johnson</a>, <a href="' +
       'http://www.soft-gems.net">Mike Lischke</a>, <a href="http://poor' +
-      'sql.com/">Tao Klerks</a>'
+      'sql.com/">Tao Klerks</a>, <a href="http://robstechcorner.blogspo' +
+      't.fi/">Robert Love</a>'
     TabOrder = 2
     OnLinkClick = LinkClick
   end

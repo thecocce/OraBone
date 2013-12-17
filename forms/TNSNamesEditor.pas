@@ -173,7 +173,7 @@ implementation
 uses
   System.RegularExpressions, Vcl.Themes, BigIni, BCCommon.StyleUtils, OraServices, OraCall,
   BCForms.PrintPreview, SynEditKeyCmds, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.OptionsContainer,
-  BCCommon.FileUtils;
+  BCCommon.FileUtils, BCCommon.Lib;
 
 const
   FORM_CAPTION = 'TNSNames Editor - [%s]';
@@ -199,7 +199,8 @@ begin
     { Position }
     Left := ReadInteger('TNSNamesEditorPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('TNSNamesEditorPosition', 'Top', (Screen.Height - Height) div 2);
-
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
     ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
     ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
     ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;

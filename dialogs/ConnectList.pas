@@ -54,7 +54,8 @@ implementation
 {$R *.dfm}
 
 uses
-  OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils;
+  OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils,
+  BCCommon.Lib;
 
 const
   GRID_COLUMN_USER = 0;
@@ -165,7 +166,8 @@ begin
     { Position }
     Left := ReadInteger('ConnectListPosition', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('ConnectListPosition', 'Top', (Screen.Height - Height) div 2);
-
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
     ReadSectionValues('Connections', Connections);
     for i := 0 to Connections.Count - 1 do
     begin

@@ -1774,6 +1774,8 @@ begin
     { Position }
     Left := ReadInteger('Position', 'Left', (Screen.Width - Width) div 2);
     Top := ReadInteger('Position', 'Top', (Screen.Height - Height) div 2);
+    { Check if the form is outside the workarea }
+    Left := SetFormInsideWorkArea(Left, Width);
     { State }
     State := ReadInteger('Size', 'State', 0);
     case State of
