@@ -4,7 +4,7 @@ object AboutDialog: TAboutDialog
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'About OraBone'
-  ClientHeight = 277
+  ClientHeight = 289
   ClientWidth = 383
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,19 +19,19 @@ object AboutDialog: TAboutDialog
   OnDestroy = FormDestroy
   DesignSize = (
     383
-    277)
+    289)
   PixelsPerInch = 96
   TextHeight = 13
   object ThanksToLabel: TLabel
     Left = 10
-    Top = 144
+    Top = 150
     Width = 47
     Height = 13
     Caption = 'Thanks to'
   end
   object CopyrightLabel: TLabel
     Left = 0
-    Top = 217
+    Top = 224
     Width = 383
     Height = 13
     Alignment = taCenter
@@ -373,8 +373,8 @@ object AboutDialog: TAboutDialog
     end
   end
   object OKButton: TButton
-    Left = 294
-    Top = 238
+    Left = 300
+    Top = 252
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -386,7 +386,7 @@ object AboutDialog: TAboutDialog
   end
   object LinkRow1Label: TLinkLabel
     Left = 18
-    Top = 163
+    Top = 169
     Width = 365
     Height = 17
     AutoSize = False
@@ -400,7 +400,7 @@ object AboutDialog: TAboutDialog
   end
   object LinkRow3Label: TLinkLabel
     Left = 18
-    Top = 195
+    Top = 201
     Width = 381
     Height = 17
     AutoSize = False
@@ -414,7 +414,7 @@ object AboutDialog: TAboutDialog
   end
   object LinkRow2Label: TLinkLabel
     Left = 18
-    Top = 179
+    Top = 185
     Width = 381
     Height = 17
     AutoSize = False
@@ -437,5 +437,16 @@ object AboutDialog: TAboutDialog
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 5
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 252
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Cancel = True
+    Caption = 'Donations'
+    TabOrder = 6
+    OnClick = Button1Click
   end
 end
