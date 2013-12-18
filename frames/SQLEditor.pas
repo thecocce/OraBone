@@ -2881,9 +2881,14 @@ var
   SynEdit: TBCOraSynEdit;
 begin
   Result := '';
-  SynEdit := GetActiveSynEdit;
-  if Assigned(SynEdit) and SynEdit.Modified then
-    Result := 'Modified';
+  if OptionsContainer.AutoSave then
+    Result := LanguageDataModule.GetConstant('AutoSave')
+  else
+  begin
+    SynEdit := GetActiveSynEdit;
+    if Assigned(SynEdit) and SynEdit.Modified then
+      Result := LanguageDataModule.GetConstant('Modified');
+  end;
 end;
 
 procedure TSQLEditorFrame.DecreaseIndent;

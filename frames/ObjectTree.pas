@@ -575,9 +575,9 @@ begin
     try
       { Open queries }
       if PackageSpec then
-        StringList.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
+        SQL.Text := DM.StringHolder.StringsByName['PackageSpecificationSQL'].Text
       else
-        StringList.Text := DM.StringHolder.StringsByName['PackageBodySQL'].Text;
+        SQL.Text := DM.StringHolder.StringsByName['PackageBodySQL'].Text;
       ParamByName('P_OBJECT_NAME').AsWideString := ParentData.NodeText; // FObjectName;
       ParamByName('P_OWNER').AsWideString := FSchemaParam;
       Open;

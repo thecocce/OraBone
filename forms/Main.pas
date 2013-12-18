@@ -592,8 +592,6 @@ begin
     repeat
       if SQLEditorFrame.OutputFrame.CancelSearch then
         Exit;
-      StatusBar.Panels[3].Text := LanguageDataModule.GetConstant('SearchInProgress');
-      Application.ProcessMessages;
       FName := StrPas(sWin32FD.cFileName);
       if (FName <> '.') and (FName <> '..') then
       begin
