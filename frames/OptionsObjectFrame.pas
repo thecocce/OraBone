@@ -4,10 +4,10 @@ interface
 
 uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, BCControls.ComboBox, Vcl.ExtCtrls,
-  BCControls.CheckBox, BCCommon.OptionsContainer;
+  BCControls.CheckBox, BCCommon.OptionsContainer, BCFrames.OptionsFrame;
 
 type
-  TOptionsObjectFrameFrame = class(TFrame)
+  TOptionsObjectFrameFrame = class(TOptionsFrame)
     Panel: TPanel;
     ButtonPanelAlignLabel: TLabel;
     ButtonPanelAlignComboBox: TBCComboBox;
@@ -18,15 +18,34 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
-    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
+    destructor Destroy; override;
+    procedure GetData; override;
+    procedure PutData; override;
   end;
+
+function OptionsObjectFrameFrame(AOwner: TComponent): TOptionsObjectFrameFrame;
 
 implementation
 
 {$R *.dfm}
 
-procedure TOptionsObjectFrameFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
+var
+  FOptionsObjectFrameFrame: TOptionsObjectFrameFrame;
+
+function OptionsObjectFrameFrame(AOwner: TComponent): TOptionsObjectFrameFrame;
+begin
+  if not Assigned(FOptionsObjectFrameFrame) then
+    FOptionsObjectFrameFrame := TOptionsObjectFrameFrame.Create(AOwner);
+  Result := FOptionsObjectFrameFrame;
+end;
+
+destructor TOptionsObjectFrameFrame.Destroy;
+begin
+  inherited;
+  FOptionsObjectFrameFrame := nil;
+end;
+
+procedure TOptionsObjectFrameFrame.PutData;
 begin
   OptionsContainer.ObjectFrameAlign := ButtonPanelAlignComboBox.Text;
   OptionsContainer.ShowObjectCreationAndModificationTimestamp := ShowCreationAndModificationTimestampCheckBox.Checked;
@@ -34,7 +53,7 @@ begin
   OptionsContainer.FilterOnTyping := FilterOnTypingCheckBox.Checked;
 end;
 
-procedure TOptionsObjectFrameFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
+procedure TOptionsObjectFrameFrame.GetData;
 begin
   ButtonPanelAlignComboBox.Text := OptionsContainer.ObjectFrameAlign;
   ShowCreationAndModificationTimestampCheckBox.Checked := OptionsContainer.ShowObjectCreationAndModificationTimestamp;

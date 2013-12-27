@@ -1447,7 +1447,7 @@ begin
   end;
   if Assigned(OraSession) then
     { open Options }
-    if OptionsForm.Execute(OraSession, OptionsContainer) then
+    if OptionsForm.Execute(OraSession) then
     begin
       UpdateMainMenuBar;
       UpdateStatusBar;

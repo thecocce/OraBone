@@ -4,10 +4,10 @@ interface
 
 uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, BCControls.CheckBox, Vcl.ExtCtrls,
-  BCCommon.OptionsContainer;
+  BCCommon.OptionsContainer, BCFrames.OptionsFrame;
 
 type
-  TOptionsOutputTabsFrame = class(TFrame)
+  TOptionsOutputTabsFrame = class(TOptionsFrame)
     Panel: TPanel;
     CloseTabByDblClickCheckBox: TBCCheckBox;
     CloseTabByMiddleClickCheckBox: TBCCheckBox;
@@ -20,15 +20,34 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
-    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
+    destructor Destroy; override;
+    procedure GetData; override;
+    procedure PutData; override;
   end;
+
+function OptionsOutputTabsFrame(AOwner: TComponent): TOptionsOutputTabsFrame;
 
 implementation
 
 {$R *.dfm}
 
-procedure TOptionsOutputTabsFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
+var
+  FOptionsOutputTabsFrame: TOptionsOutputTabsFrame;
+
+function OptionsOutputTabsFrame(AOwner: TComponent): TOptionsOutputTabsFrame;
+begin
+  if not Assigned(FOptionsOutputTabsFrame) then
+    FOptionsOutputTabsFrame := TOptionsOutputTabsFrame.Create(AOwner);
+  Result := FOptionsOutputTabsFrame;
+end;
+
+destructor TOptionsOutputTabsFrame.Destroy;
+begin
+  inherited;
+  FOptionsOutputTabsFrame := nil;
+end;
+
+procedure TOptionsOutputTabsFrame.PutData;
 begin
   OptionsContainer.OutputCloseTabByDblClick := CloseTabByDblClickCheckBox.Checked;
   OptionsContainer.OutputCloseTabByMiddleClick := CloseTabByMiddleClickCheckBox.Checked;
@@ -39,7 +58,7 @@ begin
   OptionsContainer.OutputRightClickSelect := RightClickSelectCheckBox.Checked;
 end;
 
-procedure TOptionsOutputTabsFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
+procedure TOptionsOutputTabsFrame.GetData;
 begin
   CloseTabByDblClickCheckBox.Checked := OptionsContainer.OutputCloseTabByDblClick;
   CloseTabByMiddleClickCheckBox.Checked := OptionsContainer.OutputCloseTabByMiddleClick;

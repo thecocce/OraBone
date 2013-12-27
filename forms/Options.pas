@@ -16,6 +16,7 @@ uses
 type
   POptionsRec = ^TOptionsRec;
   TOptionsRec = record
+    Index: Integer;
     Caption: UnicodeString;
     ImageIndex: Integer;
   end;
@@ -59,7 +60,6 @@ type
     SQLAlignmentsAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure OKButtonActionExecute(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
     procedure OptionsVirtualStringTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
     procedure OptionsVirtualStringTreeGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
@@ -70,38 +70,14 @@ type
     procedure OptionsVirtualStringTreePaintText(Sender: TBaseVirtualTree; const TargetCanvas: TCanvas;
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType);
   private
-    FOptionsConnectionTabsFrame: TOptionsConnectionTabsFrame;
-    FOptionsDateFormatFrame: TOptionsDateFormatFrame;
-    FOptionsDBMSOutputFrame: TOptionsDBMSOutputFrame;
-    FOptionsEditorCompletionProposalFrame: TOptionsEditorCompletionProposalFrame;
-    FOptionsEditorFontFrame: TOptionsEditorFontFrame;
-    FOptionsEditorLeftMarginFrame: TOptionsEditorLeftMarginFrame;
-    FOptionsEditorOptionsFrame: TOptionsEditorOptionsFrame;
-    FOptionsEditorRightMarginFrame: TOptionsEditorRightMarginFrame;
-    FOptionsEditorSearchFrame: TOptionsEditorSearchFrame;
-    FOptionsEditorTabsFrame: TOptionsEditorTabsFrame;
-    FOptionsEditorToolBarFrame: TOptionsEditorToolBarFrame;
-    FOptionsMainMenuFrame: TOptionsMainMenuFrame;
-    FOptionsObjectFrameFrame: TOptionsObjectFrameFrame;
-    FOptionsCompareFrame: TOptionsCompareFrame;
-    FOptionsContainer: TOraBoneOptionsContainer;
-    FOptionsOutputFrame: TOptionsOutputFrame;
-    FOptionsPrintFrame: TOptionsPrintFrame;
-    FOptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame;
-    FOptionsOutputTabsFrame: TOptionsOutputTabsFrame;
-    FOptionsStatusBarFrame: TOptionsStatusBarFrame;
-    FSQLFormatterOptionsWrapper: TSQLFormatterOptionsWrapper;
-    FOptionsTimeFormatFrame: TOptionsTimeFormatFrame;
-    FOptionsSQLSelectFrame: TOptionsSQLSelectFrame;
-    FOptionsSQLAlignmentsFrame: TOptionsSQLAlignmentsFrame;
+    FOraSession: TOraSession;
     procedure CreateTree;
-    procedure GetData;
-    procedure PutData;
     procedure ReadIniFile;
+    procedure SaveSelectedTreeNode;
     procedure SetVisibleFrame;
     procedure WriteIniFile;
   public
-    function Execute(OraSession: TOraSession; EditOptions: TOraBoneOptionsContainer): Boolean;
+    function Execute(OraSession: TOraSession): Boolean;
   end;
 
 function OptionsForm: TOptionsForm;
@@ -131,91 +107,99 @@ end;
 
 procedure TOptionsForm.FormDestroy(Sender: TObject);
 begin
-  FOptionsEditorOptionsFrame.Free;
-  FOptionsEditorFontFrame.Free;
-  FOptionsEditorLeftMarginFrame.Free;
-  FOptionsEditorRightMarginFrame.Free;
-  FOptionsEditorTabsFrame.Free;
-  FOptionsEditorSearchFrame.Free;
-  FOptionsEditorToolBarFrame.Free;
-  FOptionsEditorCompletionProposalFrame.Free;
-  FOptionsMainMenuFrame.Free;
-  FOptionsOutputFrame.Free;
-  FOptionsOutputTabsFrame.Free;
-  FOptionsDBMSOutputFrame.Free;
-  FOptionsSchemaBrowserFrame.Free;
-  FOptionsObjectFrameFrame.Free;
-  FOptionsDateFormatFrame.Free;
-  FOptionsTimeFormatFrame.Free;
-  FOptionsConnectionTabsFrame.Free;
-  FOptionsCompareFrame.Free;
-  FOptionsStatusBarFrame.Free;
-  FOptionsPrintFrame.Free;
-  FOptionsSQLSelectFrame.Free;
-  FOptionsSQLAlignmentsFrame.Free;
-
-  FSQLFormatterOptionsWrapper.Free;
-
   FOptionsForm := nil;
 end;
 
 procedure TOptionsForm.FormShow(Sender: TObject);
 var
+  SelectedItemIndex: Integer;
   Node: PVirtualNode;
+
+  function FindItem(CurrentNode: PVirtualNode; ItemIndex: Integer): PVirtualNode;
+  var
+    Data: POptionsRec;
+  begin
+    Data := OptionsVirtualStringTree.GetNodeData(CurrentNode);
+    while Assigned(CurrentNode) and (Data.Index <> ItemIndex) do
+    begin
+      CurrentNode := OptionsVirtualStringTree.GetNext(CurrentNode);
+      Data := OptionsVirtualStringTree.GetNodeData(CurrentNode);
+    end;
+    Result := CurrentNode;
+  end;
+
 begin
   inherited;
-  Node := OptionsVirtualStringTree.GetFirstSelected;
   CreateTree;
-  OptionsVirtualStringTree.Selected[Node] := True;
+
+  with TIniFile.Create(GetIniFilename) do
+  try
+    SelectedItemIndex := ReadInteger('Options', 'OptionsSelectedItemIndex', 0);
+  finally
+    Free;
+  end;
+  Node := FindItem(OptionsVirtualStringTree.GetFirst, SelectedItemIndex);
+  if Assigned(Node) then
+    OptionsVirtualStringTree.Selected[Node] := True;
   SetVisibleFrame;
 end;
 
 procedure TOptionsForm.CreateTree;
 var
+  i: Integer;
   Data: POptionsRec;
   Node, ChildNode: PVirtualNode;
 begin
   with OptionsVirtualStringTree do
   begin
     Clear;
+    i := 0;
     { Editor }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorAction.ImageIndex;
     Data.Caption := EditorAction.Caption;
     { Font }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorFontAction.ImageIndex;
     Data.Caption := EditorFontAction.Caption;
     { Left Margin }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorLeftMarginAction.ImageIndex;
     Data.Caption := EditorLeftMarginAction.Caption;
     { Right Margin }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorRightMarginAction.ImageIndex;
     Data.Caption := EditorRightMarginAction.Caption;
     { Tabs }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorTabsAction.ImageIndex;
     Data.Caption := EditorTabsAction.Caption;
     { Search }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorSearchAction.ImageIndex;
     Data.Caption := EditorSearchAction.Caption;
     { Completion proposal }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorCompletionProposalAction.ImageIndex;
     Data.Caption := EditorCompletionProposalAction.Caption;
     { Tool bar }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := EditorToolBarAction.ImageIndex;
     Data.Caption := EditorToolBarAction.Caption;
     Node.ChildCount := 7;
@@ -224,11 +208,13 @@ begin
     { Schema Browser }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := SchemaBrowserAction.ImageIndex;
     Data.Caption := SchemaBrowserAction.Caption;
     { Object Frame }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := ObjectFrameAction.ImageIndex;
     Data.Caption := ObjectFrameAction.Caption;
     Node.ChildCount := 1;
@@ -237,11 +223,13 @@ begin
     { Connection }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := ConnectionAction.ImageIndex;
     Data.Caption := ConnectionAction.Caption;
     { Tabs }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := ConnectionTabsAction.ImageIndex;
     Data.Caption := ConnectionTabsAction.Caption;
     Node.ChildCount := 1;
@@ -250,16 +238,19 @@ begin
     { Output }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := OutputAction.ImageIndex;
     Data.Caption := OutputAction.Caption;
     { DBMS }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := DBMSOutputAction.ImageIndex;
     Data.Caption := DBMSOutputAction.Caption;
     { Tabs }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := OutputTabsAction.ImageIndex;
     Data.Caption := OutputTabsAction.Caption;
     Node.ChildCount := 2;
@@ -268,36 +259,43 @@ begin
     { Compare }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := CompareAction.ImageIndex;
     Data.Caption := CompareAction.Caption;
     { Print }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := PrintAction.ImageIndex;
     Data.Caption := PrintAction.Caption;
     { Main menu }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := MainMenuAction.ImageIndex;
     Data.Caption := MainMenuAction.Caption;
     { Status Bar }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := StatusBarAction.ImageIndex;
     Data.Caption := StatusBarAction.Caption;
     { DB Settings }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := DBSettingsAction.ImageIndex;
     Data.Caption := DBSettingsAction.Caption;
     { Date Format }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := DateFormatAction.ImageIndex;
     Data.Caption := DateFormatAction.Caption;
     { Time Format }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := TimeFormatAction.ImageIndex;
     Data.Caption := TimeFormatAction.Caption;
     Node.ChildCount := 2;
@@ -306,16 +304,19 @@ begin
     { SQL Formatter }
     Node := AddChild(nil);
     Data := GetNodeData(Node);
+    Data.Index := PostInc(i);
     Data.ImageIndex := SQLFormatterAction.ImageIndex;
     Data.Caption := SQLFormatterAction.Caption;
     { Select }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := SQLSelectAction.ImageIndex;
     Data.Caption := SQLSelectAction.Caption;
     { Alignments }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
     Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
     Data.Caption := SQLAlignmentsAction.Caption;
     Node.ChildCount := 2;
@@ -325,70 +326,16 @@ begin
   end;
 end;
 
-function TOptionsForm.Execute(OraSession: TOraSession; EditOptions: TOraBoneOptionsContainer): Boolean;
+function TOptionsForm.Execute(OraSession: TOraSession): Boolean;
 begin
-  FOptionsDateFormatFrame.Session := OraSession;
-  FOptionsTimeFormatFrame.Session := OraSession;
+  FOraSession := OraSession;
   ReadIniFile;
-  FSQLFormatterOptionsWrapper.ReadIniFile;
-  if not Assigned(EditOptions) then
-  begin
-    Result:= False;
-    Exit;
-  end;
-  FOptionsContainer := EditOptions;
-  GetData;
-
-  Result:= Showmodal = mrOk;
-
+  SQLFormatterOptionsWrapper.ReadIniFile;
+  Result := Showmodal = mrOk;
   if Result then
-  begin
-    PutData;
-    WriteIniFile;
-    FSQLFormatterOptionsWrapper.WriteIniFile;
-  end;
-end;
-
-procedure TOptionsForm.GetData;
-begin
-  FOptionsEditorOptionsFrame.GetData(FOptionsContainer);
-  FOptionsEditorFontFrame.GetData(FOptionsContainer);
-  FOptionsEditorLeftMarginFrame.GetData(FOptionsContainer);
-  FOptionsEditorRightMarginFrame.GetData(FOptionsContainer);
-  FOptionsEditorSearchFrame.GetData(FOptionsContainer);
-  FOptionsEditorTabsFrame.GetData(FOptionsContainer);
-  FOptionsEditorCompletionProposalFrame.GetData(FOptionsContainer);
-  FOptionsEditorToolBarFrame.GetData(FOptionsContainer);
-  FOptionsConnectionTabsFrame.GetData(FOptionsContainer);
-  FOptionsOutputTabsFrame.GetData(FOptionsContainer);
-  FOptionsCompareFrame.GetData(FOptionsContainer);
-  FOptionsPrintFrame.GetData(FOptionsContainer);
-  FOptionsMainMenuFrame.GetData(FOptionsContainer);
-  FOptionsOutputFrame.GetData(FOptionsContainer);
-  FOptionsDBMSOutputFrame.GetData(FOptionsContainer);
-  FOptionsDateFormatFrame.GetData(FOptionsContainer);
-  FOptionsTimeFormatFrame.GetData(FOptionsContainer);
-  FOptionsSchemaBrowserFrame.GetData(FOptionsContainer);
-  FOptionsObjectFrameFrame.GetData(FOptionsContainer);
-  FOptionsStatusBarFrame.GetData(FOptionsContainer);
-  FOptionsSQLSelectFrame.GetData(FSQLFormatterOptionsWrapper);
-  FOptionsSQLAlignmentsFrame.GetData(FSQLFormatterOptionsWrapper);
-end;
-
-procedure TOptionsForm.OKButtonActionExecute(Sender: TObject);
-begin
-  if FOptionsDateFormatFrame.DateFormatExampleEdit.Font.Color = clRed then
-  begin
-    ShowErrorMessage('Invalid date format.');
-    Exit;
-  end;
-  if FOptionsTimeFormatFrame.TimeFormatExampleEdit.Font.Color = clRed then
-  begin
-    ShowErrorMessage('Invalid time format.');
-    Exit;
-  end;
-
-  ModalResult := mrOk;
+    SQLFormatterOptionsWrapper.WriteIniFile;
+  WriteIniFile;
+  SaveSelectedTreeNode;
 end;
 
 procedure TOptionsForm.OptionsVirtualStringTreeClick(Sender: TObject);
@@ -463,68 +410,54 @@ begin
       ParentIndex := TreeNode.Parent.Index;
     if Level = 2 then
       ParentIndex := TreeNode.Parent.Parent.Index;
-    FOptionsEditorOptionsFrame.Visible := (Level = 0) and (TreeNode.Index = 0);
-    FOptionsEditorFontFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 0);
-    if FOptionsEditorFontFrame.Visible then
-    begin
-      FOptionsContainer.AssignTo(FOptionsEditorFontFrame.SynEdit);
-      FOptionsEditorFontFrame.SynEdit.ActiveLineColor := LightenColor(FOptionsEditorFontFrame.SynEdit.Color, 1 - (10 - FOptionsContainer.ColorBrightness)/10);
-      BCCommon.StyleUtils.UpdateMarginAndColors(FOptionsEditorFontFrame.SynEdit);
-    end;
-    FOptionsEditorLeftMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1);
-    FOptionsEditorRightMarginFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2);
-    FOptionsEditorTabsFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3);
-    FOptionsEditorSearchFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4);
-    FOptionsEditorCompletionProposalFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 5);
-    FOptionsEditorToolBarFrame.Visible := (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 6);
 
-    FOptionsSchemaBrowserFrame.Visible := (Level = 0) and (TreeNode.Index = 1);
-    FOptionsObjectFrameFrame.Visible := (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0);
-
-    FOptionsConnectionTabsFrame.Visible := (ParentIndex = 2) and (Level = 1) and (TreeNode.Index = 0);
-
-    FOptionsOutputFrame.Visible := (Level = 0) and (TreeNode.Index = 3);
-    FOptionsDBMSOutputFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 0);
-    FOptionsOutputTabsFrame.Visible := (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 1);
-
-    FOptionsCompareFrame.Visible := (Level = 0) and (TreeNode.Index = 4);
-    FOptionsPrintFrame.Visible := (Level = 0) and (TreeNode.Index = 5);
-    FOptionsMainMenuFrame.Visible := (Level = 0) and (TreeNode.Index = 6);
-    FOptionsStatusBarFrame.Visible := (Level = 0) and (TreeNode.Index = 7);
-
-    FOptionsDateFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0);
-    FOptionsTimeFormatFrame.Visible := (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1);
-
-    FOptionsSQLSelectFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0);
-    FOptionsSQLAlignmentsFrame.Visible := (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1);
+     { don't set the visibility value with the condition because the frame is created }
+    if (Level = 0) and (TreeNode.Index = 0) then
+      OptionsEditorOptionsFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsEditorFontFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsEditorLeftMarginFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 2) then
+      OptionsEditorRightMarginFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 3) then
+      OptionsEditorTabsFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 4) then
+      OptionsEditorSearchFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 5) then
+      OptionsEditorCompletionProposalFrame(Self).Show;
+    if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 6) then
+      OptionsEditorToolBarFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 1) then
+      OptionsSchemaBrowserFrame(Self).Show;
+    if (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsObjectFrameFrame(Self).Show;
+    if (ParentIndex = 2) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsConnectionTabsFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 3) then
+      OptionsOutputFrame(Self).Show;
+    if (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsDBMSOutputFrame(Self).Show;
+    if (ParentIndex = 3) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsOutputTabsFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 4) then
+      OptionsCompareFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 5) then
+      OptionsPrintFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 6) then
+      OptionsMainMenuFrame(Self).Show;
+    if (Level = 0) and (TreeNode.Index = 7) then
+      OptionsStatusBarFrame(Self).Show;
+    if (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsDateFormatFrame(Self, FOraSession).Show;
+    if (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsTimeFormatFrame(Self, FOraSession).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0) then
+      OptionsSQLSelectFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsSQLAlignmentsFrame(Self).Show;
     //FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
   end;
-end;
-
-procedure TOptionsForm.PutData;
-begin
-  FOptionsEditorOptionsFrame.PutData(FOptionsContainer);
-  FOptionsEditorFontFrame.PutData(FOptionsContainer);
-  FOptionsEditorLeftMarginFrame.PutData(FOptionsContainer);
-  FOptionsEditorRightMarginFrame.PutData(FOptionsContainer);
-  FOptionsEditorSearchFrame.PutData(FOptionsContainer);
-  FOptionsEditorTabsFrame.PutData(FOptionsContainer);
-  FOptionsEditorCompletionProposalFrame.PutData(FOptionsContainer);
-  FOptionsEditorToolBarFrame.PutData(FOptionsContainer);
-  FOptionsConnectionTabsFrame.PutData(FOptionsContainer);
-  FOptionsOutputTabsFrame.PutData(FOptionsContainer);
-  FOptionsCompareFrame.PutData(FOptionsContainer);
-  FOptionsPrintFrame.PutData(FOptionsContainer);
-  FOptionsMainMenuFrame.PutData(FOptionsContainer);
-  FOptionsOutputFrame.PutData(FOptionsContainer);
-  FOptionsDBMSOutputFrame.PutData(FOptionsContainer);
-  FOptionsDateFormatFrame.PutData(FOptionsContainer);
-  FOptionsTimeFormatFrame.PutData(FOptionsContainer);
-  FOptionsSchemaBrowserFrame.PutData(FOptionsContainer);
-  FOptionsObjectFrameFrame.PutData(FOptionsContainer);
-  FOptionsStatusBarFrame.PutData(FOptionsContainer);
-  FOptionsSQLSelectFrame.PutData(FSQLFormatterOptionsWrapper);
-  FOptionsSQLAlignmentsFrame.PutData(FSQLFormatterOptionsWrapper);
 end;
 
 procedure TOptionsForm.ReadIniFile;
@@ -568,52 +501,21 @@ end;
 procedure TOptionsForm.FormCreate(Sender: TObject);
 begin
   OptionsVirtualStringTree.NodeDataSize := SizeOf(TOptionsRec);
-  FOptionsEditorOptionsFrame := TOptionsEditorOptionsFrame.Create(OptionsPanel);
-  FOptionsEditorOptionsFrame.Parent := OptionsPanel;
-  FOptionsEditorFontFrame := TOptionsEditorFontFrame.Create(OptionsPanel);
-  FOptionsEditorFontFrame.Parent := OptionsPanel;
-  FOptionsEditorLeftMarginFrame := TOptionsEditorLeftMarginFrame.Create(OptionsPanel);
-  FOptionsEditorLeftMarginFrame.Parent := OptionsPanel;
-  FOptionsEditorRightMarginFrame := TOptionsEditorRightMarginFrame.Create(OptionsPanel);
-  FOptionsEditorRightMarginFrame.Parent := OptionsPanel;
-  FOptionsEditorSearchFrame := TOptionsEditorSearchFrame.Create(OptionsPanel);
-  FOptionsEditorSearchFrame.Parent := OptionsPanel;
-  FOptionsEditorTabsFrame := TOptionsEditorTabsFrame.Create(OptionsPanel);
-  FOptionsEditorTabsFrame.Parent := OptionsPanel;
-  FOptionsEditorToolBarFrame := TOptionsEditorToolBarFrame.Create(OptionsPanel);
-  FOptionsEditorToolBarFrame.Parent := OptionsPanel;
-  FOptionsEditorCompletionProposalFrame := TOptionsEditorCompletionProposalFrame.Create(OptionsPanel);
-  FOptionsEditorCompletionProposalFrame.Parent := OptionsPanel;
-  FOptionsMainMenuFrame := TOptionsMainMenuFrame.Create(OptionsPanel);
-  FOptionsMainMenuFrame.Parent := OptionsPanel;
-  FOptionsOutputFrame := TOptionsOutputFrame.Create(OptionsPanel);
-  FOptionsOutputFrame.Parent := OptionsPanel;
-  FOptionsOutputTabsFrame := TOptionsOutputTabsFrame.Create(OptionsPanel);
-  FOptionsOutputTabsFrame.Parent := OptionsPanel;
-  FOptionsDBMSOutputFrame := TOptionsDBMSOutputFrame.Create(OptionsPanel);
-  FOptionsDBMSOutputFrame.Parent := OptionsPanel;
-  FOptionsSchemaBrowserFrame := TOptionsSchemaBrowserFrame.Create(OptionsPanel);
-  FOptionsSchemaBrowserFrame.Parent := OptionsPanel;
-  FOptionsObjectFrameFrame := TOptionsObjectFrameFrame.Create(OptionsPanel);
-  FOptionsObjectFrameFrame.Parent := OptionsPanel;
-  FOptionsDateFormatFrame := TOptionsDateFormatFrame.Create(OptionsPanel);
-  FOptionsDateFormatFrame.Parent := OptionsPanel;
-  FOptionsTimeFormatFrame := TOptionsTimeFormatFrame.Create(OptionsPanel);
-  FOptionsTimeFormatFrame.Parent := OptionsPanel;
-  FOptionsConnectionTabsFrame := TOptionsConnectionTabsFrame.Create(OptionsPanel);
-  FOptionsConnectionTabsFrame.Parent := OptionsPanel;
-  FOptionsCompareFrame := TOptionsCompareFrame.Create(OptionsPanel);
-  FOptionsCompareFrame.Parent := OptionsPanel;
-  FOptionsPrintFrame := TOptionsPrintFrame.Create(OptionsPanel);
-  FOptionsPrintFrame.Parent := OptionsPanel;
-  FOptionsStatusBarFrame := TOptionsStatusBarFrame.Create(OptionsPanel);
-  FOptionsStatusBarFrame.Parent := OptionsPanel;
-  FOptionsSQLSelectFrame := TOptionsSQLSelectFrame.Create(OptionsPanel);
-  FOptionsSQLSelectFrame.Parent := OptionsPanel;
-  FOptionsSQLAlignmentsFrame := TOptionsSQLAlignmentsFrame.Create(OptionsPanel);
-  FOptionsSQLAlignmentsFrame.Parent := OptionsPanel;
+end;
 
-  FSQLFormatterOptionsWrapper := TSQLFormatterOptionsWrapper.Create;
+procedure TOptionsForm.SaveSelectedTreeNode;
+var
+  Node: PVirtualNode;
+  Data: POptionsRec;
+begin
+  with TIniFile.Create(GetIniFilename) do
+  try
+    Node := OptionsVirtualStringTree.GetFirstSelected;
+    Data := OptionsVirtualStringTree.GetNodeData(Node);
+    WriteInteger('Options', 'OptionsSelectedItemIndex', Data.Index);
+  finally
+    Free;
+  end;
 end;
 
 end.

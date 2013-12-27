@@ -78,17 +78,19 @@ end;
 procedure TConnectClientDialog.FillDatabaseCombo;
 var
   Enum: TOraServerEnumerator;
+  OracleHome: TOracleHome;
 begin
-  if not LoadedOCI then
+  (*if not LoadedOCI then
   try
     DetectOCI; // to show homes info
   except
     { silence }
-  end;
+  end; *)
   DatabaseComboBox.Clear;
   DatabaseComboBox.Items := Lib.GetServerlist;
   Enum := TOraServerEnumerator.Create;
-  DatabaseComboBox.Hint := Enum.GetTNSFileName;
+  OracleHome := nil;
+  DatabaseComboBox.Hint := Enum.GetTNSFileName(OracleHome);
   Enum.Free;
 end;
 
@@ -96,14 +98,14 @@ procedure TConnectClientDialog.FillHomeCombo;
 var
   i: Integer;
 begin
-  if not LoadedOCI then
+  {if not LoadedOCI then
   try
     DetectOCI; // to show homes info
   except
 
-  end;
+  end;  }
   HomeComboBox.Clear;
-  for i := 0 to Length(OraCall.OracleHomes) - 1 do
+  for i := 0 to OraCall.OracleHomes.Count - 1 do
     HomeComboBox.Items.Add(OraCall.OracleHomes[i].Name)
 end;
 

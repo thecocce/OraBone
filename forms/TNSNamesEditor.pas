@@ -501,15 +501,17 @@ end;
 function GetTNSFileName: string;
 var
   Enum: TOraServerEnumerator;
+  OracleHome: TOracleHome;
 begin
-  if not LoadedOCI then
+  (*if not LoadedOCI then
   try
     DetectOCI; // to show homes info
   except
     { silence }
-  end;
+  end;   *)
   Enum := TOraServerEnumerator.Create;
-  Result := Enum.GetTNSFileName;
+  OracleHome := nil;
+  Result := Enum.GetTNSFileName(OracleHome);
   Enum.Free;
 end;
 

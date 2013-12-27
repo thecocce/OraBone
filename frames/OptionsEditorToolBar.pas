@@ -4,10 +4,10 @@ interface
 
 uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, BCControls.CheckBox,
-  BCCommon.OptionsContainer;
+  BCCommon.OptionsContainer, BCFrames.OptionsFrame;
 
 type
-  TOptionsEditorToolBarFrame = class(TFrame)
+  TOptionsEditorToolbarFrame = class(TOptionsFrame)
     Panel: TPanel;
     StandardCheckBox: TBCCheckBox;
     PrintCheckBox: TBCCheckBox;
@@ -26,15 +26,34 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure GetData(OptionsContainer: TOraBoneOptionsContainer);
-    procedure PutData(OptionsContainer: TOraBoneOptionsContainer);
+    destructor Destroy; override;
+    procedure GetData; override;
+    procedure PutData; override;
   end;
+
+function OptionsEditorToolbarFrame(AOwner: TComponent): TOptionsEditorToolbarFrame;
 
 implementation
 
 {$R *.dfm}
 
-procedure TOptionsEditorToolBarFrame.PutData(OptionsContainer: TOraBoneOptionsContainer);
+var
+  FOptionsEditorToolbarFrame: TOptionsEditorToolbarFrame;
+
+function OptionsEditorToolbarFrame(AOwner: TComponent): TOptionsEditorToolbarFrame;
+begin
+  if not Assigned(FOptionsEditorToolbarFrame) then
+    FOptionsEditorToolbarFrame := TOptionsEditorToolbarFrame.Create(AOwner);
+  Result := FOptionsEditorToolbarFrame;
+end;
+
+destructor TOptionsEditorToolbarFrame.Destroy;
+begin
+  inherited;
+  FOptionsEditorToolbarFrame := nil;
+end;
+
+procedure TOptionsEditorToolbarFrame.PutData;
 begin
   OptionsContainer.ToolBarExecute := ExecuteCheckBox.Checked;
   OptionsContainer.ToolBarTransaction := TransactionCheckBox.Checked;
@@ -51,7 +70,7 @@ begin
   OptionsContainer.ToolBarTools := ToolsCheckBox.Checked;
 end;
 
-procedure TOptionsEditorToolBarFrame.GetData(OptionsContainer: TOraBoneOptionsContainer);
+procedure TOptionsEditorToolbarFrame.GetData;
 begin
   ExecuteCheckBox.Checked := OptionsContainer.ToolBarExecute;
   TransactionCheckBox.Checked := OptionsContainer.ToolBarTransaction;

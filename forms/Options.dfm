@@ -75,6 +75,7 @@ object OptionsForm: TOptionsForm
       Margins.Bottom = 4
       Action = OKButtonAction
       Align = alRight
+      ModalResult = 1
       TabOrder = 0
     end
     object CancelButton: TButton
@@ -159,7 +160,6 @@ object OptionsForm: TOptionsForm
     Top = 46
     object OKButtonAction: TAction
       Caption = '&OK'
-      OnExecute = OKButtonActionExecute
     end
     object EditorAction: TAction
       Caption = 'Editor'
