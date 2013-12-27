@@ -510,8 +510,9 @@ begin
     { silence }
   end;   *)
   Enum := TOraServerEnumerator.Create;
-  OracleHome := nil;
+  OracleHome := TOracleHome.Create(nil);
   Result := Enum.GetTNSFileName(OracleHome);
+  OracleHome.Free;
   Enum.Free;
 end;
 

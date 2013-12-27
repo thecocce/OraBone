@@ -89,8 +89,9 @@ begin
   DatabaseComboBox.Clear;
   DatabaseComboBox.Items := Lib.GetServerlist;
   Enum := TOraServerEnumerator.Create;
-  OracleHome := nil;
+  OracleHome := TOracleHome.Create(nil);
   DatabaseComboBox.Hint := Enum.GetTNSFileName(OracleHome);
+  OracleHome.Free;
   Enum.Free;
 end;
 
