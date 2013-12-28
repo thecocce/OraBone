@@ -9,7 +9,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
     BevelOuter = bvNone
     TabOrder = 0
     object StandardCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 89
       Width = 232
       Height = 21
@@ -24,7 +24,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object PrintCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 111
       Width = 232
       Height = 21
@@ -39,7 +39,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ExecuteCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 0
       Width = 232
       Height = 21
@@ -54,7 +54,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object IndentCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 133
       Width = 232
       Height = 21
@@ -69,7 +69,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object SortCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 155
       Width = 232
       Height = 21
@@ -84,7 +84,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object CaseCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 177
       Width = 232
       Height = 21
@@ -99,7 +99,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object DBMSCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 44
       Width = 232
       Height = 21
@@ -114,7 +114,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object TransactionCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 22
       Width = 232
       Height = 21
@@ -129,7 +129,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ToolsCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 265
       Width = 232
       Height = 21
@@ -144,7 +144,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ModeCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 243
       Width = 232
       Height = 21
@@ -159,7 +159,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object SearchCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 221
       Width = 232
       Height = 21
@@ -174,7 +174,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object CommandCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 199
       Width = 232
       Height = 21
@@ -189,7 +189,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ExplainPlanCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 66
       Width = 232
       Height = 21

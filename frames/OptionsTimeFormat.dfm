@@ -9,7 +9,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
     BevelOuter = bvNone
     TabOrder = 0
     object TimeFormatLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 3
       Width = 59
       Height = 13
@@ -20,7 +20,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Time Format'
     end
     object ExampleLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 29
       Width = 40
       Height = 13
@@ -31,7 +31,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 55
       Width = 294
       Height = 44
@@ -47,7 +47,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHHLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 102
       Width = 14
       Height = 13
@@ -65,7 +65,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHH24Label: TLabel
-      Left = 0
+      Left = 4
       Top = 118
       Width = 26
       Height = 13
@@ -83,7 +83,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatMILabel: TLabel
-      Left = 0
+      Left = 4
       Top = 134
       Width = 12
       Height = 13
@@ -101,7 +101,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatSSLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 150
       Width = 12
       Height = 13

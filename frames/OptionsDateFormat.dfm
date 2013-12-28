@@ -10,7 +10,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
     BevelOuter = bvNone
     TabOrder = 0
     object DateFormatLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 3
       Width = 60
       Height = 13
@@ -21,7 +21,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Date Format'
     end
     object ExampleLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 29
       Width = 40
       Height = 13
@@ -32,7 +32,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 50
       Width = 294
       Height = 41
@@ -48,7 +48,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 95
       Width = 7
       Height = 13
@@ -66,7 +66,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 111
       Width = 14
       Height = 13
@@ -84,7 +84,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 127
       Width = 21
       Height = 13
@@ -102,7 +102,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 143
       Width = 20
       Height = 13
@@ -120,7 +120,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 95
       Width = 91
       Height = 13
@@ -138,7 +138,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 111
       Width = 102
       Height = 13
@@ -156,7 +156,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 127
       Width = 100
       Height = 13
@@ -174,7 +174,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 143
       Width = 252
       Height = 38
@@ -195,7 +195,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 185
       Width = 16
       Height = 13
@@ -213,7 +213,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 201
       Width = 23
       Height = 13
@@ -231,7 +231,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 217
       Width = 36
       Height = 13
@@ -249,7 +249,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 259
       Width = 12
       Height = 13
@@ -267,7 +267,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYLabel: TLabel
-      Left = 0
+      Left = 4
       Top = 275
       Width = 24
       Height = 13
@@ -285,7 +285,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 275
       Width = 73
       Height = 13
@@ -303,7 +303,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 259
       Width = 79
       Height = 13
@@ -321,7 +321,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 217
       Width = 252
       Height = 44
@@ -342,7 +342,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 185
       Width = 145
       Height = 13
@@ -360,7 +360,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTextLabel: TLabel
-      Left = 42
+      Left = 46
       Top = 201
       Width = 138
       Height = 13

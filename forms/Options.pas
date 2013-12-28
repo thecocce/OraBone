@@ -4,7 +4,7 @@ interface
 
 uses
   Vcl.Controls, Vcl.Forms, Vcl.Graphics, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
-  Vcl.Buttons, BCDialogs.Dlg, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
+  Vcl.Buttons, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
   ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, BCFrames.OptionsEditorOptions, BCFrames.OptionsEditorFont,
   BCFrames.OptionsEditorLeftMargin, BCFrames.OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs,
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
@@ -21,7 +21,7 @@ type
     ImageIndex: Integer;
   end;
 
-  TOptionsForm = class(TDialog)
+  TOptionsForm = class(TForm)
     ActionList: TActionList;
     CancelButton: TButton;
     CompareAction: TAction;
@@ -103,7 +103,6 @@ begin
   if not Assigned(FOptionsForm) then
     Application.CreateForm(TOptionsForm, FOptionsForm);
   Result := FOptionsForm;
-  SetStyledFormSize(Result);
 end;
 
 procedure TOptionsForm.FormDestroy(Sender: TObject);

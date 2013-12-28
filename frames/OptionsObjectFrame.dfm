@@ -10,7 +10,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
     BevelOuter = bvNone
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
-      Left = 2
+      Left = 6
       Top = 66
       Width = 87
       Height = 13
@@ -21,7 +21,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Caption = 'Button Panel Align'
     end
     object ButtonPanelAlignComboBox: TBCComboBox
-      Left = 0
+      Left = 4
       Top = 84
       Width = 64
       Height = 21
@@ -35,7 +35,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       DropDownFixedWidth = 0
     end
     object ShowCreationAndModificationTimestampCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 0
       Width = 312
       Height = 21
@@ -48,7 +48,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ReadOnly = False
     end
     object ShowDataSearchPanelCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 20
       Width = 312
       Height = 21
@@ -63,7 +63,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ReadOnly = False
     end
     object FilterOnTypingCheckBox: TBCCheckBox
-      Left = 0
+      Left = 4
       Top = 40
       Width = 312
       Height = 21
