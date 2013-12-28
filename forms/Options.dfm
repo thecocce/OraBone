@@ -152,6 +152,15 @@ object OptionsForm: TOptionsForm
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
+      object ScrollBox: TScrollBox
+        Left = 0
+        Top = 0
+        Width = 297
+        Height = 452
+        Align = alClient
+        BorderStyle = bsNone
+        TabOrder = 0
+      end
     end
   end
   object ActionList: TActionList

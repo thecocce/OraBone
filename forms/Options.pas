@@ -58,6 +58,7 @@ type
     SQLFormatterAction: TAction;
     SQLSelectAction: TAction;
     SQLAlignmentsAction: TAction;
+    ScrollBox: TScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
