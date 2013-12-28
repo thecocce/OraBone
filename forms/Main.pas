@@ -1334,9 +1334,10 @@ procedure TMainForm.ReadIniOptions;
 var
   i, j: Integer;
   Connections, SQLParameters, SQLFilters, SQLSorts: TStrings;
-  ConnectString, SchemaParam {Version,} : string;
+  ConnectString, SchemaParam: string;
 begin
   OptionsContainer.ReadIniFile;
+  SQLFormatterOptionsWrapper.ReadIniFile;
 
   FOnProgress := True;
   Screen.Cursor := crHourglass;
@@ -1709,6 +1710,8 @@ var
 begin
   try
     OptionsContainer.WriteIniFile;
+    SQLFormatterOptionsWrapper.WriteIniFile;
+
     WriteIniFile;
     ApplicationEvents.Free;
 

@@ -111,20 +111,20 @@
         <DCC_DebugInformation>false</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_MinorVer>3</VerInfo_MinorVer>
+        <VerInfo_MinorVer>4</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <DCC_UnitSearchPath>D:\Bonecode XE4\Components\src\SQLParser\dxe4;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.3.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.3.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.4.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.4.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <VerInfo_MinorVer>3</VerInfo_MinorVer>
+        <VerInfo_MinorVer>4</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;D:\Bonecode XE4\Components\src\UniSynEdit\Source;D:\Bonecode XE4\Components\src\SynWeb\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\VirtualTree\Source;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\RADStudioXE4\Win64\Release;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\OmniXML\src;C:\Program Files (x86)\Embarcadero\RAD Studio\11.0\source\EhLib\Common;D:\Bonecode XE4\Components\src\SQLParser\dxe4_64_bit;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.3.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.3.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.4.0.0;InternalName=;LegalCopyright=Copyright © 2010-2013 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.4.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -524,6 +524,11 @@
         <DCCReference Include="..\..\Common\units\IniPersist.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsFrame.pas">
             <Form>OptionsFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLInsert.pas">
+            <Form>OptionsSQLInsertFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

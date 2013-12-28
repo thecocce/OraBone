@@ -11,7 +11,7 @@ uses
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
   BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
-  BCFrames.OptionsSQLAlignments;
+  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -41,7 +41,6 @@ type
     MainMenuAction: TAction;
     ObjectFrameAction: TAction;
     OKButton: TButton;
-    OKButtonAction: TAction;
     OptionsPanel: TPanel;
     OptionsVirtualStringTree: TVirtualStringTree;
     OutputAction: TAction;
@@ -59,6 +58,7 @@ type
     SQLSelectAction: TAction;
     SQLAlignmentsAction: TAction;
     ScrollBox: TScrollBox;
+    SQLInsertAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
@@ -313,13 +313,20 @@ begin
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLSelectAction.ImageIndex;
     Data.Caption := SQLSelectAction.Caption;
+    { Insert }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLInsertAction.ImageIndex;
+    Data.Caption := SQLInsertAction.Caption;
     { Alignments }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
     Data.Caption := SQLAlignmentsAction.Caption;
-    Node.ChildCount := 2;
+
+    Node.ChildCount := 3;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
@@ -330,12 +337,10 @@ function TOptionsForm.Execute(OraSession: TOraSession): Boolean;
 begin
   FOraSession := OraSession;
   ReadIniFile;
-  SQLFormatterOptionsWrapper.ReadIniFile;
   Result := Showmodal = mrOk;
-  if Result then
-    SQLFormatterOptionsWrapper.WriteIniFile;
   WriteIniFile;
   SaveSelectedTreeNode;
+  Free;
 end;
 
 procedure TOptionsForm.OptionsVirtualStringTreeClick(Sender: TObject);
@@ -455,8 +460,9 @@ begin
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0) then
       OptionsSQLSelectFrame(Self).Show;
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsSQLInsertFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 2) then
       OptionsSQLAlignmentsFrame(Self).Show;
-    //FOptionsSQLSelectSubqueryFrame.Visible := (ParentIndex = 9) and (Level = 2) and (TreeNode.Index = 1);
   end;
 end;
 

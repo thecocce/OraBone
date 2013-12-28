@@ -73,8 +73,8 @@ object OptionsForm: TOptionsForm
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Action = OKButtonAction
       Align = alRight
+      Caption = '&OK'
       ModalResult = 1
       TabOrder = 0
     end
@@ -167,9 +167,6 @@ object OptionsForm: TOptionsForm
     Images = ImageList
     Left = 104
     Top = 46
-    object OKButtonAction: TAction
-      Caption = '&OK'
-    end
     object EditorAction: TAction
       Caption = 'Editor'
       ImageIndex = 0
@@ -264,6 +261,9 @@ object OptionsForm: TOptionsForm
     end
     object SQLSelectAction: TAction
       Caption = 'Select'
+    end
+    object SQLInsertAction: TAction
+      Caption = 'Insert'
     end
     object SQLAlignmentsAction: TAction
       Caption = 'Alignments'
