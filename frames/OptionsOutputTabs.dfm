@@ -1,22 +1,17 @@
-object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
-  Left = 0
-  Top = 0
-  Width = 451
-  Height = 302
-  Align = alClient
-  TabOrder = 0
+inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
+  Width = 232
+  Height = 141
   Visible = False
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 451
-    Height = 302
-    Align = alClient
+    Width = 232
+    Height = 141
     BevelOuter = bvNone
     TabOrder = 0
     object CloseTabByDblClickCheckBox: TBCCheckBox
-      Left = 9
-      Top = 6
+      Left = 0
+      Top = 0
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -28,8 +23,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object CloseTabByMiddleClickCheckBox: TBCCheckBox
-      Left = 9
-      Top = 26
+      Left = 0
+      Top = 20
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -41,8 +36,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object DoubleBufferedCheckBox: TBCCheckBox
-      Left = 9
-      Top = 46
+      Left = 0
+      Top = 40
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -56,8 +51,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object MultilineCheckBox: TBCCheckBox
-      Left = 9
-      Top = 66
+      Left = 0
+      Top = 60
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -69,8 +64,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object ShowCloseButtonCheckBox: TBCCheckBox
-      Left = 9
-      Top = 86
+      Left = 0
+      Top = 80
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -82,8 +77,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object ShowImageCheckBox: TBCCheckBox
-      Left = 9
-      Top = 106
+      Left = 0
+      Top = 100
       Width = 218
       Height = 21
       Margins.Left = 4
@@ -95,8 +90,8 @@ object OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       ReadOnly = False
     end
     object RightClickSelectCheckBox: TBCCheckBox
-      Left = 9
-      Top = 126
+      Left = 0
+      Top = 120
       Width = 218
       Height = 21
       Margins.Left = 4

@@ -1,22 +1,17 @@
-object OptionsDateFormatFrame: TOptionsDateFormatFrame
-  Left = 0
-  Top = 0
-  Width = 451
-  Height = 302
-  Align = alClient
-  TabOrder = 0
+inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
+  Width = 294
+  Height = 288
   Visible = False
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 451
-    Height = 302
-    Align = alClient
+    Width = 294
+    Height = 288
     BevelOuter = bvNone
     TabOrder = 0
     object DateFormatLabel: TLabel
-      Left = 7
-      Top = 9
+      Left = 0
+      Top = 3
       Width = 60
       Height = 13
       Margins.Left = 4
@@ -26,8 +21,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Date Format'
     end
     object ExampleLabel: TLabel
-      Left = 7
-      Top = 35
+      Left = 0
+      Top = 29
       Width = 40
       Height = 13
       Margins.Left = 4
@@ -37,8 +32,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 7
-      Top = 56
+      Left = 0
+      Top = 50
       Width = 294
       Height = 41
       Margins.Left = 4
@@ -53,8 +48,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDLabel: TLabel
-      Left = 7
-      Top = 101
+      Left = 0
+      Top = 95
       Width = 7
       Height = 13
       Margins.Left = 4
@@ -71,8 +66,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDLabel: TLabel
-      Left = 7
-      Top = 117
+      Left = 0
+      Top = 111
       Width = 14
       Height = 13
       Margins.Left = 4
@@ -89,8 +84,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDLabel: TLabel
-      Left = 7
-      Top = 133
+      Left = 0
+      Top = 127
       Width = 21
       Height = 13
       Margins.Left = 4
@@ -107,8 +102,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYLabel: TLabel
-      Left = 7
-      Top = 149
+      Left = 0
+      Top = 143
       Width = 20
       Height = 13
       Margins.Left = 4
@@ -125,8 +120,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDTextLabel: TLabel
-      Left = 49
-      Top = 101
+      Left = 42
+      Top = 95
       Width = 91
       Height = 13
       Margins.Left = 4
@@ -143,8 +138,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDTextLabel: TLabel
-      Left = 49
-      Top = 117
+      Left = 42
+      Top = 111
       Width = 102
       Height = 13
       Margins.Left = 4
@@ -161,8 +156,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDTextLabel: TLabel
-      Left = 49
-      Top = 133
+      Left = 42
+      Top = 127
       Width = 100
       Height = 13
       Margins.Left = 4
@@ -179,8 +174,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYTextLabel: TLabel
-      Left = 49
-      Top = 149
+      Left = 42
+      Top = 143
       Width = 252
       Height = 38
       Margins.Left = 4
@@ -200,8 +195,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMLabel: TLabel
-      Left = 7
-      Top = 191
+      Left = 0
+      Top = 185
       Width = 16
       Height = 13
       Margins.Left = 4
@@ -218,8 +213,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONLabel: TLabel
-      Left = 7
-      Top = 207
+      Left = 0
+      Top = 201
       Width = 23
       Height = 13
       Margins.Left = 4
@@ -236,8 +231,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHLabel: TLabel
-      Left = 7
-      Top = 223
+      Left = 0
+      Top = 217
       Width = 36
       Height = 13
       Margins.Left = 4
@@ -254,8 +249,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYLabel: TLabel
-      Left = 7
-      Top = 265
+      Left = 0
+      Top = 259
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -272,8 +267,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYLabel: TLabel
-      Left = 7
-      Top = 281
+      Left = 0
+      Top = 275
       Width = 24
       Height = 13
       Margins.Left = 4
@@ -290,8 +285,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYTextLabel: TLabel
-      Left = 49
-      Top = 281
+      Left = 42
+      Top = 275
       Width = 73
       Height = 13
       Margins.Left = 4
@@ -308,8 +303,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYTextLabel: TLabel
-      Left = 49
-      Top = 265
+      Left = 42
+      Top = 259
       Width = 79
       Height = 13
       Margins.Left = 4
@@ -326,8 +321,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHTextLabel: TLabel
-      Left = 49
-      Top = 223
+      Left = 42
+      Top = 217
       Width = 252
       Height = 44
       Margins.Left = 4
@@ -347,8 +342,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMTextLabel: TLabel
-      Left = 49
-      Top = 191
+      Left = 42
+      Top = 185
       Width = 145
       Height = 13
       Margins.Left = 4
@@ -365,8 +360,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTextLabel: TLabel
-      Left = 49
-      Top = 207
+      Left = 42
+      Top = 201
       Width = 138
       Height = 13
       Margins.Left = 4
@@ -383,8 +378,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatExampleEdit: TBCEdit
-      Left = 80
-      Top = 32
+      Left = 73
+      Top = 26
       Width = 221
       Height = 21
       Margins.Left = 4
@@ -404,8 +399,8 @@ object OptionsDateFormatFrame: TOptionsDateFormatFrame
       NumbersAllowNegative = False
     end
     object DateFormatEdit: TBCEdit
-      Left = 80
-      Top = 6
+      Left = 73
+      Top = 0
       Width = 221
       Height = 21
       Margins.Left = 4

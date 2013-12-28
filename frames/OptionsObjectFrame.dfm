@@ -1,22 +1,17 @@
-object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
-  Left = 0
-  Top = 0
-  Width = 451
-  Height = 302
-  Align = alClient
-  TabOrder = 0
+inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
+  Width = 312
+  Height = 105
   Visible = False
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 451
-    Height = 302
-    Align = alClient
+    Width = 312
+    Height = 105
     BevelOuter = bvNone
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
-      Left = 11
-      Top = 72
+      Left = 2
+      Top = 66
       Width = 87
       Height = 13
       Margins.Left = 4
@@ -26,8 +21,8 @@ object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Caption = 'Button Panel Align'
     end
     object ButtonPanelAlignComboBox: TBCComboBox
-      Left = 9
-      Top = 90
+      Left = 0
+      Top = 84
       Width = 64
       Height = 21
       TabOrder = 3
@@ -40,8 +35,8 @@ object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       DropDownFixedWidth = 0
     end
     object ShowCreationAndModificationTimestampCheckBox: TBCCheckBox
-      Left = 9
-      Top = 6
+      Left = 0
+      Top = 0
       Width = 312
       Height = 21
       Margins.Left = 4
@@ -53,8 +48,8 @@ object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ReadOnly = False
     end
     object ShowDataSearchPanelCheckBox: TBCCheckBox
-      Left = 9
-      Top = 26
+      Left = 0
+      Top = 20
       Width = 312
       Height = 21
       Margins.Left = 4
@@ -68,8 +63,8 @@ object OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ReadOnly = False
     end
     object FilterOnTypingCheckBox: TBCCheckBox
-      Left = 9
-      Top = 46
+      Left = 0
+      Top = 40
       Width = 312
       Height = 21
       Margins.Left = 4

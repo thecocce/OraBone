@@ -1,21 +1,16 @@
-object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
-  Left = 0
-  Top = 0
-  Width = 451
-  Height = 302
-  Align = alClient
-  TabOrder = 0
+inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
+  Width = 294
+  Height = 163
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 451
-    Height = 302
-    Align = alClient
+    Width = 294
+    Height = 163
     BevelOuter = bvNone
     TabOrder = 0
     object TimeFormatLabel: TLabel
-      Left = 7
-      Top = 9
+      Left = 0
+      Top = 3
       Width = 59
       Height = 13
       Margins.Left = 4
@@ -25,8 +20,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Time Format'
     end
     object ExampleLabel: TLabel
-      Left = 7
-      Top = 35
+      Left = 0
+      Top = 29
       Width = 40
       Height = 13
       Margins.Left = 4
@@ -36,8 +31,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 7
-      Top = 61
+      Left = 0
+      Top = 55
       Width = 294
       Height = 44
       Margins.Left = 4
@@ -52,8 +47,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHHLabel: TLabel
-      Left = 7
-      Top = 108
+      Left = 0
+      Top = 102
       Width = 14
       Height = 13
       Margins.Left = 4
@@ -70,8 +65,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHH24Label: TLabel
-      Left = 7
-      Top = 124
+      Left = 0
+      Top = 118
       Width = 26
       Height = 13
       Margins.Left = 4
@@ -88,8 +83,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatMILabel: TLabel
-      Left = 7
-      Top = 140
+      Left = 0
+      Top = 134
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -106,8 +101,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatSSLabel: TLabel
-      Left = 7
-      Top = 156
+      Left = 0
+      Top = 150
       Width = 12
       Height = 13
       Margins.Left = 4
@@ -124,8 +119,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatSSTextLabel: TLabel
-      Left = 49
-      Top = 156
+      Left = 42
+      Top = 150
       Width = 72
       Height = 13
       Margins.Left = 4
@@ -142,8 +137,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatMITextLabel: TLabel
-      Left = 49
-      Top = 140
+      Left = 42
+      Top = 134
       Width = 69
       Height = 13
       Margins.Left = 4
@@ -160,8 +155,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHH24TextLabel: TLabel
-      Left = 49
-      Top = 124
+      Left = 42
+      Top = 118
       Width = 94
       Height = 13
       Margins.Left = 4
@@ -178,8 +173,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHHTextLabel: TLabel
-      Left = 49
-      Top = 108
+      Left = 42
+      Top = 102
       Width = 94
       Height = 13
       Margins.Left = 4
@@ -196,8 +191,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatExampleEdit: TBCEdit
-      Left = 80
-      Top = 32
+      Left = 73
+      Top = 26
       Width = 221
       Height = 21
       Margins.Left = 4
@@ -217,8 +212,8 @@ object OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       NumbersAllowNegative = False
     end
     object TimeFormatEdit: TBCEdit
-      Left = 80
-      Top = 6
+      Left = 73
+      Top = 0
       Width = 221
       Height = 21
       Margins.Left = 4

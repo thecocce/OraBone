@@ -1,20 +1,16 @@
-object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
-  Left = 0
-  Top = 0
-  Width = 343
-  Height = 322
-  TabOrder = 0
+inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
+  Width = 232
+  Height = 286
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 343
-    Height = 322
-    Align = alClient
+    Width = 232
+    Height = 286
     BevelOuter = bvNone
     TabOrder = 0
     object StandardCheckBox: TBCCheckBox
-      Left = 9
-      Top = 94
+      Left = 0
+      Top = 89
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -28,8 +24,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object PrintCheckBox: TBCCheckBox
-      Left = 9
-      Top = 116
+      Left = 0
+      Top = 111
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -43,8 +39,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ExecuteCheckBox: TBCCheckBox
-      Left = 9
-      Top = 5
+      Left = 0
+      Top = 0
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -58,8 +54,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object IndentCheckBox: TBCCheckBox
-      Left = 9
-      Top = 138
+      Left = 0
+      Top = 133
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -73,8 +69,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object SortCheckBox: TBCCheckBox
-      Left = 9
-      Top = 160
+      Left = 0
+      Top = 155
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -88,8 +84,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object CaseCheckBox: TBCCheckBox
-      Left = 9
-      Top = 182
+      Left = 0
+      Top = 177
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -103,8 +99,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object DBMSCheckBox: TBCCheckBox
-      Left = 9
-      Top = 49
+      Left = 0
+      Top = 44
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -118,8 +114,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object TransactionCheckBox: TBCCheckBox
-      Left = 9
-      Top = 27
+      Left = 0
+      Top = 22
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -133,8 +129,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ToolsCheckBox: TBCCheckBox
-      Left = 9
-      Top = 270
+      Left = 0
+      Top = 265
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -148,8 +144,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ModeCheckBox: TBCCheckBox
-      Left = 9
-      Top = 248
+      Left = 0
+      Top = 243
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -163,8 +159,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object SearchCheckBox: TBCCheckBox
-      Left = 9
-      Top = 226
+      Left = 0
+      Top = 221
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -178,8 +174,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object CommandCheckBox: TBCCheckBox
-      Left = 9
-      Top = 204
+      Left = 0
+      Top = 199
       Width = 232
       Height = 21
       Margins.Left = 4
@@ -193,8 +189,8 @@ object OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       ReadOnly = False
     end
     object ExplainPlanCheckBox: TBCCheckBox
-      Left = 9
-      Top = 71
+      Left = 0
+      Top = 66
       Width = 232
       Height = 21
       Margins.Left = 4

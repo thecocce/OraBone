@@ -1,22 +1,17 @@
-object OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
-  Left = 0
-  Top = 0
-  Width = 451
-  Height = 302
-  Align = alClient
-  TabOrder = 0
+inherited OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
+  Width = 150
+  Height = 39
   Visible = False
   object Panel: TPanel
     Left = 0
     Top = 0
-    Width = 451
-    Height = 302
-    Align = alClient
+    Width = 150
+    Height = 39
     BevelOuter = bvNone
     TabOrder = 0
     object PollingIntervalLabel: TLabel
-      Left = 9
-      Top = 7
+      Left = 7
+      Top = 0
       Width = 119
       Height = 13
       Margins.Left = 4
@@ -26,8 +21,8 @@ object OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
       Caption = 'Polling interval: 1 second'
     end
     object PollingIntervalTrackBar: TTrackBar
-      Left = 2
-      Top = 19
+      Left = 0
+      Top = 12
       Width = 150
       Height = 27
       Min = 1
