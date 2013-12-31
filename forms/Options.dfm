@@ -265,6 +265,9 @@ object OptionsForm: TOptionsForm
     object SQLInsertAction: TAction
       Caption = 'Insert'
     end
+    object SQLUpdateAction: TAction
+      Caption = 'Update'
+    end
     object SQLAlignmentsAction: TAction
       Caption = 'Alignments'
     end

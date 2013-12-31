@@ -11,7 +11,7 @@ uses
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
   BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
-  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert;
+  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -59,6 +59,7 @@ type
     SQLAlignmentsAction: TAction;
     ScrollBox: TScrollBox;
     SQLInsertAction: TAction;
+    SQLUpdateAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
@@ -319,6 +320,12 @@ begin
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLInsertAction.ImageIndex;
     Data.Caption := SQLInsertAction.Caption;
+    { Update }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLUpdateAction.ImageIndex;
+    Data.Caption := SQLUpdateAction.Caption;
     { Alignments }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
@@ -326,7 +333,7 @@ begin
     Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
     Data.Caption := SQLAlignmentsAction.Caption;
 
-    Node.ChildCount := 3;
+    Node.ChildCount := 4;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;
@@ -462,6 +469,8 @@ begin
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
       OptionsSQLInsertFrame(Self).Show;
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 2) then
+      OptionsSQLUpdateFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 3) then
       OptionsSQLAlignmentsFrame(Self).Show;
   end;
 end;
