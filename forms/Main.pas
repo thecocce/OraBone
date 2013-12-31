@@ -270,6 +270,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    FNoIni: Boolean;
     FConnecting: Boolean;
     FOnProgress: Boolean;
     FOnStartUp: Boolean;
@@ -1707,7 +1708,21 @@ end;
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i, j: Integer;
+  SQLEditorFrame: TSQLEditorFrame;
 begin
+  { close files search if processing it }
+  for i := 0 to PageControl.PageCount - 1 do
+  begin
+    if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
+    begin
+      SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
+      if Assigned(SQLEditorFrame) then
+        if SQLEditorFrame.OutputFrame.ProcessingTabSheet then
+          SQLEditorFrame.OutputFrame.CloseTabSheet;
+    end
+  end;
+  if FNoIni then
+    Exit;
   try
     OptionsContainer.WriteIniFile;
     SQLFormatterOptionsWrapper.WriteIniFile;
@@ -1722,7 +1737,7 @@ begin
       CloseTab(False);
     end;
   except
-    { silent }
+    { silent exception, connection might have lost and we are closing, no need to inform about it }
   end;
   Action := caFree;
 end;
@@ -1793,6 +1808,7 @@ procedure TMainForm.Formshow(Sender: TObject);
 begin
   if FOnStartUp then
   begin
+    FNoIni := (ParamCount > 0) and (ParamStr(1) = PARAM_NO_INI);
     ReadIniOptions;
     CreateStyleMenu;
     CreateFileReopenList;
