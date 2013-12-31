@@ -272,7 +272,6 @@ begin
   if not CheckFields then
     Exit;
 
-
   StringList := TStringList.Create;
   // jos SelectedRowsOnlyCheckBox.Checked, niin muodostetaan rivit gridiltä
   // muuten OraQuery (fetch all)

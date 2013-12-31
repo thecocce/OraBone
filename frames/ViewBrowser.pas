@@ -835,7 +835,7 @@ procedure TViewBrowserFrame.FilterActionExecute(Sender: TObject);
 var
   Columns: TStringList;
 begin
-  if Self.Visible = False then
+  if not Visible then
     Exit;
   if ViewPageControl.ActivePage <> DataTabSheet then
     Exit;
@@ -890,10 +890,7 @@ begin
   if ViewPageControl.ActivePage = DataTabSheet then
   begin
     if Assigned(FDataQuery) and not Refresh then
-    begin
-      Result := FDataQuery;
-      Exit;
-    end;
+      Exit(FDataQuery);
     if Assigned(FDataQuery) then
     begin
       FDataQuery.Free;

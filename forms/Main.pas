@@ -2157,8 +2157,7 @@ begin
        (Trim(PageControl.Pages[i].Caption) = FormattedSchema) then
     begin
       PageControl.ActivePage := PageControl.Pages[i];
-      Result := TSQLEditorFrame(PageControl.ActivePage.Components[0]);
-      Exit;
+      Exit(TSQLEditorFrame(PageControl.ActivePage.Components[0]));
     end;
 
   SchemaBrowserFrame := nil;
@@ -2171,8 +2170,7 @@ begin
   if not Assigned(SchemaBrowserFrame) then
   begin
     ShowMessage(Format('Connection for the schema ''%s'' not found.', [Schema]));
-    Result := nil;
-    Exit;
+    Exit(nil);
   end
   else
   begin

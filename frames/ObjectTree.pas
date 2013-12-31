@@ -1643,7 +1643,7 @@ begin
     GetWindowText(FEdit.Handle, Buffer, 255);
     S := Buffer;
 
-    if (Length(S) = 0) or (StrContains('\*?/="<>|:,;+^', S)) then
+    if (Length(S) = 0) or (StrContainsChar('\*?/="<>|:,;+^', S)) then
     begin
       MessageBeep;
       if Length(S) > 0 then

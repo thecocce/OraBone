@@ -212,6 +212,9 @@ type
     ExecuteCurrentToolButton: TToolButton;
     SearchClearAction: TAction;
     GotoLineClearAction: TAction;
+    AfterRegularExpressionPanel: TPanel;
+    WildCardCheckBox: TBCCheckBox;
+    WildCardLabel: TLabel;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -1571,7 +1574,7 @@ begin
   if RegularExpressionCheckBox.Checked then
     SynEdit.SearchEngine := SynEditRegexSearch
   else
-  if (Pos('*', SearchForEdit.Text) <> 0) or (Pos('?', SearchForEdit.Text) <> 0) then
+  if WildCardCheckBox.Checked then
     SynEdit.SearchEngine := SynEditWildCardSearch
   else
     SynEdit.SearchEngine := SynEditSearch;
@@ -1580,7 +1583,8 @@ begin
   try
     if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
     begin
-      MessageBeep;
+      if OptionsContainer.BeepIfSearchStringNotFound then
+        MessageBeep;
       SynEdit.BlockBegin := SynEdit.BlockEnd;
       SynEdit.CaretXY := SynEdit.BlockBegin;
       if OptionsContainer.ShowSearchStringNotFound then
@@ -1632,7 +1636,8 @@ begin
 
   if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
   begin
-    MessageBeep;
+    if OptionsContainer.BeepIfSearchStringNotFound then
+      MessageBeep;
     SynEdit.BlockBegin := SynEdit.BlockEnd;
     SynEdit.CaretXY := SynEdit.BlockBegin;
     if (SynEdit.CaretX = 1) and (SynEdit.CaretY = 1) then

@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 302
+  Width = 807
+  Height = 348
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -10,8 +10,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 76
-    Width = 451
+    Top = 122
+    Width = 807
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -20,7 +20,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 451
+    Width = 807
     Height = 21
     Hint = ' '
     Align = alTop
@@ -32,7 +32,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 337
       Top = 0
       Width = 70
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
@@ -41,7 +41,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 434
       Top = 0
       Width = 89
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
@@ -50,9 +50,18 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 550
       Top = 0
       Width = 92
-      Height = 13
+      Height = 21
       Align = alLeft
       Caption = 'Regular Expression'
+      Layout = tlCenter
+    end
+    object WildCardLabel: TLabel
+      Left = 669
+      Top = 0
+      Width = 46
+      Height = 21
+      Align = alLeft
+      Caption = 'Wild Card'
       Layout = tlCenter
     end
     object SearchPanel2: TPanel
@@ -71,7 +80,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 13
+        Height = 18
         Align = alLeft
         Caption = 'Search for'
       end
@@ -376,12 +385,30 @@ object SQLEditorFrame: TSQLEditorFrame
       TabOrder = 9
       ReadOnly = False
     end
+    object AfterRegularExpressionPanel: TPanel
+      Left = 642
+      Top = 0
+      Width = 8
+      Height = 21
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 10
+    end
+    object WildCardCheckBox: TBCCheckBox
+      Left = 650
+      Top = 0
+      Width = 19
+      Height = 21
+      Align = alLeft
+      TabOrder = 11
+      ReadOnly = False
+    end
   end
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 451
-    Height = 7
+    Width = 807
+    Height = 53
     Align = alClient
     BevelOuter = bvNone
     UseDockManager = False
@@ -390,8 +417,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 720
-      Height = 198
+      Width = 807
+      Height = 51
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -415,8 +442,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 79
-    Width = 451
+    Top = 125
+    Width = 807
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -428,7 +455,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 451
+    Width = 807
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1017,8 +1044,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 51
-    Width = 451
+    Top = 97
+    Width = 807
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1117,7 +1144,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 13
+        Height = 20
         Align = alLeft
         Caption = 'Go to Line'
       end

@@ -70,7 +70,6 @@ procedure SetGridColumnWidths(Grid: TBCDBGrid; OnlyVisibleColumns: Boolean = Fal
 procedure GridDrawStringDataCell(Sender: TObject; const Rect: TRect; Field: TField);
 function FormatServer(Server: string): string;
 function FormatSchema(Schema: string): string;
-function StrContains(Str1, Str2: string): Boolean;
 function GetAlterConstraintSQL(SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
 procedure AlterConstraint(OraSession: TOraSession; SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean);
 procedure AlterSelectedConstraints(OraSession: TOraSession; SchemaParam: string; TableName: string; Grid: TBCDBGrid; EnableConstraint: Boolean);
@@ -360,19 +359,6 @@ begin
   Result := Copy(Schema, 0, Pos('@', Schema));
   s := Copy(Schema, Pos('@', Schema) + 1, Length(Schema));
   Result := Result + FormatServer(s);
-end;
-
-function StrContains(Str1, Str2: string): Boolean;
-var
-  i: Integer;
-begin
-  for i := 1 to Length(Str1) do
-    if Pos(Str1[i], Str2) <> 0 then
-    begin
-      Result := True;
-      Exit;
-    end;
-  Result := False;
 end;
 
 function GetAlterConstraintSQL(SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
