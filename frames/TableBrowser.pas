@@ -8,7 +8,7 @@ uses
   Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, Vcl.Menus, Vcl.StdCtrls, BCControls.PopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.StdStyleActnCtrls, BCControls.ImageList, BCControls.ToolBar, BCControls.DBGrid, Data.DB, System.Actions,
-  ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhGrouping, DBGridEhToolCtrls;
+  ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhGrouping, DBGridEhToolCtrls, Vcl.Grids, Vcl.DBGrids;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -446,7 +446,7 @@ begin
   FSession := OraSession;
   for i := 0 to ComponentCount - 1 do
     if Components[i] is TOraQuery then
-      TOraQuery(Components[i]).Session := FSession;
+      (Components[i] as TOraQuery).Session := FSession;
 end;
 
 procedure TTableBrowserFrame.SetSortMarkers(OrderSQL: string);
@@ -1844,19 +1844,16 @@ begin
     CreationAndModificationTimestampLabel.Caption := '';
     if OptionsContainer.ShowObjectCreationAndModificationTimestamp then
       CreationAndModificationTimestampLabel.Caption := GetCreationAndModificationTimestamp(FSession, FSchemaParam, FObjectName);
-    Result := ColumnsQuery
+    Exit(ColumnsQuery)
   end
   else
   if TablePageControl.ActivePage = SourceTabSheet then
-    Result := SourceQuery
+    Exit(SourceQuery)
   else
   if TablePageControl.ActivePage = DataTabSheet then
   begin
     if Assigned(FDataQuery) and not Refresh then
-    begin
-      Result := FDataQuery;
-      Exit;
-    end;
+      Exit(FDataQuery);
     if Assigned(FDataQuery) then
     begin
       FDataQuery.Free;
@@ -1885,14 +1882,14 @@ begin
     DataDataSource.DataSet := FDataQuery;
     FQuickSort := '';
 
-    Result := FDataQuery
+    Exit(FDataQuery)
   end
   else
   if TablePageControl.ActivePage = ConstraintsTabSheet then
-    Result := ConstraintsQuery
+    Exit(ConstraintsQuery)
   else
   if TablePageControl.ActivePage = TriggersTabSheet then
-    Result := TriggersQuery
+    Exit(TriggersQuery)
   else
   if TablePageControl.ActivePage = IndexesTabSheet then
   begin
@@ -1918,23 +1915,23 @@ begin
       IndexesQuery.SQL.Clear;
       IndexesQuery.SQL.Add(s);
     end;
-    Result := IndexesQuery
+    Exit(IndexesQuery)
   end
   else
   if TablePageControl.ActivePage = GrantsTabSheet then
-    Result := GrantsQuery
+    Exit(GrantsQuery)
   else
   if TablePageControl.ActivePage = SynonymsTabSheet then
-    Result := SynonymsQuery
+    Exit(SynonymsQuery)
   else
   if TablePageControl.ActivePage = ReferencedByTabSheet then
-    Result := ReferencedByQuery
+    Exit(ReferencedByQuery)
   else
   if TablePageControl.ActivePage = ReferencesTabSheet then
-    Result := ReferencesQuery
+    Exit(ReferencesQuery)
   else
   if TablePageControl.ActivePage = DependenciesTabSheet then
-    Result := DependenciesQuery
+    Exit(DependenciesQuery)
 end;
 
 procedure TTableBrowserFrame.SaveToFileActionExecute(Sender: TObject);
