@@ -2114,6 +2114,7 @@ begin
               DialogResult := AskYesOrNoAll(Format(LanguageDataModule.GetYesOrNoMessage('DocumentTimeChanged'), [SynEdit.DocumentName]));
             if DialogResult in [mrYes, mrYesToAll] then
               Refresh(i);
+            PageControl.TabClosed := True; { just to avoid begin drag }
           end
           else
           begin
