@@ -37,7 +37,7 @@ object AboutDialog: TAboutDialog
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    Caption = 'Copyright '#169' 2010-2013 Lasse Rautiainen. All Rights Reserved.'
+    Caption = 'Copyright '#169' 2010-2014 Lasse Rautiainen. All Rights Reserved.'
   end
   object TopPanel: TPanel
     Left = -10
