@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, ObjectTree, Vcl.ExtCtrls, JvExExtCtrls, JvSplitter, Vcl.ComCtrls, FuncProcBrowser, PackageBrowser,
   TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser, DBLinkBrowser, RecycleBinBrowser,
   UserBrowser, DBAccess, Ora, Vcl.Menus, Vcl.ActnList, BCControls.PopupMenu, VirtualTrees,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions, BCCommon.Images;
 
 type
   TSchemaBrowserFrame = class(TFrame)
@@ -939,7 +939,7 @@ begin
       begin
         MenuItem := TMenuItem.Create(PopupMenu);
         MenuItem.Action := ChangeUserPasswordAction;
-        MenuItem.ImageIndex := IMG_IDX_CHANGE_PASSWORD;
+        MenuItem.ImageIndex := IMG_IDX_KEY;
         MenuItem.Caption := Format(CAPTION_CHANGE_PASSWORD, [ObjectText]);
         PopupMenu.Items.Add(MenuItem);
       end;

@@ -469,7 +469,6 @@ object SQLEditorFrame: TSQLEditorFrame
     DoubleBuffered = False
     ParentColor = True
     ParentDoubleBuffered = False
-    PopupMenu = ToolbarPopupMenu
     TabOrder = 3
     object ExecuteToolbarPanel: TPanel
       Left = 0
@@ -1671,7 +1670,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 378
     Top = 106
     Bitmap = {
-      494C010105000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1947,7 +1946,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A000D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2350,125 +2349,13 @@ object SQLEditorFrame: TSQLEditorFrame
       8000800080008000FFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  object ToolbarPopupMenu: TBCPopupMenu
-    Left = 266
-    Top = 118
-    object NewOpen1: TMenuItem
-      Action = PopupMenuExecuteAction
-    end
-    object Print1: TMenuItem
-      Action = PopupMenuTransactionAction
-    end
-    object Directory1: TMenuItem
-      Action = PopupMenuDBMSAction
-    end
-    object Indent1: TMenuItem
-      Action = PopupMenuExplainPlanAction
-    end
-    object Sort1: TMenuItem
-      Action = PopupMenuStandardAction
-    end
-    object Case1: TMenuItem
-      Action = PopupMenuPrintAction
-    end
-    object UndoandRedo1: TMenuItem
-      Action = PopupMenuIndentAction
-    end
-    object Search1: TMenuItem
-      Action = PopupMenuSortAction
-    end
-    object Mode1: TMenuItem
-      Action = PopupMenuCaseAction
-    end
-    object ools1: TMenuItem
-      Action = PopupMenuCommandAction
-    end
-    object Macro1: TMenuItem
-      Action = PopupMenuSearchAction
-    end
-    object Document1: TMenuItem
-      Action = PopupMenuModeAction
-    end
-    object ools2: TMenuItem
-      Action = PopupMenuToolsAction
-    end
-  end
-  object ToolbarPopupMenuActionList: TActionList
-    Left = 358
-    Top = 62
-    object PopupMenuExecuteAction: TAction
-      Caption = 'Execute'
-      Checked = True
-      OnExecute = PopupMenuExecuteActionExecute
-    end
-    object PopupMenuTransactionAction: TAction
-      Caption = 'Transaction'
-      Checked = True
-      OnExecute = PopupMenuTransactionActionExecute
-    end
-    object PopupMenuDBMSAction: TAction
-      Caption = 'DBMS'
-      Checked = True
-      OnExecute = PopupMenuDBMSActionExecute
-    end
-    object PopupMenuExplainPlanAction: TAction
-      Caption = 'Explain Plan'
-      Checked = True
-      OnExecute = PopupMenuExplainPlanActionExecute
-    end
-    object PopupMenuStandardAction: TAction
-      Caption = 'Standard'
-      Checked = True
-      OnExecute = PopupMenuStandardActionExecute
-    end
-    object PopupMenuPrintAction: TAction
-      Caption = 'Print'
-      Checked = True
-      OnExecute = PopupMenuPrintActionExecute
-    end
-    object PopupMenuIndentAction: TAction
-      Caption = 'Indent'
-      Checked = True
-      OnExecute = PopupMenuIndentActionExecute
-    end
-    object PopupMenuSortAction: TAction
-      Caption = 'Sort'
-      Checked = True
-      OnExecute = PopupMenuSortActionExecute
-    end
-    object PopupMenuCaseAction: TAction
-      Caption = 'Case'
-      Checked = True
-      OnExecute = PopupMenuCaseActionExecute
-    end
-    object PopupMenuCommandAction: TAction
-      Caption = 'Command'
-      Checked = True
-      OnExecute = PopupMenuCommandActionExecute
-    end
-    object PopupMenuSearchAction: TAction
-      Caption = 'Search'
-      Checked = True
-      OnExecute = PopupMenuSearchActionExecute
-    end
-    object PopupMenuModeAction: TAction
-      Caption = 'Mode'
-      Checked = True
-      OnExecute = PopupMenuModeActionExecute
-    end
-    object PopupMenuToolsAction: TAction
-      Caption = 'Tools'
-      Checked = True
-      OnExecute = PopupMenuToolsActionExecute
-    end
-  end
   object ImageList20: TBCImageList
     Height = 20
     Width = 20
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102000500080014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500100014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2688,7 +2575,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C010102000500080018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500100018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2997,7 +2884,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Top = 100
   end
   object SynEditWildcardSearch: TSynEditWildcardSearch
-    Left = 98
-    Top = 240
+    Left = 62
+    Top = 304
   end
 end

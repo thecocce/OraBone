@@ -7,7 +7,7 @@ uses
   Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, ActnList,
   BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   BCControls.PopupMenu, Vcl.ToolWin, BCControls.ToolBar, GridsEh, DBGridEh, Data.DB, System.Actions, DBAxisGridsEh,
-  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
+  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images;
 
 type
   TSynonymBrowserFrame = class(TFrame)
@@ -21,7 +21,6 @@ type
     CustomizeAction: TAction;
     PageControlPopupMenu: TBCPopupMenu;
     CustomizePageControl1: TMenuItem;
-    ImageList: TImageList;
     InfoButtonPanel: TPanel;
     InfoToolBar: TBCToolBar;
     ToolButton41: TToolButton;

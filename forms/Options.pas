@@ -4,14 +4,14 @@ interface
 
 uses
   Vcl.Controls, Vcl.Forms, Vcl.Graphics, Vcl.Dialogs, Vcl.StdCtrls, ComCtrls, CommCtrl, Registry, Vcl.ExtCtrls,
-  Vcl.Buttons, System.Classes, System.SysUtils, Vcl.ImgList, Grids,
+  Vcl.Buttons, System.Classes, System.SysUtils, Vcl.ImgList, Grids, System.Generics.Collections,
   ActnList, ValEdit, Vcl.Themes, Ora, VirtualTrees, BCFrames.OptionsEditorOptions, BCFrames.OptionsEditorFont,
   BCFrames.OptionsEditorLeftMargin, BCFrames.OptionsEditorRightMargin, OptionsEditorTabs, OptionsConnectionTabs,
   BCFrames.OptionsMainMenu, OptionsOutputTabs, OptionsDBMSOutput, OptionsSchemaBrowser, OptionsObjectFrame,
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
-  BCFrames.OptionsOutput, OptionsEditorToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
+  BCFrames.OptionsOutput, BCFrames.OptionsToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
   BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
-  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate;
+  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate, BCCommon.Images;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -37,7 +37,6 @@ type
     EditorRightMarginAction: TAction;
     EditorTabsAction: TAction;
     EditorToolBarAction: TAction;
-    ImageList: TImageList;
     MainMenuAction: TAction;
     ObjectFrameAction: TAction;
     OKButton: TButton;
@@ -73,13 +72,14 @@ type
       Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType);
   private
     FOraSession: TOraSession;
+    FActionList: TObjectList<TAction>;
     procedure CreateTree;
     procedure ReadIniFile;
     procedure SaveSelectedTreeNode;
     procedure SetVisibleFrame;
     procedure WriteIniFile;
   public
-    function Execute(OraSession: TOraSession): Boolean;
+    function Execute(OraSession: TOraSession; ActionList: TObjectList<TAction>): Boolean;
   end;
 
 function OptionsForm: TOptionsForm;
@@ -340,14 +340,20 @@ begin
   end;
 end;
 
-function TOptionsForm.Execute(OraSession: TOraSession): Boolean;
+function TOptionsForm.Execute(OraSession: TOraSession; ActionList: TObjectList<TAction>): Boolean;
 begin
+  FActionList := ActionList;
   FOraSession := OraSession;
-  ReadIniFile;
-  Result := Showmodal = mrOk;
-  WriteIniFile;
-  SaveSelectedTreeNode;
-  Free;
+  try
+    ReadIniFile;
+    Result := Showmodal = mrOk;
+    if Result then
+      SQLFormatterOptions.WriteIniFile; { this is written here because dll is reading settings from the ini file }
+    WriteIniFile;
+    SaveSelectedTreeNode;
+  finally
+    Free;
+  end;
 end;
 
 procedure TOptionsForm.OptionsVirtualStringTreeClick(Sender: TObject);
@@ -439,7 +445,7 @@ begin
     if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 5) then
       OptionsEditorCompletionProposalFrame(Self).Show;
     if (ParentIndex = 0) and (Level = 1) and (TreeNode.Index = 6) then
-      OptionsEditorToolBarFrame(Self).Show;
+      OptionsToolBarFrame(Self, FActionList).Show;
     if (Level = 0) and (TreeNode.Index = 1) then
       OptionsSchemaBrowserFrame(Self).Show;
     if (ParentIndex = 1) and (Level = 1) and (TreeNode.Index = 0) then

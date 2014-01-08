@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, OleCtrls,
   SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder, ActnList, Menus, WebBrowser.Container,
   BCControls.PopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.Buttons, PlatformDefaultStyleActnCtrls, ActnPopup,
-  Vcl.Styles.WebBrowser, System.Actions;
+  Vcl.Styles.WebBrowser, System.Actions, BCCommon.Images;
 
 type
   TWebBrowser = class(TVclStylesWebBrowser);
@@ -18,10 +18,8 @@ type
     SaveAction: TAction;
     PopupMenu: TBCPopupMenu;
     SaveAction1: TMenuItem;
-    ImageList: TImageList;
     PrinterSettingsAction: TAction;
     PrintAction: TAction;
-    CloseAction: TAction;
     N1: TMenuItem;
     PrinterSettings1: TMenuItem;
     Print1: TMenuItem;

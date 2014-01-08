@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, BCControls.Edit, BCDialogs.Dlg,
-  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, System.Actions;
+  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, System.Actions, BCCommon.Images;
 
 type
   TObjectSearhForm = class(TDialog)
@@ -20,7 +20,6 @@ type
     ActionList: TActionList;
     SearchAction: TAction;
     VirtualDrawTree: TVirtualDrawTree;
-    TreeImageList: TImageList;
     ColumnsQuery: TOraQuery;
     procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -160,6 +159,28 @@ begin
       SQL.Add(DM.StringHolder.StringsByName['SearchCaseSensitiveSQL'].Text)
     else
       SQL.Add(DM.StringHolder.StringsByName['SearchNotCaseSensitiveSQL'].Text);
+    ParamByName('IMG_IDX_TABLE_ROOT').AsInteger := IMG_IDX_TABLE_ROOT;
+    ParamByName('IMG_IDX_TABLE_CHILD').AsInteger := IMG_IDX_TABLE_CHILD;
+    ParamByName('IMG_IDX_VIEW_ROOT').AsInteger := IMG_IDX_VIEW_ROOT;
+    ParamByName('IMG_IDX_VIEW_CHILD').AsInteger := IMG_IDX_VIEW_CHILD;
+    ParamByName('IMG_IDX_FUNCTION_ROOT').AsInteger := IMG_IDX_FUNCTION_ROOT;
+    ParamByName('IMG_IDX_FUNCTION_CHILD').AsInteger := IMG_IDX_FUNCTION_CHILD;
+    ParamByName('IMG_IDX_PROCEDURE_ROOT').AsInteger := IMG_IDX_PROCEDURE_ROOT;
+    ParamByName('IMG_IDX_PROCEDURE_CHILD').AsInteger := IMG_IDX_PROCEDURE_CHILD;
+    ParamByName('IMG_IDX_PACKAGE_ROOT').AsInteger := IMG_IDX_PACKAGE_ROOT;
+    ParamByName('IMG_IDX_PACKAGE_CHILD').AsInteger := IMG_IDX_PACKAGE_CHILD;
+    ParamByName('IMG_IDX_TRIGGER_ROOT').AsInteger := IMG_IDX_TRIGGER_ROOT;
+    ParamByName('IMG_IDX_TRIGGER_CHILD').AsInteger := IMG_IDX_TRIGGER_CHILD;
+    ParamByName('IMG_IDX_CONSTRAINT_ROOT').AsInteger := IMG_IDX_CONSTRAINT_ROOT;
+    ParamByName('IMG_IDX_CONSTRAINT_CHILD').AsInteger := IMG_IDX_CONSTRAINT_CHILD;
+    ParamByName('IMG_IDX_INDEX_ROOT').AsInteger := IMG_IDX_INDEX_ROOT;
+    ParamByName('IMG_IDX_INDEX_CHILD').AsInteger := IMG_IDX_INDEX_CHILD;
+    ParamByName('IMG_IDX_SEQUENCE_ROOT').AsInteger := IMG_IDX_SEQUENCE_ROOT;
+    ParamByName('IMG_IDX_SEQUENCE_CHILD').AsInteger := IMG_IDX_SEQUENCE_CHILD;
+    ParamByName('IMG_IDX_SYNONYM_ROOT').AsInteger := IMG_IDX_SYNONYM_ROOT;
+    ParamByName('IMG_IDX_SYNONYM_CHILD').AsInteger := IMG_IDX_SYNONYM_CHILD;
+    ParamByName('IMG_IDX_DBLINK_ROOT').AsInteger := IMG_IDX_DBLINK_ROOT;
+    ParamByName('IMG_IDX_DBLINK_CHILD').AsInteger := IMG_IDX_DBLINK_CHILD;
     ParamByName('SEARCHSTRING').AsString := SearchForEdit.Text;
     Prepare;
     Open;
@@ -366,7 +387,7 @@ begin
         CommentData.Level := 3;
         CommentData.ObjectName := 'Table comment';
         CommentData.SearchResult := ColumnsQuery.FieldByName('SEARCH_RESULT').AsString;
-        CommentData.ImageIndex := 23;
+        CommentData.ImageIndex := IMG_IDX_COMMENT;
         ColumnsQuery.Next;
       end
       else
@@ -377,7 +398,7 @@ begin
         ChildData.Level := 2;
         ChildData.ObjectName := ColumnsQuery.FieldByName('COLUMN_NAME').AsString;
         ChildData.SearchResult := ColumnsQuery.FieldByName('SEARCH_RESULT').AsString;
-        ChildData.ImageIndex := 22;
+        ChildData.ImageIndex := IMG_IDX_TABLE_COLUMN;
         ColumnsQuery.Next;
 
         { if the next row has the same column name then it's a column comment }
@@ -389,7 +410,7 @@ begin
           CommentData.Level := 3;
           CommentData.ObjectName := 'Column comment';
           CommentData.SearchResult := ColumnsQuery.FieldByName('SEARCH_RESULT').AsString;
-          CommentData.ImageIndex := 23;
+          CommentData.ImageIndex := IMG_IDX_COMMENT;
           ColumnsQuery.Next;
         end;
       end;

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList,
   ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, ToolWin,
   BCControls.ComboBox, VirtualTrees, DB, MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg,
-  JvProgressBar;
+  JvProgressBar, BCCommon.Images;
 
 type
   TSchemaCompareForm = class(TDialog)
@@ -14,7 +14,6 @@ type
     Schema1TabSheet: TTabSheet;
     Schema2TabSheet: TTabSheet;
     StatusBar: TJvStatusBar;
-    TreeImageList: TImageList;
     Schema1Panel: TPanel;
     Schema1VirtualDrawTree: TVirtualDrawTree;
     Schema2Panel: TPanel;
@@ -266,6 +265,67 @@ begin
     Unprepare;
     SQL.Clear;
     SQL.Add(CompareSQL);
+    if TablesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_TABLE_ROOT').AsInteger := IMG_IDX_TABLE_ROOT;
+      ParamByName('IMG_IDX_TABLE_CHILD').AsInteger := IMG_IDX_TABLE_CHILD;
+    end;
+    if ViewsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_VIEW_ROOT').AsInteger := IMG_IDX_VIEW_ROOT;
+      ParamByName('IMG_IDX_VIEW_CHILD').AsInteger := IMG_IDX_VIEW_CHILD;
+    end;
+    if FunctionsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_FUNCTION_ROOT').AsInteger := IMG_IDX_FUNCTION_ROOT;
+      ParamByName('IMG_IDX_FUNCTION_CHILD').AsInteger := IMG_IDX_FUNCTION_CHILD;
+    end;
+    if ProceduresCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_PROCEDURE_ROOT').AsInteger := IMG_IDX_PROCEDURE_ROOT;
+      ParamByName('IMG_IDX_PROCEDURE_CHILD').AsInteger := IMG_IDX_PROCEDURE_CHILD;
+    end;
+    if PackagesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_PACKAGE_ROOT').AsInteger := IMG_IDX_PACKAGE_ROOT;
+      ParamByName('IMG_IDX_PACKAGE_CHILD').AsInteger := IMG_IDX_PACKAGE_CHILD;
+    end;
+    if TriggersCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_TRIGGER_ROOT').AsInteger := IMG_IDX_TRIGGER_ROOT;
+      ParamByName('IMG_IDX_TRIGGER_CHILD').AsInteger := IMG_IDX_TRIGGER_CHILD;
+    end;
+    if ConstraintsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_CONSTRAINT_ROOT').AsInteger := IMG_IDX_CONSTRAINT_ROOT;
+      ParamByName('IMG_IDX_CONSTRAINT_CHILD').AsInteger := IMG_IDX_CONSTRAINT_CHILD;
+    end;
+    if IndexesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_INDEX_ROOT').AsInteger := IMG_IDX_INDEX_ROOT;
+      ParamByName('IMG_IDX_INDEX_CHILD').AsInteger := IMG_IDX_INDEX_CHILD;
+    end;
+    if SequencesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_SEQUENCE_ROOT').AsInteger := IMG_IDX_SEQUENCE_ROOT;
+      ParamByName('IMG_IDX_SEQUENCE_CHILD').AsInteger := IMG_IDX_SEQUENCE_CHILD;
+    end;
+    if SynonymsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_SYNONYM_ROOT').AsInteger := IMG_IDX_SYNONYM_ROOT;
+      ParamByName('IMG_IDX_SYNONYM_CHILD').AsInteger := IMG_IDX_SYNONYM_CHILD;
+    end;
+    if DBLinksCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_DBLINK_ROOT').AsInteger := IMG_IDX_DBLINK_ROOT;
+      ParamByName('IMG_IDX_DBLINK_CHILD').AsInteger := IMG_IDX_DBLINK_CHILD;
+    end;
+    if TableCommentsCheckBox.Checked then
+      ParamByName('IMG_IDX_COMMENT').AsInteger := IMG_IDX_COMMENT;
+    if ColumnNamesCheckBox.Checked then
+      ParamByName('IMG_IDX_TABLE_COLUMN').AsInteger := IMG_IDX_TABLE_COLUMN;
+    if ColumnCommentsCheckBox.Checked then
+      ParamByName('IMG_IDX_COMMENT').AsInteger := IMG_IDX_COMMENT;
     ParamByName('P_OWNER').AsString := FUsername1;
     Prepare;
     Open;
@@ -286,6 +346,67 @@ begin
     Unprepare;
     SQL.Clear;
     SQL.Add(CompareSQL);
+    if TablesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_TABLE_ROOT').AsInteger := IMG_IDX_TABLE_ROOT;
+      ParamByName('IMG_IDX_TABLE_CHILD').AsInteger := IMG_IDX_TABLE_CHILD;
+    end;
+    if ViewsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_VIEW_ROOT').AsInteger := IMG_IDX_VIEW_ROOT;
+      ParamByName('IMG_IDX_VIEW_CHILD').AsInteger := IMG_IDX_VIEW_CHILD;
+    end;
+    if FunctionsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_FUNCTION_ROOT').AsInteger := IMG_IDX_FUNCTION_ROOT;
+      ParamByName('IMG_IDX_FUNCTION_CHILD').AsInteger := IMG_IDX_FUNCTION_CHILD;
+    end;
+    if ProceduresCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_PROCEDURE_ROOT').AsInteger := IMG_IDX_PROCEDURE_ROOT;
+      ParamByName('IMG_IDX_PROCEDURE_CHILD').AsInteger := IMG_IDX_PROCEDURE_CHILD;
+    end;
+    if PackagesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_PACKAGE_ROOT').AsInteger := IMG_IDX_PACKAGE_ROOT;
+      ParamByName('IMG_IDX_PACKAGE_CHILD').AsInteger := IMG_IDX_PACKAGE_CHILD;
+    end;
+    if TriggersCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_TRIGGER_ROOT').AsInteger := IMG_IDX_TRIGGER_ROOT;
+      ParamByName('IMG_IDX_TRIGGER_CHILD').AsInteger := IMG_IDX_TRIGGER_CHILD;
+    end;
+    if ConstraintsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_CONSTRAINT_ROOT').AsInteger := IMG_IDX_CONSTRAINT_ROOT;
+      ParamByName('IMG_IDX_CONSTRAINT_CHILD').AsInteger := IMG_IDX_CONSTRAINT_CHILD;
+    end;
+    if IndexesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_INDEX_ROOT').AsInteger := IMG_IDX_INDEX_ROOT;
+      ParamByName('IMG_IDX_INDEX_CHILD').AsInteger := IMG_IDX_INDEX_CHILD;
+    end;
+    if SequencesCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_SEQUENCE_ROOT').AsInteger := IMG_IDX_SEQUENCE_ROOT;
+      ParamByName('IMG_IDX_SEQUENCE_CHILD').AsInteger := IMG_IDX_SEQUENCE_CHILD;
+    end;
+    if SynonymsCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_SYNONYM_ROOT').AsInteger := IMG_IDX_SYNONYM_ROOT;
+      ParamByName('IMG_IDX_SYNONYM_CHILD').AsInteger := IMG_IDX_SYNONYM_CHILD;
+    end;
+    if DBLinksCheckBox.Checked then
+    begin
+      ParamByName('IMG_IDX_DBLINK_ROOT').AsInteger := IMG_IDX_DBLINK_ROOT;
+      ParamByName('IMG_IDX_DBLINK_CHILD').AsInteger := IMG_IDX_DBLINK_CHILD;
+    end;
+    if TableCommentsCheckBox.Checked then
+      ParamByName('IMG_IDX_COMMENT').AsInteger := IMG_IDX_COMMENT;
+    if ColumnNamesCheckBox.Checked then
+      ParamByName('IMG_IDX_TABLE_COLUMN').AsInteger := IMG_IDX_TABLE_COLUMN;
+    if ColumnCommentsCheckBox.Checked then
+      ParamByName('IMG_IDX_COMMENT').AsInteger := IMG_IDX_COMMENT;
     ParamByName('P_OWNER').AsString := FUsername2;
     Prepare;
     Open;

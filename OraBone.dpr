@@ -106,7 +106,6 @@ uses
   OptionsDateFormat in 'frames\OptionsDateFormat.pas' {OptionsDateFormatFrame: TFrame},
   OptionsConnectionTabs in 'frames\OptionsConnectionTabs.pas' {OptionsConnectionTabsFrame: TFrame},
   BCFrames.OptionsOutput in '..\..\Common\frames\BCFrames.OptionsOutput.pas' {OptionsOutputFrame: TFrame},
-  OptionsEditorToolBar in 'frames\OptionsEditorToolBar.pas' {OptionsEditorToolBarFrame: TFrame},
   BCCommon.LanguageUtils in '..\..\Common\units\BCCommon.LanguageUtils.pas',
   BCCommon.Messages in '..\..\Common\units\BCCommon.Messages.pas',
   BCCommon.StringUtils in '..\..\Common\units\BCCommon.StringUtils.pas',
@@ -129,7 +128,10 @@ uses
   IniPersist in '..\..\Common\units\IniPersist.pas',
   BCFrames.OptionsFrame in '..\..\Common\frames\BCFrames.OptionsFrame.pas' {OptionsFrame: TFrame},
   BCFrames.OptionsSQLInsert in '..\..\Common\frames\BCFrames.OptionsSQLInsert.pas' {OptionsSQLInsertFrame: TFrame},
-  BCFrames.OptionsSQLUpdate in '..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas' {OptionsSQLUpdateFrame: TFrame};
+  BCFrames.OptionsSQLUpdate in '..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas' {OptionsSQLUpdateFrame: TFrame},
+  BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
+  BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
+  BCCommon.Images in '..\..\Common\units\BCCommon.Images.pas' {ImagesDataModule: TDataModule};
 
 {$R *.res}
 
@@ -149,5 +151,6 @@ begin
   Application.Title := 'OraBone';
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TImagesDataModule, ImagesDataModule);
   Application.Run;
 end.

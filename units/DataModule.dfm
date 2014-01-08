@@ -436,7 +436,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39' object_type, owner || '#39'.'#39' || table_name object_na' +
             'me, '#39'Object name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_tables '
           ' WHERE table_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND table_name NOT IN (SELECT mview_name FROM all_mviews) '
@@ -444,7 +446,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_tab_columns c, all_tables t'
           ' WHERE c.column_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.table_name'
@@ -454,7 +458,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_col_comments c, all_tables t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.table_name'
@@ -464,7 +470,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_tab_comments c, all_tables t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.table_name'
@@ -474,21 +482,27 @@ object DM: TDM
           
             'SELECT '#39'View'#39' object_type, owner || '#39'.'#39' || view_name object_name' +
             ', '#39'Object name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_root_' +
+            'child level1_index'
           '  FROM all_views'
           ' WHERE view_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION'
           
             'SELECT '#39'View'#39' object_type, owner || '#39'.'#39' || mview_name object_nam' +
             'e, '#39'Object name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_mviews'
           ' WHERE mview_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION'
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_columns c, all_views t'
           ' WHERE c.column_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.view_name'
@@ -497,7 +511,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_columns c, all_mviews t'
           ' WHERE c.column_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.mview_name'
@@ -506,7 +522,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_col_comments c, all_views t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.view_name'
@@ -515,7 +533,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_col_comments c, all_mviews t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.mview_name'
@@ -524,7 +544,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_comments c, all_views t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.view_name'
@@ -533,7 +555,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_comments c, all_mviews t'
           ' WHERE c.comments LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '   AND c.table_name = t.mview_name'
@@ -542,7 +566,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            4 level0_index, 5 level1_index'
+          
+            '            :img_idx_function_root level0_index, :img_idx_functi' +
+            'on_child level1_index'
           '  FROM all_source'
           ' WHERE text LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '     AND type = '#39'FUNCTION'#39
@@ -550,7 +576,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            6 level0_index, 7 level1_index'
+          
+            '            :img_idx_procedure_root level0_index, :img_idx_proce' +
+            'dure_child level1_index'
           '  FROM all_source'
           ' WHERE text LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '      AND type = '#39'PROCEDURE'#39
@@ -558,7 +586,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            8 level0_index, 9 level1_index'
+          
+            '            :img_idx_package_root level0_index, :img_idx_package' +
+            '_child level1_index'
           '  FROM all_source'
           ' WHERE text LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '       AND type = '#39'PACKAGE'#39
@@ -566,14 +596,18 @@ object DM: TDM
           
             'SELECT '#39'Trigger'#39' object_type, owner || '#39'.'#39' || trigger_name objec' +
             't_name, '#39'Object name'#39' search_result, '
-          '            10 level0_index, 11 level1_index'
+          
+            '             :img_idx_trigger_root level0_index,  :img_idx_trigg' +
+            'er_child level1_index'
           '  FROM all_triggers'
           ' WHERE trigger_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION ALL'
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            10 level0_index, 11 level1_index'
+          
+            '            :img_idx_trigger_root level0_index, :img_idx_trigger' +
+            '_child level1_index'
           '  FROM all_source'
           ' WHERE text LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '       AND type = '#39'TRIGGER'#39
@@ -581,35 +615,45 @@ object DM: TDM
           
             'SELECT '#39'Constraint'#39' object_type, owner || '#39'.'#39' || constraint_name' +
             ' object_name, '#39'Object name'#39' search_result, '
-          '           12 level0_index, 13 level1_index'
+          
+            '           :img_idx_constraint_root level0_index, :img_idx_const' +
+            'raint_child level1_index'
           '  FROM all_constraints'
           ' WHERE constraint_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION ALL'
           
             'SELECT '#39'Index'#39' object_type, owner || '#39'.'#39' || index_name object_na' +
             'me, '#39'Object name'#39' search_result, '
-          '            14 level0_index, 15 level1_index'
+          
+            '            :img_idx_index_root level0_index, :img_idx_index_chi' +
+            'ld level1_index'
           '  FROM all_indexes'
           ' WHERE index_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION ALL'
           
             'SELECT  '#39'Sequence'#39' object_type, sequence_owner || '#39'.'#39' || sequenc' +
             'e_name object_name, '#39'Object name'#39' search_result, '
-          '            16 level0_index, 17 level1_index'
+          
+            '            :img_idx_sequence_root level0_index, :img_idx_sequen' +
+            'ce_child level1_index'
           '  FROM all_sequences'
           ' WHERE sequence_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION ALL'
           
             'SELECT '#39'Synonym'#39' object_type, owner || '#39'.'#39' || synonym_name objec' +
             't_name, '#39'Object name'#39' search_result, '
-          '            18 level0_index, 19 level1_index'
+          
+            '            :img_idx_synonym_root level0_index, :img_idx_synonym' +
+            '_child level1_index'
           '  FROM all_synonyms'
           ' WHERE synonym_name LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           'UNION ALL'
           
             'SELECT '#39'DB Link'#39' object_type, owner || '#39'.'#39' || db_link object_nam' +
             'e, '#39'Object name'#39' search_result, '
-          '            20 level0_index, 21 level1_index'
+          
+            '            :img_idx_dblink_rook level0_index, :img_idx_dblink_c' +
+            'hild level1_index'
           '  FROM all_db_links'
           ' WHERE db_link LIKE '#39'%'#39' || :searchstring || '#39'%'#39
           '')
@@ -620,7 +664,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39' object_type, owner || '#39'.'#39' || table_name object_na' +
             'me, '#39'Object name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_tables '
           ' WHERE UPPER(table_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND table_name NOT IN (SELECT mview_name FROM all_mviews) '
@@ -628,7 +674,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '             :img_idx_table_root level0_index,  :img_idx_table_c' +
+            'hild level1_index'
           '  FROM all_tab_columns c, all_tables t'
           
             ' WHERE UPPER(c.column_name) LIKE '#39'%'#39' || UPPER(:searchstring) || ' +
@@ -640,7 +688,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '             :img_idx_table_root level0_index,  :img_idx_table_c' +
+            'hild level1_index'
           '  FROM all_col_comments c, all_tables t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.table_name'
@@ -650,7 +700,9 @@ object DM: TDM
           
             'SELECT '#39'Table'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obj' +
             'ect name'#39' search_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '             :img_idx_table_root level0_index,  :img_idx_table_c' +
+            'hild level1_index'
           '  FROM all_tab_comments c, all_tables t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.table_name'
@@ -660,21 +712,27 @@ object DM: TDM
           
             'SELECT '#39'View'#39' object_type, owner || '#39'.'#39' || view_name object_name' +
             ', '#39'Object name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '             :img_idx_view_root level0_index, :img_idx_view_chil' +
+            'd level1_index'
           '  FROM all_views'
           ' WHERE UPPER(view_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           'UNION'
           
             'SELECT '#39'View'#39' object_type, owner || '#39'.'#39' || mview_name object_nam' +
             'e, '#39'Object name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_mviews'
           ' WHERE UPPER(mview_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           'UNION'
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_columns c, all_views t'
           
             ' WHERE UPPER(c.column_name) LIKE '#39'%'#39' || UPPER(:searchstring) || ' +
@@ -685,7 +743,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_columns c, all_mviews t'
           
             ' WHERE UPPER(c.column_name) LIKE '#39'%'#39' || UPPER(:searchstring) || ' +
@@ -696,7 +756,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_col_comments c, all_views t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.view_name'
@@ -705,7 +767,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_col_comments c, all_mviews t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.mview_name'
@@ -714,7 +778,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_comments c, all_views t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.view_name'
@@ -723,7 +789,9 @@ object DM: TDM
           
             'SELECT '#39'View'#39', c.owner || '#39'.'#39' || c.table_name object_name, '#39'Obje' +
             'ct name'#39' search_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_tab_comments c, all_mviews t'
           ' WHERE UPPER(c.comments) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '   AND c.table_name = t.mview_name'
@@ -732,7 +800,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            4 level0_index, 5 level1_index'
+          
+            '            :img_idx_function_root level0_index, :img_idx_functi' +
+            'on_child level1_index'
           '  FROM all_source'
           ' WHERE UPPER(text) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '     AND type = '#39'FUNCTION'#39
@@ -740,7 +810,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            6 level0_index, 7 level1_index'
+          
+            '            :img_idx_procedure_root level0_index,  :img_idx_proc' +
+            'edure_child level1_index'
           '  FROM all_source'
           ' WHERE UPPER(text) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '      AND type = '#39'PROCEDURE'#39
@@ -748,7 +820,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            8 level0_index, 9 level1_index'
+          
+            '             :img_idx_package_root level0_index,  :img_idx_packa' +
+            'ge_child level1_index'
           '  FROM all_source'
           ' WHERE UPPER(text) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '    AND type = '#39'PACKAGE'#39
@@ -756,7 +830,9 @@ object DM: TDM
           
             'SELECT '#39'Trigger'#39' object_type, owner || '#39'.'#39' || trigger_name  obje' +
             'ct_name, '#39'Object name'#39' search_result, '
-          '            10 level0_index, 11 level1_index'
+          
+            '             :img_idx_trigger_root level0_index,  :img_idx_trigg' +
+            'er_child level1_index'
           '  FROM all_triggers'
           
             ' WHERE UPPER(trigger_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39 +
@@ -765,7 +841,9 @@ object DM: TDM
           
             'SELECT INITCAP(type), owner || '#39'.'#39' || name, '#39'Line '#39' || line || '#39 +
             ': '#39' || TRIM(RPAD(text, 255)), '
-          '            10 level0_index, 11 level1_index'
+          
+            '             :img_idx_trigger_root level0_index,  :img_idx_trigg' +
+            'er_child level1_index'
           '  FROM all_source'
           ' WHERE UPPER(text) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '       AND type = '#39'TRIGGER'#39
@@ -773,7 +851,9 @@ object DM: TDM
           
             'SELECT '#39'Constraint'#39' object_type, owner || '#39'.'#39' || constraint_name' +
             '  object_name, '#39'Object name'#39' search_result, '
-          '            12 level0_index, 13 level1_index'
+          
+            '             :img_idx_constraint_root level0_index, :img_idx_con' +
+            'straint_child level1_index'
           '  FROM all_constraints'
           
             ' WHERE UPPER(constraint_name) LIKE '#39'%'#39' || UPPER(:searchstring) |' +
@@ -782,14 +862,18 @@ object DM: TDM
           
             'SELECT '#39'Index'#39' object_type, owner || '#39'.'#39' || index_name  object_n' +
             'ame, '#39'Object name'#39' search_result, '
-          '            14 level0_index, 15 level1_index'
+          
+            '            :img_idx_index_root level0_index, :img_idx_index_chi' +
+            'ld level1_index'
           '  FROM all_indexes'
           ' WHERE UPPER(index_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           'UNION ALL'
           
             'SELECT '#39'Sequence'#39' object_type, sequence_owner || '#39'.'#39' || sequence' +
             '_name  object_name, '#39'Object name'#39' search_result, '
-          '            16 level0_index, 17 level1_index'
+          
+            '            :img_idx_sequence_root level0_index, :img_idx_sequen' +
+            'ce_child level1_index'
           '  FROM all_sequences'
           
             ' WHERE UPPER(sequence_name) LIKE '#39'%'#39' || UPPER(:searchstring) || ' +
@@ -798,7 +882,9 @@ object DM: TDM
           
             'SELECT '#39'Synonym'#39' object_type, owner || '#39'.'#39' || synonym_name  obje' +
             'ct_name, '#39'Object name'#39' search_result, '
-          '            18 level0_index, 19 level1_index'
+          
+            '            :img_idx_synonym_root level0_index, :img_idx_synonym' +
+            '_child level1_index'
           '  FROM all_synonyms'
           
             ' WHERE UPPER(synonym_name) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39 +
@@ -807,7 +893,9 @@ object DM: TDM
           
             'SELECT '#39'DB Link'#39' object_type, owner || '#39'.'#39' || db_link  object_na' +
             'me, '#39'Object name'#39' search_result, '
-          '            20 level0_index, 21 level1_index'
+          
+            '            :img_idx_dblink_root level0_index,  :img_idx_dblink_' +
+            'child level1_index'
           '  FROM all_db_links'
           ' WHERE UPPER(db_link) LIKE '#39'%'#39' || UPPER(:searchstring) || '#39'%'#39
           '')
@@ -864,7 +952,9 @@ object DM: TDM
           
             'SELECT 1 id, '#39'Table'#39' object_type, owner || '#39'.'#39' || table_name obj' +
             'ect_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '            0 level0_index, 1 level1_index'
+          
+            '            :img_idx_table_root level0_index, :img_idx_table_chi' +
+            'ld level1_index'
           '  FROM all_tables'
           ' WHERE owner = :p_owner '
           '   AND table_name NOT IN (SELECT mview_name FROM all_mviews)')
@@ -875,14 +965,18 @@ object DM: TDM
           
             'SELECT 2 id, '#39'View'#39' object_type, owner || '#39'.'#39' || view_name objec' +
             't_name, 0, '#39#39', '#39'Object'#39' compare_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_views'
           ' WHERE owner = :p_owner'
           ' UNION ALL '
           
             'SELECT 2 id, '#39'View'#39' object_type, owner || '#39'.'#39' || mview_name obje' +
             'ct_name, 0, '#39#39', '#39'Object'#39' compare_result,'
-          '            2 level0_index, 3 level1_index'
+          
+            '            :img_idx_view_root level0_index, :img_idx_view_child' +
+            ' level1_index'
           '  FROM all_mviews'
           ' WHERE owner = :p_owner'
           '')
@@ -896,7 +990,9 @@ object DM: TDM
           
             '            '#39'Line '#39' || line || '#39': '#39' || TRIM(RPAD(text, 255)) com' +
             'pare_result,'
-          '            4 level0_index, 5 level1_index'
+          
+            '            :img_idx_function_root level0_index, :img_idx_functi' +
+            'on_child level1_index'
           '  FROM all_source'
           ' WHERE owner = :p_owner'
           '   AND type = '#39'FUNCTION'#39)
@@ -910,7 +1006,9 @@ object DM: TDM
           
             '            '#39'Line '#39' || line || '#39': '#39' || TRIM(RPAD(text, 255)) com' +
             'pare_result,'
-          '            6 level0_index, 7 level1_index'
+          
+            '            :img_idx_procedure_root level0_index, :img_idx_proce' +
+            'dure_child level1_index'
           '  FROM all_source'
           ' WHERE owner = :p_owner'
           '   AND type = '#39'PROCEDURE'#39)
@@ -924,7 +1022,9 @@ object DM: TDM
           
             '            '#39'Line '#39' || line || '#39': '#39' || TRIM(RPAD(text, 255)) com' +
             'pare_result,'
-          '            8 level0_index, 9 level1_index'
+          
+            '            :img_idx_package_root level0_index, :img_idx_package' +
+            '_child level1_index'
           '  FROM all_source'
           ' WHERE owner = :p_owner'
           '   AND type = '#39'PACKAGE'#39
@@ -940,7 +1040,9 @@ object DM: TDM
           
             'SELECT 6 id, '#39'Trigger'#39' object_type, owner || '#39'.'#39' || trigger_name' +
             ' object_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '            10 level0_index, 11 level1_index'
+          
+            '            :img_idx_trigger_root level0_index, :img_idx_trigger' +
+            '_child level1_index'
           '  FROM all_triggers'
           ' WHERE owner = :p_owner'
           'UNION ALL'
@@ -956,7 +1058,9 @@ object DM: TDM
           
             '            '#39'Line '#39' || line || '#39': '#39' || TRIM(RPAD(text, 255)) com' +
             'pare_result,'
-          '           10 level0_index, 11 level1_index'
+          
+            '           :img_idx_trigger_root level0_index, :img_idx_trigger_' +
+            'child level1_index'
           '  FROM all_source'
           ' WHERE owner = :p_owner'
           '   AND type = '#39'TRIGGER'#39)
@@ -967,7 +1071,9 @@ object DM: TDM
           
             'SELECT 7 id, '#39'Constraint'#39' object_type, owner || '#39'.'#39' || constrain' +
             't_name object_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '           12 level0_index, 13 level1_index'
+          
+            '           :img_idx_constraint_root level0_index, :img_idx_const' +
+            'raint_child level1_index'
           '  FROM all_constraints'
           ' WHERE owner = :p_owner'
           '')
@@ -978,7 +1084,9 @@ object DM: TDM
           
             'SELECT 8 id, '#39'Index'#39' object_type, owner || '#39'.'#39' || index_name obj' +
             'ect_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '            14 level0_index, 15 level1_index'
+          
+            '            :img_idx_index_root level0_index, :img_idx_index_chi' +
+            'ld level1_index'
           '  FROM all_indexes'
           ' WHERE owner = :p_owner'
           '')
@@ -990,7 +1098,9 @@ object DM: TDM
             'SELECT 9 id, '#39'Sequence'#39' object_type, sequence_owner || '#39'.'#39' || se' +
             'quence_name object_name, 0, '#39#39' column_name, '#39'Object'#39' compare_res' +
             'ult,'
-          '            16 level0_index, 17 level1_index'
+          
+            '            :img_idx_sequence_root level0_index, :img_idx_sequen' +
+            'ce_child level1_index'
           '  FROM all_sequences'
           ' WHERE sequence_owner = :p_owner')
       end
@@ -1000,7 +1110,9 @@ object DM: TDM
           
             'SELECT 10 id, '#39'Synonym'#39' object_type, table_owner || '#39'.'#39' || synon' +
             'ym_name object_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '            18 level0_index, 19 level1_index'
+          
+            '            :img_idx_synonym_root level0_index, :img_idx_synonym' +
+            '_child level1_index'
           '  FROM all_synonyms'
           ' WHERE table_owner = :p_owner')
       end
@@ -1010,7 +1122,9 @@ object DM: TDM
           
             'SELECT 11 id, '#39'DB Link'#39' object_type, username || '#39'.'#39' || db_link ' +
             'object_name, 0, '#39#39' column_name, '#39'Object'#39' compare_result,'
-          '            20 level0_index, 21 level1_index'
+          
+            '            :img_idx_dblink_root level0_index,  :img_idx_dblink_' +
+            'child level1_index'
           '  FROM all_db_links'
           ' WHERE username = :p_owner'
           ''

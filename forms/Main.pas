@@ -7,7 +7,7 @@ uses
   PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees, ActnMenus, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl, AppEvnts, Menus,
   SQLEditor, SchemaBrowser, BCControls.PopupMenu, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
-  JvDragDrop, System.Actions, BCControls.ProgressBar;
+  JvDragDrop, System.Actions, BCControls.ProgressBar, BCCommon.Images;
 
 const
   { Main menu item indexes }
@@ -89,7 +89,6 @@ type
     InsertObjectAction: TAction;
     MainMenuPanel: TPanel;
     MainPanel: TPanel;
-    MenuImageList: TBCImageList;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -324,7 +323,7 @@ uses
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, BCCommon.OptionsContainer,
   System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, BCSQL.Formatter,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl,
-  SynEditTextBuffer;
+  SynEditTextBuffer, System.Generics.Collections;
 
 {$R *.dfm}
 
@@ -361,7 +360,7 @@ begin
   PageControl.ShowCloseButton := OptionsContainer.ConnectionShowCloseButton;
   PageControl.RightClickSelect := OptionsContainer.ConnectionRightClickSelect;
   if OptionsContainer.ConnectionShowImage then
-    PageControl.Images := MenuImageList
+    PageControl.Images := ImagesDataModule.ImageList
   else
     PageControl.Images := nil;
 end;
@@ -1227,8 +1226,8 @@ begin
     if SysImageList <> 0 then
       SystemImageList.Handle := SysImageList;
     { Remove added images from imagelist }
-    while FImageListCount < MenuImageList.Count do
-      ImageList_Remove(MenuImageList.Handle, FImageListCount);
+    while FImageListCount < ImagesDataModule.ImageList.Count do
+      ImageList_Remove(ImagesDataModule.ImageList.Handle, FImageListCount);
 
     ReopenActionClientItem := GetActionClientItem(FILE_MENU_ITEMINDEX, FILE_REOPEN_MENU_ITEMINDEX);
     { Destroy actions }
@@ -1260,7 +1259,7 @@ begin
           try
             ImageIndex := GetIconIndex(s);
             SystemImageList.GetIcon(ImageIndex, Icon);
-            ImageIndex := ImageList_AddIcon(MenuImageList.Handle, Icon.Handle);
+            ImageIndex := ImageList_AddIcon(ImagesDataModule.ImageList.Handle, Icon.Handle);
           finally
             Icon.Free;
           end;
@@ -1338,7 +1337,7 @@ var
   ConnectString, SchemaParam: string;
 begin
   OptionsContainer.ReadIniFile;
-  SQLFormatterOptionsWrapper.ReadIniFile;
+  SQLFormatterOptions.ReadIniFile;
 
   FOnProgress := True;
   Screen.Cursor := crHourglass;
@@ -1435,50 +1434,76 @@ var
   OraSession: TOraSession;
   SchemaBrowserFrame: TSchemaBrowserFrame;
   SQLHistoryFrame: TSQLHistoryFrame;
+
+  ActionList: TObjectList<TAction>;
+
+  function GetActionList: TObjectList<TAction>;
+  var
+    i: Integer;
+    Action: TAction;
+  begin
+    Result := TObjectList<TAction>.Create;
+    for i := 0 to ActionManager.ActionCount - 1 do
+      if (ActionManager.Actions[i].ImageIndex <> -1) and
+        (ActionManager.Actions[i].Hint <> '') then
+      begin
+        Action := TAction.Create(nil);
+        Action.Name := ActionManager.Actions[i].Name;
+        Action.Caption := StringReplace(ActionManager.Actions[i].Caption, '&', '', []);
+        Action.ImageIndex := ActionManager.Actions[i].ImageIndex;
+        Result.Add(Action);
+      end;
+  end;
 begin
   OraSession := nil;
 
-  SchemaBrowserFrame := GetActiveSchemaBrowser;
-  if Assigned(SchemaBrowserFrame) then
-    OraSession := SchemaBrowserFrame.ObjectTreeFrame.Session
-  else
-  begin
-    SQLEditorFrame := GetActiveSQLEditor;
-    if Assigned(SQLEditorFrame) then
-      OraSession := SQLEditorFrame.Session;
-  end;
-  if Assigned(OraSession) then
-    { open Options }
-    if OptionsForm.Execute(OraSession) then
+  ActionList := GetActionList;
+  try
+    SchemaBrowserFrame := GetActiveSchemaBrowser;
+    if Assigned(SchemaBrowserFrame) then
+      OraSession := SchemaBrowserFrame.ObjectTreeFrame.Session
+    else
     begin
-      UpdateMainMenuBar;
-      UpdateStatusBar;
-      SetPageControlOptions;
-      for i := 0 to PageControl.PageCount - 1 do
-      begin
-        if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
-        begin
-          SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
-          if Assigned(SchemaBrowserFrame) then
-            SchemaBrowserFrame.AssignOptions;
-        end
-        else
-        if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
-        begin
-          SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
-          if Assigned(SQLEditorFrame) then
-            SQLEditorFrame.AssignOptions;
-        end
-        else
-        if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_HISTORY then
-        begin
-          SQLHistoryFrame := TSQLHistoryFrame(PageControl.Pages[i].Components[0]);
-          if Assigned(SQLHistoryFrame) then
-            SQLHistoryFrame.AssignOptions;
-        end
-      end;
-      Repaint;
+      SQLEditorFrame := GetActiveSQLEditor;
+      if Assigned(SQLEditorFrame) then
+        OraSession := SQLEditorFrame.Session;
     end;
+    if Assigned(OraSession) then
+      { open Options }
+      if OptionsForm.Execute(OraSession, ActionList) then
+      begin
+        UpdateMainMenuBar;
+        UpdateStatusBar;
+        SetPageControlOptions;
+        for i := 0 to PageControl.PageCount - 1 do
+        begin
+          if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then
+          begin
+            SchemaBrowserFrame := TSchemaBrowserFrame(PageControl.Pages[i].Components[0]);
+            if Assigned(SchemaBrowserFrame) then
+              SchemaBrowserFrame.AssignOptions;
+          end
+          else
+          if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_EDITOR then
+          begin
+            SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
+            if Assigned(SQLEditorFrame) then
+              SQLEditorFrame.AssignOptions;
+          end
+          else
+          if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_HISTORY then
+          begin
+            SQLHistoryFrame := TSQLHistoryFrame(PageControl.Pages[i].Components[0]);
+            if Assigned(SQLHistoryFrame) then
+              SQLHistoryFrame.AssignOptions;
+          end
+        end;
+        Repaint;
+      end;
+  finally
+    if Assigned(ActionList) then
+      ActionList.Free;
+  end;
 end;
 
 procedure TMainForm.ToolsSelectForCompareActionExecute(Sender: TObject);
@@ -1689,10 +1714,22 @@ procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
-  SQLFormatter: TSQLFormatter;
+ // SQLFormatter: TSQLFormatter;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
-  if Assigned(SQLEditorFrame) then
+{
+var
+  s: PWideChar;
+begin
+  jos <> tyhjä
+  s := FormatSQL(PWideChar(Memo1.Text), 1);
+jos tyhjä, niin virhe
+muuten
+  Memo1.Text := s;
+  FreeAString(s);
+end;
+}
+{  if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     SQLFormatter := TSQLFormatter.Create(SynEdit.Lines);
@@ -1702,7 +1739,7 @@ begin
       SynEdit.SetFocus;
       SQLFormatter.Free;
     end;
-  end;
+  end;   }
 end;
 
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1725,7 +1762,6 @@ begin
     Exit;
   try
     OptionsContainer.WriteIniFile;
-    SQLFormatterOptionsWrapper.WriteIniFile;
 
     WriteIniFile;
     ApplicationEvents.Free;
@@ -1753,7 +1789,7 @@ begin
   FOnStartUp := True;
   FConnecting := True;
   OraCall.OCIUnicode := True;
-  FImageListCount := MenuImageList.Count; { System images are inserted after }
+  FImageListCount := ImagesDataModule.ImageList.Count; { System images are inserted after }
   CreateProgressBar;
   ReadIniSizePositionAndState;
 end;
@@ -1876,7 +1912,7 @@ end;
 procedure TMainForm.CloseTab(Confirm: Boolean);
 var
   ActivePageIndex: Integer;
-  i, Rslt: Integer;
+  Rslt: Integer;
   SQLEditorFrame: TSQLEditorFrame;
 begin
   ActivePageIndex := PageControl.ActivePageIndex;
@@ -1889,9 +1925,7 @@ begin
     with TBigIniFile.Create(GetINIFilename) do
     try
       { Toolbar }
-      EraseSection('ActionToolBar');
-      for i := 0 to SQLEditorFrame.ToolbarPopupMenu.Items.Count - 1 do
-        WriteBool('ActionToolBar', SQLEditorFrame.ToolbarPopupMenu.Items[i].Caption, SQLEditorFrame.ToolbarPopupMenu.Items[i].Checked);
+      EraseSection('ActionToolBar'); { deprecated }
     finally
       Free;
     end;
@@ -2112,7 +2146,6 @@ end;
 
 procedure TMainForm.DatabaseEditorMenuActionExecute(Sender: TObject);
 var
-  i: Integer;
   ActionToolBarStrings: TStrings;
   SQLEditorFrame: TSQLEditorFrame;
 begin
@@ -2129,11 +2162,12 @@ begin
 
     ActionToolBarStrings := TStringList.Create;
     { Toolbar }
-    ReadSectionValues('ActionToolBar', ActionToolBarStrings);
+    // TODO: new toolbar
+    {ReadSectionValues('ActionToolBar', ActionToolBarStrings);
     for i := 0 to ActionToolBarStrings.Count - 1 do
       if not StrToBool(System.Copy(ActionToolBarStrings.Strings[i],
         Pos('=', ActionToolBarStrings.Strings[i]) + 1, Length(ActionToolBarStrings.Strings[i]))) then
-           SQLEditorFrame.ToolbarPopupMenu.Items[i].Action.Execute;
+           SQLEditorFrame.ToolbarPopupMenu.Items[i].Action.Execute; }
   finally
     Free;
   end;

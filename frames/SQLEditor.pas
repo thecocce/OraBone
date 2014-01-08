@@ -76,34 +76,6 @@ type
     GotoBookmark7MenuItem: TMenuItem;
     GotoBookmark8MenuItem: TMenuItem;
     GotoBookmark9MenuItem: TMenuItem;
-    ToolbarPopupMenu: TBCPopupMenu;
-    NewOpen1: TMenuItem;
-    Print1: TMenuItem;
-    Directory1: TMenuItem;
-    Indent1: TMenuItem;
-    Sort1: TMenuItem;
-    Case1: TMenuItem;
-    UndoandRedo1: TMenuItem;
-    Search1: TMenuItem;
-    Mode1: TMenuItem;
-    ools1: TMenuItem;
-    Macro1: TMenuItem;
-    Document1: TMenuItem;
-    ToolbarPopupMenuActionList: TActionList;
-    PopupMenuExecuteAction: TAction;
-    PopupMenuTransactionAction: TAction;
-    PopupMenuDBMSAction: TAction;
-    PopupMenuExplainPlanAction: TAction;
-    PopupMenuStandardAction: TAction;
-    PopupMenuPrintAction: TAction;
-    PopupMenuIndentAction: TAction;
-    PopupMenuSortAction: TAction;
-    PopupMenuCaseAction: TAction;
-    PopupMenuCommandAction: TAction;
-    PopupMenuSearchAction: TAction;
-    PopupMenuModeAction: TAction;
-    PopupMenuToolsAction: TAction;
-    ools2: TMenuItem;
     ExecuteToolbarPanel: TPanel;
     ExecuteToolBar: TBCToolBar;
     ExecuteToolButton: TToolButton;
@@ -234,19 +206,6 @@ type
     procedure DBMSOutputTimer(Sender: TObject);
     procedure OraSessionError(Sender: TObject; E: EDAError; var Fail: Boolean);
     procedure SynEditPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
-    procedure PopupMenuExecuteActionExecute(Sender: TObject);
-    procedure PopupMenuTransactionActionExecute(Sender: TObject);
-    procedure PopupMenuDBMSActionExecute(Sender: TObject);
-    procedure PopupMenuExplainPlanActionExecute(Sender: TObject);
-    procedure PopupMenuStandardActionExecute(Sender: TObject);
-    procedure PopupMenuPrintActionExecute(Sender: TObject);
-    procedure PopupMenuIndentActionExecute(Sender: TObject);
-    procedure PopupMenuSortActionExecute(Sender: TObject);
-    procedure PopupMenuCaseActionExecute(Sender: TObject);
-    procedure PopupMenuCommandActionExecute(Sender: TObject);
-    procedure PopupMenuSearchActionExecute(Sender: TObject);
-    procedure PopupMenuModeActionExecute(Sender: TObject);
-    procedure PopupMenuToolsActionExecute(Sender: TObject);
     procedure GotoLineActionExecute(Sender: TObject);
     procedure GotoLineCloseActionExecute(Sender: TObject);
     procedure GotoLineNumberEditKeyPress(Sender: TObject; var Key: Char);
@@ -407,7 +366,7 @@ implementation
 
 uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleUtils, SynUnicode,
-  BCCommon.OptionsContainer, System.Math, BCCommon.FileUtils, BCCommon.Messages,
+  BCCommon.OptionsContainer, System.Math, BCCommon.FileUtils, BCCommon.Messages, BCCommon.Images,
   Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon.Lib, BCCommon.StringUtils,
   AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes;
 
@@ -466,7 +425,7 @@ begin
   FOutputFrame.Parent := OutputPanel;
   FOutputFrame.OnTabsheetDblClick := OutputDblClickActionExecute;
   { IDE can lose these, if the main form is not open }
-  EditorPopupMenu.Images := MainForm.MenuImageList;
+  EditorPopupMenu.Images := ImagesDataModule.ImageList;
   CutMenuItem.Action := MainForm.EditCutAction;
   CopyMenuItem.Action := MainForm.EditCopyAction;
   PasteMenuItem.Action := MainForm.EditPasteAction;
@@ -480,20 +439,20 @@ begin
   ToggleCaseMenuItem.Action := MainForm.EditToggleCaseAction;
   InsertObjectMenuItem.Action := MainForm.InsertObjectAction;
   FormatSQLMenuItem.Action := MainForm.FormatSQLAction;
-  ExecuteToolBar.Images := MainForm.MenuImageList;
-  CommitRollbackToolBar.Images := MainForm.MenuImageList;
-  DBMSToolBar.Images := MainForm.MenuImageList;
-  PlanToolBar.Images := MainForm.MenuImageList;
-  StandardToolBar.Images := MainForm.MenuImageList;
-  SaveToolBar.Images := MainForm.MenuImageList;
-  PrintToolBar.Images := MainForm.MenuImageList;
-  IncreaseToolBar.Images := MainForm.MenuImageList;
-  SortToolBar.Images := MainForm.MenuImageList;
-  CaseToolBar.Images := MainForm.MenuImageList;
-  CommandToolBar.Images := MainForm.MenuImageList;
-  SearchToolBar.Images := MainForm.MenuImageList;
-  ViewToolBar.Images := MainForm.MenuImageList;
-  CompareToolBar.Images := MainForm.MenuImageList;
+  ExecuteToolBar.Images := ImagesDataModule.ImageList;
+  CommitRollbackToolBar.Images := ImagesDataModule.ImageList;
+  DBMSToolBar.Images :=ImagesDataModule.ImageList;
+  PlanToolBar.Images := ImagesDataModule.ImageList;
+  StandardToolBar.Images := ImagesDataModule.ImageList;
+  SaveToolBar.Images := ImagesDataModule.ImageList;
+  PrintToolBar.Images := ImagesDataModule.ImageList;
+  IncreaseToolBar.Images := ImagesDataModule.ImageList;
+  SortToolBar.Images := ImagesDataModule.ImageList;
+  CaseToolBar.Images := ImagesDataModule.ImageList;
+  CommandToolBar.Images := ImagesDataModule.ImageList;
+  SearchToolBar.Images := ImagesDataModule.ImageList;
+  ViewToolBar.Images := ImagesDataModule.ImageList;
+  CompareToolBar.Images := ImagesDataModule.ImageList;
 
   ExecuteToolButton.Action := MainForm.ExecuteStatementAction;
   ExecuteCurrentToolButton.Action := MainForm.ExecuteCurrentStatementAction;
@@ -1361,97 +1320,6 @@ begin
   else
   if SearchPanel.Visible then
     SearchForEdit.PasteFromClipboard;
-end;
-
-procedure TSQLEditorFrame.PopupMenuExecuteActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarExecute := not OptionsContainer.ToolBarExecute;
-  PopupMenuExecuteAction.Checked := OptionsContainer.ToolBarExecute;
-  ExecuteToolbarPanel.Visible := PopupMenuExecuteAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuCaseActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarCase := not OptionsContainer.ToolBarCase;
-  PopupMenuCaseAction.Checked := OptionsContainer.ToolBarCase;
-  CaseToolbarPanel.Visible := PopupMenuCaseAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuCommandActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarCommand := not OptionsContainer.ToolBarCommand;
-  PopupMenuCommandAction.Checked := OptionsContainer.ToolBarCommand;
-  CommandToolbarPanel.Visible := PopupMenuCommandAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuDBMSActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarDBMS := not OptionsContainer.ToolBarDBMS;
-  PopupMenuDBMSAction.Checked := OptionsContainer.ToolBarDBMS;
-  DBMSToolbarPanel.Visible := PopupMenuDBMSAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuExplainPlanActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarExplainPlan := not OptionsContainer.ToolBarExplainPlan;
-  PopupMenuExplainPlanAction.Checked := OptionsContainer.ToolBarExplainPlan;
-  ExplainPlanToolbarPanel.Visible := PopupMenuExplainPlanAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuIndentActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarIndent := not OptionsContainer.ToolBarIndent;
-  PopupMenuIndentAction.Checked := OptionsContainer.ToolBarIndent;
-  IndentToolbarPanel.Visible := PopupMenuIndentAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuModeActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarMode := not OptionsContainer.ToolBarMode;
-  PopupMenuModeAction.Checked := OptionsContainer.ToolBarMode;
-  ModeToolbarPanel.Visible := PopupMenuModeAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuPrintActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarPrint := not OptionsContainer.ToolBarPrint;
-  PopupMenuPrintAction.Checked := OptionsContainer.ToolBarPrint;
-  PrintToolbarPanel.Visible := PopupMenuPrintAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuSearchActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarSearch := not OptionsContainer.ToolBarSearch;
-  PopupMenuSearchAction.Checked := OptionsContainer.ToolBarSearch;
-  SearchToolbarPanel.Visible := PopupMenuSearchAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuSortActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarSort := not OptionsContainer.ToolBarSort;
-  PopupMenuSortAction.Checked := OptionsContainer.ToolBarSort;
-  SortToolbarPanel.Visible := PopupMenuSortAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuStandardActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarStandard := not OptionsContainer.ToolBarStandard;
-  PopupMenuStandardAction.Checked := OptionsContainer.ToolBarStandard;
-  StandardToolbarPanel.Visible := PopupMenuStandardAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuToolsActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarTools := not OptionsContainer.ToolBarTools;
-  PopupMenuToolsAction.Checked := OptionsContainer.ToolBarTools;
-  ToolsToolbarPanel.Visible := PopupMenuToolsAction.Checked;
-end;
-
-procedure TSQLEditorFrame.PopupMenuTransactionActionExecute(Sender: TObject);
-begin
-  OptionsContainer.ToolBarTransaction := not OptionsContainer.ToolBarTransaction;
-  PopupMenuTransactionAction.Checked := OptionsContainer.ToolBarTransaction;
-  TransactionToolbarPanel.Visible := PopupMenuTransactionAction.Checked;
 end;
 
 procedure TSQLEditorFrame.InitializeSynEditPrint;

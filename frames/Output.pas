@@ -6,12 +6,11 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons,
   Vcl.ComCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.StdCtrls, JvExComCtrls, JvComCtrls, Vcl.Menus, Ora, Vcl.Grids,
   BCControls.PageControl, BCControls.PopupMenu, VirtualTrees, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions;
+  BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions, BCCommon.Images;
 
 type
   TOutputFrame = class(TFrame)
     ClearDBMSOutputAction: TAction;
-    ImageList: TImageList;
     OutputActionList: TActionList;
     OutputCloseAction: TAction;
     OutputCloseAllAction: TAction;
@@ -89,15 +88,15 @@ implementation
 {$R *.dfm}
 
 uses
-  Main, BCCommon.OptionsContainer, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
+  BCCommon.OptionsContainer, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
-  System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages;
+  System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages, Main;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
-  PopupMenu.Images := MainForm.MenuImageList;
+  PopupMenu.Images := ImagesDataModule.ImageList;
 end;
 
 procedure TOutputFrame.OutputCloseActionExecute(Sender: TObject);
@@ -998,7 +997,7 @@ begin
   PageControl.ShowCloseButton := OptionsContainer.OutputShowCloseButton;
   PageControl.RightClickSelect := OptionsContainer.OutputRightClickSelect;
   if OptionsContainer.OutputShowImage then
-    PageControl.Images := ImageList
+    PageControl.Images := ImagesDataModule.ImageList
   else
     PageControl.Images := nil;
   for i := 0 to PageControl.PageCount - 1 do

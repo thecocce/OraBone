@@ -8,7 +8,7 @@ uses
   Vcl.Buttons, Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit,
   Vcl.AppEvnts, Vcl.Menus, VirtualTrees, Vcl.ToolWin, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhToolCtrls,
-  DBGridEhGrouping, ToolCtrlsEh;
+  DBGridEhGrouping, ToolCtrlsEh, BCCommon.Images;
 
 type
   TUserBrowserFrame = class(TFrame)
@@ -22,7 +22,6 @@ type
     CustomizeAction: TAction;
     PageControlPopupMenu: TBCPopupMenu;
     CustomizePageControl1: TMenuItem;
-    ImageList: TImageList;
     RolesTabSheet: TTabSheet;
     RolesQuery: TOraQuery;
     RolesPanel: TPanel;
@@ -257,7 +256,7 @@ begin
       ChildData.Grantor := PrivilegesQuery.FieldByName('GRANTOR').AsString;
       ChildData.Owner := PrivilegesQuery.FieldByName('OWNER').AsString;
       ChildData.ObjectName := PrivilegesQuery.FieldByName('TABLE_NAME').AsString;
-      ChildData.ImageIndex := 1;
+      ChildData.ImageIndex := IMG_IDX_KEY;
       PrivilegesQuery.Next;
     end;
     ChildCount := VirtualDrawTree.ChildCount[Node];
@@ -387,7 +386,7 @@ begin
         NodeData.GrantedRole := FieldByName('GRANTED_ROLE').AsString;
         NodeData.AdminOption := FieldByName('ADMIN_OPTION').AsString;
         NodeData.DefaultRole := FieldByName('DEFAULT_ROLE').AsString;
-        NodeData.ImageIndex := 3; // role
+        NodeData.ImageIndex := IMG_IDX_USER_CHILD; // role
         { Privilege }
        (* Grantee := NodeData.Grantee;
         if PrivilegesQuery.Locate('GRANTEE', Grantee, []) then
