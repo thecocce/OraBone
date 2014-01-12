@@ -160,18 +160,17 @@ object MainForm: TMainForm
               end
               item
                 Action = FileOpenAction
-                Caption = '&Open...'
-                ImageIndex = 1
+                ImageIndex = 135
                 ShortCut = 16463
               end
               item
                 Items = <
                   item
                     Action = FileReopenClearAction
-                    ImageIndex = 20
+                    ImageIndex = 58
                   end>
                 Action = FileReopenAction
-                ImageIndex = 2
+                ImageIndex = 162
                 UsageCount = 1
               end
               item
@@ -179,36 +178,30 @@ object MainForm: TMainForm
               end
               item
                 Action = FileSaveAction
-                Caption = '&Save'
-                ImageIndex = 3
+                ImageIndex = 167
                 ShortCut = 16467
               end
               item
                 Action = FileSaveAsAction
-                Caption = 'S&ave As...'
-                ImageIndex = 4
+                ImageIndex = 169
                 ShortCut = 49235
               end
               item
                 Action = FileSaveAllAction
-                Caption = 'Sa&ve All'
-                ImageIndex = 5
+                ImageIndex = 168
               end
               item
                 Action = FileCloseAction
-                Caption = '&Close'
-                ImageIndex = 6
+                ImageIndex = 85
                 ShortCut = 16499
               end
               item
                 Action = FileCloseAllAction
-                Caption = 'C&lose All'
-                ImageIndex = 7
+                ImageIndex = 86
               end
               item
                 Action = FileCloseAllOtherPagesAction
-                Caption = 'Close All O&ther Pages'
-                ImageIndex = 8
+                ImageIndex = 87
                 ShortCut = 24691
               end
               item
@@ -216,21 +209,19 @@ object MainForm: TMainForm
               end
               item
                 Action = FilePrintAction
-                Caption = '&Print...'
-                ImageIndex = 9
+                ImageIndex = 150
                 ShortCut = 16464
               end
               item
                 Action = FilePrintPreviewAction
-                Caption = 'Pr&int Preview...'
-                ImageIndex = 10
+                ImageIndex = 148
               end
               item
                 Caption = '-'
               end
               item
                 Action = FileExitAction
-                ImageIndex = 11
+                ImageIndex = 76
                 ShortCut = 32883
               end>
             Caption = '&File'
@@ -239,12 +230,12 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = EditUndoAction
-                ImageIndex = 12
+                ImageIndex = 223
                 ShortCut = 16474
               end
               item
                 Action = EditRedoAction
-                ImageIndex = 13
+                ImageIndex = 160
                 ShortCut = 24666
               end
               item
@@ -252,23 +243,22 @@ object MainForm: TMainForm
               end
               item
                 Action = EditCutAction
-                ImageIndex = 14
+                ImageIndex = 43
                 ShortCut = 16472
               end
               item
                 Action = EditCopyAction
-                Caption = 'C&opy'
-                ImageIndex = 15
+                ImageIndex = 40
                 ShortCut = 16451
               end
               item
                 Action = EditPasteAction
-                ImageIndex = 16
+                ImageIndex = 142
                 ShortCut = 16470
               end
               item
                 Action = EditSelectAllAction
-                ImageIndex = 17
+                ImageIndex = 172
                 ShortCut = 16449
               end
               item
@@ -278,33 +268,32 @@ object MainForm: TMainForm
                 Items = <
                   item
                     Action = EditInsertLineAction
-                    ImageIndex = 19
+                    ImageIndex = 109
                     ShortCut = 16462
                   end>
                 Action = EditInsertAction
-                ImageIndex = 18
+                ImageIndex = 0
                 UsageCount = 1
               end
               item
                 Items = <
                   item
                     Action = EditDeleteLineAction
-                    ImageIndex = 21
+                    ImageIndex = 61
                     ShortCut = 16473
                   end
                   item
                     Action = EditDeleteEOLAction
-                    Caption = '&End of Line'
-                    ImageIndex = 22
+                    ImageIndex = 60
                     ShortCut = 24665
                   end
                   item
                     Action = EditDeleteWordAction
-                    ImageIndex = 23
+                    ImageIndex = 63
                     ShortCut = 16468
                   end>
                 Action = EditDeleteAction
-                ImageIndex = 20
+                ImageIndex = 58
                 UsageCount = 1
               end
               item
@@ -314,32 +303,32 @@ object MainForm: TMainForm
                 Items = <
                   item
                     Action = EditIncreaseIndentAction
-                    ImageIndex = 25
+                    ImageIndex = 100
                     ShortCut = 24649
                   end
                   item
                     Action = EditDecreaseIndentAction
-                    ImageIndex = 26
+                    ImageIndex = 101
                     ShortCut = 24661
                   end>
                 Action = EditIndentAction
-                ImageIndex = 24
+                ImageIndex = 99
                 UsageCount = 1
               end
               item
                 Items = <
                   item
                     Action = EditSortAscAction
-                    ImageIndex = 28
+                    ImageIndex = 180
                     ShortCut = 24641
                   end
                   item
                     Action = EditSortDescAction
-                    ImageIndex = 29
+                    ImageIndex = 181
                     ShortCut = 24644
                   end>
                 Action = EditSortAction
-                ImageIndex = 27
+                ImageIndex = 178
                 UsageCount = 1
               end
               item
@@ -347,7 +336,7 @@ object MainForm: TMainForm
               end
               item
                 Action = EditToggleCaseAction
-                ImageIndex = 30
+                ImageIndex = 25
                 ShortCut = 24643
               end>
             Caption = '&Edit'
@@ -356,17 +345,17 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = SearchAction
-                ImageIndex = 31
+                ImageIndex = 81
                 ShortCut = 16454
               end
               item
                 Action = SearchReplaceAction
-                ImageIndex = 32
+                ImageIndex = 163
                 ShortCut = 16466
               end
               item
                 Action = SearchFindInFilesAction
-                ImageIndex = 33
+                ImageIndex = 82
                 ShortCut = 24646
               end
               item
@@ -374,12 +363,12 @@ object MainForm: TMainForm
               end
               item
                 Action = SearchFindNextAction
-                ImageIndex = 34
+                ImageIndex = 84
                 ShortCut = 114
               end
               item
                 Action = SearchFindPreviousAction
-                ImageIndex = 35
+                ImageIndex = 83
                 ShortCut = 8306
               end
               item
@@ -387,125 +376,121 @@ object MainForm: TMainForm
               end
               item
                 Action = SearchToggleBookmarkAction
-                Caption = '&Toggle Bookmark'
-                ImageIndex = 36
+                ImageIndex = 21
                 ShortCut = 16497
               end
               item
                 Items = <
                   item
                     Action = ToggleBookmarks1Action
-                    ImageIndex = 38
+                    ImageIndex = 12
                     ShortCut = 24625
                   end
                   item
                     Action = ToggleBookmarks2Action
-                    ImageIndex = 39
+                    ImageIndex = 13
                     ShortCut = 24626
                   end
                   item
                     Action = ToggleBookmarks3Action
-                    ImageIndex = 40
+                    ImageIndex = 14
                     ShortCut = 24627
                   end
                   item
                     Action = ToggleBookmarks4Action
-                    ImageIndex = 41
+                    ImageIndex = 15
                     ShortCut = 24628
                   end
                   item
                     Action = ToggleBookmarks5Action
-                    ImageIndex = 42
+                    ImageIndex = 16
                     ShortCut = 24629
                   end
                   item
                     Action = ToggleBookmarks6Action
-                    ImageIndex = 43
+                    ImageIndex = 17
                     ShortCut = 24630
                   end
                   item
                     Action = ToggleBookmarks7Action
-                    ImageIndex = 44
+                    ImageIndex = 18
                     ShortCut = 24631
                   end
                   item
                     Action = ToggleBookmarks8Action
-                    ImageIndex = 45
+                    ImageIndex = 19
                     ShortCut = 24632
                   end
                   item
                     Action = ToggleBookmarks9Action
-                    ImageIndex = 46
+                    ImageIndex = 20
                     ShortCut = 24633
                   end>
                 Action = SearchToggleBookmarksAction
-                Caption = 'T&oggle Bookmarks'
-                ImageIndex = 37
+                ImageIndex = 24
                 UsageCount = 1
               end
               item
                 Items = <
                   item
                     Action = GotoBookmarks1Action
-                    ImageIndex = 38
+                    ImageIndex = 12
                     ShortCut = 16433
                   end
                   item
                     Action = GotoBookmarks2Action
-                    ImageIndex = 39
+                    ImageIndex = 13
                     ShortCut = 16434
                   end
                   item
                     Action = GotoBookmarks3Action
-                    ImageIndex = 40
+                    ImageIndex = 14
                     ShortCut = 16435
                   end
                   item
                     Action = GotoBookmarks4Action
-                    ImageIndex = 41
+                    ImageIndex = 15
                     ShortCut = 16436
                   end
                   item
                     Action = GotoBookmarks5Action
-                    ImageIndex = 42
+                    ImageIndex = 16
                     ShortCut = 16437
                   end
                   item
                     Action = GotoBookmarks6Action
-                    ImageIndex = 43
+                    ImageIndex = 17
                     ShortCut = 16438
                   end
                   item
                     Action = GotoBookmarks7Action
-                    ImageIndex = 44
+                    ImageIndex = 18
                     ShortCut = 16439
                   end
                   item
                     Action = GotoBookmarks8Action
-                    ImageIndex = 45
+                    ImageIndex = 19
                     ShortCut = 16440
                   end
                   item
                     Action = GotoBookmarks9Action
-                    ImageIndex = 46
+                    ImageIndex = 20
                     ShortCut = 16441
                   end>
                 Action = SearchGotoBookmarksAction
-                Caption = '&Go to Bookmarks'
-                ImageIndex = 47
+                ImageIndex = 23
                 UsageCount = 1
               end
               item
                 Action = SearchClearBookmarksAction
-                ImageIndex = 48
+                ImageIndex = 22
               end
               item
                 Caption = '-'
               end
               item
                 Action = SearchGotoLineAction
-                Caption = 'Go to &Line'
-                ImageIndex = 49
+                ImageIndex = 97
                 ShortCut = 16455
               end>
             Caption = '&Search'
@@ -530,8 +515,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SQLHistoryAction
-                Caption = 'S&QL History'
-                ImageIndex = 69
+                ImageIndex = 28
                 ShortCut = 122
               end
               item
@@ -556,7 +540,7 @@ object MainForm: TMainForm
               end
               item
                 Action = ViewStyleAction
-                ImageIndex = 74
+                ImageIndex = 90
                 UsageCount = 1
               end
               item
@@ -564,13 +548,12 @@ object MainForm: TMainForm
               end
               item
                 Action = ViewNextPageAction
-                ImageIndex = 75
+                ImageIndex = 194
                 ShortCut = 16393
               end
               item
                 Action = ViewPreviousPageAction
-                Caption = 'P&revious Page'
-                ImageIndex = 76
+                ImageIndex = 193
                 ShortCut = 24585
               end>
             Caption = '&View'
@@ -579,25 +562,25 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = DatabaseNewConnectionMenuAction
-                ImageIndex = 50
+                ImageIndex = 45
               end
               item
                 Action = DatabaseEndConnectionMenuAction
-                ImageIndex = 51
+                ImageIndex = 47
               end
               item
                 Caption = '-'
               end
               item
                 Action = DatabaseEditorMenuAction
-                ImageIndex = 52
+                ImageIndex = 67
               end
               item
                 Caption = '-'
               end
               item
                 Action = DatabaseObjectSearchAction
-                ImageIndex = 53
+                ImageIndex = 51
               end
               item
                 Caption = '-'
@@ -606,74 +589,74 @@ object MainForm: TMainForm
                 Items = <
                   item
                     Action = DatabaseCreateConstraintAction
-                    ImageIndex = 54
+                    ImageIndex = 35
                   end
                   item
                     Action = DatabaseCreateDBLinkAction
-                    ImageIndex = 55
+                    ImageIndex = 121
                   end
                   item
                     Action = DatabaseCreateFunctionAction
-                    ImageIndex = 56
+                    ImageIndex = 93
                   end
                   item
                     Action = DatabaseCreateIndexAction
-                    ImageIndex = 57
+                    ImageIndex = 103
                   end
                   item
                     Action = DatabaseCreatePackageAction
-                    ImageIndex = 58
+                    ImageIndex = 138
                   end
                   item
                     Action = DatabaseCreateProcedureAction
-                    ImageIndex = 59
+                    ImageIndex = 153
                   end
                   item
                     Action = DatabaseCreateSequenceAction
-                    ImageIndex = 60
+                    ImageIndex = 174
                   end
                   item
                     Action = DatabaseCreateSynonymAction
-                    ImageIndex = 61
+                    ImageIndex = 188
                   end
                   item
                     Action = DatabaseCreateTableAction
-                    ImageIndex = 62
+                    ImageIndex = 196
                   end
                   item
                     Action = DatabaseCreateTriggerAction
-                    ImageIndex = 63
+                    ImageIndex = 219
                   end
                   item
                     Action = DatabaseCreateUserAction
-                    ImageIndex = 64
+                    ImageIndex = 225
                   end
                   item
                     Action = DatabaseCreateViewAction
-                    ImageIndex = 65
+                    ImageIndex = 231
                   end>
                 Action = DatabaseCreateAction
-                ImageIndex = 18
+                ImageIndex = 0
                 UsageCount = 1
               end
               item
                 Items = <
                   item
                     Action = DatabaseExportTableDataAction
-                    ImageIndex = 66
+                    ImageIndex = 201
                   end>
                 Action = DatabaseExportAction
-                ImageIndex = 66
+                ImageIndex = 201
                 UsageCount = 1
               end
               item
                 Items = <
                   item
                     Action = DatabaseImportTableDataAction
-                    ImageIndex = 67
+                    ImageIndex = 202
                   end>
-                Caption = '&Import'
-                ImageIndex = 67
+                Action = DatabaseImportAction
+                ImageIndex = 202
                 UsageCount = 1
               end
               item
@@ -681,7 +664,7 @@ object MainForm: TMainForm
               end
               item
                 Action = DatabaseRefreshAction
-                ImageIndex = 68
+                ImageIndex = 53
                 ShortCut = 116
               end>
             Caption = '&Database'
@@ -690,30 +673,29 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = ToolsCompareFilesAction
-                ImageIndex = 77
+                ImageIndex = 31
               end
               item
                 Caption = '-'
               end
               item
                 Action = ToolsCompareSchemasAction
-                ImageIndex = 78
+                ImageIndex = 46
               end
               item
                 Action = SchemaDocumentAction
-                Caption = 'Sc&hema Document...'
-                ImageIndex = 79
+                ImageIndex = 69
               end
               item
                 Action = TNSNamesEditorAction
-                ImageIndex = 80
+                ImageIndex = 52
               end
               item
                 Caption = '-'
               end
               item
                 Action = ToolsOptionsAction
-                ImageIndex = 81
+                ImageIndex = 136
               end>
             Caption = '&Tools'
           end
@@ -721,24 +703,21 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = HelpCheckForUpdateMenuAction
-                Caption = '&Check for Updates'
-                ImageIndex = 82
+                ImageIndex = 72
               end
               item
                 Caption = '-'
               end
               item
                 Action = HelpHomeAction
-                Caption = '&Visit Homepage'
-                ImageIndex = 83
+                ImageIndex = 98
               end
               item
                 Caption = '-'
               end
               item
                 Action = HelpAboutMenuAction
-                Caption = '&About OraBone'
-                ImageIndex = 84
+                ImageIndex = 107
               end>
             Caption = '&Help'
           end>
@@ -1443,7 +1422,7 @@ object MainForm: TMainForm
       Category = '&Delete'
       Caption = '&Word'
       Hint = 'Delete word'
-      ImageIndex = 59
+      ImageIndex = 63
       ShortCut = 16468
       OnExecute = EditDeleteWordActionExecute
     end

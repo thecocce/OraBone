@@ -4,11 +4,11 @@
         <ProjectVersion>14.6</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -130,6 +130,10 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="..\..\Common\units\BCCommon.Images.pas">
+            <Form>ImagesDataModule</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <DCCReference Include="forms\Main.pas">
             <Form>MainForm</Form>
         </DCCReference>
@@ -378,13 +382,11 @@
         <DCCReference Include="..\..\Common\units\BCCommon.FileUtils.pas"/>
         <DCCReference Include="frames\SQLEditorTabSheet.pas">
             <Form>SQLEditorTabSheetFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.Encoding.pas"/>
         <DCCReference Include="frames\OutputDataGridTabSheet.pas">
             <Form>OutputDataGridFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OutputPlanGridTabSheet.pas">
@@ -393,17 +395,14 @@
         </DCCReference>
         <DCCReference Include="frames\OutputListBoxTabSheet.pas">
             <Form>OutputListBoxFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OutputSynEditTabSheet.pas">
             <Form>OutputSynEditFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OutputTreeViewTabSheet.pas">
             <Form>OutputTreeViewFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorOptions.pas">
@@ -420,27 +419,22 @@
         </DCCReference>
         <DCCReference Include="frames\OptionsDBMSOutput.pas">
             <Form>OptionsDBMSOutputFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsSchemaBrowser.pas">
             <Form>OptionsSchemaBrowserFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsObjectFrame.pas">
             <Form>OptionsObjectFrameFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsTimeFormat.pas">
             <Form>OptionsTimeFormatFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsDateFormat.pas">
             <Form>OptionsDateFormatFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsConnectionTabs.pas">
@@ -456,96 +450,74 @@
         <DCCReference Include="..\..\Common\units\BCCommon.StringUtils.pas"/>
         <DCCReference Include="forms\Options.pas">
             <Form>OptionsForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.Lib.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsPrint.pas">
             <Form>OptionsPrintFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\Vcl.Styles.WebBrowser.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorLeftMargin.pas">
             <Form>OptionsEditorLeftMarginFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorSearch.pas">
             <Form>OptionsEditorSearchFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCSQL.Formatter.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorFont.pas">
             <Form>OptionsEditorFontFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsCompare.pas">
             <Form>OptionsCompareFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorCompletionProposal.pas">
             <Form>OptionsEditorCompletionProposalFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsEditorRightMargin.pas">
             <Form>OptionsEditorRightMarginFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsStatusBar.pas">
             <Form>OptionsStatusBarFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="frames\OptionsEditorTabs.pas">
             <Form>OptionsEditorTabsFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLSelect.pas">
             <Form>OptionsSQLSelectFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCCommon.OptionsContainer.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLAlignments.pas">
             <Form>OptionsSQLAlignmentsFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\units\IniPersist.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsFrame.pas">
             <Form>OptionsFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLInsert.pas">
             <Form>OptionsSQLInsertFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas">
             <Form>OptionsSQLUpdateFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas">
             <Form>OptionsToolBarItemsDialog</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsToolBar.pas">
             <Form>OptionsToolBarFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\..\Common\units\BCCommon.Images.pas">
-            <Form>ImagesDataModule</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

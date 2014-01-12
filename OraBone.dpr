@@ -6,6 +6,7 @@ uses
   System.SysUtils,
   Vcl.Themes,
   Vcl.Styles,
+  BCCommon.Images in '..\..\Common\units\BCCommon.Images.pas' {ImagesDataModule: TDataModule},
   Main in 'forms\Main.pas' {MainForm},
   About in 'dialogs\About.pas' {AboutDialog},
   Lib in 'units\Lib.pas',
@@ -130,8 +131,7 @@ uses
   BCFrames.OptionsSQLInsert in '..\..\Common\frames\BCFrames.OptionsSQLInsert.pas' {OptionsSQLInsertFrame: TFrame},
   BCFrames.OptionsSQLUpdate in '..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas' {OptionsSQLUpdateFrame: TFrame},
   BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
-  BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
-  BCCommon.Images in '..\..\Common\units\BCCommon.Images.pas' {ImagesDataModule: TDataModule};
+  BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame};
 
 {$R *.res}
 
