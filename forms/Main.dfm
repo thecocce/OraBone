@@ -160,6 +160,7 @@ object MainForm: TMainForm
               end
               item
                 Action = FileOpenAction
+                Caption = '&Open...'
                 ImageIndex = 135
                 ShortCut = 16463
               end
@@ -178,29 +179,35 @@ object MainForm: TMainForm
               end
               item
                 Action = FileSaveAction
+                Caption = '&Save'
                 ImageIndex = 167
                 ShortCut = 16467
               end
               item
                 Action = FileSaveAsAction
+                Caption = 'S&ave As...'
                 ImageIndex = 169
                 ShortCut = 49235
               end
               item
                 Action = FileSaveAllAction
+                Caption = 'Sa&ve All'
                 ImageIndex = 168
               end
               item
                 Action = FileCloseAction
+                Caption = '&Close'
                 ImageIndex = 85
                 ShortCut = 16499
               end
               item
                 Action = FileCloseAllAction
+                Caption = 'C&lose All'
                 ImageIndex = 86
               end
               item
                 Action = FileCloseAllOtherPagesAction
+                Caption = 'Close All O&ther Pages'
                 ImageIndex = 87
                 ShortCut = 24691
               end
@@ -209,11 +216,13 @@ object MainForm: TMainForm
               end
               item
                 Action = FilePrintAction
+                Caption = '&Print...'
                 ImageIndex = 150
                 ShortCut = 16464
               end
               item
                 Action = FilePrintPreviewAction
+                Caption = 'Pr&int Preview...'
                 ImageIndex = 148
               end
               item
@@ -248,6 +257,7 @@ object MainForm: TMainForm
               end
               item
                 Action = EditCopyAction
+                Caption = 'Cop&y'
                 ImageIndex = 40
                 ShortCut = 16451
               end
@@ -284,6 +294,7 @@ object MainForm: TMainForm
                   end
                   item
                     Action = EditDeleteEOLAction
+                    Caption = '&End of Line'
                     ImageIndex = 60
                     ShortCut = 24665
                   end
@@ -328,6 +339,7 @@ object MainForm: TMainForm
                     ShortCut = 24644
                   end>
                 Action = EditSortAction
+                Caption = 'S&ort'
                 ImageIndex = 178
                 UsageCount = 1
               end
@@ -376,6 +388,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SearchToggleBookmarkAction
+                Caption = '&Toggle Bookmark'
                 ImageIndex = 21
                 ShortCut = 16497
               end
@@ -427,6 +440,7 @@ object MainForm: TMainForm
                     ShortCut = 24633
                   end>
                 Action = SearchToggleBookmarksAction
+                Caption = 'T&oggle Bookmarks'
                 ImageIndex = 24
                 UsageCount = 1
               end
@@ -478,6 +492,7 @@ object MainForm: TMainForm
                     ShortCut = 16441
                   end>
                 Action = SearchGotoBookmarksAction
+                Caption = '&Go to Bookmarks'
                 ImageIndex = 23
                 UsageCount = 1
               end
@@ -490,6 +505,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SearchGotoLineAction
+                Caption = 'Go to &Line'
                 ImageIndex = 97
                 ShortCut = 16455
               end>
@@ -515,6 +531,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SQLHistoryAction
+                Caption = 'S&QL History'
                 ImageIndex = 28
                 ShortCut = 122
               end
@@ -553,6 +570,7 @@ object MainForm: TMainForm
               end
               item
                 Action = ViewPreviousPageAction
+                Caption = 'P&revious Page'
                 ImageIndex = 193
                 ShortCut = 24585
               end>
@@ -684,6 +702,7 @@ object MainForm: TMainForm
               end
               item
                 Action = SchemaDocumentAction
+                Caption = 'Sc&hema Document...'
                 ImageIndex = 69
               end
               item
@@ -703,6 +722,7 @@ object MainForm: TMainForm
             Items = <
               item
                 Action = HelpCheckForUpdateMenuAction
+                Caption = '&Check for Updates'
                 ImageIndex = 72
               end
               item
@@ -710,6 +730,7 @@ object MainForm: TMainForm
               end
               item
                 Action = HelpHomeAction
+                Caption = '&Visit Homepage'
                 ImageIndex = 98
               end
               item
@@ -717,6 +738,7 @@ object MainForm: TMainForm
               end
               item
                 Action = HelpAboutMenuAction
+                Caption = '&About OraBone'
                 ImageIndex = 107
               end>
             Caption = '&Help'

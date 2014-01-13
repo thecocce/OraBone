@@ -1717,6 +1717,14 @@ var
  // SQLFormatter: TSQLFormatter;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+  begin
+    SynEdit := SQLEditorFrame.GetActiveSynEdit;
+    if Trim(Synedit.Text) <> '' then
+    begin
+      s := FormatSQL(PWideChar(Memo1.Text), 1);
+    end;
+  end;
 {
 var
   s: PWideChar;

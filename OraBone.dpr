@@ -131,7 +131,8 @@ uses
   BCFrames.OptionsSQLInsert in '..\..\Common\frames\BCFrames.OptionsSQLInsert.pas' {OptionsSQLInsertFrame: TFrame},
   BCFrames.OptionsSQLUpdate in '..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas' {OptionsSQLUpdateFrame: TFrame},
   BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
-  BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame};
+  BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
+  BCSQL.Consts in '..\..\Common\units\BCSQL.Consts.pas';
 
 {$R *.res}
 
