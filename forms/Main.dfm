@@ -658,6 +658,9 @@ object MainForm: TMainForm
                 UsageCount = 1
               end
               item
+                Caption = '-'
+              end
+              item
                 Items = <
                   item
                     Action = DatabaseExportTableDataAction
@@ -690,20 +693,8 @@ object MainForm: TMainForm
           item
             Items = <
               item
-                Action = ToolsCompareFilesAction
-                ImageIndex = 31
-              end
-              item
-                Caption = '-'
-              end
-              item
-                Action = ToolsCompareSchemasAction
-                ImageIndex = 46
-              end
-              item
-                Action = SchemaDocumentAction
-                Caption = 'Sc&hema Document...'
-                ImageIndex = 69
+                Action = ToolsOptionsAction
+                ImageIndex = 136
               end
               item
                 Action = TNSNamesEditorAction
@@ -713,8 +704,20 @@ object MainForm: TMainForm
                 Caption = '-'
               end
               item
-                Action = ToolsOptionsAction
-                ImageIndex = 136
+                Action = ToolsCompareFilesAction
+                ImageIndex = 31
+              end
+              item
+                Action = ToolsCompareSchemasAction
+                ImageIndex = 46
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = SchemaDocumentAction
+                Caption = 'Sc&hema Document...'
+                ImageIndex = 69
               end>
             Caption = '&Tools'
           end

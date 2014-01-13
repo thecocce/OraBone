@@ -12,14 +12,14 @@ object UserBrowserFrame: TUserBrowserFrame
     Top = 0
     Width = 451
     Height = 302
-    ActivePage = RolesTabSheet
+    ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = UserPageControlChange
-    ActivePageCaption = 'Roles && Privileges'
+    ActivePageCaption = 'Info'
     TabDragDrop = False
     TabClosed = False
     HoldShiftToDragDrop = False
@@ -114,6 +114,7 @@ object UserBrowserFrame: TUserBrowserFrame
           Header.Font.Style = []
           Header.Height = 20
           Header.Options = [hoColumnResize, hoShowSortGlyphs, hoVisible]
+          Images = ImagesDataModule.ImageList
           ParentCtl3D = False
           TabOrder = 0
           TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes, toAutoChangeScale]

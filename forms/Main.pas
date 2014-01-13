@@ -1714,7 +1714,7 @@ procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
- // SQLFormatter: TSQLFormatter;
+  s: PWideChar;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
@@ -1722,32 +1722,11 @@ begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     if Trim(Synedit.Text) <> '' then
     begin
-      s := FormatSQL(PWideChar(Memo1.Text), 1);
+      s := FormatSQL(PWideChar(Synedit.Text), 1);
+      Synedit.Text := s;
+      FreeAString(s);
     end;
   end;
-{
-var
-  s: PWideChar;
-begin
-  jos <> tyhjä
-  s := FormatSQL(PWideChar(Memo1.Text), 1);
-jos tyhjä, niin virhe
-muuten
-  Memo1.Text := s;
-  FreeAString(s);
-end;
-}
-{  if Assigned(SQLEditorFrame) then
-  begin
-    SynEdit := SQLEditorFrame.GetActiveSynEdit;
-    SQLFormatter := TSQLFormatter.Create(SynEdit.Lines);
-    try
-      SynEdit.Text := SQLFormatter.GetFormattedSQL;
-    finally
-      SynEdit.SetFocus;
-      SQLFormatter.Free;
-    end;
-  end;   }
 end;
 
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
