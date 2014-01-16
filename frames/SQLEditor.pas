@@ -10,7 +10,7 @@ uses
   Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl, BCControls.PopupMenu,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
   BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
-  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions;
+  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -215,6 +215,7 @@ type
     procedure SearchClearActionExecute(Sender: TObject);
     procedure GotoLineClearActionExecute(Sender: TObject);
     procedure GotoLineNumberEditChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -315,6 +316,7 @@ type
     function GetModifiedInfo: string;
     function GetActiveBookmarkList: TSynEditMarkList;
     procedure AssignOptions;
+    procedure CreateActionToolBar(CreateToolBar: Boolean = False);
     property ActiveTabSheetCaption: string read GetActiveTabSheetCaption;
     property ActiveDocumentName: string read GetActiveDocumentName;
     property ActiveDocumentFound: Boolean read GetActiveDocumentFound;
@@ -549,6 +551,7 @@ begin
   finally
     Icon.Free;
   end;
+  CreateActionToolBar(True);
 end;
 
 destructor TSQLEditorFrame.Destroy;
@@ -2029,6 +2032,11 @@ begin
     FOutputFrame.SetOptions;
 end;
 
+procedure TSQLEditorFrame.Button1Click(Sender: TObject);
+begin
+ showmessage(inttostr(toolbarpanel.ComponentCount))
+end;
+
 procedure TSQLEditorFrame.SetHighlighterTableNames(Value: TStrings);
 begin
   SynSQLSyn.TableNames.Text := LowerCase(Value.Text);
@@ -2998,6 +3006,130 @@ begin
   SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(PageControl.ActivePage);
   if Assigned(SQLEditorTabSheetFrame) then
     Result := SQLEditorTabSheetFrame.MinimapVisible;
+end;
+
+procedure TSQLEditorFrame.CreateActionToolBar(CreateToolBar: Boolean);
+var
+  i, j, k: Integer;
+  s: string;
+  ToolBarItems: TStrings;
+  Panel: TPanel;
+  ToolBar: TBCToolBar;
+  ToolButton: TToolButton;
+  Bevel: TBevel;
+  IsChanged: Boolean;
+
+  function FindItemByName(ItemName: string): TContainedAction;
+  var
+    j: Integer;
+  begin
+    Result := nil;
+    for j := 0 to MainForm.ActionManager.ActionCount - 1 do
+      if MainForm.ActionManager.Actions[j].Name = ItemName then
+        Exit(MainForm.ActionManager.Actions[j]);
+  end;
+
+begin
+  ToolBarItems := TStringList.Create;
+  with TBigIniFile.Create(GetIniFilename) do
+  try
+    { update if changed }
+    IsChanged := ReadBool('ToolBarItemsChanged', 'Changed', False);
+    EraseSection('ToolBarItemsChanged');
+    if IsChanged or CreateToolBar then
+    begin
+      ToolbarPanel.Visible := False;
+      { read items from ini }
+      ReadSectionValues('ToolBarItems', ToolBarItems);
+      if ToolBarItems.Count > 0 then
+      begin
+        { add items to action bar }
+        for i := ToolbarPanel.ControlCount - 1 downto 0 do
+           (ToolbarPanel.Controls[i] as TPanel).Free;
+        i := ToolBarItems.Count - 1;
+        while i >= 0 do
+        begin
+          Panel := TPanel.Create(ToolbarPanel);
+          Panel.Parent := ToolbarPanel;
+          Panel.Align := alLeft;
+          Panel.BevelOuter := bvNone;
+          Panel.ParentColor := True;
+          Toolbar := TBCToolBar.Create(Panel);
+          Toolbar.Parent := Panel;
+          Toolbar.Images := ImagesDataModule.ImageList;
+          Toolbar.Align := alLeft;
+          s := '';
+          while (i >= 0) and (s <> '-')  do
+          begin
+            s := System.Copy(ToolBarItems.Strings[i], Pos('=', ToolBarItems.Strings[i]) + 1, Length(ToolBarItems.Strings[i]));
+            if s <> '-' then
+            begin
+              ToolButton := TToolButton.Create(Toolbar);
+              ToolButton.Parent := Toolbar;
+              ToolButton.Action := FindItemByName(s);
+            end
+            else
+            begin
+              if i > 0 then  { no bevel after last item }
+              begin
+                Bevel := TBevel.Create(Panel);
+                with Bevel do
+                begin
+                  Parent := Panel;
+                  Align := alLeft;
+                  Shape := bsLeftLine;
+                  Width := 4;
+                  AlignWithMargins := True;
+                  Margins.Bottom := 2;
+                  Margins.Left := 6;
+                  Margins.Top := 2;
+                end;
+              end;
+            end;
+            Toolbar.AutoSize := True;
+            Panel.AutoSize := True;
+            Panel.AutoSize := False;
+            Toolbar.AutoSize := False;
+            Dec(i);
+          end;
+        end;
+      end;
+      ToolbarPanel.Visible := True;
+    end
+    else
+    begin
+      k := 0;
+      { if items doesn't exist in ini, create them }
+      for i := 0 to ToolbarPanel.ControlCount - 1 do
+      begin
+        if ToolbarPanel.Controls[i] is TPanel then
+        begin
+          Panel := ToolbarPanel.Controls[i] as TPanel;
+          Toolbar := nil;
+          for j := 0 to Panel.ControlCount - 1 do
+            if Panel.Controls[j] is TBCToolBar then
+            begin
+              Toolbar := Panel.Controls[j] as TBCToolBar;
+              Break;
+            end;
+          if Assigned(Toolbar) then
+          begin
+            for j := 0 to Toolbar.ButtonCount - 1 do
+            begin
+              WriteString('ToolBarItems', IntToStr(k), Toolbar.Buttons[j].Action.Name);
+              Inc(k);
+            end;
+            if i < ToolbarPanel.ControlCount - 1 then
+              WriteString('ToolBarItems', IntToStr(k), '-');
+          end;
+        end;
+        Inc(k);
+      end;
+    end;
+  finally
+    Free;
+    ToolBarItems.Free;
+  end;
 end;
 
 end.

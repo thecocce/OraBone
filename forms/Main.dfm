@@ -697,10 +697,6 @@ object MainForm: TMainForm
                 ImageIndex = 136
               end
               item
-                Action = TNSNamesEditorAction
-                ImageIndex = 52
-              end
-              item
                 Caption = '-'
               end
               item
@@ -712,12 +708,16 @@ object MainForm: TMainForm
                 ImageIndex = 46
               end
               item
-                Caption = '-'
-              end
-              item
                 Action = SchemaDocumentAction
                 Caption = 'Sc&hema Document...'
                 ImageIndex = 69
+              end
+              item
+                Caption = '-'
+              end
+              item
+                Action = TNSNamesEditorAction
+                ImageIndex = 52
               end>
             Caption = '&Tools'
           end
@@ -824,12 +824,6 @@ object MainForm: TMainForm
             ShowCaption = False
           end
           item
-            Action = TNSNamesEditorAction
-            Caption = 'TNSNa&mes Editor...'
-            ImageIndex = 52
-            ShowCaption = False
-          end
-          item
             Caption = '-'
           end
           item
@@ -837,39 +831,16 @@ object MainForm: TMainForm
             Caption = 'O&ptions...'
             ImageIndex = 136
             ShowCaption = False
+          end
+          item
+            Action = TNSNamesEditorAction
+            Caption = 'TNSNa&mes Editor...'
+            ImageIndex = 52
+            ShowCaption = False
           end>
         ActionBar = ActionToolBar
       end
       item
-        Items = <
-          item
-            Action = ViewWordWrapAction
-            ImageIndex = 24
-          end>
-      end
-      item
-        Items = <
-          item
-            Action = FileSaveAction
-            Caption = '&Save'
-            ImageIndex = 3
-            ShortCut = 16467
-          end>
-      end
-      item
-        Items = <
-          item
-            Action = ExecuteStatementAction
-            Caption = '&Execute Statement'
-            ImageIndex = 36
-            ShortCut = 120
-          end
-          item
-            Action = ExecuteScriptAction
-            Caption = 'E&xecute Script'
-            ImageIndex = 37
-            ShortCut = 116
-          end>
       end>
     Images = ImagesDataModule.ImageList
     Left = 62
@@ -910,6 +881,13 @@ object MainForm: TMainForm
       Checked = True
       Hint = 'Show or hide the toolbar'
       OnExecute = ViewToolbarActionExecute
+    end
+    object ToolsOptionsAction: TAction
+      Category = '&Tools'
+      Caption = '&Options...'
+      Hint = 'Set options'
+      ImageIndex = 136
+      OnExecute = ToolsOptionsActionExecute
     end
     object ToolsCompareFilesAction: TAction
       Category = '&Tools'
@@ -1457,13 +1435,6 @@ object MainForm: TMainForm
       Hint = 'Configuration file (tnsnames.ora) editor'
       ImageIndex = 52
       OnExecute = TNSNamesEditorActionExecute
-    end
-    object ToolsOptionsAction: TAction
-      Category = '&Tools'
-      Caption = '&Options...'
-      Hint = 'Set options'
-      ImageIndex = 136
-      OnExecute = ToolsOptionsActionExecute
     end
     object DatabaseCreateAction: TAction
       Category = '&Create'

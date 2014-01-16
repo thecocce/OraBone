@@ -277,6 +277,7 @@ type
     FImageListCount: Integer;
     FEncoding: TEncoding;
     FProgressBar: TBCProgressBar;
+    FSQLFormatterDLLFound: Boolean;
     function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
@@ -926,7 +927,7 @@ begin
     EditDeleteWordAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteLineAction.Enabled := ActiveSQLDocumentFound;
     EditDeleteEOLAction.Enabled := ActiveSQLDocumentFound;
-    FormatSQLAction.Enabled := ActiveSQLDocumentFound;
+    FormatSQLAction.Enabled := ActiveSQLDocumentFound and FSQLFormatterDLLFound;
     try
       EditPasteAction.Enabled := Clipboard.HasFormat(CF_TEXT) and ActiveSQLDocumentFound and not OutputGridHasFocus; //ClipBoard.AsText <> '';
     except
@@ -1488,7 +1489,10 @@ begin
           begin
             SQLEditorFrame := TSQLEditorFrame(PageControl.Pages[i].Components[0]);
             if Assigned(SQLEditorFrame) then
+            begin
               SQLEditorFrame.AssignOptions;
+              SQLEditorFrame.CreateActionToolBar;
+            end;
           end
           else
           if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SQL_HISTORY then
@@ -1714,18 +1718,13 @@ procedure TMainForm.FormatSQLActionExecute(Sender: TObject);
 var
   SQLEditorFrame: TSQLEditorFrame;
   SynEdit: TBCOraSynEdit;
-  s: PWideChar;
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   if Assigned(SQLEditorFrame) then
   begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     if Trim(Synedit.Text) <> '' then
-    begin
-      s := FormatSQL(PWideChar(Synedit.Text), 1);
-      Synedit.Text := s;
-      FreeAString(s);
-    end;
+      Synedit.Text := FormatSQL(Synedit.Text, svOracle);
   end;
 end;
 
@@ -1777,6 +1776,7 @@ begin
   FConnecting := True;
   OraCall.OCIUnicode := True;
   FImageListCount := ImagesDataModule.ImageList.Count; { System images are inserted after }
+  FSQLFormatterDLLFound := FileExists(GetSQLFormatterDLLFilename);
   CreateProgressBar;
   ReadIniSizePositionAndState;
 end;
@@ -2132,29 +2132,12 @@ begin
 end;
 
 procedure TMainForm.DatabaseEditorMenuActionExecute(Sender: TObject);
-var
-  ActionToolBarStrings: TStrings;
-  SQLEditorFrame: TSQLEditorFrame;
 begin
   with TBigIniFile.Create(GetINIFilename) do
   try
-    {ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
-    ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
-    ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
-    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;}
-
-    SQLEditorFrame := OpenSQLEditor(PageControl.ActivePageCaption, True);
+    OpenSQLEditor(PageControl.ActivePageCaption, True);
     SetFields;
     PageControlChange(Sender);
-
-    ActionToolBarStrings := TStringList.Create;
-    { Toolbar }
-    // TODO: new toolbar
-    {ReadSectionValues('ActionToolBar', ActionToolBarStrings);
-    for i := 0 to ActionToolBarStrings.Count - 1 do
-      if not StrToBool(System.Copy(ActionToolBarStrings.Strings[i],
-        Pos('=', ActionToolBarStrings.Strings[i]) + 1, Length(ActionToolBarStrings.Strings[i]))) then
-           SQLEditorFrame.ToolbarPopupMenu.Items[i].Action.Execute; }
   finally
     Free;
   end;
