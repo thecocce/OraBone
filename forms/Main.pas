@@ -1333,9 +1333,11 @@ end;
 
 procedure TMainForm.ReadIniOptions;
 var
-  i, j: Integer;
+  i, j, k: Integer;
   Connections, SQLParameters, SQLFilters, SQLSorts: TStrings;
   ConnectString, SchemaParam: string;
+  Panel: TPanel;
+  ToolBar: TBCToolBar;
 begin
   OptionsContainer.ReadIniFile;
   SQLFormatterOptions.ReadIniFile;
@@ -1351,6 +1353,56 @@ begin
 
   with TBigIniFile.Create(GetINIFilename) do
   try
+    { if items doesn't exist in ini, create them }
+    if not SectionExists('ToolBarItems') then
+    begin
+      i := 0;
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ExecuteStatementAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ExecuteCurrentStatementAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ExecuteScriptAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'DatabaseCommitAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'DatabaseRollbackAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'DBMSOutputAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ExplainPlanAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileNewAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileOpenAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileSaveAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileSaveAsAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileSaveAllAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileCloseAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FileCloseAllAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FilePrintAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'FilePrintPreviewAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditIncreaseIndentAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditDecreaseIndentAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditSortAscAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditSortDescAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditToggleCaseAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditUndoAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'EditRedoAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'SearchAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'SearchReplaceAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'SearchFindInFilesAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ViewWordWrapAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ViewLineNumbersAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ViewSpecialCharsAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ViewSelectionModeAction');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), '-');
+      WriteString('ToolBarItems', IntToStr(PostInc(i)), 'ToolsCompareFilesAction');
+    end;
+
     ReadSectionValues('OpenConnections', Connections);
     j := Connections.Count;
     if j > 0 then

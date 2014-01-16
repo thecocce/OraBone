@@ -3010,7 +3010,7 @@ end;
 
 procedure TSQLEditorFrame.CreateActionToolBar(CreateToolBar: Boolean);
 var
-  i, j, k: Integer;
+  i: Integer;
   s: string;
   ToolBarItems: TStrings;
   Panel: TPanel;
@@ -3036,6 +3036,7 @@ begin
     { update if changed }
     IsChanged := ReadBool('ToolBarItemsChanged', 'Changed', False);
     EraseSection('ToolBarItemsChanged');
+
     if IsChanged or CreateToolBar then
     begin
       ToolbarPanel.Visible := False;
@@ -3096,36 +3097,6 @@ begin
       end;
       ToolbarPanel.Visible := True;
     end
-    else
-    begin
-      k := 0;
-      { if items doesn't exist in ini, create them }
-      for i := 0 to ToolbarPanel.ControlCount - 1 do
-      begin
-        if ToolbarPanel.Controls[i] is TPanel then
-        begin
-          Panel := ToolbarPanel.Controls[i] as TPanel;
-          Toolbar := nil;
-          for j := 0 to Panel.ControlCount - 1 do
-            if Panel.Controls[j] is TBCToolBar then
-            begin
-              Toolbar := Panel.Controls[j] as TBCToolBar;
-              Break;
-            end;
-          if Assigned(Toolbar) then
-          begin
-            for j := 0 to Toolbar.ButtonCount - 1 do
-            begin
-              WriteString('ToolBarItems', IntToStr(k), Toolbar.Buttons[j].Action.Name);
-              Inc(k);
-            end;
-            if i < ToolbarPanel.ControlCount - 1 then
-              WriteString('ToolBarItems', IntToStr(k), '-');
-          end;
-        end;
-        Inc(k);
-      end;
-    end;
   finally
     Free;
     ToolBarItems.Free;
