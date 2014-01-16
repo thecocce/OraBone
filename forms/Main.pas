@@ -1855,10 +1855,10 @@ begin
     ActionToolBar.Visible := ReadBool('Options', 'ShowToolBar', True);
     StatusBar.Visible := ReadBool('Options', 'ShowStatusBar', True);
 
-    ViewWordWrapAction.Checked := OptionsContainer.EnableWordWrap;
-    ViewLineNumbersAction.Checked := OptionsContainer.EnableLineNumbers;
-    ViewSpecialCharsAction.Checked := OptionsContainer.EnableSpecialChars;
-    ViewSelectionModeAction.Checked := OptionsContainer.EnableSelectionMode;
+    ViewWordWrapAction.Checked := ReadBool('Options', 'EnableWordWrap', False); //OptionsContainer.EnableWordWrap;
+    ViewLineNumbersAction.Checked := ReadBool('Options', 'EnableLineNumbers', True); //OptionsContainer.EnableLineNumbers;
+    ViewSpecialCharsAction.Checked := ReadBool('Options', 'EnableSpecialChars', False);  //OptionsContainer.EnableSpecialChars;
+    ViewSelectionModeAction.Checked := ReadBool('Options', 'EnableSelectionMode', False); //OptionsContainer.EnableSelectionMode;
     { Size }
     Width := ReadInteger('Size', 'Width', Round(Screen.Width * 0.8));
     Height := ReadInteger('Size', 'Height', Round(Screen.Height * 0.8));
@@ -2783,13 +2783,13 @@ var
 begin
   SQLEditorFrame := GetActiveSQLEditor;
   ActiveSQLDocumentFound := Assigned(SQLEditorFrame) and SQLEditorFrame.ActiveDocumentFound;
-  if ActiveSQLDocumentFound then
+  {if ActiveSQLDocumentFound then
   begin
     ViewWordWrapAction.Checked := SQLEditorFrame.WordWrap;
     ViewLineNumbersAction.Checked := SQLEditorFrame.LineNumbers;
     ViewSpecialCharsAction.Checked := SQLEditorFrame.SpecialChars;
     ViewSelectionModeAction.Checked := SQLEditorFrame.SelectionMode;
-  end;
+  end; }
   if PageControl.PageCount > 0 then
   for i := 0 to PageControl.PageCount - 1 do
     if PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER then

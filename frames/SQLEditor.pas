@@ -441,52 +441,7 @@ begin
   ToggleCaseMenuItem.Action := MainForm.EditToggleCaseAction;
   InsertObjectMenuItem.Action := MainForm.InsertObjectAction;
   FormatSQLMenuItem.Action := MainForm.FormatSQLAction;
-  ExecuteToolBar.Images := ImagesDataModule.ImageList;
-  CommitRollbackToolBar.Images := ImagesDataModule.ImageList;
-  DBMSToolBar.Images :=ImagesDataModule.ImageList;
-  PlanToolBar.Images := ImagesDataModule.ImageList;
-  StandardToolBar.Images := ImagesDataModule.ImageList;
-  SaveToolBar.Images := ImagesDataModule.ImageList;
-  PrintToolBar.Images := ImagesDataModule.ImageList;
-  IncreaseToolBar.Images := ImagesDataModule.ImageList;
-  SortToolBar.Images := ImagesDataModule.ImageList;
-  CaseToolBar.Images := ImagesDataModule.ImageList;
-  CommandToolBar.Images := ImagesDataModule.ImageList;
-  SearchToolBar.Images := ImagesDataModule.ImageList;
-  ViewToolBar.Images := ImagesDataModule.ImageList;
-  CompareToolBar.Images := ImagesDataModule.ImageList;
-
-  ExecuteToolButton.Action := MainForm.ExecuteStatementAction;
-  ExecuteCurrentToolButton.Action := MainForm.ExecuteCurrentStatementAction;
-  ExecuteScriptToolButton.Action := MainForm.ExecuteScriptAction;
-  CommitToolButton.Action := MainForm.DatabaseCommitAction;
-  RollbackToolButton.Action := MainForm.DatabaseRollbackAction;
-  DBMSOutputToolButton.Action := MainForm.DBMSOutputAction;
-  ExplainPlanToolButton.Action := MainForm.ExplainPlanAction;
-  FileNewToolButton.Action := MainForm.FileNewAction;
-  FileOpenToolButton.Action := MainForm.FileOpenAction;
-  FileCloseToolButton.Action := MainForm.FileCloseAction;
-  FileCloseAllToolButton.Action := MainForm.FileCloseAllAction;
-  FileSaveToolButton.Action := MainForm.FileSaveAction;
-  FileSaveAsToolButton.Action := MainForm.FileSaveAsAction;
-  FileSaveAllToolButton.Action := MainForm.FileSaveAllAction;
-  FilePrintToolButton.Action := MainForm.FilePrintAction;
-  FilePrintPreviewToolButton.Action := MainForm.FilePrintPreviewAction;
-  EditIncreaseIndentToolButton.Action := MainForm.EditIncreaseIndentAction;
-  EditDecreaseIndentToolButton.Action := MainForm.EditDecreaseIndentAction;
-  EditSortAscToolButton.Action := MainForm.EditSortAscAction;
-  EditSortDescToolButton.Action := MainForm.EditSortDescAction;
-  EditToggleCaseToolButton.Action := MainForm.EditToggleCaseAction;
-  EditUndoToolButton.Action := MainForm.EditUndoAction;
-  EditRedoToolButton.Action := MainForm.EditRedoAction;
-  ViewSelectionModeToolButton.Action := MainForm.ViewSelectionModeAction;
-  SearchToolButton.Action := MainForm.SearchAction;
-  SearchReplaceToolButton.Action := MainForm.SearchReplaceAction;
-  SearchFindInFilesToolButton.Action := MainForm.SearchFindInFilesAction;
-  ViewWordWrapToolButton.Action := MainForm.ViewWordWrapAction;
-  ViewLineNumbersToolButton.Action := MainForm.ViewLineNumbersAction;
-  ViewSpecialCharsToolButton.Action := MainForm.ViewSpecialCharsAction;
-  ToolsCompareFilesToolButton.Action := MainForm.ToolsCompareFilesAction;
+  
   ToggleBookmarkMenuItem.Action := MainForm.SearchToggleBookmarkAction;
   ToggleBookmarksMenuItem.Action := MainForm.SearchToggleBookmarksAction;
   ToggleBookmark1MenuItem.Action := MainForm.ToggleBookmarks1Action;
@@ -1752,9 +1707,9 @@ var
   i: Integer;
 begin
   MainForm.SetSQLEditorFields;
-  for i := 0 to ComponentCount - 1 do
-    if Components[i] is TToolButton then
-      TToolButton(Components[i]).Repaint;
+  //for i := 0 to ComponentCount - 1 do
+  //  if Components[i] is TToolButton then
+  //    TToolButton(Components[i]).Repaint;
 end;
 
 procedure TSQLEditorFrame.SetActivePageCaptionModified;
@@ -2240,6 +2195,9 @@ begin
     s := Trim(SynEdit.Text);
 
   s := Trim(UpperCase(RemoveParenthesisFromBegin(RemoveComments(s))));
+
+  if s = '' then
+    Exit;
 
   if s[Length(s)] = ';' then
     ExecuteScript(Current)
@@ -3010,8 +2968,9 @@ end;
 
 procedure TSQLEditorFrame.CreateActionToolBar(CreateToolBar: Boolean);
 var
-  i: Integer;
+  i, k, ButtonCount: Integer;
   s: string;
+  Action: TCustomAction;
   ToolBarItems: TStrings;
   Panel: TPanel;
   ToolBar: TBCToolBar;
@@ -3019,14 +2978,14 @@ var
   Bevel: TBevel;
   IsChanged: Boolean;
 
-  function FindItemByName(ItemName: string): TContainedAction;
+  function FindItemByName(ItemName: string): TCustomAction;
   var
     j: Integer;
   begin
     Result := nil;
     for j := 0 to MainForm.ActionManager.ActionCount - 1 do
       if MainForm.ActionManager.Actions[j].Name = ItemName then
-        Exit(MainForm.ActionManager.Actions[j]);
+        Exit(MainForm.ActionManager.Actions[j] as TCustomAction);
   end;
 
 begin
@@ -3055,10 +3014,24 @@ begin
           Panel.Align := alLeft;
           Panel.BevelOuter := bvNone;
           Panel.ParentColor := True;
+          Panel.AutoSize := True;
           Toolbar := TBCToolBar.Create(Panel);
           Toolbar.Parent := Panel;
           Toolbar.Images := ImagesDataModule.ImageList;
           Toolbar.Align := alLeft;
+          //ToolBar.Autosize := True;
+          { Fuck this, Embarcadero! AutoSize can't be used because syncronizing between action's checked property and 
+            the tool button's down property will be lost.
+             
+            See Vcl.ComCtrls.pas: procedure TToolButton.SetAutoSize(Value: Boolean); buttons are recreated. }
+          k := i;
+          ButtonCount := 0;
+          while (k >= 0) and (Pos('-', ToolBarItems.Strings[k]) = 0) do
+          begin
+            Inc(ButtonCount);
+            Dec(k);
+          end;
+          ToolBar.Width := ButtonCount * 23;
           s := '';
           while (i >= 0) and (s <> '-')  do
           begin
@@ -3067,7 +3040,10 @@ begin
             begin
               ToolButton := TToolButton.Create(Toolbar);
               ToolButton.Parent := Toolbar;
-              ToolButton.Action := FindItemByName(s);
+              Action := FindItemByName(s);
+              if Action.Tag = 99 then
+                ToolButton.Style := tbsCheck;
+              ToolButton.Action := Action;
             end
             else
             begin
@@ -3087,13 +3063,12 @@ begin
                 end;
               end;
             end;
-            Toolbar.AutoSize := True;
-            Panel.AutoSize := True;
-            Panel.AutoSize := False;
-            Toolbar.AutoSize := False;
+          
             Dec(i);
           end;
         end;
+        //Toolbar.AutoSize := False;
+        //Panel.AutoSize := False;
       end;
       ToolbarPanel.Visible := True;
     end

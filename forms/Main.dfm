@@ -1116,6 +1116,7 @@ object MainForm: TMainForm
       OnExecute = SQLHistoryActionExecute
     end
     object ViewWordWrapAction: TAction
+      Tag = 99
       Category = '&View'
       Caption = '&Word Wrap'
       Hint = 'Toggle word wrap'
@@ -1123,6 +1124,7 @@ object MainForm: TMainForm
       OnExecute = ViewWordWrapActionExecute
     end
     object ViewLineNumbersAction: TAction
+      Tag = 99
       Category = '&View'
       Caption = '&Line Numbers'
       Hint = 'Toggle line numbers'
@@ -1130,6 +1132,7 @@ object MainForm: TMainForm
       OnExecute = ViewLineNumbersActionExecute
     end
     object ViewSpecialCharsAction: TAction
+      Tag = 99
       Category = '&View'
       Caption = '&Special Chars'
       Hint = 'Toggle special characters'
@@ -1137,6 +1140,7 @@ object MainForm: TMainForm
       OnExecute = ViewSpecialCharsActionExecute
     end
     object ViewSelectionModeAction: TAction
+      Tag = 99
       Category = '&View'
       Caption = '&Selection Mode'
       Hint = 
