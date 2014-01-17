@@ -422,8 +422,7 @@ object AboutDialog: TAboutDialog
       '<a href="http://synedit.svn.sourceforge.net/viewvc/synedit/">Uni' +
       'code SynEdit</a>, <a href="http://flatdev.ovh.org/">SynWeb</a>, ' +
       '<a href="http://www.customicondesign.com/">Custom Icon Design</a' +
-      '>, <a href="http://code.google.com/p/omnixml/">OmniXML</a>, <a h' +
-      'ref="http://www.glyfx.com/">glyFX Icons</a>, '
+      '>, <a href="http://www.glyfx.com/">glyFX Icons</a>, '
     TabOrder = 3
     OnLinkClick = LinkClick
   end
