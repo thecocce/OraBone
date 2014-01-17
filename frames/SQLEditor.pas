@@ -1707,9 +1707,9 @@ var
   i: Integer;
 begin
   MainForm.SetSQLEditorFields;
-  //for i := 0 to ComponentCount - 1 do
-  //  if Components[i] is TToolButton then
-  //    TToolButton(Components[i]).Repaint;
+  for i := 0 to ComponentCount - 1 do
+    if Components[i] is TToolButton then
+      TToolButton(Components[i]).Repaint;
 end;
 
 procedure TSQLEditorFrame.SetActivePageCaptionModified;

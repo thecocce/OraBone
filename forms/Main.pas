@@ -687,7 +687,6 @@ begin
         OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format(LanguageDataModule.GetConstant('SearchFor'), [FindWhatText]));
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := True;
         Application.ProcessMessages;
-        Screen.Cursor := crHourGlass;
         FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
       finally
         ProgressBar.Hide;
@@ -711,7 +710,6 @@ begin
         end;
         SQLEditorFrame.OutputFrame.PageControl.EndDrag(False); { if close button pressed and search canceled, dragging will stay... }
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := False;
-        Screen.Cursor := crDefault;
       end;
     end;
   end;
@@ -1813,7 +1811,8 @@ begin
   except
     { silent exception, connection might have lost and we are closing, no need to inform about it }
   end;
-  Action := caFree;
+  SQLFormatterOptions.Free;
+  OptionsContainer.Free;
 end;
 
 procedure TMainForm.UpdateStatusBar;
@@ -2221,6 +2220,7 @@ var
   FormattedSchema: string;
   TabSheet: TTabSheet;
   SchemaBrowserFrame: TSchemaBrowserFrame;
+  TableNames: TStringList;
 begin
   FormattedSchema := Lib.FormatSchema(Schema);
   { check if sql editor tab already exists }
@@ -2255,8 +2255,9 @@ begin
     Result := TSQLEditorFrame.Create(TabSheet);
     Result.Parent := TabSheet;
     Result.PopupMenu := DocumentPopupMenu;
-    Result.HighlighterTableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
-      SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
+    TableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session, SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
+    Result.HighlighterTableNames := TableNames;
+    TableNames.Free;
     Result.ObjectNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam, True);
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;

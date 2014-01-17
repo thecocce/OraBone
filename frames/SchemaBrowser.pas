@@ -439,58 +439,62 @@ begin
   inherited;
   { Get object names for the highlighter }
   TableNames := Lib.SessionObjectNames(ObjectTreeFrame.Session, ObjectTreeFrame.SchemaParam);
-  { Table }
-  FTableBrowserFrame := TTableBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  FTableBrowserFrame.HighlighterTableNames := TableNames;
-  CustomizePageControlDialog.SetActivePage(FTableBrowserFrame.TablePageControl);
-  { View }
-  FViewBrowserFrame := TViewBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  FViewBrowserFrame.HighlighterTableNames := TableNames;
-  CustomizePageControlDialog.SetActivePage(FViewBrowserFrame.ViewPageControl);
-  { Function and procedures }
-  FFuncProcBrowserFrame := TFuncProcBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  FFuncProcBrowserFrame.HighlighterTableNames := TableNames;
-  CustomizePageControlDialog.SetActivePage(FFuncProcBrowserFrame.FuncProcPageControl);
-  { Packages }
-  FPackageBrowserFrame := TPackageBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  FPackageBrowserFrame.HighlighterTableNames := TableNames;
-  CustomizePageControlDialog.SetActivePage(FPackageBrowserFrame.PackagePageControl);
-  { Triggers }
-  FTriggerBrowserFrame := TTriggerBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  FTriggerBrowserFrame.HighlighterTableNames := TableNames;
-  CustomizePageControlDialog.SetActivePage(FTriggerBrowserFrame.TriggerPageControl);
-  { Constraints }
-  FConstraintBrowserFrame := TConstraintBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FConstraintBrowserFrame.ConstraintPageControl);
-  { Indexes }
-  FIndexBrowserFrame := TIndexBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FIndexBrowserFrame.IndexPageControl);
-  { Sequences }
-  FSequenceBrowserFrame := TSequenceBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FSequenceBrowserFrame.SequencePageControl);
-  { Synonyms }
-  FSynonymBrowserFrame := TSynonymBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FSynonymBrowserFrame.SynonymPageControl);
-  { DB Links }
-  FDBLinkBrowserFrame := TDBLinkBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FDBLinkBrowserFrame.DBLinkPageControl);
-  { Recycle bin }
-  FRecycleBinBrowserFrame := TRecycleBinBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session);
-  CustomizePageControlDialog.SetActivePage(FRecycleBinBrowserFrame.RecycleBinPageControl);
-  { Users }
-  FUserBrowserFrame := TUserBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
-    ObjectTreeFrame.SchemaParam);
-  CustomizePageControlDialog.SetActivePage(FUserBrowserFrame.UserPageControl);
+  try
+    { Table }
+    FTableBrowserFrame := TTableBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    FTableBrowserFrame.HighlighterTableNames := TableNames;
+    CustomizePageControlDialog.SetActivePage(FTableBrowserFrame.TablePageControl);
+    { View }
+    FViewBrowserFrame := TViewBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    FViewBrowserFrame.HighlighterTableNames := TableNames;
+    CustomizePageControlDialog.SetActivePage(FViewBrowserFrame.ViewPageControl);
+    { Function and procedures }
+    FFuncProcBrowserFrame := TFuncProcBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    FFuncProcBrowserFrame.HighlighterTableNames := TableNames;
+    CustomizePageControlDialog.SetActivePage(FFuncProcBrowserFrame.FuncProcPageControl);
+    { Packages }
+    FPackageBrowserFrame := TPackageBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    FPackageBrowserFrame.HighlighterTableNames := TableNames;
+    CustomizePageControlDialog.SetActivePage(FPackageBrowserFrame.PackagePageControl);
+    { Triggers }
+    FTriggerBrowserFrame := TTriggerBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    FTriggerBrowserFrame.HighlighterTableNames := TableNames;
+    CustomizePageControlDialog.SetActivePage(FTriggerBrowserFrame.TriggerPageControl);
+    { Constraints }
+    FConstraintBrowserFrame := TConstraintBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FConstraintBrowserFrame.ConstraintPageControl);
+    { Indexes }
+    FIndexBrowserFrame := TIndexBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FIndexBrowserFrame.IndexPageControl);
+    { Sequences }
+    FSequenceBrowserFrame := TSequenceBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FSequenceBrowserFrame.SequencePageControl);
+    { Synonyms }
+    FSynonymBrowserFrame := TSynonymBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FSynonymBrowserFrame.SynonymPageControl);
+    { DB Links }
+    FDBLinkBrowserFrame := TDBLinkBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FDBLinkBrowserFrame.DBLinkPageControl);
+    { Recycle bin }
+    FRecycleBinBrowserFrame := TRecycleBinBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session);
+    CustomizePageControlDialog.SetActivePage(FRecycleBinBrowserFrame.RecycleBinPageControl);
+    { Users }
+    FUserBrowserFrame := TUserBrowserFrame.Create(Self, RightPanel, ObjectTreeFrame.Session,
+      ObjectTreeFrame.SchemaParam);
+    CustomizePageControlDialog.SetActivePage(FUserBrowserFrame.UserPageControl);
+  finally
+    TableNames.Free;
+  end;
 end;
 
 procedure TSchemaBrowserFrame.CreateFunctionActionExecute(Sender: TObject);

@@ -111,7 +111,7 @@ type
     procedure Refresh;
     function GetSchemaName: string;
     function GetConnectString: string;
-    function GetSchemaItems: TStringList;
+    //function GetSchemaItems: TStringList;
     function GetSelectedObjectText: string;
     function GetSelectedObjectName: string;
     function GetSelectedObjectParentText: string;
@@ -270,11 +270,11 @@ begin
   end;
 end;
 
-function TObjectTreeFrame.GetSchemaItems: TStringList;
+{function TObjectTreeFrame.GetSchemaItems: TStringList;
 begin
   Result := TStringList.Create;
   Result.AddStrings(SchemaComboBox.Items);
-end;
+end;}
 
 procedure TObjectTreeFrame.SetSchemaParam(Value: string);
 begin
@@ -526,6 +526,7 @@ begin
         Data.NodeText := 'Wrapped';
         Data.NodeType := OBJECT_TYPE_PACKAGE;
         Data.ImageIndex := IMG_IDX_PACKAGE_CHILD;
+        //VirtualDrawTree.ValidateNode(Node, False);
       end
       else
       begin
@@ -641,6 +642,7 @@ begin
                 Data.StateIndex := StateIndex;
                 Data.CaretX := Pos(NodeText, StringList.Strings[i]);
                 Data.CaretY := i + 1;
+                //VirtualDrawTree.ValidateNode(Node, False);
 
                 if (NodeType = 'FUNCTION') or (NodeType = 'PROCEDURE') or (NodeType = 'TYPE') then
                 begin
@@ -703,8 +705,8 @@ begin
                           Token := StringReplace(Token, ' . ', '.', []);
                          // Token := StringReplace(Token, 'IS RECORD (', '', []);
                           ChildData.NodeText := Trim(Token);
-
                           ChildData.ImageIndex := IMG_IDX_VARIABLE;
+                          //VirtualDrawTree.ValidateNode(Node, False);
                           Token := '';
                           SQLTokenizer.Next;
                         end;
@@ -1113,9 +1115,9 @@ var
   SectionValues: TStrings;
 begin
   if not Assigned(FTreeObjects) then
-    FTreeObjects := TStringList.Create;
-
-  FTreeObjects.Clear;
+    FTreeObjects := TStringList.Create
+  else
+    FTreeObjects.Clear;
   SectionValues := TStringList.Create;
   with TBigIniFile.Create(GetINIFilename) do
   try
@@ -1299,7 +1301,7 @@ begin
       if FieldByName('STATUS').AsWideString  = 'DISABLED' then
         Data.StateIndex := 2;
       Data.NodeText := FieldByName('NAME').AsString;
-
+      //VirtualDrawTree.ValidateNode(Node, False);
       if NodeType = 'PACKAGE' then
       begin
         { add specification and body }
@@ -1320,10 +1322,10 @@ begin
         Data.Level := 2;
         Data.ImageIndex := IMG_IDX_SQL_SCRIPT;
         { body items are added in OnInitChildren }
+        //VirtualDrawTree.ValidateNode(Node, False);
       end;
       Next;
     end;
-
 
     Result := RootNode;
   end;
@@ -1462,7 +1464,7 @@ end;
 
 destructor TEditLink.Destroy;
 begin
-  //FEdit.Free;
+  FEdit.Free;
   inherited;
 end;
 

@@ -2,7 +2,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 554
+  Height = 302
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -14,14 +14,14 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   object Splitter: TJvSplitter
     Left = 289
     Top = 0
-    Height = 553
+    Height = 301
     Hint = ' '
   end
   object LeftPanel: TPanel
     Left = 0
     Top = 0
     Width = 289
-    Height = 553
+    Height = 301
     Hint = ' '
     Align = alLeft
     BevelOuter = bvNone
@@ -34,31 +34,39 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       Left = 1
       Top = 0
       Width = 288
-      Height = 552
+      Height = 300
       Align = alClient
       Ctl3D = True
       ParentCtl3D = False
       TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitWidth = 288
+      ExplicitHeight = 300
       inherited BottomPanel: TPanel
-        Top = 526
+        Top = 274
         Width = 288
         ParentShowHint = False
+        ExplicitTop = 274
+        ExplicitWidth = 288
         inherited ComboPanel: TPanel
           Width = 288
           Hint = ' '
           ParentShowHint = False
+          ExplicitWidth = 288
           inherited SchemaComboBox: TBCComboBox
             Width = 261
             Hint = 'Schema name'
+            ExplicitWidth = 261
           end
           inherited FilterToolBar: TBCToolBar
             Left = 264
+            ExplicitLeft = 264
           end
         end
       end
       inherited VirtualDrawTree: TVirtualDrawTree
         Width = 288
-        Height = 526
+        Height = 274
         Hint = ' '
         ParentShowHint = False
         PopupMenu = PopupMenu
@@ -66,6 +74,8 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         OnEditing = ObjectTreeFrameVirtualDrawTreeEditing
         OnKeyUp = ObjectTreeFrameVirtualDrawTreeKeyUp
         OnMouseDown = ObjectTreeFrameVirtualDrawTreeMouseDown
+        ExplicitWidth = 288
+        ExplicitHeight = 274
       end
       inherited UsersQuery: TOraQuery
         Left = 234
@@ -77,7 +87,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     Left = 292
     Top = 0
     Width = 158
-    Height = 553
+    Height = 301
     Hint = ' '
     Align = alClient
     BevelOuter = bvNone
@@ -87,7 +97,6 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     TabOrder = 1
   end
   object SchemaActionList: TActionList
-    Images = ObjectTreeFrame.TreeImageList
     Left = 108
     Top = 244
     object AlterTableAction: TAction
@@ -336,7 +345,6 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     end
   end
   object PopupMenu: TBCPopupMenu
-    Images = ObjectTreeFrame.TreeImageList
     Left = 148
     Top = 64
   end
