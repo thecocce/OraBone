@@ -3,7 +3,7 @@ program OraBone;
 uses
   {$ifdef DEBUG}
   FastMM4,
-  {$endif}
+  {$endif }
   Forms,
   System.Classes,
   System.SysUtils,
@@ -135,7 +135,8 @@ uses
   BCFrames.OptionsSQLUpdate in '..\..\Common\frames\BCFrames.OptionsSQLUpdate.pas' {OptionsSQLUpdateFrame: TFrame},
   BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
   BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
-  BCSQL.Consts in '..\..\Common\units\BCSQL.Consts.pas';
+  BCSQL.Consts in '..\..\Common\units\BCSQL.Consts.pas',
+  BCFrames.OptionsSQLWhitespace in '..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas' {Frame1: TFrame};
 
 {$R *.res}
 
@@ -153,8 +154,8 @@ begin
   if StyleFilename <> 'Windows' then
     TStyleManager.SetStyle(TStyleManager.LoadFromFile(System.SysUtils.Format('%sStyles\%s', [ExtractFilePath(ParamStr(0)), StyleFilename])));
   Application.Title := 'OraBone';
-  Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(TImagesDataModule, ImagesDataModule);
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.

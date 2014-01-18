@@ -1333,11 +1333,9 @@ end;
 
 procedure TMainForm.ReadIniOptions;
 var
-  i, j, k: Integer;
+  i, j: Integer;
   Connections, SQLParameters, SQLFilters, SQLSorts: TStrings;
   ConnectString, SchemaParam: string;
-  Panel: TPanel;
-  ToolBar: TBCToolBar;
 begin
   OptionsContainer.ReadIniFile;
   SQLFormatterOptions.ReadIniFile;
