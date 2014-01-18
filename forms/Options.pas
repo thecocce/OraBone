@@ -12,7 +12,7 @@ uses
   BCFrames.OptionsOutput, BCFrames.OptionsToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
   BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
   BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate, BCCommon.Images,
-  BCFrames.OptionsSQLWhitespace;
+  BCFrames.OptionsSQLWhitespace, BCFrames.OptionsSQLCapitalization, BCFrames.OptionsSQLIndentation;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -61,6 +61,8 @@ type
     SQLInsertAction: TAction;
     SQLUpdateAction: TAction;
     SQLWhitespaceAction: TAction;
+    SQLIndentationAction: TAction;
+    SQLCapitalizationAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
@@ -310,30 +312,42 @@ begin
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLFormatterAction.ImageIndex;
     Data.Caption := SQLFormatterAction.Caption;
-    { Select }
-    ChildNode := AddChild(Node);
-    Data := GetNodeData(ChildNode);
-    Data.Index := PostInc(i);
-    Data.ImageIndex := SQLSelectAction.ImageIndex;
-    Data.Caption := SQLSelectAction.Caption;
-    { Insert }
-    ChildNode := AddChild(Node);
-    Data := GetNodeData(ChildNode);
-    Data.Index := PostInc(i);
-    Data.ImageIndex := SQLInsertAction.ImageIndex;
-    Data.Caption := SQLInsertAction.Caption;
-    { Update }
-    ChildNode := AddChild(Node);
-    Data := GetNodeData(ChildNode);
-    Data.Index := PostInc(i);
-    Data.ImageIndex := SQLUpdateAction.ImageIndex;
-    Data.Caption := SQLUpdateAction.Caption;
     { Alignments }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
     Data.Caption := SQLAlignmentsAction.Caption;
+    { Capitalization }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLCapitalizationAction.ImageIndex;
+    Data.Caption := SQLCapitalizationAction.Caption;
+    { Indentation }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLIndentationAction.ImageIndex;
+    Data.Caption := SQLIndentationAction.Caption;
+    { Insert }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLInsertAction.ImageIndex;
+    Data.Caption := SQLInsertAction.Caption;
+    { Select }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLSelectAction.ImageIndex;
+    Data.Caption := SQLSelectAction.Caption;
+    { Update }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLUpdateAction.ImageIndex;
+    Data.Caption := SQLUpdateAction.Caption;
     { Whitespace }
     ChildNode := AddChild(Node);
     Data := GetNodeData(ChildNode);
@@ -478,15 +492,21 @@ begin
       OptionsDateFormatFrame(Self, FOraSession).Show;
     if (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1) then
       OptionsTimeFormatFrame(Self, FOraSession).Show;
+
+
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0) then
-      OptionsSQLSelectFrame(Self).Show;
-    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
-      OptionsSQLInsertFrame(Self).Show;
-    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 2) then
-      OptionsSQLUpdateFrame(Self).Show;
-    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 3) then
       OptionsSQLAlignmentsFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
+      OptionsSQLCapitalizationFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 2) then
+      OptionsSQLIndentationFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 3) then
+      OptionsSQLInsertFrame(Self).Show;
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 4) then
+      OptionsSQLSelectFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 5) then
+      OptionsSQLUpdateFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 6) then
       OptionsSQLWhitespaceFrame(Self).Show;
   end;
 end;

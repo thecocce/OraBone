@@ -136,7 +136,9 @@ uses
   BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
   BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
   BCSQL.Consts in '..\..\Common\units\BCSQL.Consts.pas',
-  BCFrames.OptionsSQLWhitespace in '..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas' {OptionsSQLWhitespaceFrame: TFrame};
+  BCFrames.OptionsSQLWhitespace in '..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas' {OptionsSQLWhitespaceFrame: TFrame},
+  BCFrames.OptionsSQLIndentation in '..\..\Common\frames\BCFrames.OptionsSQLIndentation.pas' {OptionsSQLIndentationFrame: TFrame},
+  BCFrames.OptionsSQLCapitalization in '..\..\Common\frames\BCFrames.OptionsSQLCapitalization.pas' {OptionsSQLCapitalizationFrame: TFrame};
 
 {$R *.res}
 

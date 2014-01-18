@@ -259,17 +259,23 @@ object OptionsForm: TOptionsForm
       Caption = 'SQL Formatter'
       ImageIndex = 91
     end
-    object SQLSelectAction: TAction
-      Caption = 'Select'
+    object SQLAlignmentsAction: TAction
+      Caption = 'Alignments'
+    end
+    object SQLCapitalizationAction: TAction
+      Caption = 'SQLCapitalizationAction'
+    end
+    object SQLIndentationAction: TAction
+      Caption = 'SQLIndentationAction'
     end
     object SQLInsertAction: TAction
       Caption = 'Insert'
     end
+    object SQLSelectAction: TAction
+      Caption = 'Select'
+    end
     object SQLUpdateAction: TAction
       Caption = 'Update'
-    end
-    object SQLAlignmentsAction: TAction
-      Caption = 'Alignments'
     end
     object SQLWhitespaceAction: TAction
       Caption = 'Whitespace'
