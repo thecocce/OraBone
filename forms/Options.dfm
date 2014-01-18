@@ -271,5 +271,8 @@ object OptionsForm: TOptionsForm
     object SQLAlignmentsAction: TAction
       Caption = 'Alignments'
     end
+    object SQLWhitespaceAction: TAction
+      Caption = 'Whitespace'
+    end
   end
 end

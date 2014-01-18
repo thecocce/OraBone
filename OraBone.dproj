@@ -4,11 +4,11 @@
         <ProjectVersion>14.6</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -521,7 +521,7 @@
         </DCCReference>
         <DCCReference Include="..\..\Common\units\BCSQL.Consts.pas"/>
         <DCCReference Include="..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas">
-            <Form>Frame1</Form>
+            <Form>OptionsSQLWhitespaceFrame</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>

@@ -136,7 +136,7 @@ uses
   BCDialogs.OptionsToolBarItems in '..\..\Common\dialogs\BCDialogs.OptionsToolBarItems.pas' {OptionsToolBarItemsDialog},
   BCFrames.OptionsToolBar in '..\..\Common\frames\BCFrames.OptionsToolBar.pas' {OptionsToolBarFrame: TFrame},
   BCSQL.Consts in '..\..\Common\units\BCSQL.Consts.pas',
-  BCFrames.OptionsSQLWhitespace in '..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas' {Frame1: TFrame};
+  BCFrames.OptionsSQLWhitespace in '..\..\Common\frames\BCFrames.OptionsSQLWhitespace.pas' {OptionsSQLWhitespaceFrame: TFrame};
 
 {$R *.res}
 

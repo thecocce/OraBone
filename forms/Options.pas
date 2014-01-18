@@ -11,7 +11,8 @@ uses
   OptionsDateFormat, OptionsTimeFormat, BCFrames.OptionsCompare, BCFrames.OptionsPrint, BCFrames.OptionsStatusBar,
   BCFrames.OptionsOutput, BCFrames.OptionsToolBar, BCFrames.OptionsEditorCompletionProposal, System.Actions,
   BCFrames.OptionsEditorSearch, BCSQL.Formatter, BCFrames.OptionsSQLSelect, BCCommon.OptionsContainer,
-  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate, BCCommon.Images;
+  BCFrames.OptionsSQLAlignments, BCFrames.OptionsSQLInsert, BCFrames.OptionsSQLUpdate, BCCommon.Images,
+  BCFrames.OptionsSQLWhitespace;
 
 type
   POptionsRec = ^TOptionsRec;
@@ -59,6 +60,7 @@ type
     ScrollBox: TScrollBox;
     SQLInsertAction: TAction;
     SQLUpdateAction: TAction;
+    SQLWhitespaceAction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure OptionsVirtualStringTreeClick(Sender: TObject);
@@ -332,6 +334,12 @@ begin
     Data.Index := PostInc(i);
     Data.ImageIndex := SQLAlignmentsAction.ImageIndex;
     Data.Caption := SQLAlignmentsAction.Caption;
+    { Whitespace }
+    ChildNode := AddChild(Node);
+    Data := GetNodeData(ChildNode);
+    Data.Index := PostInc(i);
+    Data.ImageIndex := SQLWhitespaceAction.ImageIndex;
+    Data.Caption := SQLWhitespaceAction.Caption;
 
     Node.ChildCount := 4;
     OptionsVirtualStringTree.Selected[Node] := True;
@@ -478,6 +486,8 @@ begin
       OptionsSQLUpdateFrame(Self).Show;
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 3) then
       OptionsSQLAlignmentsFrame(Self).Show;
+    if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 4) then
+      OptionsSQLWhitespaceFrame(Self).Show;
   end;
 end;
 
