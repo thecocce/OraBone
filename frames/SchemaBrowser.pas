@@ -157,7 +157,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.ClipBrd, BCCommon.OptionsContainer, CustomizePages, CreateSynonym, OraError, DropTable, AnalyzeTable,
+  Vcl.ClipBrd, BCCommon.OptionsContainer, CustomizePages, CreateSynonym, OraError, DropTable,
   DropUser, CustomizeObjectBrowser, CreateUser, CreateTable, CreateView, CreateSequence,
   CreateIndex, CreateConstraint, CreateTrigger, CreateDBLink, CreateFunction, CreateProcedure,
   CreatePackage, DataModule, AlterTable, AlterView, GrantPrivileges, ChangeUserPassword, BCCommon.Lib,
@@ -293,12 +293,21 @@ begin
 end;
 
 procedure TSchemaBrowserFrame.AnalyzeTableActionExecute(Sender: TObject);
+var
+  OraSQL: TOraSQL;
 begin
   try
-    if AnalyzeTableDialog.Open(ObjectTreeFrame.ObjectName) then
-    begin
-      ObjectTreeFrame.Session.ExecSQL(AnalyzeTableDialog.GetSQL, []);
+    OraSQL := TOraSQL.Create(nil);
+    try
+      OraSQL.Session := ObjectTreeFrame.Session;
+      OraSQL.Text := 'BEGIN SYS.DBMS_STATS.GATHER_TABLE_STATS(:schema, :table, CASCADE => TRUE); END;';
+      OraSQL.ParamByName('SCHEMA').AsString := ObjectTreeFrame.SchemaParam;
+      OraSQL.ParamByName('TABLE').AsString := ObjectTreeFrame.ObjectName;
+      OraSQL.Prepare;
+      OraSQL.Execute;
+    finally
       ShowMessage('Table analyzed.');
+      OraSQL.Free;
     end;
   except
     on E: EOraError do

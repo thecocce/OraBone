@@ -14,18 +14,19 @@ type
     LinkRow2Label: TLinkLabel;
     LinkRow3Label: TLinkLabel;
     MemoryAvailableLabel: TLabel;
-    OKButton: TButton;
     OraBoneImage: TImage;
     OSLabel: TLabel;
     ProgramNameiLabel: TLabel;
     ThanksToLabel: TLabel;
     TopPanel: TPanel;
     VersionLabel: TLabel;
-    Button1: TButton;
+    BottomPanel: TPanel;
+    Button2: TButton;
+    DonationsButton: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure LinkClick(Sender: TObject; const Link: string; LinkType: TSysLinkType);
-    procedure Button1Click(Sender: TObject);
+    procedure DonationsButtonClick(Sender: TObject);
   private
     function GetVersion: string;
   public
@@ -77,7 +78,7 @@ begin
   BrowseURL(Link);
 end;
 
-procedure TAboutDialog.Button1Click(Sender: TObject);
+procedure TAboutDialog.DonationsButtonClick(Sender: TObject);
 begin
   inherited;
   BrowseURL(DONATION_URL);

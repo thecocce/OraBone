@@ -263,10 +263,10 @@ object OptionsForm: TOptionsForm
       Caption = 'Alignments'
     end
     object SQLCapitalizationAction: TAction
-      Caption = 'SQLCapitalizationAction'
+      Caption = 'Capitalization'
     end
     object SQLIndentationAction: TAction
-      Caption = 'SQLIndentationAction'
+      Caption = 'Indentation'
     end
     object SQLInsertAction: TAction
       Caption = 'Insert'

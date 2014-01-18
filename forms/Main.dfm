@@ -1250,6 +1250,7 @@ object MainForm: TMainForm
       OnExecute = InsertObjectActionExecute
     end
     object DBMSOutputAction: TAction
+      Tag = 99
       Category = 'SQLEditor'
       Caption = 'DBMS Output'
       Hint = 'Toggle DBMS output'

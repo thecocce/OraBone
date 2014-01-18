@@ -2078,7 +2078,7 @@ begin
       ScriptQuery.AfterExecute := OraScriptQueryAfterExecuteEvent;
       FOutputFrame.ClearStrings('Output: ' + GetActivePageCaption);
       SynEdit.StartTime := Now;
-      if DBMSOutputToolButton.Down then
+      if MainForm.DBMSOutputAction.Checked then // DBMSOutputToolButton.Down then
         EnableDBMSOutput;
       { parameters }
       if ScriptQuery.ParamCount > 0 then
@@ -2106,7 +2106,7 @@ begin
         else
           OraScript.Statements.Items[i].Execute;
       end;
-      if DBMSOutputToolButton.Down then
+      if MainForm.DBMSOutputAction.Checked then //DBMSOutputToolButton.Down then
         GetDBMSOutput;
       OutputPanel.Visible := True;
     except
@@ -2517,7 +2517,7 @@ begin
 
     SynEdit.StartTime := Now;
     try
-      if DBMSOutputToolButton.Down then
+      if MainForm.DBMSOutputAction.Checked then //DBMSOutputToolButton.Down then
         EnableDBMSOutput;
       if not CreateNewSession then
         if not FSession.InTransaction then
@@ -2535,7 +2535,7 @@ begin
       end;
       SynEdit.InThread := False;
       if QuerySuccess then
-        if DBMSOutputToolButton.Down then
+        if MainForm.DBMSOutputAction.Checked then //DBMSOutputToolButton.Down then
           GetDBMSOutput;
     except
       QuerySuccess := SynEdit.OraSQL.ErrorOffset = 0;
@@ -2676,7 +2676,7 @@ begin
         FOutputFrame.AddDBMSOutput('DBMS output: ' + GetActivePageCaption, OraSession.ParamByName('BUFFER').AsWideString);
         OraSession.ExecSQL('BEGIN dbms_output.get_line(:buffer,:status); END;', ['',0]);
       end;
-      if Found or not DBMSOutputToolButton.Down then
+      if Found or not MainForm.DBMSOutputAction.Checked then //DBMSOutputToolButton.Down then
       begin
         OraSession.ExecSQL('BEGIN dbms_output.disable; END;', []);
         FDBMSTimer.Enabled := False;

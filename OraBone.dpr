@@ -2,7 +2,6 @@ program OraBone;
 
 uses
   {$ifdef DEBUG}
-  FastMM4,
   {$endif }
   Forms,
   System.Classes,
@@ -46,7 +45,6 @@ uses
   ImportTableData in 'dialogs\ImportTableData.pas' {ImportTableDataDialog},
   CustomizePages in 'dialogs\CustomizePages.pas' {CustomizePageControlDialog},
   DropTable in 'dialogs\DropTable.pas' {DropTableDialog},
-  AnalyzeTable in 'dialogs\AnalyzeTable.pas' {AnalyzeTableDialog},
   DropUser in 'dialogs\DropUser.pas' {DropUserDialog},
   UserBrowser in 'frames\UserBrowser.pas' {UserBrowserFrame: TFrame},
   SchemaDocument in 'forms\SchemaDocument.pas' {SchemaDocumentForm},

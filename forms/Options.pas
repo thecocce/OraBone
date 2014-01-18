@@ -355,7 +355,7 @@ begin
     Data.ImageIndex := SQLWhitespaceAction.ImageIndex;
     Data.Caption := SQLWhitespaceAction.Caption;
 
-    Node.ChildCount := 4;
+    Node.ChildCount := 7;
     OptionsVirtualStringTree.Selected[Node] := True;
     OptionsVirtualStringTree.Expanded[Node] := True;
     OptionsVirtualStringTree.Selected[OptionsVirtualStringTree.GetFirst] := True;

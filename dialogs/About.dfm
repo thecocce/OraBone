@@ -4,7 +4,7 @@ object AboutDialog: TAboutDialog
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'About OraBone'
-  ClientHeight = 289
+  ClientHeight = 284
   ClientWidth = 383
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object AboutDialog: TAboutDialog
   OnDestroy = FormDestroy
   DesignSize = (
     383
-    289)
+    284)
   PixelsPerInch = 96
   TextHeight = 13
   object ThanksToLabel: TLabel
@@ -39,6 +39,50 @@ object AboutDialog: TAboutDialog
     AutoSize = False
     Caption = 'Copyright '#169' 2010-2014 Lasse Rautiainen. All Rights Reserved.'
   end
+  object BottomPanel: TPanel
+    Left = 0
+    Top = 243
+    Width = 383
+    Height = 41
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Align = alBottom
+    BevelOuter = bvNone
+    Padding.Left = 8
+    Padding.Top = 8
+    Padding.Right = 8
+    Padding.Bottom = 8
+    TabOrder = 5
+    ExplicitTop = 215
+    ExplicitWidth = 375
+    object Button2: TButton
+      Left = 300
+      Top = 8
+      Width = 75
+      Height = 25
+      Align = alRight
+      Cancel = True
+      Caption = '&OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+      ExplicitLeft = 292
+    end
+    object DonationsButton: TButton
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Align = alLeft
+      Cancel = True
+      Caption = 'Donations'
+      TabOrder = 1
+      OnClick = DonationsButtonClick
+      ExplicitTop = 16
+    end
+  end
   object TopPanel: TPanel
     Left = -10
     Top = -2
@@ -48,7 +92,7 @@ object AboutDialog: TAboutDialog
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
-    TabOrder = 4
+    TabOrder = 3
     DesignSize = (
       411
       139)
@@ -372,18 +416,6 @@ object AboutDialog: TAboutDialog
       Caption = 'Memory Available to Windows: %s'
     end
   end
-  object OKButton: TButton
-    Left = 300
-    Top = 252
-    Width = 75
-    Height = 25
-    Anchors = [akRight, akBottom]
-    Cancel = True
-    Caption = '&OK'
-    Default = True
-    ModalResult = 1
-    TabOrder = 0
-  end
   object LinkRow1Label: TLinkLabel
     Left = 18
     Top = 169
@@ -395,7 +427,7 @@ object AboutDialog: TAboutDialog
       'adero RAD Studio</a>, <a href="http://www.devart.com/odac/">Orac' +
       'le Data Access Components</a>, <a href="http://www.delphi-jedi.o' +
       'rg/">Jedi Project</a>,  '
-    TabOrder = 1
+    TabOrder = 0
     OnLinkClick = LinkClick
   end
   object LinkRow3Label: TLinkLabel
@@ -409,7 +441,7 @@ object AboutDialog: TAboutDialog
       'http://www.soft-gems.net">Mike Lischke</a>, <a href="http://poor' +
       'sql.com/">Tao Klerks</a>, <a href="http://robstechcorner.blogspo' +
       't.fi/">Robert Love</a>'
-    TabOrder = 2
+    TabOrder = 1
     OnLinkClick = LinkClick
   end
   object LinkRow2Label: TLinkLabel
@@ -423,7 +455,7 @@ object AboutDialog: TAboutDialog
       'code SynEdit</a>, <a href="http://flatdev.ovh.org/">SynWeb</a>, ' +
       '<a href="http://www.customicondesign.com/">Custom Icon Design</a' +
       '>, <a href="http://www.glyfx.com/">glyFX Icons</a>, '
-    TabOrder = 3
+    TabOrder = 2
     OnLinkClick = LinkClick
   end
   object GrayLinePanel: TPanel
@@ -435,17 +467,6 @@ object AboutDialog: TAboutDialog
     BevelOuter = bvNone
     Color = cl3DLight
     ParentBackground = False
-    TabOrder = 5
-  end
-  object Button1: TButton
-    Left = 8
-    Top = 252
-    Width = 75
-    Height = 25
-    Anchors = [akRight, akBottom]
-    Cancel = True
-    Caption = 'Donations'
-    TabOrder = 6
-    OnClick = Button1Click
+    TabOrder = 4
   end
 end
