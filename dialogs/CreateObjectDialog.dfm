@@ -30,7 +30,6 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
     OnChange = PageControlChange
     ActivePageCaption = 'Source'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object SourceTabSheet: TTabSheet

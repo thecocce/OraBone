@@ -21,7 +21,6 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
     OnChange = RecycleBinPageControlChange
     ActivePageCaption = 'Info'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet

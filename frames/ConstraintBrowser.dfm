@@ -21,7 +21,6 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     OnChange = ConstraintPageControlChange
     ActivePageCaption = 'Info'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet
@@ -92,7 +91,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 13
+            Height = 19
             Align = alRight
           end
           object ConstraintToolBar: TBCToolBar

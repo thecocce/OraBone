@@ -21,7 +21,6 @@ object IndexBrowserFrame: TIndexBrowserFrame
     OnChange = IndexPageControlChange
     ActivePageCaption = 'Info'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet
@@ -73,9 +72,8 @@ object IndexBrowserFrame: TIndexBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 19
           Align = alRight
-          ExplicitHeight = 13
         end
         object InfoToolBar: TBCToolBar
           Left = 0

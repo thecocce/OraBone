@@ -34,7 +34,6 @@ object SchemaCompareForm: TSchemaCompareForm
     TabOrder = 0
     ActivePageCaption = '<select schema>'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object Schema1TabSheet: TTabSheet

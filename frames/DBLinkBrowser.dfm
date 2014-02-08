@@ -21,7 +21,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     OnChange = DBLinkPageControlChange
     ActivePageCaption = 'Source'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet

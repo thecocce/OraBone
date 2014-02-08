@@ -2,6 +2,7 @@ program OraBone;
 
 uses
   {$ifdef DEBUG}
+  //FastMM4,
   {$endif }
   Forms,
   System.Classes,

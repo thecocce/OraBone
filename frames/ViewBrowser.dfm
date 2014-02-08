@@ -21,7 +21,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     OnChange = ViewPageControlChange
     ActivePageCaption = 'Source'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object ColumnsTabSheet: TTabSheet
@@ -85,7 +84,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 19
+          Height = 13
           Align = alRight
         end
         object JvToolBar5: TBCToolBar

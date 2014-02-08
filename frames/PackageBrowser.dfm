@@ -21,7 +21,6 @@ object PackageBrowserFrame: TPackageBrowserFrame
     OnChange = PackagePageControlChange
     ActivePageCaption = 'Specification'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object SpecificationTabSheet: TTabSheet
@@ -84,7 +83,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
           Gutter.ShowBookmarkPanel = False
-          Gutter.Width = 54
+          Gutter.Width = 34
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText
@@ -234,7 +233,7 @@ object PackageBrowserFrame: TPackageBrowserFrame
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
           Gutter.ShowBookmarkPanel = False
-          Gutter.Width = 54
+          Gutter.Width = 34
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText

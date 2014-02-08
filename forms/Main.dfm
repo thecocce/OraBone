@@ -120,7 +120,6 @@ object MainForm: TMainForm
       OnMouseDown = PageControlMouseDown
       RightClickSelect = True
       TabDragDrop = True
-      TabClosed = False
       HoldShiftToDragDrop = False
       ShowCloseButton = False
       OnCloseButtonClick = PageControlCloseButtonClick

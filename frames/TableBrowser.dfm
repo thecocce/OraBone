@@ -21,7 +21,6 @@ object TableBrowserFrame: TTableBrowserFrame
     OnChange = TablePageControlChange
     ActivePageCaption = 'Source'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object ColumnsTabSheet: TTabSheet
@@ -86,9 +85,8 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 13
           Align = alRight
-          ExplicitHeight = 13
         end
         object JvToolBar5: TBCToolBar
           Left = 0
@@ -1485,7 +1483,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 86
     Top = 30
     Bitmap = {
-      494C01011E002100140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011E002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

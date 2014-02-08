@@ -21,7 +21,6 @@ object UserBrowserFrame: TUserBrowserFrame
     OnChange = UserPageControlChange
     ActivePageCaption = 'Info'
     TabDragDrop = False
-    TabClosed = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
     object InfoTabSheet: TTabSheet
