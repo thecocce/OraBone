@@ -8,21 +8,25 @@ uses
 
 type
   TAboutDialog = class(TDialog)
-    CopyrightLabel: TLabel;
     GrayLinePanel: TPanel;
-    LinkRow1Label: TLinkLabel;
-    LinkRow2Label: TLinkLabel;
-    LinkRow3Label: TLinkLabel;
     MemoryAvailableLabel: TLabel;
-    OraBoneImage: TImage;
     OSLabel: TLabel;
     ProgramNameiLabel: TLabel;
-    ThanksToLabel: TLabel;
     TopPanel: TPanel;
     VersionLabel: TLabel;
     BottomPanel: TPanel;
     Button2: TButton;
     DonationsButton: TButton;
+    ImagePanel: TPanel;
+    OraBoneImage: TImage;
+    CopyrightLabel: TLabel;
+    ThanksToPanel: TPanel;
+    ThirdPartyComponentsLabel: TLabel;
+    IconsLabel: TLabel;
+    DevelopmentEnvironmentLabel: TLabel;
+    LinkLabel2: TLinkLabel;
+    LinkRow4Label: TLinkLabel;
+    LinkLabel3: TLinkLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure LinkClick(Sender: TObject; const Link: string; LinkType: TSysLinkType);
