@@ -85,6 +85,7 @@ procedure TConnectClientDialog.FillDatabaseCombo;
 var
   Enum: TOraServerEnumerator;
   //OracleHome: TOracleHome;
+  StringList: TStringList;
 begin
   if not LoadedOCI then
   try
@@ -93,7 +94,9 @@ begin
     { silence }
   end;
   DatabaseComboBox.Clear;
-  DatabaseComboBox.Items := Lib.GetServerlist;
+  StringList := Lib.GetServerlist;
+  DatabaseComboBox.Items := StringList;
+  StringList.Free;
   Enum := TOraServerEnumerator.Create;
   //OracleHome := TOracleHome.Create(nil);
   DatabaseComboBox.Hint := Enum.GetTNSFileName; //(OracleHome);

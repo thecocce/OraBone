@@ -94,9 +94,13 @@ begin
 end;
 
 procedure TCreateDBLinkDialog.GetServiceNames;
+var
+  StringList: TStringList;
 begin
  ServiceNameComboBox.Clear;
- ServiceNameComboBox.Items := Lib.GetServerlist;
+ StringList := Lib.GetServerlist;
+ ServiceNameComboBox.Items := StringList;
+ StringList.Free;
 end;
 
 procedure TCreateDBLinkDialog.Initialize;
