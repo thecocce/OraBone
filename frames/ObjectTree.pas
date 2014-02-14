@@ -176,7 +176,6 @@ function TObjectTreeFrame.CreateSession(ConnectString: string): TOraSession;
 var
   s: string;
 begin
-  //Screen.Cursor := crSQLWait;
   Result := TOraSession.Create(Self);
   Result.ConnectDialog := ConnectDialog;
   s := ConnectString;
@@ -188,13 +187,12 @@ begin
   Result.Options.Direct := Pos('Direct=True', ConnectString) <> 0;
   if Pos('^', ConnectString) <> 0 then
     Result.HomeName := Copy(ConnectString, Pos('^', ConnectString) + 1, Length(ConnectString));
-  Result.Options.DateFormat := OptionsContainer.DateFormat; // 'DD.MM.YYYY';
+  Result.Options.DateFormat := OptionsContainer.DateFormat;
   Result.AutoCommit := False;
   Result.ThreadSafety := True;
   Result.OnConnectionLost := OraSessionConnectionLost;
 
   Result.Options.UseUnicode := True;
-  //Screen.Cursor := crDefault;
 end;
 
 function TObjectTreeFrame.GetSchemaFilters(SchemaName: string): string;

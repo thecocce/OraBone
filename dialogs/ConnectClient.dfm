@@ -1,11 +1,10 @@
 object ConnectClientDialog: TConnectClientDialog
   Left = 449
   Top = 115
-  AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Connect'
-  ClientHeight = 153
+  ClientHeight = 179
   ClientWidth = 315
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +18,7 @@ object ConnectClientDialog: TConnectClientDialog
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object ProfilePanel: TPanel
     Left = 0
     Top = 0
     Width = 315
@@ -31,12 +30,12 @@ object ConnectClientDialog: TConnectClientDialog
     Padding.Right = 6
     Padding.Bottom = 3
     TabOrder = 0
-    object UsernameLabel: TLabel
+    object ProfileLabel: TLabel
       Left = 10
       Top = 13
-      Width = 52
+      Width = 30
       Height = 13
-      Caption = 'User Name'
+      Caption = 'Profile'
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -46,12 +45,12 @@ object ConnectClientDialog: TConnectClientDialog
       ParentColor = False
       ParentFont = False
     end
-    object UsernameEdit: TBCEdit
+    object ProfileEdit: TBCEdit
       Left = 89
       Top = 10
       Width = 220
       Height = 21
-      Hint = 'Username'
+      Hint = 'Profile'
       Align = alRight
       CharCase = ecUpperCase
       TabOrder = 0
@@ -63,9 +62,9 @@ object ConnectClientDialog: TConnectClientDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel2: TPanel
+  object ButtonPanel: TPanel
     Left = 0
-    Top = 116
+    Top = 142
     Width = 315
     Height = 37
     Align = alBottom
@@ -74,7 +73,7 @@ object ConnectClientDialog: TConnectClientDialog
     Padding.Top = 6
     Padding.Right = 6
     Padding.Bottom = 6
-    TabOrder = 4
+    TabOrder = 5
     object OKButton: TButton
       Left = 153
       Top = 6
@@ -119,19 +118,18 @@ object ConnectClientDialog: TConnectClientDialog
       TabOrder = 2
     end
   end
-  object Panel3: TPanel
+  object PasswordPanel: TPanel
     Left = 0
-    Top = 34
+    Top = 61
     Width = 315
     Height = 27
     Align = alTop
     BevelOuter = bvNone
-    Caption = 'Panel3'
     Padding.Left = 6
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 1
+    TabOrder = 2
     object PasswordLabel: TLabel
       Left = 10
       Top = 6
@@ -163,19 +161,19 @@ object ConnectClientDialog: TConnectClientDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel4: TPanel
+  object DatabasePanel: TPanel
     Left = 0
-    Top = 61
+    Top = 88
     Width = 315
     Height = 27
     Align = alTop
     BevelOuter = bvNone
-    Caption = 'Panel4'
+    Caption = 'DatabasePanel'
     Padding.Left = 6
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 2
+    TabOrder = 3
     object DatabaserLabel: TLabel
       Left = 10
       Top = 6
@@ -204,19 +202,19 @@ object ConnectClientDialog: TConnectClientDialog
       DropDownFixedWidth = 0
     end
   end
-  object Panel5: TPanel
+  object HomePanel: TPanel
     Left = 0
-    Top = 88
+    Top = 115
     Width = 315
     Height = 27
     Align = alTop
     BevelOuter = bvNone
-    Caption = 'Panel5'
+    Caption = 'HomePanel'
     Padding.Left = 6
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 3
+    TabOrder = 4
     object HomeLabel: TLabel
       Left = 10
       Top = 6
@@ -244,6 +242,50 @@ object ConnectClientDialog: TConnectClientDialog
       DeniedKeyStrokes = False
       ReadOnly = False
       DropDownFixedWidth = 0
+    end
+  end
+  object UsernamePanel: TPanel
+    Left = 0
+    Top = 34
+    Width = 315
+    Height = 27
+    Align = alTop
+    BevelOuter = bvNone
+    Padding.Left = 6
+    Padding.Top = 3
+    Padding.Right = 6
+    Padding.Bottom = 3
+    TabOrder = 1
+    object UsernameLabel: TLabel
+      Left = 10
+      Top = 6
+      Width = 52
+      Height = 13
+      Caption = 'User Name'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object UsernameEdit: TBCEdit
+      Left = 89
+      Top = 3
+      Width = 220
+      Height = 21
+      Hint = 'Username'
+      Align = alRight
+      CharCase = ecUpperCase
+      TabOrder = 0
+      EnterToTab = False
+      OnlyNumbers = False
+      NumbersWithDots = False
+      NumbersWithSpots = False
+      ErrorColor = 14803198
+      NumbersAllowNegative = False
     end
   end
   object ActionList: TActionList

@@ -4,7 +4,7 @@ object ConnectListDialog: TConnectListDialog
   BorderIcons = [biSystemMenu]
   Caption = 'New Connection'
   ClientHeight = 418
-  ClientWidth = 428
+  ClientWidth = 549
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object ConnectListDialog: TConnectListDialog
   object TopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 428
+    Width = 549
     Height = 28
     Align = alTop
     BevelOuter = bvNone
@@ -27,7 +27,7 @@ object ConnectListDialog: TConnectListDialog
     Padding.Bottom = 6
     TabOrder = 0
     object Label1: TLabel
-      Left = 286
+      Left = 407
       Top = 8
       Width = 33
       Height = 14
@@ -44,7 +44,7 @@ object ConnectListDialog: TConnectListDialog
       ParentFont = False
     end
     object ClientModeRadioButton: TRadioButton
-      Left = 319
+      Left = 440
       Top = 8
       Width = 54
       Height = 14
@@ -53,17 +53,15 @@ object ConnectListDialog: TConnectListDialog
       Checked = True
       TabOrder = 0
       TabStop = True
-      OnClick = ModeClickActionExecute
     end
     object DirectModeRadioButton: TRadioButton
-      Left = 373
+      Left = 494
       Top = 8
       Width = 55
       Height = 14
       Align = alRight
       Caption = ' Direct'
       TabOrder = 1
-      OnClick = ModeClickActionExecute
     end
     object ActionToolBar1: TActionToolBar
       Left = 3
@@ -90,7 +88,7 @@ object ConnectListDialog: TConnectListDialog
   object StringGridPanel: TPanel
     Left = 0
     Top = 28
-    Width = 428
+    Width = 549
     Height = 353
     Align = alClient
     BevelOuter = bvNone
@@ -98,60 +96,65 @@ object ConnectListDialog: TConnectListDialog
     Padding.Top = 3
     Padding.Right = 6
     TabOrder = 1
-    object DirectConnectionsStringGrid: TBCStringGrid
+    object VirtualDrawTree: TVirtualDrawTree
       Left = 6
       Top = 3
-      Width = 416
+      Width = 537
       Height = 350
       Align = alClient
-      ColCount = 4
-      DefaultColWidth = 130
-      DefaultRowHeight = 17
-      DoubleBuffered = False
-      FixedCols = 0
-      RowCount = 2
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goFixedHotTrack]
-      ParentDoubleBuffered = False
-      ScrollBars = ssVertical
-      TabOrder = 1
-      OnDblClick = ConnectActionExecute
-      Alignment = taLeftJustify
-      FixedFont.Charset = DEFAULT_CHARSET
-      FixedFont.Color = clWindowText
-      FixedFont.Height = -11
-      FixedFont.Name = 'Tahoma'
-      FixedFont.Style = []
-    end
-    object ClientConnectionsStringGrid: TBCStringGrid
-      Left = 6
-      Top = 3
-      Width = 416
-      Height = 350
-      Align = alClient
-      ColCount = 4
-      DefaultColWidth = 130
-      DefaultRowHeight = 17
-      DoubleBuffered = False
-      FixedCols = 0
-      RowCount = 2
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goFixedHotTrack]
-      ParentDoubleBuffered = False
-      ScrollBars = ssVertical
+      Ctl3D = True
+      DragOperations = []
+      EditDelay = 0
+      Header.AutoSizeIndex = 0
+      Header.DefaultHeight = 20
+      Header.Font.Charset = DEFAULT_CHARSET
+      Header.Font.Color = clWindowText
+      Header.Font.Height = -11
+      Header.Font.Name = 'Tahoma'
+      Header.Font.Style = []
+      Header.Height = 20
+      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible, hoAutoSpring]
+      Images = ImagesDataModule.ImageList
+      ParentCtl3D = False
       TabOrder = 0
-      Visible = False
-      OnDblClick = ConnectActionExecute
-      Alignment = taLeftJustify
-      FixedFont.Charset = DEFAULT_CHARSET
-      FixedFont.Color = clWindowText
-      FixedFont.Height = -11
-      FixedFont.Name = 'Tahoma'
-      FixedFont.Style = []
+      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning, toEditOnClick]
+      TreeOptions.PaintOptions = [toHideFocusRect, toHotTrack, toShowButtons, toShowDropmark, toShowHorzGridLines, toShowVertGridLines, toThemeAware, toUseBlendedSelection]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toFullRowSelect, toMiddleClickSelect, toRightClickSelect]
+      WantTabs = True
+      OnCompareNodes = VirtualDrawTreeCompareNodes
+      OnDblClick = VirtualDrawTreeDblClick
+      OnDrawNode = VirtualDrawTreeDrawNode
+      Columns = <
+        item
+          Position = 0
+          Width = 134
+          WideText = 'Profile'
+        end
+        item
+          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Position = 1
+          Width = 133
+          WideText = 'User'
+        end
+        item
+          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Position = 2
+          Width = 133
+          WideText = 'Database'
+        end
+        item
+          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Position = 3
+          Width = 133
+          WideText = 'Home'
+        end>
     end
   end
   object BottomPanel: TPanel
     Left = 0
     Top = 381
-    Width = 428
+    Width = 549
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
@@ -161,7 +164,7 @@ object ConnectListDialog: TConnectListDialog
     Padding.Bottom = 6
     TabOrder = 2
     object ConnectButton: TButton
-      Left = 266
+      Left = 387
       Top = 6
       Width = 75
       Height = 25
@@ -177,7 +180,7 @@ object ConnectListDialog: TConnectListDialog
       TabOrder = 0
     end
     object CancelButton: TButton
-      Left = 347
+      Left = 468
       Top = 6
       Width = 75
       Height = 25
@@ -194,7 +197,7 @@ object ConnectListDialog: TConnectListDialog
       TabOrder = 1
     end
     object Separator1Panel: TPanel
-      Left = 341
+      Left = 462
       Top = 6
       Width = 6
       Height = 25
@@ -251,7 +254,6 @@ object ConnectListDialog: TConnectListDialog
     end
     object ModeClickAction: TAction
       Caption = 'ModeClickAction'
-      OnExecute = ModeClickActionExecute
     end
   end
   object ImageList: TBCImageList
@@ -396,5 +398,10 @@ object ConnectListDialog: TConnectListDialog
       F0FFF0FFF0F30000E07FE07FE07F0000E07FE07FE07F0000E07FE07FE07F0000
       E07FE07FE07F0000F0FFF0FFF0FF000000000000000000000000000000000000
       000000000000}
+  end
+  object ApplicationEvents: TApplicationEvents
+    OnMessage = ApplicationEventsMessage
+    Left = 56
+    Top = 142
   end
 end

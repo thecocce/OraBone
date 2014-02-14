@@ -16,16 +16,19 @@ type
     HomeLabel: TLabel;
     OKAction: TAction;
     OKButton: TButton;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
+    ProfilePanel: TPanel;
+    ButtonPanel: TPanel;
+    PasswordPanel: TPanel;
+    DatabasePanel: TPanel;
+    HomePanel: TPanel;
     PasswordEdit: TBCEdit;
     PasswordLabel: TLabel;
     Separator1Panel: TPanel;
-    UsernameEdit: TBCEdit;
+    ProfileEdit: TBCEdit;
+    ProfileLabel: TLabel;
+    UsernamePanel: TPanel;
     UsernameLabel: TLabel;
+    UsernameEdit: TBCEdit;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure HomeComboBoxKeyPress(Sender: TObject; var Key: Char);
@@ -34,6 +37,7 @@ type
     function GetDatabase: string;
     function GetHomeName: string;
     function GetPassword: string;
+    function GetProfile: string;
     function GetUsername: string;
     procedure ClearFields;
     procedure DoInit;
@@ -42,9 +46,11 @@ type
     procedure SetDatabase(Value: string);
     procedure SetHomeName(Value: string);
     procedure SetPassword(Value: string);
+    procedure SetProfile(Value: string);
     procedure SetUsername(Value: string);
   public
     function Open(Clear: Boolean): Boolean;
+    property Profile: string read GetProfile write SetProfile;
     property Database: string read GetDatabase write SetDatabase;
     property HomeName: string read GetHomeName write SetHomeName;
     property Password: string read GetPassword write SetPassword;
@@ -144,6 +150,11 @@ begin
   Result := PasswordEdit.Text
 end;
 
+function TConnectClientDialog.GetProfile: string;
+begin
+  Result := ProfileEdit.Text
+end;
+
 function TConnectClientDialog.GetDatabase: string;
 begin
   Result := DatabaseComboBox.Text
@@ -164,6 +175,11 @@ end;
 procedure TConnectClientDialog.SetPassword(Value: string);
 begin
   PasswordEdit.Text := Value;
+end;
+
+procedure TConnectClientDialog.SetProfile(Value: string);
+begin
+  ProfileEdit.Text := Value;
 end;
 
 procedure TConnectClientDialog.SetDatabase(Value: string);

@@ -4,7 +4,7 @@ object ConnectDirectDialog: TConnectDirectDialog
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Connect'
-  ClientHeight = 208
+  ClientHeight = 234
   ClientWidth = 315
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,21 +18,21 @@ object ConnectDirectDialog: TConnectDirectDialog
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object UsernamePanel: TPanel
     Left = 0
-    Top = 0
+    Top = 34
     Width = 315
-    Height = 34
+    Height = 27
     Align = alTop
     BevelOuter = bvNone
     Padding.Left = 6
-    Padding.Top = 10
+    Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 0
+    TabOrder = 1
     object UsernameLabel: TLabel
       Left = 10
-      Top = 13
+      Top = 6
       Width = 52
       Height = 13
       Caption = 'User Name'
@@ -47,7 +47,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     end
     object UsernameEdit: TBCEdit
       Left = 89
-      Top = 10
+      Top = 3
       Width = 220
       Height = 21
       Hint = 'Username'
@@ -62,9 +62,9 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel2: TPanel
+  object PasswordPanel: TPanel
     Left = 0
-    Top = 34
+    Top = 61
     Width = 315
     Height = 27
     Align = alTop
@@ -73,7 +73,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 1
+    TabOrder = 2
     object PasswordLabel: TLabel
       Left = 10
       Top = 6
@@ -105,9 +105,9 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel3: TPanel
+  object HostPanel: TPanel
     Left = 0
-    Top = 61
+    Top = 88
     Width = 315
     Height = 27
     Align = alTop
@@ -116,7 +116,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 2
+    TabOrder = 3
     object DatabaserLabel: TLabel
       Left = 10
       Top = 6
@@ -148,9 +148,9 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel4: TPanel
+  object PortPanel: TPanel
     Left = 0
-    Top = 88
+    Top = 115
     Width = 315
     Height = 27
     Align = alTop
@@ -159,7 +159,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 3
+    TabOrder = 4
     object Label1: TLabel
       Left = 10
       Top = 6
@@ -190,9 +190,9 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel5: TPanel
+  object SIDPanel: TPanel
     Left = 0
-    Top = 115
+    Top = 142
     Width = 315
     Height = 27
     Align = alTop
@@ -201,7 +201,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 4
+    TabOrder = 5
     object Label2: TLabel
       Left = 10
       Top = 6
@@ -234,19 +234,19 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel6: TPanel
+  object ServiceNamePanel: TPanel
     Left = 0
-    Top = 142
+    Top = 169
     Width = 315
     Height = 27
     Align = alTop
     BevelOuter = bvNone
-    Caption = 'Panel6'
+    Caption = 'ServiceNamePanel'
     Padding.Left = 6
     Padding.Top = 3
     Padding.Right = 6
     Padding.Bottom = 3
-    TabOrder = 5
+    TabOrder = 6
     object Label3: TLabel
       Left = 10
       Top = 6
@@ -279,9 +279,9 @@ object ConnectDirectDialog: TConnectDirectDialog
       NumbersAllowNegative = False
     end
   end
-  object Panel7: TPanel
+  object ButtonPanel: TPanel
     Left = 0
-    Top = 171
+    Top = 197
     Width = 315
     Height = 37
     Align = alBottom
@@ -290,7 +290,7 @@ object ConnectDirectDialog: TConnectDirectDialog
     Padding.Top = 6
     Padding.Right = 6
     Padding.Bottom = 6
-    TabOrder = 6
+    TabOrder = 7
     object OKButton: TButton
       Left = 153
       Top = 6
@@ -333,6 +333,49 @@ object ConnectDirectDialog: TConnectDirectDialog
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
+    end
+  end
+  object ProfilePanel: TPanel
+    Left = 0
+    Top = 0
+    Width = 315
+    Height = 34
+    Align = alTop
+    BevelOuter = bvNone
+    Padding.Left = 6
+    Padding.Top = 10
+    Padding.Right = 6
+    Padding.Bottom = 3
+    TabOrder = 0
+    object ProfileLabel: TLabel
+      Left = 10
+      Top = 13
+      Width = 30
+      Height = 13
+      Caption = 'Profile'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object ProfileEdit: TBCEdit
+      Left = 89
+      Top = 10
+      Width = 220
+      Height = 21
+      Hint = 'Profile'
+      Align = alRight
+      TabOrder = 0
+      EnterToTab = False
+      OnlyNumbers = False
+      NumbersWithDots = False
+      NumbersWithSpots = False
+      ErrorColor = 14803198
+      NumbersAllowNegative = False
     end
   end
   object ActionList: TActionList

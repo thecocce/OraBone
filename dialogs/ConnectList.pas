@@ -4,21 +4,33 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids,
-  BCControls.StringGrid, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, JvStringGrid, BCControls.ImageList, System.Actions;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls, Winapi.Windows,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, BCControls.ImageList, System.Actions, VirtualTrees, Vcl.AppEvnts;
 
 type
+  PConnectData = ^TConnectData;
+  TConnectData = record
+    Profile: string;
+    Username: string;
+    Password: string;
+    Database: string;
+    HomeName: string;
+    Host: string;
+    Port: string;
+    SID: string;
+    ServiceName: string;
+    ClientMode: Boolean;
+  end;
+
   TConnectListDialog = class(TForm)
     ActionManager: TActionManager;
     ActionToolBar1: TActionToolBar;
     AddConnectionAction: TAction;
     BottomPanel: TPanel;
     CancelButton: TButton;
-    ClientConnectionsStringGrid: TBCStringGrid;
     ClientModeRadioButton: TRadioButton;
     ConnectAction: TAction;
     ConnectButton: TButton;
-    DirectConnectionsStringGrid: TBCStringGrid;
     DirectModeRadioButton: TRadioButton;
     EditConnectionAction: TAction;
     ImageList: TBCImageList;
@@ -28,21 +40,24 @@ type
     Separator1Panel: TPanel;
     StringGridPanel: TPanel;
     TopPanel: TPanel;
+    VirtualDrawTree: TVirtualDrawTree;
+    ApplicationEvents: TApplicationEvents;
     procedure AddConnectionActionExecute(Sender: TObject);
     procedure ConnectActionExecute(Sender: TObject);
     procedure EditConnectionActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ModeClickActionExecute(Sender: TObject);
     procedure RemoveConnectionActionExecute(Sender: TObject);
+    procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
+    procedure VirtualDrawTreeCompareNodes(Sender: TBaseVirtualTree; Node1, Node2: PVirtualNode; Column: TColumnIndex;
+      var Result: Integer);
+    procedure VirtualDrawTreeDblClick(Sender: TObject);
+    procedure VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
   private
     { Private declarations }
     FConnectDialog: TConnectDialog;
-    procedure DoConnect(StringGrid: TBCStringGrid);
-    procedure DoInit;
+    function GetConnectString(Data: PConnectData; IncludeHome: Boolean = False): string;
     procedure ReadIniFile;
     procedure SetConnectDialog(Value: TConnectDialog);
-    procedure SetFields(StringGrid: TBCStringGrid);
-    procedure ShowHideByMode;
     procedure WriteConnectionsToIniFile;
     procedure WriteIniFile;
   published
@@ -55,92 +70,97 @@ implementation
 
 uses
   OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils,
-  BCCommon.Lib;
+  BCCommon.Lib, Vcl.Themes;
 
 const
-  GRID_COLUMN_USER = 0;
-  GRID_COLUMN_DATABASE = 1;
-  GRID_COLUMN_CONNECTSTRING = 2;
-  GRID_COLUMN_HOMENAME = 3;
+  SECTION_CONNECTIONS = 'Connections';
+  SECTION_CONNECTIONPROFILES = 'ConnectionProfiles';
+
+// VirtualTree.IsVisible[Node] := False;
 
 procedure TConnectListDialog.AddConnectionActionExecute(Sender: TObject);
 var
-  Database: string;
+  Node: PVirtualNode;
+  Data: PConnectData;
 begin
   if ClientModeRadioButton.Checked then
     with ConnectClientDialog(Self) do
     if Open(True) then
     begin
-      ClientConnectionsStringGrid.RowCount := ClientConnectionsStringGrid.RowCount + 1;
-
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, ClientConnectionsStringGrid.RowCount - 1] :=
-        Username;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, ClientConnectionsStringGrid.RowCount - 1] :=
-        Database;
-      { Client: schema/password@database }
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, ClientConnectionsStringGrid.RowCount - 1] :=
-        Username + '/' + Password + '@' + Database;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, ClientConnectionsStringGrid.RowCount - 1] := HomeName;
-      if ClientConnectionsStringGrid.RowCount > 2 then
-        ClientConnectionsStringGrid.SortGrid(0);
-      WriteConnectionsToIniFile;
+      Node := VirtualDrawTree.AddChild(nil);
+      Data := VirtualDrawTree.GetNodeData(Node);
+      Data.Profile := Profile;
+      Data.Username := Username;
+      Data.Password := Password;
+      Data.Database := Database;
+      Data.HomeName := HomeName;
     end;
 
   if DirectModeRadioButton.Checked then
     with ConnectDirectDialog(Self) do
     if Open(True) then
     begin
-      DirectConnectionsStringGrid.RowCount := DirectConnectionsStringGrid.RowCount + 1;
-
-      DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, DirectConnectionsStringGrid.RowCount - 1] :=
-        Username;
-      { Direct: schema/password@host:port:sid=sid/sn=service name }
-      Database := Username + '/' + Password + '@' + Host + ':' + Port + ':';
+      Node := VirtualDrawTree.AddChild(nil);
+      Data := VirtualDrawTree.GetNodeData(Node);
+      Data.Profile := Profile;
+      Data.Username := Username;
+      Data.Password := Password;
+      Data.Host := Host;
+      Data.Port := Port;
       if SID <> '' then
-      begin
-        Database := Database + 'sid=' + SID;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, DirectConnectionsStringGrid.RowCount - 1] :=
-          SID;
-      end
+        Data.SID := SID
       else
-      begin
-        Database := Database + 'sn=' + ServiceName;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, DirectConnectionsStringGrid.RowCount - 1] :=
-          ServiceName;
-      end;
-      DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, DirectConnectionsStringGrid.RowCount - 1] :=
-        Database;
-      if DirectConnectionsStringGrid.RowCount > 2 then
-        DirectConnectionsStringGrid.SortGrid(0);
-      WriteConnectionsToIniFile;
-     // ModalResult := mrOk;
+        Data.ServiceName := ServiceName;
     end;
 end;
 
-procedure TConnectListDialog.ConnectActionExecute(Sender: TObject);
+function TConnectListDialog.GetConnectString(Data: PConnectData; IncludeHome: Boolean): string;
 begin
-  if ClientModeRadioButton.Checked then
-    DoConnect(ClientConnectionsStringGrid)
+  { Direct: Username/password@host:port:sid=sid/sn=service name
+    Client: Username/password@database }
+  Result := Format('%s/%s@', [Data.Username, Data.Password]);
+  if Data.ClientMode then
+  begin
+    Result := Result + Data.Database;
+    if IncludeHome then
+      Result := Result + Format('^%s', [Data.HomeName]);
+  end
   else
-    DoConnect(DirectConnectionsStringGrid)
+  begin
+    Result := Result + Format('%s:%s:', [Data.Host, Data.Port]);
+    if Data.SID <> '' then
+      Result := Result + Format('sid=%s', [Data.SID]);
+    if Data.ServiceName <> '' then
+      Result := Result + Format('sn=%s', [Data.ServiceName]);
+  end;
 end;
 
-procedure TConnectListDialog.DoConnect(StringGrid: TBCStringGrid);
+procedure TConnectListDialog.ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
 var
-  s, ConnectString: string;
+  Node: PVirtualNode;
 begin
-  ConnectString := Trim(StringGrid.Cells[GRID_COLUMN_CONNECTSTRING, StringGrid.Row]);
+  Node := VirtualDrawTree.GetFirstSelected;
+  ConnectAction.Enabled := Assigned(Node);
+  RemoveConnectionAction.Enabled := ConnectAction.Enabled;
+  EditConnectionAction.Enabled := ConnectAction.Enabled;
+end;
+
+procedure TConnectListDialog.ConnectActionExecute(Sender: TObject);
+var
+  ConnectString: string;
+  Node: PVirtualNode;
+  Data: PConnectData;
+begin
+  Node := VirtualDrawTree.GetFirstSelected;
+  Data := VirtualDrawTree.GetNodeData(Node);
   if ConnectString <> '' then
   begin
-    s := ConnectString;
-    if Pos('^', ConnectString) <> 0 then
-      s := Copy(s, 0, Pos('^', s) - 1);
-    FConnectDialog.Session.ConnectString := s;
+    FConnectDialog.Session.ConnectString := GetConnectString(Data);
     FConnectDialog.Session.Schema := FConnectDialog.Session.Username; { What the fuck, Devart?!?!? }
-    FConnectDialog.Session.Options.Direct := DirectModeRadioButton.Checked;
-    FConnectDialog.Session.HomeName := StringGrid.Cells[GRID_COLUMN_HOMENAME, StringGrid.Row];
+    FConnectDialog.Session.Options.Direct := not Data.ClientMode;
+    FConnectDialog.Session.HomeName := Data.HomeName;
     try
-      FConnectDialog.Connection.PerformConnect(False); //True);
+      FConnectDialog.Connection.PerformConnect(False);
       ModalResult := mrOk;
     except
       on E: EOraError do
@@ -151,13 +171,14 @@ end;
 
 procedure TConnectListDialog.ReadIniFile;
 var
-  i, j: Integer;
-  Connections: TStrings;
-  ConnectString, Database, HomeName: string;
-  ClientMode: Boolean;
-  StringGrid: TBCStringGrid;
+  i: Integer;
+  s, Temp: string;
+  Connections, ConnectionProfiles: TStrings;
+  Node: PVirtualNode;
+  Data: PConnectData;
 begin
   Connections := TStringList.Create;
+  ConnectionProfiles := TStringList.Create;
   with TBigIniFile.Create(GetINIFilename) do
   try
     { Size }
@@ -168,107 +189,85 @@ begin
     Top := ReadInteger('ConnectListPosition', 'Top', (Screen.Height - Height) div 2);
     { Check if the form is outside the workarea }
     Left := SetFormInsideWorkArea(Left, Width);
-    ReadSectionValues('Connections', Connections);
+    ReadSectionValues(SECTION_CONNECTIONS, Connections);
+    ReadSectionValues(SECTION_CONNECTIONPROFILES, ConnectionProfiles);
     for i := 0 to Connections.Count - 1 do
     begin
-      ConnectString := DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
-      { Direct: schema/password@host:port:sid=sid/sn=service name
-        Client: schema/password@database^homename }
-      Database := Copy(ConnectString, Pos('@', ConnectString) + 1, Length(ConnectString));
-      ClientMode := Pos(':', Database) = 0;
-      if Pos('^', Database) <> 0 then // client mode
-        Database := Copy(Database, 0, Pos('^', Database) - 1);
+      Node := VirtualDrawTree.AddChild(nil);
+      Data := VirtualDrawTree.GetNodeData(Node);
+      s := DecryptString(System.Copy(Connections.Strings[i], Pos('=', Connections.Strings[i]) + 1, Length(Connections.Strings[i])));
+      { Direct: Username/password@host:port:sid=sid/sn=service name
+        Client: Username/password@database^homename }
+      if i < ConnectionProfiles.Count then
+        Data.Profile := System.Copy(ConnectionProfiles.Strings[i], Pos('=', ConnectionProfiles.Strings[i]) + 1, Length(ConnectionProfiles.Strings[i]));
+      Data.Username := Copy(s, 0, Pos('/', s) - 1);
+      Temp :=  Copy(s, 0, Pos('@', s) - 1);
+      Data.Password := Copy(Temp, Pos('/', Temp) + 1, Length(Temp));
+      Data.Database := Copy(s, Pos('@', s) + 1, Length(s));
+      Data.ClientMode := Pos(':', s) = 0;
+      if Pos('^', Data.Database) <> 0 then // client mode
+        Data.HomeName := Copy(Data.Database, Pos('^', Data.Database) + 1, Length(Data.Database));
 
-      if not ClientMode then // direct mode
+      if not Data.ClientMode then // direct mode
       begin
-        if Pos('sid=', Database) <> 0 then
-          Database := Copy(Database, Pos('sid=', Database) + 4, Length(Database));
-        if Pos('sn=', Database) <> 0 then
-          Database := Copy(Database, Pos('sn=', Database) + 3, Length(Database));
+        Temp := Data.Database; // host:port:sid=sid/sn=service name
+        Data.Host := Copy(Temp, 0, Pos(':', Temp) - 1);
+        Temp := Copy(Temp, Pos(':', Temp) + 1, Length(Temp));
+        Data.Port := Copy(Temp, 0, Pos(':', Temp) - 1);
+        Temp := Copy(Temp, Pos(':', Temp) + 1, Length(Temp));
+
+        if Pos('sid=', Temp) <> 0 then
+          Data.Sid := Copy(Temp, Pos('sid=', Temp) + 4, Length(Temp));
+        if Pos('sn=', Temp) <> 0 then
+          Data.ServiceName := Copy(Temp, Pos('sn=', Temp) + 3, Length(Temp));
+
+        Data.Database := '';
       end;
-
-      HomeName := '';
-      if Pos('^', Database) <> 0 then // client mode
-        HomeName := Copy(ConnectString, Pos('^', ConnectString) + 1, Length(ConnectString));
-
-      if ClientMode then
-        StringGrid := ClientConnectionsStringGrid
-      else
-        StringGrid := DirectConnectionsStringGrid;
-
-      j := StringGrid.RowCount;
-      StringGrid.Cells[GRID_COLUMN_USER, j - 1] := Copy(ConnectString, 0, Pos('/', ConnectString) - 1);
-      StringGrid.Cells[GRID_COLUMN_DATABASE, j - 1] := Database;
-      StringGrid.Cells[GRID_COLUMN_CONNECTSTRING, j - 1] := ConnectString;
-      if HomeName <> '' then
-        StringGrid.Cells[GRID_COLUMN_HOMENAME, j - 1] := HomeName;
-
-      //if i < Connections.Count then
-      StringGrid.RowCount := j + 1;
     end;
-    ClientConnectionsStringGrid.RemoveRow(ClientConnectionsStringGrid.RowCount);
-    DirectConnectionsStringGrid.RemoveRow(DirectConnectionsStringGrid.RowCount);
   finally
     Connections.Free;
+    ConnectionProfiles.Free;
     Free;
   end;
 end;
 
 procedure TConnectListDialog.RemoveConnectionActionExecute(Sender: TObject);
 var
-  StringGrid: TBCStringGrid;
+  Node: PVirtualNode;
+  Data: PConnectData;
+  ConnectionProfile: string;
 begin
-  if ClientModeRadioButton.Checked then
-    StringGrid := ClientConnectionsStringGrid
-  else
-    StringGrid := DirectConnectionsStringGrid;
-
-  if AskYesOrNo(Format('Remove selected connection %s@%s, are you sure?', [
-    StringGrid.Cells[GRID_COLUMN_USER, StringGrid.Row], StringGrid.Cells[GRID_COLUMN_DATABASE, StringGrid.Row]])) then
-  begin
-    StringGrid.RemoveRow(StringGrid.Row);
-    //ShowHideByMode;
-    if ClientModeRadioButton.Checked then
-      SetFields(ClientConnectionsStringGrid)
-    else
-      SetFields(DirectConnectionsStringGrid);
-    WriteConnectionsToIniFile;
-  end;
+  Node := VirtualDrawTree.GetFirstSelected;
+  Data := VirtualDrawTree.GetNodeData(Node);
+  ConnectionProfile := '';
+  if Trim(Data.Profile) <> '' then
+    ConnectionProfile := Format(' ''%s''', [Data.Profile]);
+  if AskYesOrNo(Format('Remove selected connection%s, are you sure?', [ConnectionProfile])) then
+    VirtualDrawTree.DeleteNode(Node);
 end;
 
 procedure TConnectListDialog.WriteConnectionsToIniFile;
 var
-  Ident: Integer;
+  i: Integer;
   BigIniFile: TBigIniFile;
-
-  procedure WriteGrid(StringGrid: TBCStringGrid);
-  var
-    i: Integer;
-    s: string;
-  begin
-    for i := 1 to StringGrid.RowCount - 1 do
-      if StringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] <> '' then
-      begin
-        s := StringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i];
-        { remove homename }
-        if Pos('^', s) <> 0 then
-          s := Copy(s, 0, Pos('^', s) - 1);
-        { add homename }
-        if StringGrid.Cells[GRID_COLUMN_HOMENAME, i] <> '' then
-          s := s + '^' + StringGrid.Cells[GRID_COLUMN_HOMENAME, i];
-        BigIniFile.WriteString('Connections', IntToStr(Ident), EncryptString(s));
-        Inc(Ident);
-      end;
-  end;
-
+  Node: PVirtualNode;
+  Data: PConnectData;
 begin
+  Node := VirtualDrawTree.GetFirst;
   BigIniFile := TBigIniFile.Create(GetINIFilename);
   with BigIniFile do
   try
-    EraseSection('Connections');
-    Ident := 0;
-    WriteGrid(ClientConnectionsStringGrid);
-    WriteGrid(DirectConnectionsStringGrid);
+    EraseSection(SECTION_CONNECTIONS);
+    EraseSection(SECTION_CONNECTIONPROFILES);
+    i := 0;
+    while Assigned(Node) do
+    begin
+      Data := VirtualDrawTree.GetNodeData(Node);
+      BigIniFile.WriteString(SECTION_CONNECTIONS, IntToStr(i), EncryptString(GetConnectString(Data, True)));
+      BigIniFile.WriteString(SECTION_CONNECTIONPROFILES, IntToStr(i), Data.Profile);
+      Node := VirtualDrawTree.GetNext(Node);
+      Inc(i);
+    end;
   finally
     BigIniFile.Free;
   end;
@@ -295,124 +294,149 @@ begin
   end;
 end;
 
-procedure TConnectListDialog.SetFields(StringGrid: TBCStringGrid);
-begin
-  StringGrid.Cells[GRID_COLUMN_USER, 0] := 'User';
-  StringGrid.Cells[GRID_COLUMN_DATABASE, 0] := 'Database';
-  StringGrid.Cells[GRID_COLUMN_HOMENAME, 0] := 'Home';
-  StringGrid.HideCol(GRID_COLUMN_CONNECTSTRING);
-
-  if ClientModeRadioButton.Checked then
-  begin
-    StringGrid.ShowCol(GRID_COLUMN_HOMENAME, 17);
-    StringGrid.ColWidths[GRID_COLUMN_HOMENAME] := 130;
-  end
-  else
-    StringGrid.HideCol(GRID_COLUMN_HOMENAME);
-
-  ConnectAction.Enabled := StringGrid.Cells[GRID_COLUMN_USER, 1] <> '';
-  RemoveConnectionAction.Enabled := ConnectAction.Enabled;
-  EditConnectionAction.Enabled := ConnectAction.Enabled;
-end;
-
-procedure TConnectListDialog.DoInit;
-begin
-  ReadIniFile;
-  if ClientModeRadioButton.Checked then
-    SetFields(ClientConnectionsStringGrid)
-  else
-    SetFields(DirectConnectionsStringGrid);
-  ShowHideByMode;
-end;
-
 procedure TConnectListDialog.EditConnectionActionExecute(Sender: TObject);
 var
-  i: Integer;
-  s: string;
+  Node: PVirtualNode;
+  Data: PConnectData;
 begin
+  Node := VirtualDrawTree.GetFirstSelected;
+  Data := VirtualDrawTree.GetNodeData(Node);
   if ClientModeRadioButton.Checked then
   with ConnectClientDialog(Self) do
   begin
-    i := ClientConnectionsStringGrid.Row;
-    Username := ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
-    Database := ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i];
-    s := ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i];
-    s := Copy(s, Pos('/', s) + 1, Length(s));
-    Password := Copy(s, 0, Pos('@', s) - 1);
-    HomeName := ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i];
+    Profile := Data.Profile;
+    Username := Data.Username;
+    Password := Data.Password;
+    Database := Data.Database;
+    HomeName := Data.HomeName;
     if Open(False) then
     begin
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] := Username;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := Database;
-      { Client: schema/password@database }
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := Username + '/' + Password + '@' + Database;
-      ClientConnectionsStringGrid.Cells[GRID_COLUMN_HOMENAME, i] := HomeName;
-      WriteConnectionsToIniFile;
+      Data.Profile := Profile;
+      Data.Username := Username;
+      Data.Password := Password;
+      Data.Database := Database;
+      Data.HomeName := HomeName;
     end;
   end;
   if DirectModeRadioButton.Checked then
   with ConnectDirectDialog(Self) do
   begin
-    i := DirectConnectionsStringGrid.Row;
-    Username := DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i];
-    s := DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i];
-    s := Copy(s, Pos('/', s) + 1, Length(s));
-    Password := Copy(s, 0, Pos('@', s) - 1);
-    s := Copy(s, Pos('@', s) + 1, Length(s));
-    Host :=  Copy(s, 0, Pos(':', s) - 1);
-    s := Copy(s, Pos(':', s) + 1, Length(s));
-    Port :=  Copy(s, 0, Pos(':', s) - 1);
-    s := Copy(s, Pos(':', s) + 1, Length(s));
-    if Pos('sid=', s) <> 0 then
-      SID := Copy(s, 5, Length(s));
-    if Pos('sn=', s) <> 0 then
-      ServiceName := Copy(s, 4, Length(s));
+    Profile := Data.Profile;
+    Username := Data.Username;
+    Password := Data.Password;
+    Host := Data.Host;
+    Port := Data.Port;
+    SID := Data.SID;
+    ServiceName := Data.ServiceName;
     if Open(False) then
     begin
-      DirectConnectionsStringGrid.Cells[GRID_COLUMN_USER, i] :=
-        Username;
-      { Direct: schema/password@host:port:sid=sid/sn=service name }
-      s := Username + '/' + Password + '@' + Host + ':' + Port + ':';
-      if ConnectDirectDialog(Self).SID <> '' then
-      begin
-        s := s + 'sid=' + SID;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := SID;
-      end
-      else
-      begin
-        s := s + 'sn=' + ServiceName;
-        DirectConnectionsStringGrid.Cells[GRID_COLUMN_DATABASE, i] := ServiceName;
-      end;
-      DirectConnectionsStringGrid.Cells[GRID_COLUMN_CONNECTSTRING, i] := s;
-      WriteConnectionsToIniFile;
+      Data.Profile := Profile;
+      Data.Username := Username;
+      Data.Password := Password;
+      Data.Host := Host;
+      Data.Port := Port;
+      Data.SID := SID;
+      Data.ServiceName := ServiceName;
     end;
   end;
 end;
 
 procedure TConnectListDialog.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  WriteConnectionsToIniFile;
   WriteIniFile;
-end;
-
-procedure TConnectListDialog.ShowHideByMode;
-begin
-  ClientConnectionsStringGrid.Visible := ClientModeRadioButton.Checked;
-  DirectConnectionsStringGrid.Visible := DirectModeRadioButton.Checked;
-end;
-
-procedure TConnectListDialog.ModeClickActionExecute(Sender: TObject);
-begin
-  ShowHideByMode;
-  if ClientModeRadioButton.Checked then
-    SetFields(ClientConnectionsStringGrid)
-  else
-    SetFields(DirectConnectionsStringGrid)
 end;
 
 procedure TConnectListDialog.SetConnectDialog(Value: TConnectDialog);
 begin
   FConnectDialog := Value;
-  DoInit;
+  ReadIniFile;
+end;
+
+procedure TConnectListDialog.VirtualDrawTreeCompareNodes(Sender: TBaseVirtualTree; Node1, Node2: PVirtualNode;
+  Column: TColumnIndex; var Result: Integer);
+var
+  Data1, Data2: PConnectData;
+begin
+  if Result = 0 then
+  begin
+    Data1 := VirtualDrawTree.GetNodeData(Node1);
+    Data2 := VirtualDrawTree.GetNodeData(Node2);
+
+    Result := -1;
+
+    if not Assigned(Data1) or not Assigned(Data2) then
+      Exit;
+
+    Result := AnsiCompareText(string(Data1.Profile), string(Data2.Profile)) +
+      AnsiCompareText(string(Data1.Username), string(Data2.Username));
+  end;
+end;
+
+procedure TConnectListDialog.VirtualDrawTreeDblClick(Sender: TObject);
+begin
+  EditConnectionAction.Execute
+end;
+
+procedure TConnectListDialog.VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
+var
+  Data: PConnectData;
+  S: string;
+  R: TRect;
+  Format: Cardinal;
+  LStyles: TCustomStyleServices;
+  LColor: TColor;
+begin
+  LStyles := StyleServices;
+  with Sender as TVirtualDrawTree, PaintInfo do
+  begin
+    Data := Sender.GetNodeData(Node);
+
+    if not Assigned(Data) then
+      Exit;
+
+    if not LStyles.GetElementColor(LStyles.GetElementDetails(tgCellNormal), ecTextColor, LColor) or  (LColor = clNone) then
+      LColor := LStyles.GetSystemColor(clWindowText);
+    //get and set the background color
+    Canvas.Brush.Color := LStyles.GetStyleColor(scEdit);
+    Canvas.Font.Color := LColor;
+
+    if LStyles.Enabled and (vsSelected in PaintInfo.Node.States) then
+    begin
+       Colors.FocusedSelectionColor := LStyles.GetSystemColor(clHighlight);
+       Colors.FocusedSelectionBorderColor := LStyles.GetSystemColor(clHighlight);
+       Colors.UnfocusedSelectionColor := LStyles.GetSystemColor(clHighlight);
+       Colors.UnfocusedSelectionBorderColor := LStyles.GetSystemColor(clHighlight);
+       Canvas.Brush.Color := LStyles.GetSystemColor(clHighlight);
+       Canvas.Font.Color := LStyles.GetStyleFontColor(sfMenuItemTextSelected);
+    end
+    else
+    if not LStyles.Enabled and (vsSelected in PaintInfo.Node.States) then
+    begin
+      Canvas.Brush.Color := clHighlight;
+      Canvas.Font.Color := clHighlightText;
+    end;
+
+    SetBKMode(Canvas.Handle, TRANSPARENT);
+
+    R := ContentRect;
+    InflateRect(R, -TextMargin, 0);
+    Dec(R.Right);
+    Dec(R.Bottom);
+
+    case Column of
+      0: S := Data.Profile;
+      1: S := Data.Username;
+      2: S := Data.Database;
+      3: S := Data.Database;
+    end;
+
+    if Length(S) > 0 then
+    begin
+      Format := DT_TOP or DT_LEFT or DT_VCENTER or DT_SINGLELINE;
+      DrawText(Canvas.Handle, S, Length(S), R, Format);
+    end;
+  end;
 end;
 
 initialization

@@ -17,13 +17,13 @@ type
     Label3: TLabel;
     OKAction: TAction;
     OKButton: TButton;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
-    Panel6: TPanel;
-    Panel7: TPanel;
+    UsernamePanel: TPanel;
+    PasswordPanel: TPanel;
+    HostPanel: TPanel;
+    PortPanel: TPanel;
+    SIDPanel: TPanel;
+    ServiceNamePanel: TPanel;
+    ButtonPanel: TPanel;
     PasswordEdit: TBCEdit;
     PasswordLabel: TLabel;
     PortEdit: TBCEdit;
@@ -32,6 +32,9 @@ type
     SIDEdit: TBCEdit;
     UsernameEdit: TBCEdit;
     UsernameLabel: TLabel;
+    ProfilePanel: TPanel;
+    ProfileLabel: TLabel;
+    ProfileEdit: TBCEdit;
     procedure FormDestroy(Sender: TObject);
     procedure Formshow(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);
@@ -41,6 +44,7 @@ type
     function GetHost: string;
     function GetPassword: string;
     function GetPort: string;
+    function GetProfile: string;
     function GetServiceName: string;
     function GetSID: string;
     function GetUsername: string;
@@ -48,11 +52,13 @@ type
     procedure SetHost(Value: string);
     procedure SetPassword(Value: string);
     procedure SetPort(Value: string);
+    procedure SetProfile(Value: string);
     procedure SetServiceName(Value: string);
     procedure SetSID(Value: string);
     procedure SetUsername(Value: string);
   public
     function Open(Clear: Boolean): Boolean;
+    property Profile: string read GetProfile write SetProfile;
     property Host: string read GetHost write SetHost;
     property Password: string read GetPassword write SetPassword;
     property Port: string read GetPort write SetPort;
@@ -107,6 +113,11 @@ begin
   Result := PasswordEdit.Text
 end;
 
+function TConnectDirectDialog.GetProfile: string;
+begin
+  Result := ProfileEdit.Text
+end;
+
 procedure TConnectDirectDialog.SetPassword(Value: string);
 begin
   PasswordEdit.Text := Value
@@ -130,6 +141,11 @@ end;
 procedure TConnectDirectDialog.SetPort(Value: string);
 begin
    PortEdit.Text := Value
+end;
+
+procedure TConnectDirectDialog.SetProfile(Value: string);
+begin
+  ProfileEdit.Text := Value;
 end;
 
 function TConnectDirectDialog.GetSID: string;
