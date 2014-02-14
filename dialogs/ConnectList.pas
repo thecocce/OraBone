@@ -52,12 +52,19 @@ type
       var Result: Integer);
     procedure VirtualDrawTreeDblClick(Sender: TObject);
     procedure VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
+    procedure VirtualDrawTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
+    procedure VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree; HintCanvas: TCanvas; Node: PVirtualNode;
+      Column: TColumnIndex; var NodeWidth: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure RadioButtonClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FConnectDialog: TConnectDialog;
     function GetConnectString(Data: PConnectData; IncludeHome: Boolean = False): string;
     procedure ReadIniFile;
     procedure SetConnectDialog(Value: TConnectDialog);
+    procedure SetNodeVisibility;
     procedure WriteConnectionsToIniFile;
     procedure WriteIniFile;
   published
@@ -70,7 +77,7 @@ implementation
 
 uses
   OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils,
-  BCCommon.Lib, Vcl.Themes;
+  BCCommon.Lib, Vcl.Themes, System.Types;
 
 const
   SECTION_CONNECTIONS = 'Connections';
@@ -85,32 +92,40 @@ var
 begin
   if ClientModeRadioButton.Checked then
     with ConnectClientDialog(Self) do
-    if Open(True) then
-    begin
-      Node := VirtualDrawTree.AddChild(nil);
-      Data := VirtualDrawTree.GetNodeData(Node);
-      Data.Profile := Profile;
-      Data.Username := Username;
-      Data.Password := Password;
-      Data.Database := Database;
-      Data.HomeName := HomeName;
+    try
+      if Open(True) then
+      begin
+        Node := VirtualDrawTree.AddChild(nil);
+        Data := VirtualDrawTree.GetNodeData(Node);
+        Data.Profile := Profile;
+        Data.Username := Username;
+        Data.Password := Password;
+        Data.Database := Database;
+        Data.HomeName := HomeName;
+      end;
+    finally
+      Free;
     end;
 
   if DirectModeRadioButton.Checked then
     with ConnectDirectDialog(Self) do
-    if Open(True) then
-    begin
-      Node := VirtualDrawTree.AddChild(nil);
-      Data := VirtualDrawTree.GetNodeData(Node);
-      Data.Profile := Profile;
-      Data.Username := Username;
-      Data.Password := Password;
-      Data.Host := Host;
-      Data.Port := Port;
-      if SID <> '' then
-        Data.SID := SID
-      else
-        Data.ServiceName := ServiceName;
+    try
+      if Open(True) then
+      begin
+        Node := VirtualDrawTree.AddChild(nil);
+        Data := VirtualDrawTree.GetNodeData(Node);
+        Data.Profile := Profile;
+        Data.Username := Username;
+        Data.Password := Password;
+        Data.Host := Host;
+        Data.Port := Port;
+        if SID <> '' then
+          Data.SID := SID
+        else
+          Data.ServiceName := ServiceName;
+      end;
+    finally
+      Free;
     end;
 end;
 
@@ -118,20 +133,20 @@ function TConnectListDialog.GetConnectString(Data: PConnectData; IncludeHome: Bo
 begin
   { Direct: Username/password@host:port:sid=sid/sn=service name
     Client: Username/password@database }
-  Result := Format('%s/%s@', [Data.Username, Data.Password]);
+  Result := System.SysUtils.Format('%s/%s@', [Data.Username, Data.Password]);
   if Data.ClientMode then
   begin
     Result := Result + Data.Database;
     if IncludeHome then
-      Result := Result + Format('^%s', [Data.HomeName]);
+      Result := Result + System.SysUtils.Format('^%s', [Data.HomeName]);
   end
   else
   begin
-    Result := Result + Format('%s:%s:', [Data.Host, Data.Port]);
+    Result := Result + System.SysUtils.Format('%s:%s:', [Data.Host, Data.Port]);
     if Data.SID <> '' then
-      Result := Result + Format('sid=%s', [Data.SID]);
+      Result := Result + System.SysUtils.Format('sid=%s', [Data.SID]);
     if Data.ServiceName <> '' then
-      Result := Result + Format('sn=%s', [Data.ServiceName]);
+      Result := Result + System.SysUtils.Format('sn=%s', [Data.ServiceName]);
   end;
 end;
 
@@ -145,6 +160,39 @@ begin
   EditConnectionAction.Enabled := ConnectAction.Enabled;
 end;
 
+procedure TConnectListDialog.SetNodeVisibility;
+var
+  i: Integer;
+  Node: PVirtualNode;
+  Data: PConnectData;
+begin
+  Node := VirtualDrawTree.GetFirst;
+  while Assigned(Node) do
+  begin
+    Data := VirtualDrawTree.GetNodeData(Node);
+    VirtualDrawTree.IsVisible[Node] := ClientModeRadioButton.Checked and Data.ClientMode or
+      DirectModeRadioButton.Checked and not Data.ClientMode;
+    Node := VirtualDrawTree.GetNext(Node);
+  end;
+  if ClientModeRadioButton.Checked then
+  begin
+    for i := 0 to 3 do
+      VirtualDrawTree.Header.Columns[i].Width := VirtualDrawTree.Width div 4;
+    VirtualDrawTree.Header.Columns[3].Options := VirtualDrawTree.Header.Columns[3].Options + [coVisible]
+  end
+  else
+  begin
+    for i := 0 to 2 do
+      VirtualDrawTree.Header.Columns[i].Width := VirtualDrawTree.Width div 3;
+    VirtualDrawTree.Header.Columns[3].Options := VirtualDrawTree.Header.Columns[3].Options - [coVisible];
+  end;
+end;
+
+procedure TConnectListDialog.RadioButtonClick(Sender: TObject);
+begin
+  SetNodeVisibility;
+end;
+
 procedure TConnectListDialog.ConnectActionExecute(Sender: TObject);
 var
   ConnectString: string;
@@ -153,9 +201,10 @@ var
 begin
   Node := VirtualDrawTree.GetFirstSelected;
   Data := VirtualDrawTree.GetNodeData(Node);
+  ConnectString := GetConnectString(Data);
   if ConnectString <> '' then
   begin
-    FConnectDialog.Session.ConnectString := GetConnectString(Data);
+    FConnectDialog.Session.ConnectString := ConnectString;
     FConnectDialog.Session.Schema := FConnectDialog.Session.Username; { What the fuck, Devart?!?!? }
     FConnectDialog.Session.Options.Direct := not Data.ClientMode;
     FConnectDialog.Session.HomeName := Data.HomeName;
@@ -206,7 +255,10 @@ begin
       Data.Database := Copy(s, Pos('@', s) + 1, Length(s));
       Data.ClientMode := Pos(':', s) = 0;
       if Pos('^', Data.Database) <> 0 then // client mode
+      begin
         Data.HomeName := Copy(Data.Database, Pos('^', Data.Database) + 1, Length(Data.Database));
+        Data.Database := Copy(Data.Database, 0, Pos('^', Data.Database) - 1);
+      end;
 
       if not Data.ClientMode then // direct mode
       begin
@@ -241,8 +293,8 @@ begin
   Data := VirtualDrawTree.GetNodeData(Node);
   ConnectionProfile := '';
   if Trim(Data.Profile) <> '' then
-    ConnectionProfile := Format(' ''%s''', [Data.Profile]);
-  if AskYesOrNo(Format('Remove selected connection%s, are you sure?', [ConnectionProfile])) then
+    ConnectionProfile := System.SysUtils.Format(' ''%s''', [Data.Profile]);
+  if AskYesOrNo(System.SysUtils.Format('Remove selected connection%s, are you sure?', [ConnectionProfile])) then
     VirtualDrawTree.DeleteNode(Node);
 end;
 
@@ -301,9 +353,10 @@ var
 begin
   Node := VirtualDrawTree.GetFirstSelected;
   Data := VirtualDrawTree.GetNodeData(Node);
+
   if ClientModeRadioButton.Checked then
   with ConnectClientDialog(Self) do
-  begin
+  try
     Profile := Data.Profile;
     Username := Data.Username;
     Password := Data.Password;
@@ -317,10 +370,13 @@ begin
       Data.Database := Database;
       Data.HomeName := HomeName;
     end;
+  finally
+    Free;
   end;
+
   if DirectModeRadioButton.Checked then
   with ConnectDirectDialog(Self) do
-  begin
+  try
     Profile := Data.Profile;
     Username := Data.Username;
     Password := Data.Password;
@@ -338,6 +394,8 @@ begin
       Data.SID := SID;
       Data.ServiceName := ServiceName;
     end;
+  finally
+    Free;
   end;
 end;
 
@@ -345,6 +403,16 @@ procedure TConnectListDialog.FormClose(Sender: TObject; var Action: TCloseAction
 begin
   WriteConnectionsToIniFile;
   WriteIniFile;
+end;
+
+procedure TConnectListDialog.FormCreate(Sender: TObject);
+begin
+  VirtualDrawTree.NodeDataSize := SizeOf(TConnectData);
+end;
+
+procedure TConnectListDialog.FormShow(Sender: TObject);
+begin
+  SetNodeVisibility;
 end;
 
 procedure TConnectListDialog.SetConnectDialog(Value: TConnectDialog);
@@ -375,7 +443,7 @@ end;
 
 procedure TConnectListDialog.VirtualDrawTreeDblClick(Sender: TObject);
 begin
-  EditConnectionAction.Execute
+  ConnectAction.Execute
 end;
 
 procedure TConnectListDialog.VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree; const PaintInfo: TVTPaintInfo);
@@ -388,6 +456,7 @@ var
   LColor: TColor;
 begin
   LStyles := StyleServices;
+
   with Sender as TVirtualDrawTree, PaintInfo do
   begin
     Data := Sender.GetNodeData(Node);
@@ -427,8 +496,22 @@ begin
     case Column of
       0: S := Data.Profile;
       1: S := Data.Username;
-      2: S := Data.Database;
-      3: S := Data.Database;
+      2:
+        begin
+          if Data.ClientMode then
+            S := Data.Database
+          else
+          begin
+            // host:port:sid=sid/sn=service name
+            S := System.SysUtils.Format('%s:%s:', [Data.Host, Data.Port]);
+            if Data.SID <> '' then
+              S := S + System.SysUtils.Format('sid=%s', [Data.SID]);
+            if Data.ServiceName <> '' then
+              S := S + System.SysUtils.Format('sn=%s', [Data.ServiceName]);
+          end;
+
+        end;
+      3: S := Data.Homename;
     end;
 
     if Length(S) > 0 then
@@ -437,6 +520,21 @@ begin
       DrawText(Canvas.Handle, S, Length(S), R, Format);
     end;
   end;
+end;
+
+procedure TConnectListDialog.VirtualDrawTreeFreeNode(Sender: TBaseVirtualTree; Node: PVirtualNode);
+var
+  Data: PConnectData;
+begin
+  Data := VirtualDrawTree.GetNodeData(Node);
+  Finalize(Data^);
+  inherited;
+end;
+
+procedure TConnectListDialog.VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree; HintCanvas: TCanvas;
+  Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);
+begin
+  NodeWidth := VirtualDrawTree.Width
 end;
 
 initialization

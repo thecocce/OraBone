@@ -14,6 +14,8 @@ object ConnectListDialog: TConnectListDialog
   OldCreateOrder = False
   Position = poDefault
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object TopPanel: TPanel
@@ -53,6 +55,7 @@ object ConnectListDialog: TConnectListDialog
       Checked = True
       TabOrder = 0
       TabStop = True
+      OnClick = RadioButtonClick
     end
     object DirectModeRadioButton: TRadioButton
       Left = 494
@@ -62,6 +65,7 @@ object ConnectListDialog: TConnectListDialog
       Align = alRight
       Caption = ' Direct'
       TabOrder = 1
+      OnClick = RadioButtonClick
     end
     object ActionToolBar1: TActionToolBar
       Left = 3
@@ -125,25 +129,32 @@ object ConnectListDialog: TConnectListDialog
       OnCompareNodes = VirtualDrawTreeCompareNodes
       OnDblClick = VirtualDrawTreeDblClick
       OnDrawNode = VirtualDrawTreeDrawNode
+      OnFreeNode = VirtualDrawTreeFreeNode
+      OnGetNodeWidth = VirtualDrawTreeGetNodeWidth
       Columns = <
         item
+          MinWidth = 100
+          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 0
           Width = 134
           WideText = 'Profile'
         end
         item
+          MinWidth = 100
           Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 1
           Width = 133
           WideText = 'User'
         end
         item
+          MinWidth = 100
           Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 2
           Width = 133
           WideText = 'Database'
         end
         item
+          MinWidth = 100
           Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 3
           Width = 133

@@ -52,7 +52,6 @@ object ConnectClientDialog: TConnectClientDialog
       Height = 21
       Hint = 'Profile'
       Align = alRight
-      CharCase = ecUpperCase
       TabOrder = 0
       EnterToTab = False
       OnlyNumbers = False
