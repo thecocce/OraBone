@@ -1462,7 +1462,7 @@ end;
 
 destructor TEditLink.Destroy;
 begin
-  FEdit.Free;
+  //FEdit.Free;
   inherited;
 end;
 
