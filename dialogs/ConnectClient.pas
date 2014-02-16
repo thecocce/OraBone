@@ -135,7 +135,7 @@ end;
 
 procedure TConnectClientDialog.Formshow(Sender: TObject);
 begin
-  UsernameEdit.SetFocus;
+  ProfileEdit.SetFocus;
 end;
 
 function TConnectClientDialog.GetUsername: string;

@@ -102,6 +102,7 @@ begin
         Data.Password := Password;
         Data.Database := Database;
         Data.HomeName := HomeName;
+        Data.ClientMode := True;
       end;
     finally
       Free;
@@ -123,6 +124,7 @@ begin
           Data.SID := SID
         else
           Data.ServiceName := ServiceName;
+        Data.ClientMode := False;
       end;
     finally
       Free;

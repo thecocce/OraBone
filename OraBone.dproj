@@ -113,20 +113,22 @@
         <DCC_DebugInformation>false</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_MinorVer>8</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <DCC_UnitSearchPath>D:\Bonecode XE4\Components\src\SQLParser\dxe4;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.8.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.8.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.8.1.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.8.1;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_MinorVer>8</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
         <DCC_UnitSearchPath>C:\Program Files (x86)\Devart\ODAC for RAD Studio XE4\Bin\Win64;D:\Bonecode XE4\Components\src\Controls;D:\Bonecode XE4\Components\src\UniSynEdit\Source;D:\Bonecode XE4\Components\src\SynWeb\Source;D:\Bonecode XE4\Components\src\VirtualTree\Source;D:\Bonecode XE4\Components\src\Ehlib\RADStudioXE4\Win64\Release;D:\Bonecode XE4\Components\src\Ehlib\Common;D:\Bonecode XE4\Components\src\SQLParser\dxe4_64_bit;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.8.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.8.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=7.8.1.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=7.8.1;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

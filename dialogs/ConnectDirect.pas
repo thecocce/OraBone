@@ -95,7 +95,7 @@ end;
 procedure TConnectDirectDialog.Formshow(Sender: TObject);
 begin
   PortEdit.Left := UsernameEdit.Left; { style fix }
-  UsernameEdit.SetFocus;
+  ProfileEdit.SetFocus;
 end;
 
 function TConnectDirectDialog.GetUsername: string;
