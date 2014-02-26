@@ -5,7 +5,7 @@ object CustomizeObjectBrowserDialog: TCustomizeObjectBrowserDialog
   Caption = 'Customize Object Browser'
   ClientHeight = 343
   ClientWidth = 234
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

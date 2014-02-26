@@ -3,7 +3,10 @@ object ObjectTreeFrame: TObjectTreeFrame
   Top = 0
   Width = 287
   Height = 460
+  Color = clWindow
   Ctl3D = True
+  ParentBackground = False
+  ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
   object BottomPanel: TPanel
@@ -13,7 +16,9 @@ object ObjectTreeFrame: TObjectTreeFrame
     Height = 26
     Align = alBottom
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Bottom = 1
+    ParentBackground = False
     TabOrder = 0
     object ComboPanel: TPanel
       Left = 0
@@ -23,9 +28,10 @@ object ObjectTreeFrame: TObjectTreeFrame
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
+      Color = clWindow
       Padding.Top = 3
       Padding.Right = 1
-      ParentColor = True
+      ParentBackground = False
       TabOrder = 0
       object SchemaComboBox: TBCComboBox
         Left = 0

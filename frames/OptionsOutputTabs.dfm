@@ -1,6 +1,9 @@
 inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
   Width = 232
   Height = 141
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   Visible = False
   object Panel: TPanel
     Left = 0

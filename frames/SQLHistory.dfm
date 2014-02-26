@@ -4,8 +4,10 @@ object SQLHistoryFrame: TSQLHistoryFrame
   Width = 451
   Height = 302
   Align = alClient
+  Color = clWindow
   Padding.Right = 1
   Padding.Bottom = 1
+  ParentColor = False
   TabOrder = 0
   object ButtonPanel: TPanel
     Left = 0
@@ -14,6 +16,8 @@ object SQLHistoryFrame: TSQLHistoryFrame
     Height = 22
     Align = alBottom
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object Bevel1: TBevel
       AlignWithMargins = True
@@ -97,7 +101,9 @@ object SQLHistoryFrame: TSQLHistoryFrame
     Height = 279
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Bottom = 2
+    ParentBackground = False
     TabOrder = 1
     object SQLHistoryStringGrid: TBCStringGrid
       Left = 0

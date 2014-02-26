@@ -5,7 +5,7 @@ object ChangeUserPasswordDialog: TChangeUserPasswordDialog
   Caption = 'Change Password'
   ClientHeight = 75
   ClientWidth = 288
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

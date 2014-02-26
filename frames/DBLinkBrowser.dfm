@@ -4,7 +4,10 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
   Width = 451
   Height = 302
   Align = alClient
+  Color = clWindow
   Ctl3D = False
+  ParentBackground = False
+  ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
   object DBLinkPageControl: TBCPageControl
@@ -72,9 +75,8 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 13
           Align = alRight
-          ExplicitHeight = 13
         end
         object InfoToolBar: TBCToolBar
           Left = 0

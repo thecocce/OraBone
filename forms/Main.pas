@@ -2754,17 +2754,17 @@ begin
         TabSheet.Caption := TabSheet.Caption + ' (' + IntToStr(Found + 1) + ')';
       TabSheet.TabVisible := True;
       PageControl.ActivePage := TabSheet;
-      PageControl.ActivePage.Repaint;
-      PageControl.Repaint;
+      //PageControl.ActivePage.Repaint;
+      //PageControl.Repaint;
     end
     else
     begin
       SchemaBrowserFrame.Free;
       TabSheet.Free;
       PageControl.ActivePageIndex := ActivePageIndex;
-      if Assigned(PageControl.ActivePage) then
-        PageControl.ActivePage.Repaint;
-      PageControl.Repaint;
+      //if Assigned(PageControl.ActivePage) then
+      //  PageControl.ActivePage.Repaint;
+      //PageControl.Repaint;
     end;
   except
     on E: Exception do
@@ -2772,7 +2772,7 @@ begin
   end;
   Screen.Cursor := crDefault;
   FConnecting := False;
-  Application.ProcessMessages;
+  //Application.ProcessMessages;
 end;
 
 procedure TMainForm.PageControlChange(Sender: TObject);

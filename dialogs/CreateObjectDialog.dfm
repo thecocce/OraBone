@@ -4,7 +4,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
   Caption = 'CreateObjectBaseDialog'
   ClientHeight = 348
   ClientWidth = 508
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -91,7 +91,7 @@ object CreateObjectBaseDialog: TCreateObjectBaseDialog
           Gutter.ShowLineNumbers = True
           Gutter.ShowBookmarks = False
           Gutter.ShowBookmarkPanel = False
-          Gutter.Width = 54
+          Gutter.Width = 34
           Highlighter = SynSQLSyn
           Minimap.Font.Charset = DEFAULT_CHARSET
           Minimap.Font.Color = clWindowText

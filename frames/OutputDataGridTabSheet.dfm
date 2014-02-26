@@ -3,6 +3,9 @@ object OutputDataGridFrame: TOutputDataGridFrame
   Top = 0
   Width = 320
   Height = 240
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   TabOrder = 0
   object StatisticsPanel: TPanel
     Left = 0

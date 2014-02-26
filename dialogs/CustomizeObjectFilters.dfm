@@ -5,7 +5,7 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
   Caption = 'Customize %s Filters'
   ClientHeight = 393
   ClientWidth = 348
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -70,11 +70,6 @@ object CustomizeObjectFiltersDialog: TCustomizeObjectFiltersDialog
         4A1448270B02666666666666665F5D5C5B4A56480B0202021110101010101010
         10101010100202020202020202020202020202020202}
       GrayedInactive = False
-      HotTrackFont.Charset = DEFAULT_CHARSET
-      HotTrackFont.Color = clWindowText
-      HotTrackFont.Height = -11
-      HotTrackFont.Name = 'Tahoma'
-      HotTrackFont.Style = []
       MarkDropDown = False
       Spacing = 0
     end

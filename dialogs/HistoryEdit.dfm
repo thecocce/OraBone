@@ -5,7 +5,7 @@ object HistoryEditDialog: THistoryEditDialog
   Caption = 'Edit History'
   ClientHeight = 259
   ClientWidth = 629
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -246,7 +246,7 @@ object HistoryEditDialog: THistoryEditDialog
         Gutter.ShowLineNumbers = True
         Gutter.ShowBookmarks = False
         Gutter.ShowBookmarkPanel = False
-        Gutter.Width = 54
+        Gutter.Width = 34
         Highlighter = SynSQLSyn
         Minimap.Font.Charset = DEFAULT_CHARSET
         Minimap.Font.Color = clWindowText

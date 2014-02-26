@@ -1,25 +1,29 @@
 object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
-  Width = 451
+  Width = 826
   Height = 302
   Align = alClient
+  Color = clWindow
   Ctl3D = False
+  ParentBackground = False
+  ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
   object TablePageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 451
+    Width = 826
     Height = 302
-    ActivePage = SourceTabSheet
+    ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = TablePageControlChange
-    ActivePageCaption = 'Source'
+    ParentColor = False
+    ActivePageCaption = 'Columns'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -28,7 +32,7 @@ object TableBrowserFrame: TTableBrowserFrame
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
+        Width = 818
         Height = 252
         Align = alClient
         BevelOuter = bvNone
@@ -38,7 +42,7 @@ object TableBrowserFrame: TTableBrowserFrame
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
+          Width = 816
           Height = 250
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
@@ -63,10 +67,12 @@ object TableBrowserFrame: TTableBrowserFrame
       object ColumnsButtonPanel: TPanel
         Left = 0
         Top = 252
-        Width = 443
+        Width = 818
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
+        Color = clWindow
+        ParentBackground = False
         TabOrder = 1
         object Bevel3: TBevel
           AlignWithMargins = True
@@ -82,10 +88,10 @@ object TableBrowserFrame: TTableBrowserFrame
         end
         object CreationAndModificationTimestampLabel: TLabel
           AlignWithMargins = True
-          Left = 437
+          Left = 812
           Top = 3
           Width = 3
-          Height = 13
+          Height = 19
           Align = alRight
         end
         object JvToolBar5: TBCToolBar

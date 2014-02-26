@@ -4,7 +4,7 @@ object OptionsForm: TOptionsForm
   Caption = 'Options'
   ClientHeight = 495
   ClientWidth = 512
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -117,6 +117,8 @@ object OptionsForm: TOptionsForm
       Left = 206
       Top = 6
       Height = 452
+      Color = clBtnFace
+      ParentColor = False
     end
     object OptionsVirtualStringTree: TVirtualStringTree
       Left = 6
@@ -134,7 +136,7 @@ object OptionsForm: TOptionsForm
       Images = ImagesDataModule.ImageList
       TabOrder = 0
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-      TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedImages, toUseExplorerTheme]
+      TreeOptions.PaintOptions = [toHideFocusRect, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedImages, toUseExplorerTheme]
       TreeOptions.SelectionOptions = [toFullRowSelect]
       TreeOptions.StringOptions = []
       OnClick = OptionsVirtualStringTreeClick
@@ -159,6 +161,7 @@ object OptionsForm: TOptionsForm
         Height = 452
         Align = alClient
         BorderStyle = bsNone
+        ParentBackground = True
         TabOrder = 0
       end
     end

@@ -4,6 +4,9 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
   Width = 451
   Height = 302
   Align = alClient
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   TabOrder = 0
   object Panel: TPanel
     Left = 0

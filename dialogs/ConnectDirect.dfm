@@ -6,7 +6,7 @@ object ConnectDirectDialog: TConnectDirectDialog
   Caption = 'Connect'
   ClientHeight = 234
   ClientWidth = 315
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

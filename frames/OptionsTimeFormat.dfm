@@ -1,6 +1,9 @@
 inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
   Width = 294
   Height = 163
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   object Panel: TPanel
     Left = 0
     Top = 0

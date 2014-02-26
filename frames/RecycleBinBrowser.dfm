@@ -4,7 +4,10 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
   Width = 451
   Height = 302
   Align = alClient
+  Color = clWindow
   Ctl3D = False
+  ParentBackground = False
+  ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
   object RecycleBinPageControl: TBCPageControl

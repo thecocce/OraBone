@@ -2,6 +2,7 @@ inherited AlterTableDialog: TAlterTableDialog
   Caption = 'Alter or Recreate Table'
   ClientHeight = 453
   ClientWidth = 739
+  Color = clWindow
   PixelsPerInch = 96
   TextHeight = 13
   object TableNameLabel: TLabel [0]

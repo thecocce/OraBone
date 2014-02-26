@@ -5,7 +5,7 @@ object DataSortDialog: TDataSortDialog
   Caption = 'Data Sort'
   ClientHeight = 389
   ClientWidth = 564
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

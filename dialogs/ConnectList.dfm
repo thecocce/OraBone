@@ -5,7 +5,7 @@ object ConnectListDialog: TConnectListDialog
   Caption = 'New Connection'
   ClientHeight = 418
   ClientWidth = 549
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -85,6 +85,7 @@ object ConnectListDialog: TConnectListDialog
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentBackground = True
       ParentFont = False
       Spacing = 0
     end

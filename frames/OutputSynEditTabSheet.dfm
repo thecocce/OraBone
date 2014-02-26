@@ -3,6 +3,9 @@ object OutputSynEditFrame: TOutputSynEditFrame
   Top = 0
   Width = 490
   Height = 366
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   TabOrder = 0
   object Panel: TPanel
     Left = 0
@@ -61,7 +64,7 @@ object OutputSynEditFrame: TOutputSynEditFrame
       Gutter.ShowLineNumbers = True
       Gutter.ShowBookmarks = False
       Gutter.ShowBookmarkPanel = False
-      Gutter.Width = 54
+      Gutter.Width = 34
       Minimap.Font.Charset = DEFAULT_CHARSET
       Minimap.Font.Color = clWindowText
       Minimap.Font.Height = -4

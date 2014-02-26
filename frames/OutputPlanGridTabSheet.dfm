@@ -3,6 +3,9 @@ object OutputPlanGridFrame: TOutputPlanGridFrame
   Top = 0
   Width = 320
   Height = 240
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   TabOrder = 0
   object GridPanel: TPanel
     Left = 0

@@ -5,7 +5,7 @@ object TableSourceOptionsDialog: TTableSourceOptionsDialog
   Caption = 'Options'
   ClientHeight = 169
   ClientWidth = 214
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

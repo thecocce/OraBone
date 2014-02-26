@@ -312,7 +312,6 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
         inherited SourceSynEdit: TSynEdit
           Width = 361
           Height = 231
-          Gutter.Width = 34
         end
         inherited SourceTopPanel: TPanel
           Width = 361

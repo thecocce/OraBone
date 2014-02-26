@@ -1,32 +1,36 @@
 object SchemaBrowserFrame: TSchemaBrowserFrame
   Left = 0
   Top = 0
-  Width = 651
-  Height = 487
+  Width = 451
+  Height = 302
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
   Margins.Bottom = 0
   Align = alClient
+  Color = clWindow
   Padding.Right = 1
   Padding.Bottom = 1
+  ParentColor = False
   TabOrder = 0
   object Splitter: TJvSplitter
     Left = 289
     Top = 0
-    Height = 486
+    Height = 301
     Hint = ' '
   end
   object LeftPanel: TPanel
     Left = 0
     Top = 0
     Width = 289
-    Height = 486
+    Height = 301
     Hint = ' '
     Align = alLeft
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Left = 1
     Padding.Bottom = 1
+    ParentBackground = False
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
@@ -34,13 +38,16 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       Left = 1
       Top = 0
       Width = 288
-      Height = 485
+      Height = 300
       Align = alClient
+      Color = clWindow
       Ctl3D = True
+      ParentBackground = False
+      ParentColor = False
       ParentCtl3D = False
       TabOrder = 0
       inherited BottomPanel: TPanel
-        Top = 459
+        Top = 274
         Width = 288
         ParentShowHint = False
         inherited ComboPanel: TPanel
@@ -58,7 +65,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       end
       inherited VirtualDrawTree: TVirtualDrawTree
         Width = 288
-        Height = 459
+        Height = 274
         Hint = ' '
         ParentShowHint = False
         PopupMenu = PopupMenu
@@ -76,12 +83,14 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   object RightPanel: TPanel
     Left = 292
     Top = 0
-    Width = 358
-    Height = 486
+    Width = 158
+    Height = 301
     Hint = ' '
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Select an object from the tree on the left'
+    Color = clWindow
+    ParentBackground = False
     ParentShowHint = False
     ShowHint = False
     TabOrder = 1

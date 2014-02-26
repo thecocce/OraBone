@@ -1,6 +1,9 @@
 inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
   Width = 312
   Height = 105
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   Visible = False
   object Panel: TPanel
     Left = 0

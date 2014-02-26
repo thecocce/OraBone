@@ -5,7 +5,7 @@ object DataFilterDialog: TDataFilterDialog
   Caption = 'Data Filter'
   ClientHeight = 405
   ClientWidth = 704
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

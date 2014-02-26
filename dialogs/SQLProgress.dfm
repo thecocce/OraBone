@@ -6,7 +6,7 @@ object SQLProgressDialog: TSQLProgressDialog
   Caption = 'Statement Processing...'
   ClientHeight = 86
   ClientWidth = 298
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

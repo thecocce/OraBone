@@ -4,7 +4,7 @@ object SchemaCompareForm: TSchemaCompareForm
   Caption = 'Compare Schemas'
   ClientHeight = 434
   ClientWidth = 672
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -153,7 +153,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 179
+              Width = 185
               WideText = 'Difference'
             end>
         end

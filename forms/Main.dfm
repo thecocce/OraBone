@@ -4,7 +4,7 @@ object MainForm: TMainForm
   Caption = 'OraBone'
   ClientHeight = 521
   ClientWidth = 861
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -53,6 +53,7 @@ object MainForm: TMainForm
       Font.Name = 'Segoe UI'
       Font.Style = []
       HorzMargin = 2
+      ParentBackground = True
       Spacing = 1
     end
   end
@@ -88,6 +89,7 @@ object MainForm: TMainForm
       Font.Name = 'Tahoma'
       Font.Style = []
       HorzSeparator = False
+      ParentBackground = True
       ParentFont = False
       Spacing = 0
     end
@@ -99,10 +101,12 @@ object MainForm: TMainForm
     Height = 449
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Left = 3
     Padding.Top = 2
     Padding.Right = 1
     Padding.Bottom = 2
+    ParentBackground = False
     TabOrder = 1
     object PageControl: TBCPageControl
       Left = 3
@@ -118,6 +122,7 @@ object MainForm: TMainForm
       TabOrder = 0
       OnChange = PageControlChange
       OnMouseDown = PageControlMouseDown
+      ParentColor = False
       RightClickSelect = True
       TabDragDrop = True
       HoldShiftToDragDrop = False

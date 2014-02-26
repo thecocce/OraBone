@@ -1,6 +1,9 @@
 inherited OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
   Width = 150
   Height = 39
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   Visible = False
   object Panel: TPanel
     Left = 0

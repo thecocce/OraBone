@@ -5,7 +5,7 @@ object CustomizeTableColumnsDialog: TCustomizeTableColumnsDialog
   Caption = 'Customize Table Columns'
   ClientHeight = 333
   ClientWidth = 249
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

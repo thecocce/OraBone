@@ -1250,17 +1250,21 @@ begin
       MenuItem.Add(SubMenuItem);
       {  }
       ObjectFilters := Lib.GetObjectFilterNames(ObjectType, ObjectTreeFrame.GetSchemaName);
-      for i := 0 to ObjectFilters.Count - 1 do
-      begin
-        SubMenuItem := TMenuItem.Create(PopupMenu);
-        SubMenuItem.OnClick := CustomizeObjectFiltersMenuClick;
-        SubMenuItem.Caption := ObjectFilters.Strings[i];
-        SubMenuItem.Hint := Format('Show customized %ss', [LowerCase(ObjectType)]);
-        SubMenuItem.RadioItem := True;
-        SubMenuItem.GroupIndex := 1;
-        SubMenuItem.Checked := ObjectTreeFrame.CurrentFilters[Index] = SubMenuItem.Caption;
-        SubMenuItem.Tag := Index;
-        MenuItem.Add(SubMenuItem);
+      try
+        for i := 0 to ObjectFilters.Count - 1 do
+        begin
+          SubMenuItem := TMenuItem.Create(PopupMenu);
+          SubMenuItem.OnClick := CustomizeObjectFiltersMenuClick;
+          SubMenuItem.Caption := ObjectFilters.Strings[i];
+          SubMenuItem.Hint := Format('Show customized %ss', [LowerCase(ObjectType)]);
+          SubMenuItem.RadioItem := True;
+          SubMenuItem.GroupIndex := 1;
+          SubMenuItem.Checked := ObjectTreeFrame.CurrentFilters[Index] = SubMenuItem.Caption;
+          SubMenuItem.Tag := Index;
+          MenuItem.Add(SubMenuItem);
+        end;
+      finally
+        ObjectFilters.Free;
       end;
     end;
 

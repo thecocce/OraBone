@@ -5,7 +5,7 @@ object StringDataDialog: TStringDataDialog
   Caption = 'Edit Field: %s'
   ClientHeight = 226
   ClientWidth = 552
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -117,7 +117,7 @@ object StringDataDialog: TStringDataDialog
       Gutter.ShowLineNumbers = True
       Gutter.ShowBookmarks = False
       Gutter.ShowBookmarkPanel = False
-      Gutter.Width = 54
+      Gutter.Width = 34
       Minimap.Font.Charset = DEFAULT_CHARSET
       Minimap.Font.Color = clWindowText
       Minimap.Font.Height = -4

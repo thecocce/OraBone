@@ -4,7 +4,7 @@ object ObjectSearhForm: TObjectSearhForm
   Caption = 'Object Search'
   ClientHeight = 434
   ClientWidth = 611
-  Color = clBtnFace
+  Color = clWindow
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
