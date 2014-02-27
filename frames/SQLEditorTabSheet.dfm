@@ -15,10 +15,11 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
     Height = 302
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Left = 1
     Padding.Top = 1
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 0
     object OraSynEdit: TBCOraSynEdit
       Left = 1

@@ -14,9 +14,10 @@ object OutputListBoxFrame: TOutputListBoxFrame
     Height = 240
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Right = 2
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 0
     object ListBox: TListBox
       Left = 0

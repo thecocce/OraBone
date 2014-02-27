@@ -14,9 +14,10 @@ object OutputSynEditFrame: TOutputSynEditFrame
     Height = 366
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Right = 2
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 0
     object SynEdit: TBCSynEdit
       Left = 0

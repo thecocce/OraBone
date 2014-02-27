@@ -14,10 +14,11 @@ object OutputDataGridFrame: TOutputDataGridFrame
     Height = 19
     Align = alBottom
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Left = 2
     Padding.Right = 2
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 0
     object StatsTimeLabel: TLabel
       Left = 2
@@ -26,6 +27,7 @@ object OutputDataGridFrame: TOutputDataGridFrame
       Height = 17
       Align = alLeft
       Caption = 'StatsTimeLabel'
+      ExplicitHeight = 13
     end
     object StatsRowsLabel: TLabel
       Left = 242
@@ -34,6 +36,7 @@ object OutputDataGridFrame: TOutputDataGridFrame
       Height = 17
       Align = alRight
       Caption = 'StatsRowsLabel'
+      ExplicitHeight = 13
     end
   end
   object GridPanel: TPanel
@@ -43,9 +46,10 @@ object OutputDataGridFrame: TOutputDataGridFrame
     Height = 221
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Right = 2
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 1
     object Grid: TBCDBGrid
       Left = 0
@@ -58,11 +62,14 @@ object OutputDataGridFrame: TOutputDataGridFrame
       DrawGraphicData = True
       DrawMemoText = True
       DynProps = <>
+      EditActions = [geaCutEh, geaCopyEh, geaPasteEh, geaDeleteEh, geaSelectAllEh]
       FooterParams.Color = clWindow
       GridLineParams.VertEmptySpaceStyle = dessNonEh
       IndicatorOptions = [gioShowRowselCheckboxesEh]
+      IndicatorTitle.UseGlobalMenu = False
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove]
+      EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
       TabOrder = 0
       object RowDetailData: TRowDetailPanelControlEh
       end

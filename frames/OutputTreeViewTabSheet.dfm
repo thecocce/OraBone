@@ -14,10 +14,11 @@ object OutputTreeViewFrame: TOutputTreeViewFrame
     Height = 240
     Align = alClient
     BevelOuter = bvNone
+    Color = clWindow
     Padding.Left = 1
     Padding.Top = 1
     Padding.Bottom = 2
-    ParentColor = True
+    ParentBackground = False
     TabOrder = 0
     object VirtualDrawTree: TVirtualDrawTree
       Left = 1

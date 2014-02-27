@@ -5,6 +5,7 @@ object MainForm: TMainForm
   ClientHeight = 521
   ClientWidth = 861
   Color = clWindow
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -65,10 +66,12 @@ object MainForm: TMainForm
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
+    DoubleBuffered = True
     Padding.Left = 2
     Padding.Top = 2
     Padding.Right = 2
     ParentColor = True
+    ParentDoubleBuffered = False
     TabOrder = 3
     object ActionToolBar: TActionToolBar
       Left = 2
@@ -102,11 +105,13 @@ object MainForm: TMainForm
     Align = alClient
     BevelOuter = bvNone
     Color = clWindow
+    DoubleBuffered = True
     Padding.Left = 3
     Padding.Top = 2
     Padding.Right = 1
     Padding.Bottom = 2
     ParentBackground = False
+    ParentDoubleBuffered = False
     TabOrder = 1
     object PageControl: TBCPageControl
       Left = 3
