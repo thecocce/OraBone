@@ -69,7 +69,6 @@ object AboutDialog: TAboutDialog
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    StyleElements = [seFont, seBorder]
     DesignSize = (
       538
       137)
