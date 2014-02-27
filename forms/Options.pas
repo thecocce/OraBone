@@ -393,7 +393,6 @@ var
   Format: Cardinal;
   LStyles: TCustomStyleServices;
   LColor: TColor;
-  i, HyphenCount: Integer;
 begin
   LStyles := StyleServices;
   with Sender as TVirtualDrawTree, PaintInfo do
@@ -432,13 +431,6 @@ begin
     Dec(R.Right);
     Dec(R.Bottom);
     S := Data.Caption;
-    if S = '-' then
-    begin
-      with R do
-        HyphenCount := (Right - Left) div Canvas.TextWidth(S);
-      for i := 0 to HyphenCount  do
-        S := S + '-';
-    end;
 
     if Length(S) > 0 then
     begin
