@@ -1,16 +1,17 @@
 inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
   Width = 294
   Height = 288
-  Color = clWindow
-  ParentBackground = False
-  ParentColor = False
   Visible = False
+  ExplicitWidth = 294
+  ExplicitHeight = 288
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 294
     Height = 288
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object DateFormatLabel: TLabel
       Left = 4

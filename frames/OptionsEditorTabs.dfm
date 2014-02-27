@@ -1,16 +1,17 @@
 inherited OptionsEditorTabsFrame: TOptionsEditorTabsFrame
   Width = 232
   Height = 141
-  Color = clWindow
-  ParentBackground = False
-  ParentColor = False
   Visible = False
+  ExplicitWidth = 232
+  ExplicitHeight = 141
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 232
     Height = 141
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object CloseTabByDblClickCheckBox: TBCCheckBox
       Left = 4

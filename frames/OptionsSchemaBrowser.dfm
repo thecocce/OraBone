@@ -1,16 +1,17 @@
 inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
   Width = 201
   Height = 107
-  Color = clWindow
-  ParentBackground = False
-  ParentColor = False
   Visible = False
+  ExplicitWidth = 201
+  ExplicitHeight = 107
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 201
     Height = 107
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
       Left = 6

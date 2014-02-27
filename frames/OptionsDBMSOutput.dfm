@@ -1,16 +1,17 @@
 inherited OptionsDBMSOutputFrame: TOptionsDBMSOutputFrame
   Width = 150
   Height = 39
-  Color = clWindow
-  ParentBackground = False
-  ParentColor = False
   Visible = False
+  ExplicitWidth = 150
+  ExplicitHeight = 39
   object Panel: TPanel
     Left = 0
     Top = 0
     Width = 150
     Height = 39
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object PollingIntervalLabel: TLabel
       Left = 7

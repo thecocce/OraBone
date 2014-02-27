@@ -1,10 +1,9 @@
 inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
   Width = 312
   Height = 105
-  Color = clWindow
-  ParentBackground = False
-  ParentColor = False
   Visible = False
+  ExplicitWidth = 312
+  ExplicitHeight = 105
   object Panel: TPanel
     Left = 0
     Top = 0
@@ -76,6 +75,8 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Margins.Bottom = 4
       Caption = ' Filter On Typing'
       Checked = True
+      Color = clWindow
+      ParentColor = False
       State = cbChecked
       TabOrder = 2
       ReadOnly = False
