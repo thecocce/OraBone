@@ -1,7 +1,7 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 1090
+  Width = 451
   Height = 302
   Hint = ' '
   Align = alClient
@@ -14,7 +14,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object HorizontalSplitter: TJvSplitter
     Left = 0
     Top = 76
-    Width = 1090
+    Width = 451
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -25,7 +25,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 1090
+    Width = 451
     Height = 21
     Hint = ' '
     Align = alTop
@@ -424,7 +424,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 1090
+    Width = 451
     Height = 7
     Align = alClient
     BevelOuter = bvNone
@@ -436,8 +436,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 1090
-      Height = 11
+      Width = 451
+      Height = 5
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -456,13 +456,12 @@ object SQLEditorFrame: TSQLEditorFrame
       ShowCloseButton = False
       OnCloseButtonClick = PageControlCloseButtonClick
       OnDblClick = PageControlDblClick
-      ExplicitHeight = 5
     end
   end
   object OutputPanel: TPanel
     Left = 0
     Top = 79
-    Width = 1090
+    Width = 451
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -474,7 +473,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1090
+    Width = 451
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -1064,7 +1063,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object GotoLinePanel: TPanel
     Left = 0
     Top = 51
-    Width = 1090
+    Width = 451
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1378,6 +1377,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Caption = '-'
     end
     object ToggleBookmarkMenuItem: TMenuItem
+      Action = MainForm.SearchToggleBookmarkAction
     end
     object ToggleBookmarksMenuItem: TMenuItem
       Caption = 'Toggle Boo&kmarks'
@@ -1496,6 +1496,7 @@ object SQLEditorFrame: TSQLEditorFrame
       end
     end
     object ClearBookmarksMenuItem: TMenuItem
+      Action = MainForm.SearchClearBookmarksAction
     end
     object Separator3MenuItem: TMenuItem
       Caption = '-'
@@ -1684,7 +1685,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 378
     Top = 106
     Bitmap = {
-      494C010105000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1960,7 +1961,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 270
     Top = 230
     Bitmap = {
-      494C01010A000D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2369,7 +2370,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 382
     Top = 156
     Bitmap = {
-      494C010102000500080014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005000C0014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2589,7 +2590,7 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 380
     Top = 212
     Bitmap = {
-      494C010102000500080018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005000C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

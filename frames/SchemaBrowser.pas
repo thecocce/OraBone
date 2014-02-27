@@ -186,6 +186,8 @@ const
 constructor TSchemaBrowserFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  PopupMenu.Images := ImagesDataModule.ImageList;
+  SchemaActionList.Images := ImagesDataModule.ImageList;
   AssignOptions;
 end;
 

@@ -5,6 +5,7 @@ object OptionsForm: TOptionsForm
   ClientHeight = 495
   ClientWidth = 512
   Color = clWindow
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -120,7 +121,7 @@ object OptionsForm: TOptionsForm
       Color = clBtnFace
       ParentColor = False
     end
-    object OptionsVirtualStringTree: TVirtualStringTree
+    object OptionsVirtualDrawTree: TVirtualDrawTree
       Left = 6
       Top = 6
       Width = 200
@@ -135,15 +136,17 @@ object OptionsForm: TOptionsForm
       Header.MainColumn = -1
       Images = ImagesDataModule.ImageList
       TabOrder = 0
+      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-      TreeOptions.PaintOptions = [toHideFocusRect, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedImages, toUseExplorerTheme]
-      TreeOptions.SelectionOptions = [toFullRowSelect]
-      TreeOptions.StringOptions = []
-      OnClick = OptionsVirtualStringTreeClick
-      OnFreeNode = OptionsVirtualStringTreeFreeNode
-      OnGetText = OptionsVirtualStringTreeGetText
-      OnPaintText = OptionsVirtualStringTreePaintText
-      OnGetImageIndex = OptionsVirtualStringTreeGetImageIndex
+      TreeOptions.PaintOptions = [toHideFocusRect, toShowButtons, toShowDropmark, toShowRoot, toThemeAware, toUseBlendedSelection]
+      TreeOptions.SelectionOptions = [toFullRowSelect, toMiddleClickSelect]
+      WantTabs = True
+      OnClick = OptionsVirtualDrawTreeClick
+      OnDrawNode = OptionsVirtualDrawTreeDrawNode
+      OnFreeNode = OptionsVirtualDrawTreeFreeNode
+      OnGetImageIndex = OptionsVirtualDrawTreeGetImageIndex
+      OnGetNodeWidth = OptionsVirtualDrawTreeGetNodeWidth
+      OnKeyDown = OptionsVirtualDrawTreeKeyDown
       Columns = <>
     end
     object OptionsPanel: TPanel

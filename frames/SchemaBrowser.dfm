@@ -46,20 +46,28 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       ParentColor = False
       ParentCtl3D = False
       TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitWidth = 288
+      ExplicitHeight = 300
       inherited BottomPanel: TPanel
         Top = 274
         Width = 288
         ParentShowHint = False
+        ExplicitTop = 274
+        ExplicitWidth = 288
         inherited ComboPanel: TPanel
           Width = 288
           Hint = ' '
           ParentShowHint = False
+          ExplicitWidth = 288
           inherited SchemaComboBox: TBCComboBox
             Width = 261
             Hint = 'Schema name'
+            ExplicitWidth = 261
           end
           inherited FilterToolBar: TBCToolBar
             Left = 264
+            ExplicitLeft = 264
           end
         end
       end
@@ -73,6 +81,8 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         OnEditing = ObjectTreeFrameVirtualDrawTreeEditing
         OnKeyUp = ObjectTreeFrameVirtualDrawTreeKeyUp
         OnMouseDown = ObjectTreeFrameVirtualDrawTreeMouseDown
+        ExplicitWidth = 288
+        ExplicitHeight = 274
       end
       inherited UsersQuery: TOraQuery
         Left = 234
@@ -96,6 +106,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     TabOrder = 1
   end
   object SchemaActionList: TActionList
+    Images = ImagesDataModule.ImageList
     Left = 108
     Top = 244
     object AlterTableAction: TAction
@@ -344,6 +355,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     end
   end
   object PopupMenu: TBCPopupMenu
+    Images = ImagesDataModule.ImageList
     Left = 148
     Top = 64
   end

@@ -10,6 +10,8 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
     Width = 312
     Height = 105
     BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
       Left = 6

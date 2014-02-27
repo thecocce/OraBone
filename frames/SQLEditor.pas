@@ -454,6 +454,7 @@ begin
   ToggleBookmark8MenuItem.Action := MainForm.ToggleBookmarks8Action;
   ToggleBookmark9MenuItem.Action := MainForm.ToggleBookmarks9Action;
   GotoBookmarksMenuItem.Action := MainForm.SearchGotoBookmarksAction;
+  ClearBookmarksMenuItem.Action := MainForm.SearchClearBookmarksAction;
   GotoBookmark1MenuItem.Action := MainForm.GotoBookmarks1Action;
   GotoBookmark2MenuItem.Action := MainForm.GotoBookmarks2Action;
   GotoBookmark3MenuItem.Action := MainForm.GotoBookmarks3Action;
