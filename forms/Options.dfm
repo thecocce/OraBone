@@ -146,7 +146,7 @@ object OptionsForm: TOptionsForm
       OnFreeNode = OptionsVirtualDrawTreeFreeNode
       OnGetImageIndex = OptionsVirtualDrawTreeGetImageIndex
       OnGetNodeWidth = OptionsVirtualDrawTreeGetNodeWidth
-      OnKeyDown = OptionsVirtualDrawTreeKeyDown
+      OnKeyUp = OptionsVirtualDrawTreeKeyUp
       Columns = <>
     end
     object OptionsPanel: TPanel
