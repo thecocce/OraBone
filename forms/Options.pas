@@ -357,8 +357,8 @@ begin
     Data.Caption := SQLWhitespaceAction.Caption;
 
     Node.ChildCount := 7;
-    OptionsVirtualDrawTree.Selected[Node] := True;
-    OptionsVirtualDrawTree.Expanded[Node] := True;
+    //OptionsVirtualDrawTree.Selected[Node] := True;
+    //OptionsVirtualDrawTree.Expanded[Node] := True;
     OptionsVirtualDrawTree.Selected[OptionsVirtualDrawTree.GetFirst] := True;
   end;
 end;
@@ -539,8 +539,7 @@ begin
       OptionsDateFormatFrame(Self, FOraSession).Show;
     if (ParentIndex = 8) and (Level = 1) and (TreeNode.Index = 1) then
       OptionsTimeFormatFrame(Self, FOraSession).Show;
-
-
+    { SQL Formatter options }
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 0) then
       OptionsSQLAlignmentsFrame(Self).Show;
     if (ParentIndex = 9) and (Level = 1) and (TreeNode.Index = 1) then
