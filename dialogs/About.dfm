@@ -69,6 +69,7 @@ object AboutDialog: TAboutDialog
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    StyleElements = []
     DesignSize = (
       538
       137)
@@ -424,6 +425,7 @@ object AboutDialog: TAboutDialog
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 1
+    StyleElements = []
   end
   object ThanksToPanel: TPanel
     Left = 0
