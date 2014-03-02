@@ -1775,7 +1775,7 @@ begin
     SynEdit := SQLEditorFrame.GetActiveSynEdit;
     if Assigned(SynEdit) then
       if Trim(Synedit.Text) <> '' then
-        Synedit.Text := FormatSQL(Synedit.Text, svOracle);
+        Synedit.Text := FormatSQL(Synedit.Text, dbOracle);
   end;
 end;
 
