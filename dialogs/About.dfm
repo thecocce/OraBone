@@ -86,6 +86,7 @@ object AboutDialog: TAboutDialog
       Font.Style = []
       ParentFont = False
       Transparent = True
+      StyleElements = []
     end
     object VersionLabel: TLabel
       Left = 132
@@ -99,6 +100,7 @@ object AboutDialog: TAboutDialog
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      StyleElements = []
     end
     object OSLabel: TLabel
       Left = 132
@@ -106,6 +108,7 @@ object AboutDialog: TAboutDialog
       Width = 39
       Height = 13
       Caption = 'OSLabel'
+      StyleElements = []
     end
     object MemoryAvailableLabel: TLabel
       Left = 132
@@ -113,6 +116,7 @@ object AboutDialog: TAboutDialog
       Width = 166
       Height = 13
       Caption = 'Memory Available to Windows: %s'
+      StyleElements = []
     end
     object CopyrightLabel: TLabel
       Left = 133
@@ -121,6 +125,7 @@ object AboutDialog: TAboutDialog
       Height = 13
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Copyright '#169' 2010-2014 Lasse Rautiainen. All Rights Reserved.'
+      StyleElements = []
     end
     object ImagePanel: TPanel
       Left = 0

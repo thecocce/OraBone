@@ -4,11 +4,11 @@
         <ProjectVersion>15.3</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -91,7 +91,6 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_UnitSearchPath>..\..\Components\src\VirtualTree\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
@@ -100,7 +99,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <DCC_UnitSearchPath>..\..\Components\src\VirtualTree\Source;..\..\Components\src\Controls;..\..\Components\src\UniSynEdit\Source;..\..\Components\src\Ehlib\RADStudioXE5;..\..\Components\src\SynWeb\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\..\Components\src\Controls;..\..\Components\src\UniSynEdit\Source;..\..\Components\src\Ehlib\RADStudioXE5;..\..\Components\src\SynWeb\Source;..\..\Components\src\FastMM;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -113,7 +112,6 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <DCC_UnitSearchPath>..\..\Components\src\VirtualTree\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Release>2</VerInfo_Release>
         <VerInfo_MinorVer>8</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>

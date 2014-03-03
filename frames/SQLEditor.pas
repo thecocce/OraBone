@@ -236,8 +236,7 @@ type
     function GetActiveDocumentFound: Boolean;
     function GetSynEdit(TabSheet: TTabSheet): TBCOraSynEdit;
     function GetSQLEditorTabSheetFrame(TabSheet: TTabSheet): TSQLEditorTabSheetFrame;
-    function Save(TabSheet: TTabSheet; ShowDialog: Boolean = False): string;
-      overload;
+    function Save(TabSheet: TTabSheet; ShowDialog: Boolean = False): string; overload;
     procedure InitializeSynEditPrint;
     function GetOpenTabSheets: Boolean;
     function GetSelectionFound: Boolean;
@@ -249,6 +248,7 @@ type
     function FindOpenFile(FileName: string): TBCOraSynEdit;
     procedure SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
     procedure DoSearch;
+    procedure FreePage(TabSheet: TTabSheet);
     procedure AddToReopenFiles(FileName: string);
     procedure SetHighlighterTableNames(Value: TStrings);
     procedure ExecuteStatement(SynEdit: TBCOraSynEdit; SQL: string = ''); overload;
@@ -510,8 +510,34 @@ begin
   CreateActionToolBar(True);
 end;
 
+procedure TSQLEditorFrame.FreePage(TabSheet: TTabSheet);
+var
+  SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame;
+  SynEdit: TBCOraSynEdit;
+begin
+  SQLEditorTabSheetFrame := GetSQLEditorTabSheetFrame(TabSheet);
+  if Assigned(SQLEditorTabSheetFrame) then
+  begin
+    SynEdit := SQLEditorTabSheetFrame.OraSynEdit;
+    if Assigned(SynEdit) then
+    begin
+      if Assigned(SynEdit.OraQuery) then
+        SynEdit.OraQuery.Free;
+      if Assigned(SynEdit.PlanQuery) then
+        SynEdit.PlanQuery.Free;
+      if Assigned(SynEdit.ObjectCompletionProposal) then
+        SynEdit.ObjectCompletionProposal.Free;
+      if Assigned(SynEdit.ObjectFieldCompletionProposal) then
+        SynEdit.ObjectFieldCompletionProposal.Free;
+    end;
+    SQLEditorTabSheetFrame.Free;
+  end;
+end;
+
 destructor TSQLEditorFrame.Destroy;
 begin
+  if Assigned(FObjectNames) then
+    FObjectNames.Free;
   PageControl.Images.Free;
 
   inherited Destroy;
@@ -1051,7 +1077,7 @@ begin
       PageControl.ActivePage.PageIndex := ActivePageIndex;
     end;
     if PageControl.PageCount > 0 then
-      PageControl.Pages[ActivePageIndex].Free;
+      FreePage(PageControl.Pages[ActivePageIndex]);
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;
@@ -1074,7 +1100,7 @@ begin
   begin
     j := PageControl.PageCount - 1;
     for i := j downto 0 do
-      PageControl.Pages[i].Free;
+      FreePage(PageControl.Pages[i]);
     FNumberOfNewDocument := 0;
     Result := mrYes;
   end;
@@ -1106,7 +1132,7 @@ begin
   begin
     j := PageControl.PageCount - 1;
     for i := j downto 1 do
-      PageControl.Pages[i].Free;
+      FreePage(PageControl.Pages[i]);
 
     if GetActiveSynEdit.DocumentName = '' then
       FNumberOfNewDocument := 1
@@ -2808,10 +2834,14 @@ begin
   if Assigned(SynEdit) then
   begin
     Strings := TWideStringList.Create;
-    Strings.Text := SynEdit.SelText;
-    Strings.Sort;
-    SynEdit.SelText := TrimRight(Strings.Text);
-    Strings.Free;
+    with Strings do
+    try
+      Text := SynEdit.SelText;
+      Sort;
+      SynEdit.SelText := TrimRight(Text);
+    finally
+      Free;
+    end;
   end;
 end;
 
@@ -2826,12 +2856,16 @@ begin
   if Assigned(SynEdit) then
   begin
     Strings := TWideStringList.Create;
-    Strings.Text := SynEdit.SelText;
-    Strings.Sort;
-    for i := Strings.Count - 1 downto 0 do
-      s := s + Strings.Strings[i] + Chr(13) + Chr(10);
-    SynEdit.SelText := TrimRight(s);
-    Strings.Free;
+    with Strings do
+    try
+      Text := SynEdit.SelText;
+      Sort;
+      for i := Count - 1 downto 0 do
+        s := s + Strings[i] + Chr(13) + Chr(10);
+      SynEdit.SelText := TrimRight(s);
+    finally
+      Free;
+    end;
   end;
 end;
 

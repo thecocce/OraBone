@@ -2257,8 +2257,11 @@ begin
     Result.Parent := TabSheet;
     Result.PopupMenu := DocumentPopupMenu;
     TableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session, SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
-    Result.HighlighterTableNames := TableNames;
-    TableNames.Free;
+    try
+      Result.HighlighterTableNames := TableNames;
+    finally
+      TableNames.Free;
+    end;
     Result.ObjectNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session,
       SchemaBrowserFrame.ObjectTreeFrame.SchemaParam, True);
     Result.Session := SchemaBrowserFrame.ObjectTreeFrame.Session;
