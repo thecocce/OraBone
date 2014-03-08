@@ -650,7 +650,21 @@ begin
 end;
 
 procedure TSQLEditorFrame.UpdateMarginAndColors(SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame);
+var
+  LStyles: TCustomStyleServices;
 begin
+  LStyles := StyleServices;
+  { TButtonedEdit style fix }
+  if LStyles.Enabled then
+  begin
+    SearchForEdit.Color := LStyles.GetStyleColor(scEdit);
+    GotoLineNumberEdit.Color := LStyles.GetStyleColor(scEdit);
+  end
+  else
+  begin
+    SearchForEdit.Color := clWindow;
+    GotoLineNumberEdit.Color := clWindow;
+  end;
   BCCommon.StyleUtils.UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
   SQLEditorTabSheetFrame.OraSynEdit.ActiveLineColor := LightenColor(SQLEditorTabSheetFrame.OraSynEdit.Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
 end;
