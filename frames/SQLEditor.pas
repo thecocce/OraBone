@@ -10,7 +10,7 @@ uses
   Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl, BCControls.PopupMenu,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
   BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
-  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls;
+  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls, BCControls.ButtonedEdit;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -150,7 +150,7 @@ type
     SearchPanel2: TPanel;
     SearchForLabel: TLabel;
     SearchPanel3: TPanel;
-    SearchForEdit: TButtonedEdit;
+    SearchForEdit: TBCButtonedEdit;
     SearchPanel1: TPanel;
     JvSpeedButton1: TSpeedButton;
     SearchPanel5: TPanel;
@@ -173,7 +173,7 @@ type
     GotoLineLabelPanel: TPanel;
     GotoLineLabel: TLabel;
     LineNumberPanel: TPanel;
-    GotoLineNumberEdit: TButtonedEdit;
+    GotoLineNumberEdit: TBCButtonedEdit;
     GotoLineButtonPanel: TPanel;
     GotoLineGoSpeedButton: TSpeedButton;
     GotoLineAction: TAction;
@@ -650,21 +650,7 @@ begin
 end;
 
 procedure TSQLEditorFrame.UpdateMarginAndColors(SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame);
-var
-  LStyles: TCustomStyleServices;
 begin
-  LStyles := StyleServices;
-  { TButtonedEdit style fix }
-  if LStyles.Enabled then
-  begin
-    SearchForEdit.Color := LStyles.GetStyleColor(scEdit);
-    GotoLineNumberEdit.Color := LStyles.GetStyleColor(scEdit);
-  end
-  else
-  begin
-    SearchForEdit.Color := clWindow;
-    GotoLineNumberEdit.Color := clWindow;
-  end;
   BCCommon.StyleUtils.UpdateMargin(SQLEditorTabSheetFrame.OraSynEdit);
   SQLEditorTabSheetFrame.OraSynEdit.ActiveLineColor := LightenColor(SQLEditorTabSheetFrame.OraSynEdit.Color, 1 - (10 - OptionsContainer.ColorBrightness)/10);
 end;
