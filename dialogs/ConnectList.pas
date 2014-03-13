@@ -3,9 +3,10 @@ unit ConnectList;
 interface
 
 uses
-  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids, JvExGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls, Winapi.Windows,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, BCControls.ImageList, System.Actions, VirtualTrees, Vcl.AppEvnts;
+  System.SysUtils, System.Classes, Vcl.Graphics, BCDialogs.Dlg, Vcl.Controls, Vcl.Forms, OdacVcl, Vcl.Dialogs, Vcl.Grids,
+  JvExGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.ToolWin, Vcl.ActnMan, Vcl.ActnCtrls, Winapi.Windows,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ComCtrls, BCControls.ImageList, System.Actions, VirtualTrees, Vcl.AppEvnts,
+  Ora;
 
 type
   PConnectData = ^TConnectData;
@@ -22,7 +23,7 @@ type
     ClientMode: Boolean;
   end;
 
-  TConnectListDialog = class(TForm)
+  TConnectListDialog = class(TDialog)
     ActionManager: TActionManager;
     ActionToolBar1: TActionToolBar;
     AddConnectionAction: TAction;
@@ -58,18 +59,20 @@ type
     procedure FormCreate(Sender: TObject);
     procedure RadioButtonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FConnectDialog: TConnectDialog;
+    FOraSession: TOraSession;
     function GetConnectString(Data: PConnectData; IncludeHome: Boolean = False): string;
     procedure ReadIniFile;
-    procedure SetConnectDialog(Value: TConnectDialog);
     procedure SetNodeVisibility;
     procedure WriteConnectionsToIniFile;
     procedure WriteIniFile;
-  published
-    property ConnectDialog: TConnectDialog read FConnectDialog write SetConnectDialog;
+  public
+    function Open(OraSession: TOraSession): Boolean;
   end;
+
+function ConnectListDialog(AOwner: TComponent): TConnectListDialog;
 
 implementation
 
@@ -77,13 +80,22 @@ implementation
 
 uses
   OraError, BigIni, ConnectClient, ConnectDirect, BCCommon.FileUtils, BCCommon.Messages, BCCommon.StringUtils,
-  BCCommon.Lib, Vcl.Themes, System.Types;
+  BCCommon.Lib, Vcl.Themes, System.Types, BCCommon.StyleUtils;
 
 const
   SECTION_CONNECTIONS = 'Connections';
   SECTION_CONNECTIONPROFILES = 'ConnectionProfiles';
 
-// VirtualTree.IsVisible[Node] := False;
+var
+  FConnectListDialog: TConnectListDialog;
+
+function ConnectListDialog(AOwner: TComponent): TConnectListDialog;
+begin
+  if not Assigned(FConnectListDialog) then
+    FConnectListDialog := TConnectListDialog.Create(AOwner);
+  Result := FConnectListDialog;
+  SetStyledFormSize(Result);
+end;
 
 procedure TConnectListDialog.AddConnectionActionExecute(Sender: TObject);
 var
@@ -206,17 +218,31 @@ begin
   ConnectString := GetConnectString(Data);
   if ConnectString <> '' then
   begin
-    FConnectDialog.Session.ConnectString := ConnectString;
-    FConnectDialog.Session.Schema := FConnectDialog.Session.Username; { What the fuck, Devart?!?!? }
-    FConnectDialog.Session.Options.Direct := not Data.ClientMode;
-    FConnectDialog.Session.HomeName := Data.HomeName;
-    try
-      FConnectDialog.Connection.PerformConnect(False);
+    FOraSession.ConnectString := ConnectString;
+    FOraSession.Schema := Data.Username; { What the fuck, Devart?!?!? }
+    FOraSession.Options.Direct := not Data.ClientMode;
+    {FConnectDialog.Session.HomeName := Data.HomeName;
+    FConnectDialog.Session.Username := Data.Username;
+    FConnectDialog.Session.Password := Data.Password;
+    if Data.ClientMode then
+      FConnectDialog.Session.Server := Data.Database
+    else
+    begin
+      FConnectDialog.Session.Server := System.SysUtils.Format('%s:%s:', [Data.Host, Data.Port]);
+      if Data.SID <> '' then
+        FConnectDialog.Session.Server := FConnectDialog.Connection.Server + System.SysUtils.Format('sid=%s', [Data.SID]);
+      if Data.ServiceName <> '' then
+        FConnectDialog.Session.Server := FConnectDialog.Connection.Server + System.SysUtils.Format('sn=%s', [Data.ServiceName]);
+    end; }
+
+    //try
+      //FOraSession.Connect;
+      //ConnectDialog.Connection.PerformConnect(False);
       ModalResult := mrOk;
-    except
+    {except
       on E: EOraError do
         Raise;
-    end;
+    end;}
   end;
 end;
 
@@ -412,15 +438,21 @@ begin
   VirtualDrawTree.NodeDataSize := SizeOf(TConnectData);
 end;
 
+procedure TConnectListDialog.FormDestroy(Sender: TObject);
+begin
+  FConnectListDialog := nil;
+end;
+
 procedure TConnectListDialog.FormShow(Sender: TObject);
 begin
   SetNodeVisibility;
 end;
 
-procedure TConnectListDialog.SetConnectDialog(Value: TConnectDialog);
+function TConnectListDialog.Open(OraSession: TOraSession): Boolean;
 begin
-  FConnectDialog := Value;
+  FOraSession := OraSession;
   ReadIniFile;
+  Result := ShowModal = mrOk;
 end;
 
 procedure TConnectListDialog.VirtualDrawTreeCompareNodes(Sender: TBaseVirtualTree; Node1, Node2: PVirtualNode;

@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, ObjectTree, Vcl.ExtCtrls, JvExExtCtrls, JvSplitter, Vcl.ComCtrls, FuncProcBrowser, PackageBrowser,
   TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser, DBLinkBrowser, RecycleBinBrowser,
   UserBrowser, DBAccess, Ora, Vcl.Menus, Vcl.ActnList, BCControls.PopupMenu, VirtualTrees,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions, BCCommon.Images;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions, BCCommon.Images, OraCall, Data.DB;
 
 type
   TSchemaBrowserFrame = class(TFrame)
@@ -704,6 +704,8 @@ procedure TSchemaBrowserFrame.ObjectTreeFrameVirtualDrawTreeClick(Sender: TObjec
 var
   Refresh: Boolean;
 begin
+  if ObjectTreeFrame.Session.Username = '' then
+    Exit;
   try
     Screen.Cursor := crHourglass;
     { check session }

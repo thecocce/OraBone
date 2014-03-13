@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
   Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ImgList, DBAccess, MemData, OdacVcl, DB, Ora, MemDS, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.ToolWin, Vcl.ActnList, JvStringHolder, VirtualTrees, BCControls.Edit, BCControls.ComboBox,
-  BCControls.ToolBar, Vcl.Themes, System.Actions, BCCommon.Images;
+  BCControls.ToolBar, Vcl.Themes, System.Actions, BCCommon.Images, OraCall;
 
 const
   { Tree texts }
@@ -50,7 +50,6 @@ type
     ObjectsQuery: TOraQuery;
     InvalidObjectsQuery: TOraQuery;
     RecycleBinQuery: TOraQuery;
-    ConnectDialog: TConnectDialog;
     SchemasQuery: TOraQuery;
     BottomPanel: TPanel;
     ActionList: TActionList;
@@ -61,6 +60,7 @@ type
     VirtualDrawTree: TVirtualDrawTree;
     FilterToolBar: TBCToolBar;
     FilterToolButton: TToolButton;
+    OraSession: TOraSession;
     procedure SchemaComboBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SchemaFilterActionExecute(Sender: TObject);
     procedure OraSessionConnectionLost(Sender: TObject; Component: TComponent;
@@ -83,13 +83,13 @@ type
   private
     { Private declarations }
     FSchemaParam: string;
-    FOraSession: TOraSession;
+    //OraSession: TOraSession;
     FObjectName, FObjectType: string;
     FTreeObjects: TStrings;
     FUpdatingSchema: Boolean;
     FFilterObjects: array [0..11] of string;
     procedure ClearTree;
-    function CreateSession(ConnectString: string = ''): TOraSession;
+    function InitSession(ConnectString: string = ''): Boolean;
     procedure CreateConnectionTree;
     procedure AddObjects;
     procedure AddInvalidObjects;
@@ -118,7 +118,8 @@ type
     function GetSelectedObjectType: string;
     function GetSelectedObjectStateIndex: Byte;
     function GetSelectedLevel: Byte;
-    property Session: TOraSession read FOraSession;
+    function GetOraSession: TOraSession;
+    property Session: TOraSession read GetOraSession;
     property SchemaParam: string read FSchemaParam write SetSchemaParam;
     property ObjectName: string read FObjectName write FObjectName;
     property ObjectType: string read FObjectType write FObjectType;
@@ -133,7 +134,7 @@ type
     FTree: TVirtualDrawTree; // A back reference to the tree calling.
     FNode: PVirtualNode;       // The node being edited.
     FColumn: Integer;          // The column of the node being edited.
-    FOraSession: TOraSession;
+    OraSession: TOraSession;
     FSchemaParam: string;
     procedure RenameObject(Data: PObjectNodeRec; NewName: string);
   protected
@@ -148,7 +149,7 @@ type
     function PrepareEdit(Tree: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex): Boolean; stdcall;
     procedure ProcessMessage(var Message: TMessage); stdcall;
     procedure SetBounds(R: TRect); stdcall;
-    property OraSession: TOraSession read FOraSession write FOraSession;
+    //property OraSession: TOraSession read OraSession write OraSession;
     property SchemaParam: string write FSchemaParam;
   end;
 
@@ -158,7 +159,7 @@ implementation
 
 uses
   BCCommon.OptionsContainer, Lib, BigIni, SchemaFilter, DataModule, BCSQL.Tokenizer, System.StrUtils,
-  BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages;
+  BCCommon.FileUtils, BCCommon.StringUtils, BCCommon.Messages, ConnectList;
 
 constructor TObjectTreeFrame.Create(AOwner: TComponent);
 begin
@@ -172,27 +173,35 @@ begin
   VirtualDrawTree.Clear;
 end;
 
-function TObjectTreeFrame.CreateSession(ConnectString: string): TOraSession;
+function TObjectTreeFrame.InitSession(ConnectString: string): Boolean;
 var
   s: string;
 begin
-  Result := TOraSession.Create(Self);
-  Result.ConnectDialog := ConnectDialog;
-  s := ConnectString;
-  if Pos('^', s) <> 0 then
-    s := Copy(s, 0, Pos('^', s) - 1);
-  Result.ConnectString := s;
-  if ConnectString <> '' then
-    Result.ConnectPrompt := False;
-  Result.Options.Direct := Pos('Direct=True', ConnectString) <> 0;
-  if Pos('^', ConnectString) <> 0 then
-    Result.HomeName := Copy(ConnectString, Pos('^', ConnectString) + 1, Length(ConnectString));
-  Result.Options.DateFormat := OptionsContainer.DateFormat;
-  Result.AutoCommit := False;
-  Result.ThreadSafety := True;
-  Result.OnConnectionLost := OraSessionConnectionLost;
+  Result := True;
+  if ConnectString = '' then
+  begin
+    if not ConnectListDialog(Self).Open(OraSession) then
+      Exit(False);
+  end
+  else
+  begin
+    s := ConnectString;
+    if Pos('^', s) <> 0 then
+      s := Copy(s, 0, Pos('^', s) - 1);
+    OraSession.ConnectString := s;
+  end;
 
-  Result.Options.UseUnicode := True;
+  OraSession.ConnectPrompt := False;
+  OraSession.Options.Direct := Pos('Direct=True', OraSession.ConnectString) <> 0;
+  if Pos('^', OraSession.ConnectString) <> 0 then
+    OraSession.HomeName := Copy(OraSession.ConnectString, Pos('^', OraSession.ConnectString) + 1, Length(OraSession.ConnectString));
+  OraSession.Options.DateFormat := OptionsContainer.DateFormat;
+  //Result.AutoCommit := False;
+  //Result.ThreadSafety := True;
+  //Result.LoginPrompt := False;
+  // OraSession.OnConnectionLost := OraSessionConnectionLost;
+  OraSession.Options.UnicodeEnvironment := False;
+  //Result.Options.UseUnicode := True;
 end;
 
 function TObjectTreeFrame.GetSchemaFilters(SchemaName: string): string;
@@ -293,7 +302,7 @@ procedure TObjectTreeFrame.VirtualDrawTreeCreateEditor(Sender: TBaseVirtualTree;
   Column: TColumnIndex; out EditLink: IVTEditLink);
 begin
   EditLink := TEditLink.Create;
-  TEditLink(EditLink).OraSession := FOraSession;
+  TEditLink(EditLink).OraSession := OraSession;
   TEditLink(EditLink).SchemaParam := FSchemaParam;
 end;
 
@@ -466,7 +475,7 @@ begin
     StringList := TStringList.Create;
 
     OraQuerySpec := TOraQuery.Create(nil);
-    OraQuerySpec.Session := FOraSession;
+    OraQuerySpec.Session := OraSession;
     SQLTokenizer := TSQLTokenizer.Create;
     with OraQuerySpec do
     try
@@ -751,24 +760,26 @@ end;
 
 function TObjectTreeFrame.Connect(ConnectString: string): Boolean;
 begin
-  Result := True;
+  Result := False;
   try
     try
-      FOraSession := CreateSession(ConnectString);
+      if not InitSession(ConnectString) then
+        Exit;
       Application.ProcessMessages;
       Screen.Cursor := crSQLWait;
-      FOraSession.Connect;
+      OraSession.Connect;
 
-      ObjectsQuery.Session := FOraSession;
-      InvalidObjectsQuery.Session := FOraSession;
-      RecycleBinQuery.Session := FOraSession;
-      SchemasQuery.Session := FOraSession;
-      UsersQuery.Session := FOraSession;
+      ObjectsQuery.Session := OraSession;
+      InvalidObjectsQuery.Session := OraSession;
+      RecycleBinQuery.Session := OraSession;
+      SchemasQuery.Session := OraSession;
+      UsersQuery.Session := OraSession;
 
       LoadSchemas;
     except
       Result := False;
     end;
+    Result := True;
   finally
     Screen.Cursor := crDefault;
   end;
@@ -778,9 +789,9 @@ function TObjectTreeFrame.GetSchemaName: string;
 var
   Database: string;
 begin
-  Result := FOraSession.Schema;
+  Result := OraSession.Schema;
 
-  Database := Lib.FormatServer(FOraSession.Server);
+  Database := Lib.FormatServer(OraSession.Server);
 
   Result := Result + '@' + Database;
 end;
@@ -920,7 +931,7 @@ begin
         if FTreeObjects.Strings[i] = TEXT_INVALID_OBJECTS + TEXT_IS_TRUE then
           AddInvalidObjects;
         if FTreeObjects.Strings[i] = TEXT_RECYCLE_BIN + TEXT_IS_TRUE then
-          if FSchemaParam = FOraSession.Schema then
+          if FSchemaParam = OraSession.Schema then
             AddRecycleBin;
       end;
     finally
@@ -1103,7 +1114,7 @@ var
 begin
   SchemaName := GetSchemaName;
   SchemaFilters := GetSchemaFilters(SchemaName);
-  if SchemaFilterDialog.Open(FOraSession, SchemaName, SchemaFilters) then
+  if SchemaFilterDialog.Open(OraSession, SchemaName, SchemaFilters) then
     LoadSchemas;
 end;
 
@@ -1332,10 +1343,10 @@ end;
 
 procedure TObjectTreeFrame.Disconnect;
 begin
-  if FOraSession.Connected then
+  if OraSession.Connected then
   try
     FTreeObjects.Free;
-    FOraSession.Disconnect;
+    OraSession.Disconnect;
   except
 
   end;
@@ -1343,9 +1354,9 @@ end;
 
 function TObjectTreeFrame.GetConnectString: string;
 begin
-  Result := FOraSession.ConnectString;
-  if not FOraSession.Options.Direct then
-    Result := FOraSession.ConnectString + '^' + FOraSession.HomeName;
+  Result := OraSession.ConnectString;
+  if not OraSession.Options.Direct then
+    Result := OraSession.ConnectString + '^' + OraSession.HomeName;
 end;
 
 function TObjectTreeFrame.SetObjectTypeAndName{(Sender: TObject)}: Boolean;
@@ -1458,6 +1469,11 @@ begin
   end;
 end;
 
+function TObjectTreeFrame.GetOraSession: TOraSession;
+begin
+  Result := OraSession;
+end;
+
 { TEditLink }
 
 destructor TEditLink.Destroy;
@@ -1509,7 +1525,7 @@ begin
     { get constraint object type and name }
     with TOraQuery.Create(nil) do
     try
-      Session := FOraSession;
+      Session := OraSession;
       SQL.Add(DM.StringHolder.StringsByName['ConstraintTypeAndNameSQL'].Text);
       ParamByName('CONSTRAINT_NAME').AsWideString := OldName;
       Open;
@@ -1519,13 +1535,13 @@ begin
     finally
       Free;
     end;
-    FOraSession.ExecSQL(Format('ALTER %s %s RENAME CONSTRAINT %s.%s TO %s', [ObjectType, ObjectName,
+    OraSession.ExecSQL(Format('ALTER %s %s RENAME CONSTRAINT %s.%s TO %s', [ObjectType, ObjectName,
       FSchemaParam, OldName, NewName]), []);
   end
   else
   begin
     { ALTER object_type old_name RENAME TO new_name; }
-    FOraSession.ExecSQL(Format('ALTER %s %s.%s RENAME TO %s', [Data.NodeType, FSchemaParam,
+    OraSession.ExecSQL(Format('ALTER %s %s.%s RENAME TO %s', [Data.NodeType, FSchemaParam,
       OldName, NewName]), []);
   end;
   //Data.NodeText := NewName;

@@ -146,36 +146,6 @@ object ObjectTreeFrame: TObjectTreeFrame
     Left = 184
     Top = 352
   end
-  object ConnectDialog: TConnectDialog
-    DialogClass = 'TConnectListDialog'
-    Caption = 'Connect'
-    ConnectButton = 'Connect'
-    CancelButton = 'Cancel'
-    Server.Caption = 'Server'
-    Server.Visible = True
-    Server.Order = 1
-    UserName.Caption = 'User Name'
-    UserName.Visible = True
-    UserName.Order = 2
-    Password.Caption = 'Password'
-    Password.Visible = True
-    Password.Order = 3
-    Home.Caption = 'Home Name'
-    Home.Visible = False
-    Home.Order = 0
-    Direct.Caption = 'Direct'
-    Direct.Visible = False
-    Direct.Order = 6
-    Schema.Caption = 'Schema'
-    Schema.Visible = False
-    Schema.Order = 4
-    Role.Caption = 'Connect Mode'
-    Role.Visible = False
-    Role.Order = 5
-    LabelSet = lsCustom
-    Left = 188
-    Top = 160
-  end
   object SchemasQuery: TOraQuery
     FetchAll = True
     NonBlocking = True
@@ -209,5 +179,12 @@ object ObjectTreeFrame: TObjectTreeFrame
         Name = 'P_SCHEMA'
         Value = nil
       end>
+  end
+  object OraSession: TOraSession
+    Options.UseUnicode = True
+    AutoCommit = False
+    OnConnectionLost = OraSessionConnectionLost
+    Left = 56
+    Top = 264
   end
 end

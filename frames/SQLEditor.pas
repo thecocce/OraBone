@@ -2276,6 +2276,7 @@ begin
   Result.Options.Direct := OraSession.Options.Direct;
   Result.Options.DateFormat := OptionsContainer.DateFormat;
   Result.Options.UseUnicode := True;
+  Result.Options.UnicodeEnvironment := False;
   Result.AutoCommit := False;
   Result.ThreadSafety := True;
   Result.ConnectPrompt := False;
