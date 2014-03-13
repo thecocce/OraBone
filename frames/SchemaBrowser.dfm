@@ -88,6 +88,9 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         Left = 234
         Top = 230
       end
+      inherited OraSession: TOraSession
+        LoginPrompt = False
+      end
     end
   end
   object RightPanel: TPanel
