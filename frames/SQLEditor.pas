@@ -1479,7 +1479,7 @@ var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCOraSynEdit;
 begin
-  if SearchForEdit.Text = '' then
+  if not SearchPanel.Visible then
     Exit;
 
   SynEdit := GetActiveSynEdit;
@@ -1850,6 +1850,7 @@ begin
   if not FProcessing then
     SetActivePageCaptionModified;
 
+  DoSearch(True);
   RepaintToolButtons;
 end;
 

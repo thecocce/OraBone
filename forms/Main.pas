@@ -1795,12 +1795,13 @@ begin
           SQLEditorFrame.OutputFrame.CloseTabSheet;
     end
   end;
-  if FNoIni then
-    Exit;
   try
-    OptionsContainer.WriteIniFile;
+    if not FNoIni then
+    begin
+      OptionsContainer.WriteIniFile;
+      WriteIniFile;
+    end;
 
-    WriteIniFile;
     ApplicationEvents.Free;
 
     j := PageControl.PageCount - 1;

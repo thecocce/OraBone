@@ -44,7 +44,7 @@ type
     Ln: LongWord;
     Ch: LongWord;
     TextCh: LongWord;
-    Text: ShortString;
+    Text: string;
     SearchString: ShortString;
   end;
 

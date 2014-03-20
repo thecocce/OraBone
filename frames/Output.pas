@@ -90,7 +90,7 @@ implementation
 uses
   BCCommon.OptionsContainer, Lib, Vcl.Themes, BCCommon.StyleUtils, Vcl.ClipBrd, OutputDataGridTabSheet, Math,
   OutputPlanGridTabSheet, OutputListBoxTabSheet, OutputSynEditTabSheet, OutputTreeViewTabSheet,
-  System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages, Main;
+  System.UITypes, BCCommon.Lib, BCCommon.LanguageStrings, BCCommon.Messages, Main, System.Types;
 
 constructor TOutputFrame.Create(AOwner: TComponent);
 begin
@@ -537,7 +537,7 @@ var
   OutputTreeViewFrame: TOutputTreeViewFrame;
 begin
   { check if there already is a tab with same name }
-  if TabFound(TabCaption) then
+  if TabFound(StringReplace(TabCaption, '&', '&&', [rfReplaceAll])) then
   begin
     Self.Clear;
     Result := GetVirtualDrawTree;
@@ -548,8 +548,8 @@ begin
   TabSheet := TTabSheet.Create(PageControl);
   TabSheet.TabVisible := False;
   TabSheet.PageControl := PageControl;
-  TabSheet.ImageIndex := IMAGE_INDEX_FIND_IN_FILES; { find in files }
-  TabSheet.Caption := TabCaption;
+  TabSheet.ImageIndex := IMAGE_INDEX_FIND_IN_FILES;
+  TabSheet.Caption := StringReplace(TabCaption, '&', '&&', [rfReplaceAll]);
   PageControl.ActivePage := TabSheet;
 
   OutputTreeViewFrame := TOutputTreeViewFrame.Create(TabSheet);
@@ -644,7 +644,7 @@ begin
     if not OutputTreeView.Expanded[Root] then
       OutputTreeView.FullExpand(Root);
 
-  NodeData.Text := ShortString(S);
+  NodeData.Text := S;
   OutputTreeView.Tag := OutputTreeView.Tag + 1;
   Application.ProcessMessages;
 end;
@@ -853,7 +853,7 @@ procedure TOutputFrame.VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree;
   const PaintInfo: TVTPaintInfo);
 var
   Data: POutputRec;
-  S: UnicodeString;
+  S, Temp: UnicodeString;
   R: TRect;
   Format: Cardinal;
   LStyles: TCustomStyleServices;
@@ -924,7 +924,7 @@ begin
           S := System.SysUtils.Format('%s [%d]', [S, Node.ChildCount]);
         if Data.Level = 1 then
           S := System.SysUtils.Format('%s (%d, %d): ', [ExtractFilename(String(Data.Filename)), Data.Ln, Data.Ch]) + S;
-        DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, Format)
+        DrawText(Canvas.Handle, S, Length(S), R, Format)
       end
       else
       begin
@@ -933,17 +933,19 @@ begin
 
         S := System.SysUtils.Format('%s (%d, %d): ', [ExtractFilename(String(Data.Filename)), Data.Ln, Data.Ch]) + S;
 
-        DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, Format);
+        DrawText(Canvas.Handle, S, Length(S), R, Format);
+        S := StringReplace(S, Chr(9), '', [rfReplaceAll]); { replace tabs }
         R.Left := R.Left + Canvas.TextWidth(S);
         Canvas.Font.Color := clRed;
         S := Copy(String(Data.Text), Data.TextCh, Length(Data.SearchString));
+        Temp := StringReplace(S, '&', '&&', [rfReplaceAll]);
         Canvas.Font.Style := Canvas.Font.Style + [fsBold];
-        DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, Format);
+        DrawText(Canvas.Handle, Temp, Length(Temp), R, Format);
         Canvas.Font.Color := LColor;
         R.Left := R.Left + Canvas.TextWidth(S);
         Canvas.Font.Style := Canvas.Font.Style - [fsBold];
-        S := Copy(String(Data.Text), Data.TextCh + Length(Data.SearchString), Length(String(Data.Text)));
-        DrawTextW(Canvas.Handle, PWideChar(S), Length(S), R, Format);
+        S := System.Copy(Data.Text, Integer(Data.TextCh) + Integer(System.Length(Data.SearchString)), Length(Data.Text));
+        DrawText(Canvas.Handle, S, Length(S), R, Format);
       end;
     end;
   end;
