@@ -10,7 +10,8 @@ uses
   Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl, BCControls.PopupMenu,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
   BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
-  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls, BCControls.ButtonedEdit;
+  SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls, BCControls.ButtonedEdit,
+  System.Contnrs;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -230,6 +231,7 @@ type
     FImages: TImageList;
     FProcessing: Boolean;
     FModifiedDocuments: Boolean;
+    FFoundSearchItems: TObjectList;
     function CreateNewTabSheet(FileName: string = ''): TBCOraSynEdit;
     function GetActiveTabSheetCaption: string;
     function GetActiveDocumentName: string;
@@ -247,7 +249,8 @@ type
     function SearchOptions(IncludeBackwards: Boolean): TSynSearchOptions;
     function FindOpenFile(FileName: string): TBCOraSynEdit;
     procedure SetBookmarks(SynEdit: TBCOraSynEdit; Bookmarks: TStrings);
-    procedure DoSearch;
+    procedure DoSearch(SearchOnly: Boolean = False);
+    procedure DoSearch2;
     procedure FreePage(TabSheet: TTabSheet);
     procedure AddToReopenFiles(FileName: string);
     procedure SetHighlighterTableNames(Value: TStrings);
@@ -273,6 +276,7 @@ type
     function GetModifiedDocuments(CheckActive: Boolean = True): Boolean;
     function GetInTransAction: Boolean;
     function GetMinimapChecked: Boolean;
+    procedure SetSearchMapVisible(Value: Boolean);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -370,7 +374,8 @@ uses
   SynEditKeyCmds, BCForms.PrintPreview, BCDialogs.Replace, BCDialogs.ConfirmReplace, Lib, BCCommon.StyleUtils, SynUnicode,
   BCCommon.OptionsContainer, System.Math, BCCommon.FileUtils, BCCommon.Messages, BCCommon.Images,
   Types, Parameters, BCSQL.Tokenizer, SQLProgress, QueryProgress, Main, BigIni, BCCommon.Lib, BCCommon.StringUtils,
-  AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes;
+  AnsiStrings, ShellAPI, WideStrings, Vcl.GraphUtil, BCCommon.Dialogs, BCCommon.LanguageStrings, SynEditPrintTypes,
+  SynEditSearchHighlighter;
 
 const
   DEFAULT_FILENAME = 'Sql';
@@ -426,6 +431,7 @@ begin
   FOutputFrame := TOutputFrame.Create(OutputPanel);
   FOutputFrame.Parent := OutputPanel;
   FOutputFrame.OnTabsheetDblClick := OutputDblClickActionExecute;
+  FFoundSearchItems := TObjectList.Create;
   { IDE can lose these, if the main form is not open }
   EditorPopupMenu.Images := ImagesDataModule.ImageList;
   CutMenuItem.Action := MainForm.EditCutAction;
@@ -536,6 +542,7 @@ end;
 
 destructor TSQLEditorFrame.Destroy;
 begin
+  FFoundSearchItems.Free;
   if Assigned(FObjectNames) then
     FObjectNames.Free;
   PageControl.Images.Free;
@@ -557,6 +564,12 @@ begin
     TabSheet.ImageIndex := FNewImageIndex;
 
   PageControl.ActivePage := TabSheet;
+
+  SetSearchMapVisible(SearchPanel.Visible);
+  if SearchPanel.Visible then
+    if OptionsContainer.DocumentSpecificSearch then
+      SearchForEdit.Text := '';
+
   { set the Caption property }
   if FileName = '' then
     PageControl.ActivePageCaption := DEFAULT_FILENAME + IntToStr(FNumberOfNewDocument)
@@ -581,6 +594,9 @@ begin
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;
+    { Search highlighter plugin }
+    THighlightSearchPlugin.Create(OraSynEdit, FFoundSearchItems);
+
     OptionsContainer.AssignTo(OraSynEdit);
     UpdateMarginAndColors(SQLEditorTabSheetFrame);
 
@@ -1004,36 +1020,40 @@ var
   SynEdit: TBCOraSynEdit;
 begin
   FProcessing := True;
-  if FileName = '' then
-  begin
-    if BCCommon.Dialogs.OpenFiles(Handle, '',
-      Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
+  try
+    if FileName = '' then
     begin
-      Application.ProcessMessages; { style fix }
-      for i := 0 to BCCommon.Dialogs.Files.Count - 1 do
-        Open(BCCommon.Dialogs.Files[i])
-    end;
-  end
-  else
-  begin
-    if FileExists(FileName) then
-    begin
-      SynEdit := FindOpenFile(FileName);
-      if not Assigned(SynEdit) then
-        SynEdit := CreateNewTabSheet(FileName);
-      SynEdit.CaretXY := BufferCoord(Ch, Ln);
-      SynEdit.GotoLineAndCenter(Ln);
-      SetBookmarks(SynEdit, Bookmarks);
-      if SynEdit.CanFocus then
-        SynEdit.SetFocus;
-      AddToReopenFiles(FileName);
-      MainForm.CreateFileReopenList;
+      if BCCommon.Dialogs.OpenFiles(Handle, '',
+        Format('%s'#0'*.*'#0, [LanguageDataModule.GetConstant('AllFiles')]) + 'SQL files (*.sql)'#0'*.sql'#0#0, LanguageDataModule.GetConstant('Open')) then
+      begin
+        Application.ProcessMessages; { style fix }
+        for i := 0 to BCCommon.Dialogs.Files.Count - 1 do
+          Open(BCCommon.Dialogs.Files[i])
+      end;
     end
     else
-    if ExtractFileName(FileName) <> '' then
-      ShowErrorMessage(Format(LanguageDataModule.GetErrorMessage('FileNotFound'), [Filename]))
+    begin
+      if FileExists(FileName) then
+      begin
+        SynEdit := FindOpenFile(FileName);
+        if not Assigned(SynEdit) then
+          SynEdit := CreateNewTabSheet(FileName);
+        DoSearch2;
+        SynEdit.CaretXY := BufferCoord(Ch, Ln);
+        SynEdit.GotoLineAndCenter(Ln);
+        SetBookmarks(SynEdit, Bookmarks);
+        if SynEdit.CanFocus then
+          SynEdit.SetFocus;
+        AddToReopenFiles(FileName);
+        MainForm.CreateFileReopenList;
+      end
+      else
+      if ExtractFileName(FileName) <> '' then
+        ShowErrorMessage(Format(LanguageDataModule.GetErrorMessage('FileNotFound'), [Filename]))
+    end;
+  finally
+    FProcessing := False;
   end;
-  FProcessing := False;
 end;
 
 function TSQLEditorFrame.GetActivePageCaption: string;
@@ -1081,6 +1101,7 @@ begin
     if PageControl.PageCount = 0 then
       FNumberOfNewDocument := 0;
   end;
+  DoSearch2;
   CheckModifiedDocuments;
 end;
 
@@ -1111,25 +1132,31 @@ procedure TSQLEditorFrame.CloseAllOtherPages;
 var
   i, j: Integer;
   Rslt: Integer;
-  SynEdit: TBCOraSynEdit;
+  ActiveSynEdit, SynEdit: TBCOraSynEdit;
 begin
+  FProcessing := True;
+  Application.ProcessMessages;
   Rslt := mrNone;
-  PageControl.ActivePage.PageIndex := 0; { move the page first }
+
+  ActiveSynEdit := GetActiveSynEdit;
+
   if GetModifiedDocuments(False) then
   begin
     Rslt := SaveChanges(True);
 
     if Rslt = mrYes then
-      for i := 1 to PageControl.PageCount - 1 do
+      for i := 0 to PageControl.PageCount - 1 do
       begin
         SynEdit := GetSynEdit(PageControl.Pages[i]);
-        if Assigned(SynEdit) and SynEdit.Modified then
+        if Assigned(SynEdit) and SynEdit.Modified and (Synedit <> ActiveSynEdit) then
           Save(PageControl.Pages[i]);
       end;
   end;
 
   if Rslt <> mrCancel then
   begin
+    PageControl.ActivePage.PageIndex := 0; { move the page first }
+
     j := PageControl.PageCount - 1;
     for i := j downto 1 do
       FreePage(PageControl.Pages[i]);
@@ -1139,7 +1166,9 @@ begin
     else
       FNumberOfNewDocument := 0
   end;
+  DoSearch2;
   CheckModifiedDocuments;
+  FProcessing := False;
 end;
 
 procedure TSQLEditorFrame.CheckModifiedDocuments;
@@ -1266,15 +1295,38 @@ end;
 
 procedure TSQLEditorFrame.PageControlChange(Sender: TObject);
 var
+  BufferCoord: TBufferCoord;
   SynEdit: TBCOraSynEdit;
-begin
-  SynEdit := GetActiveSynEdit;
-  if not Assigned(SynEdit) then
+
+  procedure PositionAndSearch;
   begin
-    SearchPanel.Visible := False;
-    GotoLinePanel.Visible := False;
+    SynEdit.RightEdge.Position := OptionsContainer.MarginRightMargin;
+    if SearchPanel.Visible then
+    begin
+      if OptionsContainer.DocumentSpecificSearch and (SearchForEdit.Text <> SynEdit.SearchString) then
+        SearchForEdit.Text := SynEdit.SearchString
+      else
+        DoSearch(True);
+    end;
+  end;
+
+begin
+  if FProcessing then
+    Exit;
+  SynEdit := GetActiveSynEdit;
+  if Assigned(SynEdit) then
+  begin
+    BufferCoord := SynEdit.CaretXY;
+    PositionAndSearch;
+    SynEdit.CaretXY := BufferCoord;
+  end
+  else
+  begin
+    SearchCloseAction.Execute;
+    GotoLineCloseAction.Execute;
   end;
   CheckFileDateTimes; { compare can change file datetime }
+  PageControl.Repaint;
 end;
 
 procedure TSQLEditorFrame.PageControlCloseButtonClick(Sender: TObject);
@@ -1403,19 +1455,26 @@ procedure TSQLEditorFrame.Search;
 var
   SynEdit: TBCOraSynEdit;
 begin
-  SearchPanel.Visible := not SearchPanel.Visible;
-  if SearchPanel.Visible then
+  SearchPanel.Show;
+  SetSearchMapVisible(True);
+
+  SynEdit := GetActiveSynEdit;
+  if Assigned(SynEdit) then
   begin
-    SynEdit := GetActiveSynEdit;
+    SearchPanel.Height := SearchForEdit.Height;
     if SynEdit.SelAvail then
-      SearchForEdit.Text := SynEdit.SelText;
-    SearchForEdit.SetFocus;
+      SearchForEdit.Text := SynEdit.SelText
+    else
+    if OptionsContainer.DocumentSpecificSearch then
+      SearchForEdit.Text := SynEdit.SearchString;
+    if SearchForEdit.CanFocus then
+      SearchForEdit.SetFocus;
     SynEdit.CaretXY := BufferCoord(0, 0);
     DoSearch;
   end;
 end;
 
-procedure TSQLEditorFrame.DoSearch;
+procedure TSQLEditorFrame.DoSearch(SearchOnly: Boolean = False);
 var
   SynSearchOptions: TSynSearchOptions;
   SynEdit: TBCOraSynEdit;
@@ -1424,6 +1483,11 @@ begin
     Exit;
 
   SynEdit := GetActiveSynEdit;
+  if not Assigned(SynEdit) then
+    Exit;
+
+  SynEdit.SearchString := SearchForEdit.Text;
+
   if RegularExpressionCheckBox.Checked then
     SynEdit.SearchEngine := SynEditRegexSearch
   else
@@ -1434,18 +1498,45 @@ begin
   SynSearchOptions := SearchOptions(False);
 
   try
-    if SynEdit.SearchReplace(SearchForEdit.Text, '', SynSearchOptions) = 0 then
+    FFoundSearchItems.Clear;
+    if not SynEdit.FindSearchTerm(SearchForEdit.Text, FFoundSearchItems, SynSearchOptions) then
     begin
-      if OptionsContainer.BeepIfSearchStringNotFound then
-        MessageBeep;
-      SynEdit.BlockBegin := SynEdit.BlockEnd;
-      SynEdit.CaretXY := SynEdit.BlockBegin;
-      if OptionsContainer.ShowSearchStringNotFound then
-        ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]))
-    end;
+      if not SearchOnly then
+      begin
+        if OptionsContainer.BeepIfSearchStringNotFound then
+          MessageBeep;
+        SynEdit.BlockBegin := SynEdit.BlockEnd;
+        SynEdit.CaretXY := SynEdit.BlockBegin;
+        if OptionsContainer.ShowSearchStringNotFound then
+          ShowMessage(Format(LanguageDataModule.GetYesOrNoMessage('SearchStringNotFound'), [SearchForEdit.Text]));
+        PageControl.TabClosed := True; { just to avoid begin drag }
+      end;
+    end
+    else
+    if not SearchOnly then
+      FindNext;
+    SynEdit.Invalidate;
   except
     { silent }
   end;
+end;
+
+procedure TSQLEditorFrame.DoSearch2;
+var
+  SynEdit: TBCOraSynEdit;
+begin
+  SynEdit := GetActiveSynEdit;
+  if not Assigned(SynEdit) then
+    Exit;
+  SetSearchMapVisible(SearchPanel.Visible);
+  if SearchPanel.Visible then
+  begin
+    if OptionsContainer.DocumentSpecificSearch then
+      SearchForEdit.Text := SynEdit.SearchString;
+    DoSearch(True);
+  end;
+  if SynEdit.CanFocus then
+    SynEdit.SetFocus;
 end;
 
 procedure TSQLEditorFrame.SearchClearActionExecute(Sender: TObject);
@@ -1455,7 +1546,9 @@ end;
 
 procedure TSQLEditorFrame.SearchCloseActionExecute(Sender: TObject);
 begin
+  SearchForEdit.Text := '';
   SearchPanel.Hide;
+  SetSearchMapVisible(False);
 end;
 
 procedure TSQLEditorFrame.SearchFindNextActionExecute(Sender: TObject);
@@ -2932,10 +3025,22 @@ end;
 
 procedure TSQLEditorFrame.GotoLine;
 begin
-  GotoLinePanel.Visible := not GotoLinePanel.Visible;
-  if GotoLinePanel.Visible then
-    if GotoLineNumberEdit.CanFocus then
-      GotoLineNumberEdit.SetFocus;
+  GotoLinePanel.Show;
+  if GotoLineNumberEdit.CanFocus then
+    GotoLineNumberEdit.SetFocus;
+end;
+
+procedure TSQLEditorFrame.SetSearchMapVisible(Value: Boolean);
+var
+  i: Integer;
+  SynEdit: TBCOraSynEdit;
+begin
+  for i := 0 to PageControl.PageCount - 1 do
+  begin
+    SynEdit := GetSynEdit(PageControl.Pages[i]);
+    if Assigned(SynEdit) then
+      SynEdit.SearchMap.Visible := OptionsContainer.ShowSearchMap and Value;
+  end;
 end;
 
 procedure TSQLEditorFrame.GotoLineActionExecute(Sender: TObject);

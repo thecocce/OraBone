@@ -3,7 +3,7 @@ object DataFilterDialog: TDataFilterDialog
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Data Filter'
-  ClientHeight = 405
+  ClientHeight = 438
   ClientWidth = 704
   Color = clWindow
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object DataFilterDialog: TDataFilterDialog
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 368
+    Top = 401
     Width = 704
     Height = 37
     Align = alBottom
@@ -29,6 +29,7 @@ object DataFilterDialog: TDataFilterDialog
     Padding.Right = 6
     Padding.Bottom = 6
     TabOrder = 0
+    ExplicitTop = 368
     object Button11: TButton
       Left = 6
       Top = 6
@@ -72,23 +73,25 @@ object DataFilterDialog: TDataFilterDialog
     Left = 0
     Top = 0
     Width = 704
-    Height = 368
+    Height = 401
     Align = alClient
     BevelOuter = bvNone
     Padding.Left = 6
     Padding.Top = 6
     Padding.Right = 6
     TabOrder = 1
+    ExplicitHeight = 368
     object Panel3: TPanel
       Left = 179
       Top = 6
       Width = 80
-      Height = 362
+      Height = 395
       Align = alLeft
       BevelOuter = bvNone
       Padding.Left = 6
       Padding.Right = 6
       TabOrder = 0
+      ExplicitHeight = 362
       object Label1: TLabel
         Left = 13
         Top = 3
@@ -162,55 +165,65 @@ object DataFilterDialog: TDataFilterDialog
       end
       object BetweenButton: TButton
         Left = 8
-        Top = 274
+        Top = 306
         Width = 63
         Height = 25
         Action = BetweenAction
-        TabOrder = 8
+        TabOrder = 9
       end
       object ToDateButton: TButton
         Left = 8
-        Top = 336
+        Top = 368
         Width = 63
         Height = 25
         Action = ToDateAction
-        TabOrder = 10
+        TabOrder = 11
       end
       object InButton: TButton
         Left = 8
-        Top = 305
+        Top = 337
         Width = 63
         Height = 25
         Action = InAction
-        TabOrder = 9
+        TabOrder = 10
+      end
+      object LikeButton: TButton
+        Left = 8
+        Top = 274
+        Width = 63
+        Height = 25
+        Action = LikeAction
+        TabOrder = 8
       end
     end
     object ColumnListBox: TJvListBox
       Left = 6
       Top = 6
       Width = 173
-      Height = 362
+      Height = 395
       Align = alLeft
       ItemHeight = 13
       Background.FillMode = bfmTile
       Background.Visible = False
       TabOrder = 1
       OnClick = ColumnClickActionExecute
+      ExplicitHeight = 362
     end
     object Panel4: TPanel
       Left = 259
       Top = 6
       Width = 439
-      Height = 362
+      Height = 395
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel4'
       TabOrder = 2
+      ExplicitHeight = 362
       object FilterSynEdit: TSynEdit
         Left = 0
         Top = 24
         Width = 439
-        Height = 338
+        Height = 371
         Align = alClient
         Ctl3D = True
         ParentCtl3D = False
@@ -255,15 +268,6 @@ object DataFilterDialog: TDataFilterDialog
         Gutter.ShowBookmarkPanel = False
         Gutter.Width = 34
         Highlighter = SynSQLSyn
-        Minimap.Font.Charset = DEFAULT_CHARSET
-        Minimap.Font.Color = clWindowText
-        Minimap.Font.Height = -4
-        Minimap.Font.Name = 'Courier New'
-        Minimap.Font.Style = []
-        Minimap.Width = 0
-        Minimap.CharWidth = 2
-        Minimap.CharHeight = 4
-        Minimap.LinesInWindow = 0
         Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
         WantTabs = True
         WordWrap.Enabled = False
@@ -271,6 +275,7 @@ object DataFilterDialog: TDataFilterDialog
         WordWrap.Style = wwsClientWidth
         OnChange = FilterSynEditChange
         FontSmoothing = fsmNone
+        ExplicitHeight = 338
       end
       object Panel5: TPanel
         Left = 0
@@ -373,6 +378,11 @@ object DataFilterDialog: TDataFilterDialog
       Category = 'Click'
       Caption = 'IN'
       OnExecute = InActionExecute
+    end
+    object LikeAction: TAction
+      Category = 'Click'
+      Caption = 'LIKE'
+      OnExecute = LikeActionExecute
     end
   end
   object SynSQLSyn: TSynSQLSyn

@@ -50,6 +50,8 @@ type
     SynSQLSyn: TSynSQLSyn;
     ToDateAction: TAction;
     ToDateButton: TButton;
+    LikeButton: TButton;
+    LikeAction: TAction;
     procedure AndActionExecute(Sender: TObject);
     procedure BetweenActionExecute(Sender: TObject);
     procedure ClearFilterActionExecute(Sender: TObject);
@@ -69,6 +71,7 @@ type
     procedure SmallerActionExecute(Sender: TObject);
     procedure SmallerOrEqualActionExecute(Sender: TObject);
     procedure ToDateActionExecute(Sender: TObject);
+    procedure LikeActionExecute(Sender: TObject);
   private
     { Private declarations }
     FObjectName: string;
@@ -342,6 +345,12 @@ procedure TDataFilterDialog.InequalActionExecute(Sender: TObject);
 begin
   FilterSynEdit.SetFocus;
   FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' <> '));
+end;
+
+procedure TDataFilterDialog.LikeActionExecute(Sender: TObject);
+begin
+  FilterSynEdit.SetFocus;
+  FilterSynEdit.ExecuteCommand(ecImeStr, #0, PWideChar(' LIKE '));
 end;
 
 end.
