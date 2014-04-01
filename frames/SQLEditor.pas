@@ -1562,12 +1562,25 @@ begin
 end;
 
 procedure TSQLEditorFrame.SearchForEditChange(Sender: TObject);
+var
+  SynEdit: TBCOraSynEdit;
+  CaretXY: TBufferCoord;
 begin
   SearchForEdit.RightButton.Visible := Trim(SearchForEdit.Text) <> '';
-  GetActiveSynEdit.CaretXY := BufferCoord(0, 0);
-  SearchFindNextAction.Enabled := CanFindNextPrevious;
-  SearchFindPreviousAction.Enabled := SearchFindNextAction.Enabled;
-  DoSearch;
+  SynEdit := GetActiveSynEdit;
+  if Assigned(SynEdit) then
+  begin
+    CaretXY := SynEdit.CaretXY;
+    SynEdit.CaretXY := BufferCoord(0, 0);
+    SearchFindNextAction.Enabled := CanFindNextPrevious;
+    SearchFindPreviousAction.Enabled := SearchFindNextAction.Enabled;
+    DoSearch;
+    if Trim(SearchForEdit.Text) = '' then
+    begin
+      SynEdit.GotoLineAndCenter(CaretXY.Line);
+      SynEdit.CaretXY := CaretXY;
+    end;
+  end;
 end;
 
 procedure TSQLEditorFrame.FindNext;
