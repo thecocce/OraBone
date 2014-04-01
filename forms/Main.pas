@@ -1216,14 +1216,11 @@ var
   Action: TAction;
   SystemImageList: TBCImageList;
   SysImageList: THandle;
-  SHFileInfo: TSHFileInfo;
-  PathInfo: String;
   Icon: TIcon;
 begin
-  FileIconInit(True);
   SystemImageList := TBCImageList.Create(nil);
   try
-    SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(SHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
+    SysImageList := GetSysImageList; //SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(SHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
     if SysImageList <> 0 then
       SystemImageList.Handle := SysImageList;
     { Remove added images from imagelist }

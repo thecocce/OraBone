@@ -38,41 +38,37 @@ object SQLEditorFrame: TSQLEditorFrame
       Left = 337
       Top = 0
       Width = 70
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Case Sensitive'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object WholeWordsOnlyLabel: TLabel
       Left = 434
       Top = 0
       Width = 89
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Whole Words Only'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object RegularExpressionLabel: TLabel
       Left = 550
       Top = 0
       Width = 92
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Regular Expression'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object WildCardLabel: TLabel
       Left = 669
       Top = 0
       Width = 46
-      Height = 21
+      Height = 13
       Align = alLeft
       Caption = 'Wild Card'
       Layout = tlCenter
-      ExplicitHeight = 13
     end
     object SearchPanel2: TPanel
       Left = 21
@@ -90,10 +86,9 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 50
-        Height = 18
+        Height = 13
         Align = alLeft
         Caption = 'Search for'
-        ExplicitHeight = 13
       end
     end
     object SearchPanel3: TPanel
@@ -1163,10 +1158,9 @@ object SQLEditorFrame: TSQLEditorFrame
         Left = 4
         Top = 3
         Width = 48
-        Height = 20
+        Height = 13
         Align = alLeft
         Caption = 'Go to Line'
-        ExplicitHeight = 13
       end
     end
     object LineNumberPanel: TPanel

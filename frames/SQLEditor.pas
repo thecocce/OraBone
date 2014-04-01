@@ -418,8 +418,6 @@ end;
 constructor TSQLEditorFrame.Create(AOwner: TComponent);
 var
   SysImageList: THandle;
-  SHFileInfo: TSHFileInfo;
-  PathInfo: String;
   Icon: TIcon;
 begin
   inherited Create(AOwner);
@@ -472,7 +470,7 @@ begin
   GotoBookmark9MenuItem.Action := MainForm.GotoBookmarks9Action;
 
   FImages := TImageList.Create(Self);
-  SysImageList := SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
+  SysImageList := GetSysImageList; //SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
   if SysImageList <> 0 then
   begin
     FImages.Handle := SysImageList;
