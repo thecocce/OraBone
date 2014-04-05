@@ -375,13 +375,13 @@ begin
   try
     ReadIniFile;
     Result := Showmodal = mrOk;
-    if Result then
-      SQLFormatterOptions.WriteIniFile; { this is written here because dll is reading settings from the ini file }
     WriteIniFile;
     SaveSelectedTreeNode;
   finally
     Free;
   end;
+  if Result then
+    SQLFormatterOptions.WriteIniFile; { this is written here because dll is reading settings from the ini file }
 end;
 
 procedure TOptionsForm.OptionsVirtualDrawTreeClick(Sender: TObject);
