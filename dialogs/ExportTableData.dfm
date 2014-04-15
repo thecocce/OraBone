@@ -51,16 +51,18 @@ object ExportTableDataDialog: TExportTableDataDialog
       ReadOnly = False
       DropDownFixedWidth = 0
     end
-    object SelectedRowsOnlyCheckBox: TCheckBox
-      Left = 206
+    object SelectedRowsOnlyCheckBox: TBCCheckBox
+      Left = 210
       Top = 8
-      Width = 121
+      Width = 117
       Height = 22
       Hint = 'Export selected rows only.'
       Align = alRight
       Alignment = taLeftJustify
       Caption = ' Selected Rows Only'
       TabOrder = 1
+      AutoSize = True
+      ReadOnly = False
     end
   end
   object Panel2: TPanel
@@ -115,26 +117,30 @@ object ExportTableDataDialog: TExportTableDataDialog
           ReadOnly = False
           DropDownFixedWidth = 0
         end
-        object IncludeColumnHeadersCheckBox: TCheckBox
+        object IncludeColumnHeadersCheckBox: TBCCheckBox
           Left = 12
           Top = 43
-          Width = 157
-          Height = 17
+          Width = 138
+          Height = 15
           Hint = 'Include column headers.'
           Caption = ' Include Column Headers'
           Checked = True
           State = cbChecked
           TabOrder = 1
+          AutoSize = True
+          ReadOnly = False
         end
-        object QuotedStringColumnsCheckBox: TCheckBox
+        object QuotedStringColumnsCheckBox: TBCCheckBox
           Left = 12
           Top = 62
-          Width = 157
-          Height = 17
+          Width = 126
+          Height = 15
           Hint = 'Quote string columns.'
           Caption = ' Quote String Columns'
           TabOrder = 2
           OnClick = QuotedStringColumnsCheckBoxClick
+          AutoSize = True
+          ReadOnly = False
         end
         object SingleQuoteRadioButton: TRadioButton
           Left = 32
@@ -154,25 +160,29 @@ object ExportTableDataDialog: TExportTableDataDialog
           Enabled = False
           TabOrder = 4
         end
-        object IncludeNullColumns1CheckBox: TCheckBox
+        object IncludeNullColumns1CheckBox: TBCCheckBox
           Left = 12
           Top = 119
-          Width = 138
-          Height = 17
+          Width = 127
+          Height = 15
           Hint = 'Include NULL columns.'
           Caption = ' Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 5
+          AutoSize = True
+          ReadOnly = False
         end
-        object DelimiterAfterLastColumnCheckBox: TCheckBox
+        object DelimiterAfterLastColumnCheckBox: TBCCheckBox
           Left = 12
           Top = 138
-          Width = 217
-          Height = 17
+          Width = 190
+          Height = 15
           Hint = 'Include Delimiter After Last Column'
           Caption = ' Include Delimiter After Last Column'
           TabOrder = 6
+          AutoSize = True
+          ReadOnly = False
         end
       end
       object Options2TabSheet: TTabSheet
@@ -244,16 +254,18 @@ object ExportTableDataDialog: TExportTableDataDialog
           Hint = 'Commit Interval. Zero means no COMMIT clauses.'
           TabOrder = 2
         end
-        object IncludeNullColumns2CheckBox: TCheckBox
+        object IncludeNullColumns2CheckBox: TBCCheckBox
           Left = 10
           Top = 93
-          Width = 138
-          Height = 17
+          Width = 127
+          Height = 15
           Hint = 'Include NULL columns.'
           Caption = ' Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 3
+          AutoSize = True
+          ReadOnly = False
         end
       end
       object ColumnsTabSheet: TTabSheet
@@ -379,13 +391,15 @@ object ExportTableDataDialog: TExportTableDataDialog
         Caption = ' Clipboard'
         TabOrder = 3
       end
-      object LaunchAfterCreationCheckBox: TCheckBox
+      object LaunchAfterCreationCheckBox: TBCCheckBox
         Left = 65
         Top = 41
-        Width = 141
-        Height = 17
+        Width = 128
+        Height = 15
         Caption = ' Launch After Creation'
         TabOrder = 2
+        AutoSize = True
+        ReadOnly = False
       end
       object LoadInEditorRadioButton: TRadioButton
         Left = 16

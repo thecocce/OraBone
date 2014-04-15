@@ -8,7 +8,7 @@ uses
   SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, SynEdit, JvComCtrls,
   BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg,
   System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls;
+  DBGridEhToolCtrls, BCControls.CheckBox;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)
@@ -39,7 +39,7 @@ type
     MoveDownToolButton: TToolButton;
     AddColumnToolButton: TToolButton;
     DeleteColumnToolButton: TToolButton;
-    DropUnusedColumnsCheckBox: TCheckBox;
+    DropUnusedColumnsCheckBox: TBCCheckBox;
     DividerBevel: TBevel;
     ResetToolBar: TBCToolBar;
     ResetToolButton: TToolButton;

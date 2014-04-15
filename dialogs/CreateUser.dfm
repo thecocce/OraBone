@@ -136,16 +136,18 @@ inherited CreateUserDialog: TCreateUserDialog
     ErrorColor = 14803198
     NumbersAllowNegative = False
   end
-  object PasswordExpiredCheckBox: TCheckBox [7]
+  object PasswordExpiredCheckBox: TBCCheckBox [7]
     Left = 12
     Top = 68
-    Width = 105
-    Height = 17
+    Width = 104
+    Height = 15
     Hint = 'Password Expired'
     Alignment = taLeftJustify
     Caption = 'Password Expired'
     TabOrder = 5
     OnClick = PageControlChange
+    AutoSize = True
+    ReadOnly = False
   end
   inherited StatusBar1: TStatusBar
     Top = 383

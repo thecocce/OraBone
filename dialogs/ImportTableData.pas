@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls,
   Vcl.Mask, JvExMask, JvSpin, Ora, BCControls.Edit, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls,
-  BCDialogs.Dlg, System.Actions, JvExControls, JvSpeedButton;
+  BCDialogs.Dlg, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox;
 
 type
   TImportTableDataDialog = class(TDialog)
@@ -21,7 +21,7 @@ type
     ImportAction: TAction;
     ImportButton: TButton;
     Label1: TLabel;
-    LaunchAfterCreationCheckBox: TCheckBox;
+    LaunchAfterCreationCheckBox: TBCCheckBox;
     LoadInEditorRadioButton: TRadioButton;
     OpenFileButtonAction: TAction;
     OpenFilenameEdit: TBCEdit;

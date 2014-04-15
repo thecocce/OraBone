@@ -21,61 +21,75 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         Anchors = [akLeft, akTop, akRight]
         Caption = ' Grant '
         TabOrder = 0
-        object DeleteCheckBox: TCheckBox
+        object DeleteCheckBox: TBCCheckBox
           Left = 236
           Top = 20
-          Width = 60
-          Height = 17
+          Width = 58
+          Height = 15
           Caption = ' DELETE'
           TabOrder = 3
+          AutoSize = True
+          ReadOnly = False
         end
-        object SelectCheckBox: TCheckBox
+        object SelectCheckBox: TBCCheckBox
           Left = 12
           Top = 20
-          Width = 63
-          Height = 17
+          Width = 58
+          Height = 15
           Caption = ' SELECT'
           TabOrder = 0
+          AutoSize = True
+          ReadOnly = False
         end
-        object InsertCheckBox: TCheckBox
+        object InsertCheckBox: TBCCheckBox
           Left = 85
           Top = 20
-          Width = 56
-          Height = 17
+          Width = 58
+          Height = 15
           Caption = ' INSERT'
           TabOrder = 1
+          AutoSize = True
+          ReadOnly = False
         end
-        object UpdateCheckBox: TCheckBox
+        object UpdateCheckBox: TBCCheckBox
           Left = 159
           Top = 20
-          Width = 60
-          Height = 17
+          Width = 61
+          Height = 15
           Caption = ' UPDATE'
           TabOrder = 2
+          AutoSize = True
+          ReadOnly = False
         end
-        object ExecuteCheckBox: TCheckBox
+        object ExecuteCheckBox: TBCCheckBox
           Left = 12
           Top = 43
-          Width = 63
-          Height = 17
+          Width = 66
+          Height = 15
           Caption = ' EXECUTE'
           TabOrder = 4
+          AutoSize = True
+          ReadOnly = False
         end
-        object AlterCheckBox: TCheckBox
+        object AlterCheckBox: TBCCheckBox
           Left = 85
           Top = 43
-          Width = 63
-          Height = 17
+          Width = 53
+          Height = 15
           Caption = ' ALTER'
           TabOrder = 5
+          AutoSize = True
+          ReadOnly = False
         end
-        object DebugCheckBox: TCheckBox
+        object DebugCheckBox: TBCCheckBox
           Left = 159
           Top = 43
-          Width = 63
-          Height = 17
+          Width = 55
+          Height = 15
           Caption = ' DEBUG'
           TabOrder = 6
+          AutoSize = True
+          ReadOnly = False
         end
       end
       object OnGroupBox: TGroupBox
@@ -158,14 +172,16 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           DropDownFixedWidth = 0
         end
       end
-      object GrantOptionCheckBox: TCheckBox
+      object GrantOptionCheckBox: TBCCheckBox
         Left = 10
         Top = 230
-        Width = 97
-        Height = 17
+        Width = 84
+        Height = 15
         Anchors = [akLeft, akBottom]
         Caption = ' Grant Option'
         TabOrder = 3
+        AutoSize = True
+        ReadOnly = False
       end
     end
     inherited SourceTabSheet: TTabSheet

@@ -7,12 +7,12 @@ uses
   JvExGrids, JvStringGrid, BCControls.StringGrid, Vcl.StdCtrls, BCControls.Edit, Vcl.ImgList, SynEditHighlighter,
   SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls,
   BCControls.PageControl, DB, MemDS, DBAccess, Ora, BCControls.ToolBar, BCDialogs.Dlg, System.Actions,
-  BCControls.ImageList;
+  BCControls.ImageList, BCControls.CheckBox;
 
 type
   TCreateUserDialog = class(TCreateObjectBaseDialog)
     PasswordEdit: TBCEdit;
-    PasswordExpiredCheckBox: TCheckBox;
+    PasswordExpiredCheckBox: TBCCheckBox;
     PasswordLabel: TLabel;
     RolesPanel: TPanel;
     RolesQuery: TOraQuery;

@@ -51,21 +51,25 @@ object DropTableDialog: TDropTableDialog
       Height = 37
       AutoSize = True
     end
-    object CascadeConstraintsCheckBox: TCheckBox
+    object CascadeConstraintsCheckBox: TBCCheckBox
       Left = 10
       Top = 51
-      Width = 125
-      Height = 17
+      Width = 121
+      Height = 15
       Caption = ' Cascade Constraints'
       TabOrder = 0
+      AutoSize = True
+      ReadOnly = False
     end
-    object PurgeCheckBox: TCheckBox
+    object PurgeCheckBox: TBCCheckBox
       Left = 141
       Top = 51
-      Width = 73
-      Height = 17
+      Width = 50
+      Height = 15
       Caption = ' Purge'
       TabOrder = 1
+      AutoSize = True
+      ReadOnly = False
     end
   end
   object GrayLinePanel: TPanel

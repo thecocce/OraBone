@@ -348,13 +348,15 @@ object ImportTableDataDialog: TImportTableDataDialog
         Caption = ' Clipboard'
         TabOrder = 2
       end
-      object LaunchAfterCreationCheckBox: TCheckBox
+      object LaunchAfterCreationCheckBox: TBCCheckBox
         Left = 65
         Top = 41
-        Width = 141
-        Height = 17
+        Width = 128
+        Height = 15
         Caption = ' Launch After Creation'
         TabOrder = 1
+        AutoSize = True
+        ReadOnly = False
       end
       object LoadInEditorRadioButton: TRadioButton
         Left = 16

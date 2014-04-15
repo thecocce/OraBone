@@ -156,25 +156,29 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
         ErrorColor = 14803198
         NumbersAllowNegative = False
       end
-      object OrderCheckBox: TCheckBox
+      object OrderCheckBox: TBCCheckBox
         Left = 119
         Top = 168
-        Width = 99
-        Height = 17
+        Width = 47
+        Height = 15
         Alignment = taLeftJustify
         Caption = 'Order'
         Checked = True
         State = cbChecked
         TabOrder = 7
+        AutoSize = True
+        ReadOnly = False
       end
-      object CycleCheckBox: TCheckBox
+      object CycleCheckBox: TBCCheckBox
         Left = 8
         Top = 168
-        Width = 99
-        Height = 17
+        Width = 45
+        Height = 15
         Alignment = taLeftJustify
         Caption = 'Cycle'
         TabOrder = 6
+        AutoSize = True
+        ReadOnly = False
       end
     end
     inherited SourceTabSheet: TTabSheet

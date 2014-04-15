@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.PageControl,
   Vcl.StdCtrls, Vcl.Mask, JvExMask, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora,
   DB, DBAccess, BCControls.Edit, BCDialogs.Dlg, BCControls.ComboBox, BCControls.SpinEdit, BCControls.DBGrid,
-  Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton;
+  Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox;
 
 type
   TExportTableDataDialog = class(TDialog)
@@ -17,7 +17,7 @@ type
     ColumnsTabSheet: TTabSheet;
     ComminIntervalLabel: TLabel;
     CommitIntervalSpinEdit: TBCSpinEdit;
-    DelimiterAfterLastColumnCheckBox: TCheckBox;
+    DelimiterAfterLastColumnCheckBox: TBCCheckBox;
     DelimiterComboBox: TBCComboBox;
     DelimiterLabel: TLabel;
     DoubleQuoteRadioButton: TRadioButton;
@@ -27,11 +27,11 @@ type
     FileRadioButton: TRadioButton;
     FormatComboBox: TBCComboBox;
     FormatLabel: TLabel;
-    IncludeColumnHeadersCheckBox: TCheckBox;
-    IncludeNullColumns1CheckBox: TCheckBox;
-    IncludeNullColumns2CheckBox: TCheckBox;
+    IncludeColumnHeadersCheckBox: TBCCheckBox;
+    IncludeNullColumns1CheckBox: TBCCheckBox;
+    IncludeNullColumns2CheckBox: TBCCheckBox;
     Label1: TLabel;
-    LaunchAfterCreationCheckBox: TCheckBox;
+    LaunchAfterCreationCheckBox: TBCCheckBox;
     LoadInEditorRadioButton: TRadioButton;
     Options1TabSheet: TTabSheet;
     Options2TabSheet: TTabSheet;
@@ -41,11 +41,11 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
-    QuotedStringColumnsCheckBox: TCheckBox;
+    QuotedStringColumnsCheckBox: TBCCheckBox;
     SchemaEdit: TBCEdit;
     SchemaFilterCheckListBox: TCheckListBox;
     SchemaLabel: TLabel;
-    SelectedRowsOnlyCheckBox: TCheckBox;
+    SelectedRowsOnlyCheckBox: TBCCheckBox;
     SelectFileButtonAction: TAction;
     Separator1Panel: TPanel;
     SingleQuoteRadioButton: TRadioButton;

@@ -4,26 +4,26 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ActnList, BCDialogs.Dlg, System.Actions;
+  Vcl.ActnList, BCDialogs.Dlg, System.Actions, BCControls.CheckBox;
 
 type
   TTableSourceOptionsDialog = class(TDialog)
     ActionList: TActionList;
     CancelButton: TButton;
-    CommentsCheckBox: TCheckBox;
-    ConstraintsCheckBox: TCheckBox;
-    CreateTableCheckBox: TCheckBox;
-    GrantsCheckBox: TCheckBox;
-    IndexesCheckBox: TCheckBox;
+    CommentsCheckBox: TBCCheckBox;
+    ConstraintsCheckBox: TBCCheckBox;
+    CreateTableCheckBox: TBCCheckBox;
+    GrantsCheckBox: TBCCheckBox;
+    IndexesCheckBox: TBCCheckBox;
     OKAction: TAction;
     OKButton: TButton;
     Panel1: TPanel;
     Panel2: TPanel;
-    ParametersCheckBox: TCheckBox;
+    ParametersCheckBox: TBCCheckBox;
     Separator1Panel: TPanel;
-    StorageCheckBox: TCheckBox;
-    SynonymsCheckBox: TCheckBox;
-    TriggersCheckBox: TCheckBox;
+    StorageCheckBox: TBCCheckBox;
+    SynonymsCheckBox: TBCCheckBox;
+    TriggersCheckBox: TBCCheckBox;
     procedure FormDestroy(Sender: TObject);
     procedure OKActionExecute(Sender: TObject);
   private

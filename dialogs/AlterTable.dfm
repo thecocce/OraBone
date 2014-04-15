@@ -2,7 +2,6 @@ inherited AlterTableDialog: TAlterTableDialog
   Caption = 'Alter or Recreate Table'
   ClientHeight = 453
   ClientWidth = 739
-  Color = clWindow
   PixelsPerInch = 96
   TextHeight = 13
   object TableNameLabel: TLabel [0]
@@ -237,17 +236,19 @@ inherited AlterTableDialog: TAlterTableDialog
             end
           end
         end
-        object DropUnusedColumnsCheckBox: TCheckBox
+        object DropUnusedColumnsCheckBox: TBCCheckBox
           Left = 594
           Top = 3
-          Width = 127
-          Height = 17
+          Width = 124
+          Height = 15
           Alignment = taLeftJustify
           Anchors = [akTop, akRight]
           Caption = 'Drop Unused Columns'
           Checked = True
           State = cbChecked
           TabOrder = 1
+          AutoSize = True
+          ReadOnly = False
         end
         object ResetToolBar: TBCToolBar
           Left = 105

@@ -47,13 +47,15 @@ object DropUserDialog: TDropUserDialog
       Height = 37
       AutoSize = True
     end
-    object CascadeCheckBox: TCheckBox
+    object CascadeCheckBox: TBCCheckBox
       Left = 10
       Top = 51
-      Width = 125
-      Height = 17
+      Width = 63
+      Height = 15
       Caption = ' Cascade'
       TabOrder = 0
+      AutoSize = True
+      ReadOnly = False
     end
   end
   object GrayLinePanel: TPanel

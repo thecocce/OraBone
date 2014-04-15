@@ -76,31 +76,37 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
         DesignSize = (
           332
           45)
-        object DeleteCheckBox: TCheckBox
+        object DeleteCheckBox: TBCCheckBox
           Left = 139
           Top = 20
-          Width = 97
-          Height = 17
+          Width = 53
+          Height = 15
           Anchors = [akTop]
           Caption = ' Delete'
           TabOrder = 0
+          AutoSize = True
+          ReadOnly = False
         end
-        object InsertCheckBox: TCheckBox
+        object InsertCheckBox: TBCCheckBox
           Left = 11
           Top = 20
-          Width = 49
-          Height = 17
+          Width = 51
+          Height = 15
           Caption = ' Insert'
           TabOrder = 1
+          AutoSize = True
+          ReadOnly = False
         end
-        object UpdateCheckBox: TCheckBox
+        object UpdateCheckBox: TBCCheckBox
           Left = 269
           Top = 20
-          Width = 56
-          Height = 17
+          Width = 57
+          Height = 15
           Anchors = [akTop, akRight]
           Caption = ' Update'
           TabOrder = 2
+          AutoSize = True
+          ReadOnly = False
         end
       end
       object ReferencingGroupBox: TGroupBox
@@ -183,23 +189,52 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          ActiveLine.Background = clYellow
+          ActiveLine.Foreground = clNavy
+          ActiveLine.Visible = True
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
+          Background.Visible = False
+          Background.RepeatMode = brmNone
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
           TabOrder = 0
+          Gutter.ShowLineModified = False
+          Gutter.LineModifiedColor = clYellow
+          Gutter.LineNormalColor = clLime
+          Gutter.Intens = False
           Gutter.AutoSize = True
           Gutter.Font.Charset = DEFAULT_CHARSET
           Gutter.Font.Color = clWindowText
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.BookmarkPanelColor = clNone
+          Gutter.RightOffset = 2
+          Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
+          Gutter.ShowBookmarks = False
+          Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          WordWrap.Enabled = False
+          WordWrap.Position = 80
+          WordWrap.Style = wwsClientWidth
           FontSmoothing = fsmNone
         end
       end
@@ -225,23 +260,52 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          ActiveLine.Background = clYellow
+          ActiveLine.Foreground = clNavy
+          ActiveLine.Visible = True
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
+          Background.Visible = False
+          Background.RepeatMode = brmNone
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
           TabOrder = 0
+          Gutter.ShowLineModified = False
+          Gutter.LineModifiedColor = clYellow
+          Gutter.LineNormalColor = clLime
+          Gutter.Intens = False
           Gutter.AutoSize = True
           Gutter.Font.Charset = DEFAULT_CHARSET
           Gutter.Font.Color = clWindowText
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.BookmarkPanelColor = clNone
+          Gutter.RightOffset = 2
+          Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
+          Gutter.ShowBookmarks = False
+          Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           WantTabs = True
+          WordWrap.Enabled = False
+          WordWrap.Position = 80
+          WordWrap.Style = wwsClientWidth
           FontSmoothing = fsmNone
         end
       end

@@ -69,91 +69,109 @@ object TableSourceOptionsDialog: TTableSourceOptionsDialog
     Padding.Top = 8
     Padding.Right = 8
     TabOrder = 1
-    object CreateTableCheckBox: TCheckBox
+    object CreateTableCheckBox: TBCCheckBox
       Left = 14
       Top = 14
-      Width = 84
-      Height = 17
+      Width = 81
+      Height = 15
       Caption = 'Create Table'
       Checked = True
       State = cbChecked
       TabOrder = 0
+      AutoSize = True
+      ReadOnly = False
     end
-    object CommentsCheckBox: TCheckBox
+    object CommentsCheckBox: TBCCheckBox
       Left = 14
       Top = 37
-      Width = 73
-      Height = 17
+      Width = 69
+      Height = 15
       Caption = 'Comments'
       Checked = True
       State = cbChecked
       TabOrder = 1
+      AutoSize = True
+      ReadOnly = False
     end
-    object IndexesCheckBox: TCheckBox
+    object IndexesCheckBox: TBCCheckBox
       Left = 14
       Top = 60
-      Width = 64
-      Height = 17
+      Width = 58
+      Height = 15
       Caption = 'Indexes'
       Checked = True
       State = cbChecked
       TabOrder = 2
+      AutoSize = True
+      ReadOnly = False
     end
-    object ConstraintsCheckBox: TCheckBox
+    object ConstraintsCheckBox: TBCCheckBox
       Left = 14
       Top = 83
-      Width = 80
-      Height = 17
+      Width = 74
+      Height = 15
       Caption = 'Constraints'
       Checked = True
       State = cbChecked
       TabOrder = 3
+      AutoSize = True
+      ReadOnly = False
     end
-    object TriggersCheckBox: TCheckBox
+    object TriggersCheckBox: TBCCheckBox
       Left = 14
       Top = 106
-      Width = 64
-      Height = 17
+      Width = 58
+      Height = 15
       Caption = 'Triggers'
       Checked = True
       State = cbChecked
       TabOrder = 4
+      AutoSize = True
+      ReadOnly = False
     end
-    object ParametersCheckBox: TCheckBox
+    object ParametersCheckBox: TBCCheckBox
       Left = 128
       Top = 106
-      Width = 77
-      Height = 17
+      Width = 74
+      Height = 15
       Caption = 'Parameters'
       TabOrder = 5
+      AutoSize = True
+      ReadOnly = False
     end
-    object StorageCheckBox: TCheckBox
+    object StorageCheckBox: TBCCheckBox
       Left = 128
       Top = 83
-      Width = 64
-      Height = 17
+      Width = 57
+      Height = 15
       Caption = 'Storage'
       TabOrder = 6
+      AutoSize = True
+      ReadOnly = False
     end
-    object GrantsCheckBox: TCheckBox
+    object GrantsCheckBox: TBCCheckBox
       Left = 128
       Top = 60
-      Width = 64
-      Height = 17
+      Width = 51
+      Height = 15
       Caption = 'Grants'
       Checked = True
       State = cbChecked
       TabOrder = 7
+      AutoSize = True
+      ReadOnly = False
     end
-    object SynonymsCheckBox: TCheckBox
+    object SynonymsCheckBox: TBCCheckBox
       Left = 128
       Top = 37
-      Width = 74
-      Height = 17
+      Width = 68
+      Height = 15
       Caption = 'Synonyms'
       Checked = True
       State = cbChecked
       TabOrder = 8
+      AutoSize = True
+      ReadOnly = False
     end
   end
   object ActionList: TActionList

@@ -52,13 +52,15 @@ object ObjectSearhForm: TObjectSearhForm
       ErrorColor = 14803198
       NumbersAllowNegative = False
     end
-    object CaseSensitiveCheckBox: TCheckBox
+    object CaseSensitiveCheckBox: TBCCheckBox
       Left = 367
       Top = 7
-      Width = 101
-      Height = 17
+      Width = 91
+      Height = 15
       Caption = ' Case sensitive'
       TabOrder = 2
+      AutoSize = True
+      ReadOnly = False
     end
     object SearchBitBtn: TJvBitBtn
       Left = 291

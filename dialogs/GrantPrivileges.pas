@@ -6,26 +6,26 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls,
   BCControls.ComboBox, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin,
   JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg,
-  System.Actions, BCControls.ImageList;
+  System.Actions, BCControls.ImageList, BCControls.CheckBox;
 
 type
   TGrantPrivilegesDialog = class(TCreateObjectBaseDialog)
-    AlterCheckBox: TCheckBox;
-    DebugCheckBox: TCheckBox;
-    DeleteCheckBox: TCheckBox;
-    ExecuteCheckBox: TCheckBox;
+    AlterCheckBox: TBCCheckBox;
+    DebugCheckBox: TBCCheckBox;
+    DeleteCheckBox: TBCCheckBox;
+    ExecuteCheckBox: TBCCheckBox;
     GrantGroupBox: TGroupBox;
-    GrantOptionCheckBox: TCheckBox;
-    InsertCheckBox: TCheckBox;
+    GrantOptionCheckBox: TBCCheckBox;
+    InsertCheckBox: TBCCheckBox;
     OnEdit: TBCEdit;
     OnGroupBox: TGroupBox;
     PublicRadioButton: TRadioButton;
     RoleComboBox: TBCComboBox;
     RoleRadioButton: TRadioButton;
-    SelectCheckBox: TCheckBox;
+    SelectCheckBox: TBCCheckBox;
     SettingsTabSheet: TTabSheet;
     ToGroupBox: TGroupBox;
-    UpdateCheckBox: TCheckBox;
+    UpdateCheckBox: TBCCheckBox;
     UserComboBox: TBCComboBox;
     UserRadioButton: TRadioButton;
     procedure FormDestroy(Sender: TObject);

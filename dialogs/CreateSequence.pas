@@ -6,20 +6,20 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls,
   BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls,
   SynEdit, Vcl.ExtCtrls, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg, System.Actions,
-  BCControls.ImageList;
+  BCControls.ImageList, BCControls.CheckBox;
 
 type
   TCreateSequenceDialog = class(TCreateObjectBaseDialog)
     CacheEdit: TBCEdit;
     CacheLabel: TLabel;
-    CycleCheckBox: TCheckBox;
+    CycleCheckBox: TBCCheckBox;
     IncrementByEdit: TBCEdit;
     IncrementByLabel: TLabel;
     MaxValueEdit: TBCEdit;
     MaxValueLabel: TLabel;
     MinValueEdit: TBCEdit;
     MinValueLabel: TLabel;
-    OrderCheckBox: TCheckBox;
+    OrderCheckBox: TBCCheckBox;
     SequenceNameEdit: TBCEdit;
     SequenceNameLabel: TLabel;
     SettingsTabSheet: TTabSheet;

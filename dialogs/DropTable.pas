@@ -4,18 +4,18 @@ interface
 
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ExtCtrls, BCDialogs.Dlg;
+  Vcl.ExtCtrls, BCDialogs.Dlg, BCControls.CheckBox;
 
 type
   TDropTableDialog = class(TDialog)
     CancelButton: TButton;
-    CascadeConstraintsCheckBox: TCheckBox;
+    CascadeConstraintsCheckBox: TBCCheckBox;
     GrayLinePanel: TPanel;
     InfoImage: TImage;
     MessageLabel: TLabel;
     OKButton: TButton;
     Panel1: TPanel;
-    PurgeCheckBox: TCheckBox;
+    PurgeCheckBox: TBCCheckBox;
     Separator1Panel: TPanel;
     TopPanel: TPanel;
     procedure FormDestroy(Sender: TObject);

@@ -5,14 +5,15 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, JvExButtons, JvBitBtn, Vcl.ExtCtrls, BCControls.Edit, BCDialogs.Dlg,
-  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, System.Actions, BCCommon.Images;
+  ComCtrls, DB, DBAccess, Ora, MemDS, ActnList, VirtualTrees, Vcl.ImgList, System.Actions, BCCommon.Images,
+  BCControls.CheckBox;
 
 type
   TObjectSearhForm = class(TDialog)
     ButtonPanel: TPanel;
     SearchForLabel: TLabel;
     SearchForEdit: TBCEdit;
-    CaseSensitiveCheckBox: TCheckBox;
+    CaseSensitiveCheckBox: TBCCheckBox;
     SearchBitBtn: TJvBitBtn;
     StatusBar: TStatusBar;
     TreePanel: TPanel;

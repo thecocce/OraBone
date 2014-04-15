@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList,
   ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, ToolWin,
   BCControls.ComboBox, VirtualTrees, DB, MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg,
-  JvProgressBar, BCCommon.Images;
+  JvProgressBar, BCCommon.Images, BCControls.CheckBox;
 
 type
   TSchemaCompareForm = class(TDialog)
@@ -25,20 +25,20 @@ type
     Schema1ComboBox: TBCComboBox;
     Schema2ComboBox: TBCComboBox;
     ComparedObjectsGroupBox: TGroupBox;
-    TablesCheckBox: TCheckBox;
-    ViewsCheckBox: TCheckBox;
-    FunctionsCheckBox: TCheckBox;
-    ProceduresCheckBox: TCheckBox;
-    PackagesCheckBox: TCheckBox;
-    TriggersCheckBox: TCheckBox;
-    ConstraintsCheckBox: TCheckBox;
-    IndexesCheckBox: TCheckBox;
-    SequencesCheckBox: TCheckBox;
-    SynonymsCheckBox: TCheckBox;
-    DBLinksCheckBox: TCheckBox;
-    TableCommentsCheckBox: TCheckBox;
-    ColumnNamesCheckBox: TCheckBox;
-    ColumnCommentsCheckBox: TCheckBox;
+    TablesCheckBox: TBCCheckBox;
+    ViewsCheckBox: TBCCheckBox;
+    FunctionsCheckBox: TBCCheckBox;
+    ProceduresCheckBox: TBCCheckBox;
+    PackagesCheckBox: TBCCheckBox;
+    TriggersCheckBox: TBCCheckBox;
+    ConstraintsCheckBox: TBCCheckBox;
+    IndexesCheckBox: TBCCheckBox;
+    SequencesCheckBox: TBCCheckBox;
+    SynonymsCheckBox: TBCCheckBox;
+    DBLinksCheckBox: TBCCheckBox;
+    TableCommentsCheckBox: TBCCheckBox;
+    ColumnNamesCheckBox: TBCCheckBox;
+    ColumnCommentsCheckBox: TBCCheckBox;
     ProgressBar: TBCProgressBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Schema1ComboBoxChange(Sender: TObject);

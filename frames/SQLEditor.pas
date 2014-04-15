@@ -160,13 +160,10 @@ type
     SpeedButton2: TSpeedButton;
     SearchPanel7: TPanel;
     CaseSensitiveCheckBox: TBCCheckBox;
-    CaseSensitiveLabel: TLabel;
     Panel1: TPanel;
     WholeWordsCheckBox: TBCCheckBox;
-    WholeWordsOnlyLabel: TLabel;
     Panel2: TPanel;
     RegularExpressionCheckBox: TBCCheckBox;
-    RegularExpressionLabel: TLabel;
     SynEditRegexSearch: TSynEditRegexSearch;
     GotoLinePanel: TPanel;
     GotoLineClosePanel: TPanel;
@@ -187,7 +184,6 @@ type
     GotoLineClearAction: TAction;
     AfterRegularExpressionPanel: TPanel;
     WildCardCheckBox: TBCCheckBox;
-    WildCardLabel: TLabel;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;

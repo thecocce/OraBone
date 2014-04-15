@@ -4,12 +4,12 @@ interface
 
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ExtCtrls, BCDialogs.Dlg;
+  Vcl.ExtCtrls, BCDialogs.Dlg, BCControls.CheckBox;
 
 type
   TDropUserDialog = class(TDialog)
     CancelButton: TButton;
-    CascadeCheckBox: TCheckBox;
+    CascadeCheckBox: TBCCheckBox;
     GrayLinePanel: TPanel;
     InfoImage: TImage;
     MessageLabel: TLabel;
