@@ -1,8 +1,8 @@
 object SQLEditorFrame: TSQLEditorFrame
   Left = 0
   Top = 0
-  Width = 786
-  Height = 302
+  Width = 651
+  Height = 413
   Hint = ' '
   Align = alClient
   DoubleBuffered = False
@@ -13,8 +13,8 @@ object SQLEditorFrame: TSQLEditorFrame
   TabOrder = 0
   object HorizontalSplitter: TJvSplitter
     Left = 0
-    Top = 76
-    Width = 786
+    Top = 187
+    Width = 651
     Height = 3
     Cursor = crVSplit
     Hint = ' '
@@ -23,7 +23,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object SearchPanel: TPanel
     Left = 0
     Top = 23
-    Width = 786
+    Width = 651
     Height = 21
     Hint = ' '
     Align = alTop
@@ -389,8 +389,8 @@ object SQLEditorFrame: TSQLEditorFrame
   object DocumentPanel: TPanel
     Left = 0
     Top = 44
-    Width = 786
-    Height = 7
+    Width = 651
+    Height = 118
     Align = alClient
     BevelOuter = bvNone
     Color = clWindow
@@ -401,8 +401,8 @@ object SQLEditorFrame: TSQLEditorFrame
     object PageControl: TBCPageControl
       Left = 0
       Top = 2
-      Width = 786
-      Height = 5
+      Width = 651
+      Height = 116
       Hint = ' '
       Align = alClient
       DoubleBuffered = False
@@ -425,8 +425,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object OutputPanel: TPanel
     Left = 0
-    Top = 79
-    Width = 786
+    Top = 190
+    Width = 651
     Height = 223
     Hint = ' '
     Align = alBottom
@@ -438,7 +438,7 @@ object SQLEditorFrame: TSQLEditorFrame
   object ToolbarPanel: TPanel
     Left = 0
     Top = 0
-    Width = 786
+    Width = 651
     Height = 23
     Align = alTop
     BevelOuter = bvNone
@@ -476,6 +476,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Align = alLeft
         Caption = 'ExecuteToolBar'
         DoubleBuffered = False
+        Images = ImagesDataModule.ImageList
         ParentDoubleBuffered = False
         TabOrder = 0
         object ExecuteToolButton: TToolButton
@@ -1027,8 +1028,8 @@ object SQLEditorFrame: TSQLEditorFrame
   end
   object GotoLinePanel: TPanel
     Left = 0
-    Top = 51
-    Width = 786
+    Top = 162
+    Width = 651
     Height = 25
     Align = alBottom
     BevelOuter = bvNone
@@ -1250,38 +1251,69 @@ object SQLEditorFrame: TSQLEditorFrame
     Left = 154
     Top = 62
   end
-  object SearchActionList: TActionList
+  object ActionList: TActionList
     Left = 168
     Top = 94
     object SearchCloseAction: TAction
+      Category = 'Search'
       Hint = 'Close Search'
       OnExecute = SearchCloseActionExecute
     end
     object SearchFindNextAction: TAction
+      Category = 'Search'
       Enabled = False
       Hint = 'Find the next matching text'
       ShortCut = 114
       OnExecute = SearchFindNextActionExecute
     end
     object SearchFindPreviousAction: TAction
+      Category = 'Search'
       Enabled = False
       Hint = 'Find the previous matching text'
       ShortCut = 8306
       OnExecute = SearchFindPreviousActionExecute
     end
     object GotoLineAction: TAction
+      Category = 'GotoLine'
       Hint = 'Go to line'
       OnExecute = GotoLineActionExecute
     end
     object GotoLineCloseAction: TAction
+      Category = 'GotoLine'
       Hint = 'Close'
       OnExecute = GotoLineCloseActionExecute
     end
     object SearchClearAction: TAction
+      Category = 'Search'
       OnExecute = SearchClearActionExecute
     end
     object GotoLineClearAction: TAction
+      Category = 'GotoLine'
       OnExecute = GotoLineClearActionExecute
+    end
+    object BoxDownAction: TAction
+      Category = 'BoxSelection'
+      Caption = 'BoxDownAction'
+      ShortCut = 41000
+      OnExecute = BoxDownActionExecute
+    end
+    object BoxLeftAction: TAction
+      Category = 'BoxSelection'
+      Caption = 'BoxLeftAction'
+      ShortCut = 40997
+      OnExecute = BoxLeftActionExecute
+    end
+    object BoxRightAction: TAction
+      Category = 'BoxSelection'
+      Caption = 'BoxRightAction'
+      ShortCut = 40999
+      OnExecute = BoxRightActionExecute
+    end
+    object BoxUpAction: TAction
+      Category = 'BoxSelection'
+      Caption = 'BoxUpAction'
+      ShortCut = 40998
+      OnExecute = BoxUpActionExecute
     end
   end
   object SynSQLSyn: TSynSQLSyn

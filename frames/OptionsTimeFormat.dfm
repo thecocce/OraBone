@@ -1,22 +1,34 @@
 inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
-  Width = 294
+  Width = 298
   Height = 163
-  ExplicitWidth = 294
-  ExplicitHeight = 163
+  AutoSize = True
+  ParentFont = False
   object Panel: TPanel
-    Left = 0
+    AlignWithMargins = True
+    Left = 4
     Top = 0
     Width = 294
     Height = 163
+    Margins.Left = 4
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    AutoSize = True
     BevelOuter = bvNone
     Color = clWindow
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
     ParentBackground = False
+    ParentFont = False
     TabOrder = 0
     object TimeFormatLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 3
-      Width = 59
-      Height = 13
+      Width = 74
+      Height = 16
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -24,10 +36,10 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Time Format'
     end
     object ExampleLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 29
-      Width = 40
-      Height = 13
+      Width = 48
+      Height = 16
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -35,7 +47,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 55
       Width = 294
       Height = 44
@@ -51,7 +63,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHHLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 102
       Width = 14
       Height = 13
@@ -69,7 +81,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHH24Label: TLabel
-      Left = 4
+      Left = 0
       Top = 118
       Width = 26
       Height = 13
@@ -87,7 +99,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatMILabel: TLabel
-      Left = 4
+      Left = 0
       Top = 134
       Width = 12
       Height = 13
@@ -105,7 +117,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatSSLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 150
       Width = 12
       Height = 13
@@ -123,7 +135,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatSSTextLabel: TLabel
-      Left = 42
+      Left = 38
       Top = 150
       Width = 72
       Height = 13
@@ -141,7 +153,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatMITextLabel: TLabel
-      Left = 42
+      Left = 38
       Top = 134
       Width = 69
       Height = 13
@@ -159,7 +171,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHH24TextLabel: TLabel
-      Left = 42
+      Left = 38
       Top = 118
       Width = 94
       Height = 13
@@ -177,7 +189,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatHHTextLabel: TLabel
-      Left = 42
+      Left = 38
       Top = 102
       Width = 94
       Height = 13
@@ -195,10 +207,10 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       WordWrap = True
     end
     object TimeFormatExampleEdit: TBCEdit
-      Left = 73
+      Left = 69
       Top = 26
       Width = 221
-      Height = 21
+      Height = 24
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -216,10 +228,10 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       NumbersAllowNegative = False
     end
     object TimeFormatEdit: TBCEdit
-      Left = 73
+      Left = 69
       Top = 0
       Width = 221
-      Height = 21
+      Height = 24
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4

@@ -18,7 +18,7 @@ type
     SynEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
     SearchPanel: TPanel;
-    SearchActionList: TActionList;
+    ActionList: TActionList;
     SearchCloseAction: TAction;
     SearchFindNextAction: TAction;
     SearchFindPreviousAction: TAction;
@@ -184,6 +184,10 @@ type
     GotoLineClearAction: TAction;
     AfterRegularExpressionPanel: TPanel;
     WildCardCheckBox: TBCCheckBox;
+    BoxDownAction: TAction;
+    BoxLeftAction: TAction;
+    BoxRightAction: TAction;
+    BoxUpAction: TAction;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
       AReplace: UnicodeString; Line, Column: Integer;
@@ -212,7 +216,10 @@ type
     procedure SearchClearActionExecute(Sender: TObject);
     procedure GotoLineClearActionExecute(Sender: TObject);
     procedure GotoLineNumberEditChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure BoxDownActionExecute(Sender: TObject);
+    procedure BoxLeftActionExecute(Sender: TObject);
+    procedure BoxRightActionExecute(Sender: TObject);
+    procedure BoxUpActionExecute(Sender: TObject);
   private
     { Private declarations }
     FCaseCycle: Byte;
@@ -466,7 +473,7 @@ begin
   GotoBookmark9MenuItem.Action := MainForm.GotoBookmarks9Action;
 
   FImages := TImageList.Create(Self);
-  SysImageList := GetSysImageList; //SHGetFileInfo(PChar(PathInfo), 0, SHFileInfo, SizeOf(TSHFileInfo), SHGFI_SYSICONINDEX or SHGFI_SMALLICON);
+  SysImageList := GetSysImageList;
   if SysImageList <> 0 then
   begin
     FImages.Handle := SysImageList;
@@ -2115,9 +2122,88 @@ begin
     FOutputFrame.SetOptions;
 end;
 
-procedure TSQLEditorFrame.Button1Click(Sender: TObject);
+procedure TSQLEditorFrame.BoxDownActionExecute(Sender: TObject);
+
+ procedure BoxDown(SynEdit: TBCOraSynEdit);
+  begin
+    if Assigned(SynEdit) then
+      if SynEdit.Focused then
+      begin
+        OptionsContainer.EnableSelectionMode := True;
+        SynEdit.Options := SynEdit.Options + [eoAltSetsColumnMode];
+        SynEdit.Selectionmode := smColumn;
+        Keybd_Event(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0), 0, 0);
+        Keybd_Event(VK_DOWN, MapVirtualKey(VK_DOWN, 0), 0, 0);
+        Keybd_Event(VK_DOWN, MapVirtualKey(VK_DOWN, 0), KEYEVENTF_KEYUP, 0);
+        Keybd_Event(VK_MENU, MapVirtualKey(VK_MENU, 0), KEYEVENTF_KEYUP, 0);
+      end;
+  end;
+
 begin
- showmessage(inttostr(toolbarpanel.ComponentCount))
+  BoxDown(GetActiveSynEdit);
+end;
+
+procedure TSQLEditorFrame.BoxLeftActionExecute(Sender: TObject);
+
+  procedure BoxLeft(SynEdit: TBCOraSynEdit);
+  begin
+    if Assigned(SynEdit) then
+      if SynEdit.Focused then
+      begin
+        OptionsContainer.EnableSelectionMode := True;
+        SynEdit.Options := SynEdit.Options + [eoAltSetsColumnMode];
+        SynEdit.Selectionmode := smColumn;
+        Keybd_Event(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0), 0, 0);
+        Keybd_Event(VK_LEFT, MapVirtualKey(VK_LEFT, 0), 0, 0);
+        Keybd_Event(VK_LEFT, MapVirtualKey(VK_LEFT, 0), KEYEVENTF_KEYUP, 0);
+        Keybd_Event(VK_MENU, MapVirtualKey(VK_MENU, 0), KEYEVENTF_KEYUP, 0);
+    end;
+  end;
+
+begin
+  BoxLeft(GetActiveSynEdit);
+end;
+
+procedure TSQLEditorFrame.BoxRightActionExecute(Sender: TObject);
+
+  procedure BoxRight(SynEdit: TBCOraSynEdit);
+  begin
+    if Assigned(SynEdit) then
+      if SynEdit.Focused then
+      begin
+        OptionsContainer.EnableSelectionMode := True;
+        SynEdit.Options := SynEdit.Options + [eoAltSetsColumnMode];
+        SynEdit.Selectionmode := smColumn;
+        Keybd_Event(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0), 0, 0);
+        Keybd_Event(VK_RIGHT, MapVirtualKey(VK_RIGHT, 0), 0, 0);
+        Keybd_Event(VK_RIGHT, MapVirtualKey(VK_RIGHT, 0), KEYEVENTF_KEYUP, 0);
+        Keybd_Event(VK_MENU, MapVirtualKey(VK_MENU, 0), KEYEVENTF_KEYUP, 0);
+      end;
+  end;
+
+begin
+  BoxRight(GetActiveSynEdit);
+end;
+
+procedure TSQLEditorFrame.BoxUpActionExecute(Sender: TObject);
+
+  procedure BoxUp(SynEdit: TBCOraSynEdit);
+  begin
+    if Assigned(SynEdit) then
+      if SynEdit.Focused then
+      begin
+        OptionsContainer.EnableSelectionMode := True;
+        SynEdit.Options := SynEdit.Options + [eoAltSetsColumnMode];
+        SynEdit.Selectionmode := smColumn;
+        Keybd_Event(VK_SHIFT, MapVirtualKey(VK_SHIFT, 0), 0, 0);
+        Keybd_Event(VK_UP, MapVirtualKey(VK_UP, 0), 0, 0);
+        Keybd_Event(VK_UP, MapVirtualKey(VK_UP, 0), KEYEVENTF_KEYUP, 0);
+        Keybd_Event(VK_MENU ,MapVirtualKey(VK_MENU ,0), KEYEVENTF_KEYUP, 0);
+      end;
+  end;
+
+begin
+  BoxUp(GetActiveSynEdit);
 end;
 
 procedure TSQLEditorFrame.SetHighlighterTableNames(Value: TStrings);
@@ -2377,7 +2463,7 @@ begin
   Result.Options.Direct := OraSession.Options.Direct;
   Result.Options.DateFormat := OptionsContainer.DateFormat;
   Result.Options.UseUnicode := True;
-  Result.Options.UnicodeEnvironment := False;
+  Result.Options.UnicodeEnvironment := True; // False;
   Result.AutoCommit := False;
   Result.ThreadSafety := True;
   Result.ConnectPrompt := False;
@@ -2680,34 +2766,6 @@ begin
     SynEdit.OraSQL.Free;
   end;
 end;
-
-{procedure TSQLEditorFrame.OraScriptAfterExecuteEvent(Sender: TObject; SQL: string);
-var
-  i: Integer;
-  StringList: TStringList;
-  s: string;
-  SynEdit: TBCOraSynEdit;
-begin
-  SynEdit := GetActiveSynEdit;
-
-  StringList := TStringList.Create;
-  StringList.Clear;
-  try
-    for i := 0 to OraScript.Params.Count - 1 do
-      StringList.Add(Format('%s = %s', [OraScript.Params[i].Name, OraScript.Params[i].AsWideString]));
-
-    if OraScript.DataSet.RowsProcessed <> 0 then
-      s := Format('%d row(s) processed.', [OraScript.DataSet.RowsProcessed])
-    else
-      s := 'Success.';
-    StringList.Add(Format('%s Time Elapsed: %s', [s, System.SysUtils.FormatDateTime('hh:nn:ss.zzz', Now - SynEdit.StartTime)]));
-
-    FOutputFrame.AddStrings(Format('Output: %s', [GetActivePageCaption]), StringList.Text);
-  finally
-    WriteHistory(OraScript.Session, SynEdit.Text);
-    StringList.Free;
-  end;
-end; }
 
 procedure TSQLEditorFrame.OraSQLAfterExecuteEvent(Sender: TObject; Result: Boolean);
 var

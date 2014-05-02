@@ -196,12 +196,8 @@ begin
   if Pos('^', OraSession.ConnectString) <> 0 then
     OraSession.HomeName := Copy(OraSession.ConnectString, Pos('^', OraSession.ConnectString) + 1, Length(OraSession.ConnectString));
   OraSession.Options.DateFormat := OptionsContainer.DateFormat;
-  //Result.AutoCommit := False;
-  //Result.ThreadSafety := True;
-  //Result.LoginPrompt := False;
-  // OraSession.OnConnectionLost := OraSessionConnectionLost;
-  OraSession.Options.UnicodeEnvironment := False;
-  //Result.Options.UseUnicode := True;
+  OraSession.Options.UseUnicode := True;
+  OraSession.Options.UnicodeEnvironment := True;
 end;
 
 function TObjectTreeFrame.GetSchemaFilters(SchemaName: string): string;

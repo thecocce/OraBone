@@ -1,20 +1,31 @@
 inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
-  Width = 312
+  Width = 231
   Height = 105
+  AutoSize = True
   Visible = False
-  ExplicitWidth = 312
-  ExplicitHeight = 105
   object Panel: TPanel
-    Left = 0
+    AlignWithMargins = True
+    Left = 4
     Top = 0
-    Width = 312
+    Width = 227
     Height = 105
+    Margins.Left = 4
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    AutoSize = True
     BevelOuter = bvNone
     Color = clWindow
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
     ParentBackground = False
+    ParentFont = False
     TabOrder = 0
     object ButtonPanelAlignLabel: TLabel
-      Left = 6
+      Left = 2
       Top = 66
       Width = 87
       Height = 13
@@ -25,7 +36,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Caption = 'Button Panel Align'
     end
     object ButtonPanelAlignComboBox: TBCComboBox
-      Left = 4
+      Left = 0
       Top = 84
       Width = 64
       Height = 21
@@ -39,23 +50,24 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       DropDownFixedWidth = 0
     end
     object ShowCreationAndModificationTimestampCheckBox: TBCCheckBox
-      Left = 4
+      Left = 0
       Top = 0
-      Width = 312
-      Height = 21
+      Width = 227
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = ' Show Creation and Modification Timestamp'
       TabOrder = 0
+      AutoSize = True
       ReadOnly = False
     end
     object ShowDataSearchPanelCheckBox: TBCCheckBox
-      Left = 4
+      Left = 0
       Top = 20
-      Width = 312
-      Height = 21
+      Width = 139
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -64,13 +76,14 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Checked = True
       State = cbChecked
       TabOrder = 1
+      AutoSize = True
       ReadOnly = False
     end
     object FilterOnTypingCheckBox: TBCCheckBox
-      Left = 4
+      Left = 0
       Top = 40
-      Width = 312
-      Height = 21
+      Width = 98
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -81,6 +94,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ParentColor = False
       State = cbChecked
       TabOrder = 2
+      AutoSize = True
       ReadOnly = False
     end
   end

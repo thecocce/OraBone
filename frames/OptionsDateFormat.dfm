@@ -1,20 +1,31 @@
 inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
-  Width = 294
+  Width = 298
   Height = 288
+  AutoSize = True
   Visible = False
-  ExplicitWidth = 294
-  ExplicitHeight = 288
   object Panel: TPanel
-    Left = 0
+    AlignWithMargins = True
+    Left = 4
     Top = 0
     Width = 294
     Height = 288
+    Margins.Left = 4
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    AutoSize = True
     BevelOuter = bvNone
     Color = clWindow
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
     ParentBackground = False
+    ParentFont = False
     TabOrder = 0
     object DateFormatLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 3
       Width = 60
       Height = 13
@@ -25,7 +36,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Date Format'
     end
     object ExampleLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 29
       Width = 40
       Height = 13
@@ -36,23 +47,30 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       Caption = 'Example'
     end
     object DescriptionLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 50
-      Width = 294
-      Height = 41
+      Width = 292
+      Height = 39
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      AutoSize = False
       Caption = 
         'Use the Date Format to specify the default date format used when' +
         ' Oracle makes conversions from internal date format into string ' +
         'values and vice versa.'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
       WordWrap = True
     end
     object DateFormatDLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 95
       Width = 7
       Height = 13
@@ -70,7 +88,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 111
       Width = 14
       Height = 13
@@ -88,7 +106,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 127
       Width = 21
       Height = 13
@@ -106,7 +124,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 143
       Width = 20
       Height = 13
@@ -124,7 +142,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 95
       Width = 91
       Height = 13
@@ -142,7 +160,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 111
       Width = 102
       Height = 13
@@ -160,7 +178,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDDDTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 127
       Width = 100
       Height = 13
@@ -178,7 +196,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatDAYTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 143
       Width = 252
       Height = 38
@@ -199,7 +217,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 185
       Width = 16
       Height = 13
@@ -217,7 +235,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 201
       Width = 23
       Height = 13
@@ -235,7 +253,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 217
       Width = 36
       Height = 13
@@ -253,7 +271,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 259
       Width = 12
       Height = 13
@@ -271,7 +289,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYLabel: TLabel
-      Left = 4
+      Left = 0
       Top = 275
       Width = 24
       Height = 13
@@ -289,7 +307,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYYYTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 275
       Width = 73
       Height = 13
@@ -307,7 +325,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatYYTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 259
       Width = 79
       Height = 13
@@ -325,7 +343,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTHTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 217
       Width = 252
       Height = 44
@@ -346,7 +364,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMMTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 185
       Width = 145
       Height = 13
@@ -364,7 +382,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatMONTextLabel: TLabel
-      Left = 46
+      Left = 42
       Top = 201
       Width = 138
       Height = 13
@@ -382,7 +400,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       WordWrap = True
     end
     object DateFormatExampleEdit: TBCEdit
-      Left = 73
+      Left = 69
       Top = 26
       Width = 221
       Height = 21
@@ -403,7 +421,7 @@ inherited OptionsDateFormatFrame: TOptionsDateFormatFrame
       NumbersAllowNegative = False
     end
     object DateFormatEdit: TBCEdit
-      Left = 73
+      Left = 69
       Top = 0
       Width = 221
       Height = 21
