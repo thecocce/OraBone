@@ -145,23 +145,23 @@ begin
   MenuItem := TMenuItem.Create(PopupMenu);
   MenuItem.Action := OutputCloseAllAction;
   PopupMenu.Items.Add(MenuItem);
-  { separator }
+  { close all other pages }
   MenuItem := TMenuItem.Create(PopupMenu);
-  MenuItem.Caption := '-';
+  MenuItem.Action := OutputCloseAllOtherPagesAction;
   PopupMenu.Items.Add(MenuItem);
+
   if Pos('Search for', PageControl.ActivePageCaption) = 1 then
   begin
     { copy to clipboard }
-
+    MenuItem := TMenuItem.Create(PopupMenu);
+    MenuItem.Action := CopyToClipboardAction;
+    PopupMenu.Items.Add(MenuItem);
     { separator }
     MenuItem := TMenuItem.Create(PopupMenu);
     MenuItem.Caption := '-';
     PopupMenu.Items.Add(MenuItem);
   end;
-  { close all other pages }
-  MenuItem := TMenuItem.Create(PopupMenu);
-  MenuItem.Action := OutputCloseAllOtherPagesAction;
-  PopupMenu.Items.Add(MenuItem);
+
   if Pos('Data:', PageControl.ActivePageCaption) = 1 then
   begin
     MenuItem := TMenuItem.Create(PopupMenu);

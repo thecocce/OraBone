@@ -2390,20 +2390,35 @@ end;
 procedure TMainForm.DragDropDrop(Sender: TObject; Pos: TPoint; Value: TStrings);
 var
   SQLEditorFrame: TSQLEditorFrame;
-  i: Integer;
+  i, j: Integer;
 begin
-  SQLEditorFrame := GetActiveSQLEditor;
-  if Assigned(SQLEditorFrame) then
-  begin
-    if SQLEditorFrame.IsCompareFilesActivePage then
-    if Value.Count > 1 then
-      for i := 0 to Value.Count - 1 do
-        SQLEditorFrame.CompareFiles(Value.Strings[i])
-    else
-      SQLEditorFrame.CompareFiles(Value.Strings[0], True)
-    else
-    for i := 0 to Value.Count - 1 do
-      SQLEditorFrame.Open(Value.Strings[i]);
+  Screen.Cursor := crHourGlass;
+  try
+    j := Value.Count;
+    ProgressBar.Count := j;
+    ProgressBar.Show;
+    SQLEditorFrame := GetActiveSQLEditor;
+    if Assigned(SQLEditorFrame) then
+    begin
+      if SQLEditorFrame.IsCompareFilesActivePage then
+      if j > 1 then
+        for i := 0 to j - 1 do
+        begin
+          ProgressBar.StepIt;
+          SQLEditorFrame.CompareFiles(Value.Strings[i]);
+        end
+      else
+        SQLEditorFrame.CompareFiles(Value.Strings[0], True)
+      else
+      for i := 0 to j - 1 do
+      begin
+        ProgressBar.StepIt;
+        SQLEditorFrame.Open(Value.Strings[i]);
+      end;
+    end;
+  finally
+    ProgressBar.Hide;
+    Screen.Cursor := crDefault;
   end;
 end;
 
