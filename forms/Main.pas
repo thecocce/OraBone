@@ -687,9 +687,7 @@ begin
         OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format(LanguageDataModule.GetConstant('SearchFor'), [FindWhatText]));
         SQLEditorFrame.OutputFrame.ProcessingTabSheet := True;
         Application.ProcessMessages;
-        OutputTreeView.ScrollBarOptions.ScrollBars := System.UITypes.TScrollStyle.ssNone;
         FindInFiles(SQLEditorFrame, OutputTreeView, FindWhatText, FileTypeText, FolderText, SearchCaseSensitive, LookInSubfolders);
-        OutputTreeView.ScrollBarOptions.ScrollBars := System.UITypes.TScrollStyle.ssBoth;
       finally
         ProgressBar.Hide;
         T2 := Now;

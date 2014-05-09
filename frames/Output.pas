@@ -596,7 +596,7 @@ begin
     Exit;
   if not Assigned(OutputTreeView) then
     Exit;
-
+  OutputTreeView.BeginUpdate;
   if not Assigned(Root) then
   begin
     Root := OutputTreeView.GetFirst;
@@ -614,38 +614,49 @@ begin
     Root := OutputTreeView.AddChild(nil);
     NodeData := OutputTreeView.GetNodeData(Root);
     NodeData.Level := 0;
-    NodeData.Filename := Filename;
-  end;
-
-  Node := OutputTreeView.AddChild(Root);
-  NodeData := OutputTreeView.GetNodeData(Node);
-  NodeData.Level := 1;
-  NodeData.Ln := Ln;
-  NodeData.Ch := Ch;
-  NodeData.SearchString := SearchString;
-  NodeData.Filename := Filename;
-
-  S := Text;
-
-  if NodeData.SearchString <> '' then
-  begin
-    if Ch > 255 then
+    if Ln = -1 then
     begin
-      NodeData.TextCh := 11;
-      s := System.Copy(s, Ch - 10, System.Length(s));
+      NodeData.Level := 2;
+      NodeData.Filename := Text;
     end
     else
-      NodeData.TextCh := Ch;
-    if System.Length(s) > 255 then
-      s := System.Copy(s, 0, 251) + '...';
+      NodeData.Filename := Filename;
   end;
+  if Ln <> -1  then
+  begin
+    Node := OutputTreeView.AddChild(Root);
+    NodeData := OutputTreeView.GetNodeData(Node);
+    NodeData.Level := 1;
+    NodeData.Ln := Ln;
+    NodeData.Ch := Ch;
+    NodeData.SearchString := SearchString;
+    NodeData.Filename := Filename;
 
-  if toAutoExpand in OutputTreeView.TreeOptions.AutoOptions then
-    if not OutputTreeView.Expanded[Root] then
-      OutputTreeView.FullExpand(Root);
+    S := Text;
 
-  NodeData.Text := S;
-  OutputTreeView.Tag := OutputTreeView.Tag + 1;
+    if NodeData.SearchString <> '' then
+    begin
+      if Ch > 255 then
+      begin
+        NodeData.TextCh := 11;
+        s := System.Copy(s, Ch - 10, System.Length(s));
+      end
+      else
+        NodeData.TextCh := Ch;
+      if System.Length(s) > 255 then
+        s := Format('%s...', [System.Copy(s, 0, 251)]);
+    end;
+
+    if toAutoExpand in OutputTreeView.TreeOptions.AutoOptions then
+      if not OutputTreeView.Expanded[Root] then
+        OutputTreeView.FullExpand(Root);
+
+    NodeData.Text := S;
+    OutputTreeView.Tag := OutputTreeView.Tag + 1;
+  end;
+  OutputTreeView.EndUpdate;
+  { fix for scrollbar resize bug }
+  SetWindowPos(OutputTreeView.Handle, 0, 0, 0, OutputTreeView.Width, OutputTreeView.Height, SWP_DRAWFRAME);
   Application.ProcessMessages;
 end;
 
