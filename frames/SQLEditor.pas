@@ -190,7 +190,7 @@ type
     BoxUpAction: TAction;
     procedure SynEditOnChange(Sender: TObject);
     procedure SynEditorReplaceText(Sender: TObject; const ASearch,
-      AReplace: UnicodeString; Line, Column: Integer;
+      AReplace: UnicodeString; Line, Column: Integer; DeleteLine: Boolean;
       var Action: TSynReplaceAction);
     procedure PageControlChange(Sender: TObject);
     procedure SearchForEditChange(Sender: TObject);
@@ -1963,27 +1963,32 @@ begin
 end;
 
 procedure TSQLEditorFrame.SynEditorReplaceText(Sender: TObject; const ASearch,
-  AReplace: UnicodeString; Line, Column: Integer;
+  AReplace: UnicodeString; Line, Column: Integer; DeleteLine: Boolean;
   var Action: TSynReplaceAction);
 var
   APos: TPoint;
   EditRect: TRect;
   SynEdit: TBCOraSynEdit;
+  ConfirmText: string;
 begin
   if ASearch = AReplace then
     Action := raSkip
   else
   begin
     SynEdit := GetActiveSynEdit;
-    APos := SynEdit.ClientToScreen(SynEdit.RowColumnToPixels
-        (SynEdit.BufferToDisplayPos(BufferCoord(Column, Line))));
+    APos := SynEdit.ClientToScreen(SynEdit.RowColumnToPixels(SynEdit.BufferToDisplayPos(BufferCoord(Column, Line))));
 
     EditRect := ClientRect;
     EditRect.TopLeft := ClientToScreen(EditRect.TopLeft);
     EditRect.BottomRight := ClientToScreen(EditRect.BottomRight);
 
-    ConfirmReplaceDialog.PrepareShow(EditRect, APos.X, APos.Y, APos.Y + SynEdit.LineHeight,
-      ASearch);
+    if DeleteLine then
+      ConfirmText := LanguageDataModule.GetYesOrNoMessage('DeleteLine')
+    else
+      ConfirmText := Format(LanguageDataModule.GetYesOrNoMessage('ReplaceOccurence'), [ASearch]);
+
+    ConfirmReplaceDialog.Initialize(EditRect, APos.X, APos.Y, APos.Y + SynEdit.LineHeight,
+      ConfirmText);
     try
       case ConfirmReplaceDialog.ShowModal of
         mrYes:
