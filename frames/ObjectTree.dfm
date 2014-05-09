@@ -31,7 +31,6 @@ object ObjectTreeFrame: TObjectTreeFrame
       Color = clWindow
       Padding.Top = 3
       Padding.Right = 1
-      ParentBackground = False
       TabOrder = 0
       object SchemaComboBox: TBCComboBox
         Left = 0

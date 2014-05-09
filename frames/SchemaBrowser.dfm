@@ -2,7 +2,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -16,14 +16,15 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
   object Splitter: TJvSplitter
     Left = 289
     Top = 0
-    Height = 301
+    Height = 303
     Hint = ' '
+    ExplicitHeight = 301
   end
   object LeftPanel: TPanel
     Left = 0
     Top = 0
     Width = 289
-    Height = 301
+    Height = 303
     Hint = ' '
     Align = alLeft
     BevelOuter = bvNone
@@ -38,7 +39,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       Left = 1
       Top = 0
       Width = 288
-      Height = 300
+      Height = 302
       Align = alClient
       Color = clWindow
       Ctl3D = True
@@ -48,12 +49,12 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       TabOrder = 0
       ExplicitLeft = 1
       ExplicitWidth = 288
-      ExplicitHeight = 300
+      ExplicitHeight = 302
       inherited BottomPanel: TPanel
-        Top = 274
+        Top = 276
         Width = 288
         ParentShowHint = False
-        ExplicitTop = 274
+        ExplicitTop = 276
         ExplicitWidth = 288
         inherited ComboPanel: TPanel
           Width = 288
@@ -73,7 +74,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       end
       inherited VirtualDrawTree: TVirtualDrawTree
         Width = 288
-        Height = 274
+        Height = 276
         Hint = ' '
         ParentShowHint = False
         PopupMenu = PopupMenu
@@ -82,7 +83,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         OnKeyUp = ObjectTreeFrameVirtualDrawTreeKeyUp
         OnMouseDown = ObjectTreeFrameVirtualDrawTreeMouseDown
         ExplicitWidth = 288
-        ExplicitHeight = 274
+        ExplicitHeight = 276
       end
       inherited UsersQuery: TOraQuery
         Left = 234
@@ -97,7 +98,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
     Left = 292
     Top = 0
     Width = 158
-    Height = 301
+    Height = 303
     Hint = ' '
     Align = alClient
     BevelOuter = bvNone

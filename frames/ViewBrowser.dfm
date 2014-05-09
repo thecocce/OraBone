@@ -2,7 +2,7 @@ object ViewBrowserFrame: TViewBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,15 +14,15 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
-    ActivePage = SourceTabSheet
+    Height = 304
+    ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupMenu
     TabOrder = 0
     OnChange = ViewPageControlChange
-    ActivePageCaption = 'Source'
+    ActivePageCaption = 'Columns'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -32,7 +32,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -42,7 +42,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,7 +64,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -87,8 +87,9 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 13
+          Height = 16
           Align = alRight
+          ExplicitHeight = 13
         end
         object JvToolBar5: TBCToolBar
           Left = 0
@@ -96,7 +97,6 @@ object ViewBrowserFrame: TViewBrowserFrame
           Width = 23
           Height = 22
           Align = alLeft
-          Caption = 'SourceToolBar'
           Images = ImageList
           TabOrder = 0
           object ToolButton25: TToolButton
@@ -111,7 +111,9 @@ object ViewBrowserFrame: TViewBrowserFrame
           Width = 23
           Height = 22
           Align = alLeft
+          Color = clBtnFace
           Images = ImageList
+          ParentColor = False
           TabOrder = 1
           object ToolButton14: TToolButton
             Left = 0
@@ -128,7 +130,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -138,7 +140,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -183,15 +185,6 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -203,7 +196,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -269,7 +262,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -279,7 +272,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = False
@@ -302,7 +295,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object DataButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -507,7 +500,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 167
         Width = 443
-        Height = 107
+        Height = 109
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -517,7 +510,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 106
+          Height = 108
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -561,15 +554,6 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -587,7 +571,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -597,7 +581,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -619,7 +603,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object GrantsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -680,7 +664,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -690,7 +674,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -712,7 +696,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object SynonymsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -773,7 +757,7 @@ object ViewBrowserFrame: TViewBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -783,7 +767,7 @@ object ViewBrowserFrame: TViewBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -804,7 +788,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object DependenciesButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -904,7 +888,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114001900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114001900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

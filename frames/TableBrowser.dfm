@@ -2,7 +2,7 @@ object TableBrowserFrame: TTableBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,8 +14,8 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
-    ActivePage = DataTabSheet
+    Height = 304
+    ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -23,7 +23,7 @@ object TableBrowserFrame: TTableBrowserFrame
     TabOrder = 0
     OnChange = TablePageControlChange
     ParentColor = False
-    ActivePageCaption = 'Data'
+    ActivePageCaption = 'Columns'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -33,7 +33,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -43,7 +43,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 250
+          Height = 252
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -66,13 +66,12 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         Color = clWindow
-        ParentBackground = False
         TabOrder = 1
         object Bevel3: TBevel
           AlignWithMargins = True
@@ -105,7 +104,6 @@ object TableBrowserFrame: TTableBrowserFrame
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          Caption = 'SourceToolBar'
           Images = ImageList
           TabOrder = 0
           Transparent = True
@@ -143,7 +141,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -153,7 +151,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -209,7 +207,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -303,7 +301,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -313,7 +311,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -346,7 +344,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object DataButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -457,17 +455,18 @@ object TableBrowserFrame: TTableBrowserFrame
       ImageIndex = 2
       object ConstraintSplitter: TSplitter
         Left = 0
-        Top = 81
+        Top = 83
         Width = 443
         Height = 2
         Cursor = crVSplit
         Align = alBottom
+        ExplicitTop = 81
       end
       object ConstraintsClientPanel: TPanel
         Left = 0
         Top = 0
         Width = 443
-        Height = 81
+        Height = 83
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -476,7 +475,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 57
+          Height = 59
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -497,7 +496,7 @@ object TableBrowserFrame: TTableBrowserFrame
         end
         object ConstraintButtonPanel: TPanel
           Left = 0
-          Top = 57
+          Top = 59
           Width = 441
           Height = 24
           Align = alBottom
@@ -586,7 +585,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ConstraintBottomPanel: TPanel
         Left = 0
-        Top = 83
+        Top = 85
         Width = 443
         Height = 191
         Align = alBottom
@@ -754,7 +753,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 167
         Width = 443
-        Height = 107
+        Height = 109
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -764,7 +763,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 106
+          Height = 108
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -826,7 +825,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -836,7 +835,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -858,7 +857,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object IndexesButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -919,7 +918,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -929,7 +928,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -951,7 +950,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object GrantsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -1012,7 +1011,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1022,7 +1021,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1044,7 +1043,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object SynonymsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -1105,7 +1104,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1115,7 +1114,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1136,7 +1135,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ReferencedByButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -1166,7 +1165,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1176,7 +1175,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1197,7 +1196,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object ReferencesButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -1227,7 +1226,7 @@ object TableBrowserFrame: TTableBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -1237,7 +1236,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -1258,7 +1257,7 @@ object TableBrowserFrame: TTableBrowserFrame
       end
       object DependenciesButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -1473,7 +1472,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 86
     Top = 30
     Bitmap = {
-      494C01011E002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011E002100080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
