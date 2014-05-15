@@ -58,7 +58,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Show Creation and Modification Timestamp'
+      Caption = 'Show Creation and Modification Timestamp'
       TabOrder = 0
       AutoSize = True
       ReadOnly = False
@@ -72,7 +72,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Show Data Search Panel'
+      Caption = 'Show Data Search Panel'
       Checked = True
       State = cbChecked
       TabOrder = 1
@@ -88,7 +88,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Filter On Typing'
+      Caption = 'Filter On Typing'
       Checked = True
       Color = clWindow
       ParentColor = False

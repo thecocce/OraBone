@@ -318,7 +318,7 @@ object SQLEditorFrame: TSQLEditorFrame
         Width = 92
         Height = 19
         Align = alLeft
-        Caption = ' Case Sensitive'
+        Caption = 'Case Sensitive'
         Color = clWindow
         ParentColor = False
         TabOrder = 0
@@ -342,7 +342,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Width = 111
       Height = 21
       Align = alLeft
-      Caption = ' Whole Words Only'
+      Caption = 'Whole Words Only'
       Color = clWindow
       ParentColor = False
       TabOrder = 7
@@ -365,7 +365,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Width = 114
       Height = 21
       Align = alLeft
-      Caption = ' Regular Expression'
+      Caption = 'Regular Expression'
       Color = clWindow
       ParentColor = False
       TabOrder = 9
@@ -388,7 +388,7 @@ object SQLEditorFrame: TSQLEditorFrame
       Width = 68
       Height = 21
       Align = alLeft
-      Caption = ' Wild Card'
+      Caption = 'Wild Card'
       TabOrder = 11
       AutoSize = True
       ReadOnly = False

@@ -57,7 +57,7 @@ object ObjectSearhForm: TObjectSearhForm
       Top = 7
       Width = 91
       Height = 15
-      Caption = ' Case sensitive'
+      Caption = 'Case sensitive'
       TabOrder = 2
       AutoSize = True
       ReadOnly = False

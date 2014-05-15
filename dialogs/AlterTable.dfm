@@ -369,7 +369,7 @@ inherited AlterTableDialog: TAlterTableDialog
     Width = 77
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = ' Alter Table'
+    Caption = 'Alter Table'
     Checked = True
     TabOrder = 4
     TabStop = True
@@ -381,7 +381,7 @@ inherited AlterTableDialog: TAlterTableDialog
     Width = 97
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = ' Recreate Table'
+    Caption = 'Recreate Table'
     TabOrder = 5
     OnClick = PageControlChange
   end

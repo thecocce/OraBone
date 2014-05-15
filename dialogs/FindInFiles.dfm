@@ -71,7 +71,7 @@ object FindInFilesDialog: TFindInFilesDialog
     Top = 84
     Width = 120
     Height = 17
-    Caption = ' C&ase sensitivity'
+    Caption = 'C&ase sensitivity'
     TabOrder = 3
   end
   object LookInSubfoldersCheckBox: TCheckBox
@@ -79,7 +79,7 @@ object FindInFilesDialog: TFindInFilesDialog
     Top = 84
     Width = 120
     Height = 17
-    Caption = ' &Look in subfolders'
+    Caption = '&Look in subfolders'
     Checked = True
     State = cbChecked
     TabOrder = 4

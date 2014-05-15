@@ -17,7 +17,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Standard'
+      Caption = 'Standard'
       Checked = True
       State = cbChecked
       TabOrder = 4
@@ -32,7 +32,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Print'
+      Caption = 'Print'
       Checked = True
       State = cbChecked
       TabOrder = 5
@@ -47,7 +47,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Execute'
+      Caption = 'Execute'
       Checked = True
       State = cbChecked
       TabOrder = 0
@@ -62,7 +62,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Indent'
+      Caption = 'Indent'
       Checked = True
       State = cbChecked
       TabOrder = 6
@@ -77,7 +77,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Sort'
+      Caption = 'Sort'
       Checked = True
       State = cbChecked
       TabOrder = 7
@@ -92,7 +92,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Case'
+      Caption = 'Case'
       Checked = True
       State = cbChecked
       TabOrder = 8
@@ -107,7 +107,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' DBMS'
+      Caption = 'DBMS'
       Checked = True
       State = cbChecked
       TabOrder = 2
@@ -122,7 +122,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Transaction'
+      Caption = 'Transaction'
       Checked = True
       State = cbChecked
       TabOrder = 1
@@ -137,7 +137,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Tools'
+      Caption = 'Tools'
       Checked = True
       State = cbChecked
       TabOrder = 12
@@ -152,7 +152,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Mode'
+      Caption = 'Mode'
       Checked = True
       State = cbChecked
       TabOrder = 11
@@ -167,7 +167,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Search'
+      Caption = 'Search'
       Checked = True
       State = cbChecked
       TabOrder = 10
@@ -182,7 +182,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Command'
+      Caption = 'Command'
       Checked = True
       State = cbChecked
       TabOrder = 9
@@ -197,7 +197,7 @@ inherited OptionsEditorToolBarFrame: TOptionsEditorToolBarFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Explain Plan'
+      Caption = 'Explain Plan'
       Checked = True
       State = cbChecked
       TabOrder = 3

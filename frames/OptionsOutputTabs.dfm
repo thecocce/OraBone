@@ -33,7 +33,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Close Tab by Double Click'
+      Caption = 'Close Tab by Double Click'
       TabOrder = 0
       AutoSize = True
       ReadOnly = False
@@ -47,7 +47,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Close Tab by Middle-Click'
+      Caption = 'Close Tab by Middle-Click'
       TabOrder = 1
       AutoSize = True
       ReadOnly = False
@@ -61,7 +61,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Double Buffered'
+      Caption = 'Double Buffered'
       Checked = True
       State = cbChecked
       TabOrder = 2
@@ -77,7 +77,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Multiline'
+      Caption = 'Multiline'
       TabOrder = 3
       AutoSize = True
       ReadOnly = False
@@ -91,7 +91,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Show Close Button'
+      Caption = 'Show Close Button'
       TabOrder = 4
       AutoSize = True
       ReadOnly = False
@@ -105,7 +105,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Show Image'
+      Caption = 'Show Image'
       TabOrder = 5
       AutoSize = True
       ReadOnly = False
@@ -119,7 +119,7 @@ inherited OptionsOutputTabsFrame: TOptionsOutputTabsFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Right Click Select'
+      Caption = 'Right Click Select'
       Checked = True
       State = cbChecked
       TabOrder = 6

@@ -194,7 +194,7 @@ object SchemaCompareForm: TSchemaCompareForm
     Margins.Right = 4
     Margins.Bottom = 4
     Anchors = [akLeft, akTop, akRight]
-    Caption = ' Schemas '
+    Caption = 'Schemas '
     TabOrder = 2
     DesignSize = (
       661
@@ -252,14 +252,14 @@ object SchemaCompareForm: TSchemaCompareForm
     Margins.Right = 4
     Margins.Bottom = 4
     Anchors = [akLeft, akTop, akBottom]
-    Caption = ' Compared Objects '
+    Caption = 'Compared Objects '
     TabOrder = 3
     object TablesCheckBox: TBCCheckBox
       Left = 12
       Top = 18
       Width = 53
       Height = 15
-      Caption = ' Tables'
+      Caption = 'Tables'
       Checked = True
       State = cbChecked
       TabOrder = 0
@@ -271,7 +271,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 42
       Width = 49
       Height = 15
-      Caption = ' Views'
+      Caption = 'Views'
       Checked = True
       State = cbChecked
       TabOrder = 1
@@ -283,7 +283,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 66
       Width = 68
       Height = 15
-      Caption = ' Functions'
+      Caption = 'Functions'
       Checked = True
       State = cbChecked
       TabOrder = 2
@@ -295,7 +295,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 90
       Width = 76
       Height = 15
-      Caption = ' Procedures'
+      Caption = 'Procedures'
       Checked = True
       State = cbChecked
       TabOrder = 3
@@ -307,7 +307,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 114
       Width = 67
       Height = 15
-      Caption = ' Packages'
+      Caption = 'Packages'
       Checked = True
       State = cbChecked
       TabOrder = 4
@@ -319,7 +319,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 137
       Width = 61
       Height = 15
-      Caption = ' Triggers'
+      Caption = 'Triggers'
       Checked = True
       State = cbChecked
       TabOrder = 5
@@ -331,7 +331,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 161
       Width = 77
       Height = 15
-      Caption = ' Constraints'
+      Caption = 'Constraints'
       Checked = True
       State = cbChecked
       TabOrder = 6
@@ -343,7 +343,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 185
       Width = 61
       Height = 15
-      Caption = ' Indexes'
+      Caption = 'Indexes'
       Checked = True
       State = cbChecked
       TabOrder = 7
@@ -355,7 +355,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 209
       Width = 74
       Height = 15
-      Caption = ' Sequences'
+      Caption = 'Sequences'
       Checked = True
       State = cbChecked
       TabOrder = 8
@@ -367,7 +367,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 233
       Width = 71
       Height = 15
-      Caption = ' Synonyms'
+      Caption = 'Synonyms'
       Checked = True
       State = cbChecked
       TabOrder = 9
@@ -379,7 +379,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 257
       Width = 61
       Height = 15
-      Caption = ' DB Links'
+      Caption = 'DB Links'
       Checked = True
       State = cbChecked
       TabOrder = 10
@@ -391,7 +391,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 281
       Width = 101
       Height = 15
-      Caption = ' Table Comments'
+      Caption = 'Table Comments'
       Checked = True
       State = cbChecked
       TabOrder = 11
@@ -403,7 +403,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 305
       Width = 92
       Height = 15
-      Caption = ' Column Names'
+      Caption = 'Column Names'
       Checked = True
       State = cbChecked
       TabOrder = 12
@@ -415,7 +415,7 @@ object SchemaCompareForm: TSchemaCompareForm
       Top = 328
       Width = 110
       Height = 15
-      Caption = ' Column Comments'
+      Caption = 'Column Comments'
       Checked = True
       State = cbChecked
       TabOrder = 13

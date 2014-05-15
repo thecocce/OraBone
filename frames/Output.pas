@@ -1025,6 +1025,11 @@ begin
         VirtualDrawTree.TreeOptions.PaintOptions := VirtualDrawTree.TreeOptions.PaintOptions - [toShowTreeLines]
     end;
   end;
+
+  CopySelectedToClipboardAction.Visible := OptionsContainer.OutputShowCheckBox;
+  OpenSelectedAction.Visible := OptionsContainer.OutputShowCheckBox;
+  SelectAllAction.Visible := OptionsContainer.OutputShowCheckBox;
+  UnselectAllAction.Visible := OptionsContainer.OutputShowCheckBox;
 end;
 
 procedure TOutputFrame.UpdateControls;

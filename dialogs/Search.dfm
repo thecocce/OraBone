@@ -49,7 +49,7 @@ object SearchDialog: TSearchDialog
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    Caption = ' Options '
+    Caption = 'Options '
     TabOrder = 1
     object CaseSensitiveCheckBox: TCheckBox
       Left = 10
@@ -85,7 +85,7 @@ object SearchDialog: TSearchDialog
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    Caption = ' Direction '
+    Caption = 'Direction '
     ItemIndex = 0
     Items.Strings = (
       'Forward'

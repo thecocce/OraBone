@@ -64,7 +64,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Top = 36
         Width = 53
         Height = 17
-        Caption = ' Public'
+        Caption = 'Public'
         Checked = True
         TabOrder = 1
         TabStop = True
@@ -74,7 +74,7 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
         Top = 36
         Width = 113
         Height = 17
-        Caption = ' Private'
+        Caption = 'Private'
         TabOrder = 2
       end
       object ObjectOwnerComboBox: TBCComboBox

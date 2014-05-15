@@ -111,14 +111,14 @@ object DataSortDialog: TDataSortDialog
         Top = 24
         Width = 63
         Height = 66
-        Caption = ' Order '
+        Caption = 'Order '
         TabOrder = 0
         object AscRadioButton: TRadioButton
           Left = 8
           Top = 20
           Width = 50
           Height = 17
-          Caption = ' Asc'
+          Caption = 'Asc'
           Checked = True
           TabOrder = 0
           TabStop = True
@@ -128,7 +128,7 @@ object DataSortDialog: TDataSortDialog
           Top = 42
           Width = 50
           Height = 17
-          Caption = ' Desc'
+          Caption = 'Desc'
           TabOrder = 1
         end
       end
@@ -137,14 +137,14 @@ object DataSortDialog: TDataSortDialog
         Top = 93
         Width = 63
         Height = 66
-        Caption = ' Nulls '
+        Caption = 'Nulls '
         TabOrder = 1
         object FirstRadioButton: TRadioButton
           Left = 8
           Top = 20
           Width = 50
           Height = 17
-          Caption = ' First'
+          Caption = 'First'
           Checked = True
           TabOrder = 0
           TabStop = True
@@ -154,7 +154,7 @@ object DataSortDialog: TDataSortDialog
           Top = 42
           Width = 50
           Height = 17
-          Caption = ' Last'
+          Caption = 'Last'
           TabOrder = 1
         end
       end

@@ -19,14 +19,14 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         Width = 303
         Height = 72
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' Grant '
+        Caption = 'Grant '
         TabOrder = 0
         object DeleteCheckBox: TBCCheckBox
           Left = 236
           Top = 20
           Width = 58
           Height = 15
-          Caption = ' DELETE'
+          Caption = 'DELETE'
           TabOrder = 3
           AutoSize = True
           ReadOnly = False
@@ -36,7 +36,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 20
           Width = 58
           Height = 15
-          Caption = ' SELECT'
+          Caption = 'SELECT'
           TabOrder = 0
           AutoSize = True
           ReadOnly = False
@@ -46,7 +46,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 20
           Width = 58
           Height = 15
-          Caption = ' INSERT'
+          Caption = 'INSERT'
           TabOrder = 1
           AutoSize = True
           ReadOnly = False
@@ -56,7 +56,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 20
           Width = 61
           Height = 15
-          Caption = ' UPDATE'
+          Caption = 'UPDATE'
           TabOrder = 2
           AutoSize = True
           ReadOnly = False
@@ -66,7 +66,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 43
           Width = 66
           Height = 15
-          Caption = ' EXECUTE'
+          Caption = 'EXECUTE'
           TabOrder = 4
           AutoSize = True
           ReadOnly = False
@@ -76,7 +76,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 43
           Width = 53
           Height = 15
-          Caption = ' ALTER'
+          Caption = 'ALTER'
           TabOrder = 5
           AutoSize = True
           ReadOnly = False
@@ -86,7 +86,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 43
           Width = 55
           Height = 15
-          Caption = ' DEBUG'
+          Caption = 'DEBUG'
           TabOrder = 6
           AutoSize = True
           ReadOnly = False
@@ -98,7 +98,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         Width = 303
         Height = 52
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' On '
+        Caption = 'On '
         TabOrder = 1
         object OnEdit: TBCEdit
           Left = 12
@@ -123,14 +123,14 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         Width = 303
         Height = 96
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' To '
+        Caption = 'To '
         TabOrder = 2
         object UserRadioButton: TRadioButton
           Left = 12
           Top = 22
           Width = 113
           Height = 17
-          Caption = ' User'
+          Caption = 'User'
           Checked = True
           TabOrder = 0
           TabStop = True
@@ -140,7 +140,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 45
           Width = 113
           Height = 17
-          Caption = ' Role'
+          Caption = 'Role'
           TabOrder = 1
         end
         object PublicRadioButton: TRadioButton
@@ -148,7 +148,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
           Top = 68
           Width = 113
           Height = 17
-          Caption = ' Public'
+          Caption = 'Public'
           TabOrder = 2
         end
         object UserComboBox: TBCComboBox
@@ -178,7 +178,7 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         Width = 84
         Height = 15
         Anchors = [akLeft, akBottom]
-        Caption = ' Grant Option'
+        Caption = 'Grant Option'
         TabOrder = 3
         AutoSize = True
         ReadOnly = False

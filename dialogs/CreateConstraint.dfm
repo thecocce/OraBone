@@ -351,7 +351,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 32
     Width = 77
     Height = 17
-    Caption = ' Primary Key'
+    Caption = 'Primary Key'
     Checked = True
     TabOrder = 1
     TabStop = True
@@ -362,7 +362,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 32
     Width = 81
     Height = 17
-    Caption = ' Foreign Key'
+    Caption = 'Foreign Key'
     TabOrder = 2
     OnClick = PageControlChange
   end
@@ -371,7 +371,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 32
     Width = 52
     Height = 17
-    Caption = ' Check'
+    Caption = 'Check'
     TabOrder = 3
     OnClick = PageControlChange
   end
@@ -380,7 +380,7 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 32
     Width = 52
     Height = 17
-    Caption = ' Unique'
+    Caption = 'Unique'
     TabOrder = 4
     OnClick = PageControlChange
   end

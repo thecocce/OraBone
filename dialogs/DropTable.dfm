@@ -56,7 +56,7 @@ object DropTableDialog: TDropTableDialog
       Top = 51
       Width = 121
       Height = 15
-      Caption = ' Cascade Constraints'
+      Caption = 'Cascade Constraints'
       TabOrder = 0
       AutoSize = True
       ReadOnly = False
@@ -66,7 +66,7 @@ object DropTableDialog: TDropTableDialog
       Top = 51
       Width = 50
       Height = 15
-      Caption = ' Purge'
+      Caption = 'Purge'
       TabOrder = 1
       AutoSize = True
       ReadOnly = False

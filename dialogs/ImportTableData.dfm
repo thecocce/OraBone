@@ -33,7 +33,7 @@ object ImportTableDataDialog: TImportTableDataDialog
       Width = 321
       Height = 161
       Align = alClient
-      Caption = ' Options '
+      Caption = 'Options '
       TabOrder = 0
       object SchemaLabel: TLabel
         Left = 12
@@ -268,7 +268,7 @@ object ImportTableDataDialog: TImportTableDataDialog
       Width = 321
       Height = 112
       Align = alClient
-      Caption = ' Output '
+      Caption = 'Output '
       TabOrder = 0
       object JvSpeedButton2: TJvSpeedButton
         Left = 291
@@ -335,7 +335,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Top = 20
         Width = 113
         Height = 17
-        Caption = ' File'
+        Caption = 'File'
         Checked = True
         TabOrder = 0
         TabStop = True
@@ -345,7 +345,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Top = 58
         Width = 113
         Height = 17
-        Caption = ' Clipboard'
+        Caption = 'Clipboard'
         TabOrder = 2
       end
       object LaunchAfterCreationCheckBox: TBCCheckBox
@@ -353,7 +353,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Top = 41
         Width = 128
         Height = 15
-        Caption = ' Launch After Creation'
+        Caption = 'Launch After Creation'
         TabOrder = 1
         AutoSize = True
         ReadOnly = False
@@ -363,7 +363,7 @@ object ImportTableDataDialog: TImportTableDataDialog
         Top = 80
         Width = 113
         Height = 17
-        Caption = ' Load in Editor'
+        Caption = 'Load in Editor'
         TabOrder = 3
       end
       object SaveFilenameEdit: TBCEdit

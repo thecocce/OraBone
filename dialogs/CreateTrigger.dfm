@@ -55,7 +55,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
         Width = 332
         Height = 45
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' When '
+        Caption = 'When '
         Columns = 2
         DoubleBuffered = False
         ItemIndex = 0
@@ -71,7 +71,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
         Width = 332
         Height = 45
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' On '
+        Caption = 'On '
         TabOrder = 1
         DesignSize = (
           332
@@ -82,7 +82,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Width = 53
           Height = 15
           Anchors = [akTop]
-          Caption = ' Delete'
+          Caption = 'Delete'
           TabOrder = 0
           AutoSize = True
           ReadOnly = False
@@ -92,7 +92,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Top = 20
           Width = 51
           Height = 15
-          Caption = ' Insert'
+          Caption = 'Insert'
           TabOrder = 1
           AutoSize = True
           ReadOnly = False
@@ -103,7 +103,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Width = 57
           Height = 15
           Anchors = [akTop, akRight]
-          Caption = ' Update'
+          Caption = 'Update'
           TabOrder = 2
           AutoSize = True
           ReadOnly = False
@@ -115,7 +115,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
         Width = 332
         Height = 77
         Anchors = [akLeft, akTop, akRight]
-        Caption = ' Referencing '
+        Caption = 'Referencing '
         TabOrder = 2
         DesignSize = (
           332

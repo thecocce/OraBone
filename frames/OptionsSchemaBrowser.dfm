@@ -70,7 +70,7 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = ' Show Tree Lines'
+      Caption = 'Show Tree Lines'
       TabOrder = 1
       AutoSize = True
       ReadOnly = False

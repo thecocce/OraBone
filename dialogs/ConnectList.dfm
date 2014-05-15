@@ -52,7 +52,7 @@ object ConnectListDialog: TConnectListDialog
       Width = 54
       Height = 14
       Align = alRight
-      Caption = ' Client'
+      Caption = 'Client'
       Checked = True
       TabOrder = 0
       TabStop = True
@@ -64,7 +64,7 @@ object ConnectListDialog: TConnectListDialog
       Width = 55
       Height = 14
       Align = alRight
-      Caption = ' Direct'
+      Caption = 'Direct'
       TabOrder = 1
       OnClick = RadioButtonClick
     end

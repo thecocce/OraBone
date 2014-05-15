@@ -52,7 +52,7 @@ object DropUserDialog: TDropUserDialog
       Top = 51
       Width = 63
       Height = 15
-      Caption = ' Cascade'
+      Caption = 'Cascade'
       TabOrder = 0
       AutoSize = True
       ReadOnly = False

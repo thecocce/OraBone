@@ -59,7 +59,7 @@ object ExportTableDataDialog: TExportTableDataDialog
       Hint = 'Export selected rows only.'
       Align = alRight
       Alignment = taLeftJustify
-      Caption = ' Selected Rows Only'
+      Caption = 'Selected Rows Only'
       TabOrder = 1
       AutoSize = True
       ReadOnly = False
@@ -123,7 +123,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 138
           Height = 15
           Hint = 'Include column headers.'
-          Caption = ' Include Column Headers'
+          Caption = 'Include Column Headers'
           Checked = True
           State = cbChecked
           TabOrder = 1
@@ -136,7 +136,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 126
           Height = 15
           Hint = 'Quote string columns.'
-          Caption = ' Quote String Columns'
+          Caption = 'Quote String Columns'
           TabOrder = 2
           OnClick = QuotedStringColumnsCheckBoxClick
           AutoSize = True
@@ -147,7 +147,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Top = 81
           Width = 113
           Height = 17
-          Caption = ' Single Quote'
+          Caption = 'Single Quote'
           Enabled = False
           TabOrder = 3
         end
@@ -156,7 +156,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Top = 100
           Width = 113
           Height = 17
-          Caption = ' Double Quote'
+          Caption = 'Double Quote'
           Enabled = False
           TabOrder = 4
         end
@@ -166,7 +166,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 127
           Height = 15
           Hint = 'Include NULL columns.'
-          Caption = ' Include NULL Columns'
+          Caption = 'Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 5
@@ -179,7 +179,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 190
           Height = 15
           Hint = 'Include Delimiter After Last Column'
-          Caption = ' Include Delimiter After Last Column'
+          Caption = 'Include Delimiter After Last Column'
           TabOrder = 6
           AutoSize = True
           ReadOnly = False
@@ -260,7 +260,7 @@ object ExportTableDataDialog: TExportTableDataDialog
           Width = 127
           Height = 15
           Hint = 'Include NULL columns.'
-          Caption = ' Include NULL Columns'
+          Caption = 'Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 3
@@ -311,7 +311,7 @@ object ExportTableDataDialog: TExportTableDataDialog
       Width = 321
       Height = 105
       Align = alClient
-      Caption = ' Output '
+      Caption = 'Output '
       TabOrder = 0
       object BitBtn1: TJvSpeedButton
         Left = 291
@@ -378,7 +378,7 @@ object ExportTableDataDialog: TExportTableDataDialog
         Top = 20
         Width = 113
         Height = 17
-        Caption = ' File'
+        Caption = 'File'
         Checked = True
         TabOrder = 0
         TabStop = True
@@ -388,7 +388,7 @@ object ExportTableDataDialog: TExportTableDataDialog
         Top = 58
         Width = 113
         Height = 17
-        Caption = ' Clipboard'
+        Caption = 'Clipboard'
         TabOrder = 3
       end
       object LaunchAfterCreationCheckBox: TBCCheckBox
@@ -396,7 +396,7 @@ object ExportTableDataDialog: TExportTableDataDialog
         Top = 41
         Width = 128
         Height = 15
-        Caption = ' Launch After Creation'
+        Caption = 'Launch After Creation'
         TabOrder = 2
         AutoSize = True
         ReadOnly = False
@@ -406,7 +406,7 @@ object ExportTableDataDialog: TExportTableDataDialog
         Top = 80
         Width = 113
         Height = 17
-        Caption = ' Load in Editor'
+        Caption = 'Load in Editor'
         TabOrder = 4
       end
       object FilenameEdit: TBCEdit

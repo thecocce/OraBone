@@ -162,7 +162,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Top = 32
     Width = 81
     Height = 17
-    Caption = ' Unique'
+    Caption = 'Unique'
     Checked = True
     TabOrder = 4
     TabStop = True
@@ -173,7 +173,7 @@ inherited CreateIndexDialog: TCreateIndexDialog
     Top = 32
     Width = 81
     Height = 17
-    Caption = ' Non-unique'
+    Caption = 'Non-unique'
     TabOrder = 5
     OnClick = PageControlChange
   end
