@@ -9,6 +9,8 @@ uses
   BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions, BCCommon.Images;
 
 type
+  TOpenAllEvent = procedure(var FileNames: TStrings);
+
   TOutputFrame = class(TFrame)
     ClearDBMSOutputAction: TAction;
     OutputActionList: TActionList;
@@ -17,7 +19,12 @@ type
     OutputCloseAllOtherPagesAction: TAction;
     PageControl: TBCPageControl;
     PopupMenu: TBCPopupMenu;
-    CopyToClipboardAction: TAction;
+    CopyAllToClipboardAction: TAction;
+    CopySelectedToClipboardAction: TAction;
+    OpenAllAction: TAction;
+    OpenSelectedAction: TAction;
+    SelectAllAction: TAction;
+    UnselectAllAction: TAction;
     procedure ClearDBMSOutputActionExecute(Sender: TObject);
     procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -33,14 +40,20 @@ type
     procedure VirtualDrawTreeGetNodeWidth(Sender: TBaseVirtualTree; HintCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex; var NodeWidth: Integer);
     procedure PageControlCloseButtonClick(Sender: TObject);
     procedure PageControlDblClick(Sender: TObject);
-    procedure CopyToClipboardActionExecute(Sender: TObject);
+    procedure CopyAllToClipboardActionExecute(Sender: TObject);
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure CopySelectedToClipboardActionExecute(Sender: TObject);
+    procedure OpenAllActionExecute(Sender: TObject);
+    procedure OpenSelectedActionExecute(Sender: TObject);
+    procedure SelectAllActionExecute(Sender: TObject);
+    procedure UnselectAllActionExecute(Sender: TObject);
   private
     { Private declarations }
     FCancelSearch: Boolean;
     FProcessingTabSheet: Boolean;
     FProcessingPage: TTabSheet;
     FTabsheetDblClick: TNotifyEvent;
+    FOpenAll: TOpenAllEvent;
     function CheckCancel: Boolean;
     function GetCount: Integer;
     function GetDataGrid(TabCaption: string): TBCDBGrid;
@@ -50,11 +63,14 @@ type
     function GetSynEdit(TabCaption: string): TBCSynEdit;
     function GetVirtualDrawTree: TVirtualDrawTree;
     function TabFound(TabCaption: string): Boolean;
+    procedure CopyFilesToClipboard(OnlySelected: Boolean = False);
     procedure SetProcessingTabSheet(Value: Boolean);
     procedure SetRows(TabCaption: string);
     procedure SetTime(TabCaption: string; Time: string);
     procedure UpdatePopupMenu;
     procedure CopyTreeToClipboard;
+    procedure OpenFiles(OnlySelected: Boolean = False);
+    procedure SetCheckedState(Value: TCheckState);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -79,6 +95,7 @@ type
     property IsAnyOutput: Boolean read GetIsAnyOutput;
     property IsEmpty: Boolean read GetIsEmpty;
     property OnTabsheetDblClick: TNotifyEvent read FTabsheetDblClick write FTabsheetDblClick;
+    property OnOpenAll: TOpenAllEvent read FOpenAll write FOpenAll;
     property ProcessingTabSheet: Boolean read FProcessingTabSheet write SetProcessingTabSheet;
     property CancelSearch: Boolean read FCancelSearch write FCancelSearch;
   end;
@@ -97,6 +114,16 @@ begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
   PopupMenu.Images := ImagesDataModule.ImageList;
+end;
+
+procedure TOutputFrame.OpenAllActionExecute(Sender: TObject);
+begin
+  OpenFiles;
+end;
+
+procedure TOutputFrame.OpenSelectedActionExecute(Sender: TObject);
+begin
+  OpenFiles(True);
 end;
 
 procedure TOutputFrame.OutputCloseActionExecute(Sender: TObject);
@@ -135,51 +162,44 @@ end;
 procedure TOutputFrame.UpdatePopupMenu;
 var
   MenuItem: TMenuItem;
+
+  procedure AddMenuItem(Action: TAction; ACaption: TCaption = '');
+  begin
+    MenuItem := TMenuItem.Create(PopupMenu);
+    if Assigned(Action) then
+      MenuItem.Action := Action;
+    if ACaption <> '' then
+      MenuItem.Caption := ACaption;
+    PopupMenu.Items.Add(MenuItem);
+  end;
+
 begin
   PopupMenu.Items.Clear;
-  { close }
-  MenuItem := TMenuItem.Create(PopupMenu);
-  MenuItem.Action := OutputCloseAction;
-  PopupMenu.Items.Add(MenuItem);
-  { close all }
-  MenuItem := TMenuItem.Create(PopupMenu);
-  MenuItem.Action := OutputCloseAllAction;
-  PopupMenu.Items.Add(MenuItem);
-  { close all other pages }
-  MenuItem := TMenuItem.Create(PopupMenu);
-  MenuItem.Action := OutputCloseAllOtherPagesAction;
-  PopupMenu.Items.Add(MenuItem);
+  AddMenuItem(OutputCloseAction);
+  AddMenuItem(OutputCloseAllAction);
+  AddMenuItem(OutputCloseAllOtherPagesAction);
 
   if Pos('Search for', PageControl.ActivePageCaption) = 1 then
   begin
-    { copy to clipboard }
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Action := CopyToClipboardAction;
-    PopupMenu.Items.Add(MenuItem);
-    { separator }
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Caption := '-';
-    PopupMenu.Items.Add(MenuItem);
+    AddMenuItem(nil, '-');
+    AddMenuItem(CopyAllToClipboardAction);
+    AddMenuItem(CopySelectedToClipboardAction);
+    AddMenuItem(nil, '-');
+    AddMenuItem(OpenAllAction);
+    AddMenuItem(OpenSelectedAction);
+    AddMenuItem(nil, '-');
+    AddMenuItem(SelectAllAction);
+    AddMenuItem(UnselectAllAction);
   end;
-
   if Pos('Data:', PageControl.ActivePageCaption) = 1 then
   begin
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Caption := '-';
-    PopupMenu.Items.Add(MenuItem);
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Action := MainForm.DatabaseExportTableDataAction;
-    MenuItem.Caption := '&Export Table Data...';
-    PopupMenu.Items.Add(MenuItem);
+    AddMenuItem(nil, '-');
+    AddMenuItem(MainForm.DatabaseExportTableDataAction, '&Export Table Data...');
   end;
   if Pos('DBMS output:', PageControl.ActivePageCaption) = 1 then
   begin
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Caption := '-';
-    PopupMenu.Items.Add(MenuItem);
-    MenuItem := TMenuItem.Create(PopupMenu);
-    MenuItem.Action := ClearDBMSOutputAction;
-    PopupMenu.Items.Add(MenuItem);
+    AddMenuItem(nil, '-');
+    AddMenuItem(ClearDBMSOutputAction);
   end;
 end;
 
@@ -680,6 +700,11 @@ begin
   SynEdit.Text := ''
 end;
 
+procedure TOutputFrame.SelectAllActionExecute(Sender: TObject);
+begin
+  SetCheckedState(csCheckedNormal);
+end;
+
 function TOutputFrame.SelectedLine(var Filename: string; var Ln: LongWord; var Ch: LongWord): Boolean;
 var
   Node: PVirtualNode;
@@ -855,9 +880,14 @@ begin
   end;
 end;
 
-procedure TOutputFrame.CopyToClipboardActionExecute(Sender: TObject);
+procedure TOutputFrame.CopyAllToClipboardActionExecute(Sender: TObject);
 begin
   CopyTreeToClipboard;
+end;
+
+procedure TOutputFrame.CopySelectedToClipboardActionExecute(Sender: TObject);
+begin
+  CopyFilesToClipboard(True);
 end;
 
 procedure TOutputFrame.VirtualDrawTreeDrawNode(Sender: TBaseVirtualTree;
@@ -1032,6 +1062,11 @@ begin
   UnselectAllAction.Visible := OptionsContainer.OutputShowCheckBox;
 end;
 
+procedure TOutputFrame.UnselectAllActionExecute(Sender: TObject);
+begin
+  SetCheckedState(csUncheckedNormal);
+end;
+
 procedure TOutputFrame.UpdateControls;
 var
   i, Right: Integer;
@@ -1073,6 +1108,93 @@ begin
       else
       if PageControl.Pages[i].Components[0] is TOutputTreeViewFrame then
         TOutputTreeViewFrame(PageControl.Pages[i].Components[0]).Panel.Padding.Right := Right
+    end;
+  end;
+end;
+
+procedure TOutputFrame.OpenFiles(OnlySelected: Boolean);
+var
+  FileNames: TStrings;
+
+  procedure GetFileNames;
+  var
+    OutputTreeView: TVirtualDrawTree;
+    Node: PVirtualNode;
+    Data: POutputRec;
+  begin
+    OutputTreeView := GetVirtualDrawTree;
+    Node := OutputTreeView.GetFirst;
+    while Assigned(Node) do
+    begin
+      if not OnlySelected or OnlySelected and (OutputTreeView.CheckState[Node] = csCheckedNormal) then
+      begin
+        Data := OutputTreeView.GetNodeData(Node);
+        FileNames.Add(Data.FileName);
+      end;
+      Node := Node.NextSibling;
+    end;
+  end;
+
+begin
+  if Assigned(FOpenAll) then
+  begin
+    FileNames := TStringList.Create;
+    try
+      GetFileNames;
+      FOpenAll(FileNames);
+    finally
+      FileNames.Free;
+    end;
+  end;
+end;
+
+procedure TOutputFrame.SetCheckedState(Value: TCheckState);
+var
+  OutputTreeView: TVirtualDrawTree;
+  Node: PVirtualNode;
+begin
+  OutputTreeView := GetVirtualDrawTree;
+  Node := OutputTreeView.GetFirst;
+  while Assigned(Node) do
+  begin
+    OutputTreeView.CheckState[Node] := Value;
+    Node := Node.NextSibling;
+  end;
+end;
+
+procedure TOutputFrame.CopyFilesToClipboard(OnlySelected: Boolean);
+var
+  OutputTreeView: TVirtualDrawTree;
+  Node, ChildNode: PVirtualNode;
+  Data, ChildData: POutputRec;
+  StringList: TStrings;
+begin
+  OutputTreeView := GetVirtualDrawTree;
+  if Assigned(OutputTreeView) then
+  begin
+    StringList := TStringList.Create;
+    try
+      Node := OutputTreeView.GetFirst;
+      while Assigned(Node) do
+      begin
+        if not OnlySelected or OnlySelected and (OutputTreeView.CheckState[Node] = csCheckedNormal) then
+        begin
+          Data := OutputTreeView.GetNodeData(Node);
+          StringList.Add(Data.FileName);
+          ChildNode := Node.FirstChild;
+          while Assigned(ChildNode) do
+          begin
+            ChildData := OutputTreeView.GetNodeData(ChildNode);
+            StringList.Add(System.SysUtils.Format('  %s (%d, %d): %s', [ExtractFilename(String(ChildData.Filename)),
+              ChildData.Ln, ChildData.Ch, ChildData.Text]));
+            ChildNode := ChildNode.NextSibling;
+          end;
+        end;
+        Node := Node.NextSibling;
+      end;
+    finally
+      Clipboard.AsText := StringList.Text;
+      StringList.Free;
     end;
   end;
 end;

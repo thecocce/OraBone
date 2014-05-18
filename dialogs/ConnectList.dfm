@@ -138,7 +138,7 @@ object ConnectListDialog: TConnectListDialog
           MinWidth = 100
           Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 0
-          Width = 134
+          Width = 138
           WideText = 'Profile'
         end
         item
@@ -273,7 +273,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

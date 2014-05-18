@@ -11,7 +11,7 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
   BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
   SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls, BCControls.ButtonedEdit,
-  System.Contnrs;
+  System.Contnrs, JvExStdCtrls, JvCheckBox;
 
 type
   TSQLEditorFrame = class(TFrame)
@@ -432,6 +432,7 @@ begin
   FOutputFrame := TOutputFrame.Create(OutputPanel);
   FOutputFrame.Parent := OutputPanel;
   FOutputFrame.OnTabsheetDblClick := OutputDblClickActionExecute;
+  FOutputFrame.OnOpenAll := OutputOpenAllEvent;
   FFoundSearchItems := TObjectList.Create;
   { IDE can lose these, if the main form is not open }
   EditorPopupMenu.Images := ImagesDataModule.ImageList;
@@ -2076,11 +2077,11 @@ begin
         begin
           if FileExists(SynEdit.DocumentName) then
           begin
+            PageControl.TabClosed := True; { just to avoid begin drag }
             if not (DialogResult in [mrYesToAll, mrNoToAll]) then
               DialogResult := AskYesOrNoAll(Format(LanguageDataModule.GetYesOrNoMessage('DocumentTimeChanged'), [SynEdit.DocumentName]));
             if DialogResult in [mrYes, mrYesToAll] then
               Refresh(i);
-            PageControl.TabClosed := True; { just to avoid begin drag }
           end
           else
           begin

@@ -313,6 +313,8 @@ type
     property ProgressBar: TBCProgressBar read FProgressBar write FProgressBar;
   end;
 
+  procedure OutputOpenAllEvent(var FileNames: TStrings);
+
 var
   MainForm: TMainForm;
 
@@ -334,6 +336,29 @@ const
   MAIN_CAPTION_TAB = MAIN_CAPTION_HYPHEN + '[%s';
   MAIN_CAPTION_CLOSE = ']';
   MAIN_CAPTION_VERSION = 'Oracle Version ';
+
+procedure OutputOpenAllEvent(var FileNames: TStrings);
+var
+  i, j: Integer;
+  SQLEditorFrame: TSQLEditorFrame;
+begin
+  SQLEditorFrame := MainForm.GetActiveSQLEditor;
+  if Assigned(SQLEditorFrame) then
+  Screen.Cursor := crHourGlass;
+  try
+    j := FileNames.Count;
+    MainForm.ProgressBar.Count := j;
+    MainForm.ProgressBar.Show;
+    for i := 0 to j - 1 do
+    begin
+      MainForm.ProgressBar.StepIt;
+      SQLEditorFrame.Open(FileNames.Strings[i]);
+    end;
+    MainForm.ProgressBar.Hide;
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
 
 procedure TMainForm.HelpAboutMenuActionExecute(Sender: TObject);
 begin
@@ -1501,6 +1526,7 @@ var
       end;
   end;
 begin
+  FOnProgress := True;
   OraSession := nil;
 
   ActionList := GetActionList;
@@ -1553,6 +1579,7 @@ begin
     if Assigned(ActionList) then
       ActionList.Free;
   end;
+  FOnProgress := False;
 end;
 
 procedure TMainForm.ToolsSelectForCompareActionExecute(Sender: TObject);
@@ -2783,7 +2810,11 @@ begin
     end;
   except
     on E: Exception do
+    begin
       ShowErrorMessage(E.Message);
+      SchemaBrowserFrame.Free;
+      TabSheet.Free;
+    end;
   end;
   Screen.Cursor := crDefault;
   FConnecting := False;
