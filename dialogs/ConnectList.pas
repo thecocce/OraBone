@@ -268,6 +268,13 @@ begin
     Left := SetFormInsideWorkArea(Left, Width);
     ReadSectionValues(SECTION_CONNECTIONS, Connections);
     ReadSectionValues(SECTION_CONNECTIONPROFILES, ConnectionProfiles);
+    {}
+    Node := VirtualDrawTree.GetFirst;
+    while Assigned(Node) do
+    begin
+      VirtualDrawTree.DeleteNode(Node);
+      Node := VirtualDrawTree.GetFirst;
+    end;
     for i := 0 to Connections.Count - 1 do
     begin
       Node := VirtualDrawTree.AddChild(nil);
@@ -388,7 +395,7 @@ begin
     Profile := Data.Profile;
     Username := Data.Username;
     Password := Data.Password;
-    Database := Data.Database;
+    Database := StringReplace(Data.Database, '.WORLD', '', [rfIgnoreCase]);
     HomeName := Data.HomeName;
     if Open(False) then
     begin

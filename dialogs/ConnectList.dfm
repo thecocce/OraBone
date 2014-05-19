@@ -119,7 +119,7 @@ object ConnectListDialog: TConnectListDialog
       Header.Font.Name = 'Tahoma'
       Header.Font.Style = []
       Header.Height = 20
-      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible, hoAutoSpring]
+      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible, hoAutoSpring, hoHeaderClickAutoSort]
       Images = ImagesDataModule.ImageList
       ParentCtl3D = False
       TabOrder = 0
@@ -138,7 +138,7 @@ object ConnectListDialog: TConnectListDialog
           MinWidth = 100
           Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
           Position = 0
-          Width = 138
+          Width = 134
           WideText = 'Profile'
         end
         item
@@ -273,7 +273,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

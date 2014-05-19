@@ -2787,7 +2787,7 @@ begin
       Found := 0;
       for i := 0 to PageControl.PageCount - 1 do
         if (PageControl.Pages[i].ImageIndex = IMAGE_INDEX_SCHEMA_BROWSER) and
-           (Schema = Trim(PageControl.Pages[i].Caption)) then
+          (Pos(Schema, Trim(PageControl.Pages[i].Caption)) = 1) then
           Inc(Found);
 
       TabSheet.Caption := Schema;

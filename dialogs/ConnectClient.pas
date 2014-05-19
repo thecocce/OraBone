@@ -191,7 +191,7 @@ end;
 procedure TConnectClientDialog.SetDatabase(Value: string);
 begin
   FillDatabaseCombo;
-  DatabaseComboBox.ItemIndex := DatabaseComboBox.Items.IndexOf(Value)
+  DatabaseComboBox.ItemIndex := DatabaseComboBox.Items.IndexOf(Value);
 end;
 
 procedure TConnectClientDialog.SetHomeName(Value: string);

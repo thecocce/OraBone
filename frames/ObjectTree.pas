@@ -764,7 +764,7 @@ begin
       Application.ProcessMessages;
       Screen.Cursor := crSQLWait;
       OraSession.Connect;
-
+      Result := True;
       ObjectsQuery.Session := OraSession;
       InvalidObjectsQuery.Session := OraSession;
       RecycleBinQuery.Session := OraSession;
@@ -775,7 +775,6 @@ begin
     except
       Result := False;
     end;
-    Result := True;
   finally
     Screen.Cursor := crDefault;
   end;
@@ -1339,12 +1338,12 @@ end;
 
 procedure TObjectTreeFrame.Disconnect;
 begin
+  FTreeObjects.Free;
   if OraSession.Connected then
   try
-    FTreeObjects.Free;
     OraSession.Disconnect;
   except
-
+    { silent }
   end;
 end;
 

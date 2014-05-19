@@ -891,18 +891,20 @@ end;
 
 function GetServerlist: TStringlist;
 var
+  i: Integer;
   Enum: TOraServerEnumerator;
-  List: TStringList;
 begin
-  List := TStringList.Create;
+  Result := TStringList.Create;
   Enum := TOraServerEnumerator.Create;
   try
-    Enum.GetServerList(List);
+    Enum.GetServerList(Result);
   finally
     Enum.Free;
   end;
-  List.Sort;
-  Result := List;
+  Result.Sort;
+  for i := 0 to Result.Count - 1 do
+    if Pos('.WORLD', Result.Strings[i]) <> 0 then
+      Result.Strings[i] := StringReplace(Result.Strings[i], '.WORLD', '', [rfIgnoreCase]);
 end;
 
 function GetTableOrViewComment(OraSession: TOraSession; SchemaParam: string; ObjectName: string): WideString;
