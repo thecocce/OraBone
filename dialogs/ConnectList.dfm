@@ -119,11 +119,11 @@ object ConnectListDialog: TConnectListDialog
       Header.Font.Name = 'Tahoma'
       Header.Font.Style = []
       Header.Height = 20
-      Header.Options = [hoAutoResize, hoColumnResize, hoShowSortGlyphs, hoVisible, hoAutoSpring, hoHeaderClickAutoSort]
+      Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible, hoAutoSpring, hoHeaderClickAutoSort]
+      Header.SortColumn = 1
       Images = ImagesDataModule.ImageList
       ParentCtl3D = False
       TabOrder = 0
-      TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand]
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning, toEditOnClick]
       TreeOptions.PaintOptions = [toHideFocusRect, toHotTrack, toShowButtons, toShowDropmark, toShowHorzGridLines, toShowVertGridLines, toThemeAware, toUseBlendedSelection]
       TreeOptions.SelectionOptions = [toDisableDrawSelection, toFullRowSelect, toMiddleClickSelect, toRightClickSelect]
@@ -136,28 +136,28 @@ object ConnectListDialog: TConnectListDialog
       Columns = <
         item
           MinWidth = 100
-          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAutoSpring, coAllowFocus]
           Position = 0
-          Width = 134
+          Width = 138
           WideText = 'Profile'
         end
         item
           MinWidth = 100
-          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAutoSpring, coAllowFocus]
           Position = 1
           Width = 133
           WideText = 'User'
         end
         item
           MinWidth = 100
-          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAutoSpring, coAllowFocus]
           Position = 2
           Width = 133
           WideText = 'Database'
         end
         item
           MinWidth = 100
-          Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
+          Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAutoSpring, coAllowFocus]
           Position = 3
           Width = 133
           WideText = 'Home'
@@ -273,7 +273,7 @@ object ConnectListDialog: TConnectListDialog
     Left = 124
     Top = 196
     Bitmap = {
-      494C010103000500100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

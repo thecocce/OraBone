@@ -633,7 +633,6 @@ begin
       OraSynEdit.SetFocus;
     Result := OraSynEdit;
   end;
-  //UpdateMargin(Result);
 end;
 
 procedure TSQLEditorFrame.UpdateMarginsAndControls;

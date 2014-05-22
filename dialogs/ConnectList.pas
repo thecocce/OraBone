@@ -466,8 +466,9 @@ procedure TConnectListDialog.VirtualDrawTreeCompareNodes(Sender: TBaseVirtualTre
   Column: TColumnIndex; var Result: Integer);
 var
   Data1, Data2: PConnectData;
+  Value1, Value2: string;
 begin
-  if Result = 0 then
+  {
   begin
     Data1 := VirtualDrawTree.GetNodeData(Node1);
     Data2 := VirtualDrawTree.GetNodeData(Node2);
@@ -479,7 +480,37 @@ begin
 
     Result := AnsiCompareText(string(Data1.Profile), string(Data2.Profile)) +
       AnsiCompareText(string(Data1.Username), string(Data2.Username));
+  end; }
+  Data1 := VirtualDrawTree.GetNodeData(Node1);
+  Data2 := VirtualDrawTree.GetNodeData(Node2);
+
+  case Column of
+    0:
+      begin
+        Value1 := Data1.Profile;
+        Value2 := Data2.Profile;
+      end;
+    1:
+      begin
+        Value1 := Data1.Username;
+        Value2 := Data2.Username;
+      end;
+    2:
+      begin
+        Value1 := Data1.Database;
+        Value2 := Data2.Database;
+      end;
+    3:
+      begin
+        Value1 := Data1.HomeName;
+        Value2 := Data2.HomeName;
+      end;
   end;
+
+  if (Value1 = '') or (Value2 = '') then
+    Exit;
+
+  Result := AnsiCompareText(Value1, Value2);
 end;
 
 procedure TConnectListDialog.VirtualDrawTreeDblClick(Sender: TObject);
