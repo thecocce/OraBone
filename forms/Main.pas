@@ -703,10 +703,17 @@ begin
         FindWhatComboBox.Text := SynEdit.SelText;
     if ShowModal = mrOk then
     begin
-      ProgressBar.Count := CountFilesInFolder(FolderText);
+      Screen.Cursor := crHourGlass;
+      try
+        StatusBar.Panels[3].Text := LanguageDataModule.GetConstant('CountingFiles');
+        Application.ProcessMessages;
+        ProgressBar.Count := CountFilesInFolder(FolderText);
+      finally
+        Screen.Cursor := crDefault;
+        StatusBar.Panels[3].Text := '';
+      end;
       ProgressBar.Show;
       T1 := Now;
-      Screen.Cursor := crHourGlass;
       try
         SQLEditorFrame.OutputPanel.Visible := True;
         OutputTreeView := SQLEditorFrame.OutputFrame.AddTreeView(Format(LanguageDataModule.GetConstant('SearchFor'), [FindWhatText]));

@@ -2,7 +2,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   ParentBackground = False
@@ -12,7 +12,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     Align = alClient
     BevelOuter = bvNone
     Color = clWindow
@@ -25,7 +25,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Left = 1
       Top = 1
       Width = 450
-      Height = 299
+      Height = 301
       Align = alClient
       ActiveLineColor = clSkyBlue
       CodeFolding.CaseSensitive = False
@@ -51,6 +51,7 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Font.Name = 'Courier New'
       Font.Style = []
       TabOrder = 0
+      OnMouseDown = OraSynEditMouseDown
       Gutter.ShowLineModified = True
       Gutter.LineModifiedColor = clYellow
       Gutter.LineNormalColor = clLime
@@ -67,15 +68,6 @@ object SQLEditorTabSheetFrame: TSQLEditorTabSheetFrame
       Gutter.ShowLineNumbers = True
       Gutter.ShowBookmarks = False
       Gutter.Width = 57
-      Minimap.Font.Charset = DEFAULT_CHARSET
-      Minimap.Font.Color = clWindowText
-      Minimap.Font.Height = -4
-      Minimap.Font.Name = 'Courier New'
-      Minimap.Font.Style = []
-      Minimap.Width = 0
-      Minimap.CharWidth = 2
-      Minimap.CharHeight = 4
-      Minimap.LinesInWindow = 0
       Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSpecialLineDefaultFg, eoTabsToSpaces, eoTrimTrailingSpaces]
       WantTabs = True
       WordWrap.Enabled = False

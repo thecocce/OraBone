@@ -14,6 +14,7 @@ type
     procedure SynCompletionProposalExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: string; var x,
       y: Integer; var CanExecute: Boolean);
     procedure OraSynEditRightEdgeMouseUp(Sender: TObject);
+    procedure OraSynEditMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     function GetMinimapVisible: Boolean;
@@ -30,7 +31,8 @@ implementation
 {$R *.dfm}
 
 uses
-  System.SysUtils, Vcl.Themes, BCCommon.StringUtils, BCCommon.OptionsContainer, BCCommon.StyleUtils, Math;
+  System.SysUtils, Vcl.Themes, BCCommon.StringUtils, BCCommon.OptionsContainer, BCCommon.StyleUtils, Math,
+  SynEditTypes;
 
 const
   TAG_ZERO = 0;
@@ -58,6 +60,17 @@ end;
 function TSQLEditorTabSheetFrame.GetMinimapVisible: Boolean;
 begin
   Result := OraSynEdit.Minimap.Visible;
+end;
+
+procedure TSQLEditorTabSheetFrame.OraSynEditMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  if OptionsContainer.EnableSelectionMode and (eoAltSetsColumnMode in OraSynEdit.Options) then
+  begin
+    OptionsContainer.EnableSelectionMode := False;
+    OraSynEdit.Options := OraSynEdit.Options - [eoAltSetsColumnMode];
+    OraSynEdit.Selectionmode := smNormal;
+  end;
 end;
 
 procedure TSQLEditorTabSheetFrame.OraSynEditRightEdgeMouseUp(Sender: TObject);

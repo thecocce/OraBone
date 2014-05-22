@@ -539,6 +539,7 @@ begin
         SynEdit.ObjectFieldCompletionProposal.Free;
     end;
     SQLEditorTabSheetFrame.Free;
+    TabSheet.Free;
   end;
 end;
 
@@ -628,7 +629,7 @@ begin
 
     Application.ProcessMessages;
     OraSynEdit.Visible := True;
-    if OraSynEdit.CanFocus then
+    if Visible and OraSynEdit.CanFocus then
       OraSynEdit.SetFocus;
     Result := OraSynEdit;
   end;
