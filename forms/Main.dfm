@@ -1765,4 +1765,11 @@ object MainForm: TMainForm
     Left = 212
     Top = 144
   end
+  object Taskbar: TTaskbar
+    TaskBarButtons = <>
+    ProgressMaxValue = 100
+    TabProperties = []
+    Left = 408
+    Top = 235
+  end
 end

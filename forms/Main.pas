@@ -7,7 +7,7 @@ uses
   PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees, ActnMenus, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl, AppEvnts, Menus,
   SQLEditor, SchemaBrowser, BCControls.PopupMenu, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
-  JvDragDrop, System.Actions, BCControls.ProgressBar, BCCommon.Images;
+  JvDragDrop, System.Actions, BCControls.ProgressBar, BCCommon.Images, System.Win.TaskbarCore, Vcl.Taskbar;
 
 const
   { Main menu item indexes }
@@ -163,6 +163,7 @@ type
     DatabaseImportAction: TAction;
     ViewStyleAction: TAction;
     ViewMiniMapAction: TAction;
+    Taskbar: TTaskbar;
     procedure ApplicationEventsActivate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure ApplicationEventsMessage(var Msg: tagMSG; var Handled: Boolean);
@@ -267,6 +268,9 @@ type
     procedure PageControlMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ViewMiniMapActionExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure TaskBarStepChange(Sender: TObject);
+    procedure TaskBarShow(Sender: TObject);
+    procedure TaskBarHide(Sender: TObject);
   private
     { Private declarations }
     FNoIni: Boolean;
@@ -1938,9 +1942,27 @@ begin
   end;
 end;
 
+procedure TMainForm.TaskBarStepChange(Sender: TObject);
+begin
+  Taskbar.ProgressValue := FProgressBar.Position;
+end;
+
+procedure TMainForm.TaskBarShow(Sender: TObject);
+begin
+  Taskbar.ProgressState := TTaskBarProgressState.Normal;
+end;
+
+procedure TMainForm.TaskBarHide(Sender: TObject);
+begin
+  Taskbar.ProgressState := TTaskBarProgressState.None;
+end;
+
 procedure TMainForm.CreateProgressBar;
 begin
   FProgressBar := TBCProgressBar.Create(StatusBar);
+  FProgressBar.OnStepChange := TaskBarStepChange;
+  FProgressBar.OnShow := TaskBarShow;
+  FProgressBar.OnHide := TaskBarHide;
   FProgressBar.Hide;
   ResizeProgressBar;
   FProgressBar.Parent := Statusbar;
