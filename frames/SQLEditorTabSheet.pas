@@ -52,7 +52,7 @@ var
   MaxLengthWord: string;
 begin
   SynCompletionProposal.NbLinesInWindow := 8; { Bug fix }
-  MaxLengthWord := SplitTextIntoWords(SynCompletionProposal, OraSynEdit, OptionsContainer.CompletionProposalCaseSensitive);
+  MaxLengthWord := OraSynEdit.SplitTextIntoWords(SynCompletionProposal, OptionsContainer.CompletionProposalCaseSensitive);
   SynCompletionProposal.Width := OraSynEdit.Canvas.TextWidth(MaxLengthWord) + 40;
   CanExecute := SynCompletionProposal.ItemList.Count > 0;
 end;

@@ -330,7 +330,7 @@ uses
   SchemaDocument, Ora, ObjectSearch, SchemaCompare, TNSNamesEditor, Winapi.ShellAPI, SynUnicode, BCCommon.OptionsContainer,
   System.IOUtils, BCControls.OraSynEdit, BCControls.ToolBar, System.Math, BCCommon.Encoding, BCSQL.Formatter,
   BCCommon.LanguageStrings, BCCommon.StringUtils, BCCommon.Messages, BCCommon.FileUtils, Winapi.CommCtrl,
-  SynEditTextBuffer, System.Generics.Collections, System.UITypes;
+  SynEditTextBuffer, System.Generics.Collections, System.UITypes, BCDialogs.DownloadURL;
 
 {$R *.dfm}
 
