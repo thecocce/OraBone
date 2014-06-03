@@ -2,7 +2,7 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = RecycleBinPageControlChange
     ActivePageCaption = 'Info'
@@ -33,7 +33,7 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -43,7 +43,7 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,7 +64,7 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
       end
       object InfoButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -133,7 +133,7 @@ object RecycleBinBrowserFrame: TRecycleBinBrowserFrame
       OnExecute = RefreshActionExecute
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 92
     Top = 80

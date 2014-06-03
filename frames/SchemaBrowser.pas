@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, TableBrowser, ViewBrowser,
   Vcl.Dialogs, ObjectTree, Vcl.ExtCtrls, JvExExtCtrls, JvSplitter, Vcl.ComCtrls, FuncProcBrowser, PackageBrowser,
   TriggerBrowser, ConstraintBrowser, IndexBrowser, SequenceBrowser, SynonymBrowser, DBLinkBrowser, RecycleBinBrowser,
-  UserBrowser, DBAccess, Ora, Vcl.Menus, Vcl.ActnList, BCControls.PopupMenu, VirtualTrees,
+  UserBrowser, DBAccess, Ora, Vcl.Menus, Vcl.ActnList, VirtualTrees,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions, BCCommon.Images, OraCall, Data.DB;
 
 type
@@ -35,7 +35,7 @@ type
     EnableAllTriggersAction: TAction;
     DisableAllTriggersAction: TAction;
     CreateUserAction: TAction;
-    PopupMenu: TBCPopupMenu;
+    PopupActionBar: TPopupActionBar;
     CustomizeObjectBrowserAction: TAction;
     CreatePackageAction: TAction;
     CreateTableAction: TAction;
@@ -127,7 +127,7 @@ type
     FRecycleBinBrowserFrame: TRecycleBinBrowserFrame;
     FUserBrowserFrame: TUserBrowserFrame;
 
-    procedure FillPopupMenu;
+    procedure FillPopupActionBar;
     function GetDataQueryOpened: Boolean;
   public
     { Public declarations }
@@ -186,7 +186,7 @@ const
 constructor TSchemaBrowserFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  PopupMenu.Images := ImagesDataModule.ImageList;
+  PopupActionBar.Images := ImagesDataModule.ImageList;
   SchemaActionList.Images := ImagesDataModule.ImageList;
   AssignOptions;
 end;
@@ -717,7 +717,7 @@ begin
     end;
     Refresh := ObjectTreeFrame.SetObjectTypeAndName; //(Sender);
     SetFrames(Refresh);
-    //FillPopupMenu;
+    //FillPopupActionBar;
   finally
     ObjectTreeFrame.VirtualDrawTree.Repaint;
     Screen.Cursor := crDefault;
@@ -750,10 +750,10 @@ end;
 procedure TSchemaBrowserFrame.ObjectTreeFrameVirtualDrawTreeMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  FillPopupMenu;
+  FillPopupActionBar;
 end;
 
-procedure TSchemaBrowserFrame.FillPopupMenu;
+procedure TSchemaBrowserFrame.FillPopupActionBar;
 var
   i, Index: Integer;
   InvalidObject: Boolean;
@@ -767,10 +767,10 @@ begin
   CompileAllInvalidObjectsAction.Visible := False;
   CompileInvalidObjectAction.Visible := False;}
 
-  { Popupmenu is filled because setting item visibility won't resize the menu.
+  { PopupActionBar is filled because setting item visibility won't resize the menu.
     So, long menu items will set the menu width long and it looks very stupid when
     those items are not visible. This is problem in Winapi.Windows 7. }
-  PopupMenu.Items.Clear;
+  PopupActionBar.Items.Clear;
 
   if not Assigned(ObjectTreeFrame) then
     Exit;
@@ -797,7 +797,7 @@ begin
     if (Pos(TEXT_RECYCLE_BIN, ObjectText) = 0) and
        (Pos(TEXT_INVALID_OBJECTS, ObjectText) = 0) then
     begin
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
 
       if Pos(TEXT_TABLES, ObjectText) <> 0 then
       begin
@@ -871,15 +871,15 @@ begin
         MenuItem.ImageIndex := IMG_IDX_USER_CREATE;
       end;
       MenuItem.Caption := Format(CAPTION_CREATE, [AnsiInitCap(ObjectType)]);
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
     end;
 
   if Level = 0 then
   begin
    // ObjectType := ObjectTreeFrame.GetSelectedObjectType // TRootNodeData(ObjectTreeFrame.ObjectTreeView.Selected.Data).RootType;
-    MenuItem := TMenuItem.Create(PopupMenu);
+    MenuItem := TMenuItem.Create(PopupActionBar);
     MenuItem.Action := CustomizeObjectBrowserAction;
-    PopupMenu.Items.Add(MenuItem);
+    PopupActionBar.Items.Add(MenuItem);
   end;
 
   { Alter Table/View }
@@ -889,30 +889,30 @@ begin
       if Pos(TEXT_TABLES, ObjectParentText) <> 0 then
       begin
         { Alter Table }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := AlterTableAction;
         MenuItem.Caption := Format(CAPTION_ALTER_TABLE, [ObjectText]);
         MenuItem.Hint := 'Alter/recreate table';
         MenuItem.ImageIndex := IMG_IDX_ALTER_TABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Analyze table }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := AnalyzeTableAction;
         MenuItem.Caption := Format(CAPTION_ANALYZE, [ObjectText]);
         MenuItem.Hint := 'Analyze table';
         MenuItem.ImageIndex := IMG_IDX_ANALYZE_TABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end
       else
       if Pos(TEXT_VIEWS, ObjectParentText) <> 0 then
       begin
         { Alter Table }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := AlterViewAction;
         MenuItem.Caption := Format(CAPTION_ALTER_VIEW, [ObjectText]);
         MenuItem.Hint := 'Alter view';
         MenuItem.ImageIndex := IMG_IDX_ALTER_VIEW;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end
     end;
   { Enable/Disable All Constraints }
@@ -921,15 +921,15 @@ begin
       if Pos(TEXT_ZERO_OBJECTS, ObjectText) = 0 then
       begin
         { Enable }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := EnableAllConstraintsAction;
         MenuItem.ImageIndex := IMG_IDX_ENABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Disable }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := DisableAllConstraintsAction;
         MenuItem.ImageIndex := IMG_IDX_DISABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
 
   { Enable/Disable All Triggers }
@@ -938,15 +938,15 @@ begin
       if Pos(TEXT_ZERO_OBJECTS, ObjectText) = 0 then
       begin
         { Enable }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := EnableAllTriggersAction;
         MenuItem.ImageIndex := IMG_IDX_ENABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Disable }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := DisableAllTriggersAction;
         MenuItem.ImageIndex := IMG_IDX_DISABLE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
 
   { Change user's password }
@@ -954,11 +954,11 @@ begin
     if Level = 1 then
       if Pos(TEXT_USERS, ObjectParentText) <> 0 then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := ChangeUserPasswordAction;
         MenuItem.ImageIndex := IMG_IDX_KEY;
         MenuItem.Caption := Format(CAPTION_CHANGE_PASSWORD, [ObjectText]);
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
 
   if not InvalidObject then
@@ -966,12 +966,12 @@ begin
       if ObjectTreeFrame.GetSelectedObjectStateIndex = 2 then
       begin
         { Compile Invalid Object }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := CompileInvalidObjectAction;
         //MenuItem.Caption := 'Compile Invalid Object';
         //MenuItem.Hint := 'Compile invalid object';
         MenuItem.ImageIndex := IMG_IDX_COMPILE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
 
   { Constraints }
@@ -980,19 +980,19 @@ begin
       if (Pos(TEXT_TABLES, ObjectParentText) <> 0) or
          (Pos(TEXT_VIEWS, ObjectParentText) <> 0)then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Caption := 'Constraints of ' + ObjectText;
         MenuItem.ImageIndex := IMG_IDX_CONSTRAINT_CHILD;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Enable }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := EnableObjectConstraintsAction;
         SubMenuItem.ImageIndex := IMG_IDX_ENABLE;
         SubMenuItem.Caption := 'Enable All';
         SubMenuItem.Hint := 'Enable all constraints';
         MenuItem.Add(SubMenuItem);
         { Disable }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := DisableObjectConstraintsAction;
         SubMenuItem.ImageIndex := IMG_IDX_DISABLE;
         SubMenuItem.Caption := 'Disable All';
@@ -1010,15 +1010,15 @@ begin
          (Pos(TEXT_PACKAGES, ObjectParentText) <> 0) or
          (Pos(TEXT_SEQUENCES, ObjectParentText) <> 0) then
     begin
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
       MenuItem.Caption := 'Create';
       MenuItem.ImageIndex := IMG_IDX_ADD;
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
 
       { Create a constraint for an object }
       if Pos(TEXT_TABLES, ObjectParentText) <> 0 then
        begin
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := CreateConstraintForObjectAction;
         SubMenuItem.Caption := Format(CAPTION_CONSTRAINT, [ObjectText]);
         MenuItem.Add(SubMenuItem);
@@ -1027,7 +1027,7 @@ begin
       { Create an index for an object }
       if Pos(TEXT_TABLES, ObjectParentText) <> 0 then
        begin
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := CreateIndexForObjectAction;
         SubMenuItem.Caption := Format(CAPTION_INDEX, [ObjectText]);
         MenuItem.Add(SubMenuItem);
@@ -1041,7 +1041,7 @@ begin
          (Pos(TEXT_PACKAGES, ObjectParentText) <> 0) or
          (Pos(TEXT_SEQUENCES, ObjectParentText) <> 0) then
        begin
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := CreateSynonymForObjectAction;
         SubMenuItem.Caption := Format(CAPTION_SYNONYM, [ObjectText]);
         MenuItem.Add(SubMenuItem);
@@ -1051,7 +1051,7 @@ begin
       if (Pos(TEXT_TABLES, ObjectParentText) <> 0) or
          (Pos(TEXT_VIEWS, ObjectParentText) <> 0) then
        begin
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := CreateTriggerForObjectAction;
         SubMenuItem.Caption := Format(CAPTION_TRIGGER, [ObjectText]);
         MenuItem.Add(SubMenuItem);
@@ -1063,7 +1063,7 @@ begin
     if (Pos(TEXT_RECYCLE_BIN, ObjectParentText) = 0) and
        (Pos(TEXT_INVALID_OBJECTS,ObjectParentText) = 0) then
     begin
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
       MenuItem.Action := DropAction;
       MenuItem.Caption := Format(CAPTION_DROP, [AnsiInitCap(ObjectType), ObjectText]);
       MenuItem.Hint := 'Drop' + LowerCase(ObjectType);
@@ -1102,7 +1102,7 @@ begin
       else
       if Pos(TEXT_USERS, ObjectParentText) <> 0 then
         MenuItem.ImageIndex := IMG_IDX_USER_DROP;
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
     end;
 
   { Generate Statement }
@@ -1110,23 +1110,23 @@ begin
     if Level = 1 then
       if (Pos(TEXT_TABLES, ObjectParentText) <> 0) then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Caption := 'Generate Statement';
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Select }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := GenerateTableSelectStatementAction;
         MenuItem.Add(SubMenuItem);
         { Insert }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := GenerateInsertStatementAction;
         MenuItem.Add(SubMenuItem);
         { Update }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := GenerateUpdateStatementAction;
         MenuItem.Add(SubMenuItem);
         { Delete }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := GenerateDeleteStatementAction;
         MenuItem.Add(SubMenuItem);
       end;
@@ -1135,11 +1135,11 @@ begin
     if Level = 1 then
       if (Pos(TEXT_VIEWS, ObjectParentText) <> 0) then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Caption := 'Generate Statement';
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Select }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := GenerateViewSelectStatementAction;
         MenuItem.Add(SubMenuItem);
       end;
@@ -1154,10 +1154,10 @@ begin
          (Pos(TEXT_PACKAGES, ObjectParentText) <> 0) or
          (Pos(TEXT_SEQUENCES, ObjectParentText) <> 0) then
        begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := GrantPrivilegesForObjectAction;
         MenuItem.Caption := Format(CAPTION_GRANT, [ObjectText]);
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
 
   { Rename }
@@ -1171,50 +1171,50 @@ begin
          (Pos(TEXT_SEQUENCES, ObjectParentText) <> 0) or
          (Pos(TEXT_SYNONYMS, ObjectParentText) <> 0) then
        begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := RenameObjectAction;
         MenuItem.Caption := Format(CAPTION_RENAME, [AnsiInitCap(ObjectType), ObjectText]);
         MenuItem.Hint := 'Rename an object';
         MenuItem.ImageIndex := IMG_IDX_RENAME;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
    { Purge All Objects }
    if Level = 0 then
     if Pos(TEXT_RECYCLE_BIN, ObjectText) <> 0 then
       if Pos(TEXT_ZERO_OBJECTS, ObjectText) = 0 then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := PurgeAllObjectsAction;
         MenuItem.Caption := 'Purge All Objects';
         MenuItem.Hint := 'Purge all objects';
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
    if Level = 1 then
       if (Pos(TEXT_RECYCLE_BIN, ObjectParentText) <> 0) then
       begin
         { Purge All Objects }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := PurgeAllObjectsAction;
         MenuItem.Caption := 'Purge All Objects';
         MenuItem.Hint := 'Purge all objects';
         MenuItem.ImageIndex := IMG_IDX_PURGE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Purge }
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := PurgeObjectAction;
         MenuItem.Caption := Format(CAPTION_PURGE, [ObjectText]);
         MenuItem.Hint := 'Purge object';
         MenuItem.ImageIndex := IMG_IDX_PURGE;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         if FRecycleBinBrowserFrame.ObjectType = OBJECT_TYPE_TABLE then
         begin
           { Flashback }
-          MenuItem := TMenuItem.Create(PopupMenu);
+          MenuItem := TMenuItem.Create(PopupActionBar);
           MenuItem.Action := FlashbackTableAction;
           MenuItem.Caption := Format(CAPTION_FLASHBACK, [ObjectText]);
           MenuItem.Hint := 'Flashback table';
           MenuItem.ImageIndex := IMG_IDX_FLASHBACK;
-          PopupMenu.Items.Add(MenuItem);
+          PopupActionBar.Items.Add(MenuItem);
         end;
       end;
 
@@ -1224,21 +1224,21 @@ begin
     if (Pos(TEXT_RECYCLE_BIN, ObjectText) = 0) and
        (Pos(TEXT_INVALID_OBJECTS, ObjectText) = 0) then
     begin
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
       MenuItem.Caption := Format('%s Filter', [AnsiInitCap(ObjectType)]);
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
       { Customize }
-      SubMenuItem := TMenuItem.Create(PopupMenu);
+      SubMenuItem := TMenuItem.Create(PopupActionBar);
       SubMenuItem.Action := CustomizeObjectFiltersAction;
       SubMenuItem.Caption := Format('Customize %s Filters...', [AnsiInitCap(ObjectType)]);
       SubMenuItem.Hint := Format('Customize %s filters', [LowerCase(ObjectType)]);
       MenuItem.Add(SubMenuItem);
       { - }
-      SubMenuItem := TMenuItem.Create(PopupMenu);
+      SubMenuItem := TMenuItem.Create(PopupActionBar);
       SubMenuItem.Caption := '-';
       MenuItem.Add(SubMenuItem);
       { No filter - default }
-      SubMenuItem := TMenuItem.Create(PopupMenu);
+      SubMenuItem := TMenuItem.Create(PopupActionBar);
       SubMenuItem.OnClick := CustomizeObjectFiltersMenuClick;
       SubMenuItem.Caption := '<no filter>';
       SubMenuItem.Hint := 'No filter';
@@ -1257,7 +1257,7 @@ begin
       try
         for i := 0 to ObjectFilters.Count - 1 do
         begin
-          SubMenuItem := TMenuItem.Create(PopupMenu);
+          SubMenuItem := TMenuItem.Create(PopupActionBar);
           SubMenuItem.OnClick := CustomizeObjectFiltersMenuClick;
           SubMenuItem.Caption := ObjectFilters.Strings[i];
           SubMenuItem.Hint := Format('Show customized %ss', [LowerCase(ObjectType)]);
@@ -1278,19 +1278,19 @@ begin
       if (Pos(TEXT_TABLES, ObjectParentText) <> 0) or
          (Pos(TEXT_VIEWS, ObjectParentText) <> 0)then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Caption := 'Triggers of ' + ObjectText;
         MenuItem.ImageIndex := IMG_IDX_TRIGGER_CHILD;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
         { Enable }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := EnableObjectTriggersAction;
         SubMenuItem.ImageIndex := IMG_IDX_ENABLE;
         SubMenuItem.Caption := 'Enable All';
         SubMenuItem.Hint := 'Enable all triggers';
         MenuItem.Add(SubMenuItem);
         { Disable }
-        SubMenuItem := TMenuItem.Create(PopupMenu);
+        SubMenuItem := TMenuItem.Create(PopupActionBar);
         SubMenuItem.Action := DisableObjectTriggersAction;
         SubMenuItem.ImageIndex := IMG_IDX_DISABLE;
         SubMenuItem.Caption := 'Disable All';
@@ -1302,31 +1302,31 @@ begin
     if Pos(TEXT_INVALID_OBJECTS, ObjectText) <> 0 then
       if Pos(TEXT_ZERO_OBJECTS, ObjectText) = 0 then
       begin
-        MenuItem := TMenuItem.Create(PopupMenu);
+        MenuItem := TMenuItem.Create(PopupActionBar);
         MenuItem.Action := CompileAllInvalidObjectsAction;
         //MenuItem.Caption := 'Compile All Invalid Objects';
         //MenuItem.Hint := 'Compile all invalid objects';
         MenuItem.ImageIndex := IMG_IDX_COMPILE_ALL;
-        PopupMenu.Items.Add(MenuItem);
+        PopupActionBar.Items.Add(MenuItem);
       end;
   { Compile Invalid Object }
   if Level = 1 then
     if Pos(TEXT_INVALID_OBJECTS, ObjectParentText) <> 0 then
     begin
       { Compile All Invalid Objects }
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
       MenuItem.Action := CompileAllInvalidObjectsAction;
       //MenuItem.Caption := 'Compile All Invalid Objects';
       //MenuItem.Hint := 'Compile all invalid objects';
       MenuItem.ImageIndex := IMG_IDX_COMPILE_ALL;
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
       { Compile Invalid Object }
-      MenuItem := TMenuItem.Create(PopupMenu);
+      MenuItem := TMenuItem.Create(PopupActionBar);
       MenuItem.Action := CompileInvalidObjectAction;
       //MenuItem.Caption := 'Compile Invalid Object';
       //MenuItem.Hint := 'Compile invalid object';
       MenuItem.ImageIndex := IMG_IDX_COMPILE;
-      PopupMenu.Items.Add(MenuItem);
+      PopupActionBar.Items.Add(MenuItem);
     end;
 end;
 

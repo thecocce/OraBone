@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, BCControls.DBGrid, ComCtrls,
   JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCControls.PopupMenu, Vcl.ToolWin, BCControls.ToolBar, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls,
+  Vcl.ToolWin, BCControls.ToolBar, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images;
 
 type
@@ -20,7 +20,7 @@ type
     SQLStringHolder: TJvMultiStringHolder;
     ActionList: TActionList;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     InfoButtonPanel: TPanel;
     InfoToolBar: TBCToolBar;

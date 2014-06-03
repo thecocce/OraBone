@@ -7,7 +7,7 @@ uses
   Vcl.Dialogs, BCControls.DBGrid, Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls,
   Vcl.Buttons, Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit,
   Vcl.AppEvnts, Vcl.Menus, VirtualTrees, Vcl.ToolWin, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
-  Vcl.ActnPopup, BCControls.PopupMenu, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhToolCtrls,
+  Vcl.ActnPopup, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhToolCtrls,
   DBGridEhGrouping, ToolCtrlsEh, BCCommon.Images;
 
 type
@@ -20,7 +20,7 @@ type
     UsersDBGrid: TBCDBGrid;
     ActionList: TActionList;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     RolesTabSheet: TTabSheet;
     RolesQuery: TOraQuery;

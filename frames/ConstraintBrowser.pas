@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Grids, BCControls.DBGrid,
   ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, ActnList,
   BCControls.PageControl, Vcl.ImgList, AppEvnts, Vcl.Menus, Vcl.ToolWin, BCControls.ImageList, BCControls.ToolBar,
-  PlatformDefaultStyleActnCtrls, ActnPopup, BCControls.PopupMenu, GridsEh, DBGridEh, System.Actions, DBAxisGridsEh,
+  PlatformDefaultStyleActnCtrls, ActnPopup, GridsEh, DBGridEh, System.Actions, DBAxisGridsEh,
   Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
 
 type
@@ -17,7 +17,7 @@ type
     ConstraintsDBGrid: TBCDBGrid;
     ActionList: TActionList;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     ConstraintBottomPanel: TPanel;
     ConstraintColumnsDBGrid: TBCDBGrid;

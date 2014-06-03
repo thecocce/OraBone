@@ -2,7 +2,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = SourceTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = DBLinkPageControlChange
     ActivePageCaption = 'Source'
@@ -29,6 +29,10 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     object InfoTabSheet: TTabSheet
       Caption = 'Info'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBLinkPanel: TPanel
         Left = 0
         Top = 0
@@ -101,7 +105,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -111,7 +115,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -156,15 +160,6 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -176,7 +171,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -322,7 +317,7 @@ object DBLinkBrowserFrame: TDBLinkBrowserFrame
     Left = 202
     Top = 192
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 324
     Top = 68

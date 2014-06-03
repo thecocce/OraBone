@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons,
   Vcl.ComCtrls, Vcl.ActnList, Vcl.ImgList, Vcl.StdCtrls, JvExComCtrls, JvComCtrls, Vcl.Menus, Ora, Vcl.Grids,
-  BCControls.PageControl, BCControls.PopupMenu, VirtualTrees, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  BCControls.PageControl, VirtualTrees, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   BCControls.DBGrid, BCControls.SynEdit, Data.DB, System.Actions, BCCommon.Images;
 
 type
@@ -18,7 +18,7 @@ type
     OutputCloseAllAction: TAction;
     OutputCloseAllOtherPagesAction: TAction;
     PageControl: TBCPageControl;
-    PopupMenu: TBCPopupMenu;
+    PopupActionBar: TPopupActionBar;
     CopyAllToClipboardAction: TAction;
     CopySelectedToClipboardAction: TAction;
     OpenAllAction: TAction;
@@ -67,7 +67,7 @@ type
     procedure SetProcessingTabSheet(Value: Boolean);
     procedure SetRows(TabCaption: string);
     procedure SetTime(TabCaption: string; Time: string);
-    procedure UpdatePopupMenu;
+    procedure UpdatePopupActionBar;
     procedure CopyTreeToClipboard;
     procedure OpenFiles(OnlySelected: Boolean = False);
     procedure SetCheckedState(Value: TCheckState);
@@ -113,7 +113,7 @@ constructor TOutputFrame.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   { IDE can lose these, if the main form is not open }
-  PopupMenu.Images := ImagesDataModule.ImageList;
+  PopupActionBar.Images := ImagesDataModule.ImageList;
 end;
 
 procedure TOutputFrame.OpenAllActionExecute(Sender: TObject);
@@ -139,7 +139,7 @@ end;
 
 procedure TOutputFrame.PageControlChange(Sender: TObject);
 begin
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 procedure TOutputFrame.PageControlCloseButtonClick(Sender: TObject);
@@ -159,22 +159,22 @@ begin
     OutputCloseAction.Execute;
 end;
 
-procedure TOutputFrame.UpdatePopupMenu;
+procedure TOutputFrame.UpdatePopupActionBar;
 var
   MenuItem: TMenuItem;
 
   procedure AddMenuItem(Action: TAction; ACaption: TCaption = '');
   begin
-    MenuItem := TMenuItem.Create(PopupMenu);
+    MenuItem := TMenuItem.Create(PopupActionBar);
     if Assigned(Action) then
       MenuItem.Action := Action;
     if ACaption <> '' then
       MenuItem.Caption := ACaption;
-    PopupMenu.Items.Add(MenuItem);
+    PopupActionBar.Items.Add(MenuItem);
   end;
 
 begin
-  PopupMenu.Items.Clear;
+  PopupActionBar.Items.Clear;
   AddMenuItem(OutputCloseAction);
   AddMenuItem(OutputCloseAllAction);
   AddMenuItem(OutputCloseAllOtherPagesAction);
@@ -270,7 +270,7 @@ begin
     SetRows(TabCaption);
     Grid := GetDataGrid(TabCaption);
     Lib.SetGridColumnWidths(Grid, True);
-    UpdatePopupMenu;
+    UpdatePopupActionBar;
     Exit;
   end;
 
@@ -295,7 +295,7 @@ begin
   OraQuery.AfterScroll := DataQueryAfterScroll;
   DataQueryAfterScroll(OraQuery);
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 procedure TOutputFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;
@@ -303,7 +303,7 @@ procedure TOutputFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseButton
 begin
   { this fixes the bug when popup is popped from grid - it won't get the focus }
   if Button = mbRight then
-    PopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+    PopupActionBar.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
 end;
 
 procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
@@ -324,7 +324,7 @@ var
 begin
   if TabFound(TabCaption) then
   begin
-    UpdatePopupMenu;
+    UpdatePopupActionBar;
     Exit;
   end;
 
@@ -343,7 +343,7 @@ begin
     GridDataSource.DataSet := OraQuery;
   end;
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 procedure TOutputFrame.ClearStrings(TabCaption: string);
@@ -386,7 +386,7 @@ begin
     OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 function TOutputFrame.GetListBox(TabCaption: string): TListBox;
@@ -475,7 +475,7 @@ begin
   begin
     SynEdit := GetSynEdit(TabCaption);
     SynEdit.Text := SynEdit.Text + Text + CHR_ENTER;
-    UpdatePopupMenu;
+    UpdatePopupActionBar;
     Exit;
   end;
 
@@ -498,7 +498,7 @@ begin
     SynEdit.Text := Text + CHR_ENTER;
   end;
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 { could use AddStrings but maybe some changes in future... }
@@ -512,7 +512,7 @@ begin
   begin
     ListBox := GetListBox(TabCaption);
     ListBox.Items.Text := Text;
-    UpdatePopupMenu;
+    UpdatePopupActionBar;
     Exit;
   end;
 
@@ -533,7 +533,7 @@ begin
     OnKeyDown := ListBoxKeyDown;
   end;
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 function TOutputFrame.TabFound(TabCaption: string): Boolean;
@@ -561,7 +561,7 @@ begin
   begin
     Self.Clear;
     Result := GetVirtualDrawTree;
-    UpdatePopupMenu;
+    UpdatePopupActionBar;
     Exit;
   end;
 
@@ -592,7 +592,7 @@ begin
   end;
   Self.Clear;
   TabSheet.TabVisible := True;
-  UpdatePopupMenu;
+  UpdatePopupActionBar;
 end;
 
 function TOutputFrame.GetVirtualDrawTree: TVirtualDrawTree;

@@ -19,7 +19,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = TablePageControlChange
     ParentColor = False
@@ -297,6 +297,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object DataTabSheet: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DataPanel: TPanel
         Left = 0
         Top = 0
@@ -327,7 +331,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
-          PopupMenu = DataPopupMenu
+          PopupMenu = DataPopupActionBar
           SearchPanel.Enabled = True
           SearchPanel.FilterOnTyping = True
           EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
@@ -391,14 +395,12 @@ object TableBrowserFrame: TTableBrowserFrame
             Left = 0
             Top = 0
             Action = SortAction
-            DropdownMenu = SortDropDownMenu
             Style = tbsDropDown
           end
           object ToolButton1: TToolButton
             Left = 38
             Top = 0
             Action = FilterAction
-            DropdownMenu = FilterDropDownMenu
             Style = tbsDropDown
           end
         end
@@ -453,6 +455,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ConstraintsTabSheet: TTabSheet
       Caption = 'Constraints'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ConstraintSplitter: TSplitter
         Left = 0
         Top = 83
@@ -821,6 +827,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object IndexesTabSheet: TTabSheet
       Caption = 'Indexes'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object IndexesPanel: TPanel
         Left = 0
         Top = 0
@@ -914,6 +924,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -1007,6 +1021,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -1100,6 +1118,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencedByTabSheet: TTabSheet
       Caption = 'Referenced By'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ReferencedByPanel: TPanel
         Left = 0
         Top = 0
@@ -1161,6 +1183,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencesTabSheet: TTabSheet
       Caption = 'References'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ReferencesPanel: TPanel
         Left = 0
         Top = 0
@@ -1222,6 +1248,10 @@ object TableBrowserFrame: TTableBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -1472,7 +1502,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 86
     Top = 30
     Bitmap = {
-      494C01011E002100080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011E002100100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3064,7 +3094,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 122
     Top = 212
   end
-  object FilterDropDownMenu: TPopupMenu
+  object FilterDropDownPopupActionBar: TPopupActionBar
     Left = 56
     Top = 306
     object est1: TMenuItem
@@ -3080,7 +3110,7 @@ object TableBrowserFrame: TTableBrowserFrame
       RadioItem = True
     end
   end
-  object DataPopupMenu: TBCPopupMenu
+  object DataPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 180
     Top = 306
@@ -3128,7 +3158,7 @@ object TableBrowserFrame: TTableBrowserFrame
       Action = ExportTableDataAction
     end
   end
-  object SortDropDownMenu: TPopupMenu
+  object SortDropDownPopupActionBar: TPopupActionBar
     Left = 178
     Top = 358
     object MenuItem1: TMenuItem
@@ -3145,7 +3175,7 @@ object TableBrowserFrame: TTableBrowserFrame
       RadioItem = True
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 54
     Top = 358

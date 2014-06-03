@@ -2,7 +2,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = ConstraintPageControlChange
     ActivePageCaption = 'Info'
@@ -31,17 +31,18 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
       ImageIndex = 6
       object ConstraintSplitter: TSplitter
         Left = 0
-        Top = 81
+        Top = 83
         Width = 443
         Height = 2
         Cursor = crVSplit
         Align = alBottom
+        ExplicitTop = 81
       end
       object InfoPanel: TPanel
         Left = 0
         Top = 0
         Width = 443
-        Height = 81
+        Height = 83
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -50,7 +51,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 57
+          Height = 59
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -70,7 +71,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
         end
         object ConstraintButtonPanel: TPanel
           Left = 0
-          Top = 57
+          Top = 59
           Width = 441
           Height = 24
           Align = alBottom
@@ -94,8 +95,9 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 19
+            Height = 16
             Align = alRight
+            ExplicitHeight = 13
           end
           object ConstraintToolBar: TBCToolBar
             Left = 0
@@ -135,7 +137,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
       end
       object ConstraintBottomPanel: TPanel
         Left = 0
-        Top = 83
+        Top = 85
         Width = 443
         Height = 191
         Align = alBottom
@@ -196,7 +198,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
       OnExecute = RefreshActionExecute
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 324
     Top = 68
@@ -284,7 +286,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Left = 324
     Top = 140
     Bitmap = {
-      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040009000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

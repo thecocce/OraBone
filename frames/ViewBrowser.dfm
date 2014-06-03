@@ -1,8 +1,8 @@
 object ViewBrowserFrame: TViewBrowserFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 304
+  Width = 718
+  Height = 399
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -10,39 +10,47 @@ object ViewBrowserFrame: TViewBrowserFrame
   ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
+  ExplicitWidth = 451
+  ExplicitHeight = 304
   object ViewPageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 451
-    Height = 304
+    Width = 718
+    Height = 399
     ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = ViewPageControlChange
     ActivePageCaption = 'Columns'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
+    ExplicitWidth = 451
+    ExplicitHeight = 304
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 443
-        Height = 254
+        Width = 710
+        Height = 349
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitWidth = 443
+        ExplicitHeight = 254
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 441
-          Height = 253
+          Width = 708
+          Height = 348
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,12 +72,14 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 254
-        Width = 443
+        Top = 349
+        Width = 710
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 254
+        ExplicitWidth = 443
         object Bevel3: TBevel
           AlignWithMargins = True
           Left = 29
@@ -84,11 +94,12 @@ object ViewBrowserFrame: TViewBrowserFrame
         end
         object CreationAndModificationTimestampLabel: TLabel
           AlignWithMargins = True
-          Left = 437
+          Left = 704
           Top = 3
           Width = 3
           Height = 16
           Align = alRight
+          ExplicitLeft = 437
           ExplicitHeight = 13
         end
         object JvToolBar5: TBCToolBar
@@ -126,6 +137,8 @@ object ViewBrowserFrame: TViewBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -258,6 +271,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object DataTabSheet: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DataPanel: TPanel
         Left = 0
         Top = 0
@@ -337,14 +354,12 @@ object ViewBrowserFrame: TViewBrowserFrame
             Left = 0
             Top = 0
             Action = SortAction
-            DropdownMenu = SortDropDownMenu
             Style = tbsDropDown
           end
           object ToolButton1: TToolButton
             Left = 38
             Top = 0
             Action = FilterAction
-            DropdownMenu = FilterDropDownMenu
             Style = tbsDropDown
           end
         end
@@ -367,6 +382,8 @@ object ViewBrowserFrame: TViewBrowserFrame
     object TriggersTabSheet: TTabSheet
       Caption = 'Triggers'
       ImageIndex = 3
+      ExplicitWidth = 443
+      ExplicitHeight = 276
       object TriggersSplitter: TSplitter
         Left = 0
         Top = 165
@@ -567,6 +584,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -660,6 +681,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -753,6 +778,10 @@ object ViewBrowserFrame: TViewBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -888,7 +917,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114001900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114001900100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2012,7 +2041,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 272
     Top = 248
   end
-  object FilterDropDownMenu: TPopupMenu
+  object FilterDropDownPopupActionBar: TPopupActionBar
     Left = 36
     Top = 64
     object est1: TMenuItem
@@ -2029,7 +2058,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       RadioItem = True
     end
   end
-  object DataPopupMenu: TBCPopupMenu
+  object DataPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 516
     Top = 340
@@ -2052,7 +2081,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       Action = ExportTableDataAction
     end
   end
-  object SortDropDownMenu: TPopupMenu
+  object SortDropDownPopupActionBar: TPopupActionBar
     Left = 116
     Top = 64
     object MenuItem1: TMenuItem
@@ -2069,7 +2098,7 @@ object ViewBrowserFrame: TViewBrowserFrame
       RadioItem = True
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 372
     Top = 184

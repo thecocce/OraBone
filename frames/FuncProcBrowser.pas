@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, Vcl.ComCtrls, JvExComCtrls,
   JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl,
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
-  BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.PopupMenu, GridsEh,
+  BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, GridsEh,
   DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBAxisGridsEh, Vcl.StdCtrls, DBGridEhGrouping,
   DBGridEhToolCtrls;
 
@@ -38,7 +38,7 @@ type
     SourceSynEdit: TSynEdit;
     SynSQLSyn: TSynSQLSyn;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     CopyToClipboardAction: TAction;
     SaveToFileAction: TAction;

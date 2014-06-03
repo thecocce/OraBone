@@ -121,7 +121,7 @@ object MainForm: TMainForm
       DoubleBuffered = False
       ParentDoubleBuffered = False
       ParentShowHint = False
-      PopupMenu = PageControlPopupMenu
+      PopupMenu = PageControlPopupActionBar
       ShowHint = False
       TabOrder = 0
       OnChange = PageControlChange
@@ -1700,7 +1700,7 @@ object MainForm: TMainForm
     Left = 62
     Top = 148
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 62
     Top = 236
@@ -1718,7 +1718,7 @@ object MainForm: TMainForm
       Enabled = False
     end
   end
-  object DocumentPopupMenu: TBCPopupMenu
+  object DocumentPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 60
     Top = 302

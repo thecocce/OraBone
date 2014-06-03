@@ -7,7 +7,7 @@ uses
   JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
   Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
-  BCControls.PopupMenu, GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, System.Actions, DBAxisGridsEh, Vcl.StdCtrls,
+  GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, System.Actions, DBAxisGridsEh, Vcl.StdCtrls,
   DBGridEhGrouping, DBGridEhToolCtrls;
 
 type
@@ -41,7 +41,7 @@ type
     SequencePanel: TPanel;
     SequenceDBGrid: TBCDBGrid;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     CopyToClipboardAction: TAction;
     SaveToFileAction: TAction;

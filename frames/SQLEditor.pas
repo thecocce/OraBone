@@ -7,7 +7,7 @@ uses
   Vcl.Forms, Vcl.Dialogs, SynEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ImgList, JvExComCtrls, JvComCtrls, Vcl.Menus,
   SynHighlighterSQL, Output, SynEditHighlighter, SynEditPrint, OraError, SynEditMiscClasses, SynEditSearch,
   SynEditTypes, Vcl.Buttons, Vcl.StdCtrls, Vcl.ActnList, JvExExtCtrls, JvSplitter, DAScript, OraScript, MemDS, DBAccess,
-  Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl, BCControls.PopupMenu,
+  Ora, ToolWin, SynCompletionProposal, JvStringHolder, BCControls.PageControl,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Vcl.ActnMan, BCControls.ToolBar, BCControls.ImageList,
   BCControls.DBGrid, Vcl.Themes, Data.DB, BCControls.CheckBox, SynEditRegexSearch, BCControls.OraSynEdit,
   SQLEditorTabSheet, BCFrames.Compare, SynEditWildcardSearch, System.Actions, Vcl.ActnCtrls, BCControls.ButtonedEdit,
@@ -29,7 +29,7 @@ type
     ToolbarPanel: TPanel;
     SynSQLSyn: TSynSQLSyn;
     OraScript: TOraScript;
-    EditorPopupMenu: TBCPopupMenu;
+    EditorPopupActionBar: TPopupActionBar;
     InsertObjectMenuItem: TMenuItem;
     ColumnsQuery: TOraQuery;
     SQLStringHolder: TJvMultiStringHolder;
@@ -435,7 +435,7 @@ begin
   FOutputFrame.OnOpenAll := OutputOpenAllEvent;
   FFoundSearchItems := TObjectList.Create;
   { IDE can lose these, if the main form is not open }
-  EditorPopupMenu.Images := ImagesDataModule.ImageList;
+  EditorPopupActionBar.Images := ImagesDataModule.ImageList;
   CutMenuItem.Action := MainForm.EditCutAction;
   CopyMenuItem.Action := MainForm.EditCopyAction;
   PasteMenuItem.Action := MainForm.EditPasteAction;
@@ -593,7 +593,7 @@ begin
       OnReplaceText := SynEditorReplaceText;
       SearchEngine := SynEditSearch;
       Highlighter := SynSQLSyn;
-      PopupMenu := EditorPopupMenu;
+      PopupMenu := EditorPopupActionBar;
       OnPaintTransient := SynEditPaintTransient;
       BookMarkOptions.BookmarkImages := BookmarkImagesList;
     end;

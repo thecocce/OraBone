@@ -17,7 +17,7 @@ object OutputFrame: TOutputFrame
     DoubleBuffered = False
     Images = ImagesDataModule.ImageList
     ParentDoubleBuffered = False
-    PopupMenu = PopupMenu
+    PopupMenu = PopupActionBar
     TabOrder = 0
     OnChange = PageControlChange
     OnMouseDown = PageControlMouseDown
@@ -90,7 +90,7 @@ object OutputFrame: TOutputFrame
       OnExecute = ClearDBMSOutputActionExecute
     end
   end
-  object PopupMenu: TBCPopupMenu
+  object PopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 264
     Top = 124

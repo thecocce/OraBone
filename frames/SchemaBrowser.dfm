@@ -77,7 +77,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
         Height = 276
         Hint = ' '
         ParentShowHint = False
-        PopupMenu = PopupMenu
+        PopupMenu = PopupActionBar
         OnClick = ObjectTreeFrameVirtualDrawTreeClick
         OnEditing = ObjectTreeFrameVirtualDrawTreeEditing
         OnKeyUp = ObjectTreeFrameVirtualDrawTreeKeyUp
@@ -358,7 +358,7 @@ object SchemaBrowserFrame: TSchemaBrowserFrame
       OnExecute = CustomizeObjectFiltersActionExecute
     end
   end
-  object PopupMenu: TBCPopupMenu
+  object PopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 148
     Top = 64

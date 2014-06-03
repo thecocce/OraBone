@@ -2,7 +2,7 @@ object UserBrowserFrame: TUserBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object UserBrowserFrame: TUserBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = UserPageControlChange
     ActivePageCaption = 'Info'
@@ -33,7 +33,7 @@ object UserBrowserFrame: TUserBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -43,7 +43,7 @@ object UserBrowserFrame: TUserBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,7 +64,7 @@ object UserBrowserFrame: TUserBrowserFrame
       end
       object InfoButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -89,6 +89,10 @@ object UserBrowserFrame: TUserBrowserFrame
     object RolesTabSheet: TTabSheet
       Caption = 'Roles && Privileges'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object RolesPanel: TPanel
         Left = 0
         Top = 0
@@ -200,7 +204,7 @@ object UserBrowserFrame: TUserBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -210,7 +214,7 @@ object UserBrowserFrame: TUserBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -255,15 +259,6 @@ object UserBrowserFrame: TUserBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -275,12 +270,13 @@ object UserBrowserFrame: TUserBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 252
         object SourceToolBar: TBCToolBar
           Left = 0
           Top = 0
@@ -396,7 +392,7 @@ object UserBrowserFrame: TUserBrowserFrame
       OnExecute = RefreshActionExecute
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 324
     Top = 68

@@ -2,7 +2,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = SourceTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = TriggerPageControlChange
     ActivePageCaption = 'Source'
@@ -33,7 +33,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
         Left = 0
         Top = 63
         Width = 443
-        Height = 211
+        Height = 213
         Align = alClient
         BevelOuter = bvNone
         Padding.Top = 2
@@ -44,7 +44,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
           Left = 0
           Top = 2
           Width = 441
-          Height = 208
+          Height = 210
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -89,15 +89,6 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -176,8 +167,9 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 19
+            Height = 16
             Align = alRight
+            ExplicitHeight = 13
           end
           object SourceToolBar: TBCToolBar
             Left = 0
@@ -246,7 +238,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101070009000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -618,7 +610,7 @@ object TriggerBrowserFrame: TTriggerBrowserFrame
     Left = 92
     Top = 184
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 78
     Top = 106

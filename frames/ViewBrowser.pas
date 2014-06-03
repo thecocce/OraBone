@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Ora, Vcl.Dialogs, ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS,
   Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList, BCControls.PageControl, Vcl.ImgList,
   SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar, Vcl.Menus,
-  BCControls.PopupMenu, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.ImageList, BCControls.ToolBar,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.ImageList, BCControls.ToolBar,
   BCControls.DBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
   DBAxisGridsEh, Vcl.StdCtrls;
 
@@ -57,27 +57,27 @@ type
     SourceDataSource: TOraDataSource;
     SQLEditorAction: TAction;
     SynSQLSyn: TSynSQLSyn;
-    FilterDropDownMenu: TPopupMenu;
+    FilterDropDownPopupActionBar: TPopupActionBar;
     est1: TMenuItem;
     N1: TMenuItem;
     NoFilterMenuItem: TMenuItem;
     RemoveCurrentFilterAction: TAction;
     NoFilterAction: TAction;
-    DataPopupMenu: TBCPopupMenu;
+    DataPopupActionBar: TPopupActionBar;
     ExportMenuItem: TMenuItem;
     SelectAllMenuItem: TMenuItem;
     N2: TMenuItem;
     RefreshMenuItem: TMenuItem;
     N3: TMenuItem;
     SortAction: TAction;
-    SortDropDownMenu: TPopupMenu;
+    SortDropDownPopupActionBar: TPopupActionBar;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     NoSortMenuItem: TMenuItem;
     RemoveCurrentSortAction: TAction;
     NoSortAction: TAction;
     CustomizeAction: TAction;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     CustomizePageControl1: TMenuItem;
     EnableTriggerAction: TAction;
     DisableTriggerAction: TAction;
@@ -201,8 +201,8 @@ type
     function GetCurrentDataFilter: string;
     function GetCurrentDataSort: string;
     procedure SetHighlighterTableNames(Value: TStrings);
-    procedure InsertFiltersToDropDownMenu(PopupMenu: TPopupMenu);
-    procedure InsertSortsToDropDownMenu(PopupMenu: TPopupMenu);
+    procedure InsertFiltersToDropDownMenu(PopupActionBar: TPopupActionBar);
+    procedure InsertSortsToDropDownMenu(PopupActionBar: TPopupActionBar);
     procedure DropDownMenuClick(Sender: TObject);
     procedure DropDownSortMenuClick(Sender: TObject);
     function GetQueryOpened: Boolean;
@@ -348,10 +348,10 @@ var
   FilterName, KeyValue, CurrentKeyValue: string;
 begin
   { Get checked filter name }
-  for i := 0 to FilterDropDownMenu.Items.Count - 1 do
-    if FilterDropDownMenu.Items[i].Checked then
+  for i := 0 to FilterDropDownPopupActionBar.Items.Count - 1 do
+    if FilterDropDownPopupActionBar.Items[i].Checked then
     begin
-      FilterName := FilterDropDownMenu.Items[i].Caption;
+      FilterName := FilterDropDownPopupActionBar.Items[i].Caption;
       Break;
     end;
   FilterName := StringReplace(FilterName, '&', '', []);
@@ -385,10 +385,10 @@ var
   SortName, KeyValue, CurrentKeyValue: string;
 begin
   { Get checked filter name }
-  for i := 0 to SortDropDownMenu.Items.Count - 1 do
-    if SortDropDownMenu.Items[i].Checked then
+  for i := 0 to SortDropDownPopupActionBar.Items.Count - 1 do
+    if SortDropDownPopupActionBar.Items[i].Checked then
     begin
-      SortName := SortDropDownMenu.Items[i].Caption;
+      SortName := SortDropDownPopupActionBar.Items[i].Caption;
       Break;
     end;
   SortName := StringReplace(SortName, '&', '', []);
@@ -596,7 +596,7 @@ procedure TViewBrowserFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseB
 begin
   // this fixes the bug when popup is popped from grid - it won't get the focus }
   if Button = mbRight then
-    DataPopupMenu.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+    DataPopupActionBar.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
 end;
 
 procedure TViewBrowserFrame.DropDownMenuClick(Sender: TObject);
@@ -658,7 +658,7 @@ begin
   MainForm.DatabaseExportTableDataAction.Execute;
 end;
 
-procedure TViewBrowserFrame.InsertFiltersToDropDownMenu(PopupMenu: TPopupMenu);
+procedure TViewBrowserFrame.InsertFiltersToDropDownMenu(PopupActionBar: TPopupActionBar);
 var
   i: Integer;
   KeyValue, CurrentValue, s: string;
@@ -670,17 +670,17 @@ begin
     if Pos(KeyValue, DataFilterDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataFilterDialog.ValuesList.Keys[i]) = 0 then
       begin
-        Item := TMenuItem.Create(PopupMenu);
+        Item := TMenuItem.Create(PopupActionBar);
         Item.Tag := 1;
         Item.GroupIndex := 1;
         s := DecryptString(DataFilterDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownMenuClick;
-        PopupMenu.Items.Add(Item);
+        PopupActionBar.Items.Add(Item);
       end;
 end;
 
-procedure TViewBrowserFrame.InsertSortsToDropDownMenu(PopupMenu: TPopupMenu);
+procedure TViewBrowserFrame.InsertSortsToDropDownMenu(PopupActionBar: TPopupActionBar);
 var
   i: Integer;
   KeyValue, CurrentValue, s: string;
@@ -692,14 +692,14 @@ begin
     if Pos(KeyValue, DataSortDialog.ValuesList.Keys[i]) <> 0 then
       if Pos(CurrentValue, DataSortDialog.ValuesList.Keys[i]) = 0 then
       begin
-        Item := TMenuItem.Create(PopupMenu);
+        Item := TMenuItem.Create(PopupActionBar);
         Item.Tag := 1;
         Item.GroupIndex := 1;
         Item.RadioItem := True;
         s := DecryptString(DataSortDialog.ValuesList.Keys[i]);
         Item.Caption := Copy(s, Pos(':', s) + 1, Length(s));
         Item.OnClick := DropDownSortMenuClick;
-        PopupMenu.Items.Add(Item);
+        PopupActionBar.Items.Add(Item);
       end;
 end;
 
@@ -750,15 +750,15 @@ begin
   RemoveCurrentFilterAction.Enabled := FilterName <> '';
   NoFilterAction.Checked := not RemoveCurrentFilterAction.Enabled;
   { Remove filters }
-  for i := FilterDropDownMenu.Items.Count - 1 downto 0 do
-    if FilterDropDownMenu.Items[i].Tag = 1 then
-      FilterDropDownMenu.Items[i].Destroy;
+  for i := FilterDropDownPopupActionBar.Items.Count - 1 downto 0 do
+    if FilterDropDownPopupActionBar.Items[i].Tag = 1 then
+      FilterDropDownPopupActionBar.Items[i].Destroy;
   { Insert filters }
-  InsertFiltersToDropDownMenu(FilterDropDownMenu);
+  InsertFiltersToDropDownMenu(FilterDropDownPopupActionBar);
   { Check item }
   if FilterName <> '' then
-    if Assigned(FilterDropDownMenu.Items.Find(FilterName)) then
-      FilterDropDownMenu.Items.Find(FilterName).Checked := True
+    if Assigned(FilterDropDownPopupActionBar.Items.Find(FilterName)) then
+      FilterDropDownPopupActionBar.Items.Find(FilterName).Checked := True
 end;
 
 procedure TViewBrowserFrame.SetSortMarkers(OrderSQL: string);
@@ -820,15 +820,15 @@ begin
   RemoveCurrentSortAction.Enabled := SortName <> '';
  // NoFilterAction.Checked := not RemoveCurrentFilterAction.Enabled;
   { Remove filters }
-  for i := SortDropDownMenu.Items.Count - 1 downto 0 do
-    if SortDropDownMenu.Items[i].Tag = 1 then
-      SortDropDownMenu.Items[i].Destroy;
+  for i := SortDropDownPopupActionBar.Items.Count - 1 downto 0 do
+    if SortDropDownPopupActionBar.Items[i].Tag = 1 then
+      SortDropDownPopupActionBar.Items[i].Destroy;
   { Insert filters }
-  InsertSortsToDropDownMenu(SortDropDownMenu);
+  InsertSortsToDropDownMenu(SortDropDownPopupActionBar);
   { Check item }
   if SortName <> '' then
-    if Assigned(SortDropDownMenu.Items.Find(SortName)) then
-      SortDropDownMenu.Items.Find(SortName).Checked := True
+    if Assigned(SortDropDownPopupActionBar.Items.Find(SortName)) then
+      SortDropDownPopupActionBar.Items.Find(SortName).Checked := True
 end;
 
 procedure TViewBrowserFrame.FilterActionExecute(Sender: TObject);

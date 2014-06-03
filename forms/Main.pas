@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ActnList,
   PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, ToolWin, SQLHistory, VirtualTrees, ActnMenus, ComCtrls,
   JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, StdActns, Vcl.ImgList, Types, BCControls.PageControl, AppEvnts, Menus,
-  SQLEditor, SchemaBrowser, BCControls.PopupMenu, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
+  SQLEditor, SchemaBrowser, ActnPopup, BCControls.ImageList, Vcl.Themes, JvComponentBase,
   JvDragDrop, System.Actions, BCControls.ProgressBar, BCCommon.Images, System.Win.TaskbarCore, Vcl.Taskbar;
 
 const
@@ -49,7 +49,7 @@ type
     DatabaseRefreshAction: TAction;
     DatabaseRollbackAction: TAction;
     DBMSOutputAction: TAction;
-    DocumentPopupMenu: TBCPopupMenu;
+    DocumentPopupActionBar: TPopupActionBar;
     DragDrop: TJvDragDrop;
     EditCopyAction: TAction;
     EditCutAction: TAction;
@@ -95,7 +95,7 @@ type
     MenuItem4: TMenuItem;
     N1: TMenuItem;
     PageControl: TBCPageControl;
-    PageControlPopupMenu: TBCPopupMenu;
+    PageControlPopupActionBar: TPopupActionBar;
     PrintMenuItem: TMenuItem;
     PrintPreviewMenuItem: TMenuItem;
     SaveAsMenuItem: TMenuItem;
@@ -2307,7 +2307,7 @@ begin
 
     Result := TSQLEditorFrame.Create(TabSheet);
     Result.Parent := TabSheet;
-    Result.PopupMenu := DocumentPopupMenu;
+    Result.PopupMenu := DocumentPopupActionBar;
     TableNames := Lib.SessionObjectNames(SchemaBrowserFrame.ObjectTreeFrame.Session, SchemaBrowserFrame.ObjectTreeFrame.SchemaParam);
     try
       Result.HighlighterTableNames := TableNames;

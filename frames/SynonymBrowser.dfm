@@ -2,7 +2,7 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = SynonymPageControlChange
     ActivePageCaption = 'Info'
@@ -33,7 +33,7 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -43,7 +43,7 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,7 +64,7 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
       end
       object InfoButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -75,8 +75,9 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 19
+          Height = 16
           Align = alRight
+          ExplicitHeight = 13
         end
         object InfoToolBar: TBCToolBar
           Left = 0
@@ -144,7 +145,7 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
       OnExecute = RefreshActionExecute
     end
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 92
     Top = 80

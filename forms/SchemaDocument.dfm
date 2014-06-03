@@ -39,7 +39,7 @@ object SchemaDocumentForm: TSchemaDocumentForm
       Width = 804
       Height = 368
       Align = alClient
-      PopupMenu = PopupMenu
+      PopupMenu = PopupActionBar
       TabOrder = 0
       ControlData = {
         4C00000019530000092600000000000000000000000000000000000000000000
@@ -895,7 +895,7 @@ object SchemaDocumentForm: TSchemaDocumentForm
       OnExecute = PrintActionExecute
     end
   end
-  object PopupMenu: TBCPopupMenu
+  object PopupActionBar: TPopupActionBar
     Images = ImagesDataModule.ImageList
     Left = 460
     Top = 156

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, OleCtrls,
   SHDocVw, ComCtrls, ToolWin, JvExComCtrls, JvStatusBar, Ora, JvStringHolder, ActnList, Menus, WebBrowser.Container,
-  BCControls.PopupMenu, Vcl.ImgList, Vcl.ExtCtrls, Vcl.Buttons, PlatformDefaultStyleActnCtrls, ActnPopup,
+  Vcl.ImgList, Vcl.ExtCtrls, Vcl.Buttons, PlatformDefaultStyleActnCtrls, ActnPopup,
   Vcl.Styles.WebBrowser, System.Actions, BCCommon.Images;
 
 type
@@ -16,7 +16,7 @@ type
     StringHolder: TJvMultiStringHolder;
     ActionList: TActionList;
     SaveAction: TAction;
-    PopupMenu: TBCPopupMenu;
+    PopupActionBar: TPopupActionBar;
     SaveAction1: TMenuItem;
     PrinterSettingsAction: TAction;
     PrintAction: TAction;

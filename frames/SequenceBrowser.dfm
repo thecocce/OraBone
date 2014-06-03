@@ -2,7 +2,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 302
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -14,12 +14,12 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Left = 0
     Top = 0
     Width = 451
-    Height = 302
+    Height = 304
     ActivePage = InfoTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
-    PopupMenu = PageControlPopupMenu
+    PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = SequencePageControlChange
     ActivePageCaption = 'Info'
@@ -33,7 +33,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -43,7 +43,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -64,7 +64,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
       end
       object InfoButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -75,8 +75,9 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 19
+          Height = 16
           Align = alRight
+          ExplicitHeight = 13
         end
         object InfoToolBar: TBCToolBar
           Left = 0
@@ -101,7 +102,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -111,7 +112,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           Ctl3D = True
           ParentCtl3D = False
@@ -156,15 +157,6 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
           ReadOnly = True
           WantTabs = True
@@ -176,12 +168,13 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
       end
       object SourceButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitTop = 252
         object Bevel2: TBevel
           AlignWithMargins = True
           Left = 75
@@ -238,6 +231,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -331,6 +328,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -424,6 +425,10 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -487,7 +492,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Left = 204
     Top = 196
     Bitmap = {
-      494C010109000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1107,7 +1112,7 @@ object SequenceBrowserFrame: TSequenceBrowserFrame
     Left = 220
     Top = 292
   end
-  object PageControlPopupMenu: TBCPopupMenu
+  object PageControlPopupActionBar: TPopupActionBar
     Images = ImageList
     Left = 92
     Top = 80
