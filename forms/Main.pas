@@ -271,6 +271,8 @@ type
     procedure TaskBarStepChange(Sender: TObject);
     procedure TaskBarShow(Sender: TObject);
     procedure TaskBarHide(Sender: TObject);
+    procedure ActionToolBarGetControlClass(Sender: TCustomActionBar; AnItem: TActionClient;
+      var ControlClass: TCustomActionControlClass);
   private
     { Private declarations }
     FNoIni: Boolean;
@@ -282,6 +284,8 @@ type
     FEncoding: TEncoding;
     FProgressBar: TBCProgressBar;
     FSQLFormatterDLLFound: Boolean;
+    FSaveMenuFont: TFont; { will hold initial main menu bar's font settings }
+    FSaveColormap: TCustomActionBarColorMap;
     function GetActionClientItem(MenuItemIndex, SubMenuItemIndex: Integer): TActionClientItem;
     function EndConnection(Confirm: Boolean): Integer;
     function GetActiveSchemaBrowser: TSchemaBrowserFrame;
@@ -434,6 +438,12 @@ end;
 procedure TMainForm.HelpHomeActionExecute(Sender: TObject);
 begin
   BrowseURL(BONECODE_URL);
+end;
+
+procedure TMainForm.ActionToolBarGetControlClass(Sender: TCustomActionBar; AnItem: TActionClient;
+  var ControlClass: TCustomActionControlClass);
+begin
+  ActionToolBar.ColorMap.Assign(FSaveColormap);
 end;
 
 procedure TMainForm.ApplicationEventsActivate(Sender: TObject);
@@ -1865,11 +1875,19 @@ begin
   FSQLFormatterDLLFound := FileExists(GetSQLFormatterDLLFilename);
   CreateProgressBar;
   ReadIniSizePositionAndState;
+
+  FSaveMenuFont := TFont.Create;
+  FSaveMenuFont.Assign(ActionMainMenuBar.Font);
+  FSaveColormap := TCustomActionBarColorMap.Create(Self);
+  FSaveColormap.Assign(ActionMainMenuBar.Colormap);
+  FSaveColormap.Color := clWindow;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FProgressBar.Free;
+  FSaveMenuFont.Destroy;
+  FSaveColormap.Destroy;
 end;
 
 procedure TMainForm.FormResize(Sender: TObject);

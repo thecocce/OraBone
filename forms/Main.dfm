@@ -91,9 +91,9 @@ object MainForm: TMainForm
       Font.Name = 'Tahoma'
       Font.Style = []
       HorzSeparator = False
-      ParentBackground = True
       ParentFont = False
       Spacing = 0
+      OnGetControlClass = ActionToolBarGetControlClass
     end
   end
   object MainPanel: TPanel

@@ -8,7 +8,7 @@
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -115,19 +115,19 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MajorVer>8</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=8.0.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=8.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=8.1.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=8.1.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MajorVer>8</VerInfo_MajorVer>
         <DCC_UnitSearchPath>..\..\Components\src\Controls;..\..\Components\src\UniSynEdit\Source;..\..\Components\src\Ehlib\RADStudioXE5;..\..\Components\src\SynWeb\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=8.0.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=8.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=8.1.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=8.1.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
