@@ -33,6 +33,7 @@ object DropUserDialog: TDropUserDialog
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
+    StyleElements = []
     object MessageLabel: TLabel
       Left = 51
       Top = 17
@@ -50,12 +51,11 @@ object DropUserDialog: TDropUserDialog
     object CascadeCheckBox: TBCCheckBox
       Left = 10
       Top = 51
-      Width = 63
-      Height = 15
+      Width = 62
+      Height = 17
       Caption = 'Cascade'
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
   object GrayLinePanel: TPanel

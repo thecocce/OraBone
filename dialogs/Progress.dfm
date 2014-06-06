@@ -66,6 +66,7 @@ object ProgressDialog: TProgressDialog
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 1
+    StyleElements = []
     DesignSize = (
       362
       73)

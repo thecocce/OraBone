@@ -37,6 +37,7 @@ object DropTableDialog: TDropTableDialog
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
+    StyleElements = []
     object MessageLabel: TLabel
       Left = 51
       Top = 17
@@ -54,22 +55,20 @@ object DropTableDialog: TDropTableDialog
     object CascadeConstraintsCheckBox: TBCCheckBox
       Left = 10
       Top = 51
-      Width = 121
-      Height = 15
+      Width = 120
+      Height = 17
       Caption = 'Cascade Constraints'
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object PurgeCheckBox: TBCCheckBox
       Left = 141
       Top = 51
-      Width = 50
-      Height = 15
+      Width = 49
+      Height = 17
       Caption = 'Purge'
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
   object GrayLinePanel: TPanel

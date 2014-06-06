@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ExtCtrls, BCDialogs.Dlg, BCControls.CheckBox;
+  Vcl.ExtCtrls, BCDialogs.Dlg, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TDropTableDialog = class(TDialog)
