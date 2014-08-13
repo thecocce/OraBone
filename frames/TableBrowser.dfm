@@ -15,7 +15,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = ColumnsTabSheet
+    ActivePage = DataTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -23,7 +23,7 @@ object TableBrowserFrame: TTableBrowserFrame
     TabOrder = 0
     OnChange = TablePageControlChange
     ParentColor = False
-    ActivePageCaption = 'Columns'
+    ActivePageCaption = 'Data'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -90,7 +90,7 @@ object TableBrowserFrame: TTableBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 19
           Align = alRight
           ExplicitHeight = 13
         end
@@ -152,32 +152,21 @@ object TableBrowserFrame: TTableBrowserFrame
           Top = 0
           Width = 441
           Height = 253
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -196,13 +185,24 @@ object TableBrowserFrame: TTableBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
           ReadOnly = True
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -297,10 +297,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object DataTabSheet: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DataPanel: TPanel
         Left = 0
         Top = 0
@@ -395,12 +391,14 @@ object TableBrowserFrame: TTableBrowserFrame
             Left = 0
             Top = 0
             Action = SortAction
+            DropdownMenu = SortDropDownPopupActionBar
             Style = tbsDropDown
           end
           object ToolButton1: TToolButton
             Left = 38
             Top = 0
             Action = FilterAction
+            DropdownMenu = FilterDropDownPopupActionBar
             Style = tbsDropDown
           end
         end
@@ -455,10 +453,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object ConstraintsTabSheet: TTabSheet
       Caption = 'Constraints'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ConstraintSplitter: TSplitter
         Left = 0
         Top = 83
@@ -770,32 +764,21 @@ object TableBrowserFrame: TTableBrowserFrame
           Top = 0
           Width = 441
           Height = 108
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -814,23 +797,30 @@ object TableBrowserFrame: TTableBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
           ReadOnly = True
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
     object IndexesTabSheet: TTabSheet
       Caption = 'Indexes'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object IndexesPanel: TPanel
         Left = 0
         Top = 0
@@ -924,10 +914,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -1021,10 +1007,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -1118,10 +1100,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencedByTabSheet: TTabSheet
       Caption = 'Referenced By'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ReferencedByPanel: TPanel
         Left = 0
         Top = 0
@@ -1183,10 +1161,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object ReferencesTabSheet: TTabSheet
       Caption = 'References'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object ReferencesPanel: TPanel
         Left = 0
         Top = 0
@@ -1248,10 +1222,6 @@ object TableBrowserFrame: TTableBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -1502,7 +1472,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Left = 86
     Top = 30
     Bitmap = {
-      494C01011E002100100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011E002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

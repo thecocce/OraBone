@@ -1,8 +1,8 @@
 object ViewBrowserFrame: TViewBrowserFrame
   Left = 0
   Top = 0
-  Width = 718
-  Height = 399
+  Width = 451
+  Height = 304
   Align = alClient
   Color = clWindow
   Ctl3D = False
@@ -10,13 +10,11 @@ object ViewBrowserFrame: TViewBrowserFrame
   ParentColor = False
   ParentCtl3D = False
   TabOrder = 0
-  ExplicitWidth = 451
-  ExplicitHeight = 304
   object ViewPageControl: TBCPageControl
     Left = 0
     Top = 0
-    Width = 718
-    Height = 399
+    Width = 451
+    Height = 304
     ActivePage = ColumnsTabSheet
     Align = alClient
     DoubleBuffered = False
@@ -28,29 +26,23 @@ object ViewBrowserFrame: TViewBrowserFrame
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
-    ExplicitWidth = 451
-    ExplicitHeight = 304
     object ColumnsTabSheet: TTabSheet
       Caption = 'Columns'
-      ExplicitWidth = 443
-      ExplicitHeight = 276
       object ColumnsPanel: TPanel
         Left = 0
         Top = 0
-        Width = 710
-        Height = 349
+        Width = 443
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitWidth = 443
-        ExplicitHeight = 254
         object ColumnsDBGrid: TBCDBGrid
           Left = 0
           Top = 0
-          Width = 708
-          Height = 348
+          Width = 441
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -72,14 +64,12 @@ object ViewBrowserFrame: TViewBrowserFrame
       end
       object ColumnsButtonPanel: TPanel
         Left = 0
-        Top = 349
-        Width = 710
+        Top = 254
+        Width = 443
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitTop = 254
-        ExplicitWidth = 443
         object Bevel3: TBevel
           AlignWithMargins = True
           Left = 29
@@ -94,12 +84,12 @@ object ViewBrowserFrame: TViewBrowserFrame
         end
         object CreationAndModificationTimestampLabel: TLabel
           AlignWithMargins = True
-          Left = 704
+          Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 19
           Align = alRight
-          ExplicitLeft = 437
+          ExplicitLeft = 704
           ExplicitHeight = 13
         end
         object JvToolBar5: TBCToolBar
@@ -137,8 +127,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     object SourceTabSheet: TTabSheet
       Caption = 'Source'
       ImageIndex = 6
-      ExplicitWidth = 443
-      ExplicitHeight = 276
       object SourcePanel: TPanel
         Left = 0
         Top = 0
@@ -154,32 +142,21 @@ object ViewBrowserFrame: TViewBrowserFrame
           Top = 0
           Width = 441
           Height = 253
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -198,13 +175,24 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
           ReadOnly = True
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -271,10 +259,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     object DataTabSheet: TTabSheet
       Caption = 'Data'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DataPanel: TPanel
         Left = 0
         Top = 0
@@ -354,12 +338,14 @@ object ViewBrowserFrame: TViewBrowserFrame
             Left = 0
             Top = 0
             Action = SortAction
+            DropdownMenu = SortDropDownPopupActionBar
             Style = tbsDropDown
           end
           object ToolButton1: TToolButton
             Left = 38
             Top = 0
             Action = FilterAction
+            DropdownMenu = FilterDropDownPopupActionBar
             Style = tbsDropDown
           end
         end
@@ -382,8 +368,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     object TriggersTabSheet: TTabSheet
       Caption = 'Triggers'
       ImageIndex = 3
-      ExplicitWidth = 443
-      ExplicitHeight = 276
       object TriggersSplitter: TSplitter
         Left = 0
         Top = 165
@@ -528,32 +512,21 @@ object ViewBrowserFrame: TViewBrowserFrame
           Top = 0
           Width = 441
           Height = 108
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -571,23 +544,30 @@ object ViewBrowserFrame: TViewBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 54
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
           ReadOnly = True
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
@@ -681,10 +661,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
@@ -778,10 +754,6 @@ object ViewBrowserFrame: TViewBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
@@ -917,7 +889,7 @@ object ViewBrowserFrame: TViewBrowserFrame
     Left = 206
     Top = 180
     Bitmap = {
-      494C010114001900100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010114001900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
