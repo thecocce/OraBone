@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CreateObjectDialog, Vcl.StdCtrls,
   Vcl.ExtCtrls, BCControls.ComboBox, BCControls.Edit, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, ActnList,
   ComCtrls, ToolWin, JvExComCtrls, SynEdit, JvComCtrls, BCControls.PageControl, BCControls.ToolBar, BCDialogs.Dlg,
-  System.Actions, BCControls.ImageList, BCControls.CheckBox;
+  System.Actions, BCControls.ImageList, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TCreateTriggerDialog = class(TCreateObjectBaseDialog)

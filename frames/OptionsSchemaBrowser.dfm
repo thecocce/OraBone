@@ -1,14 +1,14 @@
 inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
   Width = 133
   Height = 110
-  AutoSize = True
-  ParentFont = False
   Visible = False
+  ExplicitWidth = 133
+  ExplicitHeight = 110
   object Panel: TPanel
     AlignWithMargins = True
     Left = 4
     Top = 0
-    Width = 129
+    Width = 117
     Height = 110
     Margins.Left = 4
     Margins.Top = 0
@@ -64,16 +64,15 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     object ShowTreeLinesCheckBox: TBCCheckBox
       Left = 0
       Top = 0
-      Width = 129
-      Height = 18
+      Width = 117
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Show Tree Lines'
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object IndentEdit: TBCEdit
       Left = 0

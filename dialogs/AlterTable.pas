@@ -8,7 +8,7 @@ uses
   SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.ComCtrls, Vcl.ToolWin, JvExComCtrls, SynEdit, JvComCtrls,
   BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, Data.DB, MemDS, DBAccess, BCDialogs.Dlg,
   System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, BCControls.CheckBox;
+  DBGridEhToolCtrls, BCControls.CheckBox, DynVarsEh, JvExStdCtrls, JvCheckBox;
 
 type
   TAlterTableDialog = class(TCreateObjectBaseDialog)

@@ -2,11 +2,17 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
   Caption = 'Create Sequence'
   ClientHeight = 280
   ClientWidth = 365
+  ExplicitWidth = 381
+  ExplicitHeight = 318
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 358
     Height = 221
+    ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
+    ExplicitWidth = 358
+    ExplicitHeight = 221
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -159,38 +165,41 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
       object OrderCheckBox: TBCCheckBox
         Left = 119
         Top = 168
-        Width = 47
-        Height = 15
-        Alignment = taLeftJustify
+        Width = 49
+        Height = 17
         Caption = 'Order'
         Checked = True
         State = cbChecked
         TabOrder = 7
-        AutoSize = True
-        ReadOnly = False
+        LinkedControls = <>
       end
       object CycleCheckBox: TBCCheckBox
         Left = 8
         Top = 168
-        Width = 45
-        Height = 15
-        Alignment = taLeftJustify
+        Width = 47
+        Height = 17
         Caption = 'Cycle'
         TabOrder = 6
-        AutoSize = True
-        ReadOnly = False
+        LinkedControls = <>
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 350
+      ExplicitHeight = 193
       inherited SourcePanel: TPanel
         Width = 350
         Height = 193
+        ExplicitWidth = 350
+        ExplicitHeight = 193
         inherited SourceSynEdit: TSynEdit
           Width = 348
           Height = 168
+          ExplicitWidth = 348
+          ExplicitHeight = 168
         end
         inherited SourceTopPanel: TPanel
           Width = 348
+          ExplicitWidth = 348
         end
       end
     end
@@ -198,13 +207,19 @@ inherited CreateSequenceDialog: TCreateSequenceDialog
   inherited OKButton: TButton
     Left = 202
     Top = 230
+    ExplicitLeft = 202
+    ExplicitTop = 230
   end
   inherited CancelButton: TButton
     Left = 283
     Top = 230
+    ExplicitLeft = 283
+    ExplicitTop = 230
   end
   inherited StatusBar1: TStatusBar
     Top = 261
     Width = 365
+    ExplicitTop = 261
+    ExplicitWidth = 365
   end
 end

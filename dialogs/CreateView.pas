@@ -7,7 +7,7 @@ uses
   DB, MemDS, DBAccess, Ora, Vcl.StdCtrls, BCControls.Edit, Vcl.ImgList, BCDialogs.Dlg, SynEditHighlighter,
   SynHighlighterSQL, ActnList, ComCtrls, ToolWin, JvExComCtrls, SynEdit, Vcl.ExtCtrls, JvComCtrls,
   BCControls.PageControl, BCControls.ToolBar, BCControls.DBGrid, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh,
-  BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
+  BCControls.ImageList, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh;
 
 type
   TCreateViewDialog = class(TCreateObjectBaseDialog)

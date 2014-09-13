@@ -8,7 +8,7 @@ uses
   Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, Vcl.Menus,
   BCControls.ImageList, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, GridsEh,
   DBGridEh, BCControls.DBGrid, System.Actions, ToolCtrlsEh, DBAxisGridsEh, Vcl.StdCtrls, DBGridEhGrouping,
-  DBGridEhToolCtrls;
+  DBGridEhToolCtrls, DynVarsEh;
 
 type
   TFuncProcBrowserFrame = class(TFrame)

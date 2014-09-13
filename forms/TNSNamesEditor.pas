@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.CommDlg, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, SynEdit,
   Vcl.ExtCtrls, VirtualTrees, Vcl.ComCtrls, Vcl.ToolWin, BCControls.ToolBar, Vcl.ImgList, BCControls.ImageList,
   Vcl.ActnList, Vcl.StdCtrls, BCControls.Edit, Vcl.Buttons, Vcl.AppEvnts, SynEditPrint, SynEditSearch,
-  SynEditMiscClasses, SynEditTypes, BCControls.CheckBox, SynEditRegexSearch, System.Actions;
+  SynEditMiscClasses, SynEditTypes, BCControls.CheckBox, SynEditRegexSearch, System.Actions, JvExStdCtrls, JvCheckBox;
 
 type
   PObjectNodeRec = ^TObjectNodeRec;

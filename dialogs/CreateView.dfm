@@ -2,6 +2,8 @@ inherited CreateViewDialog: TCreateViewDialog
   Caption = 'Create View'
   ClientHeight = 432
   ClientWidth = 446
+  ExplicitWidth = 462
+  ExplicitHeight = 470
   PixelsPerInch = 96
   TextHeight = 13
   object ViewNameLabel: TLabel [0]
@@ -22,6 +24,11 @@ inherited CreateViewDialog: TCreateViewDialog
     Top = 60
     Width = 439
     Height = 316
+    ActivePage = ColumnCommentsTabSheet
+    ActivePageCaption = 'Column Comments'
+    ExplicitTop = 60
+    ExplicitWidth = 439
+    ExplicitHeight = 316
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -47,10 +54,8 @@ inherited CreateViewDialog: TCreateViewDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           Columns = <
             item
@@ -130,10 +135,8 @@ inherited CreateViewDialog: TCreateViewDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           OnGetCellParams = ColumnCommentsDBGridGetCellParams
           Columns = <
@@ -178,40 +181,76 @@ inherited CreateViewDialog: TCreateViewDialog
           Top = 0
           Width = 429
           Height = 287
+          ActiveLine.Background = clYellow
+          ActiveLine.Foreground = clNavy
+          ActiveLine.Visible = True
           Align = alClient
+          Background.Visible = False
+          Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
           Ctl3D = True
-          ParentCtl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
+          Gutter.ShowLineModified = False
+          Gutter.LineModifiedColor = clYellow
+          Gutter.LineNormalColor = clLime
+          Gutter.Intens = False
           Gutter.AutoSize = True
           Gutter.Font.Charset = DEFAULT_CHARSET
           Gutter.Font.Color = clWindowText
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.BookmarkPanelColor = clNone
+          Gutter.RightOffset = 2
+          Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
+          Gutter.ShowBookmarks = False
+          Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
-          FontSmoothing = fsmNone
+          WordWrap.Enabled = False
+          WordWrap.Position = 80
+          WordWrap.Style = wwsClientWidth
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 431
+      ExplicitHeight = 288
       inherited SourcePanel: TPanel
         Width = 431
         Height = 288
+        ExplicitWidth = 431
+        ExplicitHeight = 288
         inherited SourceSynEdit: TSynEdit
           Width = 429
           Height = 263
+          ExplicitWidth = 429
+          ExplicitHeight = 263
         end
         inherited SourceTopPanel: TPanel
           Width = 429
+          ExplicitWidth = 429
         end
       end
     end
@@ -219,10 +258,14 @@ inherited CreateViewDialog: TCreateViewDialog
   inherited OKButton: TButton
     Left = 283
     Top = 382
+    ExplicitLeft = 283
+    ExplicitTop = 382
   end
   inherited CancelButton: TButton
     Left = 364
     Top = 382
+    ExplicitLeft = 364
+    ExplicitTop = 382
   end
   object ViewNameEdit: TBCEdit [5]
     Left = 76
@@ -260,6 +303,8 @@ inherited CreateViewDialog: TCreateViewDialog
   inherited StatusBar1: TStatusBar
     Top = 413
     Width = 446
+    ExplicitTop = 413
+    ExplicitWidth = 446
   end
   inherited ActionList: TActionList
     object MoveUpAction: TAction

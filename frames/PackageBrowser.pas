@@ -8,7 +8,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
   Vcl.Menus, SynEditMiscClasses, SynEditSearch, BCControls.ImageList, BCControls.ToolBar,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Data.DB, System.Actions, ToolCtrlsEh, GridsEh,
-   DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhToolCtrls, DBGridEhGrouping;
+   DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhToolCtrls, DBGridEhGrouping, DynVarsEh;
 
 type
   TPackageBrowserFrame = class(TFrame)

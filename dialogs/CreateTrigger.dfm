@@ -2,6 +2,8 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   Caption = 'Create Trigger'
   ClientHeight = 318
   ClientWidth = 357
+  ExplicitWidth = 373
+  ExplicitHeight = 356
   PixelsPerInch = 96
   TextHeight = 13
   object TriggerNameLabel: TLabel [0]
@@ -43,6 +45,11 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
     Top = 60
     Width = 350
     Height = 204
+    ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
+    ExplicitTop = 60
+    ExplicitWidth = 350
+    ExplicitHeight = 204
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -79,34 +86,31 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
         object DeleteCheckBox: TBCCheckBox
           Left = 139
           Top = 20
-          Width = 53
-          Height = 15
+          Width = 52
+          Height = 17
           Anchors = [akTop]
           Caption = 'Delete'
           TabOrder = 0
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object InsertCheckBox: TBCCheckBox
           Left = 11
           Top = 20
-          Width = 51
-          Height = 15
+          Width = 50
+          Height = 17
           Caption = 'Insert'
           TabOrder = 1
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object UpdateCheckBox: TBCCheckBox
           Left = 269
           Top = 20
-          Width = 57
-          Height = 15
+          Width = 56
+          Height = 17
           Anchors = [akTop, akRight]
           Caption = 'Update'
           TabOrder = 2
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
       end
       object ReferencingGroupBox: TGroupBox
@@ -186,32 +190,21 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Top = 0
           Width = 340
           Height = 175
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -230,12 +223,23 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
@@ -257,32 +261,21 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Top = 0
           Width = 340
           Height = 175
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -301,25 +294,43 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
           Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 342
+      ExplicitHeight = 176
       inherited SourcePanel: TPanel
         Width = 342
         Height = 176
+        ExplicitWidth = 342
+        ExplicitHeight = 176
         inherited SourceSynEdit: TSynEdit
           Width = 340
           Height = 151
+          ExplicitWidth = 340
+          ExplicitHeight = 151
         end
         inherited SourceTopPanel: TPanel
           Width = 340
+          ExplicitWidth = 340
         end
       end
     end
@@ -327,10 +338,14 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   inherited OKButton: TButton
     Left = 193
     Top = 268
+    ExplicitLeft = 193
+    ExplicitTop = 268
   end
   inherited CancelButton: TButton
     Left = 274
     Top = 268
+    ExplicitLeft = 274
+    ExplicitTop = 268
   end
   object TriggerNameEdit: TBCEdit [6]
     Left = 100
@@ -365,5 +380,7 @@ inherited CreateTriggerDialog: TCreateTriggerDialog
   inherited StatusBar1: TStatusBar
     Top = 299
     Width = 357
+    ExplicitTop = 299
+    ExplicitWidth = 357
   end
 end

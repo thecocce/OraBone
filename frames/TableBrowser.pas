@@ -8,7 +8,7 @@ uses
   Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts,
   Vcl.ToolWin, Vcl.Menus, Vcl.StdCtrls, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.StdStyleActnCtrls, BCControls.ImageList, BCControls.ToolBar, BCControls.DBGrid, Data.DB, System.Actions,
-  ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhGrouping, DBGridEhToolCtrls, Vcl.Grids, Vcl.DBGrids;
+  ToolCtrlsEh, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhGrouping, DBGridEhToolCtrls, Vcl.Grids, Vcl.DBGrids, DynVarsEh;
 
 type
   TTableBrowserFrame = class(TFrame)
@@ -278,8 +278,6 @@ type
     procedure DataQueryQueryAfterFetch(DataSet: TCustomDADataSet);
     procedure DataQueryQueryBeforeFetch(DataSet: TCustomDADataSet; var Cancel: Boolean);
     procedure DataDBGridDblClick(Sender: TObject);
-    procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField;
-      State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
     procedure ConstraintsDBGridSelectionChanged(Sender: TObject);
@@ -290,6 +288,8 @@ type
     procedure DataDBGridTitleClick(Column: TColumnEh);
     procedure SourceOptionsActionExecute(Sender: TObject);
     procedure DataDBGridSelectionChanged(Sender: TObject);
+    procedure DataDBGridAdvDrawDataCell(Sender: TCustomDBGridEh; Cell, AreaCell: TGridCoord; Column: TColumnEh;
+      const ARect: TRect; var Params: TColCellParamsEh; var Processed: Boolean);
   private
     { Private declarations }
     FSession: TOraSession;
@@ -1420,6 +1420,12 @@ begin
   end;
 end;
 
+procedure TTableBrowserFrame.DataDBGridAdvDrawDataCell(Sender: TCustomDBGridEh; Cell, AreaCell: TGridCoord;
+  Column: TColumnEh; const ARect: TRect; var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+  GridDrawStringDataCell(Column, Params);
+end;
+
 procedure TTableBrowserFrame.DataDBGridDblClick(Sender: TObject);
 var
   Rslt: Integer;
@@ -1467,12 +1473,6 @@ begin
       //DataDBGrid. //SelectedField.Clear;
     end;
   end;
-end;
-
-procedure TTableBrowserFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
-  Field: TField; State: TGridDrawState);
-begin
-  GridDrawStringDataCell(Sender, Rect, Field);
 end;
 
 procedure TTableBrowserFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;

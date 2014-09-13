@@ -358,28 +358,33 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Left = 368
         Top = 0
         Width = 70
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Case Sensitive'
         Layout = tlCenter
+        ExplicitHeight = 13
       end
       object WholeWordsOnlyLabel: TLabel
-        Left = 465
+        Left = 459
         Top = 0
         Width = 89
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Whole Words Only'
         Layout = tlCenter
+        ExplicitLeft = 465
+        ExplicitHeight = 13
       end
       object RegularExpressionLabel: TLabel
-        Left = 581
+        Left = 569
         Top = 0
         Width = 92
-        Height = 13
+        Height = 21
         Align = alLeft
         Caption = 'Regular Expression'
         Layout = tlCenter
+        ExplicitLeft = 581
+        ExplicitHeight = 13
       end
       object SearchPanel2: TPanel
         Left = 21
@@ -737,11 +742,12 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         object CaseSensitiveCheckBox: TBCCheckBox
           Left = 8
           Top = 2
-          Width = 19
+          Width = 13
           Height = 19
           Align = alLeft
           TabOrder = 0
-          ReadOnly = False
+          LinkedControls = <>
+          ExplicitHeight = 17
         end
       end
       object Panel3: TPanel
@@ -756,29 +762,32 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
       object WholeWordsCheckBox: TBCCheckBox
         Left = 446
         Top = 0
-        Width = 19
+        Width = 13
         Height = 21
         Align = alLeft
         TabOrder = 8
-        ReadOnly = False
+        LinkedControls = <>
+        ExplicitHeight = 17
       end
       object Panel4: TPanel
-        Left = 554
+        Left = 548
         Top = 0
         Width = 8
         Height = 21
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 9
+        ExplicitLeft = 554
       end
       object RegularExpressionCheckBox: TBCCheckBox
-        Left = 562
+        Left = 556
         Top = 0
-        Width = 19
+        Width = 13
         Height = 21
         Align = alLeft
         TabOrder = 10
-        ReadOnly = False
+        LinkedControls = <>
+        ExplicitHeight = 17
       end
     end
     object Panel5: TPanel
@@ -795,32 +804,21 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Top = 2
         Width = 742
         Height = 408
-        Align = alClient
-        CodeFolding.CaseSensitive = False
-        CodeFolding.FolderBarLinesColor = 12434877
         ActiveLine.Background = clYellow
         ActiveLine.Foreground = clNavy
         ActiveLine.Visible = True
-        LineDivider.Visible = False
-        LineDivider.Color = clRed
-        LineDivider.Style = psSolid
-        RightEdge.MouseMove = False
-        RightEdge.Visible = True
-        RightEdge.Position = 80
-        RightEdge.Color = clSilver
-        RightEdge.Style = psSolid
-        LineSpacing = 0
-        LineSpacingRule = lsSpecified
+        Align = alClient
         Background.Visible = False
         Background.RepeatMode = brmNone
+        BookMarkOptions.BookmarkImages = BookmarkImagesList
+        CodeFolding.CaseSensitive = False
+        CodeFolding.FolderBarLinesColor = 12434877
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
         Font.Name = 'Courier New'
         Font.Style = []
-        TabOrder = 0
-        OnKeyDown = SynEditKeyDown
-        BookMarkOptions.BookmarkImages = BookmarkImagesList
+        FontSmoothing = fsmNone
         Gutter.ShowLineModified = False
         Gutter.LineModifiedColor = clYellow
         Gutter.LineNormalColor = clLime
@@ -837,23 +835,25 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
         Gutter.ShowLineNumbers = True
         Gutter.ShowBookmarks = False
         Gutter.Width = 54
-        Minimap.Font.Charset = DEFAULT_CHARSET
-        Minimap.Font.Color = clWindowText
-        Minimap.Font.Height = -4
-        Minimap.Font.Name = 'Courier New'
-        Minimap.Font.Style = []
-        Minimap.Width = 0
-        Minimap.CharWidth = 2
-        Minimap.CharHeight = 4
-        Minimap.LinesInWindow = 0
+        LineDivider.Visible = False
+        LineDivider.Color = clRed
+        LineDivider.Style = psSolid
+        LineSpacing = 0
+        LineSpacingRule = lsSpecified
+        OnChange = SynEditChange
+        OnKeyDown = SynEditKeyDown
         Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+        RightEdge.MouseMove = False
+        RightEdge.Visible = True
+        RightEdge.Position = 80
+        RightEdge.Color = clSilver
+        RightEdge.Style = psSolid
         SearchEngine = SynEditSearch
+        TabOrder = 0
         WantTabs = True
         WordWrap.Enabled = False
         WordWrap.Position = 80
         WordWrap.Style = wwsClientWidth
-        OnChange = SynEditChange
-        FontSmoothing = fsmNone
       end
     end
   end
@@ -861,7 +861,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 84
     Top = 54
     Bitmap = {
-      494C010112001500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000C7C6C300BBB7
       AF00B2ACA000AFA99D00AEA99C00AEA89C00AEA89C00AEA89C00AFA99D00B2AC
@@ -1622,7 +1622,7 @@ object TNSNamesEditorForm: TTNSNamesEditorForm
     Left = 78
     Top = 122
     Bitmap = {
-      494C01010A000D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

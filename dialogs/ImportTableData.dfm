@@ -351,12 +351,11 @@ object ImportTableDataDialog: TImportTableDataDialog
       object LaunchAfterCreationCheckBox: TBCCheckBox
         Left = 65
         Top = 41
-        Width = 128
-        Height = 15
+        Width = 127
+        Height = 17
         Caption = 'Launch After Creation'
         TabOrder = 1
-        AutoSize = True
-        ReadOnly = False
+        LinkedControls = <>
       end
       object LoadInEditorRadioButton: TRadioButton
         Left = 16

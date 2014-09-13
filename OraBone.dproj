@@ -4,11 +4,11 @@
         <ProjectVersion>15.4</ProjectVersion>
         <MainSource>OraBone.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -59,8 +59,9 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <Icon_MainIcon>OraBone_Icon3.ico</Icon_MainIcon>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <DCC_UnitSearchPath>$(BONECODE_ROOT)\Components\src\FastMM;$(BONECODE_ROOT)\Components\src\Controls;$(BONECODE_ROOT)\Components\src\VirtualTree\Source;$(BONECODE_ROOT)\Components\src\UniSynEdit\Source;$(BONECODE_ROOT)\Components\src\Ehlib\RADStudioXE6;$(BONECODE_ROOT)\Components\src\SynWeb\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(BONECODE_ROOT)\Components\src\FastMM;$(BONECODE_ROOT)\Components\src\Controls;$(BONECODE_ROOT)\Components\src\VirtualTree\Source;$(BONECODE_ROOT)\Components\src\UniSynEdit\Source;$(BONECODE_ROOT)\Components\src\Ehlib\Common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <SanitizedProjectName>OraBone</SanitizedProjectName>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.2.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_MinorVer>2</VerInfo_MinorVer>
@@ -123,7 +124,7 @@
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <DCC_Define>ORABONE;$(DCC_Define)</DCC_Define>
         <VerInfo_MajorVer>8</VerInfo_MajorVer>
-        <DCC_UnitSearchPath>..\..\Components\src\Controls;..\..\Components\src\UniSynEdit\Source;..\..\Components\src\Ehlib\RADStudioXE5;..\..\Components\src\SynWeb\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\..\Components\src\Controls;..\..\Components\src\UniSynEdit\Source;..\..\Components\src\Ehlib\Common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=8.2.0.0;InternalName=;LegalCopyright=Copyright © 2010-2014 Lasse Rautiainen. All Rights Reserved.;LegalTrademarks=;OriginalFilename=;ProductName=OraBone;ProductVersion=8.2.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
@@ -577,6 +578,8 @@
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\EhLib200.bpl">EhLib 6.3</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\BCEditorDXE6.bpl">BCEditor component suite</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt200.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k200.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp200.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>

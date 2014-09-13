@@ -8,7 +8,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
   Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhToolCtrls,
-  DBGridEhGrouping, ToolCtrlsEh;
+  DBGridEhGrouping, ToolCtrlsEh, DynVarsEh;
 
 type
   TTriggerBrowserFrame = class(TFrame)

@@ -15,7 +15,7 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = DataTabSheet
+    ActivePage = DependenciesTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
@@ -23,7 +23,7 @@ object TableBrowserFrame: TTableBrowserFrame
     TabOrder = 0
     OnChange = TablePageControlChange
     ParentColor = False
-    ActivePageCaption = 'Data'
+    ActivePageCaption = 'Dependencies'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -52,10 +52,9 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghClearSelection, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
+          OptionsEh = [dghFixed3D, dghClearSelection, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
           ParentCtl3D = False
           STFilter.InstantApply = False
           STFilter.Location = stflInTitleFilterEh
@@ -321,11 +320,10 @@ object TableBrowserFrame: TTableBrowserFrame
           DynProps = <>
           EditActions = [geaCutEh, geaCopyEh, geaPasteEh, geaDeleteEh, geaSelectAllEh]
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           IndicatorTitle.UseGlobalMenu = False
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           PopupMenu = DataPopupActionBar
           SearchPanel.Enabled = True
@@ -333,8 +331,8 @@ object TableBrowserFrame: TTableBrowserFrame
           EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
           STFilter.InstantApply = True
           TabOrder = 0
+          OnAdvDrawDataCell = DataDBGridAdvDrawDataCell
           OnDblClick = DataDBGridDblClick
-          OnDrawDataCell = DataDBGridDrawDataCell
           OnMouseDown = DataDBGridMouseDown
           OnSelectionChanged = DataDBGridSelectionChanged
           OnTitleClick = DataDBGridTitleClick
@@ -483,10 +481,8 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -649,10 +645,9 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -843,10 +838,9 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -936,10 +930,9 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -1029,10 +1022,9 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -1122,10 +1114,8 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -1183,10 +1173,8 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -1244,10 +1232,8 @@ object TableBrowserFrame: TTableBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -1341,8 +1327,8 @@ object TableBrowserFrame: TTableBrowserFrame
     Options.RawAsString = True
     Options.RequiredFields = False
     Options.StrictUpdate = False
-    Left = 44
-    Top = 68
+    Left = 100
+    Top = 98
     ParamData = <
       item
         DataType = ftWideString
@@ -1469,8 +1455,8 @@ object TableBrowserFrame: TTableBrowserFrame
     Top = 306
   end
   object ImageList: TBCImageList
-    Left = 86
-    Top = 30
+    Left = 130
+    Top = 38
     Bitmap = {
       494C01011E002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080

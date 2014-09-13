@@ -2,11 +2,17 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   Caption = 'Create Synonym'
   ClientHeight = 233
   ClientWidth = 325
+  ExplicitWidth = 341
+  ExplicitHeight = 271
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 318
     Height = 175
+    ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
+    ExplicitWidth = 318
+    ExplicitHeight = 175
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -112,15 +118,22 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 310
+      ExplicitHeight = 147
       inherited SourcePanel: TPanel
         Width = 310
         Height = 147
+        ExplicitWidth = 310
+        ExplicitHeight = 147
         inherited SourceSynEdit: TSynEdit
           Width = 308
           Height = 122
+          ExplicitWidth = 308
+          ExplicitHeight = 122
         end
         inherited SourceTopPanel: TPanel
           Width = 308
+          ExplicitWidth = 308
         end
       end
     end
@@ -128,13 +141,19 @@ inherited CreateSynonymDialog: TCreateSynonymDialog
   inherited OKButton: TButton
     Left = 162
     Top = 183
+    ExplicitLeft = 162
+    ExplicitTop = 183
   end
   inherited CancelButton: TButton
     Left = 243
     Top = 183
+    ExplicitLeft = 243
+    ExplicitTop = 183
   end
   inherited StatusBar1: TStatusBar
     Top = 214
     Width = 325
+    ExplicitTop = 214
+    ExplicitWidth = 325
   end
 end

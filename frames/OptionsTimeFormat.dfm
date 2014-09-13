@@ -1,8 +1,8 @@
 inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
   Width = 298
   Height = 163
-  AutoSize = True
-  ParentFont = False
+  ExplicitWidth = 298
+  ExplicitHeight = 163
   object Panel: TPanel
     AlignWithMargins = True
     Left = 4
@@ -27,24 +27,36 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
     object TimeFormatLabel: TLabel
       Left = 0
       Top = 3
-      Width = 74
-      Height = 16
+      Width = 59
+      Height = 13
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Time Format'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object ExampleLabel: TLabel
       Left = 0
       Top = 29
-      Width = 48
-      Height = 16
+      Width = 40
+      Height = 13
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Example'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object DescriptionLabel: TLabel
       Left = 0
@@ -60,6 +72,12 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
         'Use the Time Format property to specify the default time format ' +
         'used when Oracle makes conversions from internal time format int' +
         'o string values and vice versa.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       WordWrap = True
     end
     object TimeFormatHHLabel: TLabel
@@ -210,7 +228,7 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Left = 69
       Top = 26
       Width = 221
-      Height = 24
+      Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -218,6 +236,12 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       TabStop = False
       CharCase = ecUpperCase
       Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ReadOnly = True
       TabOrder = 0
       EnterToTab = False
@@ -231,12 +255,18 @@ inherited OptionsTimeFormatFrame: TOptionsTimeFormatFrame
       Left = 69
       Top = 0
       Width = 221
-      Height = 24
+      Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       Text = 'HH24:MI:SS'
       OnChange = TimeFormatEditChange

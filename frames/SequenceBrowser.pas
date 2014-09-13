@@ -8,7 +8,7 @@ uses
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
   Vcl.Menus, BCControls.ImageList, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   GridsEh, DBGridEh, Data.DB, ToolCtrlsEh, System.Actions, DBAxisGridsEh, Vcl.StdCtrls,
-  DBGridEhGrouping, DBGridEhToolCtrls;
+  DBGridEhGrouping, DBGridEhToolCtrls, DynVarsEh;
 
 type
   TSequenceBrowserFrame = class(TFrame)

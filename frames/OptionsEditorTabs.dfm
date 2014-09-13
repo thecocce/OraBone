@@ -1,14 +1,15 @@
 inherited OptionsEditorTabsFrame: TOptionsEditorTabsFrame
   Width = 144
   Height = 138
-  AutoSize = True
   Visible = False
+  ExplicitWidth = 144
+  ExplicitHeight = 138
   object Panel: TPanel
     AlignWithMargins = True
     Left = 0
     Top = 3
-    Width = 144
-    Height = 135
+    Width = 143
+    Height = 137
     Margins.Left = 0
     Margins.Right = 0
     Margins.Bottom = 0
@@ -26,36 +27,34 @@ inherited OptionsEditorTabsFrame: TOptionsEditorTabsFrame
     object CloseTabByDblClickCheckBox: TBCCheckBox
       Left = 0
       Top = 0
-      Width = 144
-      Height = 15
+      Width = 143
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Close Tab by Double Click'
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object CloseTabByMiddleClickCheckBox: TBCCheckBox
       Left = 0
       Top = 20
-      Width = 142
-      Height = 15
+      Width = 141
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Close Tab by Middle-Click'
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object DoubleBufferedCheckBox: TBCCheckBox
       Left = 0
       Top = 40
-      Width = 100
-      Height = 15
+      Width = 99
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -64,56 +63,52 @@ inherited OptionsEditorTabsFrame: TOptionsEditorTabsFrame
       Checked = True
       State = cbChecked
       TabOrder = 2
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object MultilineCheckBox: TBCCheckBox
       Left = 0
       Top = 60
-      Width = 60
-      Height = 15
+      Width = 59
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Multiline'
       TabOrder = 3
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ShowCloseButtonCheckBox: TBCCheckBox
       Left = 0
       Top = 80
-      Width = 112
-      Height = 15
+      Width = 111
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Show Close Button'
       TabOrder = 4
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ShowImageCheckBox: TBCCheckBox
       Left = 0
       Top = 100
-      Width = 81
-      Height = 15
+      Width = 80
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Show Image'
       TabOrder = 5
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object RightClickSelectCheckBox: TBCCheckBox
       Left = 0
       Top = 120
-      Width = 103
-      Height = 15
+      Width = 102
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -122,8 +117,7 @@ inherited OptionsEditorTabsFrame: TOptionsEditorTabsFrame
       Checked = True
       State = cbChecked
       TabOrder = 6
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
 end

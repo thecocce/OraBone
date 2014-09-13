@@ -9,7 +9,7 @@ uses
   SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin, JvToolBar, Vcl.Menus,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, BCControls.ImageList, BCControls.ToolBar,
   BCControls.DBGrid, DBGridEhGrouping, GridsEh, DBGridEh, Data.DB, System.Actions, ToolCtrlsEh, DBGridEhToolCtrls,
-  DBAxisGridsEh, Vcl.StdCtrls;
+  DBAxisGridsEh, Vcl.StdCtrls, DynVarsEh;
 
 type
   TViewBrowserFrame = class(TFrame)
@@ -179,14 +179,14 @@ type
     procedure RefreshActionExecute(Sender: TObject);
     procedure RefreshTriggersActionExecute(Sender: TObject);
     procedure RefreshGrantsActionExecute(Sender: TObject);
-    procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField;
-      State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
     procedure TriggersDBGridSelectionChanged(Sender: TObject);
     procedure GrantsDBGridSelectionChanged(Sender: TObject);
     procedure SynonymsDBGridSelectionChanged(Sender: TObject);
     procedure ColumnsDBGridTitleClick(Column: TColumnEh);
+    procedure DataDBGridAdvDrawDataCell(Sender: TCustomDBGridEh; Cell, AreaCell: TGridCoord; Column: TColumnEh;
+      const ARect: TRect; var Params: TColCellParamsEh; var Processed: Boolean);
   private
     { Private declarations }
     FSession: TOraSession;
@@ -585,10 +585,10 @@ begin
   CustomizePageControlDialog.Open(ViewPageControl);
 end;
 
-procedure TViewBrowserFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
-  Field: TField; State: TGridDrawState);
+procedure TViewBrowserFrame.DataDBGridAdvDrawDataCell(Sender: TCustomDBGridEh; Cell, AreaCell: TGridCoord;
+  Column: TColumnEh; const ARect: TRect; var Params: TColCellParamsEh; var Processed: Boolean);
 begin
-  GridDrawStringDataCell(Sender, Rect, Field);
+  GridDrawStringDataCell(Column, Params);
 end;
 
 procedure TViewBrowserFrame.DataDBGridMouseDown(Sender: TObject; Button: TMouseButton;

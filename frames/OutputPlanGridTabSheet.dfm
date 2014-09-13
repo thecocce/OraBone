@@ -31,10 +31,9 @@ object OutputPlanGridFrame: TOutputPlanGridFrame
       DrawMemoText = True
       DynProps = <>
       FooterParams.Color = clWindow
-      GridLineParams.VertEmptySpaceStyle = dessNonEh
       IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
       ReadOnly = True
       TabOrder = 0
       object RowDetailData: TRowDetailPanelControlEh

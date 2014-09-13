@@ -2,6 +2,8 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   Caption = 'Create Functioin'
   ClientHeight = 377
   ClientWidth = 358
+  ExplicitWidth = 374
+  ExplicitHeight = 415
   PixelsPerInch = 96
   TextHeight = 13
   object FunctionNameLabel: TLabel [0]
@@ -22,8 +24,11 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
     Top = 62
     Width = 351
     Height = 259
-    ActivePage = ParametersTabSheet
-    ActivePageCaption = 'Parameters'
+    ActivePage = BodyTabSheet
+    ActivePageCaption = 'Body'
+    ExplicitTop = 62
+    ExplicitWidth = 351
+    ExplicitHeight = 259
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
@@ -49,10 +54,8 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           Columns = <
             item
@@ -163,32 +166,21 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
           Top = 0
           Width = 341
           Height = 230
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -207,34 +199,44 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
           Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
+      Caption = 'Parameters'
+      ExplicitWidth = 343
+      ExplicitHeight = 231
       inherited SourcePanel: TPanel
         Width = 343
         Height = 231
+        ExplicitWidth = 343
+        ExplicitHeight = 231
         inherited SourceSynEdit: TSynEdit
           Width = 341
           Height = 206
+          ExplicitWidth = 341
+          ExplicitHeight = 206
         end
         inherited SourceTopPanel: TPanel
           Width = 341
+          ExplicitWidth = 341
         end
       end
     end
@@ -242,10 +244,14 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   inherited OKButton: TButton
     Left = 194
     Top = 327
+    ExplicitLeft = 194
+    ExplicitTop = 327
   end
   inherited CancelButton: TButton
     Left = 275
     Top = 327
+    ExplicitLeft = 275
+    ExplicitTop = 327
   end
   object FunctionNameEdit: TBCEdit [5]
     Left = 100
@@ -299,6 +305,8 @@ inherited CreateFunctionDialog: TCreateFunctionDialog
   inherited StatusBar1: TStatusBar
     Top = 358
     Width = 358
+    ExplicitTop = 358
+    ExplicitWidth = 358
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

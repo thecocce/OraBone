@@ -7,7 +7,8 @@ uses
   JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit, Vcl.AppEvnts, Vcl.ToolWin,
   Vcl.Menus, BCControls.ToolBar, PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions,
-  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images;
+  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images,
+  DynVarsEh;
 
 type
   TDBLinkBrowserFrame = class(TFrame)

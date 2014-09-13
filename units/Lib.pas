@@ -6,7 +6,7 @@ interface
 
 uses
   Winapi.Windows, Ora, System.Classes, DB, Vcl.Forms, SynEdit, Vcl.Controls, Grids, BCControls.StringGrid, ActnList,
-  ComCtrls, BCControls.DBGrid;
+  ComCtrls, BCControls.DBGrid, DBGridEh;
 
 //type
 //  TWordTriple = Array[0..2] of Word;
@@ -54,7 +54,7 @@ function OldDecryptString(s: string; Key: string): string;
 function SessionObjectNames(Session: TOraSession; SchemaParam: string; IncludeType: Boolean = False): TStringList;
 function GetHistoryFile: string;
 procedure SetGridColumnWidths(Grid: TBCDBGrid; OnlyVisibleColumns: Boolean = False);
-procedure GridDrawStringDataCell(Sender: TObject; const Rect: TRect; Field: TField);
+procedure GridDrawStringDataCell(Column: TColumnEh; var Params: TColCellParamsEh);
 function FormatServer(Server: string): string;
 function FormatSchema(Schema: string): string;
 function GetAlterConstraintSQL(SchemaParam: string; TableName: string; ConstraintName: string; EnableConstraint: Boolean): string;
@@ -99,8 +99,8 @@ function GetCreationAndModificationTimestamp(OraSession: TOraSession; SchemaPara
 implementation
 
 uses
-  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, OraServices, DataModule, BigINI, BCCommon.FileUtils,
-  Math, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages, BCCommon.Lib, BCCommon.StringUtils;
+  System.SysUtils, Vcl.Dialogs, Vcl.Clipbrd, OraServices, DataModule, BigINI, BCCommon.FileUtils, Vcl.Graphics,
+  Math, BCCommon.Dialogs, BCCommon.LanguageStrings, BCCommon.Messages, BCCommon.Lib, BCCommon.StringUtils, Vcl.Themes;
 
 const
   Codes64 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/';
@@ -310,22 +310,18 @@ begin
   Screen.Cursor := crDefault;
 end; {SetGridColumnWidths  }
 
-procedure GridDrawStringDataCell(Sender: TObject; const Rect: TRect; Field: TField);
+procedure GridDrawStringDataCell(Column: TColumnEh; var Params: TColCellParamsEh);
 var
   S: string;
 begin
-  if (Field is TStringField) or (Field is TWideMemoField) then
+  if (Column.Field is TStringField) or (Column.Field is TWideMemoField) then
   begin
-    with (Sender as TBCDBGrid).Canvas do
-    begin
-      S := Field.Text;
-      while Pos(#13, S) > 0 do
-        S[Pos(#13, S)] := '|';
-      while Pos(#10, S) > 0 do
-        S[Pos(#10, S)] := '|';
-      FillRect(Rect); {clear the cell}
-      TextOut(Rect.Left + 3, Rect.Top + 2, S); {fill cell with memo data}
-    end;
+    S := Params.Text;
+    while Pos(#13, S) > 0 do
+      S[Pos(#13, S)] := '|';
+    while Pos(#10, S) > 0 do
+      S[Pos(#10, S)] := '|';
+    Params.Text := S;
   end;
 end;
 

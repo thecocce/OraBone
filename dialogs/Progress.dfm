@@ -60,7 +60,6 @@ object ProgressDialog: TProgressDialog
     Anchors = [akLeft, akTop, akRight]
     BevelEdges = []
     BevelOuter = bvNone
-    BorderWidth = 1
     Color = clWhite
     Ctl3D = True
     ParentBackground = False

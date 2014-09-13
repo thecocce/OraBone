@@ -7,7 +7,7 @@ uses
   Vcl.ComCtrls, JvExComCtrls, JvComCtrls, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.ToolWin, BCControls.ToolBar, GridsEh, DBGridEh, Data.DB, System.Actions, DBAxisGridsEh,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images;
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images, DynVarsEh;
 
 type
   TRecycleBinBrowserFrame = class(TFrame)

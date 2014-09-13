@@ -2,6 +2,8 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   Caption = 'Create Constraint'
   ClientHeight = 420
   ClientWidth = 378
+  ExplicitWidth = 394
+  ExplicitHeight = 458
   PixelsPerInch = 96
   TextHeight = 13
   object ConstraintNameLabel: TLabel [0]
@@ -49,9 +51,12 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Top = 80
     Width = 371
     Height = 284
-    ActivePage = ColumnsTabSheet
+    ActivePage = ConditionTabSheet
     TabOrder = 6
-    ActivePageCaption = 'Columns'
+    ActivePageCaption = 'Condition'
+    ExplicitTop = 80
+    ExplicitWidth = 371
+    ExplicitHeight = 284
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -242,32 +247,21 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Top = 0
           Width = 361
           Height = 255
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -286,35 +280,44 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
           Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
-          Minimap.Font.Charset = DEFAULT_CHARSET
-          Minimap.Font.Color = clWindowText
-          Minimap.Font.Height = -4
-          Minimap.Font.Name = 'Courier New'
-          Minimap.Font.Style = []
-          Minimap.Width = 0
-          Minimap.CharWidth = 2
-          Minimap.CharHeight = 4
-          Minimap.LinesInWindow = 0
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitWidth = 363
+      ExplicitHeight = 256
       inherited SourcePanel: TPanel
         Width = 363
         Height = 256
+        ExplicitWidth = 363
+        ExplicitHeight = 256
         inherited SourceSynEdit: TSynEdit
           Width = 361
           Height = 231
+          ExplicitWidth = 361
+          ExplicitHeight = 231
         end
         inherited SourceTopPanel: TPanel
           Width = 361
+          ExplicitWidth = 361
         end
       end
     end
@@ -323,11 +326,15 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
     Left = 215
     Top = 370
     TabOrder = 7
+    ExplicitLeft = 215
+    ExplicitTop = 370
   end
   inherited CancelButton: TButton
     Left = 296
     Top = 370
     TabOrder = 8
+    ExplicitLeft = 296
+    ExplicitTop = 370
   end
   object ConstraintNameEdit: TBCEdit [7]
     Left = 94
@@ -400,6 +407,8 @@ inherited CreateConstraintDialog: TCreateConstraintDialog
   inherited StatusBar1: TStatusBar
     Top = 401
     Width = 378
+    ExplicitTop = 401
+    ExplicitWidth = 378
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

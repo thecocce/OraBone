@@ -15,14 +15,14 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Top = 0
     Width = 451
     Height = 304
-    ActivePage = SourceTabSheet
+    ActivePage = DependenciesTabSheet
     Align = alClient
     DoubleBuffered = False
     ParentDoubleBuffered = False
     PopupMenu = PageControlPopupActionBar
     TabOrder = 0
     OnChange = FuncProcPageControlChange
-    ActivePageCaption = 'Source'
+    ActivePageCaption = 'Dependencies'
     TabDragDrop = False
     HoldShiftToDragDrop = False
     ShowCloseButton = False
@@ -44,32 +44,21 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Top = 0
           Width = 441
           Height = 253
-          Align = alClient
-          Ctl3D = True
-          ParentCtl3D = False
-          CodeFolding.CaseSensitive = False
-          CodeFolding.FolderBarLinesColor = 12434877
           ActiveLine.Background = clYellow
           ActiveLine.Foreground = clNavy
           ActiveLine.Visible = True
-          LineDivider.Visible = False
-          LineDivider.Color = clRed
-          LineDivider.Style = psSolid
-          RightEdge.MouseMove = False
-          RightEdge.Visible = True
-          RightEdge.Position = 80
-          RightEdge.Color = clSilver
-          RightEdge.Style = psSolid
-          LineSpacing = 0
-          LineSpacingRule = lsSpecified
+          Align = alClient
           Background.Visible = False
           Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
           Gutter.ShowLineModified = False
           Gutter.LineModifiedColor = clYellow
           Gutter.LineNormalColor = clLime
@@ -88,13 +77,24 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Gutter.ShowBookmarkPanel = False
           Gutter.Width = 34
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
           ReadOnly = True
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
           WordWrap.Enabled = False
           WordWrap.Position = 80
           WordWrap.Style = wwsClientWidth
-          FontSmoothing = fsmNone
         end
       end
       object SourceButtonPanel: TPanel
@@ -122,7 +122,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 19
           Align = alRight
           ExplicitHeight = 13
         end
@@ -170,15 +170,11 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object GrantsTabSheet: TTabSheet
       Caption = 'Grants'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GrantsPanel: TPanel
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -188,7 +184,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -196,10 +192,9 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -210,7 +205,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object GrantsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -267,15 +262,11 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object SynonymsTabSheet: TTabSheet
       Caption = 'Synonyms'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object SynonymsPanel: TPanel
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -285,7 +276,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -293,10 +284,9 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = [gioShowRowselCheckboxesEh]
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -307,7 +297,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object SynonymsButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -365,15 +355,11 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     object DependenciesTabSheet: TTabSheet
       Caption = 'Dependencies'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DependenciesPanel: TPanel
         Left = 0
         Top = 0
         Width = 443
-        Height = 252
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Right = 2
@@ -383,7 +369,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           Left = 0
           Top = 0
           Width = 441
-          Height = 251
+          Height = 253
           Align = alClient
           AllowedSelections = [gstRecordBookmarks, gstAll]
           Ctl3D = True
@@ -391,10 +377,8 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -404,7 +388,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
       end
       object DependenciesButtonPanel: TPanel
         Left = 0
-        Top = 252
+        Top = 254
         Width = 443
         Height = 22
         Align = alBottom
@@ -432,7 +416,7 @@ object FuncProcBrowserFrame: TFuncProcBrowserFrame
     Left = 78
     Top = 166
     Bitmap = {
-      494C010109000D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

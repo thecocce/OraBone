@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList,
   ComCtrls, JvExComCtrls, JvComCtrls, BCControls.PageControl, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, ToolWin,
   BCControls.ComboBox, VirtualTrees, DB, MemDS, DBAccess, Ora, JvStatusBar, BCControls.ProgressBar, BCDialogs.Dlg,
-  JvProgressBar, BCCommon.Images, BCControls.CheckBox;
+  JvProgressBar, BCCommon.Images, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TSchemaCompareForm = class(TDialog)

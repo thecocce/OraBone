@@ -52,17 +52,15 @@ object ExportTableDataDialog: TExportTableDataDialog
       DropDownFixedWidth = 0
     end
     object SelectedRowsOnlyCheckBox: TBCCheckBox
-      Left = 210
+      Left = 211
       Top = 8
-      Width = 117
+      Width = 116
       Height = 22
       Hint = 'Export selected rows only.'
       Align = alRight
-      Alignment = taLeftJustify
       Caption = 'Selected Rows Only'
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
   object Panel2: TPanel
@@ -120,27 +118,25 @@ object ExportTableDataDialog: TExportTableDataDialog
         object IncludeColumnHeadersCheckBox: TBCCheckBox
           Left = 12
           Top = 43
-          Width = 138
-          Height = 15
+          Width = 137
+          Height = 17
           Hint = 'Include column headers.'
           Caption = 'Include Column Headers'
           Checked = True
           State = cbChecked
           TabOrder = 1
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object QuotedStringColumnsCheckBox: TBCCheckBox
           Left = 12
           Top = 62
-          Width = 126
-          Height = 15
+          Width = 125
+          Height = 17
           Hint = 'Quote string columns.'
           Caption = 'Quote String Columns'
           TabOrder = 2
           OnClick = QuotedStringColumnsCheckBoxClick
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object SingleQuoteRadioButton: TRadioButton
           Left = 32
@@ -163,26 +159,24 @@ object ExportTableDataDialog: TExportTableDataDialog
         object IncludeNullColumns1CheckBox: TBCCheckBox
           Left = 12
           Top = 119
-          Width = 127
-          Height = 15
+          Width = 126
+          Height = 17
           Hint = 'Include NULL columns.'
           Caption = 'Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 5
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object DelimiterAfterLastColumnCheckBox: TBCCheckBox
           Left = 12
           Top = 138
-          Width = 190
-          Height = 15
+          Width = 189
+          Height = 17
           Hint = 'Include Delimiter After Last Column'
           Caption = 'Include Delimiter After Last Column'
           TabOrder = 6
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
       end
       object Options2TabSheet: TTabSheet
@@ -257,15 +251,14 @@ object ExportTableDataDialog: TExportTableDataDialog
         object IncludeNullColumns2CheckBox: TBCCheckBox
           Left = 10
           Top = 93
-          Width = 127
-          Height = 15
+          Width = 126
+          Height = 17
           Hint = 'Include NULL columns.'
           Caption = 'Include NULL Columns'
           Checked = True
           State = cbChecked
           TabOrder = 3
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
       end
       object ColumnsTabSheet: TTabSheet
@@ -394,12 +387,11 @@ object ExportTableDataDialog: TExportTableDataDialog
       object LaunchAfterCreationCheckBox: TBCCheckBox
         Left = 65
         Top = 41
-        Width = 128
-        Height = 15
+        Width = 127
+        Height = 17
         Caption = 'Launch After Creation'
         TabOrder = 2
-        AutoSize = True
-        ReadOnly = False
+        LinkedControls = <>
       end
       object LoadInEditorRadioButton: TRadioButton
         Left = 16

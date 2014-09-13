@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ActnList, BCDialogs.Dlg, System.Actions, BCControls.CheckBox;
+  Vcl.ActnList, BCDialogs.Dlg, System.Actions, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TTableSourceOptionsDialog = class(TDialog)

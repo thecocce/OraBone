@@ -59,10 +59,8 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -95,7 +93,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
             Left = 435
             Top = 5
             Width = 3
-            Height = 16
+            Height = 19
             Align = alRight
             ExplicitHeight = 13
           end
@@ -160,7 +158,6 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
           GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -286,7 +283,7 @@ object ConstraintBrowserFrame: TConstraintBrowserFrame
     Left = 324
     Top = 140
     Bitmap = {
-      494C0101040009000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

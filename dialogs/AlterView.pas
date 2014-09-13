@@ -7,7 +7,7 @@ uses
   CreateObjectDialog, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, Vcl.ActnList, Vcl.StdCtrls, Vcl.ComCtrls,
   Vcl.ToolWin, JvExComCtrls, SynEdit, BCControls.PageControl, BCControls.Edit, DBAccess, Ora, MemDS, Vcl.Buttons,
   BCControls.ToolBar, BCControls.DBGrid, Vcl.ExtCtrls, Data.DB, BCDialogs.Dlg, System.Actions, GridsEh, DBAxisGridsEh,
-  DBGridEh, BCControls.ImageList, JvComCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
+  DBGridEh, BCControls.ImageList, JvComCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh;
 
 type
   TAlterViewDialog = class(TCreateObjectBaseDialog)

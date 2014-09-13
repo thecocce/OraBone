@@ -6,7 +6,7 @@ uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, BCControls.PageControl,
   Vcl.StdCtrls, Vcl.Mask, JvExMask, ComCtrls, JvExComCtrls, JvComCtrls, Vcl.ExtCtrls, JvSpin, CheckLst, ActnList, Ora,
   DB, DBAccess, BCControls.Edit, BCDialogs.Dlg, BCControls.ComboBox, BCControls.SpinEdit, BCControls.DBGrid,
-  Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox;
+  Vcl.Buttons, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TExportTableDataDialog = class(TDialog)

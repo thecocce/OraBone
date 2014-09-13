@@ -1,13 +1,14 @@
 inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
   Width = 231
   Height = 105
-  AutoSize = True
   Visible = False
+  ExplicitWidth = 231
+  ExplicitHeight = 105
   object Panel: TPanel
     AlignWithMargins = True
     Left = 4
     Top = 0
-    Width = 227
+    Width = 226
     Height = 105
     Margins.Left = 4
     Margins.Top = 0
@@ -52,22 +53,21 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
     object ShowCreationAndModificationTimestampCheckBox: TBCCheckBox
       Left = 0
       Top = 0
-      Width = 227
-      Height = 15
+      Width = 226
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Show Creation and Modification Timestamp'
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ShowDataSearchPanelCheckBox: TBCCheckBox
       Left = 0
       Top = 20
-      Width = 139
-      Height = 15
+      Width = 138
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -76,14 +76,13 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       Checked = True
       State = cbChecked
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object FilterOnTypingCheckBox: TBCCheckBox
       Left = 0
       Top = 40
-      Width = 98
-      Height = 15
+      Width = 97
+      Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -94,8 +93,7 @@ inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
       ParentColor = False
       State = cbChecked
       TabOrder = 2
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
 end

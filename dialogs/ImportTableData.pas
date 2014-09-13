@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, ActnList, Vcl.StdCtrls,
   Vcl.Mask, JvExMask, JvSpin, Ora, BCControls.Edit, BCControls.ComboBox, BCControls.SpinEdit, Vcl.Buttons, Vcl.ExtCtrls,
-  BCDialogs.Dlg, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox;
+  BCDialogs.Dlg, System.Actions, JvExControls, JvSpeedButton, BCControls.CheckBox, JvExStdCtrls, JvCheckBox;
 
 type
   TImportTableDataDialog = class(TDialog)

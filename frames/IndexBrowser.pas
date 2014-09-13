@@ -7,7 +7,7 @@ uses
   JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, JvStringHolder, Vcl.Buttons, Vcl.ActnList,
   BCControls.PageControl, Vcl.ImgList, Vcl.AppEvnts, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
   Vcl.ToolWin, BCControls.ToolBar, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, Vcl.StdCtrls,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images;
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, BCCommon.Images, DynVarsEh;
 
 type
   TIndexBrowserFrame = class(TFrame)

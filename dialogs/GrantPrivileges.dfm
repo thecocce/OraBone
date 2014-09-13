@@ -2,11 +2,17 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   Caption = 'Grant Privileges'
   ClientHeight = 340
   ClientWidth = 333
+  ExplicitWidth = 349
+  ExplicitHeight = 378
   PixelsPerInch = 96
   TextHeight = 13
   inherited PageControl: TBCPageControl
     Width = 326
     Height = 282
+    ActivePage = SettingsTabSheet
+    ActivePageCaption = 'Settings'
+    ExplicitWidth = 326
+    ExplicitHeight = 282
     object SettingsTabSheet: TTabSheet [0]
       Caption = 'Settings'
       ImageIndex = 1
@@ -24,72 +30,65 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
         object DeleteCheckBox: TBCCheckBox
           Left = 236
           Top = 20
-          Width = 58
-          Height = 15
+          Width = 57
+          Height = 17
           Caption = 'DELETE'
           TabOrder = 3
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object SelectCheckBox: TBCCheckBox
           Left = 12
           Top = 20
-          Width = 58
-          Height = 15
+          Width = 57
+          Height = 17
           Caption = 'SELECT'
           TabOrder = 0
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object InsertCheckBox: TBCCheckBox
           Left = 85
           Top = 20
-          Width = 58
-          Height = 15
+          Width = 57
+          Height = 17
           Caption = 'INSERT'
           TabOrder = 1
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object UpdateCheckBox: TBCCheckBox
           Left = 159
           Top = 20
-          Width = 61
-          Height = 15
+          Width = 60
+          Height = 17
           Caption = 'UPDATE'
           TabOrder = 2
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object ExecuteCheckBox: TBCCheckBox
           Left = 12
           Top = 43
-          Width = 66
-          Height = 15
+          Width = 65
+          Height = 17
           Caption = 'EXECUTE'
           TabOrder = 4
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object AlterCheckBox: TBCCheckBox
           Left = 85
           Top = 43
-          Width = 53
-          Height = 15
+          Width = 52
+          Height = 17
           Caption = 'ALTER'
           TabOrder = 5
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object DebugCheckBox: TBCCheckBox
           Left = 159
           Top = 43
-          Width = 55
-          Height = 15
+          Width = 54
+          Height = 17
           Caption = 'DEBUG'
           TabOrder = 6
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
       end
       object OnGroupBox: TGroupBox
@@ -175,25 +174,31 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
       object GrantOptionCheckBox: TBCCheckBox
         Left = 10
         Top = 230
-        Width = 84
-        Height = 15
+        Width = 83
+        Height = 17
         Anchors = [akLeft, akBottom]
         Caption = 'Grant Option'
         TabOrder = 3
-        AutoSize = True
-        ReadOnly = False
+        LinkedControls = <>
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 318
+      ExplicitHeight = 254
       inherited SourcePanel: TPanel
         Width = 318
         Height = 254
+        ExplicitWidth = 318
+        ExplicitHeight = 254
         inherited SourceSynEdit: TSynEdit
           Width = 316
           Height = 229
+          ExplicitWidth = 316
+          ExplicitHeight = 229
         end
         inherited SourceTopPanel: TPanel
           Width = 316
+          ExplicitWidth = 316
         end
       end
     end
@@ -201,13 +206,19 @@ inherited GrantPrivilegesDialog: TGrantPrivilegesDialog
   inherited OKButton: TButton
     Left = 169
     Top = 290
+    ExplicitLeft = 169
+    ExplicitTop = 290
   end
   inherited CancelButton: TButton
     Left = 250
     Top = 290
+    ExplicitLeft = 250
+    ExplicitTop = 290
   end
   inherited StatusBar1: TStatusBar
     Top = 321
     Width = 333
+    ExplicitTop = 321
+    ExplicitWidth = 333
   end
 end

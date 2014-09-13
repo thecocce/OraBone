@@ -7,7 +7,7 @@ uses
   ComCtrls, JvExComCtrls, JvComCtrls, DB, DBAccess, MemDS, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, ActnList,
   BCControls.PageControl, Vcl.ImgList, AppEvnts, Vcl.Menus, Vcl.ToolWin, BCControls.ImageList, BCControls.ToolBar,
   PlatformDefaultStyleActnCtrls, ActnPopup, GridsEh, DBGridEh, System.Actions, DBAxisGridsEh,
-  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls;
+  Vcl.StdCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh;
 
 type
   TConstraintBrowserFrame = class(TFrame)

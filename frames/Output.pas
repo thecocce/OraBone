@@ -26,7 +26,6 @@ type
     SelectAllAction: TAction;
     UnselectAllAction: TAction;
     procedure ClearDBMSOutputActionExecute(Sender: TObject);
-    procedure DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure DataDBGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure DataQueryAfterScroll(DataSet: TDataSet);
     procedure ListBoxKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -309,12 +308,6 @@ end;
 procedure TOutputFrame.DataQueryAfterScroll(DataSet: TDataSet);
 begin
   SetRows(PageControl.ActivePageCaption);
-end;
-
-procedure TOutputFrame.DataDBGridDrawDataCell(Sender: TObject; const Rect: TRect;
-  Field: TField; State: TGridDrawState);
-begin
-  GridDrawStringDataCell(Sender, Rect, Field);
 end;
 
 procedure TOutputFrame.AddPlanGrid(TabCaption: string; OraQuery: TOraQuery);

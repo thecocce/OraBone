@@ -2,6 +2,8 @@ inherited AlterTableDialog: TAlterTableDialog
   Caption = 'Alter or Recreate Table'
   ClientHeight = 453
   ClientWidth = 739
+  ExplicitWidth = 755
+  ExplicitHeight = 491
   PixelsPerInch = 96
   TextHeight = 13
   object TableNameLabel: TLabel [0]
@@ -22,8 +24,10 @@ inherited AlterTableDialog: TAlterTableDialog
     Top = 60
     Width = 732
     Height = 337
-    ActivePage = ColumnsTabSheet
     ActivePageCaption = 'Columns'
+    ExplicitTop = 60
+    ExplicitWidth = 732
+    ExplicitHeight = 337
     object ColumnsTabSheet: TTabSheet [0]
       Caption = 'Columns'
       ImageIndex = 1
@@ -49,10 +53,8 @@ inherited AlterTableDialog: TAlterTableDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           OnGetCellParams = ColumnsDBGridGetCellParams
           OnKeyPress = ColumnsDBGridKeyPress
@@ -239,16 +241,14 @@ inherited AlterTableDialog: TAlterTableDialog
         object DropUnusedColumnsCheckBox: TBCCheckBox
           Left = 594
           Top = 3
-          Width = 124
-          Height = 15
-          Alignment = taLeftJustify
+          Width = 126
+          Height = 17
           Anchors = [akTop, akRight]
           Caption = 'Drop Unused Columns'
           Checked = True
           State = cbChecked
           TabOrder = 1
-          AutoSize = True
-          ReadOnly = False
+          LinkedControls = <>
         end
         object ResetToolBar: TBCToolBar
           Left = 105
@@ -290,10 +290,8 @@ inherited AlterTableDialog: TAlterTableDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           OnGetCellParams = ColumnCommentsDBGridGetCellParams
           Columns = <
@@ -322,15 +320,22 @@ inherited AlterTableDialog: TAlterTableDialog
     end
     inherited SourceTabSheet: TTabSheet
       Caption = 'Columns'
+      ExplicitWidth = 724
+      ExplicitHeight = 309
       inherited SourcePanel: TPanel
         Width = 724
         Height = 309
+        ExplicitWidth = 724
+        ExplicitHeight = 309
         inherited SourceSynEdit: TSynEdit
           Width = 722
           Height = 284
+          ExplicitWidth = 722
+          ExplicitHeight = 284
         end
         inherited SourceTopPanel: TPanel
           Width = 722
+          ExplicitWidth = 722
         end
       end
     end
@@ -338,10 +343,14 @@ inherited AlterTableDialog: TAlterTableDialog
   inherited OKButton: TButton
     Left = 575
     Top = 403
+    ExplicitLeft = 575
+    ExplicitTop = 403
   end
   inherited CancelButton: TButton
     Left = 656
     Top = 403
+    ExplicitLeft = 656
+    ExplicitTop = 403
   end
   object TableNameEdit: TBCEdit [5]
     Left = 76
@@ -404,6 +413,8 @@ inherited AlterTableDialog: TAlterTableDialog
   inherited StatusBar1: TStatusBar
     Top = 434
     Width = 739
+    ExplicitTop = 434
+    ExplicitWidth = 739
   end
   inherited ActionList: TActionList
     Left = 177

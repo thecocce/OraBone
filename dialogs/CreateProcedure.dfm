@@ -2,6 +2,8 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   Caption = 'Create Procedure'
   ClientHeight = 371
   ClientWidth = 358
+  ExplicitWidth = 374
+  ExplicitHeight = 409
   PixelsPerInch = 96
   TextHeight = 13
   object ProcedureNameLabel: TLabel [0]
@@ -15,6 +17,11 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
     Top = 34
     Width = 351
     Height = 281
+    ActivePage = ParametersTabSheet
+    ActivePageCaption = 'Parameters'
+    ExplicitTop = 34
+    ExplicitWidth = 351
+    ExplicitHeight = 281
     object ParametersTabSheet: TTabSheet [0]
       Caption = 'Parameters'
       ImageIndex = 1
@@ -40,10 +47,8 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           TabOrder = 0
           Columns = <
             item
@@ -155,40 +160,76 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
           Top = 0
           Width = 341
           Height = 252
+          ActiveLine.Background = clYellow
+          ActiveLine.Foreground = clNavy
+          ActiveLine.Visible = True
           Align = alClient
+          Background.Visible = False
+          Background.RepeatMode = brmNone
+          CodeFolding.CaseSensitive = False
+          CodeFolding.FolderBarLinesColor = 12434877
           Ctl3D = True
-          ParentCtl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Courier New'
           Font.Style = []
-          TabOrder = 0
+          FontSmoothing = fsmNone
+          Gutter.ShowLineModified = False
+          Gutter.LineModifiedColor = clYellow
+          Gutter.LineNormalColor = clLime
+          Gutter.Intens = False
           Gutter.AutoSize = True
           Gutter.Font.Charset = DEFAULT_CHARSET
           Gutter.Font.Color = clWindowText
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.BookmarkPanelColor = clNone
+          Gutter.RightOffset = 2
+          Gutter.RightOffsetColor = clNone
           Gutter.ShowLineNumbers = True
+          Gutter.ShowBookmarks = False
+          Gutter.Width = 54
           Gutter.Gradient = True
           Highlighter = SynSQLSyn
+          LineDivider.Visible = False
+          LineDivider.Color = clRed
+          LineDivider.Style = psSolid
+          LineSpacing = 0
+          LineSpacingRule = lsSpecified
           Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
+          ParentCtl3D = False
+          RightEdge.MouseMove = False
+          RightEdge.Visible = True
+          RightEdge.Position = 80
+          RightEdge.Color = clSilver
+          RightEdge.Style = psSolid
+          TabOrder = 0
           WantTabs = True
-          FontSmoothing = fsmNone
+          WordWrap.Enabled = False
+          WordWrap.Position = 80
+          WordWrap.Style = wwsClientWidth
         end
       end
     end
     inherited SourceTabSheet: TTabSheet
+      ExplicitWidth = 343
+      ExplicitHeight = 253
       inherited SourcePanel: TPanel
         Width = 343
         Height = 253
+        ExplicitWidth = 343
+        ExplicitHeight = 253
         inherited SourceSynEdit: TSynEdit
           Width = 341
           Height = 228
+          ExplicitWidth = 341
+          ExplicitHeight = 228
         end
         inherited SourceTopPanel: TPanel
           Width = 341
+          ExplicitWidth = 341
         end
       end
     end
@@ -196,10 +237,14 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   inherited OKButton: TButton
     Left = 194
     Top = 321
+    ExplicitLeft = 194
+    ExplicitTop = 321
   end
   inherited CancelButton: TButton
     Left = 275
     Top = 321
+    ExplicitLeft = 275
+    ExplicitTop = 321
   end
   object ProcedureNameEdit: TBCEdit [4]
     Left = 100
@@ -221,6 +266,8 @@ inherited CreateProcedureDialog: TCreateProcedureDialog
   inherited StatusBar1: TStatusBar
     Top = 352
     Width = 358
+    ExplicitTop = 352
+    ExplicitWidth = 358
   end
   inherited ActionList: TActionList
     object MoveupColumnAction: TAction

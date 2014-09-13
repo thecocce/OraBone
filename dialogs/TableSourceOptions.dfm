@@ -72,106 +72,97 @@ object TableSourceOptionsDialog: TTableSourceOptionsDialog
     object CreateTableCheckBox: TBCCheckBox
       Left = 14
       Top = 14
-      Width = 81
-      Height = 15
+      Width = 83
+      Height = 17
       Caption = 'Create Table'
       Checked = True
       State = cbChecked
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object CommentsCheckBox: TBCCheckBox
       Left = 14
       Top = 37
-      Width = 69
-      Height = 15
+      Width = 71
+      Height = 17
       Caption = 'Comments'
       Checked = True
       State = cbChecked
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object IndexesCheckBox: TBCCheckBox
       Left = 14
       Top = 60
-      Width = 58
-      Height = 15
+      Width = 60
+      Height = 17
       Caption = 'Indexes'
       Checked = True
       State = cbChecked
       TabOrder = 2
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ConstraintsCheckBox: TBCCheckBox
       Left = 14
       Top = 83
-      Width = 74
-      Height = 15
+      Width = 76
+      Height = 17
       Caption = 'Constraints'
       Checked = True
       State = cbChecked
       TabOrder = 3
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object TriggersCheckBox: TBCCheckBox
       Left = 14
       Top = 106
-      Width = 58
-      Height = 15
+      Width = 60
+      Height = 17
       Caption = 'Triggers'
       Checked = True
       State = cbChecked
       TabOrder = 4
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ParametersCheckBox: TBCCheckBox
       Left = 128
       Top = 106
-      Width = 74
-      Height = 15
+      Width = 76
+      Height = 17
       Caption = 'Parameters'
       TabOrder = 5
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object StorageCheckBox: TBCCheckBox
       Left = 128
       Top = 83
-      Width = 57
-      Height = 15
+      Width = 59
+      Height = 17
       Caption = 'Storage'
       TabOrder = 6
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object GrantsCheckBox: TBCCheckBox
       Left = 128
       Top = 60
-      Width = 51
-      Height = 15
+      Width = 53
+      Height = 17
       Caption = 'Grants'
       Checked = True
       State = cbChecked
       TabOrder = 7
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object SynonymsCheckBox: TBCCheckBox
       Left = 128
       Top = 37
-      Width = 68
-      Height = 15
+      Width = 70
+      Height = 17
       Caption = 'Synonyms'
       Checked = True
       State = cbChecked
       TabOrder = 8
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
   object ActionList: TActionList

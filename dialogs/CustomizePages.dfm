@@ -138,8 +138,7 @@ object CustomizePageControlDialog: TCustomizePageControlDialog
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goRowSelect, goThumbTracking]
       ScrollBars = ssHorizontal
       Strings.Strings = (
-        'test=True'
-        'test2=False')
+        '=')
       TabOrder = 0
       TitleCaptions.Strings = (
         'Page'

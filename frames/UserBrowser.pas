@@ -8,7 +8,7 @@ uses
   Vcl.Buttons, Vcl.ActnList, BCControls.PageControl, Vcl.ImgList, SynEditHighlighter, SynHighlighterSQL, SynEdit,
   Vcl.AppEvnts, Vcl.Menus, VirtualTrees, Vcl.ToolWin, BCControls.ToolBar, Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnPopup, Data.DB, System.Actions, GridsEh, DBAxisGridsEh, DBGridEh, DBGridEhToolCtrls,
-  DBGridEhGrouping, ToolCtrlsEh, BCCommon.Images;
+  DBGridEhGrouping, ToolCtrlsEh, BCCommon.Images, DynVarsEh;
 
 type
   TUserBrowserFrame = class(TFrame)

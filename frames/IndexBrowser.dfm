@@ -51,10 +51,8 @@ object IndexBrowserFrame: TIndexBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          GridLineParams.VertEmptySpaceStyle = dessNonEh
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
@@ -75,7 +73,7 @@ object IndexBrowserFrame: TIndexBrowserFrame
           Left = 437
           Top = 3
           Width = 3
-          Height = 16
+          Height = 19
           Align = alRight
           ExplicitHeight = 13
         end

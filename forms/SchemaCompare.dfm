@@ -153,7 +153,7 @@ object SchemaCompareForm: TSchemaCompareForm
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus]
               Position = 1
-              Width = 185
+              Width = 179
               WideText = 'Difference'
             end>
         end
@@ -182,6 +182,8 @@ object SchemaCompareForm: TSchemaCompareForm
       Step = 1
       TabOrder = 0
       Visible = False
+      ExplicitLeft = 3
+      ExplicitTop = 3
     end
   end
   object SchemasGroupBox: TGroupBox
@@ -257,170 +259,156 @@ object SchemaCompareForm: TSchemaCompareForm
     object TablesCheckBox: TBCCheckBox
       Left = 12
       Top = 18
-      Width = 53
-      Height = 15
+      Width = 52
+      Height = 17
       Caption = 'Tables'
       Checked = True
       State = cbChecked
       TabOrder = 0
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ViewsCheckBox: TBCCheckBox
       Left = 12
       Top = 42
-      Width = 49
-      Height = 15
+      Width = 48
+      Height = 17
       Caption = 'Views'
       Checked = True
       State = cbChecked
       TabOrder = 1
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object FunctionsCheckBox: TBCCheckBox
       Left = 12
       Top = 66
-      Width = 68
-      Height = 15
+      Width = 67
+      Height = 17
       Caption = 'Functions'
       Checked = True
       State = cbChecked
       TabOrder = 2
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ProceduresCheckBox: TBCCheckBox
       Left = 12
       Top = 90
-      Width = 76
-      Height = 15
+      Width = 75
+      Height = 17
       Caption = 'Procedures'
       Checked = True
       State = cbChecked
       TabOrder = 3
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object PackagesCheckBox: TBCCheckBox
       Left = 12
       Top = 114
-      Width = 67
-      Height = 15
+      Width = 66
+      Height = 17
       Caption = 'Packages'
       Checked = True
       State = cbChecked
       TabOrder = 4
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object TriggersCheckBox: TBCCheckBox
       Left = 12
       Top = 137
-      Width = 61
-      Height = 15
+      Width = 60
+      Height = 17
       Caption = 'Triggers'
       Checked = True
       State = cbChecked
       TabOrder = 5
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ConstraintsCheckBox: TBCCheckBox
       Left = 12
       Top = 161
-      Width = 77
-      Height = 15
+      Width = 76
+      Height = 17
       Caption = 'Constraints'
       Checked = True
       State = cbChecked
       TabOrder = 6
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object IndexesCheckBox: TBCCheckBox
       Left = 12
       Top = 185
-      Width = 61
-      Height = 15
+      Width = 60
+      Height = 17
       Caption = 'Indexes'
       Checked = True
       State = cbChecked
       TabOrder = 7
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object SequencesCheckBox: TBCCheckBox
       Left = 12
       Top = 209
-      Width = 74
-      Height = 15
+      Width = 73
+      Height = 17
       Caption = 'Sequences'
       Checked = True
       State = cbChecked
       TabOrder = 8
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object SynonymsCheckBox: TBCCheckBox
       Left = 12
       Top = 233
-      Width = 71
-      Height = 15
+      Width = 70
+      Height = 17
       Caption = 'Synonyms'
       Checked = True
       State = cbChecked
       TabOrder = 9
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object DBLinksCheckBox: TBCCheckBox
       Left = 12
       Top = 257
-      Width = 61
-      Height = 15
+      Width = 60
+      Height = 17
       Caption = 'DB Links'
       Checked = True
       State = cbChecked
       TabOrder = 10
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object TableCommentsCheckBox: TBCCheckBox
       Left = 12
       Top = 281
-      Width = 101
-      Height = 15
+      Width = 100
+      Height = 17
       Caption = 'Table Comments'
       Checked = True
       State = cbChecked
       TabOrder = 11
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ColumnNamesCheckBox: TBCCheckBox
       Left = 12
       Top = 305
-      Width = 92
-      Height = 15
+      Width = 91
+      Height = 17
       Caption = 'Column Names'
       Checked = True
       State = cbChecked
       TabOrder = 12
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
     object ColumnCommentsCheckBox: TBCCheckBox
       Left = 12
       Top = 328
-      Width = 110
-      Height = 15
+      Width = 109
+      Height = 17
       Caption = 'Column Comments'
       Checked = True
       State = cbChecked
       TabOrder = 13
-      AutoSize = True
-      ReadOnly = False
+      LinkedControls = <>
     end
   end
   object Schema1Query: TOraQuery

@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, BCControls.ComboBox, Vcl.ExtCtrls,
-  BCControls.CheckBox, BCCommon.OptionsContainer, BCFrames.OptionsFrame;
+  BCControls.CheckBox, BCCommon.OptionsContainer, BCFrames.OptionsFrame, JvExStdCtrls, JvCheckBox;
 
 type
   TOptionsObjectFrameFrame = class(TOptionsFrame)

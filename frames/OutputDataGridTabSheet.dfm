@@ -64,13 +64,13 @@ object OutputDataGridFrame: TOutputDataGridFrame
       DynProps = <>
       EditActions = [geaCutEh, geaCopyEh, geaPasteEh, geaDeleteEh, geaSelectAllEh]
       FooterParams.Color = clWindow
-      GridLineParams.VertEmptySpaceStyle = dessNonEh
       IndicatorOptions = [gioShowRowselCheckboxesEh]
       IndicatorTitle.UseGlobalMenu = False
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
       EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
       TabOrder = 0
+      OnAdvDrawDataCell = GridAdvDrawDataCell
       object RowDetailData: TRowDetailPanelControlEh
       end
     end
