@@ -1,14 +1,14 @@
 inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
-  Width = 133
+  Width = 103
   Height = 110
   Visible = False
-  ExplicitWidth = 133
+  ExplicitWidth = 103
   ExplicitHeight = 110
   object Panel: TPanel
     AlignWithMargins = True
     Left = 4
     Top = 0
-    Width = 117
+    Width = 99
     Height = 110
     Margins.Left = 4
     Margins.Top = 0
@@ -19,7 +19,7 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     Color = clWindow
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentBackground = False
@@ -28,30 +28,48 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     object ButtonPanelAlignLabel: TLabel
       Left = 2
       Top = 68
-      Width = 103
-      Height = 16
+      Width = 87
+      Height = 13
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Button Panel Align'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object IndentLabel: TLabel
       Left = 2
       Top = 25
-      Width = 36
-      Height = 16
+      Width = 32
+      Height = 13
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Indent'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object ButtonPanelAlignComboBox: TBCComboBox
       Left = 0
       Top = 86
       Width = 64
-      Height = 24
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       Text = 'Bottom'
       Items.Strings = (
@@ -64,13 +82,19 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
     object ShowTreeLinesCheckBox: TBCCheckBox
       Left = 0
       Top = 0
-      Width = 117
+      Width = 99
       Height = 17
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Show Tree Lines'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       LinkedControls = <>
     end
@@ -78,11 +102,17 @@ inherited OptionsSchemaBrowserFrame: TOptionsSchemaBrowserFrame
       Left = 0
       Top = 42
       Width = 64
-      Height = 24
+      Height = 21
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       Text = '20'
       EnterToTab = False

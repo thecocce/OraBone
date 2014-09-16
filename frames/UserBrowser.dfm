@@ -51,8 +51,11 @@ object UserBrowserFrame: TUserBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          IndicatorOptions = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          IndicatorTitle.ShowDropDownSign = True
+          IndicatorTitle.TitleButton = True
+          IndicatorTitle.UseGlobalMenu = False
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0

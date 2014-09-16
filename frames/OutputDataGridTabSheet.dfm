@@ -64,9 +64,11 @@ object OutputDataGridFrame: TOutputDataGridFrame
       DynProps = <>
       EditActions = [geaCutEh, geaCopyEh, geaPasteEh, geaDeleteEh, geaSelectAllEh]
       FooterParams.Color = clWindow
-      IndicatorOptions = [gioShowRowselCheckboxesEh]
+      IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
+      IndicatorTitle.ShowDropDownSign = True
+      IndicatorTitle.TitleButton = True
       IndicatorTitle.UseGlobalMenu = False
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghMultiSortMarking, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghExtendVertLines]
       EditButtonsShowOptions = [sebShowOnlyForCurCellEh, sebShowOnlyForCurRowEh, sebShowOnlyWhenGridActiveEh, sebShowOnlyWhenDataEditingEh]
       TabOrder = 0

@@ -1,8 +1,8 @@
 inherited OptionsObjectFrameFrame: TOptionsObjectFrameFrame
-  Width = 231
+  Width = 230
   Height = 105
   Visible = False
-  ExplicitWidth = 231
+  ExplicitWidth = 230
   ExplicitHeight = 105
   object Panel: TPanel
     AlignWithMargins = True

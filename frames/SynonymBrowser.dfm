@@ -51,8 +51,11 @@ object SynonymBrowserFrame: TSynonymBrowserFrame
           DrawMemoText = True
           DynProps = <>
           FooterParams.Color = clWindow
-          IndicatorOptions = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          IndicatorTitle.ShowDropDownSign = True
+          IndicatorTitle.TitleButton = True
+          IndicatorTitle.UseGlobalMenu = False
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 0
