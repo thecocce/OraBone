@@ -376,7 +376,6 @@ object MainForm: TMainForm
               item
                 Action = SearchFindInFilesAction
                 ImageIndex = 82
-                ShortCut = 24646
               end
               item
                 Caption = '-'
@@ -1068,7 +1067,6 @@ object MainForm: TMainForm
       Caption = '&Find in Files...'
       Hint = 'Search for a string in multiple files'
       ImageIndex = 82
-      ShortCut = 24646
       OnExecute = SearchFindInFilesActionExecute
     end
     object SearchFindNextAction: TAction
@@ -1304,6 +1302,7 @@ object MainForm: TMainForm
       Enabled = False
       Hint = 'Format SQL'
       ImageIndex = 91
+      ShortCut = 24646
       OnExecute = FormatSQLActionExecute
     end
     object EditSelectAllAction: TAction
