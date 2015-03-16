@@ -13,7 +13,7 @@ Powerful Oracle database management, development and reporting tool. Oracle clie
   * <a href="http://www.devart.com/odac/">Oracle Data Access Components</a> (commercial)
   * <a href="http://www.ehlib.com">EhLib</a> (commercial)
   * <a href="http://www.sqlparser.com/">General SQL Parser</a> (commercial)
-  * <a href="http://code.google.com/p/bonecode-bceditor/">bonecode-bceditor</a> (!OraBone v. 9.0.0)
+  * <a href="http://code.google.com/p/bonecode-bceditor/">bonecode-bceditor</a> (OraBone v. 9.0.0)
   * <a href="http://code.google.com/p/bonecode-common/">bonecode-common</a>
   * <a href="http://code.google.com/p/bonecode-components/">bonecode-components</a>
 
