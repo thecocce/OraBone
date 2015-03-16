@@ -9,7 +9,7 @@ Powerful Oracle database management, development and reporting tool. Oracle clie
 
   * <a href="http://jcl.sourceforge.net/daily/">JEDI Code Library</a>
   * <a href="http://jvcl.sourceforge.net/daily/">JEDI Visual Component Library</a>
-  * <a href="http://code.google.com/p/virtual-treeview/">Virtual Treeview</a>
+  * <a href="https://github.com/Virtual-TreeView/">Virtual Treeview</a>
   * <a href="http://www.devart.com/odac/">Oracle Data Access Components</a> (commercial)
   * <a href="http://www.ehlib.com">EhLib</a> (commercial)
   * <a href="http://www.sqlparser.com/">General SQL Parser</a> (commercial)
