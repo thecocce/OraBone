@@ -11,7 +11,7 @@ Powerful Oracle database management, development and reporting tool. Oracle clie
   * <a href="http://jvcl.sourceforge.net/daily/">JEDI Visual Component Library</a>
   * <a href="http://code.google.com/p/virtual-treeview/">Virtual Treeview</a>
   * <a href="http://www.devart.com/odac/">Oracle Data Access Components</a> (commercial)
-  * <a href="http://www.ehlib.com">!EhLib</a> (commercial)
+  * <a href="http://www.ehlib.com">EhLib</a> (commercial)
   * <a href="http://www.sqlparser.com/">General SQL Parser</a> (commercial)
   * <a href="http://code.google.com/p/bonecode-bceditor/">bonecode-bceditor</a> (!OraBone v. 9.0.0)
   * <a href="http://code.google.com/p/bonecode-common/">bonecode-common</a>
