@@ -7,6 +7,8 @@ Powerful Oracle database management, development and reporting tool. Oracle clie
 
 <h3>Build Requires</h3>
 
+Refactoring in process...
+
   * <a href="http://jcl.sourceforge.net/daily/">JEDI Code Library</a>
   * <a href="http://jvcl.sourceforge.net/daily/">JEDI Visual Component Library</a>
   * <a href="https://github.com/Virtual-TreeView/">Virtual Treeview</a>
@@ -14,8 +16,8 @@ Powerful Oracle database management, development and reporting tool. Oracle clie
   * <a href="http://www.ehlib.com">EhLib</a> (commercial)
   * <a href="http://www.sqlparser.com/">General SQL Parser</a> (commercial)
   * <a href="https://github.com/bonecode/TBCEditor">TBCEditor</a> (OraBone v. 9.0.0)
-  * <a href="https://github.com/bonecode/Common">Common</a>
-  * <a href="https://github.com/bonecode/Components">Components</a>
+  * <strike><a href="https://github.com/bonecode/Common">Common</a></strike>
+  * <strike><a href="https://github.com/bonecode/Components">Components</a></strike>
 
 <img src="http://www.bonecode.com/images/OraBone1.png">
 <img src="http://www.bonecode.com/images/OraBone2.png">
